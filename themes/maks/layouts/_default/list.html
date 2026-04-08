@@ -8,9 +8,9 @@
     <a href="{{ .Permalink }}" class="post-card">
       <div class="post-card-meta">
         <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-        {{ range first 2 .Params.tags }}
-        <span class="tag">{{ . }}</span>
-        {{ end }}
+        {{ range $i, $t := .Params.tags }}{{ if lt $i 2 }}
+        <span class="tag">{{ $t }}</span>
+        {{ end }}{{ end }}
       </div>
       <div class="post-card-title">{{ .Title }}</div>
       {{ with .Description }}<div class="post-card-desc">{{ . }}</div>{{ end }}

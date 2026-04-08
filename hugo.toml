@@ -17,6 +17,11 @@ paginate = 10
   category = "categories"
 
 [outputs]
-  home    = ["HTML", "RSS"]
-  section = ["HTML", "RSS"]
+  home    = ["HTML"]
+  section = ["HTML"]
   page    = ["HTML"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
