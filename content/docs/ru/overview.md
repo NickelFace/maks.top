@@ -1,13 +1,14 @@
 ---
-title: "Project Overview — Architecture & Pipeline"
+title: "Обзор проекта — Архитектура и Pipeline"
 date: 2026-04-11
-description: "Hugo pipeline, directory structure, and deployment flow for maks.top"
-lang: "en"
-lang_pair: "/docs/ru/overview/"
+description: "Hugo pipeline, структура директорий и процесс деплоя maks.top"
+lang: "ru"
+lang_pair: "/docs/overview/"
+pagefind_ignore: true
 tags: ["docs"]
 ---
 
-## What is this project?
+## Что такое этот проект?
 
 `maks.top` — статический сайт на Hugo с кастомной темой `maks`. Никаких сторонних тем или фреймворков — всё написано с нуля.
 
@@ -192,7 +193,7 @@ paginate = 10                   # Постов на страницу в лист
 
 ## Связанные страницы
 
-- [Шаблоны](/docs/templates/) — каждый layout-файл подробно
-- [CSS](/docs/css/) — архитектура стилей и справочник классов
-- [Frontmatter](/docs/frontmatter/) — все поля по типам контента
-- [JavaScript](/docs/javascript/) — функции и event listeners
+- [Шаблоны](/docs/ru/templates/)
+- [CSS](/docs/ru/css/)
+- [Frontmatter](/docs/ru/frontmatter/)
+- [JavaScript](/docs/ru/javascript/)
