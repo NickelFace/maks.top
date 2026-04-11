@@ -10,9 +10,9 @@ Stack: **Hugo** + **GitHub Pages** + **Cloudflare DNS** + **Pagefind**
 ```bash
 # 1. Clone
 git clone https://github.com/NickelFace/maks.top.git
-cd maks.top
 
 # 2. Run dev server
+cd maks.top
 hugo server -D
 # → http://localhost:1313
 ```
