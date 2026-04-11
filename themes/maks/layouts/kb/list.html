@@ -38,17 +38,27 @@
 
   <!-- ═══ QUICK REFERENCES ═══ -->
   <div class="kb-section-title">Quick References</div>
-  {{ range where .Site.RegularPages "Section" "kb" }}
-  <a href="{{ .Permalink }}" class="kb-item">
-    <div class="kb-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
-    <div>
-      <div class="kb-title">{{ .Title }}</div>
-      <div class="kb-meta">{{ with .Params.tags }}{{ delimit . " · " }}{{ end }}</div>
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-title">References</span>
     </div>
-  </a>
-  {{ else }}
-  <div class="cert-coming-soon">References coming soon.</div>
-  {{ end }}
+    <div class="panel-body">
+      {{ range where .Site.RegularPages "Section" "kb" }}
+      <a href="{{ .Permalink }}" class="kb-item">
+        <div class="kb-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
+        <div>
+          <div class="kb-title">{{ .Title }}</div>
+          <div class="kb-meta">{{ with .Params.tags }}{{ delimit . " · " }}{{ end }}</div>
+        </div>
+      </a>
+      {{ else }}
+      <div class="cert-coming-soon">
+        <div class="coming-icon">🚧</div>
+        <div>References coming soon</div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
 
 </div>
 {{ end }}
