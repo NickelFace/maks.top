@@ -54,7 +54,7 @@ if(heads.length>2){
   const page=document.getElementById('prosePage');
 
   aside.innerHTML='<div class="toc-inner"><div class="toc-title">Contents</div><div class="toc-links">'+
-    [...heads].map(h=>`<a href="#${h.id}" class="toc-item toc-${h.tagName.toLowerCase()}">${h.textContent}</a>`).join('')+
+    [...heads].map(h=>`<a href="#${h.id}" class="toc-item toc-${h.tagName.toLowerCase()}">${h.innerHTML.replace(/<[^>]*>/g,'')}</a>`).join('')+
   '</div></div>';
 
   // Activate two-column layout only when TOC exists

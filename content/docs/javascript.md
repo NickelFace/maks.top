@@ -143,7 +143,7 @@ if (heads.length > 2) { ... }
 
 ---
 
-### Copy buttons (для сырых `<pre>`)
+### Copy buttons для сырых pre-блоков
 
 ```js
 document.querySelectorAll('pre').forEach(pre => {
@@ -161,7 +161,7 @@ function cpPre(btn) {
 
 ---
 
-## posts/list.html — Pagefind поиск
+## `posts/list.html` — Pagefind поиск
 
 ```js
 let pf = null;
