@@ -9,8 +9,8 @@ Stack: **Hugo** + **GitHub Pages** + **Cloudflare DNS** + **Pagefind**
 
 ```bash
 # 1. Clone
-git clone https://github.com/NickelFace/maks-top.git
-cd maks-top
+git clone https://github.com/NickelFace/maks.top.git
+cd maks.top
 
 # 2. Run dev server
 hugo server -D
@@ -34,20 +34,34 @@ maks-top/
 │   │   ├── index.html          ← homepage
 │   │   ├── _default/
 │   │   │   ├── baseof.html     ← master layout (nav, footer, scripts)
-│   │   │   ├── single.html     ← article page
-│   │   │   └── list.html       ← listing page (blog/kb/certs)
+│   │   │   ├── single.html     ← article page with ToC sidebar
+│   │   │   └── list.html       ← generic listing page
+│   │   ├── posts/
+│   │   │   ├── list.html       ← blog listing with Pagefind search
+│   │   │   └── linux-namespaces.html ← interactive namespace explorer
+│   │   ├── about/
+│   │   │   └── single.html     ← about page with certs widget
+│   │   ├── taxonomy/
+│   │   │   └── tag.html        ← tags page with interactive filtering
 │   │   ├── shortcodes/
 │   │   │   ├── ns-card.html    ← interactive namespace card
 │   │   │   └── code.html       ← code block with copy button
 │   │   └── partials/
+│   │       ├── certs-widget.html
+│   │       ├── pagination.html
 │   │       └── search.html
-│   └── static/styles/
-│       ├── global.css          ← variables, nav, panels, certs, about
-│       ├── home.css            ← homepage-specific styles
-│       ├── prose.css           ← article typography + interactive components
-│       └── mobile.css          ← responsive breakpoints + mobile nav
+│   └── static/
+│       ├── js/
+│       │   ├── site.js         ← theme toggle, mobile menu
+│       │   └── ns.js           ← namespace explorer logic
+│       └── styles/
+│           ├── global.css      ← variables, nav, panels, tags, about
+│           ├── home.css        ← homepage-specific styles
+│           ├── prose.css       ← article typography + components
+│           ├── ns.css          ← namespace explorer styles
+│           └── mobile.css      ← responsive breakpoints + mobile nav
 └── .github/workflows/
-    └── deploy.yml              ← auto-deploy on push to main
+    └── deploy.yml              ← auto-deploy on push to hugo branch
 ```
 
 ## Writing a new post
@@ -64,8 +78,6 @@ title: "iptables vs nftables"
 date: 2026-04-08
 description: "Comparison of Linux firewall frameworks"
 tags: ["Linux", "Networking", "iptables"]
-views: 0        # used for Popular panel sorting
-icon: "🔥"      # shown in KB quick references
 ---
 ```
 
@@ -97,12 +109,10 @@ sudo unshare --pid --fork --mount-proc bash
 
 ## Deploy: GitHub Pages setup
 
-1. Create repo `NickelFace/maks-top` (or `NickelFace/NickelFace.github.io`)
-2. Push this project to `main` branch
+1. Create repo `NickelFace/maks.top`
+2. Push this project to `hugo` branch
 3. **Settings → Pages → Source: GitHub Actions**
-4. GitHub Actions runs on every push → builds Hugo → deploys `public/`
-
-The workflow also runs `pagefind` after build, indexing all content for search.
+4. GitHub Actions runs on every push → builds Hugo → runs Pagefind → deploys `public/`
 
 ## Cloudflare DNS setup
 
@@ -119,9 +129,3 @@ After adding your site to Cloudflare (Free plan):
 Then: **GitHub repo → Settings → Pages → Custom domain → `maks.top`**
 
 GitHub auto-issues Let's Encrypt TLS. Cloudflare SSL/TLS → set to **Full** (not Flexible).
-
-## Multilingual (EN/RU)
-
-Pages are organized manually via `en/` and `ru/` subfolders in content.
-The language toggle in the nav saves preference to `localStorage`.
-No Hugo i18n module — intentionally simple.
