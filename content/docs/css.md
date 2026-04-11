@@ -7,258 +7,258 @@ lang_pair: "/docs/ru/css/"
 tags: ["docs"]
 ---
 
-## Архитектура CSS
+## CSS architecture
 
-Стили разбиты на 6 файлов по принципу **scope** (область применения):
+Styles are split into 6 files by **scope** (area of application):
 
-| Файл | Размер | Загружается | Назначение |
+| File | Size | Loaded | Purpose |
 |---|---|---|---|
-| `global.css` | 757 строк | везде | Переменные, nav, базовые компоненты |
-| `mobile.css` | 440 строк | везде | Мобильная навигация, breakpoints |
-| `home.css` | 110 строк | только `/` | Hero, recent posts, KB, cert-grid |
-| `prose.css` | 164 строки | posts, about | Типографика статей, ns-card в markdown |
-| `cert.css` | 189 строк | `/certs/*` | Accordion, cert-hero, exam-blocks |
-| `ns.css` | 258 строк | `/posts/linux-namespaces/` | Namespace explorer |
+| `global.css` | 757 lines | everywhere | Variables, nav, base components |
+| `mobile.css` | 440 lines | everywhere | Mobile nav, breakpoints |
+| `home.css` | 110 lines | `/` only | Hero, recent posts, KB, cert-grid |
+| `prose.css` | 164 lines | posts, about | Article typography, ns-card in markdown |
+| `cert.css` | 189 lines | `/certs/*` | Accordion, cert-hero, exam blocks |
+| `ns.css` | 258 lines | `/posts/linux-namespaces/` | Namespace explorer |
 
-Загрузка в `baseof.html`:
+Loading in `baseof.html`:
 ```html
-<link rel="stylesheet" href="/styles/global.css">   <!-- всегда -->
+<link rel="stylesheet" href="/styles/global.css">   <!-- always -->
 {{ if .IsHome }}<link href="/styles/home.css">{{ end }}
 {{ if or (eq .Type "posts") (eq .Type "about") }}<link href="/styles/prose.css">{{ end }}
-<link rel="stylesheet" href="/styles/mobile.css">   <!-- всегда -->
-{{ block "head" . }}{{ end }}  <!-- дочерний шаблон может добавить cert.css или ns.css -->
+<link rel="stylesheet" href="/styles/mobile.css">   <!-- always -->
+{{ block "head" . }}{{ end }}  <!-- child template can add cert.css or ns.css -->
 ```
 
 ---
 
-## CSS переменные — темы
+## CSS variables — themes
 
-Переменные объявлены на `[data-theme="dark"]` и `[data-theme="light"]`:
+Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
 
-| Переменная | Dark | Light | Назначение |
+| Variable | Dark | Light | Purpose |
 |---|---|---|---|
-| `--accent` | `#00d4ff` | `#00d4ff` | Основной акцент (циан) |
-| `--accent2` | `#7c3aed` | `#7c3aed` | Вторичный акцент (фиолетовый) |
-| `--accent3` | `#10b981` | `#10b981` | Третий акцент (зелёный) |
-| `--warn` | `#f59e0b` | `#f59e0b` | Предупреждение (amber) |
-| `--bg` | `#0a0e17` | `#f5f7fa` | Основной фон |
-| `--bg2` | `#111827` | `#ffffff` | Карточки, панели |
-| `--bg3` | `#1a2235` | `#eef2f8` | Hover-состояния |
-| `--border` | `#1e2d45` | `#d1dbe8` | Рамки |
-| `--border2` | `#263347` | `#c2cfe0` | Рамки (тёмнее) |
-| `--text` | `#e2e8f0` | `#1a2235` | Основной текст |
-| `--text2` | `#94a3b8` | `#475569` | Вторичный текст |
-| `--text3` | `#64748b` | `#94a3b8` | Мuted текст (дата, мета) |
-| `--glow` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.08)` | Hover-подсветка с акцентом |
-| `--shadow` | `0 4px 24px rgba(0,0,0,0.4)` | `0 4px 24px rgba(0,0,0,0.08)` | Тень элементов |
-| `--nav-blur` | `rgba(10,14,23,0.85)` | `rgba(245,247,250,0.85)` | Фон nav с прозрачностью |
-| `--tag-bg` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.08)` | Фон тегов |
+| `--accent` | `#00d4ff` | `#00d4ff` | Primary accent (cyan) |
+| `--accent2` | `#7c3aed` | `#7c3aed` | Secondary accent (purple) |
+| `--accent3` | `#10b981` | `#10b981` | Third accent (green) |
+| `--warn` | `#f59e0b` | `#f59e0b` | Warning (amber) |
+| `--bg` | `#0a0e17` | `#f5f7fa` | Main background |
+| `--bg2` | `#111827` | `#ffffff` | Cards, panels |
+| `--bg3` | `#1a2235` | `#eef2f8` | Hover states |
+| `--border` | `#1e2d45` | `#d1dbe8` | Borders |
+| `--border2` | `#263347` | `#c2cfe0` | Borders (darker) |
+| `--text` | `#e2e8f0` | `#1a2235` | Primary text |
+| `--text2` | `#94a3b8` | `#475569` | Secondary text |
+| `--text3` | `#64748b` | `#94a3b8` | Muted text (date, meta) |
+| `--glow` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.08)` | Hover highlight with accent |
+| `--shadow` | `0 4px 24px rgba(0,0,0,0.4)` | `0 4px 24px rgba(0,0,0,0.08)` | Element shadow |
+| `--nav-blur` | `rgba(10,14,23,0.85)` | `rgba(245,247,250,0.85)` | Nav background with transparency |
+| `--tag-bg` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.08)` | Tag background |
 
-**Как переключение темы работает технически:**
-1. JS ставит `document.documentElement.setAttribute('data-theme', 'light')`
-2. CSS `[data-theme="light"]` переопределяет все переменные
-3. Все компоненты используют `var(--bg)` и т.д. — автоматически перекрашиваются
+**How theme switching works technically:**
+1. JS sets `document.documentElement.setAttribute('data-theme', 'light')`
+2. CSS `[data-theme="light"]` overrides all variables
+3. All components use `var(--bg)` etc. — automatically recolored
 
 ---
 
-## global.css — справочник классов
+## global.css — class reference
 
-### Сброс и базовые стили
+### Reset and base styles
 
-| Класс / Селектор | Описание |
+| Class / Selector | Description |
 |---|---|
-| `*, *::before, *::after` | `box-sizing: border-box`, сброс margin/padding |
+| `*, *::before, *::after` | `box-sizing: border-box`, margin/padding reset |
 | `body` | `background: var(--bg)`, `color: var(--text)`, JetBrains Mono font |
 | `a` | `color: inherit`, `text-decoration: none` |
 
-### Навигация (desktop)
+### Navigation (desktop)
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.desk-nav` | Flex-контейнер: логотип + ссылки + правая панель. `position: sticky; top: 0; z-index: 100` |
-| `.nav-logo` | Логотип с gradient-текстом (`--accent` → `--accent2`) |
-| `.nav-links` | Список nav-ссылок |
-| `.nav-links a.active` | Активная ссылка: `color: var(--accent)` |
+| `.desk-nav` | Flex container: logo + links + right panel. `position: sticky; top: 0; z-index: 100` |
+| `.nav-logo` | Logo with gradient text (`--accent` → `--accent2`) |
+| `.nav-links` | List of nav links |
+| `.nav-links a.active` | Active link: `color: var(--accent)` |
 | `.nav-right` | Lang-toggle + theme button |
-| `.lang-btn` | Кнопки EN/RU. `localStorage.lang` хранит выбор |
-| `.lang-btn.active` | Активный язык: border-color accent |
-| `.theme-btn` | 🌙/☀️ кнопка переключения темы |
+| `.lang-btn` | EN/RU buttons. `localStorage.lang` stores the choice |
+| `.lang-btn.active` | Active language: border-color accent |
+| `.theme-btn` | 🌙/☀️ theme toggle button |
 
-### Хлебные крошки
+### Breadcrumbs
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.breadcrumb` | Flex-строка с разделителями `/`. Рендерится в `single.html` и `certs/single.html` |
+| `.breadcrumb` | Flex row with `/` separators. Rendered in `single.html` and `certs/single.html` |
 
-### Панели
+### Panels
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.panel` | Карточка: `background: var(--bg2)`, `border`, `border-radius: 10px`, `padding: 20px` |
-| `.panel-head` | Flex заголовок панели: `.panel-title` + `.panel-more` |
-| `.panel-title` | Заголовок панели (uppercase, small font) |
-| `.panel-more` | Ссылка "all →" справа в заголовке |
-| `.sec-title` | H2-заголовок секции (Unbounded font, gradient) |
+| `.panel` | Card: `background: var(--bg2)`, `border`, `border-radius: 10px`, `padding: 20px` |
+| `.panel-head` | Flex panel header: `.panel-title` + `.panel-more` |
+| `.panel-title` | Panel heading (uppercase, small font) |
+| `.panel-more` | "all →" link on the right in the header |
+| `.sec-title` | H2 section heading (Unbounded font, gradient) |
 
-### Статьи (post-card)
+### Articles (post-card)
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.posts-list` | Flex-колонка с gap |
-| `.post-card` | Карточка статьи: `background: var(--bg2)`, hover поднимается на 2px |
-| `.post-card-meta` | Строка: дата + теги |
-| `.post-card-title` | Заголовок статьи в карточке |
-| `.post-card-desc` | Краткое описание (`color: var(--text3)`) |
-| `.post-date` | Дата в формате YYYY-MM-DD |
+| `.posts-list` | Flex column with gap |
+| `.post-card` | Article card: `background: var(--bg2)`, lifts 2px on hover |
+| `.post-card-meta` | Row: date + tags |
+| `.post-card-title` | Article title in card |
+| `.post-card-desc` | Short description (`color: var(--text3)`) |
+| `.post-date` | Date in YYYY-MM-DD format |
 
-### Теги
+### Tags
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
 | `.tag` | `display: inline-flex`, `background: var(--tag-bg)`, `border`, `border-radius: 4px` |
 | `.tag:hover` | `border-color: var(--accent)`, `color: var(--accent)` |
-| `.tag.active` | То же что hover — для активного фильтра на `/tags/` |
-| `button.tag` | Сброс стилей кнопки при использовании `<button>` с классом `.tag` |
-| `.tag-lg` | Увеличенный тег (на странице `/tags/`): `font-size: 12px`, `padding: 6px 14px` |
-| `.tag .count` | Счётчик в теге: `color: var(--text3)` |
-| `.tags-header` | Заголовок страницы тегов: sec-title + search-wrap |
+| `.tag.active` | Same as hover — for active filter on `/tags/` |
+| `button.tag` | Button style reset when using `<button>` with `.tag` class |
+| `.tag-lg` | Larger tag (on `/tags/` page): `font-size: 12px`, `padding: 6px 14px` |
+| `.tag .count` | Count inside tag: `color: var(--text3)` |
+| `.tags-header` | Tags page heading: sec-title + search-wrap |
 | `.tags-grid` | `display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px` |
-| `.tag-filter` | Тег-кнопка на странице `/tags/` |
+| `.tag-filter` | Tag button on `/tags/` page |
 
-### Пагинация
+### Pagination
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.pagination` | Flex-контейнер кнопок пагинации |
-| `.pg-btn` | Кнопка/ссылка страницы |
-| `.pg-btn.pg-active` | Текущая страница: `background: var(--accent)`, белый текст |
-| `.pg-btn.pg-disabled` | Неактивная стрелка |
-| `.pg-arrow` | Кнопка со стрелкой (prev/next) |
-| `.pg-ellipsis` | `···` между страницами |
-| `.pg-info` | Счётчик `N / Total` |
+| `.pagination` | Flex container of pagination buttons |
+| `.pg-btn` | Page button/link |
+| `.pg-btn.pg-active` | Current page: `background: var(--accent)`, white text |
+| `.pg-btn.pg-disabled` | Inactive arrow |
+| `.pg-arrow` | Arrow button (prev/next) |
+| `.pg-ellipsis` | `···` between pages |
+| `.pg-info` | `N / Total` counter |
 
-### Поиск
+### Search
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.search-wrap` | `position: relative` — контейнер для absolute-позиционированных результатов |
-| `.search-input` | Input поиска: `background: var(--bg2)`, `border`, font Mono |
-| `.search-icon` | Иконка ⌕ — абсолютно позиционирована справа в input |
-| `#searchResults` | Создаётся JS динамически. Absolute, `z-index: 50`, max-height 400px |
+| `.search-wrap` | `position: relative` — container for absolutely positioned results |
+| `.search-input` | Search input: `background: var(--bg2)`, `border`, Mono font |
+| `.search-icon` | ⌕ icon — absolutely positioned to the right inside input |
+| `#searchResults` | Created by JS dynamically. Absolute, `z-index: 50`, max-height 400px |
 
 ### Code blocks
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.code-block` | Обёртка: border + border-radius |
-| `.code-label` | Шапка блока: язык + label + кнопка copy |
-| `.copy-btn` | Кнопка "copy" → "ok!" через 1.5s |
-| `.copy-btn.copied` | Состояние после копирования: `color: var(--accent3)` |
+| `.code-block` | Wrapper: border + border-radius |
+| `.code-label` | Block header: language + label + copy button |
+| `.copy-btn` | "copy" → "ok!" button, reverts after 1.5s |
+| `.copy-btn.copied` | State after copying: `color: var(--accent3)` |
 
-### Сертификаты (cert-grid)
+### Certifications (cert-grid)
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.cert-grid` | Grid 4 колонки (с breakpoints) |
-| `.cert-card` | Карточка сертификата: `--cert-color` кастомная переменная для цвета |
+| `.cert-grid` | 4-column grid (with breakpoints) |
+| `.cert-card` | Cert card: `--cert-color` custom variable for color |
 | `.cert-top` | Flex: badge + name |
-| `.cert-badge` | Emoji-иконка |
-| `.cert-name` | Название (Unbounded font, `color: var(--cert-color)`) |
-| `.cert-sub` | Подзаголовок (мелкий серый) |
-| `.progress-bar` | Серая полоска прогресса |
-| `.progress-fill` | Заполнение (ширина в % задаётся inline style) |
-| `.progress-label` | Flex: текст статуса + процент |
-| `.pct` | Процент справа |
+| `.cert-badge` | Emoji icon |
+| `.cert-name` | Name (Unbounded font, `color: var(--cert-color)`) |
+| `.cert-sub` | Subtitle (small, gray) |
+| `.progress-bar` | Gray progress bar |
+| `.progress-fill` | Fill (width in % set via inline style) |
+| `.progress-label` | Flex: status text + percentage |
+| `.pct` | Percentage on the right |
 
 ---
 
-## mobile.css — справочник классов
+## mobile.css — class reference
 
-### Мобильная навигация
+### Mobile navigation
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.mob-nav` | `display: none` на десктопе, flex на мобильном. Sticky, blur-background |
+| `.mob-nav` | `display: none` on desktop, flex on mobile. Sticky, blur-background |
 | `.mob-nav-right` | Flex: theme-btn + burger |
-| `.burger` | Кнопка гамбургер-меню (3 линии) |
-| `.burger span` | Линии бургера, анимируются при открытии |
-| `.burger.open span:nth-child(1)` | Верхняя линия: `rotate(45deg)` |
-| `.burger.open span:nth-child(3)` | Нижняя линия: `rotate(-45deg)` |
-| `.mob-drawer` | Выдвижное меню: `position: fixed`, трансформируется slidein |
-| `.mob-drawer.open` | Видимое состояние |
-| `.mob-overlay` | Полупрозрачный overlay за drawer |
-| `.mob-bottom-nav` | Нижняя панель навигации (Home, Blog, Certs, KB) |
-| `.mob-bnav-item` | Элемент нижней панели: icon + label |
-| `.mob-bnav-item.active` | Активный пункт: `color: var(--accent)` |
+| `.burger` | Hamburger menu button (3 lines) |
+| `.burger span` | Burger lines, animated on open |
+| `.burger.open span:nth-child(1)` | Top line: `rotate(45deg)` |
+| `.burger.open span:nth-child(3)` | Bottom line: `rotate(-45deg)` |
+| `.mob-drawer` | Slide-out menu: `position: fixed`, transforms on slide-in |
+| `.mob-drawer.open` | Visible state |
+| `.mob-overlay` | Semi-transparent overlay behind drawer |
+| `.mob-bottom-nav` | Bottom navigation bar (Home, Blog, Certs, KB) |
+| `.mob-bnav-item` | Bottom bar item: icon + label |
+| `.mob-bnav-item.active` | Active item: `color: var(--accent)` |
 
 ### Responsive breakpoints
 
-| Breakpoint | Что меняется |
+| Breakpoint | What changes |
 |---|---|
-| `max-width: 860px` | `.desk-nav` скрыт, `.mob-nav` + `.mob-bottom-nav` видны; `.has-toc` не применяется |
-| `max-width: 560px` | Уменьшаются padding, font-size; `.cert-grid` → 2 колонки |
+| `max-width: 860px` | `.desk-nav` hidden, `.mob-nav` + `.mob-bottom-nav` visible; `.has-toc` not applied |
+| `max-width: 560px` | Reduced padding, font-size; `.cert-grid` → 2 columns |
 
 ---
 
-## prose.css — типографика статей
+## prose.css — article typography
 
-Применяется к `.prose` (тело статьи). Стилизует стандартные HTML-элементы markdown:
+Applied to `.prose` (article body). Styles standard HTML elements from markdown:
 
-| Селектор | Описание |
+| Selector | Description |
 |---|---|
-| `.prose h2, .prose h3` | Заголовки с `border-bottom: 1px solid var(--border)` |
-| `.prose code` | Инлайн код: `background: var(--bg3)`, моноширинный |
-| `.prose pre` | Блок кода: `overflow-x: auto`, padding |
-| `.prose blockquote` | Цитата: `border-left: 3px solid var(--accent)`, отступ |
-| `.prose table` | Таблица: `border-collapse: collapse`, полная ширина |
-| `.prose th` | Заголовок таблицы: `background: var(--bg3)` |
-| `.prose td, .prose th` | Ячейки: `border: 1px solid var(--border)`, padding |
-| `.prose a` | Ссылки: `color: var(--accent)` с underline |
-| `.prose strong` | Жирный: `color: var(--text)` |
-| `.prose ul, .prose ol` | Списки с отступами |
+| `.prose h2, .prose h3` | Headings with `border-bottom: 1px solid var(--border)` |
+| `.prose code` | Inline code: `background: var(--bg3)`, monospace |
+| `.prose pre` | Code block: `overflow-x: auto`, padding |
+| `.prose blockquote` | Quote: `border-left: 3px solid var(--accent)`, indent |
+| `.prose table` | Table: `border-collapse: collapse`, full width |
+| `.prose th` | Table header: `background: var(--bg3)` |
+| `.prose td, .prose th` | Cells: `border: 1px solid var(--border)`, padding |
+| `.prose a` | Links: `color: var(--accent)` with underline |
+| `.prose strong` | Bold: `color: var(--text)` |
+| `.prose ul, .prose ol` | Lists with indentation |
 
-### ToC sidebar (в single.html)
+### ToC sidebar (in single.html)
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.prose-page` | Контейнер страницы, переключается в grid при `.has-toc` |
+| `.prose-page` | Page container, switches to grid with `.has-toc` |
 | `.prose-page.has-toc` | `display: grid; grid-template-columns: 1fr 240px` |
-| `.toc-aside` | Правая колонка ToC, sticky |
-| `.toc-inner` | Карточка ToC |
-| `.toc-title` | Заголовок "Contents" |
-| `.toc-item` | Ссылка на заголовок |
-| `.toc-item.toc-h3` | H3 — сдвинут влево на 12px |
-| `.toc-item.cur` | Активный заголовок: `color: var(--accent)` |
+| `.toc-aside` | Right ToC column, sticky |
+| `.toc-inner` | ToC card |
+| `.toc-title` | "Contents" heading |
+| `.toc-item` | Link to a heading |
+| `.toc-item.toc-h3` | H3 — shifted left by 12px |
+| `.toc-item.cur` | Active heading: `color: var(--accent)` |
 
 ---
 
-## cert.css — страницы сертификаций
+## cert.css — certification pages
 
-| Класс | Описание |
+| Class | Description |
 |---|---|
-| `.cert-hero` | Hero-блок с badge, именем, описанием. `--cert-color` определяет цвет рамки |
-| `.cert-stats` | Строка статистики (exams · topics · articles) |
-| `.exam-block` | Группа тем одного экзамена |
-| `.exam-label` | Заголовок экзамена (uppercase, `color: var(--text3)`) |
-| `.cert-topic` | Один accordion-элемент |
-| `.cert-topic.has-posts` | Топик с постами (остальные — без кликабельности) |
-| `.cert-topic.open` | Раскрытое состояние: border-color → accent |
-| `.cert-topic-head` | Кнопка-заголовок accordion |
-| `.topic-num` | Номер темы (например "200"): `color: var(--accent)` |
-| `.topic-title` | Название темы: `color: var(--text)` |
-| `.topic-meta` | Счётчик статей или "no articles yet" |
-| `.topic-chevron` | `›`, поворачивается на 90° при `.open` |
-| `.cert-topic-body` | Тело accordion: `max-height: 0` → `scrollHeight` через JS |
-| `.cert-post-link` | Ссылка на статью внутри темы |
-| `.cert-post-title` | Заголовок статьи: `color: var(--accent)` |
-| `.cert-post-desc` | Описание статьи: `color: var(--text2)` |
-| `.cert-coming-soon` | Заглушка для страниц без контента |
+| `.cert-hero` | Hero block with badge, name, description. `--cert-color` sets border color |
+| `.cert-stats` | Stats row (exams · topics · articles) |
+| `.exam-block` | Group of topics for one exam |
+| `.exam-label` | Exam heading (uppercase, `color: var(--text3)`) |
+| `.cert-topic` | One accordion item |
+| `.cert-topic.has-posts` | Topic with posts (others are not clickable) |
+| `.cert-topic.open` | Expanded state: border-color → accent |
+| `.cert-topic-head` | Accordion header button |
+| `.topic-num` | Topic number (e.g. "200"): `color: var(--accent)` |
+| `.topic-title` | Topic name: `color: var(--text)` |
+| `.topic-meta` | Article count or "no articles yet" |
+| `.topic-chevron` | `›`, rotates 90° with `.open` |
+| `.cert-topic-body` | Accordion body: `max-height: 0` → `scrollHeight` via JS |
+| `.cert-post-link` | Link to an article inside a topic |
+| `.cert-post-title` | Article title: `color: var(--accent)` |
+| `.cert-post-desc` | Article description: `color: var(--text2)` |
+| `.cert-coming-soon` | Placeholder for pages without content |
 
 ---
 
-## Связанные страницы
+## Related pages
 
-- [Обзор проекта](/docs/overview/)
-- [Шаблоны](/docs/templates/)
+- [Project Overview](/docs/overview/)
+- [Templates](/docs/templates/)
 - [Frontmatter](/docs/frontmatter/)
 - [JavaScript](/docs/javascript/)
