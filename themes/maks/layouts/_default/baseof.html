@@ -30,8 +30,8 @@
   </ul>
   <div class="nav-right">
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
-      <button class="lang-btn" onclick="setLang('ru',this)">RU</button>
+      <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru',this)">RU</button>
     </div>
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
   </div>
@@ -57,8 +57,8 @@
   <a href="{{ "/docs/" | relURL }}"{{ if eq .Section "docs" }} class="active"{{ end }}>Docs</a>
   <a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>About</a>
   <div class="mob-drawer-lang">
-    <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
-    <button class="lang-btn" onclick="setLang('ru',this)">RU</button>
+    <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en',this)">EN</button>
+    <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru',this)">RU</button>
   </div>
 </div>
 <div class="mob-overlay" id="mobOverlay" onclick="closeMobMenu()"></div>
@@ -101,12 +101,9 @@ function toggleTheme(){
   const icon=isDark?'☀️':'🌙';
   document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=icon);
 }
-function setLang(lang,btn){
-  localStorage.setItem('lang',lang);
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.lang-btn').forEach(b=>{if(b.textContent.trim()===lang.toUpperCase())b.classList.add('active')});
+function setLang(lang){
   const m=document.getElementById('page-lang');
-  if(m&&m.dataset.lang&&m.dataset.langPair&&lang!==m.dataset.lang)window.location.href=m.dataset.langPair;
+  if(m&&m.dataset.langPair&&lang!==m.dataset.lang)window.location.href=m.dataset.langPair;
 }
 function toggleMobMenu(){
   const d=document.getElementById('mobDrawer');
@@ -126,17 +123,6 @@ function closeMobMenu(){
   if(t==='light'){
     document.documentElement.setAttribute('data-theme','light');
     document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent='☀️');
-  }
-  const lang=localStorage.getItem('lang')||'en';
-  if(lang==='ru'){
-    document.querySelectorAll('.lang-btn').forEach(b=>{
-      if(b.textContent.trim()==='RU')b.classList.add('active');
-      else b.classList.remove('active');
-    });
-  }
-  const m=document.getElementById('page-lang');
-  if(m&&m.dataset.lang&&m.dataset.langPair&&lang!==m.dataset.lang){
-    window.location.replace(m.dataset.langPair);
   }
 })();
 </script>
