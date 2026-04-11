@@ -7,21 +7,21 @@ lang_pair: "/docs/ru/javascript/"
 tags: ["docs"]
 ---
 
-## Где живёт JS
+## Where JS lives
 
-| Файл | Загружается | Назначение |
+| File | Loaded | Purpose |
 |---|---|---|
-| Inline в `baseof.html` `<script>` | каждая страница | Глобальные функции (тема, меню) + restore из localStorage |
-| `static/js/site.js` | **нигде не подключён** | Дублирует функции из baseof (устаревший) |
-| Inline в `_default/single.html` `{{ block "scripts" }}` | страницы статей | Progress bar + ToC + copy buttons |
-| Inline в `posts/list.html` `{{ block "scripts" }}` | `/posts/` | Pagefind поиск |
-| Inline в `taxonomy/tag.html` `{{ block "scripts" }}` | `/tags/` | Pagefind поиск + tag filter |
-| Inline в `certs/single.html` `{{ block "scripts" }}` | `/certs/*` | Accordion toggle |
-| `static/js/ns.js` | `/posts/linux-namespaces/` | Namespace explorer (данные + рендер) |
+| Inline in `baseof.html` `<script>` | every page | Global functions (theme, menu) + restore from localStorage |
+| `static/js/site.js` | **not loaded anywhere** | Duplicates functions from baseof (legacy) |
+| Inline in `_default/single.html` `{{ block "scripts" }}` | article pages | Progress bar + ToC + copy buttons |
+| Inline in `posts/list.html` `{{ block "scripts" }}` | `/posts/` | Pagefind search |
+| Inline in `taxonomy/tag.html` `{{ block "scripts" }}` | `/tags/` | Pagefind search + tag filter |
+| Inline in `certs/single.html` `{{ block "scripts" }}` | `/certs/*` | Accordion toggle |
+| `static/js/ns.js` | `/posts/linux-namespaces/` | Namespace explorer (data + render) |
 
 ---
 
-## baseof.html — глобальные функции
+## baseof.html — global functions
 
 ### `toggleTheme()`
 
@@ -29,15 +29,15 @@ tags: ["docs"]
 function toggleTheme()
 ```
 
-**Вызывается:** `onclick` на `#themeBtn` (desktop) и `#themeBtnMob` (mobile).
+**Called by:** `onclick` on `#themeBtn` (desktop) and `#themeBtnMob` (mobile).
 
-**Что делает:**
-1. Читает текущий атрибут `data-theme` с `<html>`
-2. Переключает на противоположный (`dark` ↔ `light`)
-3. Сохраняет в `localStorage.theme`
-4. Меняет иконку на всех кнопках `#themeBtn`, `#themeBtnMob`
+**What it does:**
+1. Reads the current `data-theme` attribute from `<html>`
+2. Switches to the opposite (`dark` ↔ `light`)
+3. Saves to `localStorage.theme`
+4. Updates the icon on all `#themeBtn`, `#themeBtnMob` buttons
 
-**CSS-связь:** `document.documentElement.setAttribute('data-theme', next)` триггерит CSS-переменные `[data-theme="light"]`.
+**CSS link:** `document.documentElement.setAttribute('data-theme', next)` triggers CSS variables `[data-theme="light"]`.
 
 ---
 
@@ -45,17 +45,18 @@ function toggleTheme()
 
 ```js
 function setLang(lang, btn)
-// Пример вызова: setLang('ru', this)
+// Example call: setLang('ru', this)
 ```
 
-**Вызывается:** `onclick` на кнопках `.lang-btn` в desktop nav и mobile drawer.
+**Called by:** `onclick` on `.lang-btn` buttons in desktop nav and mobile drawer.
 
-**Что делает:**
-1. Сохраняет `lang` в `localStorage.lang`
-2. Убирает `.active` со всех `.lang-btn`
-3. Добавляет `.active` кнопке с текстом = `lang.toUpperCase()`
+**What it does:**
+1. Saves `lang` to `localStorage.lang`
+2. Removes `.active` from all `.lang-btn`
+3. Adds `.active` to the button whose text equals `lang.toUpperCase()`
+4. If the page is bilingual (has `<meta id="page-lang">`) and the selected language differs from the current one — redirects to the `data-lang-pair` URL
 
-> **Важно:** функция только переключает визуальное состояние кнопок. Реального перевода контента нет — переменная `lang` зарезервирована для будущего использования.
+> **Note:** on non-bilingual pages the function only toggles the visual state of the buttons. No content translation — the `lang` variable is reserved for future use.
 
 ---
 
@@ -65,12 +66,12 @@ function setLang(lang, btn)
 function toggleMobMenu()
 ```
 
-**Вызывается:** `onclick` на `#burgerBtn`.
+**Called by:** `onclick` on `#burgerBtn`.
 
-**Что делает:** toggle класса `.open` на трёх элементах одновременно:
-- `#mobDrawer` — выдвигает drawer
-- `#mobOverlay` — показывает затемнение
-- `#burgerBtn` — анимирует бургер в крестик
+**What it does:** toggles `.open` class on three elements simultaneously:
+- `#mobDrawer` — slides out the drawer
+- `#mobOverlay` — shows the backdrop
+- `#burgerBtn` — animates burger into an X
 
 ---
 
@@ -80,9 +81,9 @@ function toggleMobMenu()
 function closeMobMenu()
 ```
 
-**Вызывается:** `onclick` на `#mobOverlay` (клик по overlay закрывает меню).
+**Called by:** `onclick` on `#mobOverlay` (clicking the overlay closes the menu).
 
-**Что делает:** убирает `.open` у `#mobDrawer`, `#mobOverlay`, `#burgerBtn`.
+**What it does:** removes `.open` from `#mobDrawer`, `#mobOverlay`, `#burgerBtn`.
 
 ---
 
@@ -97,13 +98,13 @@ function closeMobMenu()
 })();
 ```
 
-**Выполняется:** сразу при загрузке страницы (Immediately Invoked Function Expression).
+**Executes:** immediately on page load (Immediately Invoked Function Expression).
 
-**Что делает:**
-- Если `localStorage.theme === 'light'` → применяет светлую тему и ставит ☀️
-- Если `localStorage.lang === 'ru'` → ставит `.active` на кнопку RU
+**What it does:**
+- If `localStorage.theme === 'light'` → applies light theme and sets ☀️
+- If `localStorage.lang === 'ru'` → sets `.active` on the RU button
 
-> **Зачем IIFE, а не просто код?** Изоляция переменных (`t`, `lang`) от глобального scope.
+> **Why IIFE and not plain code?** Isolates variables (`t`, `lang`) from the global scope.
 
 ---
 
@@ -121,7 +122,7 @@ window.addEventListener('scroll', () => {
 });
 ```
 
-Создаёт полоску прогресса чтения. Ширина = `scrollY / (scrollHeight - viewportHeight) * 100%`.
+Creates a reading progress bar. Width = `scrollY / (scrollHeight - viewportHeight) * 100%`.
 
 ---
 
@@ -132,25 +133,25 @@ const heads = document.querySelectorAll('#articleBody h2, #articleBody h3');
 if (heads.length > 2) { ... }
 ```
 
-**Условие:** только если заголовков `> 2`.
+**Condition:** only if there are more than 2 headings.
 
-**Алгоритм:**
-1. Генерирует HTML списка ссылок из `h2`/`h3` (по атрибуту `id` и `textContent`)
-2. Вставляет в `#tocAside`
-3. Если `window.innerWidth >= 860` — добавляет `.has-toc` на `.page` (двухколоночный grid)
-4. `resize` listener — убирает/добавляет `.has-toc` при изменении ширины
-5. `IntersectionObserver` с `rootMargin: '-10% 0px -80% 0px'` — подсвечивает активный заголовок
+**Algorithm:**
+1. Generates an HTML link list from `h2`/`h3` (using `id` attribute and `textContent`)
+2. Inserts into `#tocAside`
+3. If `window.innerWidth >= 860` — adds `.has-toc` to `.page` (two-column grid)
+4. `resize` listener — removes/adds `.has-toc` on width change
+5. `IntersectionObserver` with `rootMargin: '-10% 0px -80% 0px'` — highlights the active heading
 
-**Почему `rootMargin: '-80%` снизу?** Заголовок считается активным когда он в верхних 20% viewport — более естественное ощущение при скролле.
+**Why `rootMargin: '-80%` at the bottom?** A heading is considered active when it's in the top 20% of the viewport — feels more natural while scrolling.
 
 ---
 
-### Copy buttons для сырых pre-блоков
+### Copy buttons for raw pre blocks
 
 ```js
 document.querySelectorAll('pre').forEach(pre => {
-  if (pre.closest('.code-block')) return; // пропускаем shortcode-блоки
-  // оборачивает pre в .code-block и добавляет кнопку copy
+  if (pre.closest('.code-block')) return; // skip shortcode blocks
+  // wraps pre in .code-block and adds a copy button
 });
 
 function cpPre(btn) {
@@ -159,11 +160,11 @@ function cpPre(btn) {
 }
 ```
 
-Применяется к обычным ```` ```bash ``` ```` блокам markdown. Shortcode `{{</* code */>}}` обрабатывает копирование сам через `cpCode()`.
+Applied to plain ```` ```bash ``` ```` markdown blocks. The `{{</* code */>}}` shortcode handles copying itself via `cpCode()`.
 
 ---
 
-## `posts/list.html` — Pagefind поиск
+## `posts/list.html` — Pagefind search
 
 ```js
 let pf = null;
@@ -176,30 +177,30 @@ async function loadPagefind() {
 searchInput.addEventListener('input', async function() { ... });
 ```
 
-**Ленивая загрузка:** `pagefind.js` загружается только при первом вводе (не при открытии страницы). Экономит трафик.
+**Lazy loading:** `pagefind.js` loads only on first input (not when the page opens). Saves bandwidth.
 
-**Поток:**
-1. Пользователь вводит текст → `input` event
-2. `loadPagefind()` — если ещё не загружен, делает `import()`
-3. `pf.search(q)` — возвращает результаты
-4. `await Promise.all(results.map(r => r.data()))` — асинхронно получает данные каждого результата
-5. Рендерит в `#searchResults` (absolute div под input)
+**Flow:**
+1. User types → `input` event
+2. `loadPagefind()` — if not loaded yet, does `import()`
+3. `pf.search(q)` — returns results
+4. `await Promise.all(results.map(r => r.data()))` — asynchronously fetches each result's data
+5. Renders into `#searchResults` (absolute div below input)
 
-**Закрытие:** `document.addEventListener('click')` — клик вне `.search-wrap` скрывает результаты.
+**Closing:** `document.addEventListener('click')` — a click outside `.search-wrap` hides results.
 
 ---
 
 ## taxonomy/tag.html — tag filter
 
 ```js
-const POSTS = [ /* встроен Hugo-шаблоном */ ];
+const POSTS = [ /* embedded by Hugo template */ ];
 let activeTag = '';
 
 function renderArticles() {
   const filtered = activeTag
     ? POSTS.filter(p => p.tags.includes(activeTag))
     : POSTS;
-  // innerHTML рендер
+  // innerHTML render
 }
 
 document.querySelectorAll('.tag-filter').forEach(btn => {
@@ -210,11 +211,11 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 });
 ```
 
-**Данные из Hugo:** массив `POSTS` генерируется в момент сборки. Каждый пост содержит:
-- `tags` — массив urlized-имён (для фильтрации)
-- `tagLabels` — массив display-имён (для рендера)
+**Data from Hugo:** the `POSTS` array is generated at build time. Each post contains:
+- `tags` — array of urlized names (for filtering)
+- `tagLabels` — array of display names (for rendering)
 
-**`btn.dataset.tag`** — читается из `data-tag=""` атрибута кнопки. Кнопка "All" имеет `data-tag=""` → `activeTag = ''` → показываются все посты.
+**`btn.dataset.tag`** — read from the `data-tag=""` attribute on the button. The "All" button has `data-tag=""` → `activeTag = ''` → all posts are shown.
 
 ---
 
@@ -224,36 +225,36 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 function toggleTopic(btn) {
   const topic = btn.closest('.cert-topic');
   const body  = topic.querySelector('.cert-topic-body');
-  if (!body) return;                              // топики без постов не раскрываются
+  if (!body) return;                              // topics without posts don't expand
   const open = topic.classList.toggle('open');
   body.style.maxHeight = open ? body.scrollHeight + 'px' : '0';
 }
 ```
 
-**Анимация через `max-height`:** CSS-анимация `max-height: 0 → scrollHeight`. `scrollHeight` = реальная высота содержимого.
+**Animation via `max-height`:** CSS animation `max-height: 0 → scrollHeight`. `scrollHeight` = actual content height.
 
-**Почему не `height: auto`?** CSS не умеет анимировать `auto`. `max-height` — стандартный обходной путь.
+**Why not `height: auto`?** CSS cannot animate `auto`. `max-height` is the standard workaround.
 
 ---
 
 ## ns.js — Namespace Explorer
 
-**Путь:** `static/js/ns.js`  
-**Загружается:** только на `/posts/linux-namespaces/` через `<script src="{{ "js/ns.js" | relURL }}">`
+**Path:** `static/js/ns.js`  
+**Loaded:** only on `/posts/linux-namespaces/` via `<script src="{{ "js/ns.js" | relURL }}">`
 
-Содержит:
-- `nsData` — массив объектов с данными по всем namespace'ам (name, flag, icon, color, summary, desc...)
-- `cheatData` — массив команд для cheatsheet таблицы
-- Функции рендера: `buildNsGrid()`, `buildNsMap()`, `buildCheatTable()`
-- `toggleCard(el)` — раскрывает/закрывает namespace карточку
-- `IntersectionObserver` — progress bar (сколько namespace'ов прочитано)
-- `buildToc()` — строит содержание в aside
+Contains:
+- `nsData` — array of objects with data for all namespaces (name, flag, icon, color, summary, desc...)
+- `cheatData` — array of commands for the cheatsheet table
+- Render functions: `buildNsGrid()`, `buildNsMap()`, `buildCheatTable()`
+- `toggleCard(el)` — expands/collapses a namespace card
+- `IntersectionObserver` — progress bar (how many namespaces have been read)
+- `buildToc()` — builds the table of contents in aside
 
 ---
 
-## Связанные страницы
+## Related pages
 
-- [Обзор проекта](/docs/overview/)
-- [Шаблоны](/docs/templates/)
+- [Project Overview](/docs/overview/)
+- [Templates](/docs/templates/)
 - [CSS](/docs/css/)
 - [Frontmatter](/docs/frontmatter/)

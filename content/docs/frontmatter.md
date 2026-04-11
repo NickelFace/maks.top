@@ -7,48 +7,48 @@ lang_pair: "/docs/ru/frontmatter/"
 tags: ["docs"]
 ---
 
-## Что такое frontmatter
+## What is frontmatter?
 
-Frontmatter — блок YAML в начале каждого `.md` файла между `---`. Hugo читает его и делает доступным в шаблонах через `.Params` и встроенные поля.
+Frontmatter is a YAML block at the top of each `.md` file between `---`. Hugo reads it and makes it available in templates via `.Params` and built-in fields.
 
 ```yaml
 ---
-title: "Название"        # встроенное поле → .Title
-date: 2026-04-11         # встроенное поле → .Date
-my_param: "value"        # кастомное → .Params.my_param
+title: "Title"           # built-in field → .Title
+date: 2026-04-11         # built-in field → .Date
+my_param: "value"        # custom → .Params.my_param
 ---
 ```
 
 ---
 
-## Встроенные поля Hugo (все типы контента)
+## Built-in Hugo fields (all content types)
 
-| Поле | Тип | Доступ в шаблоне | Описание |
+| Field | Type | Template access | Description |
 |---|---|---|---|
-| `title` | string | `.Title` | Заголовок страницы. Используется в `<title>`, h1, breadcrumb, карточках |
-| `date` | date | `.Date` | Дата публикации. Формат: `2026-04-11`. Влияет на сортировку |
-| `description` | string | `.Description` | Мета-описание. Используется в `<meta description>` и превью карточек |
-| `draft` | bool | `.Draft` | `true` — страница не публикуется при `hugo` (только при `hugo -D`) |
-| `tags` | []string | `.Params.tags` | Теги. Создают страницы `/tags/{tag-name}/` |
-| `categories` | []string | `.Params.categories` | Категории. Создают страницы `/categories/{name}/` |
-| `weight` | int | `.Weight` | Ручная сортировка (меньше = выше) |
+| `title` | string | `.Title` | Page title. Used in `<title>`, h1, breadcrumb, cards |
+| `date` | date | `.Date` | Publication date. Format: `2026-04-11`. Affects sorting |
+| `description` | string | `.Description` | Meta description. Used in `<meta description>` and card previews |
+| `draft` | bool | `.Draft` | `true` — page not published with `hugo` (only with `hugo -D`) |
+| `tags` | []string | `.Params.tags` | Tags. Create pages at `/tags/{tag-name}/` |
+| `categories` | []string | `.Params.categories` | Categories. Create pages at `/categories/{name}/` |
+| `weight` | int | `.Weight` | Manual sort order (lower = higher) |
 
 ---
 
-## Поля для постов (`content/posts/*.md`)
+## Fields for posts (`content/posts/*.md`)
 
-### Используемые в шаблонах
+### Used in templates
 
-| Поле | Тип | Обязательный | Используется в | Описание |
+| Field | Type | Required | Used in | Description |
 |---|---|---|---|---|
-| `title` | string | **да** | h1, карточка, ToC | Название статьи |
-| `date` | date | **да** | карточка, сортировка | Дата публикации |
-| `description` | string | рекомендуется | meta, карточка, cert-page | Краткое описание (1-2 предложения) |
-| `tags` | []string | рекомендуется | post-meta, фильтры, /tags/ | Теги статьи |
-| `categories` | []string | нет | фильтр в `certs/single.html` | Категория (напр. "LPIC-2") |
-| `readingtime` | int | нет | `.post-meta` в single.html | Время чтения в минутах |
+| `title` | string | **yes** | h1, card, ToC | Article title |
+| `date` | date | **yes** | card, sorting | Publication date |
+| `description` | string | recommended | meta, card, cert-page | Short description (1-2 sentences) |
+| `tags` | []string | recommended | post-meta, filters, /tags/ | Article tags |
+| `categories` | []string | no | filter in `certs/single.html` | Category (e.g. "LPIC-2") |
+| `readingtime` | int | no | `.post-meta` in single.html | Reading time in minutes |
 
-### Пример для статьи LPIC-2
+### Example for an LPIC-2 article
 
 ```yaml
 ---
@@ -60,65 +60,65 @@ categories: ["LPIC-2"]
 ---
 ```
 
-### Как `description` используется в разных местах
+### How `description` is used in different places
 
-| Место | Шаблон | Поведение |
+| Location | Template | Behavior |
 |---|---|---|
-| Мета-тег страницы | `baseof.html` | `.Description` или `.Site.Params.description` |
-| Карточка в листинге | `list.html` | `.Description` → если нет, то `.Summary` (первые 120 символов) |
-| Ссылка в cert-accordion | `certs/single.html` | `.Description` под заголовком |
-| Результат поиска Pagefind | Pagefind | excerpt из контента страницы |
+| Page meta tag | `baseof.html` | `.Description` or `.Site.Params.description` |
+| Card in listing | `list.html` | `.Description` → if absent, `.Summary` (first 120 chars) |
+| Link in cert accordion | `certs/single.html` | `.Description` below the title |
+| Pagefind search result | Pagefind | excerpt from page content |
 
 ---
 
-## Поля для страниц сертификатов (`content/certs/*.md`)
+## Fields for cert pages (`content/certs/*.md`)
 
-Эти поля — кастомные, читаются через `.Params.*` в `certs/single.html`.
+These are custom fields, read via `.Params.*` in `certs/single.html`.
 
-| Поле | Тип | Обязательный | Описание |
+| Field | Type | Required | Description |
 |---|---|---|---|
-| `title` | string | **да** | Название сертификата (напр. "LPIC-2") |
-| `cert_badge` | string | **да** | Emoji-иконка (напр. "🖥️") |
-| `cert_color` | string | **да** | CSS-цвет (hex). Используется для `--cert-color` и border |
-| `description` | string | **да** | Подзаголовок в hero-блоке |
-| `post_prefix` | string | **да** | Префикс для поиска постов по slug (напр. `"lpic2"`) |
-| `exams` | []Exam | нет | Список экзаменов с темами. Без него — страница "coming soon" |
+| `title` | string | **yes** | Cert name (e.g. "LPIC-2") |
+| `cert_badge` | string | **yes** | Emoji icon (e.g. "🖥️") |
+| `cert_color` | string | **yes** | CSS color (hex). Used for `--cert-color` and border |
+| `description` | string | **yes** | Subtitle in hero block |
+| `post_prefix` | string | **yes** | Prefix for matching posts by slug (e.g. `"lpic2"`) |
+| `exams` | []Exam | no | List of exams with topics. Without it — "coming soon" page |
 
-### Структура `exams`
+### `exams` structure
 
 ```yaml
 exams:
-  - code: "201"              # Код экзамена (строка)
-    title: "Advanced Linux"  # Название экзамена
+  - code: "201"              # Exam code (string)
+    title: "Advanced Linux"  # Exam name
     topics:
-      - num: "200"           # Номер темы (строка!)
+      - num: "200"           # Topic number (string!)
         title: "Capacity Planning"
       - num: "201"
         title: "Linux Kernel"
 ```
 
-> **Важно:** `num` должен быть строкой (без кавычек YAML может интерпретировать как int). В шаблоне он используется для формирования паттерна: `"{post_prefix}-{num}-"`.
+> **Important:** `num` must be a string (without quotes YAML may interpret it as int). In the template it is used to build a pattern: `"{post_prefix}-{num}-"`.
 
-### Как `post_prefix` связывает посты с темами
+### How `post_prefix` links posts to topics
 
 ```
 post_prefix = "lpic2"
 topic.num   = "200"
 ──────────────────────────────────────────────
-Паттерн: "lpic2-200-"
+Pattern: "lpic2-200-"
 
-Совпадёт:  lpic2-200-1-capacity-planning.md  ✓
-           lpic2-200-2-predict-future.md      ✓
-Не совпадёт: lpic2-201-1-kernel.md           ✗
+Matches:     lpic2-200-1-capacity-planning.md  ✓
+             lpic2-200-2-predict-future.md      ✓
+No match:    lpic2-201-1-kernel.md             ✗
 ```
 
-Таким образом, **slug файла статьи определяет к какой теме она принадлежит**.
+This means **the article file's slug determines which topic it belongs to**.
 
 ---
 
-## Поля для страницы About (`content/about.md`)
+## Fields for the About page (`content/about.md`)
 
-`about.md` не использует кастомных полей frontmatter — данные профиля (имя, ссылки) берутся из `hugo.toml [params]`.
+`about.md` uses no custom frontmatter fields — profile data (name, links) comes from `hugo.toml [params]`.
 
 ```yaml
 ---
@@ -127,45 +127,45 @@ date: 2026-04-01
 ---
 ```
 
-Тело `.md` рендерится в `.prose` в `about/single.html`.
+The `.md` body is rendered into `.prose` in `about/single.html`.
 
 ---
 
-## Поля для документации (`content/docs/*.md`)
+## Fields for documentation (`content/docs/*.md`)
 
 ```yaml
 ---
-title: "Название страницы"
+title: "Page title"
 date: 2026-04-11
-description: "Описание для meta"
+description: "Description for meta"
 lang: "en"
 lang_pair: "/docs/ru/frontmatter/"
 tags: ["docs"]
 ---
 ```
 
-Используют стандартный `_default/single.html` с ToC sidebar.
+Uses the standard `_default/single.html` with ToC sidebar.
 
 ---
 
-## Глобальные параметры сайта (`hugo.toml [params]`)
+## Global site parameters (`hugo.toml [params]`)
 
-Доступны в шаблонах как `.Site.Params.*`:
+Available in templates as `.Site.Params.*`:
 
-| Параметр | Доступ | Используется в |
+| Parameter | Access | Used in |
 |---|---|---|
 | `author` | `.Site.Params.author` | `about/single.html` → `.about-name` |
 | `description` | `.Site.Params.description` | `baseof.html` → `<meta description>` fallback |
 | `location` | `.Site.Params.location` | `about/single.html`, `footer` |
-| `github` | `.Site.Params.github` | `about/single.html` → ссылка GH |
-| `linkedin` | `.Site.Params.linkedin` | `about/single.html` → ссылка in |
-| `telegram` | `.Site.Params.telegram` | `about/single.html` → ссылка ✈ |
+| `github` | `.Site.Params.github` | `about/single.html` → GH link |
+| `linkedin` | `.Site.Params.linkedin` | `about/single.html` → LinkedIn link |
+| `telegram` | `.Site.Params.telegram` | `about/single.html` → Telegram link |
 
 ---
 
-## Связанные страницы
+## Related pages
 
-- [Обзор проекта](/docs/overview/)
-- [Шаблоны](/docs/templates/)
+- [Project Overview](/docs/overview/)
+- [Templates](/docs/templates/)
 - [CSS](/docs/css/)
 - [JavaScript](/docs/javascript/)

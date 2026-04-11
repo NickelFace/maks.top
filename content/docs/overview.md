@@ -9,11 +9,11 @@ tags: ["docs"]
 
 ## What is this project?
 
-`maks.top` — статический сайт на Hugo с кастомной темой `maks`. Никаких сторонних тем или фреймворков — всё написано с нуля.
+`maks.top` — a static site built with Hugo using a custom theme `maks`. No third-party themes or frameworks — everything is written from scratch.
 
 ---
 
-## Hugo pipeline: как сайт собирается
+## Hugo pipeline: how the site is built
 
 ```
 content/ (markdown)  ──┐
@@ -21,19 +21,19 @@ layouts/ (templates) ──┼──► Hugo build ──► public/ ──► G
 static/  (assets)    ──┘
 ```
 
-1. Hugo читает `hugo.toml` — конфигурация сайта
-2. Для каждого `.md` файла из `content/` ищет подходящий шаблон из `layouts/`
-3. Шаблон вставляет данные из frontmatter + `.Content` (тело markdown)
-4. Статические файлы из `static/` и `themes/maks/static/` копируются as-is
-5. Результат — папка `public/` с чистым HTML/CSS/JS
+1. Hugo reads `hugo.toml` — site configuration
+2. For each `.md` file in `content/`, it finds a matching template from `layouts/`
+3. The template inserts data from frontmatter + `.Content` (markdown body)
+4. Static files from `static/` and `themes/maks/static/` are copied as-is
+5. The result — a `public/` folder with clean HTML/CSS/JS
 
 ---
 
-## Поиск шаблона — приоритет
+## Template lookup — priority order
 
-Hugo ищет шаблон в таком порядке (первый найденный побеждает):
+Hugo searches for a template in this order (first match wins):
 
-| Страница | Поиск шаблонов (по порядку) |
+| Page | Template lookup (in order) |
 |---|---|
 | `/posts/lpic2-200-1/` | `layouts/posts/single.html` → `layouts/_default/single.html` |
 | `/posts/linux-namespaces/` | `layouts/posts/linux-namespaces.html` → `layouts/posts/single.html` → `layouts/_default/single.html` |
@@ -43,74 +43,74 @@ Hugo ищет шаблон в таком порядке (первый найде
 | `/posts/` | `layouts/posts/list.html` → `layouts/_default/list.html` |
 | `/tags/` | `layouts/taxonomy/tag.html` |
 
-Ключевое правило: **более специфичный путь всегда переопределяет дефолтный**.
+Key rule: **a more specific path always overrides the default**.
 
 ---
 
-## Структура директорий
+## Directory structure
 
 ```
 maks.top/
 │
-├── hugo.toml                        # Конфигурация сайта
+├── hugo.toml                        # Site configuration
 │
-├── content/                         # Контент (markdown)
-│   ├── about.md                     # Страница /about/
-│   ├── posts/                       # Раздел /posts/ (блог)
-│   │   ├── lpic2-200-1-*.md         # Статьи LPIC-2
-│   │   └── linux-namespaces.md      # Интерактивная страница
-│   ├── certs/                       # Раздел /certs/
-│   │   ├── lpic-2.md                # Страница-оглавление LPIC-2
+├── content/                         # Content (markdown)
+│   ├── about.md                     # /about/ page
+│   ├── posts/                       # /posts/ section (blog)
+│   │   ├── lpic2-200-1-*.md         # LPIC-2 articles
+│   │   └── linux-namespaces.md      # Interactive page
+│   ├── certs/                       # /certs/ section
+│   │   ├── lpic-2.md                # LPIC-2 overview page
 │   │   ├── lpic-1.md
 │   │   ├── aws-saa.md
 │   │   └── ccna.md
-│   └── docs/                        # Раздел /docs/ (эта документация)
+│   └── docs/                        # /docs/ section (this documentation)
 │
-├── static/                          # Глобальные статические файлы
-│   └── CNAME                        # Кастомный домен для GitHub Pages
+├── static/                          # Global static files
+│   └── CNAME                        # Custom domain for GitHub Pages
 │
-└── themes/maks/                     # Кастомная тема
-    ├── theme.toml                   # Мета-информация темы
+└── themes/maks/                     # Custom theme
+    ├── theme.toml                   # Theme metadata
     │
-    ├── layouts/                     # Шаблоны Hugo (Go templates)
-    │   ├── index.html               # Главная страница /
+    ├── layouts/                     # Hugo templates (Go templates)
+    │   ├── index.html               # Home page /
     │   ├── _default/
-    │   │   ├── baseof.html          # Базовый layout (обёртка для всех страниц)
-    │   │   ├── single.html          # Статья с ToC и progress bar
-    │   │   └── list.html            # Листинг страниц с пагинацией
+    │   │   ├── baseof.html          # Base layout (wrapper for all pages)
+    │   │   ├── single.html          # Article with ToC and progress bar
+    │   │   └── list.html            # Page listing with pagination
     │   ├── posts/
-    │   │   ├── list.html            # Листинг постов + Pagefind поиск
-    │   │   └── linux-namespaces.html # Интерактивный explorer namespace'ов
+    │   │   ├── list.html            # Blog listing + Pagefind search
+    │   │   └── linux-namespaces.html # Interactive namespace explorer
     │   ├── about/
-    │   │   └── single.html          # Страница about с certs-widget
+    │   │   └── single.html          # About page with certs-widget
     │   ├── certs/
-    │   │   └── single.html          # Accordion-страница сертификата
+    │   │   └── single.html          # Cert overview with accordion
     │   ├── taxonomy/
-    │   │   └── tag.html             # Теги с интерактивной фильтрацией
-    │   ├── partials/                # Переиспользуемые фрагменты
-    │   │   ├── certs-widget.html    # Виджет сертификаций (карточки)
-    │   │   ├── pagination.html      # Пагинация с ellipsis
-    │   │   └── search.html          # (не используется напрямую)
-    │   └── shortcodes/              # Shortcode-компоненты для markdown
-    │       ├── ns-card.html         # Карточка Linux namespace
-    │       └── code.html            # Code block с кнопкой copy
+    │   │   └── tag.html             # Tags with interactive filtering
+    │   ├── partials/                # Reusable fragments
+    │   │   ├── certs-widget.html    # Cert cards widget
+    │   │   ├── pagination.html      # Pagination with ellipsis
+    │   │   └── search.html          # (not used directly)
+    │   └── shortcodes/              # Shortcode components for markdown
+    │       ├── ns-card.html         # Linux namespace card
+    │       └── code.html            # Code block with copy button
     │
-    └── static/                      # Статические файлы темы
+    └── static/                      # Theme static files
         ├── js/
-        │   ├── site.js              # Глобальные функции (тема, меню)
-        │   └── ns.js                # Логика namespace explorer
+        │   ├── site.js              # Global functions (theme, menu)
+        │   └── ns.js                # Namespace explorer logic
         └── styles/
-            ├── global.css           # Переменные, nav, общие компоненты
-            ├── home.css             # Стили главной страницы
-            ├── prose.css            # Типографика статей
-            ├── cert.css             # Страницы сертификаций
+            ├── global.css           # Variables, nav, common components
+            ├── home.css             # Home page styles
+            ├── prose.css            # Article typography
+            ├── cert.css             # Cert pages
             ├── ns.css               # Namespace explorer
-            └── mobile.css           # Мобильная навигация и breakpoints
+            └── mobile.css           # Mobile nav and breakpoints
 ```
 
 ---
 
-## Build pipeline: от пуша до живого сайта
+## Build pipeline: from push to live site
 
 ```
 git push origin hugo
@@ -118,14 +118,14 @@ git push origin hugo
         ▼
 GitHub Actions (.github/workflows/deploy.yml)
         │
-        ├── actions/checkout@v4          # Клонирует репо с submodules
-        ├── peaceiris/actions-hugo@v3    # Устанавливает Hugo (latest, extended)
-        ├── hugo --minify --gc           # Собирает сайт в public/
-        │   ├── --minify: сжимает HTML/CSS/JS
-        │   └── --gc: удаляет неиспользуемые файлы кэша
-        ├── pagefind --site public        # Индексирует контент для поиска
-        ├── actions/upload-pages-artifact # Загружает public/ как артефакт
-        └── actions/deploy-pages@v4       # Деплоит на GitHub Pages
+        ├── actions/checkout@v4          # Clones repo with submodules
+        ├── peaceiris/actions-hugo@v3    # Installs Hugo (latest, extended)
+        ├── hugo --minify --gc           # Builds site into public/
+        │   ├── --minify: compresses HTML/CSS/JS
+        │   └── --gc: removes unused cache files
+        ├── pagefind --site public        # Indexes content for search
+        ├── actions/upload-pages-artifact # Uploads public/ as artifact
+        └── actions/deploy-pages@v4       # Deploys to GitHub Pages
                 │
                 ▼
         https://maks.top/
@@ -134,16 +134,16 @@ GitHub Actions (.github/workflows/deploy.yml)
 
 ---
 
-## hugo.toml — ключевые параметры
+## hugo.toml — key parameters
 
 ```toml
-baseURL = "https://maks.top/"   # Используется для абсолютных ссылок
+baseURL = "https://maks.top/"   # Used for absolute links
 languageCode = "en"
 title = "maks.top"
-theme = "maks"                  # Ссылается на themes/maks/
-paginate = 10                   # Постов на страницу в листингах
+theme = "maks"                  # References themes/maks/
+paginate = 10                   # Posts per page in listings
 
-[params]                        # Доступны в шаблонах как .Site.Params.*
+[params]                        # Available in templates as .Site.Params.*
   author      = "Maks"
   description = "..."
   location    = "Sydney, AU"
@@ -152,47 +152,47 @@ paginate = 10                   # Постов на страницу в лист
   telegram    = "..."
 
 [taxonomies]
-  tag      = "tags"             # Теги: /tags/{tag-name}/
-  category = "categories"      # Категории: /categories/{name}/
+  tag      = "tags"             # Tags: /tags/{tag-name}/
+  category = "categories"      # Categories: /categories/{name}/
 
 [outputs]
-  home    = ["HTML"]            # Только HTML (без RSS, JSON)
+  home    = ["HTML"]            # HTML only (no RSS, JSON)
   section = ["HTML"]
   page    = ["HTML"]
 
 [markup.goldmark.renderer]
-  unsafe = true                 # Разрешает сырой HTML внутри markdown
+  unsafe = true                 # Allows raw HTML inside markdown
 ```
 
 ---
 
-## Как Hugo передаёт данные в шаблон
+## How Hugo passes data to templates
 
-В каждом шаблоне доступен объект `.` (dot) — контекст текущей страницы:
+Each template has access to `.` (dot) — the current page context:
 
-| Переменная | Тип | Описание |
+| Variable | Type | Description |
 |---|---|---|
-| `.Title` | string | Из frontmatter `title:` |
-| `.Date` | time.Time | Из frontmatter `date:` |
-| `.Content` | template.HTML | Тело markdown, преобразованное в HTML |
-| `.Description` | string | Из frontmatter `description:` |
-| `.Params` | map | Все кастомные поля frontmatter |
-| `.Params.tags` | []string | Из frontmatter `tags:` |
-| `.Permalink` | string | Полный URL страницы |
-| `.RelPermalink` | string | Относительный URL |
-| `.Section` | string | Раздел: "posts", "certs", "docs" |
-| `.IsHome` | bool | true только для главной страницы |
-| `.Site` | Site | Глобальный объект сайта |
-| `.Site.Params` | map | Параметры из `[params]` в hugo.toml |
-| `.Site.RegularPages` | []Page | Все страницы сайта |
-| `.Site.Taxonomies.tags` | Taxonomy | Все теги с количеством постов |
-| `.Paginator` | Paginator | Объект пагинации (в list-шаблонах) |
+| `.Title` | string | From frontmatter `title:` |
+| `.Date` | time.Time | From frontmatter `date:` |
+| `.Content` | template.HTML | Markdown body converted to HTML |
+| `.Description` | string | From frontmatter `description:` |
+| `.Params` | map | All custom frontmatter fields |
+| `.Params.tags` | []string | From frontmatter `tags:` |
+| `.Permalink` | string | Full page URL |
+| `.RelPermalink` | string | Relative URL |
+| `.Section` | string | Section: "posts", "certs", "docs" |
+| `.IsHome` | bool | true only for the home page |
+| `.Site` | Site | Global site object |
+| `.Site.Params` | map | Parameters from `[params]` in hugo.toml |
+| `.Site.RegularPages` | []Page | All site pages |
+| `.Site.Taxonomies.tags` | Taxonomy | All tags with post counts |
+| `.Paginator` | Paginator | Pagination object (in list templates) |
 
 ---
 
-## Связанные страницы
+## Related pages
 
-- [Шаблоны](/docs/templates/) — каждый layout-файл подробно
-- [CSS](/docs/css/) — архитектура стилей и справочник классов
-- [Frontmatter](/docs/frontmatter/) — все поля по типам контента
-- [JavaScript](/docs/javascript/) — функции и event listeners
+- [Templates](/docs/templates/) — each layout file in detail
+- [CSS](/docs/css/) — style architecture and class reference
+- [Frontmatter](/docs/frontmatter/) — all fields by content type
+- [JavaScript](/docs/javascript/) — functions and event listeners
