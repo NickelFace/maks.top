@@ -5,7 +5,7 @@ description: "Hugo pipeline, структура директорий и проц
 page_lang: "ru"
 lang_pair: "/docs/overview/"
 pagefind_ignore: true
-_build:
+build:
   list: never
   render: always
 tags: ["docs"]

@@ -5,7 +5,7 @@ description: "Все поля frontmatter по типам контента с т
 page_lang: "ru"
 lang_pair: "/docs/frontmatter/"
 pagefind_ignore: true
-_build:
+build:
   list: never
   render: always
 tags: ["docs"]
