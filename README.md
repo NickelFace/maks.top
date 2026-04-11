@@ -1,7 +1,9 @@
 # maks.top — Hugo site
 
 Personal Linux & DevOps knowledge base.
-Stack: **Hugo** + **GitHub Pages** + **Cloudflare DNS** + **Pagefind**
+Stack: **Hugo** + **GitHub Pages** + **Pagefind**
+
+**Internal project docs:** https://maks.top/docs/overview/
 
 ---
 
@@ -114,18 +116,18 @@ sudo unshare --pid --fork --mount-proc bash
 3. **Settings → Pages → Source: GitHub Actions**
 4. GitHub Actions runs on every push → builds Hugo → runs Pagefind → deploys `public/`
 
-## Cloudflare DNS setup
+## Custom domain DNS setup
 
-After adding your site to Cloudflare (Free plan):
+Point your domain to GitHub Pages at your DNS provider:
 
-| Type  | Name | Value                  | Proxy |
-|-------|------|------------------------|-------|
-| A     | @    | 185.199.108.153        | ON    |
-| A     | @    | 185.199.109.153        | ON    |
-| A     | @    | 185.199.110.153        | ON    |
-| A     | @    | 185.199.111.153        | ON    |
-| CNAME | www  | nickelface.github.io   | ON    |
+| Type  | Name | Value                  |
+|-------|------|------------------------|
+| A     | @    | 185.199.108.153        |
+| A     | @    | 185.199.109.153        |
+| A     | @    | 185.199.110.153        |
+| A     | @    | 185.199.111.153        |
+| CNAME | www  | nickelface.github.io   |
 
 Then: **GitHub repo → Settings → Pages → Custom domain → `maks.top`**
 
-GitHub auto-issues Let's Encrypt TLS. Cloudflare SSL/TLS → set to **Full** (not Flexible).
+GitHub auto-issues Let's Encrypt TLS and serves via Fastly CDN with gzip compression.
