@@ -5,7 +5,7 @@ description: "Каждый файл шаблона Hugo: что рендерит
 page_lang: "ru"
 lang_pair: "/docs/templates/"
 pagefind_ignore: true
-_build:
+build:
   list: never
   render: always
 tags: ["docs"]

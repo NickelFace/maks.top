@@ -5,7 +5,7 @@ description: "Структура CSS файлов, переменные темы
 page_lang: "ru"
 lang_pair: "/docs/css/"
 pagefind_ignore: true
-_build:
+build:
   list: never
   render: always
 tags: ["docs"]

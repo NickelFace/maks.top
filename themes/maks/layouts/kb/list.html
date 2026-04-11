@@ -38,30 +38,17 @@
 
   <!-- ═══ QUICK REFERENCES ═══ -->
   <div class="kb-section-title">Quick References</div>
-  <div class="panel">
-    <div class="panel-head">
-      <span class="panel-title">References</span>
+  {{ range where .Site.RegularPages "Section" "kb" }}
+  <a href="{{ .Permalink }}" class="kb-item">
+    <div class="kb-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
+    <div>
+      <div class="kb-title">{{ .Title }}</div>
+      <div class="kb-meta">{{ with .Params.tags }}{{ delimit . " · " }}{{ end }}</div>
     </div>
-    <div class="panel-body">
-      {{ range where .Site.RegularPages "Section" "kb" }}
-      <a href="{{ .Permalink }}" class="kb-item">
-        <div class="kb-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
-        <div>
-          <div class="kb-title">{{ .Title }}</div>
-          <div class="kb-meta">{{ with .Params.tags }}{{ delimit . " · " }}{{ end }}</div>
-        </div>
-      </a>
-      {{ else }}
-      <a href="/kb/iptables/" class="kb-item"><div class="kb-icon">📋</div><div><div class="kb-title">iptables cheatsheet</div><div class="kb-meta">Netfilter · NAT · chains</div></div></a>
-      <a href="/kb/pam/" class="kb-item"><div class="kb-icon">🔐</div><div><div class="kb-title">PAM config reference</div><div class="kb-meta">pam_unix · pam_ldap</div></div></a>
-      <a href="/posts/linux-namespaces/" class="kb-item"><div class="kb-icon">🌐</div><div><div class="kb-title">Linux Namespaces</div><div class="kb-meta">UTS · PID · NET · MNT</div></div></a>
-      <a href="/kb/nfs/" class="kb-item"><div class="kb-icon">📁</div><div><div class="kb-title">NFS exports guide</div><div class="kb-meta">options · security · automount</div></div></a>
-      <a href="/kb/systemd/" class="kb-item"><div class="kb-icon">⚙️</div><div><div class="kb-title">Systemd unit syntax</div><div class="kb-meta">service · timer · target</div></div></a>
-      <a href="/kb/openssl/" class="kb-item"><div class="kb-icon">🔒</div><div><div class="kb-title">OpenSSL commands</div><div class="kb-meta">certs · keys · inspection</div></div></a>
-      <a href="/docs/overview/" class="kb-item"><div class="kb-icon">📖</div><div><div class="kb-title">Site Documentation</div><div class="kb-meta">Templates · CSS · JS · Frontmatter</div></div></a>
-      {{ end }}
-    </div>
-  </div>
+  </a>
+  {{ else }}
+  <div class="cert-coming-soon">References coming soon.</div>
+  {{ end }}
 
 </div>
 {{ end }}
