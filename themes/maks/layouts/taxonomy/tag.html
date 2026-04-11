@@ -30,7 +30,7 @@
 {{ define "scripts" }}
 <script>
 const POSTS = [
-  {{ range .Site.RegularPages }}{{ if eq .Section "posts" -}}
+  {{ range .Site.RegularPages }}{{ if ne .Params.page_lang "ru" -}}
   {
     url:     {{ .Permalink | jsonify }},
     title:   {{ .Title | jsonify }},
