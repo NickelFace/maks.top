@@ -1,9 +1,10 @@
 ---
-title: "Templates — Layout Reference"
+title: "Шаблоны — Справочник по Layout'ам"
 date: 2026-04-11
-description: "Every Hugo template file: what it renders, data context, block structure"
-lang: "en"
-lang_pair: "/docs/ru/templates/"
+description: "Каждый файл шаблона Hugo: что рендерит, контекст данных, структура блоков"
+lang: "ru"
+lang_pair: "/docs/templates/"
+pagefind_ignore: true
 tags: ["docs"]
 ---
 
@@ -286,7 +287,7 @@ CSS читает атрибут через `[data-theme="light"]` и перек�
 
 ## Связанные страницы
 
-- [Обзор проекта](/docs/overview/)
-- [CSS](/docs/css/)
-- [Frontmatter](/docs/frontmatter/)
-- [JavaScript](/docs/javascript/)
+- [Обзор проекта](/docs/ru/overview/)
+- [CSS](/docs/ru/css/)
+- [Frontmatter](/docs/ru/frontmatter/)
+- [JavaScript](/docs/ru/javascript/)

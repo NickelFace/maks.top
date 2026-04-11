@@ -1,9 +1,10 @@
 ---
-title: "CSS — Architecture & Class Reference"
+title: "CSS — Архитектура и Справочник Классов"
 date: 2026-04-11
-description: "CSS file structure, theme variables, and full class reference for maks.top"
-lang: "en"
-lang_pair: "/docs/ru/css/"
+description: "Структура CSS файлов, переменные темы и полный справочник классов maks.top"
+lang: "ru"
+lang_pair: "/docs/css/"
+pagefind_ignore: true
 tags: ["docs"]
 ---
 
@@ -48,7 +49,7 @@ tags: ["docs"]
 | `--border2` | `#263347` | `#c2cfe0` | Рамки (тёмнее) |
 | `--text` | `#e2e8f0` | `#1a2235` | Основной текст |
 | `--text2` | `#94a3b8` | `#475569` | Вторичный текст |
-| `--text3` | `#64748b` | `#94a3b8` | Мuted текст (дата, мета) |
+| `--text3` | `#64748b` | `#94a3b8` | Muted текст (дата, мета) |
 | `--glow` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.08)` | Hover-подсветка с акцентом |
 | `--shadow` | `0 4px 24px rgba(0,0,0,0.4)` | `0 4px 24px rgba(0,0,0,0.08)` | Тень элементов |
 | `--nav-blur` | `rgba(10,14,23,0.85)` | `rgba(245,247,250,0.85)` | Фон nav с прозрачностью |
@@ -258,7 +259,7 @@ tags: ["docs"]
 
 ## Связанные страницы
 
-- [Обзор проекта](/docs/overview/)
-- [Шаблоны](/docs/templates/)
-- [Frontmatter](/docs/frontmatter/)
-- [JavaScript](/docs/javascript/)
+- [Обзор проекта](/docs/ru/overview/)
+- [Шаблоны](/docs/ru/templates/)
+- [Frontmatter](/docs/ru/frontmatter/)
+- [JavaScript](/docs/ru/javascript/)

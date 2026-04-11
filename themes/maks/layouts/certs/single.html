@@ -16,10 +16,18 @@
 
   <div class="cert-hero" style="--cert-color:{{ .Params.cert_color }}">
     <div class="cert-hero-badge">{{ .Params.cert_badge }}</div>
-    <div>
+    <div style="flex:1">
       <div class="cert-hero-name">{{ .Title }}</div>
       <div class="cert-hero-desc">{{ .Params.description }}</div>
     </div>
+    {{ with .Params.credly_badge_id }}
+    <div class="credly-wrap">
+      <div data-iframe-width="150" data-iframe-height="270"
+           data-share-badge-id="{{ . }}"
+           data-share-badge-host="https://www.credly.com"></div>
+      <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+    </div>
+    {{ end }}
   </div>
 
   {{ if .Params.exams }}

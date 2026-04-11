@@ -1,9 +1,10 @@
 ---
-title: "Frontmatter — Fields Reference"
+title: "Frontmatter — Справочник Полей"
 date: 2026-04-11
-description: "All frontmatter fields by content type with types, required status, and descriptions"
-lang: "en"
-lang_pair: "/docs/ru/frontmatter/"
+description: "Все поля frontmatter по типам контента с типами, обязательностью и описаниями"
+lang: "ru"
+lang_pair: "/docs/frontmatter/"
+pagefind_ignore: true
 tags: ["docs"]
 ---
 
@@ -165,7 +166,7 @@ tags: ["docs"]
 
 ## Связанные страницы
 
-- [Обзор проекта](/docs/overview/)
-- [Шаблоны](/docs/templates/)
-- [CSS](/docs/css/)
-- [JavaScript](/docs/javascript/)
+- [Обзор проекта](/docs/ru/overview/)
+- [Шаблоны](/docs/ru/templates/)
+- [CSS](/docs/ru/css/)
+- [JavaScript](/docs/ru/javascript/)
