@@ -12,7 +12,7 @@
   </div>
 
   <div class="tags-grid">
-    <button class="tag tag-lg tag-filter active" data-tag="">
+    <button class="tag tag-lg tag-filter" data-tag="">
       All <span class="count">{{ len .Site.RegularPages }}</span>
     </button>
     {{ range .Site.Taxonomies.tags.ByCount }}
@@ -32,12 +32,12 @@
 const POSTS = [
   {{ range .Site.RegularPages }}{{ if ne .Params.page_lang "ru" -}}
   {
-    url:     {{ .Permalink | jsonify }},
-    title:   {{ .Title | jsonify }},
+    url:     {{ .Permalink | jsonify | safeJS }},
+    title:   {{ .Title | jsonify | safeJS }},
     date:    "{{ .Date.Format "2006-01-02" }}",
     tags:    [{{ range .Params.tags }}"{{ . | urlize }}",{{ end }}],
-    tagLabels: [{{ range .Params.tags }}{{ . | jsonify }},{{ end }}],
-    summary: {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | truncate 120 | jsonify }}{{ end }}
+    tagLabels: [{{ range .Params.tags }}{{ . | jsonify | safeJS }},{{ end }}],
+    summary: {{ with .Description }}{{ . | jsonify | safeJS }}{{ else }}{{ .Summary | plainify | truncate 120 | jsonify | safeJS }}{{ end }}
   },
   {{ end }}{{ end }}
 ];
@@ -76,7 +76,8 @@ document.getElementById('searchInput').addEventListener('input', async function(
 document.addEventListener('click', e => { if (!e.target.closest('.search-wrap')) searchResults.style.display = 'none'; });
 
 /* ── tag filter ── */
-let activeTag = '';
+const currentTag = {{ .Data.Term | urlize | jsonify | safeJS }};
+let activeTag = currentTag;
 
 function renderArticles() {
   const list = document.getElementById('tagArticles');
@@ -106,6 +107,7 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
     activeTag = btn.dataset.tag;
     renderArticles();
   });
+  if (btn.dataset.tag === activeTag) btn.classList.add('active');
 });
 
 renderArticles();
