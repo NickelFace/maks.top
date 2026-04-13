@@ -474,11 +474,14 @@ udevadm info -a -n /dev/device
 
 A system stops booting after a second SATA disk is added. All components are working. What is the likely cause?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 The BIOS/UEFI most likely started trying to boot from the new disk instead of the one with the operating system. When a second SATA disk is added, it may receive a higher priority in the boot device list, and the BIOS will attempt to boot from it. Since the new disk has no bootloader, the system hangs.
 
 Fix: enter BIOS/UEFI and restore the correct disk to the top of the boot order.
+
+</details>
 
 ---
 
@@ -486,7 +489,8 @@ Fix: enter BIOS/UEFI and restore the correct disk to the top of the boot order.
 
 You need to check the specs of a discrete video card connected to the PCI bus without opening the case. Which command do you use?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 ```bash
 lspci -v
@@ -502,6 +506,8 @@ lspci -s 01:00.0 -v
 
 The `Subsystem` line in the output shows exactly what is printed on the box.
 
+</details>
+
 ---
 
 ### Exercise 3 — Kernel module for a RAID controller
@@ -514,13 +520,16 @@ The `lspci` output contains this line:
 
 Which command shows the loaded kernel module for this device?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 ```bash
 lspci -s 03:00.0 -k
 ```
 
 The `-s` flag targets the specific device address; `-k` shows `Kernel driver in use` (active driver) and `Kernel modules` (all available modules for this device).
+
+</details>
 
 ---
 
@@ -534,11 +543,14 @@ modprobe: FATAL: Module bluetooth is in use.
 
 What is the cause?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 The `bluetooth` module is being used by a running process. `modprobe -r` only unloads a module if nothing is using it.
 
 Check who holds the module via `lsmod | grep bluetooth` and look at the `Used by` column. Dependent modules (e.g. `btusb`) must be unloaded first, then `bluetooth` itself. Alternatively, stop the `bluetoothd` service and retry.
+
+</details>
 
 ---
 
@@ -546,9 +558,12 @@ Check who holds the module via `lsmod | grep bluetooth` and look at the `Used by
 
 On older servers with a legacy BIOS, the system refuses to boot if no keyboard is connected. How do you fix this?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 In the BIOS settings, find the option that controls behaviour when a keyboard is absent — usually called `Halt on` or `Boot with keyboard errors`. Set it to `All, But Keyboard` (or equivalent) to ignore the missing keyboard and continue booting. Standard setting for headless servers.
+
+</details>
 
 ---
 
@@ -556,9 +571,12 @@ In the BIOS settings, find the option that controls behaviour when a keyboard is
 
 On single-board computers like the Raspberry Pi (ARM), the `lspci` command is not present. Why?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 Because ARM boards have no PCI/PCIe bus. `lspci` queries specifically the PCI bus, which is standard on x86. On ARM, peripherals are connected through the SoC internal bus directly, without a PCI interface. Use `lsusb` for USB devices or read from `/sys/bus/` instead.
+
+</details>
 
 ---
 
@@ -566,7 +584,8 @@ Because ARM boards have no PCI/PCIe bus. `lspci` queries specifically the PCI bu
 
 An external USB hard drive is connected to a Linux-based router. There are no other block devices. What will it be called in `/dev/`?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 ```
 /dev/sda
@@ -574,13 +593,16 @@ An external USB hard drive is connected to a Linux-based router. There are no ot
 
 Since kernel 2.4, USB drives are represented as SCSI devices and receive the `sd` prefix. Since there are no other block devices, the first disk gets the letter `a`. Its partitions: `/dev/sda1`, `/dev/sda2`, etc.
 
+</details>
+
 ---
 
 ### Exercise 8 — Checking for the Meltdown vulnerability
 
 How do you check whether the current system is affected by Meltdown?
 
-**Answer:**
+<details>
+<summary>Answer</summary>
 
 ```bash
 grep bugs /proc/cpuinfo
@@ -593,6 +615,8 @@ cat /sys/devices/system/cpu/vulnerabilities/meltdown
 ```
 
 The exam expects the `/proc/cpuinfo` approach.
+
+</details>
 
 ---
 
