@@ -162,3 +162,42 @@
 .comment { color: #4b5563; }
 .out { color: #6b7280; font-style: italic; }
 
+/* Details / spoiler toggle */
+details {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 16px 0;
+}
+details[open] {
+  border-color: rgba(0,212,255,.25);
+}
+details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: .04em;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: '›';
+  font-size: 16px;
+  line-height: 1;
+  transition: transform .18s;
+  display: inline-block;
+}
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+details > :not(summary) {
+  padding: 0 16px 14px;
+  border-top: 1px solid var(--border);
+}
+
