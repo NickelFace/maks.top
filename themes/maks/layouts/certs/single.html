@@ -64,6 +64,7 @@
           {{ $topicPosts = $topicPosts | append . }}
         {{ end }}
       {{ end }}
+      {{ $topicPosts = sort $topicPosts ".File.BaseFileName" }}
 
       <div class="cert-topic{{ if $topicPosts }} has-posts{{ end }}">
         <button class="cert-topic-head" onclick="toggleTopic(this)">
