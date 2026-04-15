@@ -1,9 +1,10 @@
 ---
 title: "LPIC-1 101.2 — Boot the System"
-date: 2026-04-13
+date: 2025-07-05
 description: "Boot sequence, BIOS vs UEFI, GRUB 2, kernel parameters, initramfs, SysVinit, systemd, dmesg and journalctl. LPIC-1 exam topic 101.2."
 tags: ["Linux", "LPIC-1", "Boot", "systemd", "GRUB"]
 categories: ["LPIC-1"]
+lang_pair: "/posts/ru/lpic1-101-2-boot-the-system/"
 ---
 
 > **Exam weight: 3** — LPIC-1 v5, Exam 101

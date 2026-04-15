@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 201.1 — Kernel Components"
-date: 2026-04-10
+date: 2025-08-04
 description: "Linux kernel architecture, image types, version numbering, kernel modules, and directory layout. LPIC-2 exam topic 201.1."
 tags: ["Linux", "Kernel", "LPIC-2", "Modules"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-201-1-kernel-components/"
 ---
 
 ## Linux Kernel Architecture

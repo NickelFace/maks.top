@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 201.2 — Compiling the Linux Kernel"
-date: 2026-04-10
+date: 2025-08-13
 description: "Full kernel build cycle: source layout, make targets, kernel image installation, initrd/initramfs, DKMS, and dracut. LPIC-2 exam topic 201.2."
 tags: ["Linux", "Kernel", "LPIC-2", "DKMS", "make"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-201-2-compiling-linux-kernel/"
 ---
 
 > **Exam weight:** This topic carries **3 points** on the LPIC-2 201 exam. Focus on `make` targets, the paths `/usr/src/linux/.config` and `/lib/modules/kernel-version/`, and the commands `mkinitrd`, `mkinitramfs`, and `depmod`.

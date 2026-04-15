@@ -1,16 +1,20 @@
 ---
-title: "Network Engineer — SL. Подключение к провайдеру по BGP"
-date: 2026-04-14
-description: "Самостоятельное изучение: подключение к провайдеру по BGP с резервированием и фильтрацией маршрутов, настройка NAT"
+title: "Network Engineer — SL. BGP Provider Connectivity"
+date: 2026-02-03
+description: "Self-study: connecting to a provider via BGP with redundancy and route filtering, configuring NAT"
 tags: ["Networking", "BGP", "Provider", "NAT", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-sl-bgp-provider/"
 ---
 
-# Подключение к провайдеру по BGP 
+# BGP Provider Connectivity
+<p class="ru-text">Подключение к провайдеру по BGP</p>
 
 ![](/img/neteng/sl-bgp-provider/BGP_Provider.png)
 
-## Конфигурации роутеров:
+## Router configurations:
+<p class="ru-text">Конфигурации роутеров:</p>
 
 ### R6
 
@@ -826,6 +830,8 @@ end
 
 ```
 
-**Выводы:**
+**Takeaways:**
+<p class="ru-text">**Выводы:**</p>
 
-Схема не идеальна,но показывает как можно создать подключение по BGP с резервированием ,а также отработать проблемы с NAT-ом ,которые возникают при анонсировании одинаковой сети в интернете. Вспомнил фильтрацию маршрутов , отработал команду **default-informarion originate always (metric 20)** .
+The topology is not ideal, but it demonstrates how to build a BGP connection with redundancy and how to deal with NAT issues that arise when announcing the same network from two different uplinks. Practiced route filtering and the **`default-information originate always (metric 20)`** command.
+<p class="ru-text">Схема не идеальна, но показывает как можно создать подключение по BGP с резервированием, а также отработать проблемы с NAT-ом, которые возникают при анонсировании одинаковой сети в интернете. Вспомнил фильтрацию маршрутов, отработал команду **default-information originate always (metric 20)**.</p>

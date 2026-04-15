@@ -1,9 +1,11 @@
 ---
 title: "Network Engineer — 02. STP"
-date: 2026-04-14
+date: 2025-08-12
 description: "Lab: deploying a switched network with redundant links. Root bridge election, port cost, port priority."
 tags: ["Networking", "STP", "Spanning Tree", "Cisco"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-02-stp/"
 ---
 
 ## Lab: Deploying a Switched Network with Redundant Links

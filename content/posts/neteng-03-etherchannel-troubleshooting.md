@@ -1,9 +1,11 @@
 ---
 title: "Network Engineer — 03. EtherChannel Troubleshooting"
-date: 2026-04-14
+date: 2025-08-28
 description: "Lab: diagnosing and fixing EtherChannel issues — protocol mismatch, mode conflicts, VLAN mismatches, shutdown ports."
 tags: ["Networking", "EtherChannel", "Troubleshooting", "Cisco"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-03-etherchannel-troubleshooting/"
 ---
 
 ## Lab: Troubleshooting EtherChannel

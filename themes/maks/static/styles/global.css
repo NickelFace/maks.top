@@ -608,13 +608,16 @@ button.tag {
 
 .search-icon {
   position: absolute;
-  right: 16px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text3);
-  font-size: 15px;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  transition: color .2s;
 }
+.search-wrap:focus-within .search-icon { color: var(--accent); }
 
 /* ═══════════════════════════════════════
    TAGS PAGE

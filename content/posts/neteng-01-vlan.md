@@ -1,9 +1,11 @@
 ---
 title: "Network Engineer — 01. VLAN"
-date: 2026-04-14
+date: 2025-08-03
 description: "Lab: configuring Extended VLAN, VTP and STP networks. Trunk links, DTP, extended-range VLANs."
 tags: ["Networking", "VLAN", "VTP", "Cisco"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-01-vlan/"
 ---
 
 ## Lab: Configuring Extended VLAN, VTP and STP Networks

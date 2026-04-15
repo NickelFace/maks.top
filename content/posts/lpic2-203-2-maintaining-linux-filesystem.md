@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 203.2 — Maintaining a Linux Filesystem"
-date: 2026-04-10
+date: 2025-10-04
 description: "fsck/e2fsck, tune2fs, dumpe2fs, debugfs, Btrfs subvolumes and snapshots, XFS utilities (xfs_repair/xfs_dump), ZFS overview, and SMART disk monitoring with smartctl/smartd. LPIC-2 exam topic 203.2."
 tags: ["Linux", "Filesystem", "LPIC-2", "btrfs", "xfs", "ZFS", "SMART", "fsck"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-203-2-maintaining-linux-filesystem/"
 ---
 
 > **Exam topic 203.2** — Maintaining a Linux Filesystem. Covers ext2/3/4 tools, Btrfs subvolumes and snapshots, XFS utilities, ZFS awareness, and SMART disk monitoring.

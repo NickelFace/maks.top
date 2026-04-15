@@ -1,27 +1,43 @@
 ---
 title: "Network Engineer — 15. DMVPN"
-date: 2026-04-14
-description: "Настройка GRE туннеля между Москвой и Санкт-Петербургом и DMVPN между Москвой, Чокурдахом и Лабытнанги"
+date: 2025-12-23
+description: "Configuring a GRE tunnel between Moscow and St. Petersburg, and DMVPN between Moscow, Chokurdakh, and Labytnangi"
 tags: ["Networking", "DMVPN", "GRE", "VPN", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-15-dmvpn/"
 ---
 
-# Виртуальная частные сети - VPN
+# Virtual Private Networks — VPN
+<p class="ru-text">Виртуальная частные сети — VPN</p>
 
 ![](/img/neteng/diplom/EVE_Topology.png)
 
-## Домашнее задание
+## Assignment
+<p class="ru-text">Домашнее задание</p>
 
-Цель: Настроить GRE между офисами Москва и С.-Петербург Настроить DMVPN между офисами Москва и Чокурдах, Лабытнанги
+Goal: Configure GRE between the Moscow and St. Petersburg offices. Configure DMVPN between Moscow and Chokurdakh/Labytnangi.
+<p class="ru-text">Цель: Настроить GRE между офисами Москва и С.-Петербург. Настроить DMVPN между офисами Москва и Чокурдах, Лабытнанги.</p>
 
-В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+In this lab you are expected to independently:
+<p class="ru-text">В этой самостоятельной работе мы ожидаем, что вы самостоятельно:</p>
+
+1. Configure GRE between the Moscow and St. Petersburg offices
+2. Configure DMVPN between Moscow and Chokurdakh/Labytnangi
+3. All nodes in all offices must have IP connectivity
+4. Document the plan and changes
+
+<p class="ru-text">
 
 1. Настроите GRE между офисами Москва и С.-Петербург
-2.  Настроите DMVMН между Москва и Чокурдах, Лабытнанги
-3.  Все узлы в офисах в лабораторной работе должны иметь IP связность
+2. Настроите DMVPN между Москва и Чокурдах, Лабытнанги
+3. Все узлы в офисах в лабораторной работе должны иметь IP связность
 4. План работы и изменения зафиксированы в документации
 
-### Настроите GRE между офисами Москва и С.-Петербург
+</p>
+
+### Configure GRE between the Moscow and St. Petersburg offices
+<p class="ru-text">Настроите GRE между офисами Москва и С.-Петербург</p>
 
 R15
 
@@ -41,7 +57,8 @@ interface Tunnel0
  tunnel destination 200.20.20.15
 ```
 
-### Настроите DMVMН между Москва и Чокурдах, Лабытнанги
+### Configure DMVPN between Moscow and Chokurdakh/Labytnangi
+<p class="ru-text">Настроите DMVPN между Москва и Чокурдах, Лабытнанги</p>
 
 R14 (Hub)
 
@@ -76,7 +93,7 @@ interface Tunnel0
  ip nhrp registration no-unique
  load-interval 30
  keepalive 5 10
- tunnel source Ethernet0/0  // В Чукордах нет своих сетей ,поэтому используем IP Триада
+ tunnel source Ethernet0/0  ! Chokurdakh has no own networks, using Triada's IP
  tunnel mode gre multipoint
 ```
 
@@ -96,16 +113,17 @@ interface Tunnel0
  ip nhrp registration no-unique
  load-interval 30
  keepalive 5 10
- tunnel source Ethernet0/0 // В Лабытнанги нет своих сетей ,поэтому используем IP Триада
+ tunnel source Ethernet0/0 ! Labytnangi has no own networks, using Triada's IP
  tunnel mode gre multipoint
 ```
 
-### Все узлы в офисах в лабораторной работе должны иметь IP связность
+### Verify IP connectivity across all offices
+<p class="ru-text">Все узлы в офисах в лабораторной работе должны иметь IP связность</p>
 
 R14
 
 ```
-DMVPN
+! DMVPN
 
 R14#ping 10.1.0.1 
 Type escape sequence to abort.
@@ -143,10 +161,10 @@ Type:Hub, NHRP Peers:3,
      1 210.110.35.2           10.1.0.3    UP 00:03:38     D
 ```
 
-R15 
+R15
 
 ```
-GRE Tunnel
+! GRE Tunnel
 
 R15>ping 10.0.0.2
 Type escape sequence to abort.
@@ -160,6 +178,7 @@ Sending 5, 100-byte ICMP Echos to 10.0.0.1, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/4/5 ms
 ```
 
-### План работы и изменения зафиксированы в документации
+### Documentation
+<p class="ru-text">План работы и изменения зафиксированы в документации</p>
 
 https://1drv.ms/u/s!AiW_chHQt5JCg64XQ0nBMdjjoQ3bLw?e=B1LOJE

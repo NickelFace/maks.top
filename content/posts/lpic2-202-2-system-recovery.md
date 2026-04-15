@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 202.2 — System Recovery"
-date: 2026-04-10
+date: 2025-09-08
 description: "Linux boot process, GRUB Legacy and GRUB 2, initrd/initramfs, UEFI/NVMe, fsck recovery scenarios, SysV init. LPIC-2 exam topic 202.2."
 tags: ["Linux", "GRUB", "Boot", "LPIC-2", "Recovery", "UEFI"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-202-2-system-recovery/"
 ---
 
 ## Linux Boot Process

@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 210.2 — PAM Authentication"
-date: 2026-04-10
+date: 2026-04-05
 description: "PAM module types (auth/account/password/session), control flags (required/requisite/sufficient/optional), pam_unix, pam_cracklib, pam_limits, pam_listfile, pam_ldap, SSSD with pam_sss, /etc/passwd and /etc/shadow structure, nsswitch.conf. LPIC-2 exam topic 210.2."
 tags: ["Linux", "LPIC-2", "PAM", "authentication", "SSSD", "security"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-210-2-pam/"
 ---
 
 > **Exam topic 210.2** — PAM Authentication (weight: 3). Covers PAM module types, control flags, key PAM modules, `/etc/shadow` format, nsswitch.conf, and SSSD integration.

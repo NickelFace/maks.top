@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 203.3 — Creating and Configuring Filesystem Options"
-date: 2026-04-10
+date: 2025-10-13
 description: "AutoFS auto-mounting, ISO9660 extensions (Rock Ridge/Joliet/El Torito), UDF, mkisofs/cdrecord, dm-crypt, LUKS, eCryptfs, and systemd automount units. LPIC-2 exam topic 203.3."
 tags: ["Linux", "Filesystem", "LPIC-2", "AutoFS", "LUKS", "ISO9660", "UDF", "encryption"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-203-3-filesystem-options/"
 ---
 
 > **Exam topic 203.3** — Creating and Configuring Filesystem Options. Covers AutoFS, ISO9660 and its extensions, UDF, ISO image creation with mkisofs/cdrecord, and encrypted filesystems (dm-crypt, LUKS, eCryptfs).

@@ -1,20 +1,23 @@
 ---
-title: "Network Engineer — SL. Протокол IS-IS"
-date: 2026-04-14
-description: "Самостоятельное изучение: настройка протокола IS-IS с уровнями L1 и L2 на многоузловой топологии"
+title: "Network Engineer — SL. IS-IS Protocol"
+date: 2026-02-11
+description: "Self-study: configuring IS-IS with L1 and L2 levels on a multi-node topology"
 tags: ["Networking", "IS-IS", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-sl-isis/"
 ---
 
-# Protocol IS-IS
+# IS-IS Protocol
+<p class="ru-text">Протокол IS-IS</p>
 
 ![1](/img/neteng/sl-isis/1.png)
 
+This topology shows how to configure IS-IS without filtering — basic connectivity without any traffic engineering policies.
+<p class="ru-text">Эта схема показывает как можно настроить IS-IS без фильтрации, то есть обычная связность без накидных механизмов и прочих прелестей управления трафиком.</p>
 
-
- Эта схема показывает как можно настроить is-is без фильтрации ,то есть обычная связность без накидных механизмов и прочих прелестей управления трафиком.  
-
-## Конфигурации устройств:
+## Device configurations:
+<p class="ru-text">Конфигурации устройств:</p>
 
 ### R1
 

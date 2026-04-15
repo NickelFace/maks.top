@@ -1,32 +1,49 @@
 ---
 title: "Network Engineer — 12. iBGP"
-date: 2026-04-14
-description: "Настройка iBGP в офисе Москва и провайдере Триада, настройка приоритетного провайдера и балансировки трафика в Санкт-Петербурге"
+date: 2025-11-28
+description: "Configuring iBGP in the Moscow office and Triada provider, setting preferred provider and traffic load balancing in St. Petersburg"
 tags: ["Networking", "BGP", "iBGP", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-12-ibgp/"
 ---
 
-# IBGP
+# iBGP
+<p class="ru-text">IBGP</p>
 
-## Домашнее задание
+## Assignment
+<p class="ru-text">Домашнее задание</p>
 
-Цель: Настроить iBGP в офисе Москва Настроить iBGP в сети провайдера Триада Организовать полную IP связанность всех сетей
+Goal: Configure iBGP in the Moscow office, configure iBGP in the Triada provider network, and establish full IP connectivity across all networks.
+<p class="ru-text">Цель: Настроить iBGP в офисе Москва. Настроить iBGP в сети провайдера Триада. Организовать полную IP связанность всех сетей.</p>
 
-В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+In this lab you are expected to independently:
+<p class="ru-text">В этой самостоятельной работе мы ожидаем, что вы самостоятельно:</p>
+
+1. Configure iBGP in the Moscow office between R14 and R15
+2. Configure iBGP in the Triada provider network
+3. Configure the Moscow office to prefer Lamas as the primary provider
+4. Enable iBGP in the St. Petersburg office (without using OSPF)
+5. Configure the St. Petersburg office to load-balance traffic to any office across both uplinks simultaneously
+6. All networks in the lab must have IP connectivity
+7. Document the plan and changes
+
+<p class="ru-text">
 
 1. iBGP в офисом Москва между маршрутизаторами R14 и R15
 2. Настроите iBGP в провайдере Триада
-3. Настройте офиса Москва так, чтобы приоритетным провайдером стал Ламас.
-4. В офисе С.-Петербург работает протокол iBGP. (Не использовать протокол OSPF)
+3. Настройте офиса Москва так, чтобы приоритетным провайдером стал Ламас
+4. В офисе С.-Петербург работает протокол iBGP (не использовать протокол OSPF)
 5. Настройте офиса С.-Петербург так, чтобы трафик до любого офиса распределялся по двум линкам одновременно
 6. Все сети в лабораторной работе должны иметь IP связность
 7. План работы и изменения зафиксированы в документации
 
-
+</p>
 
 ![EVE_Topology](/img/neteng/diplom/EVE_Topology.png)
 
-### iBGP в офисом Москва между маршрутизаторами R14 и R15
+### iBGP in the Moscow office between R14 and R15
+<p class="ru-text">iBGP в офисе Москва между маршрутизаторами R14 и R15</p>
 
 R14
 
@@ -81,7 +98,8 @@ interface Loopback0
  ip address 1.1.1.15 255.255.255.255
 ```
 
-### Настроите iBGP в провайдере Триада
+### Configure iBGP in the Triada provider network
+<p class="ru-text">Настроите iBGP в провайдере Триада</p>
 
 R23
 
@@ -171,7 +189,8 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 77.77.77.14     4         2042      91      89        6    0    0 01:16:24        0
 ```
 
-### Настройте офиса Москва так, чтобы приоритетным провайдером стал Ламас.
+### Configure the Moscow office to prefer Lamas as the primary provider
+<p class="ru-text">Настройте офис Москва так, чтобы приоритетным провайдером стал Ламас</p>
 
 R14
 
@@ -243,11 +262,11 @@ VRF info: (vrf in name/id, vrf out name/id)
   3 111.111.111.6 [AS 301] 1 msec 1 msec 1 msec
   4 77.77.77.10 [AS 520] 2 msec
 
- Проверка до СПБ и как видно , он ходит через R15.
+ ! Verify path to SPb — traffic goes through R15 as expected.
 
 ```
 
-R15 
+R15
 
 ```
 R15(config-router)#do sh run | s bgp
@@ -300,8 +319,8 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 ```
 
-**Резюмирую :**
- Ранее я приоритет local-preference выставлял на вход у R14 в сторону  R15 , но тогда я не решал проблемы с масштабируемостью ,мне бы пришлось на каждом роутере этот параметр выставлять. В данном случаем мы поступили иначе, мы все Update от R21 заранее помечаем с приоритетом 150 (neighbor 111.111.111.2 route-map LP in ) , и уже тогда R15  будет рассказывать об этом. ***Спасибо Алексею за консультацию***.
+**Summary:** Previously I set local-preference on the inbound side at R14 toward R15, but that approach doesn't scale — I'd have to set it on every router. This time we took a better approach: mark all updates from R21 with local-preference 150 at ingress (`neighbor 111.111.111.2 route-map LP in`), so R15 propagates this preference to all iBGP peers. *Thanks to Alexei for the consultation.*
+<p class="ru-text">**Резюмирую:** Ранее я приоритет local-preference выставлял на вход у R14 в сторону R15, но тогда я не решал проблемы с масштабируемостью — мне бы пришлось на каждом роутере этот параметр выставлять. В данном случае мы поступили иначе: мы все Update от R21 заранее помечаем с приоритетом 150 (neighbor 111.111.111.2 route-map LP in), и уже тогда R15 будет рассказывать об этом. ***Спасибо Алексею за консультацию***.</p>
 
 ```
 R14#traceroute 111.110.35.13
@@ -312,7 +331,7 @@ VRF info: (vrf in name/id, vrf out name/id)
   2 111.111.111.2 [AS 301] 1 msec 0 msec 1 msec
   3 111.111.111.6 [AS 301] 1 msec 1 msec 1 msec
   4 10.10.30.14 1 msec *  2 msec
-Это край Триады в сторону Чукорды
+! This is the Triada edge toward Chokurdakh
 
 R14#traceroute 115.115.115.115
 Type escape sequence to abort.
@@ -322,10 +341,11 @@ VRF info: (vrf in name/id, vrf out name/id)
   2 111.111.111.2 [AS 301] 3 msec 1 msec 1 msec
   3 111.111.111.6 [AS 301] 2 msec 2 msec 1 msec
   4 77.77.77.10 [AS 520] 2 msec *  1 msec
-А это поднятый Loopback который анонсирует СПб
+! This is the Loopback announced by St. Petersburg
 ```
 
-### В офисе С.-Петербург работает протокол iBGP. (Не использовать протокол OSPF)
+### iBGP in the St. Petersburg office (without OSPF)
+<p class="ru-text">В офисе С.-Петербург работает протокол iBGP (не использовать протокол OSPF)</p>
 
 R16
 
@@ -485,7 +505,8 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 1.1.2.18        4         2042      19      12        1    0    0 00:07:36       10
 ```
 
-### Все сети в лабораторной работе должны иметь IP связность
+### Verify full IP connectivity across all networks
+<p class="ru-text">Все сети в лабораторной работе должны иметь IP связность</p>
 
 R15 ping R18
 
@@ -521,17 +542,17 @@ Sending 5, 100-byte ICMP Echos to 77.77.77.14, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/2 ms
 ```
 
-R18 -> R28 / R27
+R18 → R28 / R27
 
 ```
-До Лабытнанги
+! To Labytnangi
 R18(config-if-range)#do ping 210.110.35.2
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 210.110.35.2, timeout is 2 seconds:
 !!!!!
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/2 ms
 
-До Чукордах
+! To Chokurdakh
 R18(config-if-range)#do ping 111.110.35.14
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 111.110.35.14, timeout is 2 seconds:
@@ -545,11 +566,13 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 
 ```
 
-### План работы и изменения зафиксированы в документации
+### Documentation
+<p class="ru-text">План работы и изменения зафиксированы в документации</p>
 
-**Для доступа к прописанным конфигурациям на роутерах ,то жмём сюда :**
+**Full router configs:**
 
 https://e9exu-my.sharepoint.com/:f:/g/personal/nickelface_ermaon_com/Euh_hOXWUWRAr0awcVlpJVYBzobOZWNdcKt4VLkLif40EA?e=GGNmyl
 
-А сам IP план находиться тут:
+**IP address plan:**
+
 https://docs.google.com/spreadsheets/d/1KDH3y6QoNxf8ykn9vnS4ybjlyAnmF-XwGE42wKX74wE/edit?usp=sharing

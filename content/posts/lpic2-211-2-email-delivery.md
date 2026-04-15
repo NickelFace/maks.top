@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 211.2 — Managing E-Mail Delivery"
-date: 2026-04-10
+date: 2026-05-10
 description: "Procmail recipe syntax and flags, Sieve filter language (RFC 5228), action/control/test commands, vacation extension, mbox vs maildir formats, Dovecot LDA and LMTP integration with Postfix. LPIC-2 exam topic 211.2."
 tags: ["Linux", "LPIC-2", "Postfix", "Dovecot", "Procmail", "Sieve", "email", "MDA"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-211-2-email-delivery/"
 ---
 
 > **Exam topic 211.2** — Managing E-Mail Delivery (weight: 2). Covers mail filtering and sorting using procmail (awareness level) and Sieve (scripting level), plus mbox and maildir storage formats.

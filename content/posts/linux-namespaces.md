@@ -1,11 +1,12 @@
 ---
 title: "Linux Namespaces"
-date: 2026-03-28
+date: 2025-07-14
 description: "All 8 Linux namespace types explained with interactive examples and practical commands."
 tags: ["Linux", "Kernel", "Containers", "LPIC-2"]
 views: 1240
 icon: "🌐"
 layout: "linux-namespaces"
+lang_pair: "/posts/ru/linux-namespaces/"
 ---
 
 <div class="intro-card">

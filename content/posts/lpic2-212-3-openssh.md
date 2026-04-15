@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 212.3 — Secure Shell (OpenSSH)"
-date: 2026-04-11
+date: 2026-06-14
 description: "OpenSSH client and server configuration, key-based authentication, ssh-keygen/ssh-agent/ssh-copy-id, port forwarding, X11 forwarding, SCP/SFTP, sshd_config hardening. LPIC-2 exam topic 212.3."
 tags: ["Linux", "LPIC-2", "OpenSSH", "SSH", "SCP", "SFTP", "port forwarding", "X11"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-212-3-openssh/"
 ---
 
 > **Exam topic 212.3** — Secure shell (OpenSSH) (weight: 4). Covers SSH client and server configuration, key management, port forwarding, and X11 forwarding.

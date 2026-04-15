@@ -1,16 +1,19 @@
 ---
 title: "Network Engineer — SL. BGP Route Reflector"
-date: 2026-04-14
-description: "Самостоятельное изучение: настройка BGP Route Reflector для масштабирования iBGP без полносвязной топологии"
+date: 2026-01-26
+description: "Self-study: configuring a BGP Route Reflector to scale iBGP without a full-mesh topology"
 tags: ["Networking", "BGP", "Route Reflector", "iBGP", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-sl-bgp-rr/"
 ---
 
-# Router reflector
+# BGP Route Reflector
 
 ![image-20200521142853726](/img/neteng/sl-bgp-rr/1.png)
 
-## Конфигурация роутеров
+## Router configurations
+<p class="ru-text">Конфигурация роутеров</p>
 
 ### R1
 

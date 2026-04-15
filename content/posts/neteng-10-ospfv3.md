@@ -1,29 +1,42 @@
 ---
-title: "Network Engineer — 10. OSPFv3 для IPv6"
-date: 2026-04-14
-description: "Настройка OSPFv3 для IPv6 с сохранением логики работы OSPFv2 — метрики, таймеры, фильтры"
+title: "Network Engineer — 10. OSPFv3 for IPv6"
+date: 2025-11-12
+description: "Configuring OSPFv3 for IPv6 while preserving the same logic as OSPFv2 — metrics, timers, filters"
 tags: ["Networking", "OSPFv3", "IPv6", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-10-ospfv3/"
 ---
 
-# Работа протокола OSPF для IPv6
+# OSPF for IPv6
+<p class="ru-text">Работа протокола OSPF для IPv6</p>
 
-## Домашнее задание
+## Assignment
+<p class="ru-text">Домашнее задание</p>
 
-### OSPF для IPv6
+### OSPF for IPv6
+<p class="ru-text">OSPF для IPv6</p>
 
-Цель: Настроить OSPF для IPv6, сохранив ту же логику работы, что у OSPF для IPv4
+Goal: Configure OSPF for IPv6, preserving the same logic as OSPF for IPv4.
+<p class="ru-text">Цель: Настроить OSPF для IPv6, сохранив ту же логику работы, что у OSPF для IPv4.</p>
 
-В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+In this lab you are expected to independently:
+<p class="ru-text">В этой самостоятельной работе мы ожидаем, что вы самостоятельно:</p>
 
-1. Настроите OSPF для IPv6. сохранив ту же логику работы(метрики, таймеры, фильтры), что OSPF для IPv4
+1. Configure OSPF for IPv6, preserving the same logic (metrics, timers, filters) as OSPF for IPv4
+2. Document the plan and changes
+
+<p class="ru-text">
+
+1. Настроите OSPF для IPv6, сохранив ту же логику работы (метрики, таймеры, фильтры), что OSPF для IPv4
 2. План работы и изменения зафиксированы в документации
+
+</p>
 
 ![OSPF](/img/neteng/diplom/OSPF.png)
 
-
-
-В прошлый раз я забыл прописать Link-Local  адресацию ,поэтому исправляюсь .
+Last time I forgot to configure Link-Local addresses, so fixing that now.
+<p class="ru-text">В прошлый раз я забыл прописать Link-Local адресацию, поэтому исправляюсь.</p>
 
 **R14**
 
@@ -45,8 +58,6 @@ ipv6 address FE80:6::14 link-local
 ipv6 ospf 1 area 101
 
 ```
-
-
 
 **R15**
 
@@ -71,8 +82,6 @@ ipv6 prefix-list PL6 seq 5 deny 2002:ACAD:DB8:7::/64 le 128
 ipv6 prefix-list PL6 seq 10 permit ::/0 le 128
 
 ```
-
-
 
 **R12**
 
@@ -112,8 +121,6 @@ interface Ethernet0/3
  ipv6 ospf 1 area 0
 ```
 
-
-
 **R19**
 
 ```
@@ -127,7 +134,8 @@ interface Ethernet0/0
  
 ```
 
-Проверим какие получает маршруты R19
+Let's check what routes R19 receives:
+<p class="ru-text">Проверим какие получает маршруты R19</p>
 
 ```
 R19#sh ipv6 route ospf
@@ -154,7 +162,8 @@ interface Ethernet0/0
  ipv6 ospf 1 area 102
 ```
 
-Проверим какие получает маршруты R20
+Let's check what routes R20 receives:
+<p class="ru-text">Проверим какие получает маршруты R20</p>
 
 ```
 R20#show ipv6 route ospf
@@ -181,12 +190,11 @@ OI  2002:ACAD:DB8:9::/64 [110/30]
 
 ```
 
-Как видно ,внешнюю сеть **2002:ACAD:DB8:7::/64** мы не получаем
+The external network **2002:ACAD:DB8:7::/64** is not present — filtered as expected.
+<p class="ru-text">Как видно, внешнюю сеть **2002:ACAD:DB8:7::/64** мы не получаем.</p>
 
-
-
-
-Решил проверить разницу в таймерах (и метриках) метриках и не нашел отличий,поэтому я просто ничего не стал менять 
+I checked timers and metrics and found no differences from OSPFv2, so nothing needed to be changed.
+<p class="ru-text">Решил проверить разницу в таймерах (и метриках) и не нашел отличий, поэтому я просто ничего не стал менять.</p>
 
 ```
 R15#show ipv6 ospf interface e0/0

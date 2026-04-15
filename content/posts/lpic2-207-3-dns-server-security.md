@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 207.3 — DNS Server Security"
-date: 2026-04-10
+date: 2026-01-25
 description: "BIND security: hide version, ACLs, allow-query/allow-transfer, unprivileged user, chroot jail, split DNS, TSIG transaction signatures, DNSSEC (ZSK/KSK, RRSIG/NSEC/NSEC3/DS), DANE/TLSA records. LPIC-2 exam topic 207.3."
 tags: ["Linux", "LPIC-2", "DNS", "BIND", "DNSSEC", "TSIG", "security"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-207-3-dns-server-security/"
 ---
 
 > **Exam topic 207.3** — Securing a DNS Server (weight: 2). Covers BIND security strategies, chroot jails, split DNS configuration, TSIG zone transfer authentication, DNSSEC record signing, and DANE certificate binding.

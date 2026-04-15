@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 210.4 — Configuring an OpenLDAP Server"
-date: 2026-04-10
+date: 2026-04-22
 description: "OpenLDAP slapd configuration (slapd.conf vs slapd-config/LDIF), distinguished names, server utilities (slapadd/slapcat/slapindex/slappasswd), ACL, TLS setup, client integration with NSLCD and PAM. LPIC-2 exam topic 210.4."
 tags: ["Linux", "LPIC-2", "OpenLDAP", "LDAP", "slapd", "directory server"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-210-4-openldap/"
 ---
 
 > **Exam topic 210.4** — Configuring an OpenLDAP Server (weight: 4). Covers installing and configuring the slapd daemon, managing the LDAP database, access control, TLS, and integrating Linux clients.

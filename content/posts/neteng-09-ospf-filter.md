@@ -1,32 +1,47 @@
 ---
-title: "Network Engineer — 09. Фильтрация маршрутов OSPF"
-date: 2026-04-14
-description: "Настройка OSPF в офисе Москва с разделением на зоны и фильтрацией маршрутов между зонами"
+title: "Network Engineer — 09. OSPF Route Filtering"
+date: 2025-11-03
+description: "Configuring OSPF in the Moscow office with area segmentation and inter-area route filtering"
 tags: ["Networking", "OSPF", "Routing", "Filtering", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-09-ospf-filter/"
 ---
 
-# Различные виды фильтрации в протоколе OSPF
+# OSPF Route Filtering
+<p class="ru-text">Различные виды фильтрации в протоколе OSPF</p>
 
-## Домашнее задание
+## Assignment
+<p class="ru-text">Домашнее задание</p>
 
 ### OSPF
 
-Цель: Настроить OSPF офисе Москва Разделить сеть на зоны Настроить фильтрацию между зонами
+Goal: Configure OSPF in the Moscow office, divide the network into areas, and configure inter-area filtering.
+<p class="ru-text">Цель: Настроить OSPF офисе Москва. Разделить сеть на зоны. Настроить фильтрацию между зонами.</p>
+
+1. R14–R15 are in area 0 — backbone
+2. **R12–R13 are in area 10. They must also receive the default route**
+3. R19 is in area 101 and receives only the default route
+4. R20 is in area 102 and receives all routes except routes to area 101 networks
+5. Document the plan and changes
+
+<p class="ru-text">
 
 1. Маршрутизаторы R14-R15 находятся в зоне 0 - backbone
 2. **Маршрутизаторы R12-R13 находятся в зоне 10. Дополнительно к маршрутам должны получать маршрут по-умолчанию**
 3. Маршрутизатор R19 находится в зоне 101 и получает только маршрут по умолчанию
-4. Маршрутизатор R20 находится в зоне 102 и получает все маршруты, кроме маршрутов до сетей зоны 1015
+4. Маршрутизатор R20 находится в зоне 102 и получает все маршруты, кроме маршрутов до сетей зоны 101
 5. План работы и изменения зафиксированы в документации
+
+</p>
 
 ![OSPF](/img/neteng/diplom/OSPF.png)
 
-### Маршрутизаторы R14-R15 находятся в зоне 0 - backbone
+### R14–R15 are in area 0 — backbone
+<p class="ru-text">Маршрутизаторы R14-R15 находятся в зоне 0 - backbone</p>
 
-
-
-Так как у меня слетела схема и заглючила EVE-NG , то буду настраивать заново Со всеми настройками.
+My topology crashed and EVE-NG froze, so I'm reconfiguring everything from scratch.
+<p class="ru-text">Так как у меня слетела схема и заглючила EVE-NG, то буду настраивать заново со всеми настройками.</p>
 
 R14
 
@@ -116,7 +131,8 @@ ip prefix-list PL1 seq 10 permit 0.0.0.0/0 le 32
 
 ```
 
-### Маршрутизаторы R12-R13 находятся в зоне 10. Дополнительно к маршрутам должны получать маршрут по-умолчанию
+### R12–R13 are in area 10. They must also receive the default route
+<p class="ru-text">Маршрутизаторы R12-R13 находятся в зоне 10. Дополнительно к маршрутам должны получать маршрут по-умолчанию</p>
 
 R12
 
@@ -180,7 +196,8 @@ router ospf 1
 
 ```
 
-А теперь таблицу маршрутизации глянем на R12 / R13
+Now let's check the routing table on R12 / R13:
+<p class="ru-text">А теперь таблицу маршрутизации глянем на R12 / R13</p>
 
 ```
 R12#show ip route ospf
@@ -233,9 +250,11 @@ O IA     172.16.0.0/24 [110/30] via 10.10.10.21, 05:31:25, Ethernet0/3
 
 ```
 
-И там , и там мы получаем маршруты по умолчанию, а значит можем приступить к следующему пункту.
+Both routers receive a default route — we can move on to the next step.
+<p class="ru-text">И там, и там мы получаем маршруты по умолчанию, а значит можем приступить к следующему пункту.</p>
 
-### Маршрутизатор R19 находится в зоне 101 и получает только маршрут по умолчанию
+### R19 is in area 101 and receives only the default route
+<p class="ru-text">Маршрутизатор R19 находится в зоне 101 и получает только маршрут по умолчанию</p>
 
 R19
 
@@ -257,7 +276,8 @@ router ospf 1
 
 ```
 
-Взглянем на таблицу маршрутизации
+Let's check the routing table:
+<p class="ru-text">Взглянем на таблицу маршрутизации</p>
 
 ```
 R19#show ip route ospf
@@ -276,9 +296,8 @@ Gateway of last resort is 10.10.10.13 to network 0.0.0.0
 O*IA  0.0.0.0/0 [110/11] via 10.10.10.13, 18:31:11, Ethernet0/0
 ```
 
-
-
-### Маршрутизатор R20 находится в зоне 102 и получает все маршруты, кроме маршрутов до сетей зоны 101
+### R20 is in area 102 and receives all routes except routes to area 101 networks
+<p class="ru-text">Маршрутизатор R20 находится в зоне 102 и получает все маршруты, кроме маршрутов до сетей зоны 101</p>
 
 R20
 
@@ -302,7 +321,8 @@ router ospf 1
 
 ```
 
-Взглянем на таблицу маршрутизации
+Let's check the routing table:
+<p class="ru-text">Взглянем на таблицу маршрутизации</p>
 
 ```
 R20#show ip route ospf
@@ -328,4 +348,5 @@ O IA     172.16.0.0 [110/30] via 10.10.10.1, 00:31:46, Ethernet0/0
 O IA     172.16.1.0 [110/30] via 10.10.10.1, 00:31:46, Ethernet0/0
 ```
 
-Как видно,мы не наблюдаем сеть 10.10.10.12/30 ,те что относятся к area 101 ,а значит мы справились с задачей
+The 10.10.10.12/30 network (area 101) is absent from the table — objective achieved.
+<p class="ru-text">Как видно, мы не наблюдаем сеть 10.10.10.12/30, те что относятся к area 101, а значит мы справились с задачей.</p>
