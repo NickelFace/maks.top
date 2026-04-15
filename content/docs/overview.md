@@ -1,6 +1,6 @@
 ---
 title: "Project Overview — Architecture & Pipeline"
-date: 2026-04-11
+date: 2026-04-15
 description: "Hugo pipeline, directory structure, and deployment flow for maks.top"
 page_lang: "en"
 lang_pair: "/docs/ru/overview/"
@@ -36,8 +36,10 @@ Hugo searches for a template in this order (first match wins):
 | Page | Template lookup (in order) |
 |---|---|
 | `/posts/lpic2-200-1/` | `layouts/posts/single.html` → `layouts/_default/single.html` |
-| `/posts/linux-namespaces/` | `layouts/posts/linux-namespaces.html` → `layouts/posts/single.html` → `layouts/_default/single.html` |
-| `/certs/lpic-2/` | `layouts/certs/single.html` → `layouts/_default/single.html` |
+| `/posts/linux-namespaces/` | `layouts/posts/linux-namespaces.html` → `layouts/posts/single.html` |
+| `/certs/ccna/` | `layouts/certs/single.html` → `layouts/_default/single.html` |
+| `/ccna-quiz/p01/` | `layouts/ccna-quiz/single.html` |
+| `/ccna-quiz/` | `layouts/ccna-quiz/list.html` |
 | `/about/` | `layouts/about/single.html` → `layouts/_default/single.html` |
 | `/` | `layouts/index.html` |
 | `/posts/` | `layouts/posts/list.html` → `layouts/_default/list.html` |
@@ -58,12 +60,15 @@ maks.top/
 │   ├── about.md                     # /about/ page
 │   ├── posts/                       # /posts/ section (blog)
 │   │   ├── lpic2-200-1-*.md         # LPIC-2 articles
-│   │   └── linux-namespaces.md      # Interactive page
+│   │   └── linux-namespaces.md      # Interactive namespace explorer
 │   ├── certs/                       # /certs/ section
+│   │   ├── ccna.md                  # CCNA cert page (accordion + resource tiles)
 │   │   ├── lpic-1.md, lpic-2.md     # LPIC cert pages
 │   │   ├── network-engineer.md      # OTUS course: 17 topics, 24 articles
-│   │   ├── aws-saa.md
-│   │   └── ccna.md
+│   │   └── aws-saa.md
+│   ├── ccna-quiz/                   # /ccna-quiz/ section
+│   │   ├── _index.md                # Quiz index page (49-tile grid)
+│   │   └── p01.md – p49.md          # 489 questions, 10 per page, YAML frontmatter
 │   ├── kb/                          # /kb/ section (quick references)
 │   │   ├── linux-network.md         # ip, ss, tcpdump, nmcli, iptables
 │   │   ├── bash.md                  # Variables, arrays, loops, functions
@@ -80,6 +85,7 @@ maks.top/
 │   └── docs/                        # /docs/ section (this documentation)
 │
 ├── static/                          # Global static files
+│   ├── img/quiz/                    # 247 JPEG images extracted from CCNA PDF
 │   └── CNAME                        # Custom domain for GitHub Pages
 │
 └── themes/maks/                     # Custom theme
@@ -94,20 +100,23 @@ maks.top/
     │   ├── posts/
     │   │   ├── list.html            # Blog listing + Pagefind search
     │   │   └── linux-namespaces.html # Interactive namespace explorer
+    │   ├── ccna-quiz/
+    │   │   ├── list.html            # Quiz index (49 page tiles)
+    │   │   └── single.html          # Quiz page: questions, options, scoring
     │   ├── about/
     │   │   └── single.html          # About page with certs-widget
     │   ├── certs/
-    │   │   └── single.html          # Cert overview with accordion
+    │   │   └── single.html          # Cert overview: hero, resource tiles, accordion
     │   ├── taxonomy/
     │   │   └── tag.html             # Tags with interactive filtering
     │   ├── kb/
     │   │   └── list.html            # KB index grouped by Params.group
     │   ├── partials/                # Reusable fragments
-    │   │   ├── certs-widget.html    # Cert cards (5: incl. Network Engineer)
-    │   │   ├── pagination.html      # Pagination with ellipsis
+    │   │   ├── certs-widget.html    # Cert cards for About page
+    │   │   ├── pagination.html      # Dot-grid pagination (shared CSS in global.css)
     │   │   └── breadcrumb.html      # Breadcrumb navigation
     │   └── shortcodes/              # Shortcode components for markdown
-    │       ├── ns-card.html         # Linux namespace card
+    │       ├── ns-card.html         # Linux namespace card (uses --c variable)
     │       └── code.html            # Code block with Chroma highlighting
     │
     └── static/                      # Theme static files
@@ -115,12 +124,14 @@ maks.top/
         │   ├── site.js              # Global functions (theme, menu)
         │   └── ns.js                # Namespace explorer logic
         └── styles/
-            ├── global.css           # Variables, nav, common components
+            ├── global.css           # Variables, nav, common components, pagination
             ├── home.css             # Home page styles
-            ├── prose.css            # Article typography and code blocks
-            ├── cert.css             # Cert pages
+            ├── prose.css            # Article typography, NS cards, tabs, ref-panel
+            ├── cert.css             # Cert pages (hero, resource tiles, accordion)
+            ├── quiz.css             # CCNA quiz cards, options, scoring badges
+            ├── ns.css               # linux-namespaces page layout only
             ├── chroma.css           # Syntax highlighting: Dracula (dark) / GitHub (light)
-            ├── ns.css               # Namespace explorer
+            ├── fonts.css            # @font-face for self-hosted fonts
             └── mobile.css           # Mobile nav and breakpoints
 ```
 
@@ -203,7 +214,7 @@ Each template has access to `.` (dot) — the current page context:
 | `.Params.tags` | []string | From frontmatter `tags:` |
 | `.Permalink` | string | Full page URL |
 | `.RelPermalink` | string | Relative URL |
-| `.Section` | string | Section: "posts", "certs", "docs" |
+| `.Section` | string | Section: "posts", "certs", "ccna-quiz" |
 | `.IsHome` | bool | true only for the home page |
 | `.Site` | Site | Global site object |
 | `.Site.Params` | map | Parameters from `[params]` in hugo.toml |

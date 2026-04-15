@@ -26,6 +26,21 @@
     {{ end }}
   </div>
 
+  {{ with .Params.resources }}
+  <div class="cert-resources">
+    {{ range . }}
+    <a href="{{ .url | relURL }}" class="cert-resource-card">
+      <span class="cert-resource-icon">{{ .icon }}</span>
+      <span class="cert-resource-body">
+        <span class="cert-resource-title">{{ .title }}</span>
+        <span class="cert-resource-desc">{{ .desc }}</span>
+      </span>
+      <span class="cert-resource-arrow">→</span>
+    </a>
+    {{ end }}
+  </div>
+  {{ end }}
+
   {{ if .Params.exams }}
 
     {{/* count total posts for this cert */}}

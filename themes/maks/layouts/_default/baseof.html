@@ -26,7 +26,6 @@
     <li><a href="{{ "/posts/" | relURL }}"{{ if eq .Section "posts" }} class="active"{{ end }}>Blog</a></li>
     <li><a href="{{ "/certs/" | relURL }}"{{ if eq .Section "certs" }} class="active"{{ end }}>Certs</a></li>
     <li><a href="{{ "/kb/" | relURL }}"{{ if eq .Section "kb" }} class="active"{{ end }}>Knowledge Base</a></li>
-    <li><a href="{{ "/ccna-quiz/" | relURL }}"{{ if eq .Section "ccna-quiz" }} class="active"{{ end }}>Quiz</a></li>
     <li><a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>About</a></li>
   </ul>
   <div class="nav-right">
@@ -55,7 +54,6 @@
   <a href="{{ "/posts/" | relURL }}"{{ if eq .Section "posts" }} class="active"{{ end }}>Blog</a>
   <a href="{{ "/certs/" | relURL }}"{{ if eq .Section "certs" }} class="active"{{ end }}>Certs</a>
   <a href="{{ "/kb/" | relURL }}"{{ if eq .Section "kb" }} class="active"{{ end }}>Knowledge Base</a>
-  <a href="{{ "/ccna-quiz/" | relURL }}"{{ if eq .Section "ccna-quiz" }} class="active"{{ end }}>Quiz</a>
   <a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>About</a>
   <div class="mob-drawer-lang">
     <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en',this)">EN</button>
