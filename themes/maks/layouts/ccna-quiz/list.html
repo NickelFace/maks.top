@@ -1,0 +1,22 @@
+{{ define "head" }}
+<link rel="stylesheet" href="{{ "styles/quiz.css" | relURL }}">
+{{ end }}
+
+{{ define "main" }}
+<div class="page">
+  <div class="sec-title">CCNA 200-301 Quiz</div>
+  <p style="color:var(--text2);font-size:13px;margin-bottom:28px">489 practice questions · 49 pages · 10 questions per page · answers hidden by default</p>
+
+  <div class="quiz-index-grid">
+    {{ range $i := seq 1 49 }}
+    {{ $start := add (mul (sub $i 1) 10) 1 }}
+    {{ $end   := mul $i 10 }}
+    {{ if gt $end 489 }}{{ $end = 489 }}{{ end }}
+    <a href="{{ printf "/ccna-quiz/p%02d/" $i | relURL }}" class="quiz-index-card">
+      <span class="quiz-index-num">{{ printf "%02d" $i }}</span>
+      <span class="quiz-index-range">Q{{ $start }}–Q{{ $end }}</span>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
