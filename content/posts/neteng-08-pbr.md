@@ -1,39 +1,56 @@
 ---
-title: "Network Engineer — 08. Маршрутизация на основе политик (PBR)"
-date: 2026-04-14
-description: "Настройка Policy-Based Routing для офиса Чокурдах с распределением трафика между двумя линками и IP SLA"
+title: "Network Engineer — 08. Policy-Based Routing (PBR)"
+date: 2025-10-26
+description: "Configuring Policy-Based Routing for the Chokurdakh office with traffic distribution between two uplinks and IP SLA tracking"
 tags: ["Networking", "PBR", "IP SLA", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-08-pbr/"
 ---
 
-# Маршрутизация на основе политик (PBR)
+# Policy-Based Routing (PBR)
+<p class="ru-text">Маршрутизация на основе политик (PBR)</p>
 
-## Домашнее задание
+## Assignment
+<p class="ru-text">Домашнее задание</p>
 
 ### PBR
 
-Цель: Настроить политику маршрутизации в офисе Чокурдах Распределить трафик между 2 линками
+Goal: Configure routing policy for the Chokurdakh office and distribute traffic between 2 uplinks.
+<p class="ru-text">Цель: Настроить политику маршрутизации в офисе Чокурдах. Распределить трафик между 2 линками.</p>
 
-  В этой  самостоятельной работе мы ожидаем, что вы самостоятельно:
+In this lab you are expected to independently:
+<p class="ru-text">В этой самостоятельной работе мы ожидаем, что вы самостоятельно:</p>
+
+1. Configure routing policy for the Chokurdakh office networks
+2. Distribute traffic between the two provider uplinks in Chokurdakh
+3. Configure link tracking via IP SLA in Chokurdakh
+4. Configure a default route for the Labytnangi office
+5. Document the plan and changes
+
+<p class="ru-text">
 
 1. Настроите политику маршрутизации для сетей офиса Чокурдах
 2. Распределите трафик между двумя линками с провайдером в Чокурдах
 3. Настроите отслеживание линка через технологию IP SLA в Чокурдах
 4. Настройте для офиса Лабытнанги маршрут по-умолчанию
-5. План работы и изменения зафиксированы в документации 
+5. План работы и изменения зафиксированы в документации
+
+</p>
 
 ![PBR](/img/neteng/diplom/PBR.png)
 
-| Устройств | Port | IPv4             | IPv6                 | Примечание      | Регион     |
-| --------- | ---- | ---------------- | -------------------- | --------------- | ---------- |
-| R27       | e0/0 | 210.110.35.2/30  | 2CAD:1995:B0DA:A::27 | R25(Triada)     | Лабытнанги |
-| R28       | e0/0 | 111.110.35.14/30 | 2CAD:1995:B0DA:7::28 | R26(Triada)     | Чокурдах   |
-|           | e0/1 | 111.110.35.10/30 | 2CAD:1995:B0DA:8::28 | R25(Triada)     |            |
-|           | e0/2 | 172.16.40.1/24   | 2CAD:1995:B0DA:9::28 | SW29(Chukordah) |            |
-| VPC30     |      | 172.16.40.10     | 2cad:1995:b0da:9::10 |                 |            |
-| VPC31     |      | 172.16.40.11     | 2cad:1995:b0da:9::11 |                 |            |
+| Device | Port | IPv4             | IPv6                 | Note            | Region     |
+| ------ | ---- | ---------------- | -------------------- | --------------- | ---------- |
+| R27    | e0/0 | 210.110.35.2/30  | 2CAD:1995:B0DA:A::27 | R25(Triada)     | Labytnangi |
+| R28    | e0/0 | 111.110.35.14/30 | 2CAD:1995:B0DA:7::28 | R26(Triada)     | Chokurdakh |
+|        | e0/1 | 111.110.35.10/30 | 2CAD:1995:B0DA:8::28 | R25(Triada)     |            |
+|        | e0/2 | 172.16.40.1/24   | 2CAD:1995:B0DA:9::28 | SW29(Chokurdah) |            |
+| VPC30  |      | 172.16.40.10     | 2cad:1995:b0da:9::10 |                 |            |
+| VPC31  |      | 172.16.40.11     | 2cad:1995:b0da:9::11 |                 |            |
 
-## Настроите политику маршрутизации для сетей офиса Чокурдах
+## Configure routing policy for the Chokurdakh office networks
+<p class="ru-text">Настроите политику маршрутизации для сетей офиса Чокурдах</p>
 
 **R28**
 
@@ -57,18 +74,20 @@ Ethernet0/2                172.16.40.1     YES manual up                    up
 
 ```
 
-Со стороны провайдера не вижу смысла показывать 
+No point showing the provider side.
+<p class="ru-text">Со стороны провайдера не вижу смысла показывать.</p>
 
-## Распределите трафик между двумя линками с провайдером в Чокурдах
+## Distribute traffic between the two provider uplinks in Chokurdakh
+<p class="ru-text">Распределите трафик между двумя линками с провайдером в Чокурдах</p>
 
 **R28**
 
 ```
-enbale
+enable
 configure terminal
 
-На R25  мы поднимаем Loopback сеть и указываем маршрут до них
-А на стороне провайдера работает OSPF ,там я ничего не прописывал ,кроме анонса сети.
+! On R25 we bring up a Loopback network and add a static route toward it.
+! The provider side runs OSPF — nothing was configured there except the network announcement.
 ip route 215.215.215.215 255.255.255.255 111.110.35.9
 
 
@@ -89,14 +108,14 @@ interface Ethernet0/2
 **VPC30**
 
 ```
-До применения Route-map
+! Before applying Route-map
 
 VPCS> trace 215.215.215.215
 trace to 215.215.215.215, 8 hops max, press Ctrl+C to stop
  1   172.16.40.1   0.551 ms  0.369 ms  0.357 ms
  2   *111.110.35.9   1.014 ms (ICMP type:3, code:3, Destination port unreachable)  *
 
-После применения Route-map
+! After applying Route-map
 
 VPCS> trace 215.215.215.215
 trace to 215.215.215.215, 8 hops max, press Ctrl+C to stop
@@ -105,9 +124,8 @@ trace to 215.215.215.215, 8 hops max, press Ctrl+C to stop
  3   *10.10.30.9   0.882 ms (ICMP type:3, code:3, Destination port unreachable)  *
 ```
 
-
-
-## Настроите отслеживание линка через технологию IP SLA в Чокурдах
+## Configure link tracking via IP SLA in Chokurdakh
+<p class="ru-text">Настроите отслеживание линка через технологию IP SLA в Чокурдах</p>
 
 **R28**
 
@@ -129,7 +147,7 @@ ip route 0.0.0.0 0.0.0.0 111.110.35.9 track 1
 ip route 0.0.0.0 0.0.0.0 111.110.35.13 track 2
 
 ------------------------------------------------------------------------------
-Немного переделаем Route-map с проверкой
+! Updated route-map with availability verification
 
 route-map TEST permit 10
  match ip address ACL1
@@ -138,7 +156,8 @@ route-map TEST permit 10
 
 ```
 
-Проверка Track и Route-map
+Verify track and route-map:
+<p class="ru-text">Проверка Track и Route-map</p>
 
 ```
 R28#show track 1
@@ -176,9 +195,8 @@ route-map TEST, permit, sequence 10
   Policy routing matches: 234 packets, 24284 bytes
 ```
 
-
-
-## Настройте для офиса Лабытнанги маршрут по-умолчанию
+## Configure a default route for the Labytnangi office
+<p class="ru-text">Настройте для офиса Лабытнанги маршрут по-умолчанию</p>
 
 **R27**
 

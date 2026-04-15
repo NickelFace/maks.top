@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 201.3 — Kernel Runtime Management"
-date: 2026-04-10
+date: 2025-08-22
 description: "Managing the running Linux kernel: modules, /proc, sysctl, udev, hardware analysis tools, and tracing utilities. LPIC-2 exam topic 201.3."
 tags: ["Linux", "Kernel", "LPIC-2", "udev", "sysctl", "Modules"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-201-3-kernel-runtime-management/"
 ---
 
 > **Exam weight:** Topic 201.3 carries **4 points** — one of the highest-weighted topics on the LPIC-2 201 exam. Focus on module management commands, `sysctl`, `/proc/sys/`, and `udev`.

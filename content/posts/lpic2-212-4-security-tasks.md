@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 212.4 — Security Tasks"
-date: 2026-04-11
+date: 2026-06-22
 description: "GPG/OpenPGP key management, intrusion detection (fail2ban, portsentry), OpenSSL certificates, security auditing tools (nmap, lsof, fuser, netstat, arp), password hashing. LPIC-2 exam topic 212.4."
 tags: ["Linux", "LPIC-2", "GPG", "OpenPGP", "fail2ban", "portsentry", "nmap", "lsof", "john", "OpenSSL", "security"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-212-4-security-tasks/"
 ---
 
 > **Exam topic 212.4** — Security tasks (weight: 3). Covers GPG key management, intrusion detection, OpenSSL certificates, and security auditing tools.

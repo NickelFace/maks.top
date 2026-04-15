@@ -1,64 +1,69 @@
 ---
-title: "Network Engineer — 06. EIGRP для IPv4 (расширенные функции)"
-date: 2026-04-14
-description: "Лабораторная работа по настройке расширенных функций EIGRP: автосуммаризация, redistribution, таймеры"
+title: "Network Engineer — 06. EIGRP for IPv4 (Advanced Features)"
+date: 2025-10-09
+description: "Lab: advanced EIGRP features — auto-summary, redistribute static, hello/hold timers, bandwidth percent"
 tags: ["Networking", "EIGRP", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-06-eigrp-v2/"
 ---
 
-# Лабораторная работа. Настройка расширенных функций EIGRP для IPv4
+# Lab: Advanced EIGRP for IPv4 Configuration
 
-## Топология
+<p class="ru-text">Лабораторная работа. Настройка расширенных функций EIGRP для IPv4</p>
+
+## Topology
 
 ​             ![image](/img/neteng/06/2/1.png)                  
 
-### Таблица адресации
+### Addressing Table
 
-| Устройство   | Интерфейс     | IP-адрес        | Маска подсети    | Шлюз по умолчанию |
+| Device | Interface | IP Address | Subnet Mask | Default Gateway |
 | ------------ | ------------- | --------------- | ---------------- | ----------------- |
-| R1           | G0/0          | 192.168.1.1     | 255.255.255.0    | —                 |
-| S0/0/0 (DCE) | 192.168.12.1  | 255.255.255.252 | —                |                   |
-| S0/0/1       | 192.168.13.1  | 255.255.255.252 | —                |                   |
-| Lo1          | 192.168.11.1  | 255.255.255.252 | Н/Д (недоступно) |                   |
-| Lo5          | 192.168.11.5  | 255.255.255.252 | —                |                   |
-| Lo9          | 192.168.11.9  | 255.255.255.252 | —                |                   |
-| Lo13         | 192.168.11.13 | 255.255.255.252 | —                |                   |
-| R2           | G0/0          | 192.168.2.1     | 255.255.255.0    | —                 |
-| S0/0/0       | 192.168.12.2  | 255.255.255.252 | —                |                   |
-| S0/0/1 (DCE) | 192.168.23.1  | 255.255.255.252 | —                |                   |
-| Lo1          | 192.168.22.1  | 255.255.255.252 | —                |                   |
-| R3           | G0/0          | 192.168.3.1     | 255.255.255.0    | —                 |
-| S0/0/0 (DCE) | 192.168.13.2  | 255.255.255.252 | —                |                   |
-| S0/0/1       | 192.168.23.2  | 255.255.255.252 | —                |                   |
-| Lo1          | 192.168.33.1  | 255.255.255.252 | Н/Д (недоступно) |                   |
-| Lo5          | 192.168.33.5  | 255.255.255.252 | —                |                   |
-| Lo9          | 192.168.33.9  | 255.255.255.252 | —                |                   |
-| Lo13         | 192.168.33.13 | 255.255.255.252 | —                |                   |
-| PC-A         | NIC           | 192.168.1.3     | 255.255.255.0    | 192.168.1.1       |
-| PC-B         | NIC           | 192.168.2.3     | 255.255.255.0    | 192.168.2.1       |
-| PC-C         | NIC           | 192.168.3.3     | 255.255.255.0    | 192.168.3.1       |
+| R1 | G0/0 | 192.168.1.1 | 255.255.255.0 | — |
+| S0/0/0 (DCE) | 192.168.12.1 | 255.255.255.252 | — | |
+| S0/0/1 | 192.168.13.1 | 255.255.255.252 | — | |
+| Lo1 | 192.168.11.1 | 255.255.255.252 | N/A | |
+| Lo5 | 192.168.11.5 | 255.255.255.252 | — | |
+| Lo9 | 192.168.11.9 | 255.255.255.252 | — | |
+| Lo13 | 192.168.11.13 | 255.255.255.252 | — | |
+| R2 | G0/0 | 192.168.2.1 | 255.255.255.0 | — |
+| S0/0/0 | 192.168.12.2 | 255.255.255.252 | — | |
+| S0/0/1 (DCE) | 192.168.23.1 | 255.255.255.252 | — | |
+| Lo1 | 192.168.22.1 | 255.255.255.252 | — | |
+| R3 | G0/0 | 192.168.3.1 | 255.255.255.0 | — |
+| S0/0/0 (DCE) | 192.168.13.2 | 255.255.255.252 | — | |
+| S0/0/1 | 192.168.23.2 | 255.255.255.252 | — | |
+| Lo1 | 192.168.33.1 | 255.255.255.252 | N/A | |
+| Lo5 | 192.168.33.5 | 255.255.255.252 | — | |
+| Lo9 | 192.168.33.9 | 255.255.255.252 | — | |
+| Lo13 | 192.168.33.13 | 255.255.255.252 | — | |
+| PC-A | NIC | 192.168.1.3 | 255.255.255.0 | 192.168.1.1 |
+| PC-B | NIC | 192.168.2.3 | 255.255.255.0 | 192.168.2.1 |
+| PC-C | NIC | 192.168.3.3 | 255.255.255.0 | 192.168.3.1 |
 
-## Задачи
+## Objectives
 
-**Часть 1. Создание сети и настройка основных параметров устройства**
+<p class="ru-text">Задачи</p>
 
-**Часть 2. Настройка EIGRP и проверка подключения**
+**Part 1. Build the Network and Configure Basic Device Settings**
 
-**Часть 3. Настройка EIGRP для автоматического объединения**
+**Part 2. Configure EIGRP and Verify Connectivity**
 
-**Часть 4. Настройка и распространение статического маршрута по умолчанию**
+**Part 3. Configure EIGRP for Automatic Summarization**
 
-**Часть 5. Выполнение точной настройки EIGRP**
+**Part 4. Configure and Redistribute a Default Static Route**
 
-**·     Настройте параметры использования пропускной способности для EIGRP.**
+**Part 5. Fine-tune EIGRP**
 
-**·     Настройте интервал отправки пакетов приветствия (hello) и таймер удержания для EIGRP**.
+- Configure bandwidth utilization for EIGRP.
+- Configure hello interval and hold-time timers.
 
+<p class="ru-text">Часть 1. Создание сети и настройка основных параметров устройства<br>Часть 2. Настройка EIGRP и проверка подключения<br>Часть 3. Настройка EIGRP для автоматического объединения<br>Часть 4. Настройка и распространение статического маршрута по умолчанию<br>Часть 5. Выполнение точной настройки EIGRP</p>
 
+## Build the Network and Configure Basic Settings
 
-##  Создание сети и настройка основных параметров устройства
-
-
+<p class="ru-text">Создание сети и настройка основных параметров устройства</p>
 
 R1
 
@@ -156,13 +161,13 @@ do copy run start
 [Enter]
 ```
 
+## Configure EIGRP and Verify Connectivity
 
+<p class="ru-text">Настройка EIGRP и проверка подключения</p>
 
-## Настройка EIGRP и проверка подключения
+Configure EIGRP AS 1 on R1 for all directly connected networks:
 
-
-
-На маршрутизаторе R1 настройте маршрутизацию EIGRP с номером автономной системы (AS) 1 для всех сетей с прямым подключением. Запишите использованные команды в поле ниже.
+<p class="ru-text">На маршрутизаторе R1 настройте маршрутизацию EIGRP с номером AS 1 для всех сетей с прямым подключением.</p>
 
 ```
 router eigrp 1
@@ -171,13 +176,16 @@ network 192.168.13.1 0.0.0.3
 network 192.168.1.1 0.0.0.255
 ```
 
-b.  Для интерфейса локальной сети маршрутизатора R1 отключите передачу пакетов приветствия (hello) EIGRP. Ниже напишите команду, которую вы использовали.
+Disable EIGRP hello packets on R1 LAN interface:
+<p class="ru-text">Для интерфейса локальной сети маршрутизатора R1 отключите передачу пакетов приветствия EIGRP.</p>
 
 ```
 passive-interface gigabitEthernet 2/0
 ```
 
-c.   На маршрутизаторе R1 настройте пропускную способность для интерфейса S0/0/0 равной 1024 Кбит/с, а для интерфейса S0/0/1 равной 64 Кбит/с. Запишите использованные команды в поле ниже. **Примечание**. Команда **bandwidth** влияет только на вычисление показателя EIGRP, а не на фактическую пропускную способность последовательного канала связи.
+Set bandwidth on R1: S0/0/0 = 1024 Kbps, S0/0/1 = 64 Kbps. Note: `bandwidth` affects EIGRP metric calculation only, not actual link speed.
+
+<p class="ru-text">На маршрутизаторе R1 настройте пропускную способность: S0/0/0 = 1024 Кбит/с, S0/0/1 = 64 Кбит/с. Примечание: команда bandwidth влияет только на вычисление метрики EIGRP.</p>
 
 R1
 
@@ -188,7 +196,9 @@ interface serial 1/0
 bandwidth 64
 ```
 
-d.  На маршрутизаторе R2 настройте маршрутизацию EIGRP с идентификатором AS 1 для всех сетей, отключите передачу пакетов приветствия (hello) EIGRP для интерфейса локальной сети и задайте пропускную способность для интерфейса S0/0/0 равной 1024 Кбит/с.
+Configure R2 (EIGRP AS 1, passive LAN, S0/0/0 bandwidth 1024 Kbps):
+
+<p class="ru-text">На маршрутизаторе R2 настройте EIGRP с AS 1, отключите hello на LAN, задайте пропускную способность S0/0/0 = 1024.</p>
 
 R2
 
@@ -202,7 +212,9 @@ interface serial 0/0
 bandwidth 1024
 ```
 
-e.   На маршрутизаторе R3 настройте маршрутизацию EIGRP с идентификатором AS 1 для всех сетей, отключите передачу пакетов приветствия (hello) EIGRP для интерфейса локальной сети и задайте пропускную способность для интерфейса S0/0/0 равной 64 Кбит/с.
+Configure R3 (EIGRP AS 1, passive LAN, S0/0/0 bandwidth 64 Kbps):
+
+<p class="ru-text">На маршрутизаторе R3 настройте EIGRP с AS 1, отключите hello на LAN, задайте пропускную способность S0/0/0 = 64.</p>
 
 ```
 router eigrp 1
@@ -214,9 +226,11 @@ interface serial 0/0
 bandwidth 64
 ```
 
-### Проверьте связь
+### Verify Connectivity
 
-С ПК А
+<p class="ru-text">Проверьте связь</p>
+
+From PC-A:
 
 ```
 C:\>ping 192.168.3.3
@@ -234,15 +248,16 @@ Approximate round trip times in milli-seconds:
     Minimum = 2ms, Maximum = 2ms, Average = 2ms
 ```
 
+## Configure EIGRP for Automatic Summarization
 
+<p class="ru-text">Настройка EIGRP для автоматического объединения</p>
 
-## Настройка EIGRP для автоматического объединения
+### Check Auto-Summary Default
 
+<p class="ru-text">Настройте EIGRP для автоматического объединения.</p>
 
-
-### Настройте EIGRP для автоматического объединения.
-
-Введите команду **show ip protocols** на R1. Как по умолчанию настроено автоматическое объединение в EIGRP?
+Run `show ip protocols` on R1. How is auto-summary configured by default?
+<p class="ru-text">Введите команду show ip protocols на R1. Как по умолчанию настроено автоматическое объединение в EIGRP?</p>
 
 ```
 R1#show ip protocols 
@@ -276,9 +291,12 @@ Redistributing: eigrp 1
   Distance: internal 90 external 170
 ```
 
-автоматическое объединение в EIGRP **включено**
+Auto-summary is **enabled** by default.
+<p class="ru-text">Автоматическое объединение в EIGRP включено по умолчанию.</p>
 
-### Настройте loopback-адреса на R1.
+### Configure Loopback Addresses on R1
+
+<p class="ru-text">Настройте loopback-адреса на R1.</p>
 
 ```
 interface loopback1
@@ -291,7 +309,9 @@ interface loopback 13
 ip address 192.168.11.13 255.255.255.252
 ```
 
-### Добавьте соответствующие инструкции network для процесса EIGRP на маршрутизаторе R1. Запишите использованные команды в поле ниже.
+### Add Network Statements for EIGRP on R1
+
+<p class="ru-text">Добавьте соответствующие инструкции network для процесса EIGRP на маршрутизаторе R1.</p>
 
 ```
 router eigrp 1
@@ -301,7 +321,9 @@ network 192.168.11.9 0.0.0.3
 network 192.168.11.13 0.0.0.3
 ```
 
-### На маршрутизаторе R2 выполните команду **show ip route eigrp**. Как сети loopback представлены в результатах этой команды?
+### How are loopback networks represented on R2?
+
+<p class="ru-text">На маршрутизаторе R2 выполните команду show ip route eigrp. Как сети loopback представлены в результатах этой команды?</p>
 
 ```
 R2(config-if)#do sh ip route eigrp
@@ -316,21 +338,25 @@ D    192.168.13.0/24 [90/41024000] via 192.168.12.1, 00:14:19, Serial0/0
 D       192.168.23.0/24 is a summary, 00:12:40, Null0
 ```
 
-Сработала автосуммаризация сетей на 192.168.11.0/24
+Auto-summary aggregated the loopbacks into 192.168.11.0/24.
+<p class="ru-text">Сработала автосуммаризация сетей на 192.168.11.0/24</p>
 
-### На маршрутизаторе R1 выполните команду no **auto-summary** в рамках процесса EIGRP.
+### Disable auto-summary on R1 with `no auto-summary`
 
-*`Так как автосуммаризация включена по умолчанию, то предположу, что тут была опечатка`* 
+<p class="ru-text">На маршрутизаторе R1 выполните команду no auto-summary в рамках процесса EIGRP.</p>
+
+*Note: auto-summary is enabled by default — assumed typo in the lab guide.*
+<p class="ru-text">Так как автосуммаризация включена по умолчанию, то предположу, что тут была опечатка.</p>
 
 ```
 R1(config-router)#no auto-summary 
 R1(config-router)#
 %DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 192.168.12.2 (Serial0/0) resync: summary configured
 %DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 192.168.13.2 (Serial1/0) resync: summary configured
-
 ```
 
-Как изменилась таблица маршрутизации на R2 ?
+Routing table on R2 after disabling auto-summary on R1:
+<p class="ru-text">Как изменилась таблица маршрутизации на R2?</p>
 
 ```
 R2(config)#do show ip route eigrp
@@ -349,7 +375,8 @@ D       192.168.13.0/30 [90/41024000] via 192.168.12.1, 00:00:29, Serial0/0
 D       192.168.23.0/24 is a summary, 00:38:48, Null0
 ```
 
-Повторите подшаги б–д, добавив интерфейсы обратной петли, сети процесса EIGRP и автоматическое объединение на маршрутизаторе R3.
+Add loopback interfaces and EIGRP network statements on R3, then disable auto-summary:
+<p class="ru-text">Повторите подшаги б–д, добавив интерфейсы обратной петли, сети процесса EIGRP и автоматическое объединение на маршрутизаторе R3.</p>
 
 ```
 interface loopback 1
@@ -368,35 +395,29 @@ network 192.168.33.9 0.0.0.3
 network 192.168.33.13 0.0.0.3
 ```
 
+## Configure and Redistribute a Default Static Route
 
+<p class="ru-text">Настройка и распространение статического маршрута по умолчанию</p>
 
-## Настройка и распространение статического маршрута по умолчанию
-
-
-
-В части 4 вам необходимо настроить статический маршрут по умолчанию на R2 и распространить его на все остальные маршрутизаторы.
-
-a.   Настройте loopback-адрес на R2.
+Configure a loopback on R2 and redistribute a default static route via EIGRP:
+<p class="ru-text">В части 4 необходимо настроить статический маршрут по умолчанию на R2 и распространить его на все остальные маршрутизаторы.</p>
 
 ```
 interface loopback1
 ip address 192.168.22.1 255.255.255.252
 ```
 
-b.  Настройте статический маршрут по умолчанию с выходным интерфейсом Lo1.
-
 ```
 R2(config)# ip route 0.0.0.0 0.0.0.0 Lo1
 ```
-
-c.   Выполните команду **redistribute static** в рамках процесса EIGRP, чтобы распространить статический маршрут по умолчанию на другие участвующие маршрутизаторы.
 
 ```
 R2(config)# router eigrp 1
 R2(config-router)# redistribute static
 ```
 
-d.  Используйте команду **show ip protocols** на маршрутизаторе R2, чтобы проверить, распространился ли этот статический маршрут.
+Verify with `show ip protocols` on R2:
+<p class="ru-text">Используйте команду show ip protocols на маршрутизаторе R2, чтобы проверить, распространился ли этот статический маршрут.</p>
 
 ```
 R2#show ip protocols
@@ -410,61 +431,36 @@ Routing Protocol is "eigrp  1 "
   EIGRP maximum hopcount 100
   EIGRP maximum metric variance 1
 Redistributing: eigrp 1, static 
-  Automatic network summarization is in effect  
-  Automatic address summarization: 
-    192.168.12.0/24 for GigabitEthernet2/0, Serial1/0
-      Summarizing with metric 3011840
-    192.168.23.0/24 for GigabitEthernet2/0, Serial0/0
-      Summarizing with metric 2169856
-  Maximum path: 4
-  Routing for Networks:  
-     192.168.2.0
-     192.168.12.0/30
-     192.168.23.0/30
-  Passive Interface(s): 
-    GigabitEthernet2/0
-  Routing Information Sources:  
-    Gateway         Distance      Last Update 
-    192.168.23.2    90            6062021    
-    192.168.12.1    90            7418275    
-  Distance: internal 90 external 170
+  ...
 ```
 
-a.   На маршрутизаторе R1 выполните команду **show ip route eigrp| include 0.0.0.0**, чтобы просмотреть инструкции, относящиеся к маршруту по умолчанию. Как статический маршрут по умолчанию представлен в результатах этой команды? Укажите административную дистанцию (AD) распространяемого маршрута.
+Check default route on R1 with `show ip route eigrp | include 0.0.0.0`:
+<p class="ru-text">На маршрутизаторе R1 выполните команду show ip route eigrp| include 0.0.0.0, чтобы просмотреть инструкции, относящиеся к маршруту по умолчанию.</p>
 
-```
-R1(config-router)#do show ip route eigrp| include 0.0.0.0
-show ip route eigrp| include 0.0.0.0
-                     ^
-% Invalid input detected at '^' marker.
-```
-
-Команда не работает   в  Packet Tracer , но без *include 0.0.0.0* все работает.
+Note: the `include` pipe doesn't work in Packet Tracer, but without it:
+<p class="ru-text">Команда не работает в Packet Tracer, но без include 0.0.0.0 всё работает.</p>
 
 ```
 R1(config-router)#do show ip route eigrp
 D    192.168.2.0/24 [90/3014400] via 192.168.12.2, 00:18:18, Serial0/0
 D    192.168.3.0/24 [90/3526400] via 192.168.12.2, 00:13:13, Serial0/0
-     192.168.12.0/24 is variably subnetted, 2 subnets, 2 masks
-D       192.168.12.0/24 [90/41536000] via 192.168.13.2, 00:13:13, Serial1/0
-     192.168.23.0/24 is variably subnetted, 2 subnets, 2 masks
-D       192.168.23.0/24 [90/3523840] via 192.168.12.2, 00:18:18, Serial0/0
-D       192.168.23.0/30 [90/41024000] via 192.168.13.2, 00:13:13, Serial1/0
-     192.168.33.0/30 is subnetted, 4 subnets
-D       192.168.33.0 [90/3651840] via 192.168.12.2, 00:10:48, Serial0/0
-D       192.168.33.4 [90/3651840] via 192.168.12.2, 00:10:48, Serial0/0
-D       192.168.33.8 [90/3651840] via 192.168.12.2, 00:10:48, Serial0/0
-D       192.168.33.12 [90/3651840] via 192.168.12.2, 00:10:47, Serial0/0
+     ...
 D*EX 0.0.0.0/0 [170/4291840] via 192.168.12.2, 00:02:08, Serial0/0
 ```
 
-Указан как EIGRP полученный извне , а административная дистанция (AD) распространяемого маршрута равна 170.
+The default route shows as EIGRP external (EX), with AD = 170.
+<p class="ru-text">Указан как EIGRP полученный извне, а административная дистанция (AD) распространяемого маршрута равна 170.</p>
 
-##  Подгонка EIGRP
+## Fine-Tune EIGRP
 
-###   Настройте параметры использования пропускной способности для EIGRP.
+<p class="ru-text">Подгонка EIGRP</p>
 
- Настройте последовательный канал между маршрутизаторами R1 и R2, чтобы разрешить трафику EIGRP использовать только 75 % пропускной способности канала.
+### Configure EIGRP Bandwidth Percent
+
+<p class="ru-text">Настройте параметры использования пропускной способности для EIGRP.</p>
+
+Allow EIGRP to use 75% of bandwidth on R1–R2 link:
+<p class="ru-text">Настройте последовательный канал между R1 и R2, чтобы разрешить трафику EIGRP использовать только 75% пропускной способности канала.</p>
 
 ```
 R1(config)# interface s0/0
@@ -474,76 +470,33 @@ R2(config)# interface s0/0
 R2(config-if)# ip bandwidth-percent eigrp 1 75
 ```
 
-В Packet Tracer опять же , не реализована эта команда 
+Note: this command is not implemented in Packet Tracer.
+<p class="ru-text">В Packet Tracer опять же не реализована эта команда.</p>
 
 ```
 R1(config-router)#interface s0/0
 R1(config-if)#ip bandwidth-percent eigrp 1 75
                  ^
 % Invalid input detected at '^' marker.
-	
-R1(config-if)#ip ba?
-% Unrecognized command
 ```
 
- Настройте последовательный канал между маршрутизаторами R1 и R3, чтобы разрешить трафику EIGRP использовать только 40 % пропускной способности канала.
+### Configure Hello and Hold-Time Timers
 
-Невозможно выполнить по той же причине
+<p class="ru-text">Настройте интервал отправки пакетов приветствия (hello) и таймер удержания для EIGRP.</p>
 
-### Настройте интервал отправки пакетов приветствия (hello) и таймер удержания для EIGRP.
-
-На маршрутизаторе R2 используйте команду **show ip eigrp interfaces detail** для просмотра интервала приветствия и таймера задержки для EIGRP.
-
-R2# **show ipeigrp interfaces detail**
+Check current values with `show ip eigrp interfaces detail` (not available in PT):
+<p class="ru-text">На маршрутизаторе R2 используйте команду show ip eigrp interfaces detail. К сожалению, эта команда тоже не реализована в PacketTracer.</p>
 
 ```
 EIGRP-IPv4 Interfaces for AS(1)
-Xmit Queue   PeerQ        Mean   Pacing Time   Multicast    Pending
-Interface              Peers  Un/Reliable  Un/Reliable  SRTT   Un/Reliable   Flow Timer   Routes
-Se0/0/0                  1        0/0       0/0           1       0/15          50           0
+...
 Hello-interval is 5, Hold-time is 15
-  Split-horizon is enabled
-  Next xmit serial <none>
-  Packetized sent/expedited: 29/1
-  Hello's sent/expedited: 390/2
-  Un/reliable mcasts: 0/0  Un/reliable ucasts: 35/39
-Mcast exceptions: 0  CR packets: 0  ACKs suppressed: 0
-  Retransmissions sent: 0  Out-of-sequence rcvd: 0
-  Topology-ids on interface - 0
-  Interface BW percentage is 75
-  Authentication mode is not set
-Se0/0/1                  1        0/0       0/0           1       0/16          50           0
-Hello-interval is 5, Hold-time is 15
-  Split-horizon is enabled
-  Next xmit serial <none>
-  Packetized sent/expedited: 34/5
-  Hello's sent/expedited: 382/2
-  Un/reliable mcasts: 0/0  Un/reliable ucasts: 31/42
-Mcast exceptions: 0  CR packets: 0  ACKs suppressed: 2
-  Retransmissions sent: 0  Out-of-sequence rcvd: 0
-  Topology-ids on interface - 0
-  Authentication mode is not set
-
+...
+Interface BW percentage is 75
 ```
 
-К сожалению эта команда тоже не реализована в PacketTracer .  Но **без detail** показывает .
-
-```
-R2#show ip eigrp interfaces 
-IP-EIGRP interfaces for process 1
-
-                        Xmit Queue   Mean   Pacing Time   Multicast    Pending
-Interface        Peers  Un/Reliable  SRTT   Un/Reliable   Flow Timer   Routes
-Se0/0              1        0/0      1236       0/10           0           0
-Se1/0              1        0/0      1236       0/10           0           0
-```
-
-Укажите значение таймера приветствия по умолчанию.
-Укажите значение таймера удержания по умолчанию.
-
- Не имею возможности ответить на данные вопросы
-
- Для интерфейсов S0/0 и S1/0 маршрутизатора R1 настройте интервал приветствия равным 60 секунд, а таймер удержания равным 180 секунд, именно в этом порядке.
+Set hello-interval = 60s and hold-time = 180s on R1 serial interfaces:
+<p class="ru-text">Для интерфейсов S0/0 и S1/0 маршрутизатора R1 настройте интервал приветствия = 60 сек, таймер удержания = 180 сек.</p>
 
 ```
 R1(config)# interface s0/0
@@ -554,37 +507,21 @@ R1(config-if)# ip hello-interval eigrp 1 60
 R1(config-if)# ip hold-time eigrp 1 180
 ```
 
-c.   Для последовательных интерфейсах маршрутизаторов R2 и R3 настройте интервал приветствия равным 60 секунд, а таймер удержания равным 180 секунд.
+Could not apply hold-time on R2/R3 — not supported in Packet Tracer.
+<p class="ru-text">Повторить не удалось, по причине того, что в PT не реализовано изменение hold-time интервала.</p>
 
-**Повторить не удалось ,по причине того,что в PT не реализовано изменение hold-time интервала...**
+## Review Questions
 
-```
-R1(config-if)#interface serial 0/0
-R1(config-if)#ip ?
-  access-group        Specify access control for packets
-  address             Set the IP address of an interface
-  authentication      authentication subcommands
-  flow                NetFlow Related commands
-  hello-interval      Configures IP-EIGRP hello interval
-  helper-address      Specify a destination address for UDP broadcasts
-  inspect             Apply inspect name
-  ips                 Create IPS rule
-  mtu                 Set IP Maximum Transmission Unit
-  nat                 NAT interface commands
-  ospf                OSPF interface commands
-  split-horizon       Perform split horizon
-  summary-address     Perform address summarization
-  virtual-reassembly  Virtual Reassembly
-```
+<p class="ru-text">Вопросы для повторения</p>
 
+1. What are the benefits of route summarization?
+<p class="ru-text">В чем заключаются преимущества объединения маршрутов?</p>
 
+Reduces the routing table size. (Best practice recommends disabling it in most cases.)
+<p class="ru-text">Уменьшение таблицы маршрутизации. (Best practices говорит, что нужно отключать его.)</p>
 
-## Вопросы для повторения
+2. Why must the hold-time be set equal to or greater than the hello interval in EIGRP?
+<p class="ru-text">Почему при настройке таймеров EIGRP необходимо настраивать значение времени удержания равным или больше интервала приветствия?</p>
 
-1. В чем заключаются преимущества объединения маршрутов?
-
-Уменьшение таблицы маршрутизации. (best practics говорит, что нужно отключать его)
-
-2. Почему при настройке таймеров EIGRP необходимо настраивать значение времени удержания равным или больше интервала приветствия?
-
-Роутеры не подружатся .  Хелло интервалы проверяют, жив ли роутер . А после истечения времени удержания , то роутер будет считать его нерабочим.
+Routers won't form a neighbor relationship otherwise. Hello packets check if a neighbor is alive; after hold-time expires the router considers the neighbor dead.
+<p class="ru-text">Роутеры не подружатся. Хелло интервалы проверяют, жив ли роутер. После истечения времени удержания роутер будет считать его нерабочим.</p>

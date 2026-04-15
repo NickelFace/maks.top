@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 203.1 — Operating the Linux Filesystem"
-date: 2026-04-10
+date: 2025-09-26
 description: "FHS directory layout, mkfs, mount/umount, /etc/fstab format, UUID and blkid, swap partitions and swap files, systemd mount units, and the sync command. LPIC-2 exam topic 203.1."
 tags: ["Linux", "Filesystem", "LPIC-2", "fstab", "mount", "UUID", "swap"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-203-1-operating-linux-filesystem/"
 ---
 
 > **Exam topic 203.1** — Operating the Linux Filesystem. Covers the FHS hierarchy, creating and mounting filesystems, /etc/fstab configuration, UUID management, swap, and systemd mount units.

@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 200.2 — Predict Future Resource Needs"
-date: 2026-04-10
+date: 2025-07-27
 description: "Capacity planning, monitoring tools (collectd, Nagios, Icinga2, MRTG, Cacti), growth prediction, and resource exhaustion. LPIC-2 exam topic 200.2."
 tags: ["Linux", "Performance", "LPIC-2", "Monitoring", "Nagios", "Icinga2", "collectd", "Cacti", "MRTG"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-200-2-predict-future-resource-needs/"
 ---
 
 > **Exam weight: 2 points** out of the total 8 for section 200 Capacity Planning.

@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 206.2 — Backup Operations"
-date: 2026-04-10
+date: 2025-12-22
 description: "Backup types (full/incremental/differential), storage media, tar (incremental with .snar), rsync, dd, cpio, mt and tape devices, Amanda/Bacula/Bareos/BackupPC. LPIC-2 exam topic 206.2."
 tags: ["Linux", "LPIC-2", "backup", "rsync", "tar", "Amanda", "Bacula", "Bareos"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-206-2-backup-operations/"
 ---
 
 > **Exam topic 206.2** — Backup Operations (weight: 3). Covers backup strategy, backup types, storage media selection, and the tools used to create, verify, and restore backups.

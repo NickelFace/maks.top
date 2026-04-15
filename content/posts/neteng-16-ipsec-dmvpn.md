@@ -1,29 +1,44 @@
 ---
 title: "Network Engineer — 16. IPSec over DMVPN"
-date: 2026-04-14
-description: "Настройка GRE поверх IPSec между Москвой и Санкт-Петербургом, DMVPN поверх IPSec между Москвой, Чокурдахом и Лабытнанги"
+date: 2026-01-01
+description: "Configuring GRE over IPSec between Moscow and St. Petersburg, and DMVPN over IPSec between Moscow, Chokurdakh, and Labytnangi"
 tags: ["Networking", "IPSec", "DMVPN", "GRE", "VPN", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-16-ipsec-dmvpn/"
 ---
 
 # IPsec
 
 ![](/img/neteng/diplom/EVE_Topology.png)
 
-## Домашнее задание
+## Assignment
+<p class="ru-text">Домашнее задание</p>
 
 IPSec over DmVPN
 
-Цель: Настроить GRE поверх IPSec между офисами Москва и С.-Петербург Настроить DMVPN поверх IPSec между офисами Москва и Чокурдах, Лабытнанги
+Goal: Configure GRE over IPSec between the Moscow and St. Petersburg offices. Configure DMVPN over IPSec between Moscow and Chokurdakh/Labytnangi.
+<p class="ru-text">Цель: Настроить GRE поверх IPSec между офисами Москва и С.-Петербург. Настроить DMVPN поверх IPSec между офисами Москва и Чокурдах, Лабытнанги.</p>
 
-В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+In this lab you are expected to independently:
+<p class="ru-text">В этой самостоятельной работе мы ожидаем, что вы самостоятельно:</p>
+
+1. Configure GRE over IPSec between the Moscow and St. Petersburg offices
+2. Configure DMVPN over IPSec between Moscow and Chokurdakh/Labytnangi
+3. All nodes in all offices must have IP connectivity
+4. Document the plan and changes
+
+<p class="ru-text">
 
 1. Настроите GRE поверх IPSec между офисами Москва и С.-Петербург
 2. Настроите DMVPN поверх IPSec между Москва и Чокурдах, Лабытнанги
 3. Все узлы в офисах в лабораторной работе должны иметь IP связность
 4. План работы и изменения зафиксированы в документации
 
-### Настроите GRE поверх IPSec между офисами Москва и С.-Петербург
+</p>
+
+### Configure GRE over IPSec between the Moscow and St. Petersburg offices
+<p class="ru-text">Настроите GRE поверх IPSec между офисами Москва и С.-Петербург</p>
 
 R15
 
@@ -85,7 +100,8 @@ interface Tunnel0
  tunnel protection ipsec profile protect-gre
 ```
 
-Проверка
+Verify:
+<p class="ru-text">Проверка</p>
 
 ```
 R18(config-if)#do ping 10.0.0.1
@@ -116,9 +132,8 @@ Peer: 200.20.20.15 port 500
         Active SAs: 4, origin: crypto map
 ```
 
-
-
-### Настроите DMVPN поверх IPSec между Москва и Чокурдах, Лабытнанги
+### Configure DMVPN over IPSec between Moscow and Chokurdakh/Labytnangi
+<p class="ru-text">Настроите DMVPN поверх IPSec между Москва и Чокурдах, Лабытнанги</p>
 
 R14
 
@@ -233,7 +248,8 @@ interface Tunnel0
  tunnel protection ipsec profile protect-gre 
 ```
 
-Проверка
+Verify:
+<p class="ru-text">Проверка</p>
 
 ```
 R27#show dmvpn   
@@ -285,6 +301,7 @@ Sending 5, 100-byte ICMP Echos to 10.1.0.3, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 7/7/8 ms
 ```
 
-### План работы и изменения зафиксированы в документации
+### Documentation
+<p class="ru-text">План работы и изменения зафиксированы в документации</p>
 
 https://1drv.ms/u/s!AiW_chHQt5JCg64XQ0nBMdjjoQ3bLw?e=B1LOJE

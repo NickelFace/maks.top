@@ -1,20 +1,22 @@
 ---
-title: "Network Engineer — 06. EIGRP для IPv4 (базовая настройка)"
-date: 2026-04-14
-description: "Лабораторная работа по базовой настройке протокола EIGRP для IPv4"
+title: "Network Engineer — 06. EIGRP for IPv4 (Basic Configuration)"
+date: 2025-10-01
+description: "Lab: basic EIGRP for IPv4 configuration — neighbors, bandwidth, passive interfaces, topology table"
 tags: ["Networking", "EIGRP", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-06-eigrp/"
 ---
 
-# Лабораторная работа. Базовая настройка протокола EIGRP для IPv4
+# Lab: Basic EIGRP for IPv4 Configuration
 
-## Топология
+## Topology
 
 ![image](/img/neteng/06/1.png)
 
-## Таблица адресации
+## Addressing Table
 
-| Устройство | Интерфейс    | IP-адрес    | Маска подсети   | Шлюз по умолчанию |
+| Device | Interface    | IP Address  | Subnet Mask     | Default Gateway |
 | ---------- | ------------ | ----------- | --------------- | ----------------- |
 | R1         | G0/0         | 192.168.1.1 | 255.255.255.0   | —                 |
 |            | S0/0/0 (DCE) | 10.1.1.1    | 255.255.255.252 | —                 |
@@ -29,19 +31,19 @@ categories: ["Network Engineer"]
 | PC-B       | NIC          | 192.168.2.3 | 255.255.255.0   | 192.168.2.1       |
 | PC-C       | NIC          | 192.168.3.3 | 255.255.255.0   | 192.168.3.1       |
 
-## Задачи
+## Objectives
 
-**Часть 1. Построение сети и проверка соединения**
+**Part 1. Build the Network and Verify Connectivity**
 
-**Часть 2. Настройка маршрутизации EIGRP**
+**Part 2. Configure EIGRP Routing**
 
-**Часть 3. Проверка маршрутизации EIGRP**
+**Part 3. Verify EIGRP Routing**
 
-**Часть 4. Настройка пропускной способности и пассивных интерфейсов**
+**Part 4. Configure Bandwidth and Passive Interfaces**
 
 
 
-##  Построение сети и проверка связи
+##  Build the Network and Verify Connectivity
 
 R1
 
@@ -133,13 +135,13 @@ do copy run start
 [Enter]
 ```
 
-### Проверьте подключение
+### Verify Connectivity
 
-Проверил все подключения, скриншоты нет смысла показывать, раздувать лабораторную в размерах.
+Verified all connections — no point showing screenshots, just inflates the lab.
 
 
 
-## Настройка маршрутизации EIGRP
+## Configure EIGRP Routing
 
 R1
 
@@ -168,16 +170,19 @@ network 192.168.3.0 0.0.0.255
 network 10.3.3.0 0.0.0.3
 ```
 
-Почему рекомендуется использовать шаблонные маски при объявлении сетей? 
+Why are wildcard masks recommended when declaring networks?
+<p class="ru-text">Почему рекомендуется использовать шаблонные маски при объявлении сетей?</p>
 
-Потому что Router OS не даст анонсировать обычную
+Because IOS will not allow advertising without one when using non-classful addresses.
+<p class="ru-text">Потому что Router OS не даст анонсировать обычную маску.</p>
 
-Можно ли исключить маску в какой-нибудь из вышеприведённых инструкций network?
- Если да, то в какой (в каких)?
+Can the mask be omitted in any of the network statements above? If so, which one(s)?
+<p class="ru-text">Можно ли исключить маску в какой-нибудь из вышеприведённых инструкций network?</p>
 
-Да ,при явно анонсировании классовой сети 
+Yes — when explicitly advertising a classful network.
+<p class="ru-text">Да — при явном анонсировании классовой сети.</p>
 
-## Проверка маршрутизации EIGRP
+## Verify EIGRP Routing
 
 R1
 
@@ -212,7 +217,7 @@ H   Address         Interface      Hold Uptime    SRTT   RTO   Q   Seq
 1   10.3.3.1        Se0/0          13   00:35:18  40     1000  0   10
 ```
 
-###  Проанализируйте таблицу IP-маршрутизации EIGRP.
+### Analyze the EIGRP IP Routing Table.
 
 ```
 R1(config-router)#do show ip route eigrp
@@ -224,10 +229,13 @@ D    192.168.2.0/24 [90/20514560] via 10.1.1.2, 00:38:32, Serial0/0
 D    192.168.3.0/24 [90/20514560] via 10.3.3.2, 00:38:19, Serial1/0
 ```
 
-Почему у маршрутизатора R1 два пути к сети 10.2.2.0/30?
-Метрика и АД совпадают,а значит оба включаются в таблицу за этот маршрут
+Why does R1 have two paths to the 10.2.2.0/30 network?
+<p class="ru-text">Почему у маршрутизатора R1 два пути к сети 10.2.2.0/30?</p>
 
-### Проанализируйте таблицу соседних устройств EIGRP.
+The metric and AD are equal, so both paths are installed in the routing table.
+<p class="ru-text">Метрика и АД совпадают, а значит оба включаются в таблицу за этот маршрут.</p>
+
+### Analyze the EIGRP Topology Table.
 
 ```
 R1#show ip eigrp topology
@@ -253,11 +261,13 @@ P 192.168.3.0/24, 1 successors, FD is 20514560
          via 10.3.3.2 (20514560/5120), Serial1/0
 ```
 
-Почему в таблице топологии маршрутизатора R1 отсутствуют возможные преемники?
+Why are there no feasible successors in R1's topology table?
+<p class="ru-text">Почему в таблице топологии маршрутизатора R1 отсутствуют возможные преемники?</p>
 
-Потому что Feasible successor это резервный маршрутизатор с путем без петель (AD  feasible successor должно быть меньше чем FD текущего маршрута  successor). А такого маршрутизатора в данной топологии нет.
+A feasible successor requires a loop-free path where the AD of the backup route is less than the FD of the current successor. No such router exists in this topology.
+<p class="ru-text">Потому что Feasible successor — это резервный маршрутизатор с путём без петель (AD feasible successor должно быть меньше чем FD текущего маршрута). Такого маршрутизатора в данной топологии нет.</p>
 
-### Проверьте параметры маршрутизации EIGRP и объявленные сети
+### Verify EIGRP Routing Parameters and Advertised Networks
 
 ```
 R1#show ip protocols
@@ -287,25 +297,27 @@ Redistributing: eigrp 10
   Distance: internal 90 external 170
 ```
 
-Какой номер автономной системы используется?
+What AS number is used?
+<p class="ru-text">Какой номер автономной системы используется?</p>
 
- 10
+10
 
-Какие сети объявляются?   
+Which networks are advertised?
+<p class="ru-text">Какие сети объявляются?</p>
 
-10.1.1.0/30
-192.168.1.0
-10.3.3.0/30
+10.1.1.0/30, 192.168.1.0, 10.3.3.0/30
 
-Каково значение административной дистанции для маршрутов EIGRP?  
+What is the administrative distance for EIGRP routes?
+<p class="ru-text">Каково значение административной дистанции для маршрутов EIGRP?</p>
 
 90
 
-Сколько маршрутов с равной стоимостью по умолчанию использует EIGRP?  
+How many equal-cost paths does EIGRP use by default?
+<p class="ru-text">Сколько маршрутов с равной стоимостью по умолчанию использует EIGRP?</p>
 
 2
 
-## Настройка пропускной способности и пассивных интерфейсов
+## Configure Bandwidth and Passive Interfaces
 
 ```
 R1#show interface serial 0/0
@@ -335,11 +347,13 @@ Serial0/0 is up, line protocol is up (connected)
      DCD=up  DSR=up  DTR=up  RTS=up  CTS=up
 ```
 
-Какова пропускная способность по умолчанию для этого последовательного интерфейса? 
+What is the default bandwidth for this serial interface?
+<p class="ru-text">Какова пропускная способность по умолчанию для этого последовательного интерфейса?</p>
 
- 128
+128 Kbit
 
-Сколько маршрутов к сети 10.2.2.0/30 содержит таблица маршрутизации? 
+How many routes to 10.2.2.0/30 are in the routing table?
+<p class="ru-text">Сколько маршрутов к сети 10.2.2.0/30 содержит таблица маршрутизации?</p>
 
 2
 
@@ -353,9 +367,10 @@ D    192.168.2.0/24 [90/20514560] via 10.1.1.2, 01:09:24, Serial0/0
 D    192.168.3.0/24 [90/20514560] via 10.3.3.2, 01:09:11, Serial1/0
 ```
 
-###  Измените пропускную способность на маршрутизаторах.
+### Modify Bandwidth on the Routers.
 
-Поменяем пропускную способность R1
+Changing bandwidth on R1:
+<p class="ru-text">Поменяем пропускную способность R1</p>
 
 ```
 interface serial 0/0 
@@ -364,7 +379,8 @@ interface serial 1/0
 bandwidth 64
 ```
 
-Посмотрим как поменялась таблица маршрутизации на R1
+Let's check how the routing table changed on R1:
+<p class="ru-text">Посмотрим как поменялась таблица маршрутизации на R1</p>
 
 ```
 R1#show ip route 
@@ -388,7 +404,8 @@ D    192.168.2.0/24 [90/1794560] via 10.1.1.2, 00:00:42, Serial0/0
 D    192.168.3.0/24 [90/21026560] via 10.1.1.2, 00:00:28, Serial0/0
 ```
 
-Теперь до сети 10.2.2.0/30 только 1 маршрут. Поменяем и на остальных.
+Now only 1 route to 10.2.2.0/30. Applying to the remaining routers:
+<p class="ru-text">Теперь до сети 10.2.2.0/30 только 1 маршрут. Поменяем и на остальных.</p>
 
 ```
 R2(config)# interface s0/0
@@ -403,7 +420,7 @@ R3(config-if)# bandwidth 2000
 
 ```
 
-###  Проверьте изменения пропускной способности.
+### Verify Bandwidth Changes.
 
 ```
 R1#show interfaces serial 0/0
@@ -433,11 +450,13 @@ Serial0/0 is up, line protocol is up (connected)
      DCD=up  DSR=up  DTR=up  RTS=up  CTS=up
 ```
 
-Исходя из заданной пропускной способности, попробуйте определить, как будут выглядеть таблицы маршрутизации маршрутизаторов R2 и R3 до выполнения команды **show ip route**. Останутся ли их таблицы маршрутизации прежними или изменятся?
+Based on the configured bandwidths, predict how R2 and R3 routing tables will look before running **show ip route**. Will they stay the same or change?
+<p class="ru-text">Исходя из заданной пропускной способности, попробуйте определить, как будут выглядеть таблицы маршрутизации R2 и R3. Останутся ли их таблицы маршрутизации прежними или изменятся?</p>
 
-Измениться путь до маршрута 10.2.2.0/30
+The route to 10.2.2.0/30 will change.
+<p class="ru-text">Измениться путь до маршрута 10.2.2.0/30</p>
 
-###  Настройте на маршрутизаторах R1, R2 и R3 интерфейс G0/0 как пассивный.
+### Configure G0/0 as Passive on R1, R2, and R3.
 
 ```
 R1(config)# router eigrp 10
@@ -451,9 +470,10 @@ R3(config-router)# passive-interface g2/0
 
 ```
 
-###  Проверьте конфигурацию пассивных интерфейсов.
+### Verify Passive Interface Configuration.
 
-Покажу за R1 , так как за R2 , R3 аналогичная картина.
+Showing R1 — R2 and R3 look the same.
+<p class="ru-text">Покажу за R1, так как за R2, R3 аналогичная картина.</p>
 
 ```
 R1#show ip protocols 
@@ -485,11 +505,14 @@ Redistributing: eigrp 10
   Distance: internal 90 external 170
 ```
 
-## Вопросы для повторения
+## Review Questions
 
-При выполнении лабораторной работы можно было ограничиться только статической маршрутизацией. Каковы преимущества использования EIGRP?
+Static routing could have been used for this lab. What are the advantages of EIGRP?
+<p class="ru-text">При выполнении лабораторной работы можно было ограничиться только статической маршрутизацией. Каковы преимущества использования EIGRP?</p>
 
-- позволяет осуществлять балансировку нагрузки по маршрутам с разной метрикой
-- потребляет меньше ресурсов чем OSPF
-- Имеет резервный маршрут FS и позволяет практически моментально на него переключиться
-- Префиксная агрегация в любой точке (routing summarization)
+- Supports unequal-cost load balancing (variance)
+- Consumes fewer resources than OSPF
+- Has a feasible successor (FS) for near-instant failover
+- Supports route summarization at any point in the topology
+
+<p class="ru-text">— позволяет осуществлять балансировку нагрузки по маршрутам с разной метрикой<br>— потребляет меньше ресурсов чем OSPF<br>— Имеет резервный маршрут FS и позволяет практически моментально на него переключиться<br>— Префиксная агрегация в любой точке</p>

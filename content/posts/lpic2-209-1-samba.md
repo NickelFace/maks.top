@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 209.1 — Samba Server Configuration"
-date: 2026-04-10
+date: 2026-03-10
 description: "Samba daemons (smbd/nmbd/winbindd), smb.conf structure, global directives, share configuration, security levels, passdb backends, ACLs, username mapping, mounting CIFS shares, WINS, AD domain join. LPIC-2 exam topic 209.1."
 tags: ["Linux", "LPIC-2", "Samba", "SMB", "CIFS", "Winbind", "Active Directory", "file sharing"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-209-1-samba/"
 ---
 
 > **Exam topic 209.1** — Samba Server Configuration (weight: 5). Covers configuring Samba as a standalone file/print server or AD member server, access control, user management, and mounting SMB shares.

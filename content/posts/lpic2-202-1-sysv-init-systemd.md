@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 202.1 — SysV Init and systemd"
-date: 2026-04-10
+date: 2025-08-31
 description: "System startup customisation: SysV runlevels, inittab, init scripts, chkconfig, update-rc.d, systemd units and targets, mkinitrd, LSB. LPIC-2 exam topic 202.1."
 tags: ["Linux", "systemd", "SysV", "LPIC-2", "Boot"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-202-1-sysv-init-systemd/"
 ---
 
 > **Exam weight: 3 points.** You need to manage services via runlevels (SysV) and targets (systemd), understand the boot sequence, and know all the utilities listed here. The exam tests both approaches.

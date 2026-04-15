@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 210.3 — LDAP Client Usage"
-date: 2026-04-10
+date: 2026-04-14
 description: "LDAP tree structure, DN/RDN, LDIF format, ldapsearch with filters, ldapadd/ldapdelete/ldapmodify/ldappasswd, search scopes, slapadd vs ldapadd. LPIC-2 exam topic 210.3."
 tags: ["Linux", "LPIC-2", "LDAP", "OpenLDAP", "directory", "authentication"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-210-3-ldap-client/"
 ---
 
 > **Exam topic 210.3** — LDAP Client Usage (weight: 2). Covers using LDAP command-line client tools, LDIF format, search filters, and understanding the LDAP directory tree structure.

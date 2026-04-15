@@ -1,9 +1,10 @@
 ---
 title: "LPIC-1 101.1 — Determine and Configure Hardware Settings"
-date: 2026-04-13
+date: 2025-07-01
 description: "BIOS/UEFI, pseudo-filesystems /proc/ /sys/ /dev/, sysfs, udev, dbus, kernel modules, lspci, lsusb. LPIC-1 exam topic 101.1."
 tags: ["Linux", "LPIC-1", "Hardware", "Kernel"]
 categories: ["LPIC-1"]
+lang_pair: "/posts/ru/lpic1-101-1-hardware-settings/"
 ---
 
 > **Exam weight: 2** — LPIC-1 v5, Exam 101

@@ -1,29 +1,47 @@
 ---
-title: "Network Engineer — 13. BGP. Выбор пути и фильтрация"
-date: 2026-04-14
-description: "Настройка фильтрации BGP маршрутов для офисов Москва и Санкт-Петербург, настройка провайдеров для передачи только маршрута по умолчанию"
+title: "Network Engineer — 13. BGP Path Selection and Filtering"
+date: 2025-12-07
+description: "Configuring BGP route filtering for the Moscow and St. Petersburg offices, configuring providers to send only a default route"
 tags: ["Networking", "BGP", "Filtering", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-13-bgp-filtering/"
 ---
 
-# BGP. Выбор пути 
+# BGP Path Selection
+<p class="ru-text">BGP. Выбор пути</p>
 
 ![](/img/neteng/diplom/EVE_Topology.png)
 
-## Домашнее задание
+## Assignment
+<p class="ru-text">Домашнее задание</p>
 
-Цель: Настроить фильтрацию для офисе Москва Настроить фильтрацию для офисе С.-Петербург
+Goal: Configure BGP filtering for the Moscow office and for the St. Petersburg office.
+<p class="ru-text">Цель: Настроить фильтрацию для офиса Москва. Настроить фильтрацию для офиса С.-Петербург.</p>
 
-В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+In this lab you are expected to independently:
+<p class="ru-text">В этой самостоятельной работе мы ожидаем, что вы самостоятельно:</p>
 
-1. Настроить фильтрацию в офисе Москва так, чтобы не появилось транзитного трафика(As-path)
-2. Настроить фильтрацию в офисе С.-Петербург так, чтобы не появилось транзитного трафика(Prefix-list)
+1. Configure filtering in the Moscow office to prevent transit traffic (AS-path)
+2. Configure filtering in the St. Petersburg office to prevent transit traffic (prefix-list)
+3. Configure provider Kitorn to send only the default route to the Moscow office
+4. Configure provider Lamas to send only the default route and the St. Petersburg prefix to the Moscow office
+5. All networks in the lab must have IP connectivity
+6. Document the plan and changes
+
+<p class="ru-text">
+
+1. Настроить фильтрацию в офисе Москва так, чтобы не появилось транзитного трафика (As-path)
+2. Настроить фильтрацию в офисе С.-Петербург так, чтобы не появилось транзитного трафика (Prefix-list)
 3. Настроить провайдера Киторн так, чтобы в офис Москва отдавался только маршрут по-умолчанию
 4. Настроить провайдера Ламас так, чтобы в офис Москва отдавался только маршрут по-умолчанию и префикс офиса С.-Петербург
 5. Все сети в лабораторной работе должны иметь IP связность
 6. План работы и изменения зафиксированы в документации
 
-### Настроить фильтрацию в офисе Москва так, чтобы не появилось транзитного трафика(As-path)
+</p>
+
+### Configure filtering in the Moscow office to prevent transit traffic (AS-path)
+<p class="ru-text">Настроить фильтрацию в офисе Москва так, чтобы не появилось транзитного трафика (As-path)</p>
 
 R14
 
@@ -48,11 +66,11 @@ ip as-path access-list 1 deny .*
 
 interface Loopback0
  ip address 1.1.1.14 255.255.255.255
-//Для соседа iBGP
+! Used for iBGP peering
 
 interface Loopback14
  ip address 200.20.20.14 255.255.252.0
-//Сеть которую мы анонсируем в интернет
+! Network announced to the internet
 ```
 
 R15
@@ -75,14 +93,15 @@ ip as-path access-list 1 deny .*
 
 interface Loopback0
  ip address 1.1.1.15 255.255.255.255
- //Для соседа iBGP
+ ! Used for iBGP peering
  
 interface Loopback15
  ip address 200.20.20.15 255.255.252.0
-//Сеть которую мы анонсируем в интернет
+! Network announced to the internet
 ```
 
-**Теперь проверим провайдерские роутеры на наличие маршрутов**
+Now let's verify the provider routers for route presence:
+<p class="ru-text">Теперь проверим провайдерские роутеры на наличие маршрутов</p>
 
 R22
 
@@ -118,7 +137,7 @@ RPKI validation codes: V valid, I invalid, N Not found
  *>                   100.100.100.6                          0 520 i
 
 ------------------------------------------------------------------------------
-Как видно из вывода АС 1001 анонсирует только свои сети и не является транзитом для других
+! AS 1001 announces only its own networks and is not a transit — objective achieved.
 ```
 
 R21
@@ -156,27 +175,28 @@ RPKI validation codes: V valid, I invalid, N Not found
  *>                   111.111.111.6                          0 520 i
 
 ------------------------------------------------------------------------------
-Картина аналогичная предыдущему выводу
+! Same picture as the previous output — AS 1001 is not used as transit.
 ```
 
-### Настроить фильтрацию в офисе С.-Петербург так, чтобы не появилось транзитного трафика(Prefix-list)
+### Configure filtering in the St. Petersburg office to prevent transit traffic (prefix-list)
+<p class="ru-text">Настроить фильтрацию в офисе С.-Петербург так, чтобы не появилось транзитного трафика (Prefix-list)</p>
 
 R18
 
 ```
 interface Loopback18
  ip address 100.10.8.18 255.255.252.0
- //Сеть которую мы анонсируем в интернет
+ ! Network announced to the internet
 -------------------------------------------------
 
 ip as-path access-list 1 permit ^$
 ip as-path access-list 1 deny .*
 
-Создаем prefix-list :
+! Create prefix-list:
 ip prefix-list DEFAULT seq 15 permit 100.10.8.0/22 le 32 
 ip prefix-list DEFAULT seq 20 deny 0.0.0.0/0 le 32
 
-Прикрепляем его к route-map:
+! Attach to route-map:
 route-map FILTER permit 10
  match ip address prefix-list DEFAULT
  
@@ -210,7 +230,8 @@ router bgp 2042
 ------------------------------------------------
 ```
 
-Теперь посмотрим,что приходит у провайдера Триада (R24/R26)
+Now let's check what Triada (R24/R26) receives:
+<p class="ru-text">Теперь посмотрим, что приходит у провайдера Триада (R24/R26)</p>
 
 ```
 R24#show ip bgp
@@ -239,7 +260,7 @@ RPKI validation codes: V valid, I invalid, N Not found
  *>                   111.111.111.5                          0 301 1001 i
  *>i 210.110.35.0/30  50.0.25.1                0    100      0 i
 
-Нас лишь интересует маршрут 100.10.8.0/22 за АС 2042  
+! We only care about the 100.10.8.0/22 route from AS 2042.
 ---------------------------------------------------------------------------
 R26#show ip bgp
 BGP table version is 26, local router ID is 26.26.26.26
@@ -266,23 +287,22 @@ RPKI validation codes: V valid, I invalid, N Not found
  *>i 210.110.35.0/30  50.0.25.1                0    100      0 i
 
 -----------------------------------------------------------------------
-Нас лишь интересует маршрут 100.10.8.0/22 за АС 2042
-
-Как видно из вывода мы смогли выполнить фильтрацию с помощью Prefix-list
-Воспользоваться as-path access-list задании не запрещалось.
+! We only care about the 100.10.8.0/22 route from AS 2042.
+! Prefix-list filtering works as expected. Using as-path access-list was also acceptable.
 ```
 
-### Настроить провайдера Киторн так, чтобы в офис Москва отдавался только маршрут по-умолчанию
+### Configure Kitorn to send only the default route to the Moscow office
+<p class="ru-text">Настроить провайдера Киторн так, чтобы в офис Москва отдавался только маршрут по-умолчанию</p>
 
 R22
 
 ```
-Создаем prefix-list :
+! Create prefix-list:
 ip prefix-list ISP seq 5 permit 0.0.0.0/0
 ip prefix-list ISP seq 10 permit 100.10.8.0/22
 ip prefix-list ISP seq 20 deny 0.0.0.0/0 le 32
 
-Прикрепляем его к route-map :
+! Attach to route-map:
 route-map DEFAULT permit 10
  match ip address prefix-list ISP
 ------------------------------------------------
@@ -292,7 +312,7 @@ router bgp 101
  network 100.100.100.4 mask 255.255.255.252
  neighbor 100.100.100.1 remote-as 1001
  neighbor 100.100.100.1 default-originate
- neighbor 100.100.100.1 route-map DEFAULT out //применяем rout-map для нашего "соседа"
+ neighbor 100.100.100.1 route-map DEFAULT out
  neighbor 100.100.100.6 remote-as 520
  neighbor 110.110.110.2 remote-as 301
 
@@ -325,21 +345,18 @@ RPKI validation codes: V valid, I invalid, N Not found
  *>i 210.110.35.0/30  1.1.1.15                 0    150      0 301 520 i
 
 ---------------------------------------------------------------------------
-Маршрут по умолчанию мы смогли передать,значит задача выполнена
+! Default route was delivered successfully — objective achieved.
 ```
 
-
-
-### Настроить провайдера Ламас так, чтобы в офис Москва отдавался только маршрут по-умолчанию и префикс офиса С.-Петербург
-
-
+### Configure Lamas to send only the default route and the St. Petersburg prefix to the Moscow office
+<p class="ru-text">Настроить провайдера Ламас так, чтобы в офис Москва отдавался только маршрут по-умолчанию и префикс офиса С.-Петербург</p>
 
 R21
 
 ```
-Создаем prefix-list :
-ip prefix-list ISP seq 5 permit 0.0.0.0/0      // маршрут по-умолчанию
-ip prefix-list ISP seq 10 permit 100.10.8.0/22 //Сеть Спб
+! Create prefix-list:
+ip prefix-list ISP seq 5 permit 0.0.0.0/0       ! default route
+ip prefix-list ISP seq 10 permit 100.10.8.0/22  ! SPb network
 ip prefix-list ISP seq 15 deny 0.0.0.0/0 le 32  
 
 route-map DEFAULT permit 10
@@ -394,7 +411,8 @@ RPKI validation codes: V valid, I invalid, N Not found
 
 ```
 
-### Все сети в лабораторной работе должны иметь IP связность
+### Verify full IP connectivity
+<p class="ru-text">Все сети в лабораторной работе должны иметь IP связность</p>
 
 R14/R15
 
@@ -426,8 +444,9 @@ Sending 5, 100-byte ICMP Echos to 111.110.35.14, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 ```
 
-### План работы и изменения зафиксированы в документации
+### Documentation
+<p class="ru-text">План работы и изменения зафиксированы в документации</p>
 
-**Для доступа к прописанным конфигурациям на роутерах ,то жмём сюда :**
+**Full router configs:**
 
-https://e9exu-my.sharepoint.com/:f:/g/personal/nickelface_ermaon_com/Euh_hOXWUWRAr0awcVlpJVYBzobOZWNdcKt4VLkLif40EA?e=GGNmylЦель: 
+https://e9exu-my.sharepoint.com/:f:/g/personal/nickelface_ermaon_com/Euh_hOXWUWRAr0awcVlpJVYBzobOZWNdcKt4VLkLif40EA?e=GGNmyl

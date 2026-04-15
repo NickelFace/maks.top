@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 205.1 — Basic Networking Configuration"
-date: 2026-04-10
+date: 2025-11-17
 description: "ifconfig, route, ip addr/route, ARP, loopback interface, default gateway, and wireless tools (iw, iwconfig, iwlist). LPIC-2 exam topic 205.1."
 tags: ["Linux", "networking", "LPIC-2", "ip", "ifconfig", "ARP", "wifi"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-205-1-basic-networking-configuration/"
 ---
 
 > **Exam topic 205.1** — Basic Networking Configuration (weight: 3). Covers configuring wired and wireless network interfaces, routing tables, ARP, and the loopback interface.

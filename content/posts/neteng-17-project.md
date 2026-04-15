@@ -1,43 +1,59 @@
 ---
-title: "Network Engineer — 17. Организация сети офиса"
-date: 2026-04-14
-description: "Проектирование и настройка корпоративной сети по трёхуровневой иерархической модели Cisco с OSPF, HSRP, STP, DHCP, PAT и L2 Security"
+title: "Network Engineer — 17. Corporate Office Network"
+date: 2026-01-09
+description: "Designing and configuring a corporate network using Cisco's three-tier hierarchical model with OSPF, HSRP, STP, DHCP, PAT, and L2 Security"
 tags: ["Networking", "OSPF", "HSRP", "STP", "DHCP", "NAT", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-17-project/"
 ---
 
-# «Организация сети офиса»
+# Corporate Office Network
+<p class="ru-text">«Организация сети офиса»</p>
 
 ![](/img/neteng/17/Corporate.png)
 
-В этом файле я укажу настроенные конфигурации устройств , а темы как защита сети ,почему настраивал так или иначе буду разбивать на более мелкие файлы ,для удобства восприятия .
+This post covers the device configurations. Topics like network security and design rationale are broken out into smaller separate posts for readability.
+<p class="ru-text">В этом файле я укажу настроенные конфигурации устройств, а темы как защита сети, почему настраивал так или иначе буду разбивать на более мелкие файлы, для удобства восприятия.</p>
 
-## Разбиваем на части :
+## Sections
+<p class="ru-text">Разбиваем на части:</p>
 
-1. [Адресация сети предприятия](#1)
-2. [OSPF и проверка связности](#2)
+1. [Network addressing](#1)
+2. [OSPF and connectivity verification](#2)
 3. [STP](#3)
-4.  [DHCP и L2 Security](#4)
-5. [ISP и выход в интернет, PAT , FTP , 3 Distribution block (Server Farm) , NTP](#5)
+4. [DHCP and L2 Security](#4)
+5. [ISP and internet access, PAT, FTP, 3rd Distribution block (Server Farm), NTP](#5)
 
-### <a name="1">Адресация сети предприятия</a>
+### <a name="1">Network addressing</a>
+<p class="ru-text">Адресация сети предприятия</p>
 
-Из частного диапазона адресов ,была выбрана:
+Private address ranges **172.16.0.0/16** and **10.0.0.0/8** were chosen to avoid subnet overlap when setting up remote access for employees in the future.
+<p class="ru-text">Из частного диапазона адресов была выбрана **172.16.0.0/16** и **10.0.0.0/8**, чтобы избежать пересечения сетей, когда будем в будущем настраивать удаленную работу сотрудникам предприятия.</p>
 
-**172.16.0.0/16**  и  **10.0.0.0/8**  ,чтобы избежать пересечения сетей ,когда будем в будещем настраивать удаленную работу сотрудникам предприятия.
+The network follows Cisco's **Enterprise Campus Architecture** — a three-tier hierarchical model. The traffic split is approximately 80% internal and 20% external. Here's what each tier handles:
+<p class="ru-text">При построении будущей модели предприятия было решено строить 3х уровневую иерархическую модель предприятия, предложенную компанией Cisco: **Enterprise Campus Architecture**. Так как планируется, что 80% трафика будет задействовано внутри предприятия и 20% внешнего трафика.</p>
 
-При построении будущей модели предприятия , было решено строить 3х уровневую иерархическую модель предприятия , предложенная компанией  Cisco  : **Enterprise Campus Architecture** . 
+**Access Layer** — each device handles no more than ~5% of total enterprise traffic on average.
 
-Так как планируется, что 80% трафика будет задействованно внутри предприятия и 20% внешнего трафика .  А теперь разберем суть данной модели по уровням , начиная с нижнего.
+**Distribution Layer** — each device handles no more than ~20% of total enterprise traffic on average.
 
-**Access Layer** - подразумевает ,что на 1 устройство ляжет не более 5% от общего трафика всего предприятия в среднем.
+**Core Layer** — each device handles no more than ~80% of total enterprise traffic on average (up to 100% is acceptable).
 
-**Distribution Layer** - подразумевает ,что на 1 устройство ляжет не более 20% от общего трафика всего предприятия в среднем.
+<p class="ru-text">
 
-**Core Layer** - подразумевает ,что на 1 устройство ляжет не более 80% от общего трафика всего предприятия в среднем.(но может и под 100% и это будет тоже нормально)
+**Access Layer** — подразумевает, что на 1 устройство ляжет не более 5% от общего трафика всего предприятия в среднем.
 
-Далее ,трафик был поделен на 9 VLAN-ов 
+**Distribution Layer** — подразумевает, что на 1 устройство ляжет не более 20% от общего трафика всего предприятия в среднем.
 
+**Core Layer** — подразумевает, что на 1 устройство ляжет не более 80% от общего трафика всего предприятия в среднем (но может и под 100% и это будет тоже нормально).
+
+</p>
+
+Traffic is divided into 9 VLANs:
+<p class="ru-text">Далее трафик был поделен на 9 VLAN-ов:</p>
+
+```
 2    ENGINEER
 3    ACCOUNTING
 4    LAWYER 
@@ -46,48 +62,52 @@ categories: ["Network Engineer"]
 7    IT
 20   MANAGEMENT
 21   MANAGEMENT
+```
 
-А также 20 VLAN MANAGEMENT был добавлен ,когда разворачивал Windows Server в 3 distribution блоке.  Всю сеть предприятия можно поделить на  **3 блока**  Distribution, которые объеденены иерархически.
+VLAN 20 MANAGEMENT was also added when deploying Windows Server in the 3rd Distribution block. The entire enterprise network is divided into **3 Distribution blocks** connected hierarchically:
+<p class="ru-text">А также 20 VLAN MANAGEMENT был добавлен, когда разворачивал Windows Server в 3 distribution блоке. Всю сеть предприятия можно поделить на **3 блока** Distribution, которые объединены иерархически.</p>
 
-*Первый блок* : D-SW1 и D-SW2
+*Block 1*: D-SW1 and D-SW2
 
-*Второй блок*:  D-SW3 и D-SW4
+*Block 2*: D-SW3 and D-SW4
 
-*Третий блок* : FarmDistSW1 и FarmDistSW2
+*Block 3*: FarmDistSW1 and FarmDistSW2
 
-Всё что ниже этих устройств это L2 , всё что выше этих устройств  L3.
+Everything below these devices is L2; everything above is L3.
+<p class="ru-text">Всё что ниже этих устройств — это L2, всё что выше этих устройств — L3.</p>
 
-#### <a name="3">Создание VLAN , работа с HSRP и STP.</a>
+#### <a name="3">VLAN creation, HSRP, and STP</a>
+<p class="ru-text">Создание VLAN, работа с HSRP и STP.</p>
 
-Для первых 2х блоков и перехода в L3  использовался протокол резервирования первого перехода - **HSRP**. И первая проблема , с которой столкнулся , это STP , а точнее PVST , который строит дерево за каждый VLAN. Проблема том, что STP блокирует порты , и вследствии чего , трафик  идет через  Access коммутатор , нарушая идеалогию иерархического построения сети.
+**HSRP** is used for first-hop redundancy at the L2/L3 boundary for the first two blocks. The first challenge was **STP (PVST)**, which builds a spanning tree per VLAN. The problem: STP blocks ports, causing traffic to route through access switches and breaking the hierarchical model.
+<p class="ru-text">Для первых 2х блоков и перехода в L3 использовался протокол резервирования первого перехода — **HSRP**. И первая проблема, с которой столкнулся, это STP, а точнее PVST, который строит дерево за каждый VLAN. Проблема в том, что STP блокирует порты, и вследствие чего трафик идет через Access коммутатор, нарушая идеологию иерархического построения сети.</p>
 
-За первый блок D-SW1 и D-SW2 у нас 3 домена трафика : VLAN 2, 3, 20. (VLAN 2 и VLAN 3 для работы пользователей ,а 20 для управления устройствами.)
-
-Это озночает ,что у нас будет 3 STP дерева ,которые должны строиться согласно иерархической идеологии. Именно поэтому мы обязаны вручную прописать Root Primary , а также Root Secondary .
-
-
+Block 1 (D-SW1 and D-SW2) has 3 traffic domains: VLAN 2, 3, 20 — so 3 STP trees must align with the hierarchy. Root Primary and Root Secondary must be set manually.
+<p class="ru-text">За первый блок D-SW1 и D-SW2 у нас 3 домена трафика: VLAN 2, 3, 20. Это означает, что у нас будет 3 STP дерева, которые должны строиться согласно иерархической идеологии. Именно поэтому мы обязаны вручную прописать Root Primary, а также Root Secondary.</p>
 
 ![](/img/neteng/17/DistributionBlock1.png)
 
-Аналогисная ситуация складывается и во 2ом блоке ,где уже 5 STP деревьев нужно построить.
-
-
+Block 2 has 5 STP trees to configure.
+<p class="ru-text">Аналогичная ситуация складывается и во 2ом блоке, где уже 5 STP деревьев нужно построить.</p>
 
 ![](/img/neteng/17/DistributionBlock2.png)
 
-Укажу команды по данной настройке и для примера возьму **D-SW1**
+Example configuration using **D-SW1**:
+<p class="ru-text">Укажу команды по данной настройке и для примера возьму **D-SW1**</p>
 
 **D-SW1**
 
 ```
-Установим root за каждый Vlan:
+! Set root per VLAN:
 
 spanning-tree vlan 2,20 priority 24576
 spanning-tree vlan 3 priority 28672
 
-Ограничивать конкретными Vlan не стал ,по причине того,что обычно доступ к D-SW ограничен помещением,который закрывается на ключ.
+! Did not restrict specific VLANs on trunk ports since D-SW access is physically restricted
+! (server room locked with a key).
  
-Настройка HSRP за каждый Vlan +  ip helper-address для направния запросов на DHCP сервер, который может находиться за несколько канальных сред.
+! HSRP per VLAN + ip helper-address to forward DHCP requests to the server
+! (which may be across multiple L2 segments):
 
 interface Vlan2
  ip address 172.16.2.251 255.255.255.0
@@ -102,17 +122,20 @@ interface Vlan2
  standby 0 ip 172.16.3.1
  standby 0 preempt
  
-Также на каждом устройстве который учавствует в OSPF и работает с IP был назначен Loopback адрес:
+! Loopback assigned on every device participating in OSPF:
  
 interface Loopback0
   ip address 5.5.5.1 255.255.255.255 
 ```
 
-Аналогичная настройка присутствует на остальных L3 Switch уровня Distribution.
+Same configuration applies to the other L3 Distribution switches.
+<p class="ru-text">Аналогичная настройка присутствует на остальных L3 Switch уровня Distribution.</p>
 
-### <a name="2">OSPF и проверка связности</a>
+### <a name="2">OSPF and connectivity verification</a>
+<p class="ru-text">OSPF и проверка связности</p>
 
-Далее было прописан адрес на каждом интерфейсе Router  или Switch L3 в режиме роутера. И организован протокол динамической маршрутизации OSPF .
+IP addresses were assigned on all Router and L3 Switch interfaces, and OSPF was configured for dynamic routing.
+<p class="ru-text">Далее было прописан адрес на каждом интерфейсе Router или Switch L3 в режиме роутера. И организован протокол динамической маршрутизации OSPF.</p>
 
 **D-SW1**
 
@@ -126,7 +149,7 @@ router ospf 1
  network 172.16.3.0 0.0.0.255 area 0
  network 172.16.20.0 0.0.0.255 area 0
 
-Также для более скорой сходимости сети ,если интерфейс упадет я уменьшил dead-interval до 20
+! Reduced dead-interval to 20 for faster convergence on link failure:
 
 interface Ethernet1/2
  no switchport
@@ -140,19 +163,22 @@ interface Ethernet1/3
  ip ospf dead-interval 20
  duplex auto
  
-Я рассматривал добавление всторонней area в OSPF ,но отказался ,так как устройств в сети довольно мало .
+! Considered adding an additional OSPF area but decided against it
+! since the network has relatively few devices.
 ```
 
-На этом этапе была проведено тестирование оборудования на отказоустойчивость и на скорость сходимости в случае сбоя.
+Failover and convergence were tested at this stage.
+<p class="ru-text">На этом этапе была проведено тестирование оборудования на отказоустойчивость и на скорость сходимости в случае сбоя.</p>
 
-### <a name="4">DHCP , а также настройка L2 Security </a>
+### <a name="4">DHCP and L2 Security</a>
+<p class="ru-text">DHCP, а также настройка L2 Security</p>
 
 ![](/img/neteng/17/Corporate.png)
 
- **DHCP** 
+**DHCP**
 
 ```
-Исключим из выдачи ip адресов шлюзы по умолчанию , а также адреса интерфейсов Vlan.
+! Exclude default gateways and VLAN interface addresses from DHCP pool:
 
 ip dhcp excluded-address 172.16.2.1
 ip dhcp excluded-address 172.16.3.1
@@ -202,7 +228,8 @@ ip dhcp pool VLAN7
  dns-server 192.168.1.1 
 ```
 
-Проверим работу DHCP
+Verify DHCP:
+<p class="ru-text">Проверим работу DHCP</p>
 
 ```
 VPCS> ip dhcp
@@ -222,20 +249,22 @@ RHOST:PORT  : 127.0.0.1:30000
 MTU         : 1500
 ```
 
-Далее приступим к настройке коммутируемой среды::
+Switching security features configured:
+<p class="ru-text">Далее приступим к настройке коммутируемой среды:</p>
 
 1. **Port-security**
-2. **<del>Storm Control</del>**
-3. **DHCP SNooping** 
-4. **<del>IP Source Guard</del>**
+2. **~~Storm Control~~**
+3. **DHCP Snooping**
+4. **~~IP Source Guard~~**
 5. **Dynamic ARP Inspection**
 
-К сожалению ,мне придется отказаться от некоторых технологий по причине не поддержки в данной прошивке устройства.
+Some technologies had to be dropped due to firmware limitations.
+<p class="ru-text">К сожалению, мне придется отказаться от некоторых технологий по причине не поддержки в данной прошивке устройства.</p>
 
-#### **Port-security**
+#### Port-security
 
-Это функция коммутатора, позволяющая указать MAC-адреса хостов, которым разрешено передавать данные через порт. Основная её функция это защита от атаки на переполнение MAC коммутатора . Поэтому  sticky считаю использовать не целесообразно,так как каждый порт ограничили 2 MAC адресами.  Второй вариант это  ограничиться 10 адресами  и добавить sticky ,тогда в этом случаем можно забыть про это минимум на полгода .
-Я выбрал первый вариант ,так как его можно настроить единожды , а потом не вспоминать про sticky, так как их и не использую .
+Port-security limits which MAC addresses can send frames through a port — primarily a defense against MAC flooding attacks. Sticky learning is not used here since each port is limited to 2 MAC addresses, making manual (static) mode sufficient. If you prefer less maintenance, set 10 addresses with sticky — configure once and forget for months.
+<p class="ru-text">Это функция коммутатора, позволяющая указать MAC-адреса хостов, которым разрешено передавать данные через порт. Основная её функция — это защита от атаки на переполнение MAC коммутатора. Поэтому sticky считаю использовать нецелесообразно, так как каждый порт ограничили 2 MAC адресами. Второй вариант — ограничиться 10 адресами и добавить sticky, тогда в этом случае можно забыть про это минимум на полгода. Я выбрал первый вариант, так как его можно настроить единожды, а потом не вспоминать про sticky.</p>
 
 **AccSW1**
 
@@ -253,22 +282,23 @@ interface Ethernet0/3
  switchport port-security
 ```
 
-Данной настройкой указал максимальное количество устройств за портом и режим mac-address sticky указывает , что он самостоятельно будет учить эти адреса. Прописывается это безусловно *только на access портах* коммутаторов уровня доступа. 
+This sets the maximum number of devices per port. Configure on **access ports only** at the access layer.
+<p class="ru-text">Данной настройкой указал максимальное количество устройств за портом. Прописывается это безусловно *только на access портах* коммутаторов уровня доступа.</p>
 
-#### **<del>Storm Control</del>**
+#### ~~Storm Control~~
 
-Эта технология позволяет защититься от широковещательного шторма . Его принцип ,срезать такой трафик при его увеличении на определенный уровень загрузки порта или коммутатора. Настраивается *на всех портах* коммутатора.
+Protects against broadcast storms by rate-limiting traffic when it exceeds a threshold. Should be configured on all switch ports. Unfortunately not supported on these firmware images.
+<p class="ru-text">Эта технология позволяет защититься от широковещательного шторма. Его принцип — срезать такой трафик при его увеличении на определенный уровень загрузки порта или коммутатора. Настраивается на всех портах коммутатора. К сожалению, данная технология не поддерживается на этих образах.</p>
 
-К сожалению , данная технология не поддерживается на этих образах.
+#### DHCP Snooping
 
-#### DHCP SNooping 
-
-Это функция коммутатора, предназначенная для защиты от атак с использованием протокола DHCP.
+Protects against DHCP-based attacks by distinguishing trusted (server-facing) and untrusted (client-facing) ports.
+<p class="ru-text">Это функция коммутатора, предназначенная для защиты от атак с использованием протокола DHCP.</p>
 
 **AccSW1**
 
 ```
-Помечаем порты как доверенные , с них мы можем ожидать Offer от DHCP сервера. А остальные по умолчанию заблокированы от принятия DHCP запроса с предложением .
+! Mark uplink ports as trusted — DHCP Offers are expected only from these:
 
 interface Ethernet0/0
  ip dhcp snooping trust
@@ -276,17 +306,17 @@ interface Ethernet0/0
 interface Ethernet0/1
  ip dhcp snooping trust
  
-Задаём команду глобально и отдельно за каждый VLAN
+! Enable globally and per VLAN:
 ip dhcp snooping 
 ip dhcp snooping vlan 2
-no ip dhcp snooping information option // Убирает 82 опцию с запроса
+no ip dhcp snooping information option
+! Removes DHCP option 82 added by snooping — without this, DHCP Discover frames get
+! option 82 appended and are dropped at the Distribution layer.
 
-Проблема в том ,что после указания dhcp snooping vlan 2 (за любой vlan) , коммутатор к dhcp Discover добавляет 82 опцию и такой кадр попадает на уровень Distribution и далее дропается. Поэтому мы задаем данной командой запрет на подобное поведение.
+ip dhcp relay information trust-all
+! Marks the upstream DHCP server (outside the local segment) as trusted.
 
-ip dhcp relay information trust-all // таким образом указывается доверенный DHCP сервер, который находится вне канальной среды. 
-
-
-Ограничем количество генерируемых DHCP запросов на определенный порт:
+! Rate-limit DHCP requests on access ports:
 
 interface Ethernet0/2
  ip dhcp snooping limit rate 10
@@ -295,22 +325,22 @@ interface Ethernet0/3
  ip dhcp snooping limit rate 10
 ```
 
-#### **<del>IP Source Guard</del>**
+#### ~~IP Source Guard~~
 
- функция коммутатора, которая ограничивает IP-трафик на интерфейсах 2го уровня, фильтруя трафик на основании таблицы привязок DHCP snooping и статических соответствий. Функция используется для борьбы с IP-spoofingом.
-
-**AccSW1**
+Filters IP traffic on L2 interfaces based on the DHCP snooping binding table — defends against IP spoofing.
+<p class="ru-text">Функция коммутатора, которая ограничивает IP-трафик на интерфейсах 2го уровня, фильтруя трафик на основании таблицы привязок DHCP snooping и статических соответствий. Функция используется для борьбы с IP-spoofing.</p>
 
 ```
-AccSW1(config)#int e0/2
 AccSW1(config-if)#ip verify source port-security 
 ```
 
-Так как после ввода данной команды у меня перестаёт ходить трафик ,а troubleshooting не дал результата, то я отказался от данной технологии.
+Traffic stopped flowing after this command and troubleshooting was unsuccessful — skipped this technology.
+<p class="ru-text">Так как после ввода данной команды у меня перестаёт ходить трафик, а troubleshooting не дал результата, то я отказался от данной технологии.</p>
 
-#### **Dynamic ARP Inspection**
+#### Dynamic ARP Inspection
 
- функция коммутатора, предназначенная для защиты от атак с использованием протокола ARP.
+Protects against ARP spoofing attacks.
+<p class="ru-text">Функция коммутатора, предназначенная для защиты от атак с использованием протокола ARP.</p>
 
 **AccSW1**
 
@@ -330,20 +360,20 @@ interface Ethernet0/3
  ip arp inspection limit rate 2
 ```
 
-###  <a name="5">FTP , AAA server (Tacacs+) , 3 Distribution block , ISP, PAT</a>
+### <a name="5">FTP, AAA server (Tacacs+), 3rd Distribution block, ISP, PAT</a>
+<p class="ru-text">FTP, AAA server (Tacacs+), 3 Distribution block, ISP, PAT</p>
 
 ![](/img/neteng/17/DistributionBlock3.png)
 
-
-
-Выход в интернет реализован через 3  Distribution block , который выходит к  Edge роутерам.  Edge роутеры в свою очередь реализовывают механизм PAT , для преобразования серых адресов в один публичный. Для резервирования ,к провайдеру подключаемся по схеме dual homed.
+Internet access is provided through the 3rd Distribution block, which connects to Edge routers. The Edge routers implement PAT to translate private addresses into a single public IP. A dual-homed topology is used for provider redundancy.
+<p class="ru-text">Выход в интернет реализован через 3 Distribution block, который выходит к Edge роутерам. Edge роутеры в свою очередь реализуют механизм PAT для преобразования серых адресов в один публичный. Для резервирования к провайдеру подключаемся по схеме dual homed.</p>
 
 #### PAT
 
 **E-R1**
 
 ```
-Организация PAT:
+! PAT configuration:
 
 interface Ethernet0/0
  ip address 10.0.12.2 255.255.255.252
@@ -364,9 +394,11 @@ access-list 1 permit 172.16.0.0 0.0.15.255
 access-list 1 permit 172.20.20.0 0.0.0.255
 ```
 
-Провайдер в свою очередь тоже использует NAT(PAT) , но нас это не интересует.
+The provider also uses NAT/PAT on their side — not our concern.
+<p class="ru-text">Провайдер в свою очередь тоже использует NAT(PAT), но нас это не интересует.</p>
 
-Далее поднимаем Windows Server 2012  и на нём FTP Server.  Данную машину резервируем 2-мя  сетевыми адаптерами типа мост.  И на её основе реализуем отказоустойчивый переход HSRP. 
+Windows Server 2012 with FTP Server is deployed in the 3rd block, connected with 2 bridged network adapters for HSRP-based failover.
+<p class="ru-text">Далее поднимаем Windows Server 2012 и на нём FTP Server. Данную машину резервируем 2-мя сетевыми адаптерами типа мост. И на её основе реализуем отказоустойчивый переход HSRP.</p>
 
 ```
 interface Vlan20
@@ -380,7 +412,8 @@ interface Ethernet1/3
  switchport mode access
 ```
 
-Также на каждом блоке организован **Etherchannel** :
+**EtherChannel** is configured on each distribution block:
+<p class="ru-text">Также на каждом блоке организован **Etherchannel**:</p>
 
 #### LACP
 
@@ -422,11 +455,12 @@ Group  Port-channel  Protocol    Ports
 1      Po1(SU)         LACP      Et1/0(P)    Et1/1(P)
 ```
 
-#### **FTP**
+#### FTP
 
-Пропишем на всех устройствах доступ к FTP серверу 
+Configure FTP access on all devices for automated config archiving:
+<p class="ru-text">Пропишем на всех устройствах доступ к FTP серверу</p>
 
-**login**: admin 
+**login**: admin  
 **password**: cisco
 
 ```
@@ -436,9 +470,10 @@ archive
  time-period 360
 ```
 
-#### **NTP**
+#### NTP
 
-На Edge роутерах поднимем NTP-server
+On Edge routers (NTP servers):
+<p class="ru-text">На Edge роутерах поднимем NTP-server</p>
 
 ```
 ntp source Loopback0
@@ -448,7 +483,8 @@ ntp server ntp3.stratum2.ru
 ntp server 1.ru.pool.ntp.org prefer
 ```
 
-На клиентах
+On clients:
+<p class="ru-text">На клиентах</p>
 
 ```
 ntp update-calendar

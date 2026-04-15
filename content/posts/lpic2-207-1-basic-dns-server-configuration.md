@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 207.1 — Basic DNS Server Configuration"
-date: 2026-04-10
+date: 2026-01-08
 description: "BIND components, named.conf structure (options/logging/zone), caching-only server, rndc, named-checkconf/named-checkzone, dig and host. Alternative DNS servers: dnsmasq, djbdns, PowerDNS. LPIC-2 exam topic 207.1."
 tags: ["Linux", "LPIC-2", "DNS", "BIND", "named", "dig"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-207-1-basic-dns-server-configuration/"
 ---
 
 > **Exam topic 207.1** — Basic DNS Server Configuration (weight: 3). Covers configuring BIND as a caching-only DNS server, `named.conf` structure, zone types, `rndc` management, and DNS diagnostic utilities.

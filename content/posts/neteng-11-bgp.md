@@ -1,31 +1,49 @@
 ---
-title: "Network Engineer — 11. BGP. Основы"
-date: 2026-04-14
-description: "Настройка eBGP между автономными системами для обеспечения доступности между офисами Москва и Санкт-Петербург"
+title: "Network Engineer — 11. BGP Basics"
+date: 2025-11-20
+description: "Configuring eBGP between autonomous systems to enable connectivity between the Moscow and St. Petersburg offices"
 tags: ["Networking", "BGP", "eBGP", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
+code_toggle: true
+lang_pair: "/posts/ru/neteng-11-bgp/"
 ---
 
-# BGP. Основы
+# BGP Basics
+<p class="ru-text">BGP. Основы</p>
 
-## Цель: Настроить BGP между автономными системами Организовать доступность между офисами Москва и С.-Петербург
+## Goal: Configure BGP between autonomous systems and ensure connectivity between the Moscow and St. Petersburg offices
+<p class="ru-text">Цель: Настроить BGP между автономными системами. Организовать доступность между офисами Москва и С.-Петербург.</p>
 
-В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+In this lab you are expected to independently:
+<p class="ru-text">В этой самостоятельной работе мы ожидаем, что вы самостоятельно:</p>
 
-1.  eBGP между офисом Москва и двумя провайдерами - Киторн и Ламас
+1. Configure eBGP between the Moscow office and two providers — Kitorn and Lamas
+2. Configure eBGP between providers Kitorn and Lamas
+3. Configure eBGP between Lamas and Triada
+4. Configure eBGP between the St. Petersburg office and provider Triada
+5. Enable IP connectivity between the Moscow and St. Petersburg offices
+6. Document the plan and changes
+
+<p class="ru-text">
+
+1. eBGP между офисом Москва и двумя провайдерами — Киторн и Ламас
 2. Настроите eBGP между провайдерами Киторн и Ламас
 3. Настроите eBGP между Ламас и Триада
 4. eBGP между офисом С.-Петербург и провайдером Триада
 5. Организуете IP доступность между офисами Москва и С.-Петербург
 6. План работы и изменения зафиксированы в документации
 
+</p>
+
 ![EVE_Topology](/img/neteng/diplom/EVE_Topology.png)
 
-Решил добавить линк между  R14 и R15 ,чтобы  проще соединить их в area 0  ,во вторых ,чтобы обеспечить отказоустойчивость при прохождении пакета через интернет.
+I decided to add a link between R14 and R15 — first to simplify connecting them in area 0, and second to provide redundancy for traffic traversing the internet.
+<p class="ru-text">Решил добавить линк между R14 и R15, чтобы проще соединить их в area 0, во-вторых, чтобы обеспечить отказоустойчивость при прохождении пакета через интернет.</p>
 
-### eBGP между офисом Москва и двумя провайдерами - Киторн и Ламас
+### eBGP between the Moscow office and providers Kitorn and Lamas
+<p class="ru-text">eBGP между офисом Москва и двумя провайдерами — Киторн и Ламас</p>
 
-R14 
+R14
 
 ```
 router bgp 1001
@@ -50,9 +68,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 100.100.100.2   4          101     381     378       84    0    0 05:33:33       10
 ```
 
-
-
-R15 
+R15
 
 ```
 router bgp 1001
@@ -78,8 +94,6 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 10.10.10.25     4         1001     385     380       50    0    0 05:35:41        9
 111.111.111.2   4          301     378     373       50    0    0 05:34:10       10
 ```
-
-
 
 R21
 
@@ -113,8 +127,6 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 111.111.111.6   4          520     361     364       30    0    0 05:20:03        6
 ```
 
-
-
 R22
 
 ```
@@ -146,9 +158,8 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 110.110.110.2   4          301     382     386       41    0    0 05:36:40        8
 ```
 
-
-
-### Настроите eBGP между Ламас (заодно и Киторн) и Триада
+### Configure eBGP between Lamas (and Kitorn) and Triada
+<p class="ru-text">Настроите eBGP между Ламас (заодно и Киторн) и Триада</p>
 
 R23
 
@@ -184,8 +195,6 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 100.100.100.5   4          101     371     366       32    0    0 05:25:02        5
 
 ```
-
-
 
 R24
 
@@ -225,7 +234,8 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 
 ```
 
-### eBGP между офисом С.-Петербург и провайдером Триада
+### eBGP between the St. Petersburg office and provider Triada
+<p class="ru-text">eBGP между офисом С.-Петербург и провайдером Триада</p>
 
 R26
 
@@ -295,9 +305,8 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 
 ```
 
-
-
-### Организуете IP доступность между офисами Москва и С.-Петербург
+### Verify IP connectivity between the Moscow and St. Petersburg offices
+<p class="ru-text">Организуете IP доступность между офисами Москва и С.-Петербург</p>
 
 R15 ping R18
 
@@ -336,11 +345,8 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/2 ms
 
 ```
 
-
-
-### Сети провайдера 
-
-
+### Provider networks
+<p class="ru-text">Сети провайдера</p>
 
 | Triada           | LAMAS            | Kitorn           |
 | ---------------- | ---------------- | ---------------- |
@@ -350,6 +356,6 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/2 ms
 | 111.110.35.12/30 |                  |                  |
 | 210.110.35.0/30  |                  |                  |
 
-**Для доступа к прописанным конфигурациям на роутерах ,то жмём сюда :**
+**Full router configs are available here:**
 
 https://e9exu-my.sharepoint.com/:f:/g/personal/nickelface_ermaon_com/Euh_hOXWUWRAr0awcVlpJVYBzobOZWNdcKt4VLkLif40EA?e=GGNmyl

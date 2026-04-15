@@ -1,9 +1,10 @@
 ---
 title: "LPIC-2 205.3 — Troubleshooting Network Issues"
-date: 2026-04-10
+date: 2025-12-04
 description: "Systematic network diagnostics, TCP Wrappers (hosts.allow/hosts.deny), interface and routing management, netstat/ss, ping/traceroute/mtr, DNS tools (dig/host), config files, dmesg, NetworkManager. LPIC-2 exam topic 205.3."
 tags: ["Linux", "networking", "LPIC-2", "troubleshooting", "TCP Wrappers", "NetworkManager"]
 categories: ["LPIC-2"]
+lang_pair: "/posts/ru/lpic2-205-3-troubleshooting-network/"
 ---
 
 > **Exam topic 205.3** — Troubleshooting Network Issues (weight: 4). Covers systematically diagnosing and resolving network problems, TCP Wrappers access control, interface/routing configuration, and key diagnostic tools.
