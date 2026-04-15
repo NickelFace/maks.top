@@ -133,5 +133,17 @@ function closeMobMenu(){
 </script>
 
 {{ block "scripts" . }}{{ end }}
+
+<script>
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('a.pg-dot, a.pg-btn');
+  if (!link || !link.href) return;
+  e.preventDefault();
+  const go = function() { window.location.href = link.href; };
+  if (window.scrollY < 80) { go(); return; }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(go, 750);
+});
+</script>
 </body>
 </html>
