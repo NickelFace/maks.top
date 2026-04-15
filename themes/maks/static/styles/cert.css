@@ -33,6 +33,57 @@
   line-height: 1.6;
 }
 
+/* ── resource tiles (ns-map-btn pattern) ── */
+.cert-resources {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.cert-resource-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  min-width: 90px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.cert-resource-card:hover {
+  border-color: var(--cert-color);
+  background: color-mix(in srgb, var(--cert-color) 10%, transparent);
+}
+
+.cert-resource-icon { font-size: 20px; line-height: 1; }
+
+.cert-resource-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cert-resource-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cert-resource-desc {
+  font-size: 9.5px;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+.cert-resource-arrow { display: none; }
+
 .cert-stats {
   display: flex;
   gap: 10px;
@@ -185,6 +236,8 @@
     flex-wrap: wrap;
     gap: 6px;
   }
+
+  .cert-resources { grid-template-columns: 1fr; }
 
   .cert-topic-head {
     gap: 8px;

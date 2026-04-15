@@ -1,259 +1,81 @@
-/* ─── POST HEADER ────────────────────────────────────────── */
-.post-h1 {
-  font-family:'Unbounded',sans-serif;
-  font-size:clamp(20px,3.5vw,34px); font-weight:900; line-height:1.15;
-  margin-bottom:12px;
-  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 55%,var(--accent3) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-.post-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:28px }
-.p-date { font-size:11px; color:var(--text3) }
-.ptag {
-  display:inline-flex; align-items:center;
-  background:var(--tag-bg); border:1px solid var(--border);
-  color:var(--text2); font-size:10px; padding:2px 8px; border-radius:4px;
-  text-decoration:none; transition:all .15s;
-}
-.ptag:hover { border-color:var(--accent); color:var(--accent); background:var(--glow) }
-
-/* ─── BREADCRUMB ─────────────────────────────────────────── */
-.breadcrumb { font-size:11px; color:var(--text3); margin-bottom:24px }
-.breadcrumb a { color:var(--text3); text-decoration:none }
-.breadcrumb a:hover { color:var(--accent) }
-.breadcrumb span { margin:0 6px }
-
-/* ─── INTRO CARD ─────────────────────────────────────────── */
-.intro-card {
-  background:var(--bg2); border:1px solid var(--border);
-  border-left:3px solid var(--accent); border-radius:var(--radius,10px);
-  padding:18px 22px; margin-bottom:28px;
-  font-size:13px; color:var(--text2); line-height:1.85;
-}
-.intro-card strong { color:var(--accent) }
-
-/* ─── SECTION DIVIDER ────────────────────────────────────── */
-.sec {
-  font-family:'Unbounded',sans-serif; font-size:9px; letter-spacing:3px;
-  text-transform:uppercase; color:var(--text3);
-  margin:32px 0 14px; display:flex; align-items:center; gap:12px;
-}
-.sec::after { content:''; flex:1; height:1px; background:var(--border) }
-
-/* ─── NS MAP ─────────────────────────────────────────────── */
-.ns-map {
-  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius,10px);
-  padding:14px 16px; margin-bottom:28px;
-}
-.ns-map-title {
-  font-size:9px; letter-spacing:2px; text-transform:uppercase;
-  color:var(--text3); margin-bottom:12px;
-}
-.ns-map-grid {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
-}
-.ns-map-btn {
-  background:var(--bg3); border:1px solid var(--border);
-  border-radius:7px; padding:8px 6px; cursor:pointer;
-  transition:all .15s; text-align:center;
-  display:flex; flex-direction:column; align-items:center; gap:3px;
-}
-.ns-map-btn:hover,
-.ns-map-btn.sel {
-  border-color:var(--c); background:color-mix(in srgb,var(--c) 10%,transparent);
-}
-.ns-map-icon { font-size:16px }
-.ns-map-name { font-size:9px; color:var(--text2); font-weight:600 }
-.ns-map-flag { font-size:8px; color:var(--text3) }
-
-/* ─── NS CARDS ───────────────────────────────────────────── */
-.ns-grid { display:grid; gap:10px; margin-bottom:40px }
-.ns-card {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:var(--radius,10px); overflow:hidden; cursor:pointer;
-  transition:border-color .2s,transform .15s;
-  animation:fadeUp .35s ease both;
-}
-.ns-card:hover { transform:translateY(-1px) }
-.ns-card.active { border-color:var(--c) }
-
-.ns-header {
-  display:flex; align-items:center; gap:14px;
-  padding:14px 18px; user-select:none;
-}
-.ns-icon {
-  width:36px; height:36px; border-radius:8px; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center; font-size:16px;
-  background:color-mix(in srgb,var(--c) 15%,transparent);
-  border:1px solid color-mix(in srgb,var(--c) 30%,transparent);
-}
-.ns-meta { flex:1; min-width:0 }
-.ns-name { font-family:'Unbounded',sans-serif; font-size:11px; font-weight:700; color:var(--c); margin-bottom:2px }
-.ns-flag { font-size:10px; color:var(--text3) }
-.ns-summary { font-size:11px; color:var(--text3); max-width:420px; line-height:1.45 }
-.ns-toggle { color:var(--text3); font-size:18px; transition:transform .25s; flex-shrink:0 }
-.ns-card.active .ns-toggle { transform:rotate(90deg) }
-
-.ns-body {
-  display:none; padding:0 18px 18px;
-  border-top:1px solid var(--border);
-}
-.ns-card.active .ns-body { display:block }
-.ns-desc { font-size:12.5px; color:var(--text2); line-height:1.85; padding:14px 0 12px }
-
-/* ─── TABS ───────────────────────────────────────────────── */
-.tabs { display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap }
-.tab-btn {
-  background:var(--bg3); border:1px solid var(--border);
-  color:var(--text3); font-family:'JetBrains Mono',monospace;
-  font-size:11px; padding:5px 12px; border-radius:4px;
-  cursor:pointer; transition:all .15s;
-}
-.tab-btn.active,
-.tab-btn:hover {
-  background:color-mix(in srgb,var(--c) 12%,transparent);
-  border-color:var(--c); color:var(--c);
-}
-.tab-content { display:none }
-.tab-content.active { display:block }
-
-/* ─── CODE BLOCK ─────────────────────────────────────────── */
-.code-block {
-  background:var(--code-bg); border:1px solid var(--border);
-  border-radius:6px; overflow:hidden; margin:8px 0;
-}
-.code-label {
-  font-size:10px; letter-spacing:2px; text-transform:uppercase;
-  color:var(--text3); padding:7px 14px 6px;
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; justify-content:space-between;
-}
-.copy-btn {
-  background:none; border:1px solid var(--border); color:var(--text3);
-  font-size:10px; font-family:inherit; padding:2px 8px;
-  border-radius:3px; cursor:pointer; transition:color .15s,border-color .15s;
-}
-.copy-btn:hover { color:var(--accent); border-color:var(--accent) }
-.copy-btn.copied { color:var(--accent3); border-color:var(--accent3) }
-
-.ns-pre { padding:14px; font-size:12px; line-height:1.7; overflow-x:auto; color:#a5f3fc }
-.ns-pre .cm  { color:#4b5563 }
-.ns-pre .out { color:#6b7280; font-style:italic }
-
-/* ─── FILTER ROW ─────────────────────────────────────────── */
-.filter-row { display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:12px }
-.filter-label { font-size:10px; color:var(--text3); letter-spacing:1px }
-.f-btn {
-  background:var(--bg3); border:1px solid var(--border);
-  color:var(--text3); font-family:'JetBrains Mono',monospace;
-  font-size:10px; padding:4px 10px; border-radius:4px;
-  cursor:pointer; transition:all .15s;
-}
-.f-btn:hover { background:color-mix(in srgb,var(--c,var(--accent)) 10%,transparent); border-color:var(--c,var(--accent)); color:var(--c,var(--accent)) }
-.f-btn.on    { background:color-mix(in srgb,var(--c,var(--accent)) 15%,transparent); border-color:var(--c,var(--accent)); color:var(--c,var(--accent)) }
-
-/* ─── CHEATSHEET TABLE ───────────────────────────────────── */
-.ref-panel {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:var(--radius,10px); overflow:hidden; margin-bottom:32px;
-}
-.ref-head {
-  padding:10px 16px; border-bottom:1px solid var(--border);
-  font-family:'Unbounded',sans-serif; font-size:9px;
-  letter-spacing:2px; text-transform:uppercase; color:var(--text3);
-}
-.ref-body { overflow-x:auto }
-.ct { width:100%; border-collapse:collapse; font-size:12px }
-.ct th {
-  text-align:left; padding:8px 14px;
-  border-bottom:1px solid var(--border);
-  color:var(--text3); font-size:10px; letter-spacing:1px; text-transform:uppercase;
-}
-.ct td {
-  padding:7px 14px;
-  border-bottom:1px solid color-mix(in srgb,var(--border) 40%,transparent);
-  vertical-align:middle; line-height:1.6;
-}
-.ct tr:last-child td { border-bottom:none }
-.ct tr:hover td { background:var(--bg3) }
-.ct .mono { color:var(--accent) }
-.ct .desc { color:var(--text2) }
-
-.stag {
-  display:inline-block; font-size:9px; padding:2px 7px;
-  border-radius:3px; font-weight:600; white-space:nowrap;
-}
-/* one stag per namespace type — colors match NS_DATA card colors */
-.stag-general { background:rgba(148,163,184,.12); color:#94a3b8; border:1px solid rgba(148,163,184,.25) }
-.stag-uts     { background:rgba(0,212,255,.10);   color:#67e8f9; border:1px solid rgba(0,212,255,.25) }    /* #00d4ff */
-.stag-pid     { background:rgba(124,58,237,.12);  color:#a78bfa; border:1px solid rgba(124,58,237,.3) }    /* #7c3aed */
-.stag-net     { background:rgba(16,185,129,.10);  color:#6ee7b7; border:1px solid rgba(16,185,129,.25) }   /* #10b981 */
-.stag-mnt     { background:rgba(245,158,11,.10);  color:#fcd34d; border:1px solid rgba(245,158,11,.25) }   /* #f59e0b */
-.stag-ipc     { background:rgba(244,114,182,.10); color:#f9a8d4; border:1px solid rgba(244,114,182,.25) }  /* #f472b6 */
-.stag-user    { background:rgba(129,140,248,.10); color:#a5b4fc; border:1px solid rgba(129,140,248,.25) }  /* #818cf8 */
-.stag-cgroup  { background:rgba(52,211,153,.10);  color:#6ee7b7; border:1px solid rgba(52,211,153,.25) }   /* #34d399 */
-.stag-time    { background:rgba(251,146,60,.10);  color:#fdba74; border:1px solid rgba(251,146,60,.25) }   /* #fb923c */
-
-/* ─── TOC + PROGRESS (aside) ─────────────────────────────── */
-.toc-box {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:var(--radius,10px); overflow:hidden; margin-bottom:14px;
-}
-.toc-head {
-  padding:10px 14px; border-bottom:1px solid var(--border);
-  font-family:'Unbounded',sans-serif; font-size:9px;
-  letter-spacing:2px; text-transform:uppercase; color:var(--text3);
-}
-.toc-body { padding:10px 6px }
-.toc-item {
-  display:flex; align-items:center; gap:8px;
-  padding:6px 8px; border-radius:5px; cursor:pointer;
-  font-size:11px; color:var(--text3); transition:all .15s;
-}
-.toc-item:hover,
-.toc-item.hl { color:var(--text2); background:var(--bg3) }
-.toc-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0 }
-
-.progress-box {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:var(--radius,10px); padding:12px 14px;
-}
-.progress-lbl {
-  font-size:9px; letter-spacing:2px; text-transform:uppercase;
-  color:var(--text3); margin-bottom:10px;
-}
-.progress-bar { height:4px; background:var(--bg3); border-radius:2px; overflow:hidden; margin-bottom:8px }
-.progress-fill {
-  height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2));
-  border-radius:2px; transition:width .4s ease; width:0%;
-}
-.progress-txt { display:flex; justify-content:space-between; font-size:10px; color:var(--text3) }
-.progress-txt span:last-child { color:var(--accent) }
+/* ═══════════════════════════════════════
+   NS.CSS — linux-namespaces page only
+   Shared components (ns-card, tabs, ref-panel,
+   ns-map, stag, intro-card, code-block…)
+   live in prose.css.
+═══════════════════════════════════════ */
 
 /* ─── PAGE LAYOUT ────────────────────────────────────────── */
 .ns-page-wrap {
-  position:relative; z-index:1;
-  max-width:1100px; margin:0 auto; padding:32px 24px 80px;
-  display:grid; grid-template-columns:1fr 240px; gap:28px; align-items:start;
+  position: relative; z-index: 1;
+  max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px;
+  display: grid; grid-template-columns: 1fr 240px; gap: 28px; align-items: start;
 }
-.ns-page-main  { min-width:0 }
-.ns-page-aside { position:sticky; top:72px }
+.ns-page-main  { min-width: 0; }
+.ns-page-aside { position: sticky; top: 72px; }
 
-/* ─── BACK LINK ──────────────────────────────────────────── */
-.back-link { margin-top:40px; padding-top:20px; border-top:1px solid var(--border) }
-.back-link a { font-size:12px; color:var(--accent); text-decoration:none }
-.back-link a:hover { text-decoration:underline }
+/* ─── TOC ────────────────────────────────────────────────── */
+.toc-box {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius, 10px); overflow: hidden; margin-bottom: 14px;
+}
+.toc-head {
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  font-family: 'Unbounded', sans-serif; font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--text3);
+}
+.toc-body { padding: 10px 6px; }
+.toc-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 5px; cursor: pointer;
+  font-size: 11px; color: var(--text3); transition: all .15s;
+}
+.toc-item:hover,
+.toc-item.hl { color: var(--text2); background: var(--bg3); }
+.toc-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
-/* ─── ANIMATIONS ─────────────────────────────────────────── */
-@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+/* ─── READING PROGRESS ───────────────────────────────────── */
+.progress-box {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius, 10px); padding: 12px 14px;
+}
+.progress-lbl {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 10px;
+}
+.progress-bar { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; margin-bottom: 8px; }
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px; transition: width .4s ease; width: 0%;
+}
+.progress-txt { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); }
+.progress-txt span:last-child { color: var(--accent); }
+
+/* ─── FILTER ROW ─────────────────────────────────────────── */
+.filter-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.filter-label { font-size: 10px; color: var(--text3); letter-spacing: 1px; }
+.f-btn {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text3); font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 4px 10px; border-radius: 4px;
+  cursor: pointer; transition: all .15s;
+}
+.f-btn:hover { background: color-mix(in srgb, var(--c, var(--accent)) 10%, transparent); border-color: var(--c, var(--accent)); color: var(--c, var(--accent)); }
+.f-btn.on    { background: color-mix(in srgb, var(--c, var(--accent)) 15%, transparent); border-color: var(--c, var(--accent)); color: var(--c, var(--accent)); }
+
+/* ─── CODE OUTPUT COLORS ─────────────────────────────────── */
+.ns-pre { padding: 14px; font-size: 12px; line-height: 1.7; overflow-x: auto; color: #a5f3fc; }
+.ns-pre .cm  { color: #4b5563; }
+.ns-pre .out { color: #6b7280; font-style: italic; }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
-@media (max-width:860px) {
-  .ns-page-wrap { grid-template-columns:1fr; padding:20px 16px 100px }
-  .ns-page-aside { display:none }
-  .ns-summary { display:none }
+@media (max-width: 860px) {
+  .ns-page-wrap { grid-template-columns: 1fr; padding: 20px 16px 100px; }
+  .ns-page-aside { display: none; }
+  .ns-summary { display: none; }
 }
-@media (max-width:480px) {
-  .ns-header { gap:10px; padding:12px 14px }
-  .ns-name { font-size:10px }
-  .ns-pre { font-size:11px }
+@media (max-width: 480px) {
+  .ns-header { gap: 10px; padding: 12px 14px; }
+  .ns-name { font-size: 10px; }
+  .ns-pre { font-size: 11px; }
 }
