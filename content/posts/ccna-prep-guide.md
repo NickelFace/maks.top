@@ -4,6 +4,8 @@ date: 2026-03-01
 description: "Complete resource list for CCNA 200-301 exam preparation: books, video courses, practice labs, exam tips and registration."
 tags: ["Networking", "CCNA", "Cisco", "Certification"]
 categories: ["CCNA"]
+page_lang: "en"
+lang_pair: "/posts/ru/ccna-prep-guide/"
 ---
 
 > Exam code: **200-301** · Current version: **v1.1** (2024) · Duration: **120 min** · Passing score: ~825/1000
