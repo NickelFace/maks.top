@@ -210,17 +210,44 @@ Flags:  D - down        P - bundled in port-channel
 
         A - formed by Auto LAG
 
-
 Number of channel-groups in use: 1
 Number of aggregators:           1
 
 Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+----------------------------------------------
-1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
+1      Po1(SU)           PAgP   Et1/2(P) Et1/3(P)
 </code></pre>
 </details>
 
 **Flag meanings:** `SU` — channel is a Layer2 trunk and in use. `P` — port is bundled in the port-channel.
+
+Verify STP — S3's root port should now be Port-channel1:
+
+```
+show spanning-tree
+```
+
+<details>
+<summary>S3 output</summary>
+<pre><code>
+VLAN0001
+  Spanning tree enabled protocol ieee
+  Root ID    Priority    32769
+             Address     aabb.cc00.1000
+             Cost        56
+             Port        65 (Port-channel1)
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
+             Address     aabb.cc00.3000
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Po1                 Root FWD 56        128.65   P2p
+</code></pre>
+</details>
 
 ---
 
@@ -303,10 +330,13 @@ show etherchannel summary
 <details>
 <summary>S1</summary>
 <pre><code>
+Number of channel-groups in use: 2
+Number of aggregators:           2
+
 Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+----------------------------------------------
-1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
-2      Po2(SU)           LACP   Fa0/1(P) Fa0/2(P)
+1      Po1(SU)           PAgP   Et1/2(P) Et1/3(P)
+2      Po2(SU)           LACP   Et0/1(P) Et0/2(P)
 </code></pre>
 </details>
 <details>
@@ -323,7 +353,7 @@ Group  Port-channel  Protocol    Ports
 <pre><code>
 Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+----------------------------------------------
-1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
+1      Po1(SU)           PAgP   Et1/2(P) Et1/3(P)
 3      Po3(SU)           LACP   Fa0/1(P) Fa0/2(P)
 </code></pre>
 </details>
