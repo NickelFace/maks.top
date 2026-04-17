@@ -15,13 +15,6 @@
         {{ end }}
       </div>
     </div>
-    {{ if .Params.code_toggle }}
-    <div class="lang-toggle">
-      <span class="lang-toggle-label">Lang:</span>
-      <button id="langEN" class="active" onclick="setLang('en')">EN</button>
-      <button id="langRU" onclick="setLang('ru')">RU</button>
-    </div>
-    {{ end }}
     <div class="prose" id="articleBody">
       {{ .Content }}
     </div>
@@ -124,20 +117,6 @@ function cpPre(btn){
     setTimeout(()=>{btn.textContent='copy';btn.classList.remove('copied')},1500);
   });
 }
-
-/* ── Language switcher ── */
-function setLang(lang){
-  if(lang==='ru'){
-    document.body.classList.add('show-ru');
-    document.getElementById('langEN').classList.remove('active');
-    document.getElementById('langRU').classList.add('active');
-  } else {
-    document.body.classList.remove('show-ru');
-    document.getElementById('langEN').classList.add('active');
-    document.getElementById('langRU').classList.remove('active');
-  }
-}
-
 
 /* ── Image lightbox with zoom & pan ── */
 (function(){
@@ -248,6 +227,7 @@ function setLang(lang){
 document.querySelectorAll('.code-block').forEach(block=>{
   const lbl=block.querySelector('.code-label');
   if(!lbl)return;
+  if(block.closest('.no-toggle'))return;
   /* Create collapsible body wrapper */
   const body=document.createElement('div');
   body.className='code-body collapsed';
