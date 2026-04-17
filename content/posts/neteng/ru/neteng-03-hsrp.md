@@ -149,35 +149,37 @@ ip 192.168.1.33 192.168.1.3 24
 
 ---
 
-### OSPF для доступа в интернет
+### RIP для доступа в интернет
 
 <details>
 <summary>R1</summary>
 <pre><code>
-router ospf 1
- router-id 1.1.1.1
- network 10.1.1.0 0.0.0.3 area 0
- network 192.168.1.0 0.0.0.255 area 0
+router rip
+ version 2
+ network 10.0.0.0
+ network 192.168.1.0
+ no auto-summary
 </code></pre>
 </details>
 <details>
 <summary>R2</summary>
 <pre><code>
-router ospf 1
- router-id 2.2.2.2
- network 10.1.1.0 0.0.0.3 area 0
- network 10.2.2.0 0.0.0.3 area 0
+router rip
+ version 2
+ network 10.0.0.0
  default-information originate
+ no auto-summary
 ip route 0.0.0.0 0.0.0.0 Loopback0
 </code></pre>
 </details>
 <details>
 <summary>R3</summary>
 <pre><code>
-router ospf 1
- router-id 3.3.3.3
- network 10.2.2.0 0.0.0.3 area 0
- network 192.168.1.0 0.0.0.255 area 0
+router rip
+ version 2
+ network 10.0.0.0
+ network 192.168.1.0
+ no auto-summary
 </code></pre>
 </details>
 
@@ -217,7 +219,26 @@ interface Ethernet0/0
 </code></pre>
 </details>
 
-Измените шлюз по умолчанию на PC-A, PC-C, S1, S3 на виртуальный IP: **192.168.1.254**
+Смените шлюз по умолчанию на ПК и коммутаторах на виртуальный IP **192.168.1.254**:
+
+<details>
+<summary>PC-A</summary>
+<pre><code>
+ip 192.168.1.31 192.168.1.254 24
+</code></pre>
+</details>
+<details>
+<summary>PC-C</summary>
+<pre><code>
+ip 192.168.1.33 192.168.1.254 24
+</code></pre>
+</details>
+<details>
+<summary>S1, S3 (шлюз управления)</summary>
+<pre><code>
+ip default-gateway 192.168.1.254
+</code></pre>
+</details>
 
 ---
 
