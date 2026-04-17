@@ -1,238 +1,195 @@
 ---
-title: "Network Engineer — 06. EIGRP for IPv4 (Advanced Features)"
+title: "Network Engineer — 06. EIGRP for IPv4 (Advanced)"
 date: 2025-10-09
-description: "Lab: advanced EIGRP features — auto-summary, redistribute static, hello/hold timers, bandwidth percent"
-tags: ["Networking", "EIGRP", "Routing", "Cisco", "OTUS"]
+description: "Lab: advanced EIGRP features — auto-summary, redistribute static default route, hello/hold timers, bandwidth percent."
+tags: ["Networking", "EIGRP", "Routing", "Cisco"]
 categories: ["Network Engineer"]
 code_toggle: true
+page_lang: "en"
 lang_pair: "/posts/neteng/ru/neteng-06-eigrp-v2/"
 ---
 
-# Lab: Advanced EIGRP for IPv4 Configuration
+## Lab: Advanced EIGRP for IPv4 Configuration
 
-<p class="ru-text">Лабораторная работа. Настройка расширенных функций EIGRP для IPv4</p>
+### Topology
 
-## Topology
+![EIGRP advanced topology](/img/neteng/06/2.png)
 
-​             ![image](/img/neteng/06/2/1.png)                  
+### Addressing table
 
-### Addressing Table
+| Device | Interface     | IP Address    | Subnet Mask     | Default Gateway |
+| ------ | ------------- | ------------- | --------------- | --------------- |
+| R1     | G0/0          | 192.168.1.1   | 255.255.255.0   | —               |
+|        | S0/0/0 (DCE)  | 192.168.12.1  | 255.255.255.252 | —               |
+|        | S0/0/1        | 192.168.13.1  | 255.255.255.252 | —               |
+|        | Lo1           | 192.168.11.1  | 255.255.255.252 | —               |
+|        | Lo5           | 192.168.11.5  | 255.255.255.252 | —               |
+|        | Lo9           | 192.168.11.9  | 255.255.255.252 | —               |
+|        | Lo13          | 192.168.11.13 | 255.255.255.252 | —               |
+| R2     | G0/0          | 192.168.2.1   | 255.255.255.0   | —               |
+|        | S0/0/0        | 192.168.12.2  | 255.255.255.252 | —               |
+|        | S0/0/1 (DCE)  | 192.168.23.1  | 255.255.255.252 | —               |
+|        | Lo1           | 192.168.22.1  | 255.255.255.252 | —               |
+| R3     | G0/0          | 192.168.3.1   | 255.255.255.0   | —               |
+|        | S0/0/0 (DCE)  | 192.168.13.2  | 255.255.255.252 | —               |
+|        | S0/0/1        | 192.168.23.2  | 255.255.255.252 | —               |
+|        | Lo1           | 192.168.33.1  | 255.255.255.252 | —               |
+|        | Lo5           | 192.168.33.5  | 255.255.255.252 | —               |
+|        | Lo9           | 192.168.33.9  | 255.255.255.252 | —               |
+|        | Lo13          | 192.168.33.13 | 255.255.255.252 | —               |
+| PC-A   | NIC           | 192.168.1.3   | 255.255.255.0   | 192.168.1.1     |
+| PC-B   | NIC           | 192.168.2.3   | 255.255.255.0   | 192.168.2.1     |
+| PC-C   | NIC           | 192.168.3.3   | 255.255.255.0   | 192.168.3.1     |
 
-| Device | Interface | IP Address | Subnet Mask | Default Gateway |
-| ------------ | ------------- | --------------- | ---------------- | ----------------- |
-| R1 | G0/0 | 192.168.1.1 | 255.255.255.0 | — |
-| S0/0/0 (DCE) | 192.168.12.1 | 255.255.255.252 | — | |
-| S0/0/1 | 192.168.13.1 | 255.255.255.252 | — | |
-| Lo1 | 192.168.11.1 | 255.255.255.252 | N/A | |
-| Lo5 | 192.168.11.5 | 255.255.255.252 | — | |
-| Lo9 | 192.168.11.9 | 255.255.255.252 | — | |
-| Lo13 | 192.168.11.13 | 255.255.255.252 | — | |
-| R2 | G0/0 | 192.168.2.1 | 255.255.255.0 | — |
-| S0/0/0 | 192.168.12.2 | 255.255.255.252 | — | |
-| S0/0/1 (DCE) | 192.168.23.1 | 255.255.255.252 | — | |
-| Lo1 | 192.168.22.1 | 255.255.255.252 | — | |
-| R3 | G0/0 | 192.168.3.1 | 255.255.255.0 | — |
-| S0/0/0 (DCE) | 192.168.13.2 | 255.255.255.252 | — | |
-| S0/0/1 | 192.168.23.2 | 255.255.255.252 | — | |
-| Lo1 | 192.168.33.1 | 255.255.255.252 | N/A | |
-| Lo5 | 192.168.33.5 | 255.255.255.252 | — | |
-| Lo9 | 192.168.33.9 | 255.255.255.252 | — | |
-| Lo13 | 192.168.33.13 | 255.255.255.252 | — | |
-| PC-A | NIC | 192.168.1.3 | 255.255.255.0 | 192.168.1.1 |
-| PC-B | NIC | 192.168.2.3 | 255.255.255.0 | 192.168.2.1 |
-| PC-C | NIC | 192.168.3.3 | 255.255.255.0 | 192.168.3.1 |
+### Goals
 
-## Objectives
+- **Part 1.** Build the network and configure basic device settings
+- **Part 2.** Configure EIGRP and verify connectivity
+- **Part 3.** Configure EIGRP for automatic summarization
+- **Part 4.** Configure and redistribute a default static route
+- **Part 5.** Fine-tune EIGRP: bandwidth percent, hello/hold timers
 
-<p class="ru-text">Задачи</p>
+---
 
-**Part 1. Build the Network and Configure Basic Device Settings**
+### Part 1 — Basic device setup
 
-**Part 2. Configure EIGRP and Verify Connectivity**
+Note: do **not** configure loopback interfaces yet.
 
-**Part 3. Configure EIGRP for Automatic Summarization**
-
-**Part 4. Configure and Redistribute a Default Static Route**
-
-**Part 5. Fine-tune EIGRP**
-
-- Configure bandwidth utilization for EIGRP.
-- Configure hello interval and hold-time timers.
-
-<p class="ru-text">Часть 1. Создание сети и настройка основных параметров устройства<br>Часть 2. Настройка EIGRP и проверка подключения<br>Часть 3. Настройка EIGRP для автоматического объединения<br>Часть 4. Настройка и распространение статического маршрута по умолчанию<br>Часть 5. Выполнение точной настройки EIGRP</p>
-
-## Build the Network and Configure Basic Settings
-
-<p class="ru-text">Создание сети и настройка основных параметров устройства</p>
-
-R1
-
-```
-Enable
+<details>
+<summary>R1</summary>
+<pre><code>
+enable
 configure terminal
 hostname R1
-
-interface serial 0/0
-ip address 192.168.12.1 255.255.255.252
-no shutdown
-interface serial 1/0
-ip address 192.168.13.1 255.255.255.252
-no shutdown
-interface gi2/0
-ip address 192.168.1.1 255.255.255.0
-no shutdown
-
-line console 0
-exec-timeout 0 0
-exit
+interface Serial0/0
+ ip address 192.168.12.1 255.255.255.252
+ no shutdown
+interface Serial1/0
+ ip address 192.168.13.1 255.255.255.252
+ no shutdown
+interface GigabitEthernet2/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
 no ip domain-lookup
 enable secret class
 line vty 0 15
-logging synchronous
-password cisco
-login
-exit
-
+ logging synchronous
+ password cisco
+ login
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+banner motd "This is a secure system. Authorized Access Only!"
 do copy run start
-[Enter]
-```
-
-R2
-
-```
-Enable
+</code></pre>
+</details>
+<details>
+<summary>R2</summary>
+<pre><code>
+enable
 configure terminal
 hostname R2
-
-interface serial 0/0
-ip address 192.168.12.2 255.255.255.252
-no shutdown
-interface serial 1/0
-ip address 192.168.23.1 255.255.255.252
-no shutdown
-interface gi2/0
-ip address 192.168.2.1 255.255.255.0
-no shutdown
-
-line console 0
-exec-timeout 0 0
-exit
+interface Serial0/0
+ ip address 192.168.12.2 255.255.255.252
+ no shutdown
+interface Serial1/0
+ ip address 192.168.23.1 255.255.255.252
+ no shutdown
+interface GigabitEthernet2/0
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
 no ip domain-lookup
 enable secret class
 line vty 0 15
-logging synchronous
-password cisco
-login
-exit
-
+ logging synchronous
+ password cisco
+ login
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+banner motd "This is a secure system. Authorized Access Only!"
 do copy run start
-[Enter]
-```
-
-R3
-
-```
-Enable
+</code></pre>
+</details>
+<details>
+<summary>R3</summary>
+<pre><code>
+enable
 configure terminal
 hostname R3
-
-interface serial 0/0
-ip address 192.168.13.2 255.255.255.252
-no shutdown
-interface serial 1/0
-ip address 192.168.23.2 255.255.255.252
-no shutdown
-interface gi2/0
-ip address 192.168.3.1 255.255.255.0
-no shutdown
-
-line console 0
-exec-timeout 0 0
-exit
+interface Serial0/0
+ ip address 192.168.13.2 255.255.255.252
+ no shutdown
+interface Serial1/0
+ ip address 192.168.23.2 255.255.255.252
+ no shutdown
+interface GigabitEthernet2/0
+ ip address 192.168.3.1 255.255.255.0
+ no shutdown
 no ip domain-lookup
 enable secret class
 line vty 0 15
-logging synchronous
-password cisco
-login
-exit
-
+ logging synchronous
+ password cisco
+ login
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+banner motd "This is a secure system. Authorized Access Only!"
 do copy run start
-[Enter]
-```
+</code></pre>
+</details>
 
-## Configure EIGRP and Verify Connectivity
+---
 
-<p class="ru-text">Настройка EIGRP и проверка подключения</p>
+### Part 2 — Configure EIGRP and verify connectivity
 
-Configure EIGRP AS 1 on R1 for all directly connected networks:
+Configure EIGRP AS 1, passive LAN interface, and set bandwidth on serial links. Note: `bandwidth` affects EIGRP metric calculation only, not actual link speed.
 
-<p class="ru-text">На маршрутизаторе R1 настройте маршрутизацию EIGRP с номером AS 1 для всех сетей с прямым подключением.</p>
-
-```
+<details>
+<summary>R1 — EIGRP AS 1, S0/0/0 = 1024 Kbps, S0/0/1 = 64 Kbps</summary>
+<pre><code>
 router eigrp 1
-network 192.168.12.1 0.0.0.3
-network 192.168.13.1 0.0.0.3
-network 192.168.1.1 0.0.0.255
-```
-
-Disable EIGRP hello packets on R1 LAN interface:
-<p class="ru-text">Для интерфейса локальной сети маршрутизатора R1 отключите передачу пакетов приветствия EIGRP.</p>
-
-```
-passive-interface gigabitEthernet 2/0
-```
-
-Set bandwidth on R1: S0/0/0 = 1024 Kbps, S0/0/1 = 64 Kbps. Note: `bandwidth` affects EIGRP metric calculation only, not actual link speed.
-
-<p class="ru-text">На маршрутизаторе R1 настройте пропускную способность: S0/0/0 = 1024 Кбит/с, S0/0/1 = 64 Кбит/с. Примечание: команда bandwidth влияет только на вычисление метрики EIGRP.</p>
-
-R1
-
-```
-interface serial 0/0 
-bandwidth 1024
-interface serial 1/0
-bandwidth 64
-```
-
-Configure R2 (EIGRP AS 1, passive LAN, S0/0/0 bandwidth 1024 Kbps):
-
-<p class="ru-text">На маршрутизаторе R2 настройте EIGRP с AS 1, отключите hello на LAN, задайте пропускную способность S0/0/0 = 1024.</p>
-
-R2
-
-```
+ network 192.168.12.0 0.0.0.3
+ network 192.168.13.0 0.0.0.3
+ network 192.168.1.0 0.0.0.255
+ passive-interface GigabitEthernet2/0
+interface Serial0/0
+ bandwidth 1024
+interface Serial1/0
+ bandwidth 64
+</code></pre>
+</details>
+<details>
+<summary>R2 — EIGRP AS 1, S0/0/0 = 1024 Kbps</summary>
+<pre><code>
 router eigrp 1
-network 192.168.2.1 0.0.0.255
-network 192.168.12.2 0.0.0.3
-network 192.168.23.1 0.0.0.3
-passive-interface gigabitEthernet 2/0
-interface serial 0/0
-bandwidth 1024
-```
-
-Configure R3 (EIGRP AS 1, passive LAN, S0/0/0 bandwidth 64 Kbps):
-
-<p class="ru-text">На маршрутизаторе R3 настройте EIGRP с AS 1, отключите hello на LAN, задайте пропускную способность S0/0/0 = 64.</p>
-
-```
+ network 192.168.2.0 0.0.0.255
+ network 192.168.12.0 0.0.0.3
+ network 192.168.23.0 0.0.0.3
+ passive-interface GigabitEthernet2/0
+interface Serial0/0
+ bandwidth 1024
+</code></pre>
+</details>
+<details>
+<summary>R3 — EIGRP AS 1, S0/0/0 = 64 Kbps</summary>
+<pre><code>
 router eigrp 1
-network 192.168.3.1 0.0.0.255
-network 192.168.13.2 0.0.0.3
-network 192.168.23.2 0.0.0.3
-passive-interface gigabitEthernet 2/0
-interface serial 0/0
-bandwidth 64
-```
+ network 192.168.3.0 0.0.0.255
+ network 192.168.13.0 0.0.0.3
+ network 192.168.23.0 0.0.0.3
+ passive-interface GigabitEthernet2/0
+interface Serial0/0
+ bandwidth 64
+</code></pre>
+</details>
 
-### Verify Connectivity
+Verify end-to-end connectivity — all PCs should ping each other:
 
-<p class="ru-text">Проверьте связь</p>
-
-From PC-A:
-
-```
+<details>
+<summary>PC-A → PC-C ping</summary>
+<pre><code>
 C:\>ping 192.168.3.3
 
 Pinging 192.168.3.3 with 32 bytes of data:
@@ -246,86 +203,77 @@ Ping statistics for 192.168.3.3:
     Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
     Minimum = 2ms, Maximum = 2ms, Average = 2ms
-```
+</code></pre>
+</details>
 
-## Configure EIGRP for Automatic Summarization
+---
 
-<p class="ru-text">Настройка EIGRP для автоматического объединения</p>
+### Part 3 — Auto-summarization
 
-### Check Auto-Summary Default
+Check auto-summary default state with `show ip protocols` on R1:
 
-<p class="ru-text">Настройте EIGRP для автоматического объединения.</p>
+<details>
+<summary>R1 — show ip protocols (auto-summary enabled)</summary>
+<pre><code>
+R1#show ip protocols
 
-Run `show ip protocols` on R1. How is auto-summary configured by default?
-<p class="ru-text">Введите команду show ip protocols на R1. Как по умолчанию настроено автоматическое объединение в EIGRP?</p>
-
-```
-R1#show ip protocols 
-
-Routing Protocol is "eigrp  1 " 
-  Outgoing update filter list for all interfaces is not set 
-  Incoming update filter list for all interfaces is not set 
-  Default networks flagged in outgoing updates  
-  Default networks accepted from incoming updates 
+Routing Protocol is "eigrp 1"
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Default networks flagged in outgoing updates
+  Default networks accepted from incoming updates
   EIGRP metric weight K1=1, K2=0, K3=1, K4=0, K5=0
   EIGRP maximum hopcount 100
   EIGRP maximum metric variance 1
 Redistributing: eigrp 1
-  Automatic network summarization is in effect  
-  Automatic address summarization: 
+  Automatic network summarization is in effect
+  Automatic address summarization:
     192.168.12.0/24 for GigabitEthernet2/0, Serial1/0
       Summarizing with metric 3011840
     192.168.13.0/24 for GigabitEthernet2/0, Serial0/0
       Summarizing with metric 40512000
   Maximum path: 4
-  Routing for Networks:  
+  Routing for Networks:
      192.168.12.0/30
      192.168.13.0/30
      192.168.1.0
-  Passive Interface(s): 
+  Passive Interface(s):
     GigabitEthernet2/0
-  Routing Information Sources:  
-    Gateway         Distance      Last Update 
-    192.168.12.2    90            4397620    
-    192.168.13.2    90            5983078    
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    192.168.12.2    90            4397620
+    192.168.13.2    90            5983078
   Distance: internal 90 external 170
-```
+</code></pre>
+</details>
 
-Auto-summary is **enabled** by default.
-<p class="ru-text">Автоматическое объединение в EIGRP включено по умолчанию.</p>
+Auto-summary is **enabled** by default. Now add loopback interfaces on R1 and advertise them:
 
-### Configure Loopback Addresses on R1
+<details>
+<summary>R1 — loopback addresses and EIGRP network statements</summary>
+<pre><code>
+interface Loopback1
+ ip address 192.168.11.1 255.255.255.252
+interface Loopback5
+ ip address 192.168.11.5 255.255.255.252
+interface Loopback9
+ ip address 192.168.11.9 255.255.255.252
+interface Loopback13
+ ip address 192.168.11.13 255.255.255.252
 
-<p class="ru-text">Настройте loopback-адреса на R1.</p>
-
-```
-interface loopback1
-ip address 192.168.11.1 255.255.255.252
-interface loopback 5
-ip address 192.168.11.5 255.255.255.252
-interface loopback 9
-ip address 192.168.11.9 252.255.255.252
-interface loopback 13
-ip address 192.168.11.13 255.255.255.252
-```
-
-### Add Network Statements for EIGRP on R1
-
-<p class="ru-text">Добавьте соответствующие инструкции network для процесса EIGRP на маршрутизаторе R1.</p>
-
-```
 router eigrp 1
-network 192.168.11.1 0.0.0.3
-network 192.168.11.5 0.0.0.3
-network 192.168.11.9 0.0.0.3
-network 192.168.11.13 0.0.0.3
-```
+ network 192.168.11.1 0.0.0.3
+ network 192.168.11.5 0.0.0.3
+ network 192.168.11.9 0.0.0.3
+ network 192.168.11.13 0.0.0.3
+</code></pre>
+</details>
 
-### How are loopback networks represented on R2?
+With auto-summary active, R2 sees all four loopbacks summarized into a single classful /24:
 
-<p class="ru-text">На маршрутизаторе R2 выполните команду show ip route eigrp. Как сети loopback представлены в результатах этой команды?</p>
-
-```
+<details>
+<summary>R2 — show ip route eigrp (auto-summary active)</summary>
+<pre><code>
 R2(config-if)#do sh ip route eigrp
 D    192.168.1.0/24 [90/3014400] via 192.168.12.1, 00:39:04, Serial0/0
 D    192.168.3.0/24 [90/2172416] via 192.168.23.2, 00:12:37, Serial1/0
@@ -336,29 +284,21 @@ D    192.168.13.0/24 [90/41024000] via 192.168.12.1, 00:14:19, Serial0/0
                      [90/41024000] via 192.168.23.2, 00:12:37, Serial1/0
      192.168.23.0/24 is variably subnetted, 2 subnets, 2 masks
 D       192.168.23.0/24 is a summary, 00:12:40, Null0
-```
+</code></pre>
+</details>
 
-Auto-summary aggregated the loopbacks into 192.168.11.0/24.
-<p class="ru-text">Сработала автосуммаризация сетей на 192.168.11.0/24</p>
+Disable auto-summary on R1 — the four /30 loopbacks now appear individually:
 
-### Disable auto-summary on R1 with `no auto-summary`
-
-<p class="ru-text">На маршрутизаторе R1 выполните команду no auto-summary в рамках процесса EIGRP.</p>
-
-*Note: auto-summary is enabled by default — assumed typo in the lab guide.*
-<p class="ru-text">Так как автосуммаризация включена по умолчанию, то предположу, что тут была опечатка.</p>
-
-```
-R1(config-router)#no auto-summary 
-R1(config-router)#
-%DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 192.168.12.2 (Serial0/0) resync: summary configured
-%DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 192.168.13.2 (Serial1/0) resync: summary configured
-```
-
-Routing table on R2 after disabling auto-summary on R1:
-<p class="ru-text">Как изменилась таблица маршрутизации на R2?</p>
-
-```
+<details>
+<summary>R1 — no auto-summary</summary>
+<pre><code>
+router eigrp 1
+ no auto-summary
+</code></pre>
+</details>
+<details>
+<summary>R2 — show ip route eigrp (after no auto-summary on R1)</summary>
+<pre><code>
 R2(config)#do show ip route eigrp
 D    192.168.1.0/24 [90/3014400] via 192.168.12.1, 00:00:29, Serial0/0
 D    192.168.3.0/24 [90/2172416] via 192.168.23.2, 00:38:45, Serial1/0
@@ -373,155 +313,174 @@ D       192.168.13.0/24 [90/41024000] via 192.168.23.2, 00:38:45, Serial1/0
 D       192.168.13.0/30 [90/41024000] via 192.168.12.1, 00:00:29, Serial0/0
      192.168.23.0/24 is variably subnetted, 2 subnets, 2 masks
 D       192.168.23.0/24 is a summary, 00:38:48, Null0
-```
+</code></pre>
+</details>
 
-Add loopback interfaces and EIGRP network statements on R3, then disable auto-summary:
-<p class="ru-text">Повторите подшаги б–д, добавив интерфейсы обратной петли, сети процесса EIGRP и автоматическое объединение на маршрутизаторе R3.</p>
+Repeat the same on R3 — add loopback interfaces, advertise them, disable auto-summary:
 
-```
-interface loopback 1
-ip address 192.168.33.1 255.255.255.252
-interface loopback 5 
-ip address 192.168.33.5 255.255.255.252
-interface loopback 9
-ip address 192.168.33.9 255.255.255.252
-interface loopback 13
-ip address 192.168.33.13 255.255.255.252
+<details>
+<summary>R3 — loopbacks + EIGRP + no auto-summary</summary>
+<pre><code>
+interface Loopback1
+ ip address 192.168.33.1 255.255.255.252
+interface Loopback5
+ ip address 192.168.33.5 255.255.255.252
+interface Loopback9
+ ip address 192.168.33.9 255.255.255.252
+interface Loopback13
+ ip address 192.168.33.13 255.255.255.252
 
 router eigrp 1
-network 192.168.33.1 0.0.0.3
-network 192.168.33.5 0.0.0.3
-network 192.168.33.9 0.0.0.3
-network 192.168.33.13 0.0.0.3
-```
+ network 192.168.33.1 0.0.0.3
+ network 192.168.33.5 0.0.0.3
+ network 192.168.33.9 0.0.0.3
+ network 192.168.33.13 0.0.0.3
+ no auto-summary
+</code></pre>
+</details>
 
-## Configure and Redistribute a Default Static Route
+---
 
-<p class="ru-text">Настройка и распространение статического маршрута по умолчанию</p>
+### Part 4 — Redistribute a default static route
 
-Configure a loopback on R2 and redistribute a default static route via EIGRP:
-<p class="ru-text">В части 4 необходимо настроить статический маршрут по умолчанию на R2 и распространить его на все остальные маршрутизаторы.</p>
-
-```
-interface loopback1
-ip address 192.168.22.1 255.255.255.252
-```
+Configure a loopback on R2 simulating the internet uplink, create a default static route, and redistribute it into EIGRP:
 
 ```
-R2(config)# ip route 0.0.0.0 0.0.0.0 Lo1
+interface Loopback1
+ ip address 192.168.22.1 255.255.255.252
+
+ip route 0.0.0.0 0.0.0.0 Loopback1
+
+router eigrp 1
+ redistribute static
 ```
 
-```
-R2(config)# router eigrp 1
-R2(config-router)# redistribute static
-```
+Verify that redistribution is active with `show ip protocols` on R2:
 
-Verify with `show ip protocols` on R2:
-<p class="ru-text">Используйте команду show ip protocols на маршрутизаторе R2, чтобы проверить, распространился ли этот статический маршрут.</p>
-
-```
+<details>
+<summary>R2 — show ip protocols (redistributing static)</summary>
+<pre><code>
 R2#show ip protocols
 
-Routing Protocol is "eigrp  1 " 
-  Outgoing update filter list for all interfaces is not set 
-  Incoming update filter list for all interfaces is not set 
-  Default networks flagged in outgoing updates  
-  Default networks accepted from incoming updates 
-  EIGRP metric weight K1=1, K2=0, K3=1, K4=0, K5=0
-  EIGRP maximum hopcount 100
-  EIGRP maximum metric variance 1
-Redistributing: eigrp 1, static 
-  ...
-```
+Routing Protocol is "eigrp 1"
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Default networks flagged in outgoing updates
+  Default networks accepted from incoming updates
+  Redistributing: eigrp 1, static
+  EIGRP-IPv4 Protocol for AS(1)
+    Metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+    Router-ID: 192.168.23.1
+  Maximum path: 4
+  Routing for Networks:
+    192.168.2.0
+    192.168.12.0/30
+    192.168.23.0/30
+  Passive Interface(s):
+    GigabitEthernet2/0
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    192.168.12.1          90      00:13:20
+    192.168.23.2          90      00:13:20
+  Distance: internal 90 external 170
+</code></pre>
+</details>
 
-Check default route on R1 with `show ip route eigrp | include 0.0.0.0`:
-<p class="ru-text">На маршрутизаторе R1 выполните команду show ip route eigrp| include 0.0.0.0, чтобы просмотреть инструкции, относящиеся к маршруту по умолчанию.</p>
+On R1 verify the redistributed default route — it appears as EIGRP external (EX) with AD = 170:
 
-Note: the `include` pipe doesn't work in Packet Tracer, but without it:
-<p class="ru-text">Команда не работает в Packet Tracer, но без include 0.0.0.0 всё работает.</p>
-
-```
+<details>
+<summary>R1 — show ip route eigrp (default route visible)</summary>
+<pre><code>
 R1(config-router)#do show ip route eigrp
 D    192.168.2.0/24 [90/3014400] via 192.168.12.2, 00:18:18, Serial0/0
 D    192.168.3.0/24 [90/3526400] via 192.168.12.2, 00:13:13, Serial0/0
      ...
 D*EX 0.0.0.0/0 [170/4291840] via 192.168.12.2, 00:02:08, Serial0/0
-```
+</code></pre>
+</details>
 
-The default route shows as EIGRP external (EX), with AD = 170.
-<p class="ru-text">Указан как EIGRP полученный извне, а административная дистанция (AD) распространяемого маршрута равна 170.</p>
+---
 
-## Fine-Tune EIGRP
+### Part 5 — Fine-tune EIGRP
 
-<p class="ru-text">Подгонка EIGRP</p>
-
-### Configure EIGRP Bandwidth Percent
-
-<p class="ru-text">Настройте параметры использования пропускной способности для EIGRP.</p>
-
-Allow EIGRP to use 75% of bandwidth on R1–R2 link:
-<p class="ru-text">Настройте последовательный канал между R1 и R2, чтобы разрешить трафику EIGRP использовать только 75% пропускной способности канала.</p>
+**Bandwidth percent** — limit EIGRP traffic to 75% of bandwidth on R1–R2 link, 40% on R1–R3:
 
 ```
-R1(config)# interface s0/0
+R1(config)# interface Serial0/0
 R1(config-if)# ip bandwidth-percent eigrp 1 75
+R1(config)# interface Serial1/0
+R1(config-if)# ip bandwidth-percent eigrp 1 40
 
-R2(config)# interface s0/0
+R2(config)# interface Serial0/0
 R2(config-if)# ip bandwidth-percent eigrp 1 75
+
+R3(config)# interface Serial0/0
+R3(config-if)# ip bandwidth-percent eigrp 1 40
 ```
 
-Note: this command is not implemented in Packet Tracer.
-<p class="ru-text">В Packet Tracer опять же не реализована эта команда.</p>
+**Hello/hold timers** — check current defaults with `show ip eigrp interfaces detail`:
 
-```
-R1(config-router)#interface s0/0
-R1(config-if)#ip bandwidth-percent eigrp 1 75
-                 ^
-% Invalid input detected at '^' marker.
-```
-
-### Configure Hello and Hold-Time Timers
-
-<p class="ru-text">Настройте интервал отправки пакетов приветствия (hello) и таймер удержания для EIGRP.</p>
-
-Check current values with `show ip eigrp interfaces detail` (not available in PT):
-<p class="ru-text">На маршрутизаторе R2 используйте команду show ip eigrp interfaces detail. К сожалению, эта команда тоже не реализована в PacketTracer.</p>
-
-```
+<details>
+<summary>R2 — show ip eigrp interfaces detail</summary>
+<pre><code>
+R2# show ip eigrp interfaces detail
 EIGRP-IPv4 Interfaces for AS(1)
-...
-Hello-interval is 5, Hold-time is 15
-...
-Interface BW percentage is 75
-```
+                              Xmit Queue   PeerQ        Mean   Pacing Time   Multicast    Pending
+Interface              Peers  Un/Reliable  Un/Reliable  SRTT   Un/Reliable   Flow Timer   Routes
+Se0/0/0                  1        0/0       0/0           1       0/15          50           0
+  Hello-interval is 5, Hold-time is 15
+  Split-horizon is enabled
+  Interface BW percentage is 75
+Se0/0/1                  1        0/0       0/0           1       0/16          50           0
+  Hello-interval is 5, Hold-time is 15
+  Split-horizon is enabled
+</code></pre>
+</details>
 
-Set hello-interval = 60s and hold-time = 180s on R1 serial interfaces:
-<p class="ru-text">Для интерфейсов S0/0 и S1/0 маршрутизатора R1 настройте интервал приветствия = 60 сек, таймер удержания = 180 сек.</p>
+Default: hello = **5 s**, hold-time = **15 s**. Set hello = 60 s, hold-time = 180 s on all serial interfaces (hold-time must always be ≥ hello-interval):
 
-```
-R1(config)# interface s0/0
-R1(config-if)# ip hello-interval eigrp 1 60
-R1(config-if)# ip hold-time eigrp 1 180
-R1(config)# interface s1/0
-R1(config-if)# ip hello-interval eigrp 1 60
-R1(config-if)# ip hold-time eigrp 1 180
-```
+<details>
+<summary>R1</summary>
+<pre><code>
+interface Serial0/0
+ ip hello-interval eigrp 1 60
+ ip hold-time eigrp 1 180
+interface Serial1/0
+ ip hello-interval eigrp 1 60
+ ip hold-time eigrp 1 180
+</code></pre>
+</details>
+<details>
+<summary>R2</summary>
+<pre><code>
+interface Serial0/0
+ ip hello-interval eigrp 1 60
+ ip hold-time eigrp 1 180
+interface Serial1/0
+ ip hello-interval eigrp 1 60
+ ip hold-time eigrp 1 180
+</code></pre>
+</details>
+<details>
+<summary>R3</summary>
+<pre><code>
+interface Serial0/0
+ ip hello-interval eigrp 1 60
+ ip hold-time eigrp 1 180
+interface Serial1/0
+ ip hello-interval eigrp 1 60
+ ip hold-time eigrp 1 180
+</code></pre>
+</details>
 
-Could not apply hold-time on R2/R3 — not supported in Packet Tracer.
-<p class="ru-text">Повторить не удалось, по причине того, что в PT не реализовано изменение hold-time интервала.</p>
+---
 
-## Review Questions
+### Review
 
-<p class="ru-text">Вопросы для повторения</p>
+**Benefits of route summarization:** reduces routing table size and LSU flooding scope, less memory and CPU consumed on routers further from the summarized area. Best practice recommends disabling auto-summary and summarizing manually.
 
-1. What are the benefits of route summarization?
-<p class="ru-text">В чем заключаются преимущества объединения маршрутов?</p>
+**Why hold-time ≥ hello-interval:** hello packets probe neighbor liveness; the neighbor is declared dead when hold-time expires without receiving a hello. If hold-time < hello-interval, neighbors would constantly flap before the next hello arrives.
 
-Reduces the routing table size. (Best practice recommends disabling it in most cases.)
-<p class="ru-text">Уменьшение таблицы маршрутизации. (Best practices говорит, что нужно отключать его.)</p>
+---
 
-2. Why must the hold-time be set equal to or greater than the hello interval in EIGRP?
-<p class="ru-text">Почему при настройке таймеров EIGRP необходимо настраивать значение времени удержания равным или больше интервала приветствия?</p>
-
-Routers won't form a neighbor relationship otherwise. Hello packets check if a neighbor is alive; after hold-time expires the router considers the neighbor dead.
-<p class="ru-text">Роутеры не подружатся. Хелло интервалы проверяют, жив ли роутер. После истечения времени удержания роутер будет считать его нерабочим.</p>
+*Network Engineer Course | Lab 06 (Advanced)*
