@@ -249,31 +249,96 @@ show standby brief
 ```
 
 <details>
-<summary>R1</summary>
+<summary>R1 — Active</summary>
 <pre><code>
+R1(config-if)#do show standby brief
+                     P indicates configured to preempt.
+                     |
 Interface   Grp  Pri P State   Active          Standby         Virtual IP
-Et0/0       1    150 P Active  local           unknown         192.168.1.254
+Gig6/0      1    150 P Active  local           192.168.1.3     192.168.1.254
 </code></pre>
 </details>
 <details>
-<summary>R3</summary>
+<summary>R3 — Standby</summary>
 <pre><code>
+R3(config-if)#do sh stan bri
+                     P indicates configured to preempt.
+                     |
 Interface   Grp  Pri P State   Active          Standby         Virtual IP
-Et0/0       1    100   Standby 192.168.1.1     local           192.168.1.254
+Gig9/0      1    100   Standby 192.168.1.1     local           192.168.1.254
 </code></pre>
 </details>
 
-Тест отказоустойчивости — непрерывный ping в интернет с отключением R1:
+Детальное состояние:
 
 <details>
-<summary>Непрерывный ping с PC-A</summary>
+<summary>R1 show standby</summary>
 <pre><code>
-PC-A> ping 209.165.200.225 -t
-84 bytes icmp_seq=1  time=12 ms
-...
-209.165.200.225 icmp_seq=9 timeout   ← R1 отключён
-209.165.200.225 icmp_seq=10 timeout
-84 bytes icmp_seq=11 time=11 ms      ← R3 перехватил управление
+R1(config)#do sh stand
+GigabitEthernet6/0 - Group 1 (version 2)
+  State is Active
+    12 state changes, last state change 02:02:36
+  Virtual IP address is 192.168.1.254
+  Active virtual MAC address is 0000.0C9F.F001
+    Local virtual MAC address is 0000.0C9F.F001 (v2 default)
+  Hello time 3 sec, hold time 10 sec
+    Next hello sent in 0.774 secs
+  Preemption enabled
+  Active router is local
+  Standby router is 192.168.1.3, priority 100 (expires in 8 sec)
+  Priority 150 (configured 150)
+  Group name is hsrp-Gig6/0-1 (default)
+</code></pre>
+</details>
+<details>
+<summary>R3 show standby</summary>
+<pre><code>
+R3#show standby
+GigabitEthernet9/0 - Group 1 (version 2)
+  State is Standby
+    12 state changes, last state change 02:02:48
+  Virtual IP address is 192.168.1.254
+  Active virtual MAC address is 0000.0C9F.F001
+    Local virtual MAC address is 0000.0C9F.F001 (v2 default)
+  Hello time 3 sec, hold time 10 sec
+    Next hello sent in 1.657 secs
+  Preemption disabled
+  Active router is 192.168.1.1, priority 150 (expires in 9 sec)
+    MAC address is 0000.0C9F.F001
+  Standby router is local
+  Priority 100 (default 100)
+  Group name is hsrp-Gig9/0-1 (default)
+</code></pre>
+</details>
+
+Тест отказоустойчивости — отправьте ping на `209.165.200.225` и отключите аплинк R1. R3 перехватит управление после истечения hold time:
+
+<details>
+<summary>PC-A ping при переключении</summary>
+<pre><code>
+C:\>ping 209.165.200.225
+
+Pinging 209.165.200.225 with 32 bytes of data:
+Reply from 209.165.200.225: bytes=32 time=2ms TTL=254
+Request timed out.
+Reply from 209.165.200.225: bytes=32 time=2ms TTL=254
+Reply from 209.165.200.225: bytes=32 time<1ms TTL=254
+
+Ping statistics for 209.165.200.225:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss)
+</code></pre>
+</details>
+
+После отключения R1 — R3 становится активным:
+
+<details>
+<summary>R3 — после отключения R1</summary>
+<pre><code>
+R3(config-if)#do sh stan bri
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State   Active          Standby         Virtual IP
+Gig9/0      1    100 P Active  local           192.168.1.1     192.168.1.254
 </code></pre>
 </details>
 
@@ -281,7 +346,7 @@ PC-A> ping 209.165.200.225 -t
 
 ### Изменение приоритетов HSRP
 
-Повысьте приоритет R3 до 200 и сделайте его активным:
+Повысьте приоритет R3 до 200 и включите preempt:
 
 ```
 R3(config)# interface Ethernet0/0
@@ -290,10 +355,26 @@ R3(config-if)# standby 1 preempt
 ```
 
 <details>
-<summary>R3 после изменения</summary>
+<summary>R3 после изменения приоритета</summary>
 <pre><code>
+R3#show standby brief
+                     P indicates configured to preempt.
+                     |
 Interface   Grp  Pri P State   Active          Standby         Virtual IP
-Et0/0       1    200 P Active  local           unknown         192.168.1.254
+Gig9/0      1    200 P Active  local           unknown         192.168.1.254
+</code></pre>
+</details>
+
+После повторного подключения R1 он остаётся резервным, так как приоритет R3 (200) теперь выше:
+
+<details>
+<summary>R1 — после повышения приоритета R3</summary>
+<pre><code>
+R1(config-if)#do sh stan bri
+                     P indicates configured to preempt.
+                     |
+Interface   Grp  Pri P State   Active          Standby         Virtual IP
+Gig6/0      1    100 P Standby 192.168.1.3     local           192.168.1.254
 </code></pre>
 </details>
 
