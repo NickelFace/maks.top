@@ -1,4 +1,11 @@
 {{/* Breadcrumb partial — unified for all pages */}}
+{{ $certMap := dict
+    "neteng"  "/certs/network-engineer/"
+    "netarch" "/certs/network-architect/"
+    "lpic1"   "/certs/lpic-1/"
+    "lpic2"   "/certs/lpic-2/"
+}}
+
 <div class="breadcrumb">
   <a href="{{ "/" | relURL }}">maks.top</a>
   <span>/</span>
@@ -7,19 +14,27 @@
     <span style="color:var(--text2)">{{ .Title }}</span>
 
   {{ else if .IsSection }}
-    {{/* Section list pages: maks.top / section */}}
     <span style="color:var(--text2)">{{ .Section }}</span>
 
-  {{ else if eq .File.BaseFileName "linux-namespaces" }}
-    <a href="{{ "/posts/" | relURL }}">posts</a>
-    <span>/</span>
-    <span style="color:var(--text2)">{{ .Title }}</span>
-
   {{ else }}
-    {{/* Regular pages (posts, docs, etc.) */}}
     {{ with .Section }}
       <a href="{{ . | relURL }}">{{ . }}</a>
       <span>/</span>
+    {{ end }}
+    {{ if .File }}
+      {{ $parts := split .File.Dir "/" }}
+      {{ if gt (len $parts) 2 }}
+        {{ $sub := index $parts 1 }}
+        {{ if $sub }}
+          {{ $certURL := index $certMap $sub }}
+          {{ if $certURL }}
+            <a href="{{ $certURL | relURL }}">{{ $sub }}</a>
+          {{ else }}
+            <span>{{ $sub }}</span>
+          {{ end }}
+          <span>/</span>
+        {{ end }}
+      {{ end }}
     {{ end }}
     <span style="color:var(--text2)">{{ .Title }}</span>
   {{ end }}

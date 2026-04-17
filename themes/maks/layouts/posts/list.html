@@ -12,7 +12,9 @@
   </div>
 
   <div class="posts-list">
-    {{ range .Paginator.Pages }}
+    {{ $allPosts := where .Site.RegularPages "Section" "posts" }}
+    {{ $paginator := .Paginate $allPosts }}
+    {{ range $paginator.Pages }}
     <a href="{{ .Permalink }}" class="post-card">
       <div class="post-card-meta">
         <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
