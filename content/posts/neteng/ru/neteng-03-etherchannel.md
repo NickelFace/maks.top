@@ -221,11 +221,39 @@ Number of aggregators:           1
 
 Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+----------------------------------------------
-1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
+1      Po1(SU)           PAgP   Et1/2(P) Et1/3(P)
 </code></pre>
 </details>
 
 **Значение флагов:** `SU` — канал является транком L2 и активен. `P` — порт объединён в port-channel.
+
+Проверьте STP — корневым портом S3 должен стать Port-channel1:
+
+```
+show spanning-tree
+```
+
+<details>
+<summary>Вывод S3</summary>
+<pre><code>
+VLAN0001
+  Spanning tree enabled protocol ieee
+  Root ID    Priority    32769
+             Address     aabb.cc00.1000
+             Cost        56
+             Port        65 (Port-channel1)
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
+             Address     aabb.cc00.3000
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Po1                 Root FWD 56        128.65   P2p
+</code></pre>
+</details>
 
 ---
 
@@ -310,8 +338,8 @@ show etherchannel summary
 <pre><code>
 Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+----------------------------------------------
-1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
-2      Po2(SU)           LACP   Fa0/1(P) Fa0/2(P)
+1      Po1(SU)           PAgP   Et1/2(P) Et1/3(P)
+2      Po2(SU)           LACP   Et0/1(P) Et0/2(P)
 </code></pre>
 </details>
 <details>

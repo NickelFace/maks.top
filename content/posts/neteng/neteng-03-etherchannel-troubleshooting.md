@@ -221,9 +221,74 @@ S3(config)# int r fa0/3-4
 S3(config-if-range)# channel-group 2 mode auto
 ```
 
+Check S2's running config to identify all issues at once:
+
+```
+show running-config | begin Port-channel
+```
+
+<details>
+<summary>S2 output</summary>
+<pre><code>
+interface Port-channel1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 1,99
+ switchport mode trunk
+!
+interface Port-channel3
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 1,10,99
+ switchport mode trunk
+!
+interface FastEthernet0/1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 1,99
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface FastEthernet0/2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 1,99
+ switchport mode trunk
+ channel-group 1 mode desirable
+!
+interface FastEthernet0/3
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 1,10,99
+ switchport mode trunk
+ channel-group 3 mode desirable
+ shutdown
+!
+interface FastEthernet0/4
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 1,10,99
+ switchport mode trunk
+ channel-group 3 mode desirable
+ shutdown
+</code></pre>
+</details>
+
+Issues visible in S2 config:
+- Po1 allows only VLAN 1,99 (missing VLAN 10)
+- Fa0/1-2 use `mode desirable` (PAgP) but S1 uses LACP `active` — protocol mismatch
+- Fa0/3-4 are shutdown
+
 #### Step 2 — Check VLAN 10 access port
 
-Po2 on S1 is in `access` mode — EtherChannel requires trunk. Fix:
+Po2 on S1 is in `access` mode — verify with `show run interface`:
+
+<details>
+<summary>S1 — interface Ethernet1/2</summary>
+<pre><code>
+interface Ethernet1/2
+ switchport access vlan 10
+ switchport mode access
+ channel-group 1 mode desirable
+end
+</code></pre>
+</details>
+
+EtherChannel requires all member ports to be in trunk mode. Fix:
 
 ```
 S1(config)# interface Port-channel2
@@ -304,12 +369,56 @@ show etherchannel summary
 </code></pre>
 </details>
 
-Connectivity check:
+Connectivity check — ping Management VLAN from S3:
 
-```
-ping 192.168.0.3
-Reply from 192.168.0.3: bytes=32 time=1ms TTL=128
-```
+<details>
+<summary>S3</summary>
+<pre><code>
+S3(config-if)#do ping 192.168.1.13
+Sending 5, 100-byte ICMP Echos to 192.168.1.13, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/3/4 ms
+
+S3(config-if)#do ping 192.168.1.12
+Sending 5, 100-byte ICMP Echos to 192.168.1.12, timeout is 2 seconds:
+.!!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 0/0/1 ms
+
+S3(config-if)#do ping 192.168.1.11
+Sending 5, 100-byte ICMP Echos to 192.168.1.11, timeout is 2 seconds:
+..!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 0/1/4 ms
+</code></pre>
+</details>
+
+Connectivity check — ping between PCs:
+
+<details>
+<summary>PC-A</summary>
+<pre><code>
+C:\>ping 192.168.0.2
+
+Pinging 192.168.0.2 with 32 bytes of data:
+Reply from 192.168.0.2: bytes=32 time=3ms TTL=128
+Reply from 192.168.0.2: bytes=32 time=4ms TTL=128
+Reply from 192.168.0.2: bytes=32 time=1ms TTL=128
+Reply from 192.168.0.2: bytes=32 time=4ms TTL=128
+
+Ping statistics for 192.168.0.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)
+
+C:\>ping 192.168.0.3
+
+Pinging 192.168.0.3 with 32 bytes of data:
+Reply from 192.168.0.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.0.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.0.3: bytes=32 time<1ms TTL=128
+Reply from 192.168.0.3: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.0.3:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)
+</code></pre>
+</details>
 
 ---
 
