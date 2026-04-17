@@ -634,6 +634,28 @@ button.tag {
   max-width: 560px;
 }
 
+.tags-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+
+.tags-bar-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill-close {
+  margin-left: 6px;
+  opacity: 0.5;
+  font-size: 13px;
+  line-height: 1;
+}
+
 .tags-grid {
   display: flex;
   flex-wrap: wrap;
