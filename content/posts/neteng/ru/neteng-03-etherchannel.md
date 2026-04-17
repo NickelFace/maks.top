@@ -34,7 +34,7 @@ build:
 
 - **Часть 1.** Настройте базовые параметры коммутаторов
 - **Часть 2.** Настройте EtherChannel PAgP (S1–S3)
-- **Часть 3.** Настройте EtherChannel LACP (S1–S2)
+- **Часть 3.** Настройте EtherChannel LACP (S1–S2 и S2–S3)
 
 ---
 
@@ -48,6 +48,7 @@ conf t
 hostname S1
 no ip domain-lookup
 enable secret class
+banner motd "Unauthorized access is strictly prohibited!"
 line console 0
 exec-timeout 0 0
 password cisco
@@ -62,11 +63,18 @@ interface range f0/1-24, g0/1-2
 shutdown
 exit
 vlan 10
-name Users
+name Staff
 vlan 99
 name Management
+exit
 interface vlan 99
 ip address 192.168.99.11 255.255.255.0
+no shutdown
+exit
+interface f0/6
+switchport mode access
+switchport access vlan 10
+no shutdown
 do copy run start
 </code></pre>
 </details>
@@ -78,6 +86,7 @@ conf t
 hostname S2
 no ip domain-lookup
 enable secret class
+banner motd "Unauthorized access is strictly prohibited!"
 line console 0
 exec-timeout 0 0
 password cisco
@@ -92,11 +101,18 @@ interface range f0/1-24, g0/1-2
 shutdown
 exit
 vlan 10
-name Users
+name Staff
 vlan 99
 name Management
+exit
 interface vlan 99
 ip address 192.168.99.12 255.255.255.0
+no shutdown
+exit
+interface f0/18
+switchport mode access
+switchport access vlan 10
+no shutdown
 do copy run start
 </code></pre>
 </details>
@@ -108,6 +124,7 @@ conf t
 hostname S3
 no ip domain-lookup
 enable secret class
+banner motd "Unauthorized access is strictly prohibited!"
 line console 0
 exec-timeout 0 0
 password cisco
@@ -122,11 +139,18 @@ interface range f0/1-24, g0/1-2
 shutdown
 exit
 vlan 10
-name Users
+name Staff
 vlan 99
 name Management
+exit
 interface vlan 99
 ip address 192.168.99.13 255.255.255.0
+no shutdown
+exit
+interface f0/18
+switchport mode access
+switchport access vlan 10
+no shutdown
 do copy run start
 </code></pre>
 </details>
@@ -135,7 +159,7 @@ do copy run start
 
 ### Часть 2 — EtherChannel PAgP (S1–S3)
 
-PAgP (Port Aggregation Protocol) — проприетарный протокол Cisco. Режимы: `desirable` (активное согласование) и `auto` (пассивный).
+PAgP (Port Aggregation Protocol) — проприетарный протокол Cisco. Режимы: `desirable` (активное согласование) и `auto` (пассивный). Минимум одна сторона должна быть `desirable`.
 
 <details>
 <summary>S1</summary>
@@ -172,14 +196,44 @@ switchport trunk allowed vlan 1,10,99
 
 ```
 show etherchannel summary
-show etherchannel port-channel
 ```
+
+<details>
+<summary>Вывод S1</summary>
+<pre><code>
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      N - not in use, no aggregation
+        f - failed to allocate aggregator
+
+        M - not in use, no aggregation due to minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+        A - formed by Auto LAG
+
+
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
+</code></pre>
+</details>
+
+**Значение флагов:** `SU` — канал является транком L2 и активен. `P` — порт объединён в port-channel.
 
 ---
 
-### Часть 3 — EtherChannel LACP (S1–S2)
+### Часть 3 — EtherChannel LACP (S1–S2 и S2–S3)
 
-LACP (Link Aggregation Control Protocol) — открытый стандарт (802.3ad). Режимы: `active` и `passive`.
+LACP (Link Aggregation Control Protocol) — открытый стандарт (IEEE 802.3ad). Режимы: `active` (отправляет LACP-фреймы) и `passive` (только отвечает). Минимум одна сторона должна быть `active`.
+
+**S1–S2 (channel-group 2)**
 
 <details>
 <summary>S1</summary>
@@ -211,6 +265,80 @@ switchport trunk native vlan 99
 switchport trunk allowed vlan 1,10,99
 </code></pre>
 </details>
+
+**S2–S3 (channel-group 3)**
+
+<details>
+<summary>S2</summary>
+<pre><code>
+interface range f0/3-4
+channel-group 3 mode active
+switchport mode trunk
+switchport trunk native vlan 99
+no shutdown
+exit
+interface port-channel 3
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 1,10,99
+</code></pre>
+</details>
+<details>
+<summary>S3</summary>
+<pre><code>
+interface range f0/1-2
+channel-group 3 mode passive
+switchport mode trunk
+switchport trunk native vlan 99
+no shutdown
+exit
+interface port-channel 3
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 1,10,99
+</code></pre>
+</details>
+
+Проверьте все каналы:
+
+```
+show etherchannel summary
+```
+
+<details>
+<summary>S1</summary>
+<pre><code>
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
+2      Po2(SU)           LACP   Fa0/1(P) Fa0/2(P)
+</code></pre>
+</details>
+<details>
+<summary>S2</summary>
+<pre><code>
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+2      Po2(SU)           LACP   Fa0/1(P) Fa0/2(P)
+3      Po3(SU)           LACP   Fa0/3(P) Fa0/4(P)
+</code></pre>
+</details>
+<details>
+<summary>S3</summary>
+<pre><code>
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+----------------------------------------------
+1      Po1(SU)           PAgP   Fa0/3(P) Fa0/4(P)
+3      Po3(SU)           LACP   Fa0/1(P) Fa0/2(P)
+</code></pre>
+</details>
+
+Проверьте связность — ping между ПК в VLAN 10:
+
+```
+PC-A> ping 192.168.10.2
+PC-A> ping 192.168.10.3
+```
 
 ---
 
