@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 06. VxLAN Type 2 (L2 EVPN)"
 date: 2025-12-11
-description: "OTUS Network Architect: VxLAN EVPN Overlay for L2 connectivity, Spine as Route Reflector"
+description: "OTUS Network Architect: VxLAN EVPN Overlay для L2 связанности между клиентами, Spine как Route Reflector"
 tags:
   - "Networking"
   - "VxLAN"
@@ -12,24 +12,32 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-06-vxlan-type2/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-06-vxlan-type2/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## VxLAN Type 2 (L2 EVPN)
+VxLAN. type 2
 
-Goal: Configure a VxLAN EVPN Overlay for L2 connectivity between clients.
+Цель: Настроить Overlay на основе VxLAN EVPN для L2 связанности между клиентами
 
-Lab objectives:
+В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
 
-1. Configure BGP peering between Leaf and Spine in the l2vpn evpn address family.
-2. Spine operates as route-reflector.
-3. L2 connectivity between clients in the first zone is established.
-4. Document the work plan, address space, network diagram, and configurations.
+
+
+1. Настроить BGP peering между Leaf и Spine в AF l2vpn evpn
+2. Spine работает в качестве route-reflector
+3. Настроена связанность между клиентами в первой зоне
+4. План работы, адресное пространство, схема сети, настройки - зафиксированы в документации
+
+
 
 ![Scheme](/img/netarch/6/Scheme.png)
 
-**NEXUS configuration:**
+**Настройка NEXUS:**
 
  <details>
 <summary>NXOS2</summary>
@@ -461,7 +469,7 @@ copy run star
 </code></pre>
 </details>
 
-Verifying BGP peering:
+Проверим пиринг со всеми:
 
 <details>
 <summary>NXOS2</summary>
@@ -546,7 +554,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 </code></pre>
 </details>
 
-Verifying IP connectivity between all devices:
+Проверим что есть IP связанность между всеми устройствами:
 
 
 <details>
@@ -730,7 +738,7 @@ IP Route Table for VRF "default"
 </code></pre>
 </details>
 
-Verifying NVE peers and BGP EVPN table:
+Теперь проверим nve peers и таблицу для BGP EVPN:
 
 <details>
 <summary>NXOS5</summary>
@@ -848,10 +856,8 @@ Route Distinguisher: 1.1.1.7:32778    (L2VNI 10011)
 </code></pre>
 </details>
 
-Conclusion:
+Вывод:
 
-1. BGP peering configured between Leaf and Spine in l2vpn evpn AF.
-2. Spine operates as route-reflector.
-3. Work plan, address space, network diagram, and configurations are documented.
-
-*Network Architect Course | Lab 06*
+1. Настроен BGP peering между Leaf и Spine в AF l2vpn evpn
+2. Spine работает в качестве route-reflector
+3. План работы, адресное пространство, схема сети, настройки - зафиксированы в документации

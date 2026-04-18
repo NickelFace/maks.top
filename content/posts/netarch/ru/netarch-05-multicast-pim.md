@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 05. Multicast PIM"
 date: 2025-11-21
-description: "OTUS Network Architect: PIM Sparse-Mode and BSR configuration in DC topology, multicast via EVE-NG"
+description: "OTUS Network Architect: настройка PIM Sparse-Mode и BSR в топологии ДЦ, мультикаст через EVE-NG"
 tags:
   - "Networking"
   - "Multicast"
@@ -11,28 +11,39 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-05-multicast-pim/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-05-multicast-pim/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## Multicast. PIM
+# Multicast. PIM
 
-Goal: Configure PIM in the network.
+Цель:
 
-Lab objectives:
+Настроить PIM в сети.
 
-1. Configure PIM on all devices (except access switches). Any dynamic routing protocol may be used for IP connectivity.
-2. Document the work plan, address space, network diagram, and configurations.
+В этой работе мы ожидаем, что вы самостоятельно:
 
-An optional extension: implement Multicast together with VxLAN (may be addressed later).
+1. Настроите PIM на всех устройствах (кроме коммутаторов доступа);
 
-The topology is based on the OSPF lab, extended with multicast support.
+  *Для IP связанности между устройствами можно использовать любой протокол динамической маршрутизации; 2. План работы, адресное пространство, схема сети, настройки - зафиксируете в документации;
 
-Since EVE-NG runs without a GPU (console only), a custom QEMU image was built for multicast source/client roles. The multicast source uses the `tstools` package; clients use `smcroute`.
+Дополнительно предлагается реализовать Multicast совместно с VxLAN(к этой части самостоятельной работы возможно вернуться позже)
+
+
+
+За основу взял схему из раздела [OSPF](https://github.com/NickelFace/OTUS-Network-Architect/blob/main/2.Overlay_OSPF/Home_Work.md), где указал логику построения сети ЦОД, а  теперь требуется организовать  мультикаст в данной топологии.
+
+Так как в интернете довольно мало информации на данную тематику,а [некоторые статьи](https://linkmeup.ru/blog/1204/)  не подойдут(на сервере нет видеокарты, только консоль) для EVE-NG, то придется организовать свою статью. Первая проблема с которой столкнулся, это как организовать источник мультикаста, а заодно и клиента. За решение данного вопроса я воспользовался [инструкцией](https://www.eve-ng.net/index.php/documentation/howtos/howto-save-your-settings-to-be-as-default-on-qemu-node/) по созданию своего [образа](https://disk.yandex.ru/d/_UKl3leYfNVqGA). Для организации сервера мне потребовался пакет [tstools](https://onstartup.ru/utility/tstools/), а для организации клиента [smcroute](https://onstartup.ru/set/smcroute/). 
+
+
 
 ![](/img/netarch/5/Schema1.png)
 
-**NEXUS configuration:**
+**Настройка NEXUS:**
 
  <details>
 <summary>NXOS1</summary>
@@ -551,7 +562,7 @@ wr
 </code></pre>
 </details>
 
-Multicast source configuration
+Настройка Source Multicast
 
 <details>
 <summary>Server</summary>
@@ -568,7 +579,7 @@ iface ens3  inet static
 tsplay ./video.ts 239.0.0.100:1234 -loop -i 10.10.10.2 &
 </code></pre>
 </details>
-Client configuration:
+Настройка клиентов:
 
 <details>
 <summary>Client13</summary>
@@ -601,7 +612,7 @@ iface ens3 inet static
 smcroute -j ens3 239.0.0.100
 </code></pre>
 </details>
-SW9, SW10, and SW11 act as simple access switches:
+А устройства SW9, SW10, SW11 выполняют просто функцию коммутатора.
 
 <details>
 <summary>SW9</summary>
@@ -715,7 +726,7 @@ end
 wr
 </code></pre>
 </details> 
-Verifying RP:
+Теперь проверим RP:
 
 <details> <summary>NXOS1</summary> <pre><code>
 NX1(config)# show ip pim rp
@@ -851,7 +862,7 @@ RP: 1.1.1.11, (0),
  224.0.0.0/4   , expires: 00:02:10 (B)
 </code></pre> </details>
 
-Verifying IGMP:
+Теперь проверим IGMP:
 
  <details> <summary>NXOS7</summary> <pre><code>
 NX7# show ip igmp groups 
@@ -880,7 +891,7 @@ Group Address      Type Interface              Uptime    Expires   Last Reporter
 239.0.0.100        D   Ethernet1/2            01:54:09  00:03:28  10.10.11.2
 </code></pre> </details>
 
-PIM neighbor output:
+А теперь PIM, начнём сначала с указанием соседств:
 
  <details> <summary>NXOS2</summary> <pre><code>
 NX2# show ip pim neighbor 
@@ -929,7 +940,7 @@ Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD
  no
 </code></pre> </details>
 
-Multicast subscription distribution for group 239.0.0.100:
+А теперь как распределяется мультикаст подписка за 239.0.0.100:
 
 <details> 
 <summary>NXOS1</summary>
@@ -1089,12 +1100,10 @@ Outgoing interface flags: H - Hardware switched, A - Assert winner
     Loopback0, Forward/Sparse, 20:20:47/00:02:16
 </code></pre> </details>
 
-Based on the data, the traffic flow looks like this:
+Исходя из данных мы можем нарисовать поток трафика:
 
 ![](/img/netarch/5/Schema2.png)
 
-Conclusion:
+Вывод:
 
-The simulated DC network is operational. Multicast is configured and delivers traffic from source to clients.
-
-*Network Architect Course | Lab 05*
+Условная сеть ДЦ была постоена, а также организован мультикаст, который доставляет трафик от источника до клиента. 

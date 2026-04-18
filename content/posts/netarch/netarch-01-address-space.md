@@ -9,19 +9,23 @@ tags:
   - "Spine-Leaf"
   - "OTUS"
 categories: ["Network Architect"]
+code_toggle: true
+page_lang: "en"
+lang_pair: "/posts/netarch/ru/netarch-01-address-space/"
 ---
 
-Проектирование адресного пространства
+## Address Space Design
 
-Цель: Собрать схему CLOS;
-Распределить адресное пространство;
+Goal: Build a CLOS topology and distribute the address space.
 
-В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+Lab objectives:
 
-1. Соберете топологию CLOS с 3 Spine и 4 Leaf. 3 Leaf подключены к 2 Spine. 1 Leaf подключен к оставшемуся Spine. Все Spine связаны между собой через дополнительный маршрутизатор(рекомендуется использовать IOL)
-2. Leaf необходимо связать между собой для дальнейшей настройки VPC пары
-3. Добавите 3 клиента будущей фабрики. Один клиент подключен к VPC паре. Остальные клиенты подключены к оставшимся Leaf(в качестве клиентов рекомендуется использовать IOL образы)
-4. Распределите адресное пространство для Underlay сети
-5. План работы, адресное пространство, схема сети, настройки - зафиксированы в документации
+1. Build a CLOS topology with 3 Spine and 4 Leaf. Three Leaf nodes connect to 2 Spine. One Leaf connects to the remaining Spine. All Spine are interconnected via an additional router (IOL recommended).
+2. Interconnect Leaf nodes for future VPC pair configuration.
+3. Add 3 clients to the future fabric. One client connects to the VPC pair; the rest connect to the remaining Leaf nodes (IOL images recommended for clients).
+4. Distribute the address space for the Underlay network.
+5. Document the work plan, address space, network diagram, and configurations.
 
 ![Schema](/img/netarch/1/Schema.png)
+
+*Network Architect Course | Lab 01*

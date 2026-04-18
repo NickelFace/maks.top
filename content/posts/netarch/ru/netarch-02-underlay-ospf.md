@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 02. Underlay OSPF"
 date: 2025-09-22
-description: "OTUS Network Architect: OSPF configuration for DC Underlay network on Cisco NX-OS"
+description: "OTUS Network Architect: настройка OSPF для Underlay сети в дата-центре на Cisco NX-OS"
 tags:
   - "Networking"
   - "OSPF"
@@ -10,28 +10,33 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-02-underlay-ospf/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-02-underlay-ospf/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## Underlay. OSPF
+# Underlay. OSPF
 
-Goal: Configure OSPF for the Underlay network.
+Цель: Настроить OSPF для Underlay сети
 
-Lab objectives:
+В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
 
-1. Configure OSPF in the Underlay network for IP connectivity between all NX-OS devices.
-2. Document the work plan, address space, network diagram, and configurations.
+1. настроить OSPF в Underlay сети, для IP связанности между всеми устройствами NXOS
+2. План работы, адресное пространство, схема сети, настройки - зафиксированы в документации
 
 ![Schema](/img/netarch/2/Schema.png)
 
-A few introductory notes:
+Немного вводной информации:
 
-The topology includes 2 DCs (Data Centers), not one. OSPF areas 0 and 1 logically separate them. Loopback interfaces are added to all devices for use as Overlay endpoints. Device configurations are shown first, followed by verification output.
+У нас на схеме не 1 DC(Data Center) , а 2 DC. Поэтому появятся зоны 0 и 1 OSPF ,которые разделят "уcловно" нашу схему. 
+Добавим также на устройства Loopback интерфейсы , чтобы  в дальнейшем через Loopback'и было удобно строить Overlay сеть. Вначале указываю настройки конфигурации устройств ,а позже вывод ,чтобы показать связанность между ними.
 
 ![](/img/netarch/2/Schema2.png)
 
-NEXUS configuration:
+Настройка NEXUS:
  <details>
 <summary>NXOS1</summary>
 <pre><code>
@@ -435,7 +440,7 @@ wr
 </details>
  
 
-Client device configurations:
+Далее пойдут настройки клиентских устройств:
 
 <details>
 <summary>SW11</summary>
@@ -525,7 +530,7 @@ wr
 </code></pre>
 </details> 
 
-Device output after configuration:
+Вывод  нескольких устройств после настройки:
 
 ```
  R11#show ip route ospf    
@@ -568,7 +573,7 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 ```
 
 
-OSPF neighbor output:
+Далее укажу вывод соседства по OSPF:
 
 NXOS4
 
@@ -608,7 +613,7 @@ NX2# show ip ospf neighbors
  1.1.1.11          1 FULL/ -          02:19:07 10.15.0.7       Eth1/4
 ```
 
-Verifying connectivity between DCs:
+Проверим связь между ДЦ:
 
 SW9
 
@@ -669,8 +674,6 @@ Sending 100, 100-byte ICMP Echos to 172.16.0.1, timeout is 2 seconds:
 Success rate is 100 percent (100/100), round-trip min/avg/max = 9/10/14 ms
 ```
 
-Conclusion:
+Вывод:
 
-The simulated two-DC network is operational. OSPF is running and end-to-end connectivity between all endpoints is confirmed.
-
-*Network Architect Course | Lab 02*   
+Условная сеть для двух ДЦ была построена , протокол OSPF работает , связь между конечными точками сети присутствует.   
