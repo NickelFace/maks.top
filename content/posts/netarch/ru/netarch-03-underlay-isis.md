@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 03. Underlay IS-IS"
 date: 2025-10-12
-description: "OTUS Network Architect: IS-IS configuration for DC Underlay network on Cisco NX-OS"
+description: "OTUS Network Architect: настройка IS-IS для Underlay сети в ДЦ на Cisco NX-OS"
 tags:
   - "Networking"
   - "IS-IS"
@@ -10,26 +10,32 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-03-underlay-isis/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-03-underlay-isis/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## Underlay. IS-IS
+## Домашнее задание
 
-Goal: Configure IS-IS for the Underlay network.
+Underlay. IS-IS
 
-Lab objectives:
+Цель: Настроить IS-IS для Underlay сети
 
-1. Configure IS-IS in the Underlay network for IP connectivity between all NX-OS devices.
-2. Document the work plan, address space, network diagram, and configurations.
+В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+
+1. настроить IS-IS в Underlay сети, для IP связанности между всеми устройствами NXOS
+2. План работы, адресное пространство, схема сети, настройки - зафиксированы в документации
 
 ![](/img/netarch/3/Schema.png)
 
-A few introductory notes:
+Немного вводной информации:
 
-NXOS2 and NXOS3 operate in IS-IS area 0 (0000), and the Leaf nodes below them belong to the same area. R11 is the inter-area router residing in area 0 and forwarding routes toward NXOS4 in area 1 (0001). Routes follow the topology as shown on the diagram; Loopback addresses are redistributed at L1/L2 to avoid tracking individual connected networks.
+Коммутаторы NXOS2 и NXOS3 будут находиться в ISIS area 0 (0000) , следовательно LEAF ниже аналогично в той же зоне . R11 - это связующий маршрутизатор ,который будет находиться в зоне area 0 и передавать маршруты в сторону NXOS4 где зона area 1 (0001).  В основном маршруты будут передаваться так как указано на схеме , исключением будут Loopback интерфейсы ,которые будут передаваться L1/L2 ,чтобы не запоминать Connected сети.
 
-NEXUS configuration:
+Настройка NEXUS:
 
 <details>
 <summary>NXOS1</summary>
@@ -460,7 +466,7 @@ copy run star
 </code></pre>
 </details>
 
-Client device configurations:
+Далее пойдут настройки клиентских устройств:
 
 <details>
 <summary>SW11</summary>
@@ -551,7 +557,7 @@ wr
 </code></pre>
 </details>
 
-Device output:
+Вывод нескольких устройств:
 
 ```
 R11#show ip route isis 
@@ -598,7 +604,7 @@ NX3            L2   Et0/1       10.15.1.6       UP    23       01
 NX4            L2   Et0/2       10.16.0.0       UP    29       01
 ```
 
-IS-IS neighbor output:
+Далее укажу вывод соседства по IS-IS:
 
 NXOS4
 
@@ -640,7 +646,7 @@ NX5             N/A             1      UP     00:00:25   Ethernet1/3
 R11             N/A             2      UP     00:00:26   Ethernet1/4
 ```
 
-Verifying connectivity between DCs:
+Проверим связь между ДЦ:
 
 SW9
 
@@ -671,8 +677,6 @@ Sending 100, 100-byte ICMP Echos to 172.16.0.1, timeout is 2 seconds:
 Success rate is 100 percent (100/100), round-trip min/avg/max = 27/71/433 ms
 ```
 
-Conclusion:
+Вывод:
 
-The simulated two-DC network is operational. IS-IS is running and end-to-end connectivity between all endpoints is confirmed.
-
-*Network Architect Course | Lab 03*
+Условная сеть для двух ДЦ была построена , протокол IS-IS работает , связь между конечными точками сети присутствует.

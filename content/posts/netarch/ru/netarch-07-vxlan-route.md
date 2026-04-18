@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 07. VxLAN Route (L3 EVPN)"
 date: 2026-01-03
-description: "OTUS Network Architect: L3 routing between clients in Overlay, per-client VNI, VPC pair"
+description: "OTUS Network Architect: L3 маршрутизация между клиентами в Overlay, отдельный VNI на клиента, пара VPC"
 tags:
   - "Networking"
   - "VxLAN"
@@ -12,22 +12,31 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-07-vxlan-route/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-07-vxlan-route/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## VxLAN Route (L3 EVPN)
+# VxLAN. Route
 
-Goal: Configure an Overlay with VPC support and inter-client L3 routing.
+Цель:
 
-Lab objectives:
+Настроить Overlay на основе с использованием VPC; Маршрутизация в Overlay.
 
-1. Place each client in its own VNI.
-2. Configure routing between clients.
+В этой  самостоятельной работе мы ожидаем, что вы самостоятельно:
+
+1. Настроите каждого клиента в своем VNI
+
+2. Настроите маршрутизацию между клиентами
+
+   
 
 ![Scheme](/img/netarch/7/Scheme.png)
 
-**NEXUS configuration:**
+**Настройка NEXUS:**
 
  <details>
 <summary>NXOS2</summary>
@@ -607,7 +616,7 @@ wr
 </code></pre>
 </details>
 
-**Switch configuration:**
+**Настройка Switch:**
 
 <details>
   <summary>SW9</summary>
@@ -701,7 +710,7 @@ wr
 </code></pre>
 </details>
 
-**Client configuration:**
+**Настройка клиентов:**
 
 <details>
   <summary>VPC1</summary>
@@ -740,7 +749,7 @@ ip 192.168.68.219/24 192.168.69.253
 </code></pre>
 </details>
 
-VPC configuration between **NXOS5 — NXOS7**:
+Обращаем внимание на настройку **VPC** между **NXOS5 - NXOS7**:
 
 <details>
 <summary>NXOS5</summary>
@@ -911,7 +920,7 @@ Local suspended VLANs       -     -                      -
 </code></pre>
 </details>
 
-MLAG configured using LACP:
+Также был настроен MLAG на основе LACP:
 
 
 <details>
@@ -955,9 +964,9 @@ Et0/0     SA      32768     0023.04ee.be01  24s    0x0    0x8001 0x4106  0x3D
 Et0/1     SA      32768     0023.04ee.be01  23s    0x0    0x8001 0x106   0x3D  
 </code></pre>
 </details
-Between **NX6** and (**NX5**-**NX7**): both L2 connectivity via VNIs **10010**, **10011** and inter-VNI L3 routing via **10068**, **10069** through VNI **9999** are configured.
+Между **NX6** - (**NX5**-**NX7**) организована как L2 связь через метки **10010**,**10011** так и маршрутизация между VNI по меткам **10068**,**10069** через метку **9999**.
 
-Verifying BGP peering:
+Для начала проверим пиринг:
 
 
 <details>
@@ -1043,7 +1052,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 NX7(config)#      
 </code></pre>
 </details> 
-Verifying routing tables:
+Проверим формирование таблиц маршрутизации:
 
 
 <details>
@@ -1310,7 +1319,7 @@ IP Route Table for VRF "VXLAN_RT"
 n) segid: 9999 tunnelid: 0x1010106 encap: VXLAN
 </code></pre>
 </details>
-Verifying NVE peers and BGP EVPN table:
+Теперь проверим nve peers и таблицу для BGP EVPN:
 
 
 <details>
@@ -1659,7 +1668,7 @@ Route Distinguisher: 1.1.1.7:32835    (L2VNI 10068)
                       10.255.255.255                    100      32768 i
 </code></pre>
 </details>
-Connectivity verification via ping
+Проверка связности через утилиту ping
 
 
 <details>
@@ -1708,10 +1717,8 @@ VPCS> ping 192.168.69.219
 84 bytes from 192.168.69.219 icmp_seq=5 ttl=62 time=25.785 ms
 </code></pre>
 </details>
-Conclusion:
+Вывод:
 
-- L2 connectivity configured between clients (VPC1 — VPC2; VPC3 — VPC14).
-- Inter-VNI routing configured (10068 — 10069 via VNI 9999).
-- VPC pair and MLAG via LACP configured.
-
-*Network Architect Course | Lab 07*
+- Настроил L2 связность между клиентами (VPC1 - VPC2; VPC3 - VPC14)
+- Настроил маршрутизацию между VNI (10068 - 10069 через метку 9999)
+- Настроил пару VPC, а также MLAG на основе протокола LACP.

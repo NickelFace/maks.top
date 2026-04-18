@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 08. VxLAN Multipod"
 date: 2026-01-24
-description: "OTUS Network Architect: L2/L3 connectivity between two pods via Multipod VxLAN EVPN"
+description: "OTUS Network Architect: L2/L3 связанность между двумя подами через Multipod VxLAN EVPN"
 tags:
   - "Networking"
   - "VxLAN"
@@ -12,18 +12,25 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-08-vxlan-multipod/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-08-vxlan-multipod/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## VxLAN Multipod
+# VxLAN. Multipod
 
-Goal: Configure L2 connectivity using the Multipod technology.
+Цель:
 
-Lab objectives:
+Настроить L2 связанность по технологии Multipod
 
-1. Configure BGP peering between Spine nodes across both zones.
-2. All clients have L2/L3 connectivity.
+В этой  самостоятельной работе мы ожидаем, что вы самостоятельно:
+
+1. Настроите BGP peering между Spine в одной зоне и во второй
+
+2. Все клиенты имеют L2/L3 связанность
 
    
 
@@ -970,7 +977,7 @@ ip 192.168.68.219/24 192.168.69.253
 ip 192.168.7019/24 192.168.70.252
 </code></pre>
 </details>
-Verifying BGP peering:
+Для начала проверим пиринг:
 
 
 <details>
@@ -1091,7 +1098,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 </code></pre>
 </details> 
 
-Verifying routing tables:
+Проверим формирование таблиц маршрутизации:
 
 <details>
   <summary>NXOS1</summary>
@@ -1547,7 +1554,7 @@ IP Route Table for VRF "VXLAN_RT"
 </code></pre>
 </details>
 
-Verifying NVE peers and BGP EVPN table:
+Теперь проверим nve peers и таблицу для BGP EVPN:
 
 <details>
   <summary>NXOS1</summary>
@@ -1845,7 +1852,7 @@ Route Distinguisher: 1.1.1.7:32835    (L2VNI 10068)
 </code></pre>
 </details>
 
-Connectivity verification via ping
+Проверка связности через утилиту ping
 
 <details>
   <summary>VPC</summary>
@@ -1879,9 +1886,7 @@ VPCS> ping 192.168.69.219
 </code></pre>
 </details>
 
-Conclusion:
+Вывод:
 
-- BGP peering configured between Spine nodes across both zones.
-- All clients have L2/L3 connectivity.
-
-*Network Architect Course | Lab 08*
+- Настроил BGP peering между Spine в одной зоне и во второй
+- Все клиенты имеют L2/L3 связанность

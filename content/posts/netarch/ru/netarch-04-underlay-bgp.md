@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 04. Underlay BGP"
 date: 2025-11-01
-description: "OTUS Network Architect: eBGP configuration for DC Underlay with route-map and peer-templates"
+description: "OTUS Network Architect: настройка eBGP для Underlay сети с использованием route-map и peer-template"
 tags:
   - "Networking"
   - "BGP"
@@ -10,26 +10,32 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-04-underlay-bgp/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-04-underlay-bgp/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## Underlay. BGP
+## Домашнее задание
 
-Goal: Configure BGP for the Underlay network.
+Underlay.BGP
 
-Lab objectives:
+Цель: Настроить BGP для Underlay сети
 
-1. Configure BGP in the Underlay network for IP connectivity between all NX-OS devices.
-2. Document the work plan, address space, network diagram, and configurations.
+В этой самостоятельной работе мы ожидаем, что вы самостоятельно:
+
+1. настроить BGP в Underlay сети, для IP связанности между всеми устройствами NXOS
+2. План работы, адресное пространство, схема сети, настройки - зафиксированы в документации
 
 ![Sheme](/img/netarch/4/Schema.png)
 
-A few introductory notes:
+Немного вводной информации:
 
-Routes are distributed via route-map attached to peer templates — this approach makes policy changes easier. BGP sessions are established using physical interface addresses. Loopback and connected networks are advertised.
+ Все маршруты завожу по средствам route-map и прикреплению его к шаблону устройства ,так как это более удобный способ менять политики .  Для установления соседства по BGP используется адреса ,указанные на физических интерфейсах. Маршруты для анонса используются loopback и connected сети . 
 
-NEXUS configuration:
+Настройка NEXUS:
 
 <details>
   <summary>NXOS1</summary>
@@ -629,7 +635,7 @@ copy run star
 </details>
 
 
-Client device configurations:
+Далее пойдут настройки клиентских устройств:
 
 <details>
   <summary>SW11</summary>
@@ -719,7 +725,7 @@ wr
 </details>
 
 
-Device output:
+Вывод нескольких устройств:
 
 ```
 R11#show ip route bgp 
@@ -795,7 +801,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 10.16.0.0       4        64554       8      14       27    0    0 00:02:51        5
 ```
 
-BGP session output:
+Далее укажу вывод соседства по BGP:
 
 NXOS4
 
@@ -846,7 +852,7 @@ Neighbor        ASN    Flaps LastUpDn|LastRead|LastWrit St Port(L/R)  Notif(S/R)
 10.15.0.7       64777 1     00:05:32|00:00:01|00:00:31 E   45531/179        0/0
 ```
 
-Verifying connectivity between DCs:
+Проверим связь между ДЦ:
 
 SW9  -> SW11
 
@@ -897,8 +903,6 @@ VRF info: (vrf in name/id, vrf out name/id)
   6 172.16.2.1 10 msec *  14 msec
 ```
 
-Conclusion:
+Вывод:
 
-The simulated two-DC network is operational. BGP is running and end-to-end connectivity between all endpoints is confirmed.
-
-*Network Architect Course | Lab 04*
+Условная сеть для двух ДЦ была построена , протокол BGP работает , связь между конечными точками сети присутствует.
