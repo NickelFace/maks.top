@@ -1,7 +1,7 @@
 ---
 title: "Network Architect — 09. Project: CP Migration from Multicast to EVPN"
 date: 2026-02-14
-description: "OTUS Network Architect: final project — VxLAN Control Plane migration plan from Multicast to EVPN, Multipod"
+description: "OTUS Network Architect: итоговый проект — план миграции VxLAN Control Plane с Multicast на EVPN, Multipod"
 tags:
   - "Networking"
   - "VxLAN"
@@ -11,40 +11,46 @@ tags:
   - "OTUS"
 categories: ["Network Architect"]
 code_toggle: true
-page_lang: "en"
-lang_pair: "/posts/netarch/ru/netarch-09-project/"
+page_lang: "ru"
+lang_pair: "/posts/netarch/netarch-09-project/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 
-## VxLAN: Control Plane Migration from Multicast to EVPN
+# VxLAN. Миграция Control Plane c Multicast на EVPN
 
-Goal: Design a migration plan from CP Multicast to EVPN.
+Цель:
 
-Lab plan:
+Составить план перехода от CP Multicast к EVPN
 
-1. Configure the network topology for VxLAN CP Multicast.
-2. Provide a migration plan to EVPN.
-3. Configure the network topology for VxLAN Multipod.
+План работы:
+
+1. Настроить схему сети для VxLAN CP Multicast.
+2. Предоставить план перехода на EVPN.
+3. Настроить схему сети для VxLAN Multipod.
 
 ![Scheme](/img/netarch/9/Scheme.png)
 
-## Configure VxLAN CP Multicast Topology
+## Настроить схему сети для VxLAN CP Multicast.
 
-Description:
+Описание:
 
-VxLAN configured via multicast: VNI reachability information is distributed via multicast in **sparse mode**. Key decisions: who acts as RP (and how that information is distributed), multicast IP addressing (to avoid duplicate MAC propagation across the network), and so on.
+На данный момент буду приводить конфигурацию VxLAN через мультикаст, то есть передача информации в сети об определенном VNI будет распространяться через многоадресную рассылку в режиме **sparse mode**. В данном примере мне потребуется решить следующие задачи: кто будет участвовать в качестве RP(и как получить эту информацию), многоадресная IP адресация(чтобы по сети не гуляли одинаковые mac-адреса) и так далее. 
 
-What did not work:
+Что не получилось:
 
-Only L2 connectivity could be configured for this topology. Attempting L3 produced the following error:
+Для данной схемы получилось настроить только L2 связь, так как при настройке L3 получил сообщение:
 
 ```
 TRM not supported on this platform
 ```
 
 
-BFD is also not supported in the images — the commands exist but the actual packets are not sent.
+А также в образах отсутствует поддержка bfd(команды есть, но самих пакетов нет) 
 
-**Configuration:**
+**Приступим к настройке :**
 
 <details>
   <summary>NXOS1</summary>
@@ -878,7 +884,7 @@ end
 wr
 </code></pre>
 </details>
-Showing 2 established NVE tunnels and device output:
+А теперь покажу 2 простроенных туннеля nve и вывод устройств:
 <details>
 <summary>NX1</summary>
 <pre><code>
@@ -909,26 +915,28 @@ nve1      10.1.1.5         Up    DP        03:32:54 n/a
 </code></pre>
 </details>
 
-To avoid cluttering the project with excessive output, here is a diagram showing the established path:
+Чтобы не загромождать проект лишними выводами, вставлю далее картинку с указанием построенного пути:
 
 ![Scheme2](/img/netarch/9/Scheme2.png)
 
-Multicast is now considered a legacy solution. The primary goal of this project is to migrate the network to EVPN.
+Multicast на данный момент считается уже устаревшим решением, поэтому главной задачей данного проекта перевести сеть на EVPN
 
-## Migration Plan to EVPN
+## Предоставить план перехода на EVPN.
 
-- AS numbers remain unchanged.
-- VNI numbers remain unchanged.
-- OSPF adjacency is brought up.
-- At this stage, test/unused reserve **VLANs** and **VNIs** are provisioned (e.g. vlan 1200–1205, vni 10020–10025); BGP neighbor templates are prepared.
-- All IPv4 unicast peering is removed and replaced with L2 EVPN.
-- VNI label distribution via BGP is explicitly configured on NVE1 interfaces.
-- Route-targets are explicitly set in EVPN for peering.
-- Configuration is prepared in advance for a smoother cutover.
-- A test run is conducted and monitored for one hour.
-- The PIM feature is disabled on all devices.
+- Номера автономных систем останется прежним.
+- Номера vni тоже.
+- Поднимается соседство по ospf
+- На этом этапе будут подниматься тестовые неиспользуемые резервные **vlan** и **vni**
+  Например: vlan 1200 - 1205 vni 10020 - 10025
+  Готовим нужные template для соседей BGP
+- Будут убираться все соединения ipv4 unicast и заменяться на l2 evpn.
+- В интерфейсах nve1 будет явно указываться распространение меток vni через BGP.
+- Для построения пиринга, будем явноуказывать указывать route-target в evpn.
+- Для более плавного перехода, потребуется заранее подготовить конфигурацию.
+- Проводим тестовое испытание , в течении часа ожидаем.
+- На всех устройствах будет отключаться фича отвечающая за pim.
 
-## VxLAN Multipod Configuration
+## Настройка схемы сети для VxLAN Multipod.
 
 ![Scheme](/img/netarch/9/Scheme3.png)
 
@@ -1742,4 +1750,3 @@ end
 wr
 </code></pre>
 </details>
-*Network Architect Course | Lab 09*

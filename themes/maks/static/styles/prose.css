@@ -4,7 +4,7 @@
 
 .prose { font-size: 13px; line-height: 1.85; color: var(--text2); }
 
-.prose img { max-width: 100%; height: auto; display: block; border-radius: 6px; margin: 16px 0; aspect-ratio: auto; }
+.prose img { max-width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--border); margin: 16px 0; aspect-ratio: auto; }
 
 .prose h2 {
   font-family: 'Unbounded', sans-serif;
