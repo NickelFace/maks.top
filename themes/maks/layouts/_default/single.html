@@ -81,6 +81,20 @@ if(heads.length>2){
   const ab=document.getElementById('articleBody');
   ab.insertBefore(mobToc,ab.firstChild);
   mobToc.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobToc.removeAttribute('open')));
+
+  // Shrink TOC inner when footer enters viewport to prevent overlap
+  const tocInner=aside.querySelector('.toc-inner');
+  const footer=document.querySelector('footer');
+  if(tocInner&&footer){
+    const clampToc=()=>{
+      const footerTop=footer.getBoundingClientRect().top;
+      const maxNatural=window.innerHeight-96;
+      const maxAllowed=footerTop-72-8;
+      tocInner.style.maxHeight=Math.min(maxNatural,Math.max(maxAllowed,80))+'px';
+    };
+    window.addEventListener('scroll',clampToc,{passive:true});
+    clampToc();
+  }
 }
 
 /* ── Copy buttons on all code blocks ── */
