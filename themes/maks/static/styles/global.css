@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════
    FONTS
 ═══════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Unbounded:wght@400;700;900&display=swap');
 
 /* ═══════════════════════════════════════
    THEME VARIABLES
@@ -14,11 +13,11 @@
   --danger:  #ef4444;
 
   /* Dark theme (default) */
-  --bg:        #0a0e17;
-  --bg2:       #111827;
-  --bg3:       #1a2235;
-  --border:    #1e2d45;
-  --border2:   #263347;
+  --bg:        #13151f;
+  --bg2:       #1c1f2e;
+  --bg3:       #252840;
+  --border:    #2d3356;
+  --border2:   #353a60;
   --text:      #e2e8f0;
   --text2:     #94a3b8;
   --text3:     #64748b;
@@ -27,7 +26,7 @@
   --tag-bg:    rgba(0,212,255,0.08);
   --tag-color: #67e8f9;
   --shadow:    0 4px 24px rgba(0,0,0,0.5);
-  --nav-blur:  rgba(10,14,23,0.85);
+  --nav-blur:  rgba(19,21,31,0.85);
   --code-bg:   #0d1520;
 }
 
@@ -59,7 +58,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
   transition: background 0.3s, color 0.3s;
