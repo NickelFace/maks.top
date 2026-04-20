@@ -29,7 +29,7 @@ build:
 
 ## CUPS — Common Unix Printing System
 
-CUPS (Common Unix Printing System) — стандартная система печати в современном Linux. Демон: `cupsd`.
+CUPS (Common Unix Printing System) — стандартная система печати в современном Linux. Демон CUPS — `cupsd`.
 
 ### Файлы конфигурации CUPS
 
@@ -116,7 +116,7 @@ lpr -P laserjet file.pdf
 
 ## lp — печать файлов (интерфейс System V)
 
-`lp` — альтернатива `lpr` в стиле System V.
+Команда `lp` является альтернативой `lpr` в стиле System V.
 
 ```bash
 lp file.pdf
@@ -273,7 +273,7 @@ cupsenable ИМЯ    возобновить обработку очереди
 12. Какая команда удаляет все ожидающие задания текущего пользователя? → `lprm -`
 13. Какая команда System V отменяет задание печати? → `cancel JOBID` или `cancel ПРИНТЕР-JOBID`
 14. Что делает `lpmove laserjet-5 colorjet`? → Перемещает задание 5 с принтера `laserjet` на `colorjet`.
-15. В чём разница между `cupsreject` и `cupsdisable`? → `cupsreject` прекращает добавление новых заданий в очередь; `cupsdisable` останавливает обработку заданий, уже находящихся в очереди.
+15. В чём разница между `cupsreject` и `cupsdisable`? → `cupsreject` прекращает добавление новых заданий в очередь. `cupsdisable` останавливает обработку заданий, уже находящихся в очереди.
 16. Какая команда показывает состояние всех принтеров? → `lpstat -p`
 17. Какая команда показывает принтер по умолчанию? → `lpstat -d`
 18. Какой файл обеспечивает совместимость CUPS с LPD? → `/etc/printcap`

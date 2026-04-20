@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps роадмап — ресурсы и план</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --bg-secondary: #f5f5f3;
+    --border: rgba(0,0,0,0.12); --text: #1a1a18; --text-secondary: #6b6b67;
+    --accent-purple: #534AB7; --accent-purple-bg: #EEEDFE; --accent-purple-border: #AFA9EC;
+    --accent-green: #0F6E56; --accent-green-bg: #EAF3DE; --accent-green-text: #3B6D11;
+    --accent-orange-bg: #FAEEDA; --accent-orange-text: #854F0B;
+    --accent-blue-bg: #E6F1FB; --accent-blue-text: #185FA5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1c1c1a; --bg-secondary: #252523; --border: rgba(255,255,255,0.1); --text: #f0ede8; --text-secondary: #9a9990; }
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 2rem 1.5rem; max-width: 860px; margin: 0 auto; line-height: 1.6; }
+  h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+  h2 { font-size: 14px; font-weight: 600; margin-bottom: 12px; margin-top: 8px; }
+  .section-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; gap: 8px; }
+  .card-name { font-size: 15px; font-weight: 500; }
+  .badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
+  .badge-free { background: var(--accent-green-bg); color: var(--accent-green-text); }
+  .badge-paid { background: var(--accent-orange-bg); color: var(--accent-orange-text); }
+  .badge-freemium { background: var(--accent-blue-bg); color: var(--accent-blue-text); }
+  .badge-asterisk { background: var(--accent-green-bg); color: var(--accent-green-text); }
+  .card-focus { font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 11px; padding: 2px 7px; background: var(--bg-secondary); color: var(--text-secondary); border-radius: 4px; border: 0.5px solid var(--border); }
+  .tag-highlight { background: var(--accent-purple-bg); color: var(--accent-purple); border-color: var(--accent-purple-border); }
+  .note { font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; padding: 10px 14px; background: var(--bg-secondary); border-radius: 8px; border-left: 2px solid var(--accent-purple); }
+  hr.divider { border: none; border-top: 0.5px solid var(--border); margin: 2.5rem 0 1.5rem; }
+
+  .phase { display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 1.1rem 1.25rem; background: var(--bg); border: 0.5px solid var(--border); border-radius: 12px; margin-bottom: 10px; }
+  .phase-num { font-size: 28px; font-weight: 300; color: var(--accent-purple); line-height: 1; padding-top: 2px; }
+  .phase-body .phase-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .phase-title { font-size: 15px; font-weight: 500; }
+  .phase-time { font-size: 11px; padding: 3px 8px; background: var(--accent-purple-bg); color: var(--accent-purple); border-radius: 4px; font-weight: 500; }
+  .phase-goal { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
+  .phase-list { list-style: none; font-size: 13px; }
+  .phase-list li { padding: 3px 0; padding-left: 16px; position: relative; color: var(--text); }
+  .phase-list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent-purple); font-size: 11px; }
+  .milestone { display: inline-block; margin-top: 8px; font-size: 12px; padding: 4px 10px; background: var(--accent-green-bg); color: var(--accent-green-text); border-radius: 4px; font-weight: 500; }
+
+  .principle { padding: 1rem 1.25rem; background: var(--bg); border: 0.5px solid var(--border); border-radius: 12px; margin-bottom: 10px; }
+  .principle-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .principle-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--accent-purple-bg); color: var(--accent-purple); border-radius: 50%; font-size: 11px; font-weight: 600; }
+  .principle-body { font-size: 13px; color: var(--text-secondary); padding-left: 30px; }
+
+  .parallel { background: linear-gradient(to right, var(--accent-purple-bg) 0%, transparent 100%); border: 0.5px solid var(--accent-purple-border); border-radius: 12px; padding: 1.1rem 1.25rem; margin-top: 14px; }
+  .parallel-title { font-size: 13px; font-weight: 600; color: var(--accent-purple); margin-bottom: 8px; }
+  .parallel-items { font-size: 13px; color: var(--text); }
+  .parallel-items div { padding: 3px 0; }
+</style>
+</head>
+<body>
+
+<h1>DevOps роадмап</h1>
+<p class="subtitle">Обновлённая карта ресурсов и план движения от LPIC-2 до работы в Сиднее</p>
+
+<div class="section-label">Тренажёры Linux и DevOps</div>
+<div class="grid">
+  <div class="card">
+    <div class="card-top"><span class="card-name">SadServers</span><span class="badge badge-freemium">Freemium</span></div>
+    <div class="card-focus">CTF-задачи, сломан сервер почини его</div>
+    <div class="tag-row"><span class="tag tag-highlight">Эталон жанра</span><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">K8s</span><span class="tag">Авто-проверка</span></div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="card-name">Killercoda</span><span class="badge badge-freemium">Freemium</span></div>
+    <div class="card-focus">Наследник Katacoda, сценарии и playground</div>
+    <div class="tag-row"><span class="tag">Linux</span><span class="tag">Kubernetes</span><span class="tag">CKA/CKAD</span><span class="tag">Docker</span><span class="tag">Свободный режим</span></div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="card-name">Instruqt</span><span class="badge badge-asterisk">Бесплатно*</span></div>
+    <div class="card-focus">Hosted labs от вендоров, доступ через их порталы</div>
+    <div class="tag-row"><span class="tag tag-highlight">HashiCorp Terraform</span><span class="tag">Vault</span><span class="tag">Consul</span><span class="tag">Cloud VMs</span></div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="card-name">OverTheWire</span><span class="badge badge-free">Бесплатно</span></div>
+    <div class="card-focus">Bandit и другие варгеймы через SSH</div>
+    <div class="tag-row"><span class="tag">Linux</span><span class="tag">Security</span><span class="tag">Bash</span><span class="tag">CTF</span></div>
+  </div>
+</div>
+
+<div class="note">
+  <strong>* про Instruqt.</strong> Платформа B2B, но контент для учащегося бесплатен. Треки HashiCorp, Redpanda, Datadog открыты через developer-порталы этих компаний. Под Terraform лучший бесплатный практикум в сети.
+</div>
+
+<hr class="divider">
+
+<div class="section-label">Подготовка к сертификации</div>
+<div class="grid">
+  <div class="card">
+    <div class="card-top"><span class="card-name">killer.sh</span><span class="badge badge-freemium">В цене экзамена</span></div>
+    <div class="card-focus">Симуляторы CKA/CKAD/CKS от Killer Shell</div>
+    <div class="tag-row"><span class="tag tag-highlight">Обязателен под CKA</span><span class="tag">2 захода × 36ч</span><span class="tag">Kubernetes</span></div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="card-name">Tutorials Dojo</span><span class="badge badge-paid">Платно</span></div>
+    <div class="card-focus">Mock-экзамены под AWS SAA/SOA/DOP, лучший в индустрии</div>
+    <div class="tag-row"><span class="tag tag-highlight">Must-have под AWS</span><span class="tag">Review mode</span><span class="tag">Cheat sheets</span></div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="card-name">AWS Skill Builder</span><span class="badge badge-freemium">Freemium</span></div>
+    <div class="card-focus">Официальные курсы и Cloud Quest от AWS</div>
+    <div class="tag-row"><span class="tag">AWS</span><span class="tag">Лабы в sandbox</span><span class="tag">Геймификация</span></div>
+  </div>
+  <div class="card">
+    <div class="card-top"><span class="card-name">KodeKloud</span><span class="badge badge-paid">Платно</span></div>
+    <div class="card-focus">Курсы + playgrounds по Docker, K8s, Terraform, Ansible</div>
+    <div class="tag-row"><span class="tag">DevOps bundle</span><span class="tag">Mumshad Mannambeth</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-label">План по фазам</div>
+
+<div class="phase">
+  <div class="phase-num">01</div>
+  <div class="phase-body">
+    <div class="phase-top">
+      <span class="phase-title">Завершить LPIC-2</span>
+      <span class="phase-time">сейчас — 3 месяца</span>
+    </div>
+    <div class="phase-goal">Закрыть экзамены 201 и 202, получить первый весомый сертификат в резюме.</div>
+    <ul class="phase-list">
+      <li>Пройти все разделы borosan.gitbook.io/lpic2book, помечать слабые места в Obsidian</li>
+      <li>201: capacity planning, ядро, загрузка, файловые системы, RAID/LVM, сеть</li>
+      <li>202: DNS, web-серверы, file sharing, network client management, email, безопасность</li>
+      <li>Каждую тему закреплять на ubuntu-test, не просто читать</li>
+      <li>Последние 2 недели перед экзаменом только SadServers + прогон mock-вопросов</li>
+      <li>Записаться в Pearson VUE Sydney, оба экзамена подряд с разницей в 2-3 недели</li>
+    </ul>
+    <div class="milestone">Майлстоун: LPIC-2 в LinkedIn и CV</div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">02</div>
+  <div class="phase-body">
+    <div class="phase-top">
+      <span class="phase-title">AWS Solutions Architect Associate</span>
+      <span class="phase-time">3 — 6 месяцев</span>
+    </div>
+    <div class="phase-goal">Выйти на уровень junior-требований Sydney-рынка. Без AWS резюме не читают.</div>
+    <ul class="phase-list">
+      <li>Курс Stephane Maarek или Adrian Cantrill на Udemy, один из двух</li>
+      <li>AWS Free Tier: развернуть реальные EC2, VPC, S3, IAM, RDS руками</li>
+      <li>Проект в homelab: static site на S3 + CloudFront + Route53 со своим maks.top</li>
+      <li>Проект посложнее: Docker-приложение на ECS Fargate с ALB</li>
+      <li>Tutorials Dojo mock-экзамены, добиться стабильных 85%+ перед записью на real exam</li>
+      <li>Сдать SAA-C03, начать откликаться на junior DevOps вакансии в Сиднее</li>
+    </ul>
+    <div class="milestone">Майлстоун: AWS SAA + первые собеседования</div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">03</div>
+  <div class="phase-body">
+    <div class="phase-top">
+      <span class="phase-title">Terraform и CI/CD</span>
+      <span class="phase-time">6 — 9 месяцев</span>
+    </div>
+    <div class="phase-goal">Закрыть Infrastructure-as-Code и базовую автоматизацию деплоя, сделать портфолио.</div>
+    <ul class="phase-list">
+      <li>HashiCorp Learn + Instruqt треки под Terraform, все хенды-он</li>
+      <li>Переписать AWS homelab из фазы 2 целиком на Terraform модули</li>
+      <li>GitHub Actions: базовые workflows (lint, test, build, deploy на AWS)</li>
+      <li>Ansible базовый уровень, playbooks под настройку своих серверов</li>
+      <li>Сдать Terraform Associate (недорого, хороший сигнал работодателю)</li>
+      <li>Вести homelab репозиторий публично, пушить минимум 3-4 раза в неделю</li>
+    </ul>
+    <div class="milestone">Майлстоун: Terraform cert + видимый GitHub портфель</div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">04</div>
+  <div class="phase-body">
+    <div class="phase-top">
+      <span class="phase-title">Kubernetes и CKA</span>
+      <span class="phase-time">9 — 12 месяцев</span>
+    </div>
+    <div class="phase-goal">Контейнерная оркестрация, самая дорогая строчка в резюме после AWS.</div>
+    <ul class="phase-list">
+      <li>KodeKloud CKA course (Mumshad) или Cantrill, плюс книга Kubernetes Up and Running</li>
+      <li>Поднять k3s в homelab на основной машине, деплоить туда реальные сервисы</li>
+      <li>Killercoda сценарии под CKA ежедневно последний месяц</li>
+      <li>killer.sh два полных захода, оба до зелёной зоны</li>
+      <li>Сдать CKA, обновить CV и LinkedIn в тот же день</li>
+    </ul>
+    <div class="milestone">Майлстоун: CKA, мидл-уровень запросов по зарплате</div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">05</div>
+  <div class="phase-body">
+    <div class="phase-top">
+      <span class="phase-title">AWS DevOps Pro и специализация</span>
+      <span class="phase-time">12 — 18 месяцев</span>
+    </div>
+    <div class="phase-goal">Закрыть топовый AWS-сертификат и выбрать вертикаль дальнейшего роста.</div>
+    <ul class="phase-list">
+      <li>AWS DOP-C02 через Cantrill + Tutorials Dojo</li>
+      <li>По желанию SOA-C02 между SAA и DOP для тройной AWS-сертификации</li>
+      <li>Выбор направления: Platform Engineering, SRE, Security, или Data Platform</li>
+      <li>Глубокое погружение в observability (Prometheus, Grafana, Datadog) или security</li>
+      <li>Начать писать в блоге не только как ученик, но как практик</li>
+    </ul>
+    <div class="milestone">Майлстоун: стабильная DevOps-роль + выбранная специализация</div>
+  </div>
+</div>
+
+<div class="parallel">
+  <div class="parallel-title">Параллельно всё время</div>
+  <div class="parallel-items">
+    <div>▸ Homelab растёт вместе со скиллами, не отдельно от учёбы</div>
+    <div>▸ GitHub-профиль публичный, с README, pinned repos, регулярными коммитами</div>
+    <div>▸ Технический блог на maks.top, минимум пост в 2 недели</div>
+    <div>▸ Откликаться на вакансии уже с LPIC-2, не ждать полного набора сертов</div>
+    <div>▸ Sydney DevOps meetups, DevOps Days Sydney, Kubernetes Sydney</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-label">Принципы эффективного изучения</div>
+
+<div class="principle">
+  <div class="principle-title"><span class="principle-num">1</span>Сначала сделай, потом читай</div>
+  <div class="principle-body">Любая новая тема начинается с попытки настроить сервис руками до того как сядешь за книгу. Получил ошибку, упёрся в непонятное, пошёл читать документацию прицельно под проблему. Это в десять раз эффективнее пассивного чтения.</div>
+</div>
+
+<div class="principle">
+  <div class="principle-title"><span class="principle-num">2</span>Пиши пока учишься</div>
+  <div class="principle-body">Блог это не тщеславие, а проверка понимания. Если не можешь объяснить тему постом на 800 слов, значит не понял. Плюс контент работает на тебя круглосуточно, HR и инженеры реально гуглят кандидатов.</div>
+</div>
+
+<div class="principle">
+  <div class="principle-title"><span class="principle-num">3</span>Не гонись за коллекцией сертов</div>
+  <div class="principle-body">Максимум один серт в квартал, с реальной практикой между ними. Пять сертификатов без проекта в GitHub читаются как красный флаг. Один серт с публичным портфолио под него читается как инженер.</div>
+</div>
+
+<div class="principle">
+  <div class="principle-title"><span class="principle-num">4</span>Пропорция 70/30</div>
+  <div class="principle-body">Семьдесят процентов времени терминал, тридцать процентов видео и книги. Если пропорция перекашивается в сторону пассивного контента, знания не закрепляются и быстро уходят.</div>
+</div>
+
+<div class="principle">
+  <div class="principle-title"><span class="principle-num">5</span>Откликайся рано и итерируй</div>
+  <div class="principle-body">Первые собеседования не про то чтобы получить оффер, а про то чтобы понять чего не хватает. После LPIC-2 уже можно подавать, отказы это обратная связь для корректировки учёбы. Ждать полного набора сертов ошибка.</div>
+</div>
+
+<div class="principle">
+  <div class="principle-title"><span class="principle-num">6</span>Находи сообщество</div>
+  <div class="principle-body">В Сиднее активное DevOps-комьюнити, meetup.com, DevOps Days, Kubernetes community days. Личные контакты в этой сфере решают больше чем CV в ATS. Плюс через сообщество находятся менторы, которых нет онлайн.</div>
+</div>
+
+<div class="principle">
+  <div class="principle-title"><span class="principle-num">7</span>Документируй homelab как production</div>
+  <div class="principle-body">README, runbooks, disaster recovery план. Относись к своей инфраструктуре как к рабочей. Это формирует правильные привычки и выглядит сильно на интервью, когда рассказываешь про свою setup.</div>
+</div>
+
+</body>
+</html>
