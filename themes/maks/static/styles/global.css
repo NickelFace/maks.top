@@ -884,6 +884,7 @@ footer {
   padding: 16px 18px;
   text-decoration: none;
   transition: border-color .15s, transform .15s;
+  position: relative;
 }
 .kb-card:hover {
   border-color: var(--accent);
@@ -912,12 +913,20 @@ footer {
   padding: 2px 7px;
 }
 .kb-card-meta {
-  font-size: 10.5px;
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 10px;
   color: var(--accent);
-  margin-top: 4px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 8px;
+  line-height: 1.4;
 }
 .kb-card-section {
   border-color: var(--border2);
+  padding-bottom: 32px;
 }
 .kb-card-section:hover {
   border-color: var(--accent);
