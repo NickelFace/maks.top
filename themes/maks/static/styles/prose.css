@@ -2,8 +2,12 @@
    PROSE.CSS — article content styles
 ═══════════════════════════════════════ */
 
-.post-header { margin-bottom: 24px; }
-.post-header h1 { margin-bottom: 10px; }
+.post-header {
+  padding-bottom: 18px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.post-header h1 { margin-bottom: 12px; }
 .post-meta {
   display: flex;
   flex-wrap: wrap;
@@ -11,9 +15,12 @@
   gap: 6px;
 }
 .post-meta .post-date {
+  display: inline;
   font-size: 11px;
   color: var(--text3);
-  margin-right: 4px;
+  margin-top: 0;
+  padding-right: 6px;
+  border-right: 1px solid var(--border2);
 }
 
 .prose { font-size: 13px; line-height: 1.85; color: var(--text2); }
