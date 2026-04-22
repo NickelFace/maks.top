@@ -20,49 +20,65 @@
   </div>
 
   <!-- ═══ QUICK REFERENCES — grouped by Params.group ═══ -->
+  {{/* Collect direct kb pages and sub-section index pages */}}
   {{ $kbPages := where .Site.RegularPages "Section" "kb" }}
-  {{ if $kbPages }}
-    {{ $groups := slice "Linux Core" "Networking" "Cloud & DevOps" "Security" }}
-    {{ range $groups }}
-      {{ $group := . }}
-      {{ $gPages := where $kbPages "Params.group" $group }}
-      {{ if $gPages }}
-      <div class="kb-section-title">{{ $group }}</div>
-      <div class="kb-cards">
-        {{ range $gPages }}
-        <a href="{{ .RelPermalink }}" class="kb-card">
-          <div class="kb-card-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
-          <div class="kb-card-title">{{ .Title }}</div>
-          {{ with .Description }}<div class="kb-card-desc">{{ . }}</div>{{ end }}
-          {{ with .Params.tags }}
-          <div class="kb-card-tags">
-            {{ range first 3 . }}<span class="tag">{{ . }}</span>{{ end }}
-          </div>
-          {{ end }}
-        </a>
-        {{ end }}
-      </div>
-      {{ end }}
-    {{ end }}
+  {{ $kbSections := .Sections }}
 
-    {{/* Ungrouped fallback */}}
-    {{ $ungrouped := slice }}
-    {{ range $kbPages }}
-      {{ if not .Params.group }}{{ $ungrouped = $ungrouped | append . }}{{ end }}
+  {{ $groups := slice "Linux Core" "Networking" "Cloud & DevOps" "Security" }}
+  {{ range $groups }}
+    {{ $group := . }}
+    {{ $gPages := where $kbPages "Params.group" $group }}
+    {{/* Also include sub-section index pages with this group */}}
+    {{ $gSections := slice }}
+    {{ range $kbSections }}
+      {{ if eq .Params.group $group }}{{ $gSections = $gSections | append . }}{{ end }}
     {{ end }}
-    {{ if $ungrouped }}
-    <div class="kb-section-title">References</div>
+    {{ if or $gPages $gSections }}
+    <div class="kb-section-title">{{ $group }}</div>
     <div class="kb-cards">
-      {{ range $ungrouped }}
-      <a href="{{ .Permalink }}" class="kb-card">
+      {{ range $gSections }}
+      <a href="{{ .RelPermalink }}" class="kb-card kb-card-section">
+        <div class="kb-card-icon">{{ with .Params.icon }}{{ . }}{{ else }}📁{{ end }}</div>
+        <div class="kb-card-title">{{ .Title }}</div>
+        {{ with .Description }}<div class="kb-card-desc">{{ . }}</div>{{ end }}
+        <div class="kb-card-meta">{{ len .Pages }} pages</div>
+      </a>
+      {{ end }}
+      {{ range $gPages }}
+      <a href="{{ .RelPermalink }}" class="kb-card">
         <div class="kb-card-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
         <div class="kb-card-title">{{ .Title }}</div>
         {{ with .Description }}<div class="kb-card-desc">{{ . }}</div>{{ end }}
+        {{ with .Params.tags }}
+        <div class="kb-card-tags">
+          {{ range first 3 . }}<span class="tag">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
       </a>
       {{ end }}
     </div>
     {{ end }}
-  {{ else }}
+  {{ end }}
+
+  {{/* Ungrouped direct kb pages fallback */}}
+  {{ $ungrouped := slice }}
+  {{ range $kbPages }}
+    {{ if not .Params.group }}{{ $ungrouped = $ungrouped | append . }}{{ end }}
+  {{ end }}
+  {{ if $ungrouped }}
+  <div class="kb-section-title">References</div>
+  <div class="kb-cards">
+    {{ range $ungrouped }}
+    <a href="{{ .Permalink }}" class="kb-card">
+      <div class="kb-card-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
+      <div class="kb-card-title">{{ .Title }}</div>
+      {{ with .Description }}<div class="kb-card-desc">{{ . }}</div>{{ end }}
+    </a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ if and (not $kbPages) (not $kbSections) }}
   <div class="cert-coming-soon" style="margin-top:40px">
     <div class="coming-icon">🚧</div>
     <div>Quick references coming soon</div>
