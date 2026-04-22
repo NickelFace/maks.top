@@ -911,6 +911,17 @@ footer {
   font-size: 9.5px;
   padding: 2px 7px;
 }
+.kb-card-meta {
+  font-size: 10.5px;
+  color: var(--accent);
+  margin-top: 4px;
+}
+.kb-card-section {
+  border-color: var(--border2);
+}
+.kb-card-section:hover {
+  border-color: var(--accent);
+}
 .kb-empty {
   font-size: 12px;
   color: var(--text3);
