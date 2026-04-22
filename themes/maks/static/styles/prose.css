@@ -10,17 +10,19 @@
 .post-header h1 { margin-bottom: 12px; }
 .post-meta {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  gap: 8px;
 }
 .post-meta .post-date {
-  display: inline;
+  display: block;
   font-size: 11px;
   color: var(--text3);
   margin-top: 0;
-  padding-right: 6px;
-  border-right: 1px solid var(--border2);
+}
+.post-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .prose { font-size: 13px; line-height: 1.85; color: var(--text2); }
