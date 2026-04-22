@@ -29,6 +29,8 @@
           {{ $certURL := index $certMap $sub }}
           {{ if $certURL }}
             <a href="{{ $certURL | relURL }}">{{ $sub }}</a>
+          {{ else if eq $.Section "kb" }}
+            <a href="{{ (printf "/%s/%s/" $.Section $sub) | relURL }}">{{ $.Parent.Title | default $sub }}</a>
           {{ else }}
             <span>{{ $sub }}</span>
           {{ end }}
