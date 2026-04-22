@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="page">
+
+  {{ partial "breadcrumb.html" . }}
+
+  <h1 class="sec-title">{{ .Title }}</h1>
+  {{ with .Description }}<p class="sec-desc">{{ . }}</p>{{ end }}
+
+  {{ with .Params.tags }}
+  <div style="margin-bottom:24px">
+    {{ range . }}<span class="tag">{{ . }}</span> {{ end }}
+  </div>
+  {{ end }}
+
+  <div class="kb-cards">
+    {{ range .Pages.ByTitle }}
+    <a href="{{ .RelPermalink }}" class="kb-card">
+      <div class="kb-card-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
+      <div class="kb-card-title">{{ .Title }}</div>
+      {{ with .Description }}<div class="kb-card-desc">{{ . }}</div>{{ end }}
+      {{ with .Params.tags }}
+      <div class="kb-card-tags">
+        {{ range first 4 . }}<span class="tag">{{ . }}</span>{{ end }}
+      </div>
+      {{ end }}
+    </a>
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}
