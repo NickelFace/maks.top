@@ -2,6 +2,20 @@
    PROSE.CSS — article content styles
 ═══════════════════════════════════════ */
 
+.post-header { margin-bottom: 24px; }
+.post-header h1 { margin-bottom: 10px; }
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.post-meta .post-date {
+  font-size: 11px;
+  color: var(--text3);
+  margin-right: 4px;
+}
+
 .prose { font-size: 13px; line-height: 1.85; color: var(--text2); }
 
 .prose img { max-width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--border); margin: 16px 0; aspect-ratio: auto; }
