@@ -23,7 +23,7 @@
   </div>
 
   <!-- ═══ QUICK REFERENCES — grouped by Params.group ═══ -->
-  {{ $kbPages := where .Site.RegularPages "Section" "kb" }}
+  {{ $kbPages := where (where .Site.RegularPages "Section" "kb") "Params.page_lang" "ne" "ru" }}
   {{ $kbSections := .Sections }}
 
   {{ $groups := slice "Linux Core" "Networking" "Cloud & DevOps" "Security" }}
