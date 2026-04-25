@@ -7,7 +7,7 @@
     {{ range .Paginator.Pages }}
     <a href="{{ .RelPermalink }}" class="post-card">
       <div class="post-card-meta">
-        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+        {{ if not .Date.IsZero }}<span class="post-date">{{ .Date.Format "2006-01-02" }}</span>{{ end }}
         {{ range $i, $t := .Params.tags }}{{ if lt $i 2 }}
         <span class="tag">{{ $t }}</span>
         {{ end }}{{ end }}
