@@ -49,7 +49,7 @@
         <div class="kb-card-meta">{{ len .Pages }} pages</div>
       </a>
       {{ end }}
-      {{ range $gPages }}
+      {{ range sort $gPages "Title" }}
       <a href="{{ .RelPermalink }}" class="kb-card">
         <div class="kb-card-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
         <div class="kb-card-title">{{ .Title }}</div>
