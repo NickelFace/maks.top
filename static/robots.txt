@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /posts/neteng/ru/
+Disallow: /posts/misc/ru/
+Disallow: /posts/lpic1/ru/
+Disallow: /posts/lpic2/ru/
+Disallow: /posts/netarch/ru/
+Disallow: /kb/ru/
+Disallow: /kb/cases/ru/
+Disallow: /docs/ru/
+
+Sitemap: https://maks.top/sitemap.xml
