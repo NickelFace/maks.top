@@ -13,22 +13,26 @@ tags: ["docs"]
 
 ## Архитектура CSS
 
-Стили разбиты на 8 файлов по принципу **scope** (область применения):
+Стили разбиты на 9 файлов по принципу **scope** (область применения):
 
-| Файл | Загружается | Назначение |
-|---|---|---|
-| `global.css` | везде | Переменные, nav, базовые компоненты, dot-grid пагинация |
-| `mobile.css` | везде | Мобильная навигация, breakpoints |
-| `fonts.css` | везде | `@font-face` для Inter (body), JetBrains Mono (код), Unbounded (заголовки) |
-| `prose.css` | posts, about, kb, docs | Типографика, NS-карточки/tabs/ref-panel, section divider |
-| `home.css` | только `/` | Hero, recent posts, KB grid, cert-grid |
-| `cert.css` | `/certs/*` | Cert hero, плитки ресурсов, аккордеон тем |
-| `quiz.css` | `/ccna-quiz/*` | Карточки квиза, состояния вариантов, значки баллов |
-| `ns.css` | `/posts/linux-namespaces/` | Двухколоночный layout, TOC sidebar, прогресс, фильтры |
-| `chroma.css` | везде | Подсветка синтаксиса (Dracula тёмная / GitHub светлая) |
+| Файл | Расположение | Загружается | Назначение |
+|---|---|---|---|
+| `critical.css` | `themes/maks/assets/css/` | инлайн в `<head>` | Предотвращение FOUC: фон `html,body` для обеих тем + правило `no-transition` |
+| `global.css` | `themes/maks/static/styles/` | везде | Переменные, nav, базовые компоненты, dot-grid пагинация |
+| `mobile.css` | `themes/maks/static/styles/` | везде | Мобильная навигация, breakpoints |
+| `fonts.css` | `themes/maks/static/styles/` | везде | `@font-face` для Inter (body), JetBrains Mono (код), Unbounded (заголовки) |
+| `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs | Типографика, NS-карточки/tabs/ref-panel, section divider |
+| `home.css` | `themes/maks/static/styles/` | только `/` | Hero, recent posts, KB grid, cert-grid |
+| `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, плитки ресурсов, аккордеон тем |
+| `quiz.css` | `themes/maks/static/styles/` | `/ccna-quiz/*` | Карточки квиза, состояния вариантов, значки баллов |
+| `ns.css` | `themes/maks/static/styles/` | `/posts/linux-namespaces/` | Двухколоночный layout, TOC sidebar, прогресс, фильтры |
+| `chroma.css` | `themes/maks/static/styles/` | везде | Подсветка синтаксиса (Dracula тёмная / GitHub светлая) |
 
 Загрузка в `baseof.html`:
 ```html
+<!-- Инлайн через Hugo asset pipeline — единственный источник правды для FOUC-цветов -->
+{{ with resources.Get "css/critical.css" | minify }}<style>{{ .Content | safeCSS }}</style>{{ end }}
+
 <link rel="stylesheet" href="/styles/fonts.css">    <!-- всегда -->
 <link rel="stylesheet" href="/styles/global.css">   <!-- всегда -->
 <link rel="stylesheet" href="/styles/chroma.css">   <!-- всегда -->
@@ -38,6 +42,8 @@ tags: ["docs"]
 <link rel="stylesheet" href="/styles/mobile.css">   <!-- всегда -->
 {{ block "head" . }}{{ end }}  <!-- cert.css / quiz.css / ns.css добавляются здесь -->
 ```
+
+> **Зачем `critical.css` инлайнится:** цвета фона тёмной/светлой темы должны применяться до загрузки любого внешнего CSS, чтобы предотвратить белую вспышку при навигации. `critical.css` находится в `assets/`, поэтому Hugo может прочитать и встроить его во время сборки через `resources.Get`. **При изменении цветов темы обновляй `critical.css` И переменные `:root` в `global.css` — они должны совпадать.**
 
 ---
 

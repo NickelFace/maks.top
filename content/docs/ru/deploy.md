@@ -24,6 +24,23 @@ cd maks.top
 git checkout hugo
 ```
 
+### Переменные окружения
+
+`phone` и `email` не хранятся в `hugo.toml` — они передаются через переменные окружения, чтобы не попасть в историю git.
+
+Создай файл `.env` в корне репозитория (он в `.gitignore`):
+
+```bash
+HUGO_PARAMS_PHONE=+1234567890
+HUGO_PARAMS_EMAIL=contact@example.com
+```
+
+Hugo автоматически подхватывает переменные `HUGO_PARAMS_*`. Скрипт `dev.sh` загружает `.env` перед сборкой.
+
+На GitHub Actions добавь секреты (**Settings → Secrets and variables → Actions**):
+- `CONTACT_PHONE`
+- `CONTACT_EMAIL`
+
 ### Запуск dev-сервера
 
 Три варианта в зависимости от задачи:
@@ -31,7 +48,7 @@ git checkout hugo
 ```bash
 # Вариант 1 — полный цикл (как в CI): сборка + индексация + сервер
 ./dev.sh
-# = hugo && npx pagefind --site public && hugo server --disableFastRender
+# загружает .env, затем: hugo && npx pagefind --site public && hugo server --disableFastRender
 
 # Вариант 2 — быстрые итерации (Pagefind не работает, поиск недоступен)
 hugo server -D
@@ -76,13 +93,13 @@ GitHub Actions (.github/workflows/deploy.yml)
         │      submodules: recursive   ← обязательно! тема — сабмодуль
         │      fetch-depth: 0          ← полная история для .GitInfo
         │
-        ├── 2. peaceiris/actions-hugo@v3
-        │      hugo-version: "latest"
-        │      extended: true          ← обязательно для поддержки SASS
+        ├── 2. wget hugo_extended .deb → dpkg -i
+        │      версия задаётся через HUGO_VERSION в workflow
         │
         ├── 3. hugo --minify --gc
         │      --minify  сжимает HTML/CSS/JS
         │      --gc      удаляет неиспользуемые файлы кэша
+        │      env: HUGO_PARAMS_PHONE / HUGO_PARAMS_EMAIL из GitHub Secrets
         │
         ├── 4. grep stylesheet check   ← отладочный шаг, проверяет пути CSS в public/index.html
         │
@@ -150,18 +167,30 @@ DNS-записи в Cloudflare:
 
 В текущем `deploy.yml` этого шага **нет**. Не добавляйте его.
 
-### `hugo-version: "latest"` может сломаться при мажорных обновлениях
+### Версия Hugo зафиксирована в `deploy.yml`
 
-`peaceiris/actions-hugo@v3` с `hugo-version: "latest"` всегда устанавливает новейшую версию. Если Hugo выпустит breaking change, сборка может неожиданно упасть.
-
-**Решение:** зафиксировать конкретную версию:
+Hugo устанавливается через `wget` (не через `peaceiris/actions-hugo`). Версия задаётся переменной `HUGO_VERSION` в workflow:
 
 ```yaml
-- uses: peaceiris/actions-hugo@v3
-  with:
-    hugo-version: "0.145.0"   # последняя заведомо рабочая версия
-    extended: true
+env:
+  HUGO_VERSION: "0.147.1"
 ```
+
+Для обновления — измените это значение и сделайте пуш.
+
+### `@view-transition` вызывает белую вспышку при навигации
+
+`@view-transition { navigation: auto; }` в `global.css` включает браузерный cross-fade между страницами. Стандартная анимация показывает прозрачный/белый кадр во время перехода — это обходит инлайн-скрипт предотвращения FOUC.
+
+**Исправление уже применено:** стандартная анимация отключена:
+
+```css
+@view-transition { navigation: auto; }
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; }
+```
+
+Не удаляйте эти overrides без добавления кастомной анимации, которая избегает белого кадра.
 
 ### Ручное редактирование `public/`
 
