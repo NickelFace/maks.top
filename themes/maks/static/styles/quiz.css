@@ -397,8 +397,5 @@
   .quiz-opt { padding: 8px 10px; }
   .quiz-opt-text { font-size: 12px; }
   .quiz-img { max-height: 220px; }
-  .quiz-nav-pages { gap: 3px; }
-  .quiz-nav-dot { min-width: 24px; height: 24px; font-size: 9.5px; }
-  .quiz-nav-btn { padding: 7px 12px; font-size: 11.5px; }
-  .quiz-index-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+.quiz-index-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
 }

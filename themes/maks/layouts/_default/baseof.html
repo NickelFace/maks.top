@@ -13,15 +13,28 @@
 {{- if eq .Params.page_lang "ru" }}{{- with .Params.lang_pair }}{{- $canonical = absURL . }}{{- end }}{{- end }}
 <link rel="canonical" href="{{ $canonical }}">
 
-{{- $title := cond .IsHome .Site.Title (printf "%s — %s" .Title .Site.Title) }}
-{{- $desc  := cond (ne .Description "") .Description .Site.Params.description }}
+{{- $title  := cond .IsHome .Site.Title (printf "%s — %s" .Title .Site.Title) }}
+{{- $desc   := cond (ne .Description "") .Description .Site.Params.description }}
+{{- $ogImg  := .Params.image | default .Site.Params.og_image }}
 <meta property="og:type"        content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:site_name"   content="{{ .Site.Title }}">
 <meta property="og:title"       content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:url"         content="{{ $canonical }}">
+{{- with $ogImg }}
+<meta property="og:image"       content="{{ . | absURL }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{{- end }}
 {{- if .IsPage }}
 <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time"  content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end }}
+<meta name="twitter:card"        content="{{ if $ogImg }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title"       content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+{{- with $ogImg }}
+<meta name="twitter:image"       content="{{ . | absURL }}">
 {{- end }}
 {{- if eq .Params.page_lang "ru" }}
 <meta name="robots" content="noindex, nofollow">
@@ -30,10 +43,10 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{{ "styles/fonts.css" | relURL }}">
 <link rel="stylesheet" href="{{ "styles/global.css" | relURL }}">
-<link rel="stylesheet" href="{{ "styles/chroma.css" | relURL }}">
+{{ if or (eq .Type "posts") (eq .Type "kb") (eq .Type "docs") }}<link rel="stylesheet" href="{{ "styles/chroma.css" | relURL }}">{{ end }}
 {{ if .IsHome }}<link rel="stylesheet" href="{{ "styles/home.css" | relURL }}">{{ end }}
 {{ if or (eq .Type "posts") (eq .Type "about") (eq .Type "docs") (eq .Type "kb") }}<link rel="stylesheet" href="{{ "styles/prose.css" | relURL }}">{{ end }}
-<link rel="stylesheet" href="{{ "styles/mobile.css" | relURL }}">
+<link rel="stylesheet" href="{{ "styles/mobile.css" | relURL }}" media="(max-width: 860px)">
 {{ block "head" . }}{{ end }}
 {{ if or .Params.page_lang .Params.lang_pair }}<meta id="page-lang" data-lang="{{ .Params.page_lang | default "en" }}" data-lang-pair="{{ .Params.lang_pair }}">{{ end }}
 </head>
@@ -50,11 +63,11 @@
     <li><a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>About</a></li>
   </ul>
   <div class="nav-right">
-    <div class="lang-toggle">
-      <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en',this)">EN</button>
-      <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru',this)">RU</button>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en')" aria-pressed="{{ if ne .Params.page_lang "ru" }}true{{ else }}false{{ end }}">EN</button>
+      <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru')" aria-pressed="{{ if eq .Params.page_lang "ru" }}true{{ else }}false{{ end }}">RU</button>
     </div>
-    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme" aria-pressed="false">🌙</button>
   </div>
 </nav>
 
@@ -62,23 +75,23 @@
 <nav class="mob-nav">
   <a href="{{ "/" | relURL }}" class="nav-logo">maks.top</a>
   <div class="mob-nav-right">
-    <button class="theme-btn" onclick="toggleTheme()" id="themeBtnMob" title="Toggle theme">🌙</button>
-    <button class="burger" id="burgerBtn" onclick="toggleMobMenu()" aria-label="Menu">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtnMob" aria-label="Toggle theme" aria-pressed="false">🌙</button>
+    <button class="burger" id="burgerBtn" onclick="toggleMobMenu()" aria-label="Menu" aria-expanded="false" aria-controls="mobDrawer">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
 <!-- ═══ MOBILE DRAWER ═══ -->
-<div class="mob-drawer" id="mobDrawer">
+<div class="mob-drawer" id="mobDrawer" role="dialog" aria-label="Navigation menu">
   <a href="{{ "/" | relURL }}"{{ if .IsHome }} class="active"{{ end }}>Home</a>
   <a href="{{ "/posts/" | relURL }}"{{ if eq .Section "posts" }} class="active"{{ end }}>Blog</a>
   <a href="{{ "/certs/" | relURL }}"{{ if eq .Section "certs" }} class="active"{{ end }}>Certs</a>
   <a href="{{ "/kb/" | relURL }}"{{ if eq .Section "kb" }} class="active"{{ end }}>Knowledge Base</a>
   <a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>About</a>
-  <div class="mob-drawer-lang">
-    <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en',this)">EN</button>
-    <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru',this)">RU</button>
+  <div class="mob-drawer-lang" role="group" aria-label="Language">
+    <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en')" aria-pressed="{{ if ne .Params.page_lang "ru" }}true{{ else }}false{{ end }}">EN</button>
+    <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru')" aria-pressed="{{ if eq .Params.page_lang "ru" }}true{{ else }}false{{ end }}">RU</button>
   </div>
 </div>
 <div class="mob-overlay" id="mobOverlay" onclick="closeMobMenu()"></div>
@@ -86,25 +99,25 @@
 {{ block "main" . }}{{ end }}
 
 <!-- ═══ MOBILE BOTTOM NAV ═══ -->
-<nav class="mob-bottom-nav">
+<nav class="mob-bottom-nav" aria-label="Main navigation">
   <a href="{{ "/" | relURL }}" class="mob-bnav-item{{ if .IsHome }} active{{ end }}">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
     <span>Home</span>
   </a>
   <a href="{{ "/posts/" | relURL }}" class="mob-bnav-item{{ if eq .Section "posts" }} active{{ end }}">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
     <span>Blog</span>
   </a>
   <a href="{{ "/certs/" | relURL }}" class="mob-bnav-item{{ if eq .Section "certs" }} active{{ end }}">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
     <span>Certs</span>
   </a>
   <a href="{{ "/kb/" | relURL }}" class="mob-bnav-item{{ if eq .Section "kb" }} active{{ end }}">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
     <span>KB</span>
   </a>
   <a href="{{ "/about/" | relURL }}" class="mob-bnav-item{{ if eq .RelPermalink "/about/" }} active{{ end }}">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
     <span>About</span>
   </a>
 </nav>
@@ -116,14 +129,18 @@
 </footer>
 
 <script>
+function applyTheme(theme){
+  const isLight=theme==='light';
+  document.documentElement.setAttribute('data-theme',isLight?'light':'dark');
+  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>{
+    b.textContent=isLight?'☀️':'🌙';
+    b.setAttribute('aria-pressed',isLight?'true':'false');
+  });
+}
 function toggleTheme(){
-  const html=document.documentElement;
-  const isDark=html.getAttribute('data-theme')==='dark';
-  const next=isDark?'light':'dark';
-  html.setAttribute('data-theme',next);
+  const next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
   localStorage.setItem('theme',next);
-  const icon=isDark?'☀️':'🌙';
-  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=icon);
+  applyTheme(next);
 }
 function setLang(lang){
   const m=document.getElementById('page-lang');
@@ -136,17 +153,16 @@ function toggleMobMenu(){
   const open=d.classList.toggle('open');
   o.classList.toggle('open',open);
   b.classList.toggle('open',open);
+  b.setAttribute('aria-expanded',open?'true':'false');
 }
 function closeMobMenu(){
   document.getElementById('mobDrawer').classList.remove('open');
   document.getElementById('mobOverlay').classList.remove('open');
-  document.getElementById('burgerBtn').classList.remove('open');
+  const b=document.getElementById('burgerBtn');
+  b.classList.remove('open');
+  b.setAttribute('aria-expanded','false');
 }
-(function(){
-  if(localStorage.getItem('theme')==='light'){
-    document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent='☀️');
-  }
-})();
+applyTheme(localStorage.getItem('theme')||'dark');
 </script>
 
 {{ block "scripts" . }}{{ end }}
@@ -155,11 +171,16 @@ function closeMobMenu(){
 document.addEventListener('click', function(e) {
   const link = e.target.closest('a.pg-dot, a.pg-btn');
   if (!link || !link.href) return;
+  if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
   e.preventDefault();
   const go = function() { window.location.href = link.href; };
   if (window.scrollY < 80) { go(); return; }
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  setTimeout(go, 750);
+  if ('onscrollend' in window) {
+    window.addEventListener('scrollend', go, { once: true });
+  } else {
+    setTimeout(go, 400);
+  }
 });
 </script>
 </body>

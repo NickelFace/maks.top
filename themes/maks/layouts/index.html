@@ -20,39 +20,29 @@
       </div>
     </div>
 
-    <div class="search-wrap">
-      <input class="search-input" type="text" placeholder="Search articles and notes... (powered by Pagefind)" id="searchInput">
-      <span class="search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-    </div>
+    {{ partial "search-box.html" (dict "placeholder" "Search articles and notes… (powered by Pagefind)") }}
   </div>
 
   <!-- GRID -->
   <div class="sec-title">Overview</div>
   <div class="main-grid">
 
-    <!-- Popular -->
+    {{- $enPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" -}}
+
+    <!-- Latest -->
     <div class="panel">
       <div class="panel-head">
-        <span class="panel-title">Popular</span>
+        <span class="panel-title">Latest Posts</span>
         <a href="{{ "/posts/" | relURL }}" class="panel-more">all →</a>
       </div>
       <div class="panel-body">
-        {{ range $i, $p := first 8 (sort .Site.RegularPages "Params.views" "desc") }}
+        {{ range $i, $p := first 8 $enPosts.ByDate.Reverse }}
         <a href="{{ $p.RelPermalink }}" class="post-item">
           <span class="post-num">{{ add $i 1 }}</span>
           <div class="post-info">
             <span class="post-title">{{ $p.Title }}</span>
           </div>
         </a>
-        {{ else }}
-        {{ range $i, $p := first 8 .Site.RegularPages }}
-        <a href="{{ $p.RelPermalink }}" class="post-item">
-          <span class="post-num">{{ add $i 1 }}</span>
-          <div class="post-info">
-            <span class="post-title">{{ $p.Title }}</span>
-          </div>
-        </a>
-        {{ end }}
         {{ end }}
       </div>
     </div>
@@ -64,7 +54,7 @@
         <a href="{{ "/posts/" | relURL }}" class="panel-more">all →</a>
       </div>
       <div class="panel-body">
-        {{ range first 6 .Site.RegularPages }}
+        {{ range first 6 $enPosts.ByDate.Reverse }}
         <a href="{{ .RelPermalink }}" class="post-item">
           <div class="post-info">
             <span class="post-title">{{ .Title }}</span>
@@ -82,7 +72,7 @@
         <a href="{{ "/kb/" | relURL }}" class="panel-more">all →</a>
       </div>
       <div class="panel-body">
-        {{ range first 6 (where .Site.RegularPages "Section" "kb") }}
+        {{ range first 6 (where (where .Site.RegularPages "Section" "kb") "Params.page_lang" "ne" "ru") }}
         <a href="{{ .RelPermalink }}" class="kb-item">
           <div class="kb-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
           <div>
@@ -102,76 +92,14 @@
     <!-- Certs (spans 2 cols) -->
     <div class="panel certs-section">
       {{ partial "certs-widget.html" . }}
-<!--       <div class="panel-head">
-        <span class="panel-title">Certification Notes</span>
-        <a href="{{ "/certs/" | relURL }}" class="panel-more">all →</a>
-      </div>
-      <div class="cert-grid">
-        <a href="/certs/lpic-1/" class="cert-card" style="--cert-color:#00d4ff">
-          <div class="cert-top"><div class="cert-badge">🐧</div><div class="cert-name">LPIC-1</div></div>
-          <div class="cert-sub">Linux Professional Institute · Exams 101 &amp; 102</div>
-          <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-          <div class="progress-label"><span>Complete</span><span class="pct">✓ Passed</span></div>
-        </a>
-        <a href="/certs/lpic-2/" class="cert-card" style="--cert-color:#7c3aed">
-          <div class="cert-top"><div class="cert-badge">🖥️</div><div class="cert-name">LPIC-2</div></div>
-          <div class="cert-sub">Linux Professional Institute · Exams 201 &amp; 202</div>
-          <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
-          <div class="progress-label"><span>In progress</span><span class="pct">62%</span></div>
-        </a>
-        <a href="/certs/aws-saa/" class="cert-card" style="--cert-color:#10b981">
-          <div class="cert-top"><div class="cert-badge">☁️</div><div class="cert-name">AWS SAA</div></div>
-          <div class="cert-sub">Solutions Architect Associate · C03</div>
-          <div class="progress-bar"><div class="progress-fill" style="width:18%"></div></div>
-          <div class="progress-label"><span>Planned</span><span class="pct">18%</span></div>
-        </a>
-        <a href="/certs/ccna/" class="cert-card" style="--cert-color:#f59e0b">
-          <div class="cert-top"><div class="cert-badge">🌐</div><div class="cert-name">CCNA</div></div>
-          <div class="cert-sub">Cisco Certified Network Associate · 200-301</div>
-          <div class="progress-bar"><div class="progress-fill" style="width:5%"></div></div>
-          <div class="progress-label"><span>Queued</span><span class="pct">5%</span></div>
-        </a>
-      </div> -->
     </div>
 
   </div><!-- /main-grid -->
-
-  <!-- ABOUT STRIP -->
-<!--   <div class="sec-title">About</div>
-  {{ partial "certs-widget.html" . }} -->
 
 </div><!-- /page -->
 
 {{ end }}
 
 {{ define "scripts" }}
-<script>
-const searchResults=document.createElement('div');
-searchResults.id='searchResults';
-searchResults.style.cssText='position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--bg2);border:1px solid var(--border);border-radius:8px;z-index:50;max-height:400px;overflow-y:auto;display:none;box-shadow:var(--shadow)';
-document.querySelector('.search-wrap').style.position='relative';
-document.querySelector('.search-wrap').appendChild(searchResults);
-
-let pf=null;
-async function loadPagefind(){
-  if(pf)return;
-  try{pf=await import('/pagefind/pagefind.js');await pf.init();}catch(e){console.warn('Pagefind not ready');}
-}
-
-document.getElementById('searchInput').addEventListener('input',async function(){
-  const q=this.value.trim();
-  if(!q){searchResults.style.display='none';return;}
-  await loadPagefind();
-  if(!pf){searchResults.style.display='none';return;}
-  const res=await pf.search(q);
-  if(!res.results.length){
-    searchResults.innerHTML='<div style="padding:14px 18px;font-size:12px;color:var(--text3)">No results for "'+q+'"</div>';
-    searchResults.style.display='block';return;
-  }
-  const items=await Promise.all(res.results.slice(0,8).map(r=>r.data()));
-  searchResults.innerHTML=items.map(item=>`<a href="${item.url}" style="display:flex;flex-direction:column;padding:10px 18px;text-decoration:none;border-bottom:1px solid var(--border);transition:background .1s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''"><span style="font-size:12.5px;color:var(--accent)">${item.meta?.title||item.url}</span><span style="font-size:11px;color:var(--text3);margin-top:3px;line-height:1.5">${item.excerpt}</span></a>`).join('');
-  searchResults.style.display='block';
-});
-document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))searchResults.style.display='none';});
-</script>
+<script src="{{ "js/pagefind-search.js" | relURL }}"></script>
 {{ end }}

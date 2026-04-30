@@ -11,11 +11,11 @@
 
     {{ partial "breadcrumb.html" . }}
 
-    <div class="post-h1">{{ .Title }}</div>
+    <h1 class="post-h1">{{ .Title }}</h1>
     <div class="post-meta">
-      <span class="p-date">{{ .Date.Format "2006-01-02" }}</span>
+      <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
       {{ range .Params.tags }}
-        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="ptag">{{ . }}</a>
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
       {{ end }}
     </div>
 
