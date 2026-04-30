@@ -11,14 +11,7 @@
 
 <div class="page quiz-page">
 
-  <!-- breadcrumb -->
-  <div class="breadcrumb">
-    <a href="{{ "/" | relURL }}">Home</a>
-    <span>›</span>
-    <a href="{{ "/ccna-quiz/" | relURL }}">CCNA Quiz</a>
-    <span>›</span>
-    <span>Page {{ $page }}</span>
-  </div>
+  {{ partial "breadcrumb.html" . }}
 
   <!-- progress bar -->
   <div class="quiz-progress-wrap">
@@ -37,7 +30,7 @@
     {{ with $q.images }}
     <div class="quiz-images">
       {{ range . }}
-      <img src="{{ printf "/img/quiz/%s" . | relURL }}" alt="Question diagram" class="quiz-img" loading="lazy">
+      <img src="{{ printf "/img/quiz/%s" . | relURL }}" alt="Question diagram" class="quiz-img" loading="lazy" decoding="async">
       {{ end }}
     </div>
     {{ end }}

@@ -11,10 +11,19 @@
   <span>/</span>
 
   {{ if eq .Section "certs" }}
-    <span style="color:var(--text2)">{{ .Title }}</span>
+    <span>{{ .Title }}</span>
+
+  {{ else if eq .Section "ccna-quiz" }}
+    {{ if .IsSection }}
+      <span>CCNA Quiz</span>
+    {{ else }}
+      <a href="{{ "/ccna-quiz/" | relURL }}">CCNA Quiz</a>
+      <span>/</span>
+      <span>Page {{ .Params.quiz_page }}</span>
+    {{ end }}
 
   {{ else if .IsSection }}
-    <span style="color:var(--text2)">{{ .Section }}</span>
+    <span>{{ .Section }}</span>
 
   {{ else }}
     {{ with .Section }}
@@ -38,6 +47,6 @@
         {{ end }}
       {{ end }}
     {{ end }}
-    <span style="color:var(--text2)">{{ .Title }}</span>
+    <span>{{ .Title }}</span>
   {{ end }}
 </div>

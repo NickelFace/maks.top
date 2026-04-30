@@ -2,6 +2,9 @@ baseURL = "https://maks.top"
 languageCode = "en"
 title = "maks.top"
 theme = "maks"
+
+[minify]
+  minifyOutput = true
 [pagination]
   pagerSize = 10
 
@@ -14,6 +17,7 @@ theme = "maks"
   telegram    = "https://t.me/nickelface"
   email       = ""
   phone       = ""
+  og_image    = ""   # default OG image path, e.g. "/img/og-default.png" (1200×630px)
 
 [taxonomies]
   tag      = "tags"
