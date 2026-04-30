@@ -3,7 +3,7 @@ title: "Frontmatter — Справочник Полей"
 date: 2026-04-11
 description: "Все поля frontmatter по типам контента с типами, обязательностью и описаниями"
 page_lang: "ru"
-lang_pair: "/docs/frontmatter/"
+lang_pair: "/kb/docs/frontmatter/"
 pagefind_ignore: true
 build:
   list: never
@@ -135,7 +135,7 @@ date: 2026-04-01
 
 ---
 
-## Поля для документации (`content/docs/*.md`)
+## Поля для документации (`content/kb/docs/*.md`)
 
 ```yaml
 ---
@@ -143,7 +143,7 @@ title: "Название страницы"
 date: 2026-04-11
 description: "Описание для meta"
 page_lang: "en"
-lang_pair: "/docs/ru/frontmatter/"
+lang_pair: "/kb/docs/ru/frontmatter/"
 tags: ["docs"]
 ---
 ```
@@ -169,7 +169,7 @@ tags: ["docs"]
 
 ## Связанные страницы
 
-- [Обзор проекта](/docs/ru/overview/)
-- [Шаблоны](/docs/ru/templates/)
-- [CSS](/docs/ru/css/)
-- [JavaScript](/docs/ru/javascript/)
+- [Обзор проекта](/kb/docs/ru/overview/)
+- [Шаблоны](/kb/docs/ru/templates/)
+- [CSS](/kb/docs/ru/css/)
+- [JavaScript](/kb/docs/ru/javascript/)

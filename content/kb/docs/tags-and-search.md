@@ -3,7 +3,7 @@ title: "Tags & Search"
 date: 2026-04-13
 description: "How tag filtering and Pagefind full-text search work — architecture, data flow, and implementation details"
 page_lang: "en"
-lang_pair: "/docs/ru/tags-and-search/"
+lang_pair: "/kb/docs/ru/tags-and-search/"
 tags: ["docs"]
 ---
 
@@ -88,45 +88,25 @@ Two separate tag arrays per post:
 
 #### Client-side filter logic
 
+Filter logic lives in **`static/js/taxonomy.js`** (external cacheable file). The inline `<script>` in `tag.html` only defines the data:
+
 ```js
-let activeTag = '';
-
-function renderArticles() {
-  const filtered = activeTag
-    ? POSTS.filter(p => p.tags.includes(activeTag))
-    : POSTS;
-
-  document.getElementById('tagArticles').innerHTML = filtered.map(p => `
-    <a href="${p.url}" class="post-card">
-      <div class="post-card-meta">
-        <span class="post-date">${p.date}</span>
-        ${p.tagLabels.slice(0, 2).map(l => `<span class="tag">${l}</span>`).join('')}
-      </div>
-      <div class="post-card-title">${p.title}</div>
-      ${p.summary ? `<div class="post-card-desc">${p.summary}</div>` : ''}
-    </a>
-  `).join('');
-}
-
-// Button click handler
-document.querySelectorAll('.tag-filter').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tag-filter').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeTag = btn.dataset.tag;   // "" for "All", urlized tag for others
-    renderArticles();
-  });
-});
-
-// Initial render on page load (shows all posts)
-renderArticles();
+// Inline in tag.html (Hugo-generated):
+const POSTS = [ ... ];         // full post list, EN only
+const currentTag = "linux";   // "" if on /tags/ root, urlized slug otherwise
 ```
 
+Then the template loads:
+```html
+<script src="/js/taxonomy.js"></script>
+```
+
+`taxonomy.js` reads those two variables and handles all UI — tag grid, article grid, active pill, filter logic. See [JavaScript](/kb/docs/javascript/) for function details.
+
 **Filter flow:**
-1. Page loads → `renderArticles()` runs with `activeTag = ''` → all posts shown
-2. User clicks "Linux" button → `activeTag = 'linux'`
-3. `renderArticles()` filters `POSTS` where `p.tags.includes('linux')`
-4. `#tagArticles` innerHTML replaced with filtered results — no page reload
+1. Page loads → `renderArticles()` runs with `activeTag = currentTag` (pre-selects tag if arriving via `/tags/linux/`)
+2. User clicks a tag button → `activeTag` updated → `renderArticles()` rerenders `#tagArticles`
+3. No page reload — `POSTS` array is already in memory
 
 Note: only the first 2 tags per post are shown in the card (`tagLabels.slice(0, 2)`).
 
@@ -284,8 +264,8 @@ Runtime (browser):
 
 ## Related pages
 
-- [Project Overview](/docs/overview/)
-- [Frontmatter](/docs/frontmatter/)
-- [Templates](/docs/templates/)
-- [JavaScript](/docs/javascript/)
-- [Deploy & Local Dev](/docs/deploy/)
+- [Project Overview](/kb/docs/overview/)
+- [Frontmatter](/kb/docs/frontmatter/)
+- [Templates](/kb/docs/templates/)
+- [JavaScript](/kb/docs/javascript/)
+- [Deploy & Local Dev](/kb/docs/deploy/)

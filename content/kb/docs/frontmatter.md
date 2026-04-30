@@ -3,7 +3,7 @@ title: "Frontmatter — Fields Reference"
 date: 2026-04-11
 description: "All frontmatter fields by content type with types, required status, and descriptions"
 page_lang: "en"
-lang_pair: "/docs/ru/frontmatter/"
+lang_pair: "/kb/docs/ru/frontmatter/"
 tags: ["docs"]
 ---
 
@@ -82,6 +82,9 @@ These are custom fields, read via `.Params.*` in `certs/single.html`.
 | `cert_color` | string | **yes** | CSS color (hex). Used for `--cert-color` and border |
 | `description` | string | **yes** | Subtitle in hero block |
 | `post_prefix` | string | **yes** | Prefix for matching posts by slug (e.g. `"lpic2"`) |
+| `post_category` | string | **yes** | Hugo category used in course posts (e.g. `"LPIC-2"`). Used by `certs-widget.html` to count articles |
+| `expected_articles` | int | no | Planned total article count — enables auto-calculated progress % in the widget |
+| `progress_pct` | int | no | Manual fallback % when `expected_articles` is not set (e.g. early-stage courses with no articles yet) |
 | `exams` | []Exam | no | List of exams with topics. Without it — "coming soon" page |
 
 ### `exams` structure
@@ -131,7 +134,7 @@ The `.md` body is rendered into `.prose` in `about/single.html`.
 
 ---
 
-## Fields for documentation (`content/docs/*.md`)
+## Fields for documentation (`content/kb/docs/*.md`)
 
 ```yaml
 ---
@@ -139,7 +142,7 @@ title: "Page title"
 date: 2026-04-11
 description: "Description for meta"
 page_lang: "en"
-lang_pair: "/docs/ru/frontmatter/"
+lang_pair: "/kb/docs/ru/frontmatter/"
 tags: ["docs"]
 ---
 ```
@@ -165,7 +168,7 @@ Available in templates as `.Site.Params.*`:
 
 ## Related pages
 
-- [Project Overview](/docs/overview/)
-- [Templates](/docs/templates/)
-- [CSS](/docs/css/)
-- [JavaScript](/docs/javascript/)
+- [Project Overview](/kb/docs/overview/)
+- [Templates](/kb/docs/templates/)
+- [CSS](/kb/docs/css/)
+- [JavaScript](/kb/docs/javascript/)

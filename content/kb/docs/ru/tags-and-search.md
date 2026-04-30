@@ -3,7 +3,7 @@ title: "Теги и поиск"
 date: 2026-04-13
 description: "Как работают фильтрация по тегам и полнотекстовый поиск Pagefind — архитектура, поток данных и детали реализации"
 page_lang: "ru"
-lang_pair: "/docs/tags-and-search/"
+lang_pair: "/kb/docs/tags-and-search/"
 pagefind_ignore: true
 build:
   list: never
@@ -288,8 +288,8 @@ Runtime (браузер):
 
 ## Связанные страницы
 
-- [Обзор проекта](/docs/ru/overview/)
-- [Frontmatter](/docs/ru/frontmatter/)
-- [Шаблоны](/docs/ru/templates/)
-- [JavaScript](/docs/ru/javascript/)
-- [Деплой и локальная разработка](/docs/ru/deploy/)
+- [Обзор проекта](/kb/docs/ru/overview/)
+- [Frontmatter](/kb/docs/ru/frontmatter/)
+- [Шаблоны](/kb/docs/ru/templates/)
+- [JavaScript](/kb/docs/ru/javascript/)
+- [Деплой и локальная разработка](/kb/docs/ru/deploy/)

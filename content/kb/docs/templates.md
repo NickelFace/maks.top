@@ -3,7 +3,7 @@ title: "Templates — Layout Reference"
 date: 2026-04-11
 description: "Every Hugo template file: what it renders, data context, block structure"
 page_lang: "en"
-lang_pair: "/docs/ru/templates/"
+lang_pair: "/kb/docs/ru/templates/"
 tags: ["docs"]
 ---
 
@@ -73,9 +73,7 @@ CSS reads the attribute via `[data-theme="light"]` and switches variables. The v
 | `.panel .recent-posts` | Last 5 posts | `{{ range first 5 .Site.RegularPages }}` |
 | `.panel .kb-section` | KB quick links | Hardcoded links |
 | `.panel .certs-section` | Cert widget | `{{ partial "certs-widget.html" . }}` |
-| `.cert-grid` | 4 cert cards | Hardcoded in `certs-widget.html` |
-
-> **Note:** cert progress bars (`width:62%`) are hardcoded in `certs-widget.html`. To update them, edit the partial file manually.
+| `.cert-grid` | cert cards | `{{ partial "certs-widget.html" . }}` — counts computed dynamically |
 
 ---
 
@@ -83,8 +81,8 @@ CSS reads the attribute via `[data-theme="light"]` and switches variables. The v
 
 **Path:** `themes/maks/layouts/_default/single.html`  
 **Rendered for:** any `single` page without a specific template  
-**Used by:** all articles `/posts/lpic2-*/`, `/docs/*/`, `/about/`... (when no own template exists)  
-**Defines blocks:** `main`, `scripts`
+**Used by:** all articles `/posts/*/`, `/kb/*/`, `/kb/docs/*/` (when no own template exists)  
+**Defines blocks:** `head` (JSON-LD for EN pages), `main`, `scripts`
 
 ### `main` structure
 
@@ -103,24 +101,20 @@ CSS reads the attribute via `[data-theme="light"]` and switches variables. The v
   .toc-aside           ← empty div, populated by JS
 ```
 
-### `scripts` block — ToC + progress bar + copy buttons
+### `head` block — JSON-LD structured data
 
-**Reading progress bar:** created dynamically via `document.createElement('div')`, inline style, updated on `scroll` event.
+Injects `<script type="application/ld+json">` with Schema.org `Article` for all EN pages (`page_lang: "en"`). Fields: headline, description, url, datePublished, dateModified, author, publisher.
 
-**ToC sidebar:**
-1. Finds all `h2`, `h3` inside `#articleBody`
-2. If more than 2 headings — generates `.toc-inner` with links
-3. At width `>= 860px` adds `.has-toc` to `.page` (two-column layout)
-4. `IntersectionObserver` highlights the active item on scroll
+### `scripts` block
 
-**Copy buttons:** for each `<pre>` not inside `.code-block`, wraps it in `.code-block` with a button.
+Loads `static/js/article.js` (reading bar, ToC, copy buttons, lightbox). If `code_toggle: true` in frontmatter, sets `document.body.dataset.codeToggle = 'true'` before the script loads.
 
 ---
 
 ## _default/list.html — page listing
 
 **Path:** `themes/maks/layouts/_default/list.html`  
-**Rendered for:** any section without a specific template (`/docs/`, `/certs/` if no own template)  
+**Rendered for:** any section without a specific template (`/kb/docs/`, `/certs/` if no own template)  
 **Defines block:** `main`
 
 ```
@@ -143,7 +137,7 @@ CSS reads the attribute via `[data-theme="light"]` and switches variables. The v
 **Overrides:** `_default/list.html`  
 **Adds:** Pagefind search
 
-**Difference from `_default/list.html`:** adds `.tags-header` with a search `<input>` and initializes Pagefind via dynamic `import('/pagefind/pagefind.js')`.
+**Difference from `_default/list.html`:** explicit `page_lang ne ru` filter, adds `.tags-header` via `search-box.html` partial, loads `pagefind-search.js`.
 
 **How Pagefind works:**
 1. GitHub Actions runs `pagefind --site public` after `hugo build`
@@ -210,7 +204,7 @@ Then inserts `{{ partial "certs-widget.html" . }}` — the same cards as on the 
 
 **Path:** `themes/maks/layouts/kb/section.html`  
 **Rendered for:** `/kb/` (root index) and `/kb/{sub-section}/` (sub-section landing pages)  
-**Note:** Hugo prefers `section.html` over `list.html` for section index pages — `kb/list.html` is kept for reference but is not used.
+**Note:** `kb/single.html` and `kb/list.html` were deleted — KB articles fall through to `_default/single.html`.
 
 Uses `{{ if .Sections }}` to branch between two layouts:
 
@@ -244,12 +238,7 @@ Uses `{{ if .Sections }}` to branch between two layouts:
 **Path:** `themes/maks/layouts/taxonomy/tag.html`  
 **Rendered for:** `/tags/`
 
-Embeds all posts as a `POSTS` JSON array directly in the HTML. Each object:
-```js
-{ url, title, date, tags: [urlized], tagLabels: [display], summary }
-```
-
-Clicking a tag button filters the array and re-renders `.posts-list` via `innerHTML`.
+Embeds `POSTS[]` array and `currentTag` inline (Hugo-generated, EN only), then loads `static/js/taxonomy.js` which handles all filter/render logic. Clicking a tag button filters the array and re-renders `.posts-list` via `innerHTML`.
 
 ---
 
@@ -257,19 +246,15 @@ Clicking a tag button filters the array and re-renders `.posts-list` via `innerH
 
 ### certs-widget.html
 
-Included on the home page (`index.html`) and about (`about/single.html`).  
-Hardcodes 4 cards with progress bars. Progress is updated manually (`width:62%` etc.).
+Included on the home page (`index.html`) and about (`about/single.html`). Article counts and progress % are computed dynamically from `post_category` + `expected_articles` / `progress_pct` in each cert's frontmatter. See [Frontmatter](/kb/docs/frontmatter/) for cert fields.
+
+### search-box.html
+
+Renders the search input UI. Accepts `.placeholder` param. Used in `index.html`, `posts/list.html`, `taxonomy/tag.html`.
 
 ### pagination.html
 
-Accepts a context with `.Paginator`. Page display logic:
-- Always shows first and last page
-- Shows `cur-1`, `cur`, `cur+1`
-- Inserts `···` between them when there's a gap
-
-### search.html
-
-Exists but is not used via `partial`. Search is inlined directly in `posts/list.html` and `taxonomy/tag.html`.
+Accepts a context with `.Paginator`. Always shows first/last page, `cur-1`, `cur`, `cur+1`, inserts `···` for gaps.
 
 ---
 
@@ -319,8 +304,8 @@ Renders `.code-block` with a copy button. `.Inner` — body between tags, passed
 
 ## Related pages
 
-- [Project Overview](/docs/overview/)
-- [CSS](/docs/css/)
-- [Frontmatter](/docs/frontmatter/)
-- [JavaScript](/docs/javascript/)
-- [Tags & Search](/docs/tags-and-search/)
+- [Project Overview](/kb/docs/overview/)
+- [CSS](/kb/docs/css/)
+- [Frontmatter](/kb/docs/frontmatter/)
+- [JavaScript](/kb/docs/javascript/)
+- [Tags & Search](/kb/docs/tags-and-search/)

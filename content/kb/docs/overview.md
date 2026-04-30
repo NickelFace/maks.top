@@ -3,7 +3,7 @@ title: "Project Overview — Architecture & Pipeline"
 date: 2026-04-15
 description: "Hugo pipeline, directory structure, and deployment flow for maks.top"
 page_lang: "en"
-lang_pair: "/docs/ru/overview/"
+lang_pair: "/kb/docs/ru/overview/"
 tags: ["docs"]
 ---
 
@@ -82,7 +82,7 @@ maks.top/
 │   │   ├── aws-cli.md               # EC2/S3/IAM/VPC commands
 │   │   ├── iptables-nftables.md     # Firewall rules deep-dive
 │   │   └── ssh.md                   # Keys/tunnels/config/rsync
-│   └── docs/                        # /docs/ section (this documentation)
+│   └── docs/                        # /kb/docs/ section (this documentation)
 │
 ├── static/                          # Global static files
 │   ├── img/quiz/                    # 247 JPEG images extracted from CCNA PDF
@@ -227,7 +227,7 @@ Each template has access to `.` (dot) — the current page context:
 
 ## Related pages
 
-- [Templates](/docs/templates/) — each layout file in detail
-- [CSS](/docs/css/) — style architecture and class reference
-- [Frontmatter](/docs/frontmatter/) — all fields by content type
-- [JavaScript](/docs/javascript/) — functions and event listeners
+- [Templates](/kb/docs/templates/) — each layout file in detail
+- [CSS](/kb/docs/css/) — style architecture and class reference
+- [Frontmatter](/kb/docs/frontmatter/) — all fields by content type
+- [JavaScript](/kb/docs/javascript/) — functions and event listeners

@@ -4,6 +4,8 @@ cert_badge: "🐧"
 cert_color: "#00d4ff"
 description: "Linux Professional Institute Certification Level 1 — Linux Administrator"
 post_prefix: "lpic1"
+post_category: "LPIC-1"
+expected_articles: 44
 credly_badge_id: "6ff7dcba-6ab8-45c0-ab60-e35e2c59dbd5"
 exams:
   - code: "101"

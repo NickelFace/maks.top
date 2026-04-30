@@ -3,7 +3,7 @@ title: "New Page Guide"
 date: 2026-04-13
 description: "Step-by-step guide for adding any type of page: prose article, interactive page, cert overview"
 page_lang: "en"
-lang_pair: "/docs/ru/new-page/"
+lang_pair: "/kb/docs/ru/new-page/"
 tags: ["docs"]
 ---
 
@@ -310,21 +310,21 @@ To make a page switchable between EN and RU:
 ---
 title: "My Topic"
 page_lang: "en"
-lang_pair: "/docs/ru/my-topic/"
+lang_pair: "/kb/docs/ru/my-topic/"
 ---
 ```
 
 ### Russian version
 
 ```bash
-content/docs/ru/my-topic.md
+content/kb/docs/ru/my-topic.md
 ```
 
 ```yaml
 ---
 title: "Моя тема"
 page_lang: "ru"
-lang_pair: "/docs/my-topic/"
+lang_pair: "/kb/docs/my-topic/"
 ---
 ```
 
@@ -358,8 +358,8 @@ hugo server --disableFastRender
 
 ## Related pages
 
-- [Project Overview](/docs/overview/)
-- [Frontmatter](/docs/frontmatter/)
-- [Templates](/docs/templates/)
-- [CSS](/docs/css/)
-- [JavaScript](/docs/javascript/)
+- [Project Overview](/kb/docs/overview/)
+- [Frontmatter](/kb/docs/frontmatter/)
+- [Templates](/kb/docs/templates/)
+- [CSS](/kb/docs/css/)
+- [JavaScript](/kb/docs/javascript/)

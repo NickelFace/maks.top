@@ -3,7 +3,7 @@ title: "CSS — Architecture & Class Reference"
 date: 2026-04-15
 description: "CSS file structure, theme variables, and full class reference for maks.top"
 page_lang: "en"
-lang_pair: "/docs/ru/css/"
+lang_pair: "/kb/docs/ru/css/"
 tags: ["docs"]
 ---
 
@@ -343,7 +343,7 @@ Loads only for `/posts/linux-namespaces/`. All shared components (NS cards, tabs
 
 ## Related pages
 
-- [Project Overview](/docs/overview/)
-- [Templates](/docs/templates/)
-- [Frontmatter](/docs/frontmatter/)
-- [JavaScript](/docs/javascript/)
+- [Project Overview](/kb/docs/overview/)
+- [Templates](/kb/docs/templates/)
+- [Frontmatter](/kb/docs/frontmatter/)
+- [JavaScript](/kb/docs/javascript/)

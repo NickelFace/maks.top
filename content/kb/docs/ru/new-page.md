@@ -3,7 +3,7 @@ title: "Создание новых страниц"
 date: 2026-04-13
 description: "Пошаговое руководство по добавлению любого типа страницы: prose-статья, интерактивная страница, страница сертификации"
 page_lang: "ru"
-lang_pair: "/docs/new-page/"
+lang_pair: "/kb/docs/new-page/"
 pagefind_ignore: true
 build:
   list: never
@@ -314,21 +314,21 @@ topic.num   = "01"
 ---
 title: "My Topic"
 page_lang: "en"
-lang_pair: "/docs/ru/my-topic/"
+lang_pair: "/kb/docs/ru/my-topic/"
 ---
 ```
 
 ### Русская версия
 
 ```bash
-content/docs/ru/my-topic.md
+content/kb/docs/ru/my-topic.md
 ```
 
 ```yaml
 ---
 title: "Моя тема"
 page_lang: "ru"
-lang_pair: "/docs/my-topic/"
+lang_pair: "/kb/docs/my-topic/"
 ---
 ```
 
@@ -360,8 +360,8 @@ hugo server --disableFastRender
 
 ## Связанные страницы
 
-- [Обзор проекта](/docs/ru/overview/)
-- [Frontmatter](/docs/ru/frontmatter/)
-- [Шаблоны](/docs/ru/templates/)
-- [CSS](/docs/ru/css/)
-- [JavaScript](/docs/ru/javascript/)
+- [Обзор проекта](/kb/docs/ru/overview/)
+- [Frontmatter](/kb/docs/ru/frontmatter/)
+- [Шаблоны](/kb/docs/ru/templates/)
+- [CSS](/kb/docs/ru/css/)
+- [JavaScript](/kb/docs/ru/javascript/)
