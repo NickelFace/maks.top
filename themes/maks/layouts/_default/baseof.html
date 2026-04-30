@@ -46,7 +46,7 @@
 {{ if or (eq .Type "posts") (eq .Type "kb") (eq .Type "docs") }}<link rel="stylesheet" href="{{ "styles/chroma.css" | relURL }}">{{ end }}
 {{ if .IsHome }}<link rel="stylesheet" href="{{ "styles/home.css" | relURL }}">{{ end }}
 {{ if or (eq .Type "posts") (eq .Type "about") (eq .Type "docs") (eq .Type "kb") }}<link rel="stylesheet" href="{{ "styles/prose.css" | relURL }}">{{ end }}
-<link rel="stylesheet" href="{{ "styles/mobile.css" | relURL }}" media="(max-width: 860px)">
+<link rel="stylesheet" href="{{ "styles/mobile.css" | relURL }}">
 {{ block "head" . }}{{ end }}
 {{ if or .Params.page_lang .Params.lang_pair }}<meta id="page-lang" data-lang="{{ .Params.page_lang | default "en" }}" data-lang-pair="{{ .Params.lang_pair }}">{{ end }}
 </head>
@@ -90,8 +90,8 @@
   <a href="{{ "/kb/" | relURL }}"{{ if eq .Section "kb" }} class="active"{{ end }}>Knowledge Base</a>
   <a href="{{ "/about/" | relURL }}"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>About</a>
   <div class="mob-drawer-lang" role="group" aria-label="Language">
-    <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en')" aria-pressed="{{ if ne .Params.page_lang "ru" }}true{{ else }}false{{ end }}">EN</button>
-    <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru')" aria-pressed="{{ if eq .Params.page_lang "ru" }}true{{ else }}false{{ end }}">RU</button>
+    <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick='setLang("en")' aria-pressed="{{ if ne .Params.page_lang "ru" }}true{{ else }}false{{ end }}">EN</button>
+    <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick='setLang("ru")' aria-pressed="{{ if eq .Params.page_lang "ru" }}true{{ else }}false{{ end }}">RU</button>
   </div>
 </div>
 <div class="mob-overlay" id="mobOverlay" onclick="closeMobMenu()"></div>
