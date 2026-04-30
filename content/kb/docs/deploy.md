@@ -3,7 +3,7 @@ title: "Deploy & Local Dev"
 date: 2026-04-13
 description: "CI/CD pipeline, local development workflow, Pagefind, and known deployment pitfalls"
 page_lang: "en"
-lang_pair: "/docs/ru/deploy/"
+lang_pair: "/kb/docs/ru/deploy/"
 tags: ["docs"]
 ---
 
@@ -251,6 +251,6 @@ The debug step in `deploy.yml` prints CSS link tags from `public/index.html` —
 
 ## Related pages
 
-- [Project Overview](/docs/overview/)
-- [Templates](/docs/templates/)
-- [New Page Guide](/docs/new-page/)
+- [Project Overview](/kb/docs/overview/)
+- [Templates](/kb/docs/templates/)
+- [New Page Guide](/kb/docs/new-page/)

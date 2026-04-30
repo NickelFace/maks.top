@@ -3,7 +3,7 @@ title: "Обзор проекта — Архитектура и Pipeline"
 date: 2026-04-15
 description: "Hugo pipeline, структура директорий и процесс деплоя maks.top"
 page_lang: "ru"
-lang_pair: "/docs/overview/"
+lang_pair: "/kb/docs/overview/"
 pagefind_ignore: true
 build:
   list: never
@@ -86,7 +86,7 @@ maks.top/
 │   │   ├── aws-cli.md               # Команды EC2/S3/IAM/VPC
 │   │   ├── iptables-nftables.md     # Правила фаервола
 │   │   └── ssh.md                   # Ключи/туннели/конфиг/rsync
-│   └── docs/                        # Раздел /docs/ (эта документация)
+│   └── docs/                        # Раздел /kb/docs/ (эта документация)
 │
 ├── static/                          # Глобальные статические файлы
 │   ├── img/quiz/                    # 247 JPEG-изображений из PDF CCNA
@@ -231,7 +231,7 @@ paginate = 10                   # Постов на страницу в лист
 
 ## Связанные страницы
 
-- [Шаблоны](/docs/ru/templates/)
-- [CSS](/docs/ru/css/)
-- [Frontmatter](/docs/ru/frontmatter/)
-- [JavaScript](/docs/ru/javascript/)
+- [Шаблоны](/kb/docs/ru/templates/)
+- [CSS](/kb/docs/ru/css/)
+- [Frontmatter](/kb/docs/ru/frontmatter/)
+- [JavaScript](/kb/docs/ru/javascript/)

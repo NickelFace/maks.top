@@ -4,6 +4,8 @@ cert_badge: "🌐"
 cert_color: "#f59e0b"
 description: "Cisco Certified Network Associate (200-301) — Enterprise networking fundamentals"
 post_prefix: "ccna"
+post_category: "CCNA"
+progress_pct: 5
 resources:
   - icon: "📖"
     title: "Prep Guide"

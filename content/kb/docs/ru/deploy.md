@@ -3,7 +3,7 @@ title: "Деплой и локальная разработка"
 date: 2026-04-13
 description: "CI/CD пайплайн, локальная разработка, Pagefind и известные проблемы деплоя"
 page_lang: "ru"
-lang_pair: "/docs/deploy/"
+lang_pair: "/kb/docs/deploy/"
 pagefind_ignore: true
 build:
   list: never
@@ -255,6 +255,6 @@ git commit -m "chore: update theme submodule"
 
 ## Связанные страницы
 
-- [Обзор проекта](/docs/ru/overview/)
-- [Шаблоны](/docs/ru/templates/)
-- [Создание новых страниц](/docs/ru/new-page/)
+- [Обзор проекта](/kb/docs/ru/overview/)
+- [Шаблоны](/kb/docs/ru/templates/)
+- [Создание новых страниц](/kb/docs/ru/new-page/)

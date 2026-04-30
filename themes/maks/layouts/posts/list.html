@@ -7,7 +7,7 @@
   </div>
 
   <div class="posts-list">
-    {{ $allPosts := where .Site.RegularPages "Section" "posts" }}
+    {{ $allPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" }}
     {{ $paginator := .Paginate $allPosts }}
     {{ range $paginator.Pages }}
     <a href="{{ .RelPermalink }}" class="post-card">

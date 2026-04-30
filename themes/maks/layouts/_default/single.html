@@ -1,3 +1,21 @@
+{{ define "head" }}
+{{- if eq .Params.page_lang "en" -}}
+{{- $desc := cond (ne .Description "") .Description .Site.Params.description -}}
+{{- $ld := dict
+  "@context" "https://schema.org"
+  "@type"    "Article"
+  "headline"      .Title
+  "description"   $desc
+  "url"           .Permalink
+  "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified"  (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+  "author"        (dict "@type" "Person" "name" .Site.Params.author)
+  "publisher"     (dict "@type" "Organization" "name" .Site.Title "url" .Site.BaseURL)
+-}}
+<script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+{{- end }}
+{{ end }}
+
 {{ define "main" }}
 <div class="page prose-page" id="prosePage">
 

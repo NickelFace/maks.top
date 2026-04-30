@@ -4,6 +4,8 @@ cert_badge: "🖥️"
 cert_color: "#7c3aed"
 description: "Linux Professional Institute Certification Level 2 — Advanced Linux Administration"
 post_prefix: "lpic2"
+post_category: "LPIC-2"
+expected_articles: 41
 exams:
   - code: "201"
     title: "Advanced Linux Administration"

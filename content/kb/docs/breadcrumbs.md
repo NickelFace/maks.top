@@ -3,7 +3,7 @@ title: "Breadcrumbs"
 date: 2026-04-22
 description: "How breadcrumbs are implemented across templates — partial, CSS, and KB sub-section support"
 page_lang: "en"
-lang_pair: "/docs/ru/breadcrumbs/"
+lang_pair: "/kb/docs/ru/breadcrumbs/"
 tags: ["docs"]
 ---
 
@@ -38,6 +38,7 @@ The partial renders different segments depending on page type:
 | Case | Output |
 |---|---|
 | `eq .Section "certs"` | `maks.top / Page Title` (no section link — no certs index) |
+| `eq .Section "ccna-quiz"` | `maks.top / CCNA Quiz / Page N` (page number from filename) |
 | `.IsSection` | `maks.top / section-name` (section index — current page as plain text) |
 | KB sub-page (`Section=kb`, depth=2) | `maks.top / kb / Parent Section Title / Page Title` |
 | Other regular pages | `maks.top / section / Page Title` |
@@ -90,5 +91,5 @@ Used for posts in `/posts/neteng/`, `/posts/lpic1/` etc. — their middle breadc
 
 ## Related pages
 
-- [Templates](/docs/templates/)
-- [CSS](/docs/css/)
+- [Templates](/kb/docs/templates/)
+- [CSS](/kb/docs/css/)

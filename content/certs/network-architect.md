@@ -4,6 +4,8 @@ cert_badge: "🏗️"
 cert_color: "#f59e0b"
 description: "OTUS Network Architect Course — Data Center Design, VxLAN EVPN, Underlay/Overlay"
 post_prefix: "netarch"
+post_category: "Network Architect"
+expected_articles: 9
 cert_url: "https://otus.ru/certificate/4c96622346d542378b69e703d7c73a36/en/"
 exams:
   - code: "1"

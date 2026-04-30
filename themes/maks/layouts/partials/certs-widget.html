@@ -1,61 +1,114 @@
-<div class="panel certs-section">
-  <div class="panel-head">
-    <span class="panel-title">Certification Notes</span>
-    <a href="{{ "/certs/" | relURL }}" class="panel-more">all →</a>
-  </div>
-  <div class="cert-grid">
+{{- $enPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" -}}
 
-    <!-- Network Engineer — featured full-width, all 17 topics covered -->
-    <a href="/certs/network-engineer/" class="cert-card cert-card-featured" style="--cert-color:#22c55e">
-      <div class="cert-top">
-        <div class="cert-badge">🔌</div>
-        <div class="cert-name">Network Engineer</div>
-        <span class="cert-tag-done">Certificate ↗</span>
-      </div>
-      <div class="cert-sub">Cisco Routing &amp; Switching · OTUS Course · 24 articles</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-      <div class="progress-label"><span>Course complete</span><span class="pct">✓ All notes</span></div>
-    </a>
+{{- /* Helper: compute actual count and pct for a cert page */ -}}
+{{- /* Returns: $act (int), $pct (int 0-100) */ -}}
 
-    <!-- Network Architect -->
-    <a href="/certs/network-architect/" class="cert-card cert-card-featured" style="--cert-color:#f59e0b">
-      <div class="cert-top">
-        <div class="cert-badge">🏗️</div>
-        <div class="cert-name">Network Architect</div>
-        <span class="cert-tag-done">Certificate ↗</span>
-      </div>
-      <div class="cert-sub">Data Center Design · VxLAN EVPN · OTUS Course · 9 articles</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-      <div class="progress-label"><span>Course complete</span><span class="pct">✓ All labs</span></div>
-    </a>
+{{- $ne    := .Site.GetPage "/certs/network-engineer" -}}
+{{- $neAct := len (where $enPosts "Params.categories" "intersect" (slice $ne.Params.post_category)) -}}
+{{- $nePct := $ne.Params.progress_pct | default 0 -}}
+{{- if gt ($ne.Params.expected_articles | default 0) 0 -}}
+  {{- $nePct = int (math.Round (div (mul (float $neAct) 100.0) (float $ne.Params.expected_articles))) -}}
+  {{- if gt $nePct 100 -}}{{- $nePct = 100 -}}{{- end -}}
+{{- end -}}
 
-    <a href="/certs/lpic-1/" class="cert-card" style="--cert-color:#00d4ff">
-      <div class="cert-top">
-        <div class="cert-badge">🐧</div>
-        <div class="cert-name">LPIC-1</div>
-        <span class="cert-tag-done">Verified ↗</span>
-      </div>
-      <div class="cert-sub">Linux Professional Institute · 16 Feb 2025</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-      <div class="progress-label"><span>Passed</span><span class="pct">✓ lpi.org</span></div>
-    </a>
-    <a href="/certs/lpic-2/" class="cert-card" style="--cert-color:#7c3aed">
-      <div class="cert-top"><div class="cert-badge">🖥️</div><div class="cert-name">LPIC-2</div></div>
-      <div class="cert-sub">Linux Professional Institute · Exams 201 &amp; 202</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
-      <div class="progress-label"><span>In progress</span><span class="pct">62%</span></div>
-    </a>
-    <a href="/certs/aws-saa/" class="cert-card" style="--cert-color:#10b981">
-      <div class="cert-top"><div class="cert-badge">☁️</div><div class="cert-name">AWS SAA</div></div>
-      <div class="cert-sub">Solutions Architect Associate · C03</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:18%"></div></div>
-      <div class="progress-label"><span>Planned</span><span class="pct">18%</span></div>
-    </a>
-    <a href="/certs/ccna/" class="cert-card" style="--cert-color:#f59e0b">
-      <div class="cert-top"><div class="cert-badge">🌐</div><div class="cert-name">CCNA</div></div>
-      <div class="cert-sub">Cisco Certified Network Associate · 200-301</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:5%"></div></div>
-      <div class="progress-label"><span>Queued</span><span class="pct">5%</span></div>
-    </a>
-  </div>
+{{- $na    := .Site.GetPage "/certs/network-architect" -}}
+{{- $naAct := len (where $enPosts "Params.categories" "intersect" (slice $na.Params.post_category)) -}}
+{{- $naPct := $na.Params.progress_pct | default 0 -}}
+{{- if gt ($na.Params.expected_articles | default 0) 0 -}}
+  {{- $naPct = int (math.Round (div (mul (float $naAct) 100.0) (float $na.Params.expected_articles))) -}}
+  {{- if gt $naPct 100 -}}{{- $naPct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $l1    := .Site.GetPage "/certs/lpic-1" -}}
+{{- $l1Act := len (where $enPosts "Params.categories" "intersect" (slice $l1.Params.post_category)) -}}
+{{- $l1Pct := $l1.Params.progress_pct | default 0 -}}
+{{- if gt ($l1.Params.expected_articles | default 0) 0 -}}
+  {{- $l1Pct = int (math.Round (div (mul (float $l1Act) 100.0) (float $l1.Params.expected_articles))) -}}
+  {{- if gt $l1Pct 100 -}}{{- $l1Pct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $l2    := .Site.GetPage "/certs/lpic-2" -}}
+{{- $l2Act := len (where $enPosts "Params.categories" "intersect" (slice $l2.Params.post_category)) -}}
+{{- $l2Pct := $l2.Params.progress_pct | default 0 -}}
+{{- if gt ($l2.Params.expected_articles | default 0) 0 -}}
+  {{- $l2Pct = int (math.Round (div (mul (float $l2Act) 100.0) (float $l2.Params.expected_articles))) -}}
+  {{- if gt $l2Pct 100 -}}{{- $l2Pct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $aws   := .Site.GetPage "/certs/aws-saa" -}}
+{{- $awsAct := len (where $enPosts "Params.categories" "intersect" (slice $aws.Params.post_category)) -}}
+{{- $awsPct := $aws.Params.progress_pct | default 0 -}}
+{{- if gt ($aws.Params.expected_articles | default 0) 0 -}}
+  {{- $awsPct = int (math.Round (div (mul (float $awsAct) 100.0) (float $aws.Params.expected_articles))) -}}
+  {{- if gt $awsPct 100 -}}{{- $awsPct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $ccna   := .Site.GetPage "/certs/ccna" -}}
+{{- $ccnaAct := len (where $enPosts "Params.categories" "intersect" (slice $ccna.Params.post_category)) -}}
+{{- $ccnaPct := $ccna.Params.progress_pct | default 0 -}}
+{{- if gt ($ccna.Params.expected_articles | default 0) 0 -}}
+  {{- $ccnaPct = int (math.Round (div (mul (float $ccnaAct) 100.0) (float $ccna.Params.expected_articles))) -}}
+  {{- if gt $ccnaPct 100 -}}{{- $ccnaPct = 100 -}}{{- end -}}
+{{- end -}}
+
+<div class="panel-head">
+  <span class="panel-title">Certification Notes</span>
+  <a href="{{ "/certs/" | relURL }}" class="panel-more">all →</a>
+</div>
+<div class="cert-grid">
+
+  <a href="/certs/network-engineer/" class="cert-card cert-card-featured" style="--cert-color:#22c55e">
+    <div class="cert-top">
+      <div class="cert-badge">🔌</div>
+      <div class="cert-name">Network Engineer</div>
+      <span class="cert-tag-done">Certificate ↗</span>
+    </div>
+    <div class="cert-sub">Cisco Routing &amp; Switching · OTUS Course · {{ $neAct }} articles</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:{{ $nePct }}%"></div></div>
+    <div class="progress-label"><span>Course complete</span><span class="pct">✓ All notes</span></div>
+  </a>
+
+  <a href="/certs/network-architect/" class="cert-card cert-card-featured" style="--cert-color:#f59e0b">
+    <div class="cert-top">
+      <div class="cert-badge">🏗️</div>
+      <div class="cert-name">Network Architect</div>
+      <span class="cert-tag-done">Certificate ↗</span>
+    </div>
+    <div class="cert-sub">Data Center Design · VxLAN EVPN · OTUS Course · {{ $naAct }} articles</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:{{ $naPct }}%"></div></div>
+    <div class="progress-label"><span>Course complete</span><span class="pct">✓ All labs</span></div>
+  </a>
+
+  <a href="/certs/lpic-1/" class="cert-card" style="--cert-color:#00d4ff">
+    <div class="cert-top">
+      <div class="cert-badge">🐧</div>
+      <div class="cert-name">LPIC-1</div>
+      <span class="cert-tag-done">Verified ↗</span>
+    </div>
+    <div class="cert-sub">Linux Professional Institute · 16 Feb 2025 · {{ $l1Act }} articles</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:{{ $l1Pct }}%"></div></div>
+    <div class="progress-label"><span>Passed</span><span class="pct">✓ lpi.org</span></div>
+  </a>
+
+  <a href="/certs/lpic-2/" class="cert-card" style="--cert-color:#7c3aed">
+    <div class="cert-top"><div class="cert-badge">🖥️</div><div class="cert-name">LPIC-2</div></div>
+    <div class="cert-sub">Linux Professional Institute · Exams 201 &amp; 202 · {{ $l2Act }} / {{ $l2.Params.expected_articles }} articles</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:{{ $l2Pct }}%"></div></div>
+    <div class="progress-label"><span>In progress</span><span class="pct">{{ $l2Pct }}%</span></div>
+  </a>
+
+  <a href="/certs/aws-saa/" class="cert-card" style="--cert-color:#10b981">
+    <div class="cert-top"><div class="cert-badge">☁️</div><div class="cert-name">AWS SAA</div></div>
+    <div class="cert-sub">Solutions Architect Associate · C03</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:{{ $awsPct }}%"></div></div>
+    <div class="progress-label"><span>Planned</span><span class="pct">{{ $awsPct }}%</span></div>
+  </a>
+
+  <a href="/certs/ccna/" class="cert-card" style="--cert-color:#f59e0b">
+    <div class="cert-top"><div class="cert-badge">🌐</div><div class="cert-name">CCNA</div></div>
+    <div class="cert-sub">Cisco Certified Network Associate · 200-301</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:{{ $ccnaPct }}%"></div></div>
+    <div class="progress-label"><span>Queued</span><span class="pct">{{ $ccnaPct }}%</span></div>
+  </a>
+
 </div>

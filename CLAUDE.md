@@ -15,6 +15,8 @@ content/
   posts/neteng/ru/    ← Network Engineer course (RU)
   certs/              ← Cert overview pages (type: certs)
   kb/                 ← Knowledge base (flat EN pages + subsections)
+  kb/docs/            ← Site documentation (was content/docs/, moved here for breadcrumb consistency)
+  kb/docs/ru/         ← RU translations of docs (build: list: never, render: always)
   kb/ru/              ← KB RU translations (build: list: never, render: always)
   ccna-quiz/          ← Quiz pages p01–p49 (type: ccna-quiz)
   about/
@@ -42,7 +44,7 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 | `home.css` | `static/styles/` | Homepage layout |
 | `mobile.css` | `static/styles/` | Mobile-specific overrides |
 | `fonts.css` | `static/styles/` | @font-face for self-hosted fonts |
-| `chroma.css` | `static/styles/` | Hugo syntax highlighting — loaded only on `posts`, `kb`, `docs` pages |
+| `chroma.css` | `static/styles/` | Hugo syntax highlighting — loaded only on `posts`, `kb` pages (docs are now under `kb/docs/` so also covered) |
 
 ## CSS variables (defined in global.css)
 ```css
@@ -157,7 +159,11 @@ Template: `themes/maks/layouts/taxonomy/tag.html`
 - CSS classes reused from global tag system (`.tag`, `.tag-lg`, `.tag.active`) — no custom button styles.
 
 ## Cert pages
-- `content/certs/<name>.md` — frontmatter: `post_prefix`, `exams[].topics[]`
+- `content/certs/<name>.md` — frontmatter: `post_prefix`, `post_category`, `exams[].topics[]`
+- `post_category` — Hugo category string used in posts (e.g. `"Network Engineer"`); used by certs-widget to count articles
+- `expected_articles` — planned total article count; drives auto-calculated progress % in the widget
+- `progress_pct` — manual fallback % when course has no articles yet (e.g. AWS SAA, CCNA)
+- JSON-LD `Article` schema is injected in `<head>` by `_default/single.html` for all EN pages; uses `safeJS` to prevent Go `html/template` from double-encoding the JSON
 - Template matches posts by: `strings.HasPrefix .File.BaseFileName (printf "%s-%s-" $prefix $topic.num)`
 - Articles show under their topic accordion in the cert page
 - List view uses `_default/list.html` — zero dates (`0001-01-01`) are hidden via `{{ if not .Date.IsZero }}`
@@ -172,7 +178,7 @@ Template: `themes/maks/layouts/taxonomy/tag.html`
 ## KB section structure
 
 ### Groups
-Five groups render on `/kb/` root: `"Linux Core"`, `"Networking"`, `"Cloud & DevOps"`, `"Security"`, `"Cases"`.
+Five groups render on `/kb/` root: `"Linux Core"`, `"Networking"`, `"Cloud & DevOps"`, `"Security"`, `"Cases"`. These must match exactly the `slice` in `layouts/kb/section.html`.
 
 ### Flat pages (directly in `content/kb/`)
 Must have `group:` to appear in the correct KB section block:
@@ -246,6 +252,7 @@ Search index built during `hugo`. RU pages excluded with `pagefind_ignore: true`
 |---|---|---|
 | `article.js` | `_default/single.html` scripts block | Reading progress bar (`#readingBar`), desktop+mobile ToC, copy buttons, image lightbox |
 | `pagefind-search.js` | `posts/list.html`, `taxonomy/tag.html` scripts block | Pagefind search UI — renders into `#searchResults`, uses `.search-result-item` CSS classes |
+| `taxonomy.js` | `taxonomy/tag.html` scripts block | Tag filter logic + article grid. Reads `POSTS[]` and `currentTag` from inline `<script>` above it |
 
 `article.js` checks `document.body.dataset.codeToggle === 'true'` to conditionally activate code-toggle UI. Set via `{{ if .Params.code_toggle }}<script>document.body.dataset.codeToggle='true';</script>{{ end }}` in the page scripts block.
 
@@ -255,4 +262,4 @@ Search index built during `hugo`. RU pages excluded with `pagefind_ignore: true`
 |---|---|
 | `partials/breadcrumb.html` | Shared breadcrumb — used in all templates |
 | `partials/search-box.html` | Search input UI — used in index.html, posts/list.html, taxonomy/tag.html. Accepts `.placeholder` param |
-| `partials/certs-widget.html` | Cert widget on homepage |
+| `partials/certs-widget.html` | Cert widget on homepage — article counts and progress % computed dynamically from `post_category` + `expected_articles` / `progress_pct` in cert frontmatter |
