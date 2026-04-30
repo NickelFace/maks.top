@@ -42,7 +42,7 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 | `home.css` | `static/styles/` | Homepage layout |
 | `mobile.css` | `static/styles/` | Mobile-specific overrides |
 | `fonts.css` | `static/styles/` | @font-face for self-hosted fonts |
-| `chroma.css` | `static/styles/` | Hugo syntax highlighting |
+| `chroma.css` | `static/styles/` | Hugo syntax highlighting — loaded only on `posts`, `kb`, `docs` pages |
 
 ## CSS variables (defined in global.css)
 ```css
@@ -53,11 +53,12 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 --text, --text2, --text3
 --glow     /* subtle accent glow background */
 --code-bg
+--radius   /* border-radius base: 8px */
 ```
 
 ## Tags — non-clickable everywhere except /tags/ page
 Tags (`<span class="tag">`) are **decorative only** across the whole site — no hover effect, no links, `pointer-events: none`. The `/tags/` taxonomy page is the only place with interactive tag buttons.
-- In `_default/single.html` and `kb/single.html`: tags rendered as `<span>`, not `<a>`
+- In `_default/single.html` (handles both posts and KB): tags rendered as `<span>`, not `<a>`
 - In `kb/section.html`: `.kb-card-tags .tag` and section-level tags have `cursor:default; pointer-events:none`
 - In `global.css`: `.kb-card-tags .tag:hover` resets border/color to non-accent
 
@@ -66,7 +67,7 @@ Tags (`<span class="tag">`) are **decorative only** across the whole site — no
 
 Inline `<script>` in `<head>` reads `localStorage('theme')`, applies `data-theme="light"` if needed, and removes `no-transition` after double `requestAnimationFrame`.
 
-**`@view-transition { navigation: auto; }`** in `global.css` enables browser page transitions but the default cross-fade shows a white frame that bypasses all inline FOUC logic. The default animation is disabled via `::view-transition-old(root), ::view-transition-new(root) { animation: none; }` — do not remove this override.
+Theme state is managed by a single `applyTheme(theme)` function in `baseof.html` (end of `<body>`). It sets `data-theme`, button icons, and `aria-pressed` in one place. `toggleTheme()` calls it. It is also called once on page load: `applyTheme(localStorage.getItem('theme')||'dark')`. Do not add separate theme init logic elsewhere.
 
 ## EN/RU translation system
 Applies to both posts and KB pages.
@@ -198,8 +199,8 @@ date: DD-MM-YYYY   # must be a past date — Hugo skips future/today dates by de
 
 ### KB template notes
 - `layouts/kb/section.html` handles both root `/kb/` and sub-section landing pages (via `{{ if .Sections }}`)
-- `layouts/kb/single.html` — KB article single pages (tags as non-clickable spans)
-- `layouts/kb/list.html` — exists but **not active** (Hugo uses `section.html` first)
+- KB article single pages fall through to `layouts/_default/single.html` — `layouts/kb/single.html` was deleted (was identical)
+- `layouts/kb/list.html` — deleted (was dead code, Hugo never used it)
 - `$kbPages` in the root template filters to **direct children only** (`.File.Dir == "kb/"`) — subsection articles do not appear in the root listing
 
 ### Network Labs section (Cases group)
@@ -208,7 +209,7 @@ Personal lab notes live in `content/kb/network-labs/`. EN only, no RU translatio
 ## Breadcrumb partial
 
 Shared partial at `themes/maks/layouts/partials/breadcrumb.html`. Called via `{{ partial "breadcrumb.html" . }}` in all templates.
-- Handles: certs (2-segment), sections (current as plain text), KB sub-pages (links to parent section via `.Parent.Title`), regular pages (section link + title)
+- Handles: certs (2-segment), sections (current as plain text), KB sub-pages (links to parent section via `.Parent.Title`), ccna-quiz pages (Page N), regular pages (section link + title)
 - `$certMap` maps post sub-folders (neteng, lpic1, lpic2…) to cert page URLs
 
 ## Sticky footer
@@ -238,3 +239,20 @@ Inter subsets: `Inter-latin.woff2`, `Inter-latin-ext.woff2`, `Inter-cyrillic.wof
 
 ## Pagefind
 Search index built during `hugo`. RU pages excluded with `pagefind_ignore: true`.
+
+## JS files (`static/js/`)
+
+| File | Loaded by | Purpose |
+|---|---|---|
+| `article.js` | `_default/single.html` scripts block | Reading progress bar (`#readingBar`), desktop+mobile ToC, copy buttons, image lightbox |
+| `pagefind-search.js` | `posts/list.html`, `taxonomy/tag.html` scripts block | Pagefind search UI — renders into `#searchResults`, uses `.search-result-item` CSS classes |
+
+`article.js` checks `document.body.dataset.codeToggle === 'true'` to conditionally activate code-toggle UI. Set via `{{ if .Params.code_toggle }}<script>document.body.dataset.codeToggle='true';</script>{{ end }}` in the page scripts block.
+
+## Partials
+
+| File | Purpose |
+|---|---|
+| `partials/breadcrumb.html` | Shared breadcrumb — used in all templates |
+| `partials/search-box.html` | Search input UI — used in index.html, posts/list.html, taxonomy/tag.html. Accepts `.placeholder` param |
+| `partials/certs-widget.html` | Cert widget on homepage |
