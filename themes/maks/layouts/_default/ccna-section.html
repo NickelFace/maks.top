@@ -1,0 +1,41 @@
+{{ define "main" }}
+<div class="page">
+
+  {{ partial "breadcrumb.html" . }}
+
+  <div class="sec-title">CCNA 200-301 — Theory</div>
+  <p style="color:var(--text2);font-size:13px;margin:4px 0 20px">All six exam domains · 36 articles</p>
+
+  {{ $pages := where .Pages "Params.page_lang" "ne" "ru" }}
+  {{ $domains := slice
+    (dict "num" "1" "title" "Network Fundamentals (20%)")
+    (dict "num" "2" "title" "Network Access — VLANs, STP, EtherChannel (20%)")
+    (dict "num" "3" "title" "IP Connectivity — Routing, OSPF (25%)")
+    (dict "num" "4" "title" "IP Services — NAT, NTP, DHCP, QoS (10%)")
+    (dict "num" "5" "title" "Security Fundamentals — ACL, AAA, VPN (15%)")
+    (dict "num" "6" "title" "Automation and Programmability (10%)")
+  }}
+
+  <div style="display:flex;flex-direction:column;gap:8px">
+  {{ range $domains }}
+    {{ $num := .num }}
+    {{ $prefix := printf "ccna-%s-" $num }}
+    {{ $group := where $pages "File.BaseFileName" "like" (printf "%s*" $prefix) }}
+    {{ if $group }}
+    <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+      <div style="padding:12px 16px;background:var(--bg2);font-size:13px;font-weight:600;color:var(--text2)">
+        Domain {{ $num }} — {{ .title }}
+      </div>
+      {{ range sort $group "File.BaseFileName" }}
+      <a href="{{ .RelPermalink }}" style="display:block;padding:11px 16px;border-top:1px solid var(--border);background:var(--bg);text-decoration:none;transition:background .15s">
+        <div style="font-size:13px;font-weight:500;color:var(--text)">{{ .Title }}</div>
+        {{ with .Description }}<div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.5">{{ . }}</div>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  {{ end }}
+  </div>
+
+</div>
+{{ end }}

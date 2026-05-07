@@ -21,7 +21,7 @@
 }
 .toc-head {
   padding: 10px 14px; border-bottom: 1px solid var(--border);
-  font-family: 'Unbounded', sans-serif; font-size: 9px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
   letter-spacing: 2px; text-transform: uppercase; color: var(--text3);
 }
 .toc-body { padding: 10px 6px; }

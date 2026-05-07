@@ -176,7 +176,7 @@
 .toc-title {
   padding: 10px 14px;
   border-bottom: 1px solid var(--border);
-  font-family: 'Unbounded', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -286,13 +286,46 @@
   flex-wrap: wrap;
 }
 .post-card-title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
   color: var(--text);
   margin-bottom: 6px;
-  line-height: 1.35;
+  line-height: 1.4;
   transition: color .15s;
+}
+
+/* ── POST GROUPS (blog list page) ── */
+.post-group { margin-bottom: 48px; }
+
+.post-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a.post-group-label:hover { color: var(--accent); }
+
+.post-group-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
 }
 .post-card:hover .post-card-title { color: var(--accent); }
 .post-card-desc {
@@ -412,7 +445,7 @@ a.page-btn:hover {
     overflow: hidden;
   }
   .mob-toc > summary {
-    font-family: 'Unbounded', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -452,19 +485,22 @@ a.page-btn:hover {
 }
 
 /* ═══════════════════════════════════════
-   LARGE DESKTOP — prose + ToC layout
+   NEW SECTION-BASED PAGES (no .page wrapper)
+   posts/list, kb, certs, about, labs, tags
 ═══════════════════════════════════════ */
-@media (min-width: 860px) {
-  /* Two-column grid for mid-range screens */
-  .prose-page.has-toc {
-    display: grid;
-    grid-template-columns: 1fr 220px;
-    gap: 32px;
-    align-items: start;
+@media (max-width: 640px) {
+  /* New-style pages need bottom nav padding */
+  .bl-header-inner, .bl-body-inner,
+  .kb-pg-header-inner, .kb-pg-body-inner,
+  .kb-sub-header, .kb-sub-body,
+  .cert-pg-header-inner, .cert-pg-body-inner,
+  .about-pg-hd-inner, .about-sect-inner,
+  .labs-pg-hd-inner, .labs-pg-body,
+  .tags-pg-hd-inner, .tags-pg-body {
+    padding-bottom: 80px !important;
   }
-  .prose-page.has-toc .breadcrumb { grid-column: 1 / -1; }
-  .prose-page.has-toc article { min-width: 0; }
-  .prose-page.has-toc .toc-aside { display: block; }
+  /* The sections themselves don't need the 80px override since
+     the last section already gets it above */
 }
 
 

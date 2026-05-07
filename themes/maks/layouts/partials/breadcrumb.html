@@ -6,6 +6,13 @@
     "lpic2"   "/certs/lpic-2/"
     "ccna"    "/certs/ccna/"
 }}
+{{ $certNames := dict
+    "ccna"    "CCNA"
+    "neteng"  "Network Engineer"
+    "lpic1"   "LPIC-1"
+    "lpic2"   "LPIC-2"
+    "netarch" "Network Architect"
+}}
 
 <div class="breadcrumb">
   <a href="{{ "/" | relURL }}">maks.top</a>
@@ -37,30 +44,52 @@
     {{ end }}
 
   {{ else if .IsSection }}
-    <span>{{ .Section }}</span>
+    {{ if eq .Section "posts" }}
+      <span>Blog</span>
+    {{ else }}
+      <span>{{ .Section }}</span>
+    {{ end }}
+
+  {{ else if eq .Section "posts" }}
+    {{/* Single post — determine subfolder */}}
+    {{ $sub := "" }}
+    {{ if .File }}
+      {{ $parts := split .File.Dir "/" }}
+      {{ if gt (len $parts) 2 }}
+        {{ $sub = index $parts 1 }}
+      {{ end }}
+    {{ end }}
+    {{ $certURL := index $certMap $sub }}
+    {{ if $certURL }}
+      <a href="{{ $certURL | relURL }}">{{ index $certNames $sub | default $sub }}</a>
+      <span>/</span>
+      <span>{{ .Title }}</span>
+    {{ else }}
+      <a href="{{ "/posts/" | relURL }}">Blog</a>
+      <span>/</span>
+      <span>{{ .Title }}</span>
+    {{ end }}
+
+  {{ else if eq .Section "kb" }}
+    {{/* KB pages — link to parent subsection if nested */}}
+    {{ if .File }}
+      {{ $parts := split .File.Dir "/" }}
+      {{ if gt (len $parts) 2 }}
+        {{ $sub := index $parts 1 }}
+        {{ if $sub }}
+          <a href="{{ (printf "/kb/%s/" $sub) | relURL }}">{{ $.Parent.Title | default $sub }}</a>
+          <span>/</span>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    <span>{{ .Title }}</span>
 
   {{ else }}
     {{ with .Section }}
       <a href="{{ . | relURL }}">{{ . }}</a>
       <span>/</span>
     {{ end }}
-    {{ if .File }}
-      {{ $parts := split .File.Dir "/" }}
-      {{ if gt (len $parts) 2 }}
-        {{ $sub := index $parts 1 }}
-        {{ if $sub }}
-          {{ $certURL := index $certMap $sub }}
-          {{ if $certURL }}
-            <a href="{{ $certURL | relURL }}">{{ $sub }}</a>
-          {{ else if eq $.Section "kb" }}
-            <a href="{{ (printf "/%s/%s/" $.Section $sub) | relURL }}">{{ $.Parent.Title | default $sub }}</a>
-          {{ else }}
-            <span>{{ $sub }}</span>
-          {{ end }}
-          <span>/</span>
-        {{ end }}
-      {{ end }}
-    {{ end }}
     <span>{{ .Title }}</span>
+
   {{ end }}
 </div>

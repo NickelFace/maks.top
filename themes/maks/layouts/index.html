@@ -1,105 +1,294 @@
 {{ define "main" }}
-<div class="page">
+{{- $enPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" -}}
+{{- $enLabs  := where (where .Site.RegularPages "Section" "ccna-labs") "Params.page_lang" "ne" "ru" -}}
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-top">
-      <div class="hero-text">
-        <h1>Linux &amp; DevOps<br>Knowledge Base</h1>
-        <p>Articles, cert notes, and sysadmin references.<br>LPIC-2 · AWS · CKA · Networking.</p>
-      </div>
-      <div class="tag-cloud">
-        {{ range $i, $t := first 12 .Site.Taxonomies.tags.ByCount }}
-        <a href="{{ "/tags/" | relURL }}{{ $t.Page.Title | urlize }}/"
-           class="tag{{ if lt $i 3 }} tag-lg{{ else if lt $i 7 }} tag-md{{ end }}"
-           style="animation-delay:{{ mul $i 40 }}ms">
-          {{ $t.Page.Title }} <span class="count">{{ $t.Count }}</span>
-        </a>
-        {{ end }}
-        <a href="{{ "/tags/" | relURL }}" class="tag tag-more" style="animation-delay:{{ mul 12 40 }}ms">all →</a>
-      </div>
+{{- /* ── Cert data ── */ -}}
+{{- $ne    := .Site.GetPage "/certs/network-engineer" -}}
+{{- $neAct := len (where $enPosts "Params.categories" "intersect" (slice $ne.Params.post_category)) -}}
+{{- $nePct := $ne.Params.progress_pct | default 0 -}}
+{{- if gt ($ne.Params.expected_articles | default 0) 0 -}}
+  {{- $nePct = int (math.Round (div (mul (float $neAct) 100.0) (float $ne.Params.expected_articles))) -}}
+  {{- if gt $nePct 100 -}}{{- $nePct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $na    := .Site.GetPage "/certs/network-architect" -}}
+{{- $naAct := len (where $enPosts "Params.categories" "intersect" (slice $na.Params.post_category)) -}}
+{{- $naPct := $na.Params.progress_pct | default 0 -}}
+{{- if gt ($na.Params.expected_articles | default 0) 0 -}}
+  {{- $naPct = int (math.Round (div (mul (float $naAct) 100.0) (float $na.Params.expected_articles))) -}}
+  {{- if gt $naPct 100 -}}{{- $naPct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $l1    := .Site.GetPage "/certs/lpic-1" -}}
+{{- $l1Act := len (where $enPosts "Params.categories" "intersect" (slice $l1.Params.post_category)) -}}
+{{- $l1Pct := $l1.Params.progress_pct | default 0 -}}
+{{- if gt ($l1.Params.expected_articles | default 0) 0 -}}
+  {{- $l1Pct = int (math.Round (div (mul (float $l1Act) 100.0) (float $l1.Params.expected_articles))) -}}
+  {{- if gt $l1Pct 100 -}}{{- $l1Pct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $l2    := .Site.GetPage "/certs/lpic-2" -}}
+{{- $l2Act := len (where $enPosts "Params.categories" "intersect" (slice $l2.Params.post_category)) -}}
+{{- $l2Pct := $l2.Params.progress_pct | default 0 -}}
+{{- if gt ($l2.Params.expected_articles | default 0) 0 -}}
+  {{- $l2Pct = int (math.Round (div (mul (float $l2Act) 100.0) (float $l2.Params.expected_articles))) -}}
+  {{- if gt $l2Pct 100 -}}{{- $l2Pct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $aws   := .Site.GetPage "/certs/aws-saa" -}}
+{{- $awsAct := len (where $enPosts "Params.categories" "intersect" (slice $aws.Params.post_category)) -}}
+{{- $awsPct := $aws.Params.progress_pct | default 0 -}}
+{{- if gt ($aws.Params.expected_articles | default 0) 0 -}}
+  {{- $awsPct = int (math.Round (div (mul (float $awsAct) 100.0) (float $aws.Params.expected_articles))) -}}
+  {{- if gt $awsPct 100 -}}{{- $awsPct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- $ccna   := .Site.GetPage "/certs/ccna" -}}
+{{- $ccnaAct := len (where $enPosts "Params.categories" "intersect" (slice $ccna.Params.post_category)) -}}
+{{- $ccnaPct := $ccna.Params.progress_pct | default 0 -}}
+{{- if gt ($ccna.Params.expected_articles | default 0) 0 -}}
+  {{- $ccnaPct = int (math.Round (div (mul (float $ccnaAct) 100.0) (float $ccna.Params.expected_articles))) -}}
+  {{- if gt $ccnaPct 100 -}}{{- $ccnaPct = 100 -}}{{- end -}}
+{{- end -}}
+
+{{- /* ── KB data ── */ -}}
+{{- $allKb := where (where .Site.RegularPages "Section" "kb") "Params.page_lang" "ne" "ru" -}}
+{{- $kbDirect := slice -}}
+{{- range $allKb -}}{{- if eq .File.Dir "kb/" -}}{{- $kbDirect = $kbDirect | append . -}}{{- end -}}{{- end -}}
+{{- $kbRoot := .Site.GetPage "/kb" -}}
+{{- $kbSections := $kbRoot.Sections -}}
+
+<!-- ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ -->
+<section class="home-hero">
+  <div class="home-hero-left">
+    <div class="home-eyebrow" style="margin-bottom:18px">· Maks Lopunov · Sydney, AU</div>
+    <h1 class="home-h1">Linux &amp; DevOps,<br><em class="home-h1-em">studied in public.</em></h1>
+    <p class="home-lead">A working knowledge base of everything I'm learning toward LPIC-2, AWS SAA, CKA and CCNA — plus the network-engineering labs that got me here.</p>
+    <div class="home-cta">
+      <a href="{{ "/posts/" | relURL }}" class="btn-ink">
+        Read the notes
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="{{ "/about/" | relURL }}" class="btn-ring">
+        Hire me
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+      </a>
     </div>
-
-    {{ partial "search-box.html" (dict "placeholder" "Search articles and notes… (powered by Pagefind)") }}
   </div>
+  <div class="home-hero-stats">
+    <div>&gt; {{ len $enPosts }} published notes</div>
+    <div>&gt; 6 cert tracks active</div>
+    <div>&gt; {{ len $enLabs }} lab walkthroughs</div>
+    <div>&gt; 489 quiz questions</div>
+    {{ with index $enPosts.ByDate.Reverse 0 }}
+    <div class="home-stats-accent">&gt; last write: <span id="lastWrite" data-date="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</span></div>
+    {{ end }}
+  </div>
+</section>
 
-  <!-- GRID -->
-  <div class="sec-title">Overview</div>
-  <div class="main-grid">
-
-    {{- $enPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" -}}
-
-    <!-- Latest -->
-    <div class="panel">
-      <div class="panel-head">
-        <span class="panel-title">Latest Posts</span>
-        <a href="{{ "/posts/" | relURL }}" class="panel-more">all →</a>
-      </div>
-      <div class="panel-body">
-        {{ range $i, $p := first 8 $enPosts.ByDate.Reverse }}
-        <a href="{{ $p.RelPermalink }}" class="post-item">
-          <span class="post-num">{{ add $i 1 }}</span>
-          <div class="post-info">
-            <span class="post-title">{{ $p.Title }}</span>
-          </div>
-        </a>
-        {{ end }}
-      </div>
+<!-- ═══════════════════════════════════════
+     § 01 — CERTIFICATION TRACK
+     ═══════════════════════════════════════ -->
+<section class="home-sect">
+  <div class="home-sect-hd">
+    <div>
+      <div class="home-eyebrow">§ 01 — Certification track</div>
+      <h2 class="home-h2">What I'm working toward.</h2>
     </div>
+    <a href="{{ "/certs/" | relURL }}" class="home-more">all certifications →</a>
+  </div>
+  <div class="home-cert-grid">
 
-    <!-- Recent -->
-    <div class="panel">
-      <div class="panel-head">
-        <span class="panel-title">Recent Posts</span>
-        <a href="{{ "/posts/" | relURL }}" class="panel-more">all →</a>
+    <a href="{{ "/certs/lpic-1/" | relURL }}" class="home-cert-card">
+      <div class="home-cc-top">
+        <div class="home-cc-name">LPIC-1</div>
+        <div class="home-cc-state" style="color:var(--accent2)">passed</div>
       </div>
-      <div class="panel-body">
-        {{ range first 6 $enPosts.ByDate.Reverse }}
-        <a href="{{ .RelPermalink }}" class="post-item">
-          <div class="post-info">
-            <span class="post-title">{{ .Title }}</span>
-            <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-          </div>
-        </a>
-        {{ end }}
+      <div class="home-cc-sub">Linux Professional Institute</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l1Pct }}%;background:var(--accent2)"></div></div>
+      <div class="home-cc-meta">16 Feb 2025 · {{ $l1Act }} articles</div>
+    </a>
+
+    <a href="{{ "/certs/network-engineer/" | relURL }}" class="home-cert-card">
+      <div class="home-cc-top">
+        <div class="home-cc-name">Network Engineer</div>
+        <div class="home-cc-state" style="color:var(--accent2)">complete</div>
       </div>
+      <div class="home-cc-sub">Cisco R&amp;S · OTUS</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $nePct }}%;background:var(--accent2)"></div></div>
+      <div class="home-cc-meta">{{ $neAct }} / {{ $ne.Params.expected_articles | default "17" }} labs</div>
+    </a>
+
+    <a href="{{ "/certs/network-architect/" | relURL }}" class="home-cert-card">
+      <div class="home-cc-top">
+        <div class="home-cc-name">Network Architect</div>
+        <div class="home-cc-state" style="color:var(--accent2)">complete</div>
+      </div>
+      <div class="home-cc-sub">Data Center · VxLAN EVPN</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $naPct }}%;background:var(--accent2)"></div></div>
+      <div class="home-cc-meta">{{ $naAct }} / {{ $na.Params.expected_articles | default "13" }} labs</div>
+    </a>
+
+    <a href="{{ "/certs/lpic-2/" | relURL }}" class="home-cert-card">
+      <div class="home-cc-top">
+        <div class="home-cc-name">LPIC-2</div>
+        <div class="home-cc-state" style="color:var(--accent)">in progress</div>
+      </div>
+      <div class="home-cc-sub">Exams 201 &amp; 202</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l2Pct }}%;background:var(--accent)"></div></div>
+      <div class="home-cc-meta">{{ $l2Act }} / {{ $l2.Params.expected_articles }} articles</div>
+    </a>
+
+    <a href="{{ "/certs/aws-saa/" | relURL }}" class="home-cert-card">
+      <div class="home-cc-top">
+        <div class="home-cc-name">AWS SAA-C03</div>
+        <div class="home-cc-state" style="color:var(--accent3)">planned</div>
+      </div>
+      <div class="home-cc-sub">Solutions Architect Assoc.</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $awsPct }}%;background:var(--accent3)"></div></div>
+      <div class="home-cc-meta">Q2 2026</div>
+    </a>
+
+    <a href="{{ "/certs/ccna/" | relURL }}" class="home-cert-card">
+      <div class="home-cc-top">
+        <div class="home-cc-name">CCNA 200-301</div>
+        <div class="home-cc-state" style="color:var(--accent)">in progress</div>
+      </div>
+      <div class="home-cc-sub">Cisco Certified Network Assoc.</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $ccnaPct }}%;background:var(--accent)"></div></div>
+      <div class="home-cc-meta">{{ $ccnaAct }} / {{ $ccna.Params.expected_articles }} articles</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     § 02 — KNOWLEDGE BASE
+     ═══════════════════════════════════════ -->
+<section class="home-sect">
+  <div class="home-sect-hd">
+    <div>
+      <div class="home-eyebrow">§ 02 — Knowledge base</div>
+      <h2 class="home-h2">Reference material, organised.</h2>
     </div>
-
-    <!-- KB Quick References -->
-    <div class="panel">
-      <div class="panel-head">
-        <span class="panel-title">Quick References</span>
-        <a href="{{ "/kb/" | relURL }}" class="panel-more">all →</a>
+    <a href="{{ "/kb/" | relURL }}" class="home-more">browse all →</a>
+  </div>
+  <div class="home-kb-grid">
+    {{ $kbCols := slice
+      (dict "n" "I"   "group" "Linux Core"    "extra" "")
+      (dict "n" "II"  "group" "Networking"     "extra" "")
+      (dict "n" "III" "group" "Cloud & DevOps" "extra" "")
+      (dict "n" "IV"  "group" "Security"       "extra" "Cases")
+    }}
+    {{ range $kbCols }}
+      {{- $group := .group -}}
+      {{- $extra := .extra -}}
+      {{- $gPages := where $kbDirect "Params.group" $group -}}
+      {{- $gSecs  := slice -}}
+      {{- range $kbSections -}}{{- if eq .Params.group $group -}}{{- $gSecs = $gSecs | append . -}}{{- end -}}{{- end -}}
+      {{- if $extra -}}
+        {{- $gPages = $gPages | append (where $kbDirect "Params.group" $extra) -}}
+        {{- range $kbSections -}}{{- if eq .Params.group $extra -}}{{- $gSecs = $gSecs | append . -}}{{- end -}}{{- end -}}
+      {{- end -}}
+      {{- $all := $gSecs | append $gPages -}}
+    <div class="home-kb-col">
+      <div class="home-kb-col-hd">
+        <span class="home-kb-num">{{ .n }}</span>
+        <span class="home-kb-count">{{ len $all }} pages</span>
       </div>
-      <div class="panel-body">
-        {{ range first 6 (where (where .Site.RegularPages "Section" "kb") "Params.page_lang" "ne" "ru") }}
-        <a href="{{ .RelPermalink }}" class="kb-item">
-          <div class="kb-icon">{{ with .Params.icon }}{{ . }}{{ else }}📋{{ end }}</div>
-          <div>
-            <div class="kb-title">{{ .Title }}</div>
-            <div class="kb-meta">{{ with .Params.tags }}{{ delimit . " · " }}{{ end }}</div>
+      <div class="home-kb-colname">{{ if eq $group "Security" }}Security &amp; Cases{{ else }}{{ $group }}{{ end }}</div>
+      <ul class="home-kb-list">
+        {{ range first 6 (sort $all "Title") }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+        {{ if gt (len $all) 6 }}
+        <li class="home-kb-more"><a href="{{ "/kb/" | relURL }}">+ {{ sub (len $all) 6 }} more</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     § 03 — RECENT WRITING
+     ═══════════════════════════════════════ -->
+<div class="home-writing-outer">
+  <section class="home-sect home-writing-sect">
+    <div class="home-sect-hd">
+      <div>
+        <div class="home-eyebrow">§ 03 — Latest writing</div>
+        <h2 class="home-h2">Recent notes from the desk.</h2>
+      </div>
+      <a href="{{ "/posts/" | relURL }}" class="home-more">blog archive →</a>
+    </div>
+    <div class="home-posts-grid">
+      {{ range $i, $p := first 4 $enPosts.ByDate.Reverse }}
+      <a href="{{ $p.RelPermalink }}" class="home-post-item">
+        <div class="home-post-num">{{ printf "%03d" (add $i 1) }}</div>
+        <div class="home-post-body">
+          <div class="home-post-meta">
+            {{ $p.Date.Format "02 Jan 2006" }}
+            {{ with $p.Params.tags }}<span class="home-post-dot">·</span>{{ delimit (first 2 .) " / " }}{{ end }}
           </div>
-        </a>
-        {{ else }}
-        <div class="cert-coming-soon">
-          <div class="coming-icon">🚧</div>
-          <div>References coming soon</div>
+          <div class="home-post-title">{{ $p.Title }}</div>
+          {{ with $p.Description }}<div class="home-post-desc">{{ . }}</div>{{ end }}
+          <div class="home-post-read">read note →</div>
         </div>
-        {{ end }}
-      </div>
+      </a>
+      {{ end }}
     </div>
+  </section>
+</div>
 
-    <!-- Certs (spans 2 cols) -->
-    <div class="panel certs-section">
-      {{ partial "certs-widget.html" . }}
+<!-- ═══════════════════════════════════════
+     § 04 — ABOUT
+     ═══════════════════════════════════════ -->
+<section class="home-about">
+  <div class="home-about-left">
+    <div class="home-eyebrow">§ 04 — About</div>
+    <h2 class="home-h2" style="margin:8px 0 24px">Currently looking for DevOps / SRE roles in Sydney.</h2>
+    <div class="home-skills">
+      {{ range slice "Linux" "Bash" "Docker" "K8s" "Terraform" "AWS" "Nginx" "iptables" "Ansible" "Git" "Networking" "LDAP/AD" }}
+      <span class="home-skill">{{ . }}</span>
+      {{ end }}
     </div>
-
-  </div><!-- /main-grid -->
-
-</div><!-- /page -->
+  </div>
+  <div class="home-about-right">
+    <p class="home-bio">I write production-grade notes while preparing for the certifications above. Most pages are battle-tested in a 12-node home lab and at a mid-size enterprise gig. I publish in EN and RU. CV and references on request.</p>
+    <div class="home-socials">
+      <a href="{{ .Site.Params.github }}" class="home-social" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>
+        github
+      </a>
+      <a href="{{ .Site.Params.linkedin }}" class="home-social" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin
+      </a>
+      {{ with .Site.Params.telegram }}
+      <a href="{{ . }}" class="home-social" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 5 2 11.7l6.3 1.4 2.1 6.4 3.5-3.5 4.2 3.4L21.2 5Z"/><path d="M8.3 13.1 17.2 7.7"/></svg>
+        telegram
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
 
 {{ end }}
 
 {{ define "scripts" }}
-<script src="{{ "js/pagefind-search.js" | relURL }}"></script>
+<script>
+(function(){
+  var el = document.getElementById('lastWrite');
+  if (!el) return;
+  var d = new Date(el.dataset.date);
+  var diff = Math.floor((Date.now() - d) / 86400000);
+  if (diff === 0) el.textContent = 'today';
+  else if (diff === 1) el.textContent = '1d ago';
+  else if (diff < 30) el.textContent = diff + 'd ago';
+})();
+</script>
 {{ end }}

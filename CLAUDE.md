@@ -42,26 +42,28 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 | File | Location | Scope |
 |---|---|---|
 | `critical.css` | `assets/css/` | Inlined in `<head>` via `resources.Get \| minify`. Dark/light `html,body` bg + `no-transition`. **Single source of truth for FOUC colors — update here when changing theme bg.** |
-| `global.css` | `static/styles/` | Variables, reset, nav, page, KB cards (.kb-card, .kb-card-meta, .kb-card-section), tags, pagination, breadcrumb, sticky footer |
-| `prose.css` | `static/styles/` | Article body typography, post-header/post-meta, `.intro-card`, `.ref-panel`, `.cheat-table`, `.tabs`, `.code-block`, `.sec` divider (used in KB and posts) |
-| `cert.css` | `static/styles/` | Cert overview page (hero, accordion topics) |
-| `quiz.css` | `static/styles/` | CCNA quiz cards, options, scoring badges; also CCNA labs list (`.labs-index`, `.lab-item`, `.lab-toggle`, `.lab-body`) |
+| `global.css` | `static/styles/` | Variables, reset, nav (incl. `.nav-suntime` sunrise/sunset), page, KB cards, tags, pagination, breadcrumb, sticky footer. Utility classes: `.eyebrow`, `.serif`, `.mono` |
+| `prose.css` | `static/styles/` | Article body typography + **3-col layout** (`.prose-3col`, `.prose-meta-rail`, `.prose-toc-rail`, `.prose-h1`, `.prose-lead`, `.tldr-card`), `.intro-card`, `.ref-panel`, `.cheat-table`, `.tabs`, `.code-block`, `.sec` |
+| `cert.css` | `static/styles/` | New cert page (`.cert-pg-*`, `.cert-res-*`, `.cert-domain-*`); legacy styles kept for fallback |
+| `quiz.css` | `static/styles/` | CCNA quiz cards, options, scoring badges |
 | `ns.css` | `static/styles/` | linux-namespaces page only (ns-specific: `.ns-card`, `.ns-grid`, `.ns-map*`, `.stag*`) |
 | `home.css` | `static/styles/` | Homepage layout |
 | `mobile.css` | `static/styles/` | Mobile-specific overrides |
 | `fonts.css` | `static/styles/` | @font-face for self-hosted fonts |
 | `chroma.css` | `static/styles/` | Hugo syntax highlighting — loaded on `posts`, `kb`, and `ccna-labs` single pages (NOT on ccna-labs list page) |
+| `topology.css` | `static/styles/` | `.topology` figure + SVG diagram styles — loaded on `posts`, `kb`, `ccna-labs` single pages |
 
 ## CSS variables (defined in global.css)
 ```css
---accent   /* cyan highlight color */
---accent2, --accent3
---bg, --bg2, --bg3  /* background layers: dark=#13151f,#1c1f2e,#252840 */
---border, --border2  /* dark=#2d3356,#353a60 */
+--accent   /* amber — night: oklch(0.78 0.14 70), day: oklch(0.72 0.14 65) */
+--accent2  /* moss green */
+--accent3  /* rust */
+--bg, --bg2, --bg3  /* night: #16140F,#1F1C16,#2A2620 / day: #F6F3EC,#EFEBE0,#E6E1D2 */
+--border, --border2
 --text, --text2, --text3
---glow     /* subtle accent glow background */
---code-bg
---radius   /* border-radius base: 8px */
+--glow     /* amber glow */
+--code-bg  /* night: #100E09 / day: #EDE9DF */
+--radius   /* border-radius base: 6px */
 ```
 
 ## Tags — non-clickable everywhere except /tags/ page
@@ -71,11 +73,19 @@ Tags (`<span class="tag">`) are **decorative only** across the whole site — no
 - In `global.css`: `.kb-card-tags .tag:hover` resets border/color to non-accent
 
 ## FOUC prevention
-`themes/maks/assets/css/critical.css` is inlined into `<head>` at build time via `{{ with resources.Get "css/critical.css" | minify }}<style>{{ .Content | safeCSS }}</style>{{ end }}`. It sets `html,body` background for both themes and the `no-transition` rule. This is the **single source of truth** — do not hardcode bg colors in `baseof.html` directly.
+`themes/maks/assets/css/critical.css` is inlined into `<head>` at build time. Sets `html,body` backgrounds for both themes (night: `#16140F`, day: `#F6F3EC`) and `no-transition`. **Single source of truth — update here when changing theme bg colors.**
 
-Inline `<script>` in `<head>` reads `localStorage('theme')`, applies `data-theme="light"` if needed, and removes `no-transition` after double `requestAnimationFrame`.
+Inline `<script>` in `<head>` reads `localStorage('theme')`:
+- `'light'` or `'dark'` → use stored value
+- absent/`'auto'` → **auto-detect**: day if local hour is 7–20, night otherwise
 
-Theme state is managed by a single `applyTheme(theme)` function in `baseof.html` (end of `<body>`). It sets `data-theme`, button icons, and `aria-pressed` in one place. `toggleTheme()` calls it. It is also called once on page load: `applyTheme(localStorage.getItem('theme')||'dark')`. Do not add separate theme init logic elsewhere.
+Theme state is managed by `applyTheme(t, isAuto)` in `baseof.html` body. Sets `data-theme`, `aria-pressed`, and `data-auto` on all `.theme-btn` buttons. Init function calls `applyTheme` once on load; if auto mode, starts a `setInterval` (10 min) to re-evaluate.
+
+## Theme toggle behaviour
+- **Default**: auto — reads local time, switches at 07:00 (day) and 20:00 (night)
+- **Click**: manual override stored as `'light'` or `'dark'` in `localStorage('theme')`
+- `data-auto="true"` on `.theme-btn` indicates auto mode (CSS shows dashed border)
+- To reset to auto: clear `localStorage.removeItem('theme')` in browser console
 
 ## EN/RU translation system
 Applies to both posts and KB pages.
@@ -275,8 +285,10 @@ In `about/single.html` the values are rendered as base64 `data-v` attributes and
 - Always build (`hugo`) before committing to catch errors
 
 ## Fonts
-Inter (body text, wt 400–600), JetBrains Mono (monospace/code), Unbounded (display headings).
-All self-hosted woff2 in `static/fonts/`, loaded via `styles/fonts.css`.
+- **Fraunces** (display/logo, serif) — loaded via Google Fonts link in `baseof.html`
+- **Inter** (body text, wt 400–600) — self-hosted woff2
+- **JetBrains Mono** (monospace/code/labels) — self-hosted woff2
+- Unbounded woff2 files remain in `static/fonts/` but are no longer referenced in CSS
 Inter subsets: `Inter-latin.woff2`, `Inter-latin-ext.woff2`, `Inter-cyrillic.woff2`, `Inter-cyrillic-ext.woff2`.
 
 ## Pagefind
@@ -299,3 +311,31 @@ Search index built during `hugo`. RU pages excluded with `pagefind_ignore: true`
 | `partials/breadcrumb.html` | Shared breadcrumb — used in all templates |
 | `partials/search-box.html` | Search input UI — used in index.html, posts/list.html, taxonomy/tag.html. Accepts `.placeholder` param |
 | `partials/certs-widget.html` | Cert widget on homepage — article counts and progress % computed dynamically from `post_category` + `expected_articles` / `progress_pct` in cert frontmatter |
+
+## Shortcodes
+
+| File | Usage |
+|---|---|
+| `shortcodes/topology.html` | Declarative SVG network diagram. Replaces ASCII art in posts/kb/labs. |
+| `shortcodes/code.html` | Code block with copy button |
+| `shortcodes/ns-card.html` | Namespace isolation visualisation card |
+
+### topology shortcode syntax
+```
+{{</* topology cols="4" rows="3" caption="OSPF baseline" */>}}
+  cloud  ISP    "AS 64512"   at 0,1
+  router R1     "GW · BGP"   at 1,1
+  switch CORE   "VLAN 10/20" at 2,1
+  server srv-01 "10.0.10.4"  at 3,0
+  server srv-02 "10.0.10.5"  at 3,2
+  pc     lab-pc "VLAN 20"    at 2,2
+
+  ISP  — R1
+  R1   — CORE  label="trunk · 1G"
+  CORE — srv-01
+  CORE — srv-02
+  CORE — lab-pc
+{{</* /topology */>}}
+```
+Node kinds: `router` `switch` `server` `cloud` `pc` `fw` (and fallback generic rect).
+Coordinates: `at col,row` (0-indexed). Links: `A — B` or `A — B label="text"`.

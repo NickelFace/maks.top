@@ -1,12 +1,41 @@
+{{ define "head" }}
+<style>
+.tags-pg-hd { width:100%; border-bottom:1px solid var(--border); }
+.tags-pg-hd-inner { max-width:1200px; margin:0 auto; padding:56px 64px 32px; width:100%; }
+.tags-pg-h1 {
+  font-family:'Fraunces',Georgia,serif; font-size:clamp(28px,4vw,42px);
+  font-weight:400; margin:0; letter-spacing:-0.03em;
+  font-feature-settings:'opsz' 144; color:var(--text);
+}
+.tags-pg-body { max-width:1200px; margin:0 auto; padding:40px 64px 80px; width:100%; }
+/* Override tag font for cloud */
+.tags-grid .tag { font-family:'Fraunces',Georgia,serif; border-radius:999px; }
+.tags-grid .tag .count {
+  font-family:'JetBrains Mono',monospace; font-size:10px;
+  color:var(--text3); opacity:0.7;
+}
+@media (max-width:860px) {
+  .tags-pg-hd-inner,.tags-pg-body { padding-left:40px; padding-right:40px; }
+}
+@media (max-width:640px) {
+  .tags-pg-hd-inner { padding:40px 20px 24px; }
+  .tags-pg-body { padding:24px 20px 80px; }
+}
+</style>
+{{ end }}
+
 {{ define "main" }}
-<div class="page">
-
-  <div class="tags-header">
-    <div class="sec-title">All Tags</div>
-    {{ partial "search-box.html" (dict "placeholder" "Search articles… (powered by Pagefind)") }}
+<header class="tags-pg-hd">
+  <div class="tags-pg-hd-inner">
+    <h1 class="tags-pg-h1">Tags <em style="font-style:italic;color:var(--text2)">— index of topics.</em></h1>
+    <div style="margin-top:24px;max-width:560px">
+      {{ partial "search-box.html" (dict "placeholder" "Search articles… (powered by Pagefind)") }}
+    </div>
   </div>
+</header>
 
-  <div class="tags-bar" id="tagsBar">
+<div class="tags-pg-body">
+  <div class="tags-bar" id="tagsBar" style="margin-bottom:20px">
     <button class="tag tag-lg" id="tagsGridToggle"></button>
     <button class="tag tag-lg active" id="tagsBarPill" style="display:none"></button>
   </div>
@@ -14,7 +43,6 @@
   <div class="tags-grid" id="tagsGrid"></div>
 
   <div id="tagArticles" class="posts-list"></div>
-
 </div>
 {{ end }}
 
