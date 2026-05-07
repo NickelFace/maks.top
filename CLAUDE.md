@@ -207,9 +207,9 @@ Template: `themes/maks/layouts/taxonomy/tag.html`
 - Standalone section at `/ccna-labs/` (not under `/posts/`)
 - EN files: English content, `page_lang: "en"`, `lang_pair: "/ccna-labs/ru/{slug}/"`
 - RU shadow pages: `content/ccna-labs/ru/`, Russian content, same build flags as other RU pages
-- List page (`/ccna-labs/`): toggle accordion — click lab to expand description + "Open lab →" link
+- List page (`/ccna-labs/`): flat grid — `grid-template-columns: 80px 1fr 140px 100px 24px` — no accordion
+  - Columns: `LAB NN` (amber), title + tags, tool (default "Packet Tracer"), duration (default "—"), `→`
   - Template: `themes/maks/layouts/ccna-labs/list.html` with inline CSS (no external dependency)
-  - JS: `toggleLab()` function inline in template
 - Single lab pages use `_default/single.html` — `prose.css` + `chroma.css` load via `baseof.html` (`.IsPage` check)
 - Breadcrumb: `maks.top / CCNA / Labs / Lab Title` — CCNA links to `/certs/ccna/`
 - `ccna-labs/` section added to `$certMap` in breadcrumb partial
@@ -256,6 +256,9 @@ date: DD-MM-YYYY   # must be a past date — Hugo skips future/today dates by de
 
 ### Network Labs section (Cases group)
 Personal lab notes live in `content/kb/network-labs/`. EN only, no RU translations. Group: `"Cases"`.
+
+## CCNA section layout
+`themes/maks/layouts/_default/ccna-section.html` — used for section landing pages under CCNA (e.g. `/ccna-labs/`, `/ccna-quiz/` list overviews). Renders a section-based header + child page grid.
 
 ## Breadcrumb partial
 
