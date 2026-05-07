@@ -1,47 +1,47 @@
 ---
 title: "CCNA — 6.3 Инструменты конфигурации"
 date: 2026-05-07
-description: "Ansible (agentless, YAML, push), Puppet и Chef (agent-based, pull), сравнение инструментов автоматизации, Terraform для IaC и встроенные средства IOS: EEM и TCL."
+description: "Ansible (agentless, YAML, push), Puppet and Chef (agent-based, pull), comparison of automation tools, Terraform for IaC, and built-in IOS tools: EEM and TCL scripting."
 tags: ["CCNA", "Cisco", "Ansible", "автоматизация", "конфигурация"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-6-03-config-tools/"
 ---
 
-## Зачем нужна автоматизация конфигурации
+## Why Configuration Automation is Needed
 
-| Проблема ручного управления | Решение |
+| Manual management problem | Solution |
 |---|---|
-| Ошибки при вводе вручную | Шаблоны, декларативный подход |
-| Непоследовательность конфигураций | Idempotency — применяется только разница |
-| Долгое развёртывание | Параллельное применение на сотни устройств |
-| Нет истории изменений | Git-интеграция (IaC — Infrastructure as Code) |
+| Errors from manual input | Templates, declarative approach |
+| Inconsistent configurations | Idempotency — only differences are applied |
+| Slow deployments | Parallel application to hundreds of devices |
+| No change history | Git integration (IaC — Infrastructure as Code) |
 
 ---
 
 ## Ansible
 
-**Ansible** — наиболее популярный инструмент для сетевой автоматизации.
+**Ansible** is the most popular tool for network automation.
 
-| Характеристика | Описание |
+| Characteristic | Description |
 |---|---|
-| Язык | YAML (Playbooks) |
-| Агент | Нет (agentless) |
-| Транспорт | SSH или API (для сетевых устройств — NETCONF, HTTP) |
-| Разработчик | Red Hat |
+| Language | YAML (Playbooks) |
+| Agent | None (agentless) |
+| Transport | SSH or API (for network devices — NETCONF, HTTP) |
+| Developer | Red Hat |
 
-### Компоненты Ansible
+### Ansible Components
 
-| Компонент | Описание |
+| Component | Description |
 |---|---|
-| Inventory | Список хостов (IP, группы, переменные) |
-| Playbook | Набор задач в YAML |
-| Task | Одна операция (вызов модуля) |
-| Module | Плагин для взаимодействия с устройством |
-| Role | Набор Playbooks для конкретной функции |
-| Jinja2 | Шаблонизатор для генерации конфигов |
+| Inventory | List of hosts (IPs, groups, variables) |
+| Playbook | Set of tasks in YAML |
+| Task | A single operation (module call) |
+| Module | Plugin for interacting with a device |
+| Role | Collection of Playbooks for a specific function |
+| Jinja2 | Templating engine for generating configurations |
 
-### Пример Ansible Playbook для Cisco IOS
+### Ansible Playbook Example for Cisco IOS
 
 ```yaml
 ---
@@ -75,7 +75,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-03-config-tools/"
               - address: "{{ ip_address }}/24"
 ```
 
-### Inventory файл
+### Inventory File
 
 ```ini
 [routers]
@@ -93,20 +93,20 @@ ansible_connection=network_cli
 
 ## Puppet
 
-| Характеристика | Описание |
+| Characteristic | Description |
 |---|---|
-| Язык | Puppet DSL (Ruby-based) |
-| Агент | Да (Puppet Agent на каждом узле) |
-| Модель | Pull (агент запрашивает конфиг у Puppet Master) |
-| Разработчик | Puppet, Inc. |
+| Language | Puppet DSL (Ruby-based) |
+| Agent | Yes (Puppet Agent on each node) |
+| Model | Pull (agent requests config from Puppet Master) |
+| Developer | Puppet, Inc. |
 
-**Принцип работы:**
-1. Puppet Master хранит "манифесты" (желаемое состояние)
-2. Puppet Agent (на устройствах) периодически запрашивает манифест
-3. Агент применяет изменения, если состояние отличается от желаемого
+**How it works:**
+1. Puppet Master stores "manifests" (desired state)
+2. Puppet Agent (on devices) periodically requests the manifest
+3. Agent applies changes if the current state differs from desired
 
 ```puppet
-# Пример манифеста Puppet
+# Example Puppet manifest
 class network_config {
   cisco_interface { 'GigabitEthernet0/0':
     ensure      => present,
@@ -121,46 +121,46 @@ class network_config {
 
 ## Chef
 
-| Характеристика | Описание |
+| Characteristic | Description |
 |---|---|
-| Язык | Ruby (Recipes/Cookbooks) |
-| Агент | Да (Chef Client) |
-| Модель | Pull (Chef Client → Chef Server) |
-| Разработчик | Progress (ранее Chef Software) |
+| Language | Ruby (Recipes/Cookbooks) |
+| Agent | Yes (Chef Client) |
+| Model | Pull (Chef Client → Chef Server) |
+| Developer | Progress (formerly Chef Software) |
 
-**Компоненты:**
-- **Chef Server** — хранит конфигурации
-- **Chef Client** — агент на управляемых узлах
-- **Workstation** — где разработчики пишут рецепты
-- **Cookbook** — набор рецептов для одной задачи
+**Components:**
+- **Chef Server** — stores configurations
+- **Chef Client** — agent on managed nodes
+- **Workstation** — where developers write recipes
+- **Cookbook** — collection of recipes for a single task
 
 ---
 
-## Сравнение инструментов
+## Tool Comparison
 
-| Характеристика | Ansible | Puppet | Chef |
+| Characteristic | Ansible | Puppet | Chef |
 |---|---|---|---|
-| Агент | Нет | Да | Да |
-| Язык конфига | YAML | Puppet DSL | Ruby |
-| Модель | Push | Pull | Pull |
-| Кривая обучения | Низкая | Средняя | Высокая |
-| Сетевые модули | Отличные (cisco.ios, cisco.nxos) | Ограниченные | Ограниченные |
-| Популярность для сетей | Очень высокая | Средняя | Низкая |
+| Agent | No | Yes | Yes |
+| Config language | YAML | Puppet DSL | Ruby |
+| Model | Push | Pull | Pull |
+| Learning curve | Low | Medium | High |
+| Network modules | Excellent (cisco.ios, cisco.nxos) | Limited | Limited |
+| Popularity for networks | Very high | Medium | Low |
 
-> **💡 Совет:** Для CCNA экзамена главное: **Ansible = agentless = YAML = push**; **Puppet/Chef = agent-based = pull**. Ansible наиболее распространён для автоматизации сетей Cisco.
+> **💡 Tip:** For the CCNA exam, key facts are: **Ansible = agentless = YAML = push**; **Puppet/Chef = agent-based = pull**. Ansible is the most widely used tool for Cisco network automation.
 
 ---
 
 ## Terraform
 
-**Terraform** (HashiCorp) — Infrastructure as Code для облачных и on-prem ресурсов.
+**Terraform** (HashiCorp) — Infrastructure as Code for cloud and on-premises resources.
 
-| Характеристика | Описание |
+| Characteristic | Description |
 |---|---|
-| Язык | HCL (HashiCorp Configuration Language) |
-| Подход | Декларативный (описываешь конечное состояние) |
-| Провайдеры | AWS, Azure, GCP, Cisco ACI, VMware, и др. |
-| Применение | Создание инфраструктуры (VM, сети, маршрутизаторы) |
+| Language | HCL (HashiCorp Configuration Language) |
+| Approach | Declarative (describe the desired end state) |
+| Providers | AWS, Azure, GCP, Cisco ACI, VMware, and more |
+| Use case | Creating infrastructure (VMs, networks, routers) |
 
 ```hcl
 resource "cisco-asa_access_rules" "example" {
@@ -174,14 +174,14 @@ resource "cisco-asa_access_rules" "example" {
 
 ---
 
-## Cisco IOS и автоматизация
+## Cisco IOS and Automation
 
 ### EEM (Embedded Event Manager)
 
-Встроенный в IOS инструмент для автоматизации реакций на события:
+A built-in IOS tool for automating responses to events:
 
 ```bash
-# Пример: при падении интерфейса — отправить syslog + backup config
+# Example: when an interface goes down — send syslog + backup config
 Router(config)# event manager applet LINK_DOWN
 Router(config-applet)# event syslog pattern "Interface.*down"
 Router(config-applet)# action 1.0 syslog msg "Interface went down - alerting"
@@ -191,23 +191,23 @@ Router(config-applet)# action 3.0 cli command "copy running-config tftp://10.0.0
 
 ### TCL Scripting
 
-Cisco IOS поддерживает TCL-скрипты:
+Cisco IOS supports TCL scripts:
 
 ```tcl
-# Простой TCL-скрипт на IOS
+# Simple TCL script on IOS
 Router# tclsh
 Router(tcl)# puts [exec "show version | include IOS"]
 ```
 
 ---
 
-## Ресурсы
+## Resources
 
-| Ресурс | Описание |
+| Resource | Description |
 |---|---|
-| [Ansible for Network Automation — Ansible Docs](https://docs.ansible.com/ansible/latest/network/index.html) | Официальная документация Ansible по автоматизации сети |
-| [RFC 6241 — NETCONF](https://www.rfc-editor.org/rfc/rfc6241) | Network Configuration Protocol: операции, XML, capabilities |
-| [RESTCONF — RFC 8040](https://www.rfc-editor.org/rfc/rfc8040) | RESTCONF Protocol: HTTP-интерфейс для YANG моделей |
-| [Configuration Management Tools — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/configuration-management) | Ansible vs Puppet vs Chef: агентные и безагентные подходы |
-| [Jeremy's IT Lab — Configuration Management (YouTube)](https://www.youtube.com/watch?v=_k_v_-0TH_k) | Ansible, Puppet, Chef, Terraform, YANG из серии Free CCNA |
-| [Cisco DevNet — Network Automation](https://developer.cisco.com/network-automation/) | Cisco DevNet: ресурсы по NETCONF, RESTCONF, YANG, Ansible |
+| [Ansible for Network Automation — Ansible Docs](https://docs.ansible.com/ansible/latest/network/index.html) | Official Ansible documentation for network automation |
+| [RFC 6241 — NETCONF](https://www.rfc-editor.org/rfc/rfc6241) | Network Configuration Protocol: operations, XML, capabilities |
+| [RESTCONF — RFC 8040](https://www.rfc-editor.org/rfc/rfc8040) | RESTCONF Protocol: HTTP interface for YANG models |
+| [Configuration Management Tools — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/configuration-management) | Ansible vs Puppet vs Chef: agent-based and agentless approaches |
+| [Jeremy's IT Lab — Configuration Management (YouTube)](https://www.youtube.com/watch?v=_k_v_-0TH_k) | Ansible, Puppet, Chef, Terraform, YANG from the Free CCNA series |
+| [Cisco DevNet — Network Automation](https://developer.cisco.com/network-automation/) | Cisco DevNet: NETCONF, RESTCONF, YANG, Ansible resources |

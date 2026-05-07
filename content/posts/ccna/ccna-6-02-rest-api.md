@@ -1,60 +1,60 @@
 ---
 title: "CCNA — 6.2 REST API"
 date: 2026-05-07
-description: "REST API: принципы архитектуры, HTTP-методы (CRUD), коды ответов, форматы данных JSON/XML/YAML, методы аутентификации и примеры запросов к Cisco DNA Center и IOS-XE RESTCONF."
+description: "REST API: architectural principles, HTTP methods (CRUD), response codes, JSON/XML/YAML data formats, authentication methods, and example requests to Cisco DNA Center and IOS-XE RESTCONF."
 tags: ["CCNA", "Cisco", "REST API", "JSON", "автоматизация"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-6-02-rest-api/"
 ---
 
-## Что такое API
+## What is an API
 
-**API (Application Programming Interface)** — интерфейс, позволяющий программам взаимодействовать друг с другом.
+**API (Application Programming Interface)** is an interface that allows programs to communicate with each other.
 
-**REST API** (RESTful API) — архитектурный стиль API на базе HTTP, стандарт взаимодействия с сетевыми контроллерами (Cisco DNA Center, APIC, IOS-XE).
+**REST API** (RESTful API) is an HTTP-based architectural style for APIs — the standard for interacting with network controllers (Cisco DNA Center, APIC, IOS-XE).
 
 ---
 
-## REST принципы
+## REST Principles
 
-| Принцип | Описание |
+| Principle | Description |
 |---|---|
-| Client-Server | Клиент и сервер разделены, взаимодействуют через API |
-| Stateless | Каждый запрос независим, сервер не хранит состояние сессии |
-| Cacheable | Ответы могут кэшироваться |
-| Uniform Interface | Единообразный интерфейс (URI, HTTP методы) |
-| Layered System | Клиент не знает, с каким сервером общается (может быть прокси) |
-| Code on Demand | Сервер может передавать исполняемый код (опционально) |
+| Client-Server | Client and server are separated, communicating through the API |
+| Stateless | Each request is independent; the server stores no session state |
+| Cacheable | Responses can be cached |
+| Uniform Interface | Consistent interface (URI, HTTP methods) |
+| Layered System | The client does not know which server it is talking to (may be a proxy) |
+| Code on Demand | The server can send executable code (optional) |
 
 ---
 
-## HTTP методы (CRUD)
+## HTTP Methods (CRUD)
 
-| HTTP Метод | CRUD операция | Описание |
+| HTTP Method | CRUD Operation | Description |
 |---|---|---|
-| GET | Read | Получить ресурс (не изменяет) |
-| POST | Create | Создать новый ресурс |
-| PUT | Update | Заменить ресурс целиком |
-| PATCH | Update | Частично обновить ресурс |
-| DELETE | Delete | Удалить ресурс |
+| GET | Read | Retrieve a resource (no modification) |
+| POST | Create | Create a new resource |
+| PUT | Update | Replace a resource entirely |
+| PATCH | Update | Partially update a resource |
+| DELETE | Delete | Delete a resource |
 
-### Коды ответов HTTP
+### HTTP Response Codes
 
-| Диапазон | Значение |
+| Range | Meaning |
 |:---:|---|
-| 2xx | Успех (200 OK, 201 Created, 204 No Content) |
-| 3xx | Перенаправление |
-| 4xx | Ошибка клиента (400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found) |
-| 5xx | Ошибка сервера (500 Internal Server Error) |
+| 2xx | Success (200 OK, 201 Created, 204 No Content) |
+| 3xx | Redirection |
+| 4xx | Client error (400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found) |
+| 5xx | Server error (500 Internal Server Error) |
 
 ---
 
-## Форматы данных
+## Data Formats
 
 ### JSON (JavaScript Object Notation)
 
-Наиболее распространён в REST API. Читаем, компактен.
+Most widely used in REST APIs. Human-readable and compact.
 
 ```json
 {
@@ -80,7 +80,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-02-rest-api/"
 
 ### XML (Extensible Markup Language)
 
-Используется в NETCONF, старых API.
+Used in NETCONF and older APIs.
 
 ```xml
 <device>
@@ -94,7 +94,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-02-rest-api/"
 
 ### YAML (YAML Ain't Markup Language)
 
-Используется в Ansible playbooks, конфигурационных файлах.
+Used in Ansible playbooks and configuration files.
 
 ```yaml
 hostname: R1
@@ -107,16 +107,16 @@ ospf_enabled: true
 
 ---
 
-## JSON — синтаксис
+## JSON — Syntax
 
-| Тип данных | Пример |
+| Data type | Example |
 |---|---|
-| Строка | `"value"` |
-| Число | `42` или `3.14` |
-| Булево | `true` или `false` |
+| String | `"value"` |
+| Number | `42` or `3.14` |
+| Boolean | `true` or `false` |
 | Null | `null` |
-| Массив | `["a", "b", "c"]` |
-| Объект | `{"key": "value"}` |
+| Array | `["a", "b", "c"]` |
+| Object | `{"key": "value"}` |
 
 ```json
 {
@@ -134,27 +134,27 @@ ospf_enabled: true
 
 ---
 
-## Аутентификация API
+## API Authentication
 
-| Метод | Описание |
+| Method | Description |
 |---|---|
-| Basic Auth | Base64(username:password) в заголовке |
-| Token | Получить токен → использовать в каждом запросе |
-| API Key | Статический ключ в заголовке или URL |
-| OAuth 2.0 | Делегированная авторизация |
+| Basic Auth | Base64(username:password) in the header |
+| Token | Obtain a token → include in every request |
+| API Key | Static key in the header or URL |
+| OAuth 2.0 | Delegated authorization |
 
 ---
 
-## Пример: Cisco DNA Center API
+## Example: Cisco DNA Center API
 
 ```python
 import requests
 import json
 
-# Базовый URL
+# Base URL
 BASE_URL = "https://sandboxdnac.cisco.com"
 
-# 1. Получить токен (Authentication)
+# 1. Get token (Authentication)
 auth_url = f"{BASE_URL}/dna/system/api/v1/auth/token"
 response = requests.post(
     auth_url,
@@ -163,7 +163,7 @@ response = requests.post(
 )
 token = response.json()["Token"]
 
-# 2. Получить список устройств (GET)
+# 2. Get device list (GET)
 devices_url = f"{BASE_URL}/dna/intent/api/v1/network-device"
 headers = {
     "x-auth-token": token,
@@ -176,14 +176,14 @@ print(json.dumps(devices.json(), indent=2))
 ### Cisco IOS-XE RESTCONF
 
 ```bash
-# GET интерфейс (curl)
+# GET interface (curl)
 curl -X GET \
   "https://192.168.1.1/restconf/data/ietf-interfaces:interfaces" \
   -H "Accept: application/yang-data+json" \
   -u "admin:cisco123" \
   --insecure
 
-# PUT — изменить hostname
+# PUT — change hostname
 curl -X PUT \
   "https://192.168.1.1/restconf/data/Cisco-IOS-XE-native:native/hostname" \
   -H "Content-Type: application/yang-data+json" \
@@ -194,13 +194,13 @@ curl -X PUT \
 
 ---
 
-## Ресурсы
+## Resources
 
-| Ресурс | Описание |
+| Resource | Description |
 |---|---|
-| [REST API — Cisco DevNet Learning](https://developer.cisco.com/learning/tracks/netprog-eng/netprog-eng-rest-api/) | Официальный курс Cisco DevNet по REST API |
-| [HTTP Methods — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) | GET, POST, PUT, PATCH, DELETE: описание и применение |
-| [JSON — json.org](https://www.json.org/json-en.html) | Официальный стандарт формата JSON |
-| [REST API — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/rest-api) | REST: принципы, HTTP методы, CRUD, статус-коды |
-| [Jeremy's IT Lab — REST APIs (YouTube)](https://www.youtube.com/watch?v=G0RM7eS0vw8) | REST API, JSON, Postman из серии Free CCNA |
-| [Cisco DNA Center API Reference](https://developer.cisco.com/docs/dna-center/#!api-quick-start) | Справочник по Intent API и REST endpoints DNA Center |
+| [REST API — Cisco DevNet Learning](https://developer.cisco.com/learning/tracks/netprog-eng/netprog-eng-rest-api/) | Official Cisco DevNet REST API course |
+| [HTTP Methods — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) | GET, POST, PUT, PATCH, DELETE: descriptions and usage |
+| [JSON — json.org](https://www.json.org/json-en.html) | Official JSON format standard |
+| [REST API — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/rest-api) | REST: principles, HTTP methods, CRUD, status codes |
+| [Jeremy's IT Lab — REST APIs (YouTube)](https://www.youtube.com/watch?v=G0RM7eS0vw8) | REST API, JSON, Postman from the Free CCNA series |
+| [Cisco DNA Center API Reference](https://developer.cisco.com/docs/dna-center/#!api-quick-start) | Intent API and REST endpoints reference for DNA Center |
