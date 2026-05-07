@@ -1,50 +1,50 @@
 ---
 title: "CCNA — 6.4 Python и автоматизация сетей"
 date: 2026-05-07
-description: "Python для сетевых инженеров: библиотеки paramiko, netmiko и NAPALM для автоматизации CLI, работа с REST API через requests, обработка JSON-ответов DNA Center."
+description: "Python for network engineers: paramiko, netmiko, and NAPALM libraries for CLI automation, working with REST APIs via requests, and parsing JSON responses from DNA Center."
 tags: ["CCNA", "Cisco", "Python", "netmiko", "автоматизация"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-6-04-python-automation/"
 ---
 
-**Экзаменационная тема:** Domain 6 — Automation and Programmability
+**Exam topic:** Domain 6 — Automation and Programmability
 **Odom:** Vol.2, Ch. 15
 
 ---
 
-## Зачем Python для сетей
+## Why Python for Networks
 
-| Задача | Вручную (CLI) | Python |
+| Task | Manually (CLI) | Python |
 |---|---|---|
-| Собрать `show version` с 50 роутеров | ~2 часа | ~30 секунд |
-| Изменить VLAN на 100 коммутаторах | Весь день | 1 скрипт |
-| Проверить соответствие конфигурации | Сложно | Автоматически |
-| Получить данные из DNA Center API | Браузер | requests + JSON |
+| Collect `show version` from 50 routers | ~2 hours | ~30 seconds |
+| Change VLAN on 100 switches | All day | 1 script |
+| Verify configuration compliance | Difficult | Automated |
+| Retrieve data from DNA Center API | Browser | requests + JSON |
 
-**Ключевые библиотеки для сетей:**
+**Key libraries for networking:**
 
-| Библиотека | Назначение |
+| Library | Purpose |
 |---|---|
-| `paramiko` | Низкоуровневый SSH |
-| `netmiko` | SSH для сетевых устройств (абстракция над paramiko) |
-| `napalm` | Мультивендорный API (IOS, EOS, NX-OS, JunOS) |
-| `nornir` | Фреймворк автоматизации (альтернатива Ansible) |
+| `paramiko` | Low-level SSH |
+| `netmiko` | SSH for network devices (abstraction over paramiko) |
+| `napalm` | Multi-vendor API (IOS, EOS, NX-OS, JunOS) |
+| `nornir` | Automation framework (alternative to Ansible) |
 | `requests` | HTTP/REST API |
-| `json` | Парсинг JSON-ответов |
-| `re` | Регулярные выражения для парсинга CLI-вывода |
+| `json` | JSON response parsing |
+| `re` | Regular expressions for parsing CLI output |
 
 ---
 
-## Основы Python для сетевого инженера
+## Python Basics for Network Engineers
 
-### Структуры данных
+### Data Structures
 
 ```python
-# Список устройств
+# List of devices
 devices = ["192.168.1.1", "192.168.1.2", "192.168.1.3"]
 
-# Словарь — конфигурация устройства
+# Dictionary — device configuration
 device = {
     "host": "192.168.1.1",
     "username": "admin",
@@ -52,39 +52,39 @@ device = {
     "device_type": "cisco_ios"
 }
 
-# Список словарей — несколько устройств
+# List of dictionaries — multiple devices
 routers = [
     {"host": "10.0.0.1", "hostname": "R1"},
     {"host": "10.0.0.2", "hostname": "R2"},
 ]
 ```
 
-### Циклы для итерации по устройствам
+### Loops for Iterating Over Devices
 
 ```python
 for device_ip in devices:
-    print(f"Подключаюсь к {device_ip}")
-    # ... выполнить команду
+    print(f"Connecting to {device_ip}")
+    # ... execute command
 
-# Перебор словаря
+# Iterating over a dictionary
 for router in routers:
-    print(f"Устройство: {router['hostname']} — IP: {router['host']}")
+    print(f"Device: {router['hostname']} — IP: {router['host']}")
 ```
 
-### Функции
+### Functions
 
 ```python
 def get_hostname(connection):
     output = connection.send_command("show version")
-    # Парсинг через re или textfsm
+    # Parse with re or textfsm
     return output
 ```
 
 ---
 
-## Paramiko — SSH вручную
+## Paramiko — Manual SSH
 
-**Paramiko** — низкоуровневая библиотека SSH. Требует ручного управления сессией.
+**Paramiko** is a low-level SSH library. Requires manual session management.
 
 ```python
 import paramiko
@@ -100,7 +100,7 @@ ssh.connect(
     look_for_keys=False
 )
 
-# Для интерактивных сессий IOS нужен invoke_shell
+# Interactive IOS sessions require invoke_shell
 shell = ssh.invoke_shell()
 time.sleep(1)
 
@@ -113,43 +113,43 @@ print(output)
 ssh.close()
 ```
 
-> Paramiko требует `time.sleep()` для ожидания вывода — неудобно. Netmiko решает эту проблему.
+> Paramiko requires `time.sleep()` to wait for output — inconvenient. Netmiko solves this problem.
 
 ---
 
-## Netmiko — упрощённый SSH
+## Netmiko — Simplified SSH
 
-**Netmiko** — надстройка над paramiko с поддержкой десятков типов устройств.
+**Netmiko** is a wrapper over paramiko with support for dozens of device types.
 
 ```python
 from netmiko import ConnectHandler
 
-# Параметры подключения
+# Connection parameters
 cisco_router = {
-    "device_type": "cisco_ios",     # Тип устройства
+    "device_type": "cisco_ios",     # Device type
     "host": "192.168.1.1",
     "username": "admin",
     "password": "cisco123",
-    "secret": "enable_pass",        # Enable пароль (опционально)
+    "secret": "enable_pass",        # Enable password (optional)
 }
 
-# Подключение и выполнение команды
+# Connect and execute a command
 with ConnectHandler(**cisco_router) as net_connect:
     output = net_connect.send_command("show ip interface brief")
     print(output)
 ```
 
-### Выполнение нескольких команд
+### Running Multiple Commands
 
 ```python
 with ConnectHandler(**cisco_router) as net_connect:
-    # show команды
+    # show commands
     output = net_connect.send_command("show version")
 
-    # Переход в enable
+    # Enter enable mode
     net_connect.enable()
 
-    # Конфигурирование (config mode)
+    # Configuration mode
     config_commands = [
         "interface loopback 0",
         "ip address 1.1.1.1 255.255.255.255",
@@ -158,11 +158,11 @@ with ConnectHandler(**cisco_router) as net_connect:
     ]
     net_connect.send_config_set(config_commands)
 
-    # Сохранить конфигурацию
+    # Save configuration
     net_connect.save_config()
 ```
 
-### Массовая операция на нескольких устройствах
+### Bulk Operation on Multiple Devices
 
 ```python
 from netmiko import ConnectHandler
@@ -179,9 +179,9 @@ for device in devices:
         print(f"{device['host']}: {hostname.strip()} — {version.strip()}")
 ```
 
-### Типы устройств Netmiko
+### Netmiko Device Types
 
-| device_type | Устройство |
+| device_type | Device |
 |---|---|
 | `cisco_ios` | Cisco IOS/IOS XE |
 | `cisco_nxos` | Cisco NX-OS |
@@ -193,14 +193,14 @@ for device in devices:
 
 ---
 
-## NAPALM — мультивендор
+## NAPALM — Multi-Vendor
 
-**NAPALM** (Network Automation and Programmability Abstraction Layer with Multivendor support) — единый API для разных ОС.
+**NAPALM** (Network Automation and Programmability Abstraction Layer with Multivendor support) — a unified API for different network OSes.
 
 ```python
 from napalm import get_network_driver
 
-# Инициализация драйвера
+# Initialize the driver
 driver = get_network_driver("ios")
 device = driver(
     hostname="192.168.1.1",
@@ -210,38 +210,38 @@ device = driver(
 
 device.open()
 
-# Получить факты устройства
+# Get device facts
 facts = device.get_facts()
 print(facts["hostname"])         # Hostname
 print(facts["vendor"])           # Cisco
 print(facts["model"])            # ISR4321
 print(facts["os_version"])       # IOS XE version
 
-# Получить интерфейсы
+# Get interfaces
 interfaces = device.get_interfaces()
 for iface, data in interfaces.items():
     print(f"{iface}: up={data['is_up']}, mac={data['mac_address']}")
 
-# Сравнение конфигураций (replace_candidate)
+# Compare configurations (replace_candidate)
 device.load_replace_candidate(filename="new_config.txt")
 diff = device.compare_config()
-print(diff)                      # Что изменится
-device.commit_config()           # Применить
+print(diff)                      # What will change
+device.commit_config()           # Apply
 
 device.close()
 ```
 
 ---
 
-## Работа с JSON и API
+## Working with JSON and APIs
 
-### Разбор JSON-ответа от DNA Center
+### Parsing a JSON Response from DNA Center
 
 ```python
 import requests
 import json
 
-# Получить токен аутентификации
+# Get authentication token
 auth_response = requests.post(
     "https://sandboxdnac.cisco.com/dna/system/api/v1/auth/token",
     auth=("devnetuser", "Cisco123!"),
@@ -249,13 +249,13 @@ auth_response = requests.post(
 )
 token = auth_response.json()["Token"]
 
-# Заголовки с токеном
+# Headers with token
 headers = {
     "X-Auth-Token": token,
     "Content-Type": "application/json"
 }
 
-# Получить список устройств
+# Get device list
 devices_response = requests.get(
     "https://sandboxdnac.cisco.com/dna/intent/api/v1/network-device",
     headers=headers,
@@ -267,49 +267,49 @@ for device in devices:
     print(f"{device['hostname']} — {device['managementIpAddress']} — {device['type']}")
 ```
 
-### Структура JSON
+### JSON Structure
 
 ```python
 import json
 
-# Парсинг JSON-строки
+# Parse JSON string
 json_string = '{"hostname": "R1", "interfaces": ["Gi0/0", "Gi0/1"]}'
 data = json.loads(json_string)
 print(data["hostname"])            # R1
 print(data["interfaces"][0])      # Gi0/0
 
-# Сериализация в JSON
+# Serialize to JSON
 config = {"vlan": 10, "name": "Sales"}
 print(json.dumps(config, indent=2))
 ```
 
 ---
 
-## Типичные экзаменационные концепции
+## Key Exam Concepts
 
-На экзамене CCNA от Python и автоматизации ожидают:
+For the CCNA exam, Python and automation questions focus on:
 
-| Концепция | Что надо знать |
+| Concept | What to know |
 |---|---|
-| Зачем Python | Автоматизация повторяющихся задач, масштабирование |
-| Netmiko vs Paramiko | Netmiko — удобнее, специально для сетей |
-| NAPALM | Единый API для разных вендоров |
-| JSON | Формат данных в REST API (DNA Center, RESTCONF) |
-| `requests` | Библиотека для HTTP-запросов к REST API |
-| Идемпотентность | Применение скрипта дважды = тот же результат (как Ansible) |
+| Why Python | Automate repetitive tasks, scale operations |
+| Netmiko vs Paramiko | Netmiko — more convenient, purpose-built for networking |
+| NAPALM | Unified API for multiple vendors |
+| JSON | Data format used in REST APIs (DNA Center, RESTCONF) |
+| `requests` | Library for HTTP requests to REST APIs |
+| Idempotency | Running a script twice produces the same result (like Ansible) |
 
-> **💡 Совет:** На CCNA не требуется писать Python-код. Нужно понимать **зачем и что делают** эти инструменты. Реальные вопросы: "Какая библиотека используется для SSH к сетевым устройствам?", "Что такое NAPALM?", "Какой формат данных использует REST API?"
+> **💡 Tip:** The CCNA exam does not require writing Python code. You need to understand **why and what** these tools do. Typical exam questions: "Which library is used for SSH to network devices?", "What is NAPALM?", "What data format does REST API use?"
 
 ---
 
 ```mermaid
 flowchart LR
-    Manual["Ручное управление\nCLI на каждом устройстве"] --> Python["Python скрипт"]
-    Python --> Paramiko["paramiko\nНизкоуровневый SSH"]
-    Python --> Netmiko["netmiko\nSSH для сетей\ncisco_ios, nxos..."]
-    Python --> NAPALM["napalm\nМультивендор API"]
+    Manual["Manual Management\nCLI on Each Device"] --> Python["Python Script"]
+    Python --> Paramiko["paramiko\nLow-level SSH"]
+    Python --> Netmiko["netmiko\nSSH for Networks\ncisco_ios, nxos..."]
+    Python --> NAPALM["napalm\nMulti-vendor API"]
     Python --> Requests["requests\nHTTP / REST API"]
-    Requests --> DNA["DNA Center\nJSON ответы"]
+    Requests --> DNA["DNA Center\nJSON Responses"]
     NAPALM --> IOS["Cisco IOS"]
     NAPALM --> EOS["Arista EOS"]
     NAPALM --> JunOS["Juniper JunOS"]
@@ -317,11 +317,11 @@ flowchart LR
 
 ---
 
-## Ресурсы
+## Resources
 
-| Ресурс | Описание |
+| Resource | Description |
 |---|---|
-| [Netmiko — GitHub](https://github.com/ktbyers/netmiko) | Kirk Byers: Netmiko документация и примеры |
-| [NAPALM — Read the Docs](https://napalm.readthedocs.io/) | NAPALM: поддерживаемые драйверы, методы, примеры |
-| [Cisco DevNet — Network Automation](https://developer.cisco.com/network-automation/) | Cisco: Python, Ansible, YANG, RESTCONF примеры |
-| [Jeremy's IT Lab — Python & Automation (YouTube)](https://www.youtube.com/watch?v=FdRaJxFcT_8) | Python для CCNA: netmiko, NAPALM, automation basics |
+| [Netmiko — GitHub](https://github.com/ktbyers/netmiko) | Kirk Byers: Netmiko documentation and examples |
+| [NAPALM — Read the Docs](https://napalm.readthedocs.io/) | NAPALM: supported drivers, methods, examples |
+| [Cisco DevNet — Network Automation](https://developer.cisco.com/network-automation/) | Cisco: Python, Ansible, YANG, RESTCONF examples |
+| [Jeremy's IT Lab — Python & Automation (YouTube)](https://www.youtube.com/watch?v=FdRaJxFcT_8) | Python for CCNA: netmiko, NAPALM, automation basics |
