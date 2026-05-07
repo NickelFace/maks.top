@@ -1,76 +1,70 @@
 {{ define "head" }}
 <style>
-.labs-index { display: flex; flex-direction: column; gap: 6px; margin-top: 16px; }
-
-.lab-item { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-
-.lab-toggle {
-  width: 100%; display: flex; align-items: center; gap: 12px;
-  padding: 13px 16px; background: var(--bg2);
-  border: none; cursor: pointer; text-align: left;
-  color: var(--text); font-family: inherit; font-size: 13px;
-  transition: background .15s;
+.labs-pg-hd { width:100%; border-bottom:1px solid var(--border); }
+.labs-pg-hd-inner { max-width:1200px; margin:0 auto; padding:56px 64px 32px; width:100%; }
+.labs-pg-h1 {
+  font-family:'Fraunces',Georgia,serif; font-size:clamp(26px,3.5vw,40px);
+  font-weight:400; margin:0; letter-spacing:-0.03em;
+  font-feature-settings:'opsz' 144; color:var(--text);
 }
-.lab-toggle:hover { background: var(--bg3); }
-.lab-item.open .lab-toggle { background: var(--bg3); border-bottom: 1px solid var(--border); }
-
-.lab-num {
-  flex-shrink: 0; min-width: 36px;
-  font-size: 11px; font-weight: 600; color: var(--accent);
-  font-variant-numeric: tabular-nums;
+.labs-pg-body { max-width:1200px; margin:0 auto; padding:32px 64px 80px; width:100%; }
+.labs-item {
+  display:grid; grid-template-columns:80px 1fr 140px 100px 24px;
+  gap:24px; padding:18px 0;
+  border-bottom:1px solid var(--border);
+  text-decoration:none; color:var(--text); align-items:center;
+  transition:opacity 0.12s;
 }
-.lab-title { flex: 1; font-weight: 500; }
-.lab-chevron { flex-shrink: 0; color: var(--text3); font-size: 16px; transition: transform .2s; }
-.lab-item.open .lab-chevron { transform: rotate(90deg); }
-
-.lab-body {
-  display: none; padding: 14px 16px;
-  background: var(--bg); border-top: none;
+.labs-item:hover { opacity:0.8; }
+.labs-item-num {
+  font-family:'JetBrains Mono',monospace; font-size:13px;
+  color:var(--accent);
 }
-.lab-item.open .lab-body { display: block; }
+.labs-item-title { font-size:15.5px; font-weight:500; }
+.labs-item-tags { display:flex; gap:8px; margin-top:4px; }
+.labs-item-tag { font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--text3); }
+.labs-item-tool { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text3); }
+.labs-item-dur  { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text3); }
+.labs-arrow { color:var(--text3); font-size:14px; }
 
-.lab-desc { color: var(--text2); font-size: 13px; margin-bottom: 12px; line-height: 1.6; }
-.lab-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 12px; color: var(--accent); text-decoration: none;
-  border-bottom: 1px solid rgba(0,212,255,.25);
-  transition: border-color .15s;
+@media (max-width:860px) {
+  .labs-pg-hd-inner,.labs-pg-body { padding-left:40px; padding-right:40px; }
+  .labs-item { grid-template-columns:64px 1fr 24px; }
+  .labs-item-tool,.labs-item-dur { display:none; }
 }
-.lab-link:hover { border-bottom-color: var(--accent); }
+@media (max-width:640px) {
+  .labs-pg-hd-inner { padding:40px 20px 24px; }
+  .labs-pg-body { padding:24px 20px 80px; }
+  .labs-item { grid-template-columns:56px 1fr 20px; gap:12px; }
+}
 </style>
 {{ end }}
 
 {{ define "main" }}
-<div class="page">
+<header class="labs-pg-hd">
+  <div class="labs-pg-hd-inner">
+    {{ partial "breadcrumb.html" . }}
+    <h1 class="labs-pg-h1">CCNA labs <em style="font-style:italic;color:var(--text2)">— solved &amp; annotated.</em></h1>
+    <p style="font-size:15.5px;color:var(--text2);max-width:640px;margin-top:14px;line-height:1.55">{{ len (where .Pages "Params.page_lang" "ne" "ru") }} hands-on scenarios in Packet Tracer and EVE-NG. Each lab links to the topology, my running config, and what I broke trying to solve it.</p>
+  </div>
+</header>
 
-  {{ partial "breadcrumb.html" . }}
-
-  <div class="sec-title">CCNA Lab Solutions</div>
-  <p style="color:var(--text2);font-size:13px;margin:4px 0 8px">CCNA 200-301 · step-by-step lab walkthroughs</p>
-
-  <div class="labs-index">
-    {{ range sort .Pages ".File.BaseFileName" }}
-    {{ if ne .Params.page_lang "ru" }}
-    <div class="lab-item">
-      <button class="lab-toggle" onclick="toggleLab(this)">
-        <span class="lab-num">{{ index (split .File.BaseFileName "-") 2 }}</span>
-        <span class="lab-title">{{ .Title }}</span>
-        <span class="lab-chevron">›</span>
-      </button>
-      <div class="lab-body">
-        {{ with .Description }}<p class="lab-desc">{{ . }}</p>{{ end }}
-        <a href="{{ .RelPermalink }}" class="lab-link">Open lab →</a>
+<div class="labs-pg-body">
+  {{ range sort .Pages ".File.BaseFileName" }}
+  {{ if ne .Params.page_lang "ru" }}
+  <a href="{{ .RelPermalink }}" class="labs-item">
+    <div class="labs-item-num">LAB {{ index (split .File.BaseFileName "-") 2 }}</div>
+    <div>
+      <div class="labs-item-title">{{ .Title }}</div>
+      <div class="labs-item-tags">
+        {{ range .Params.tags }}<span class="labs-item-tag">#{{ . }}</span>{{ end }}
       </div>
     </div>
-    {{ end }}
-    {{ end }}
-  </div>
-
+    <div class="labs-item-tool">{{ .Params.tool | default "Packet Tracer" }}</div>
+    <div class="labs-item-dur">{{ .Params.duration | default "—" }}</div>
+    <div class="labs-arrow">→</div>
+  </a>
+  {{ end }}
+  {{ end }}
 </div>
-
-<script>
-function toggleLab(btn) {
-  btn.closest('.lab-item').classList.toggle('open');
-}
-</script>
 {{ end }}

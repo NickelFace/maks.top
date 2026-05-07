@@ -1,131 +1,161 @@
 {{ define "head" }}
 <link rel="stylesheet" href="{{ "styles/cert.css" | relURL }}">
+<style>:root { --cert-color: {{ .Params.cert_color | default "var(--accent)" }}; }</style>
 {{ end }}
 
 {{ define "main" }}
 {{ $allPosts := where .Site.RegularPages "Section" "posts" }}
 {{ $prefix   := .Params.post_prefix }}
 
-<div class="page cert-page">
-
-  {{ partial "breadcrumb.html" . }}
-
-  <div class="cert-hero" style="--cert-color:{{ .Params.cert_color }}">
-    <div class="cert-hero-badge">{{ .Params.cert_badge }}</div>
-    <div style="flex:1">
-      <div class="cert-hero-name">{{ .Title }}</div>
-      <div class="cert-hero-desc">{{ .Params.description }}</div>
-    </div>
-    {{ with .Params.credly_badge_id }}
-    <div class="credly-wrap">
-      <div data-iframe-width="150" data-iframe-height="270"
-           data-share-badge-id="{{ . }}"
-           data-share-badge-host="https://www.credly.com"></div>
-      <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-    </div>
-    {{ end }}
-    {{ with .Params.cert_url }}
-    <a href="{{ . }}" target="_blank" rel="noopener" class="cert-btn">Certificate ↗</a>
-    {{ end }}
-  </div>
-
-  {{ with .Params.resources }}
-  <div class="cert-resources">
-    {{ range . }}
-    <a href="{{ .url | relURL }}" class="cert-resource-card">
-      <span class="cert-resource-icon">{{ .icon }}</span>
-      <span class="cert-resource-body">
-        <span class="cert-resource-title">{{ .title }}</span>
-        <span class="cert-resource-desc">{{ .desc }}</span>
-      </span>
-      <span class="cert-resource-arrow">→</span>
-    </a>
-    {{ end }}
-  </div>
+{{/* Compute article count */}}
+{{ $written := 0 }}
+{{ range $allPosts }}
+  {{ if strings.HasPrefix .File.BaseFileName $prefix }}
+    {{ $written = add $written 1 }}
   {{ end }}
+{{ end }}
+{{ $expected := .Params.expected_articles | default 0 }}
+{{ $pct := 0 }}
+{{ if and (gt $expected 0) (gt $written 0) }}
+  {{ $pct = int (math.Round (mul (div (float $written) (float $expected)) 100)) }}
+{{ else if .Params.progress_pct }}
+  {{ $pct = int .Params.progress_pct }}
+{{ end }}
 
-  {{ if .Params.exams }}
+{{/* Derive cert state */}}
+{{ $state := "planned" }}
+{{ if or .Params.credly_badge_id .Params.cert_url }}{{ $state = "passed" }}{{ else if gt $pct 0 }}{{ $state = "in progress" }}{{ end }}
 
-    {{/* count total posts for this cert */}}
-    {{ $total := 0 }}
-    {{ range $allPosts }}
-      {{ if strings.HasPrefix .File.BaseFileName $prefix }}
-        {{ $total = add $total 1 }}
+{{/* Eyebrow: title + exam_code + state */}}
+{{ $eyebrow := printf "%s · %s" .Title $state }}
+{{ with .Params.exams }}{{ $eyebrow = printf "%s · %s · %s" $.Title (index . 0).code $state }}{{ end }}
+
+<header class="cert-pg-header">
+  <div class="cert-pg-header-inner">
+    {{ partial "breadcrumb.html" . }}
+    <div class="cert-pg-hero-grid">
+      <div>
+        <div class="eyebrow" style="margin-bottom:10px">{{ $eyebrow }}</div>
+        <h1 class="cert-pg-h1">{{ .Title }}<span class="cert-pg-h1-em">{{ with .Params.cert_tagline }} {{ . }}{{ end }}</span></h1>
+        {{ with .Description }}
+        <p style="font-size:15.5px;color:var(--text2);max-width:640px;line-height:1.6;margin-top:16px">{{ . }}</p>
+        {{ end }}
+      </div>
+      <div class="cert-pg-stat">
+        {{ if or .Params.credly_badge_id .Params.cert_url }}
+        <div class="cert-passed-badge">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg>
+          <div class="cert-passed-word">Passed</div>
+        </div>
+        {{ else }}
+        <div class="cert-pg-pct" style="color:var(--cert-color,var(--accent))">{{ $pct }}<span style="font-size:28px">%</span></div>
+        {{ end }}
+        <div class="cert-pg-stat-lines">
+          {{ if gt $expected 0 }}<div>{{ $written }} / {{ $expected }} articles</div>{{ end }}
+          {{ with .Params.cert_labs_done }}<div>{{ . }} labs</div>{{ end }}
+          {{ with .Params.cert_quiz_count }}<div>{{ . }} quiz q's</div>{{ end }}
+        </div>
+        {{ with .Params.cert_url }}
+        <a href="{{ . }}" target="_blank" rel="noopener" class="cert-btn" style="margin-top:16px">View certificate ↗</a>
+        {{ else }}{{ with .Params.credly_badge_id }}
+        <a href="https://www.credly.com/badges/{{ . }}" target="_blank" rel="noopener" class="cert-btn" style="margin-top:16px">View on Credly ↗</a>
+        {{ end }}{{ end }}
+      </div>
+    </div>
+    <div class="cert-pg-bar">
+      <div class="cert-pg-bar-fill" style="width:{{ $pct }}%;background:var(--cert-color,var(--accent))"></div>
+    </div>
+  </div>
+</header>
+
+<div class="cert-pg-body">
+  <div class="cert-pg-body-inner">
+
+    {{ with .Params.resources }}
+    <div class="eyebrow" style="margin-bottom:20px">Resources</div>
+    <div class="cert-res-grid">
+      {{ range . }}
+      <a href="{{ .url | relURL }}" class="cert-res-card">
+        <div class="cert-res-icon">{{ .icon }}</div>
+        <div style="flex:1">
+          <div class="cert-res-title">{{ .title }}</div>
+          <div class="cert-res-desc">{{ .desc }}</div>
+        </div>
+        <span class="cert-res-arrow">→</span>
+      </a>
       {{ end }}
+    </div>
     {{ end }}
 
-    <div class="cert-stats">
-      <span>{{ len .Params.exams }} exams</span>
-      <span>·</span>
-      {{ $topicCount := 0 }}
-      {{ range .Params.exams }}{{ $topicCount = add $topicCount (len .topics) }}{{ end }}
-      <span>{{ $topicCount }} topics</span>
-      <span>·</span>
-      <span>{{ $total }} articles</span>
+    {{ if .Params.exams }}
+
+    <div class="eyebrow" style="margin-bottom:20px;margin-top:48px">Domains</div>
+
+    {{ $topicCount := 0 }}
+    {{ range .Params.exams }}{{ $topicCount = add $topicCount (len .topics) }}{{ end }}
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);margin-bottom:24px">
+      {{ len .Params.exams }} exam{{ if gt (len .Params.exams) 1 }}s{{ end }} · {{ $topicCount }} topics · {{ $written }} articles
     </div>
 
     {{ range .Params.exams }}
     {{ $exam := . }}
-    <div class="exam-block">
-      <div class="exam-label">Exam {{ $exam.code }} — {{ $exam.title }}</div>
 
-      {{ range $exam.topics }}
-      {{ $topic := . }}
-      {{ $topicPattern := printf "%s-%s-" $prefix $topic.num }}
-      {{ $topicPosts := slice }}
-      {{ range $allPosts }}
-        {{ if strings.HasPrefix .File.BaseFileName $topicPattern }}
-          {{ $topicPosts = $topicPosts | append . }}
-        {{ end }}
+    {{ range $exam.topics }}
+    {{ $topic := . }}
+    {{ $topicPattern := printf "%s-%s-" $prefix $topic.num }}
+    {{ $topicPosts := slice }}
+    {{ range $allPosts }}
+      {{ if strings.HasPrefix .File.BaseFileName $topicPattern }}
+        {{ $topicPosts = $topicPosts | append . }}
       {{ end }}
-      {{ $topicPosts = sort $topicPosts ".File.BaseFileName" }}
+    {{ end }}
+    {{ $topicPosts = sort $topicPosts ".File.BaseFileName" }}
 
-      <div class="cert-topic{{ if $topicPosts }} has-posts{{ end }}">
-        <button class="cert-topic-head" onclick="toggleTopic(this)">
-          <span class="topic-num">{{ $topic.num }}</span>
-          <span class="topic-title">{{ $topic.title }}</span>
-          <span class="topic-meta">
-            {{ if $topicPosts }}
-              {{ len $topicPosts }} {{ if eq (len $topicPosts) 1 }}article{{ else }}articles{{ end }}
-            {{ else }}
-              <span class="topic-empty">no articles yet</span>
-            {{ end }}
-          </span>
-          <span class="topic-chevron">›</span>
-        </button>
+    <div class="cert-domain-row{{ if $topicPosts }} has-posts{{ end }}" onclick="toggleTopic(this)">
+      <div class="cert-domain-num">{{ $topic.num }}</div>
+      <div class="cert-domain-title">{{ $topic.title }}</div>
+      <div class="cert-domain-meta">
         {{ if $topicPosts }}
-        <div class="cert-topic-body">
-          {{ range $topicPosts }}
-          <a href="{{ .RelPermalink }}" class="cert-post-link">
-            <span class="cert-post-title">{{ .Title }}</span>
-            {{ with .Description }}<span class="cert-post-desc">{{ . }}</span>{{ end }}
-          </a>
-          {{ end }}
-        </div>
+          {{ len $topicPosts }} {{ if eq (len $topicPosts) 1 }}article{{ else }}articles{{ end }}
+        {{ else }}
+          <span style="opacity:0.4">no articles yet</span>
         {{ end }}
       </div>
-
+      <div class="cert-domain-chev">›</div>
+    </div>
+    {{ if $topicPosts }}
+    <div class="cert-domain-body">
+      {{ range $topicPosts }}
+      <a href="{{ .RelPermalink }}" class="cert-post-link">
+        <span class="cert-post-title">{{ .Title }}</span>
+        {{ with .Description }}<span class="cert-post-desc">{{ . }}</span>{{ end }}
+      </a>
       {{ end }}
     </div>
     {{ end }}
 
-  {{ else }}
-  <div class="cert-coming-soon">
-    <div class="coming-icon">🚧</div>
-    <div>Articles coming soon</div>
-  </div>
-  {{ end }}
+    {{ end }}
+    {{ end }}
 
+    {{ else }}
+    <div class="cert-coming-soon">
+      <div class="coming-icon">🚧</div>
+      <div>Articles coming soon</div>
+    </div>
+    {{ end }}
+
+  </div>
 </div>
+
 {{ end }}
 
 {{ define "scripts" }}
 <script>
-function toggleTopic(btn) {
-  const topic = btn.closest('.cert-topic');
-  const body  = topic.querySelector('.cert-topic-body');
-  if (!body) return;
-  const open = topic.classList.toggle('open');
+function toggleTopic(row) {
+  if (!row.classList.contains('has-posts')) return;
+  var body = row.nextElementSibling;
+  if (!body || !body.classList.contains('cert-domain-body')) return;
+  var open = row.classList.toggle('open');
   body.style.maxHeight = open ? body.scrollHeight + 'px' : '0';
 }
 </script>

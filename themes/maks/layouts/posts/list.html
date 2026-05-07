@@ -1,32 +1,111 @@
+{{ define "head" }}
+<style>
+.bl-header { width:100%; border-bottom:1px solid var(--border); }
+.bl-header-inner { max-width:1200px; margin:0 auto; padding:56px 64px 32px; width:100%; }
+.bl-h1 {
+  font-family:'Fraunces',Georgia,serif; font-size:clamp(26px,3.5vw,42px);
+  font-weight:400; margin:0; letter-spacing:-0.03em;
+  font-feature-settings:'opsz' 144; color:var(--text);
+}
+.bl-search-row { margin-top:28px; max-width:560px; }
+.bl-body { width:100%; }
+.bl-body-inner { max-width:1200px; margin:0 auto; padding:0 64px 80px; width:100%; }
+.bl-filter-row {
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  padding:18px 0; border-bottom:1px solid var(--border); margin-bottom:0;
+}
+.bl-filter-label {
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  color:var(--text3); letter-spacing:0.1em; margin-right:4px; white-space:nowrap;
+}
+.bl-filter-tag {
+  display:inline-flex; align-items:center; padding:4px 12px;
+  border:1px solid var(--border2); border-radius:999px;
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  color:var(--text2); text-decoration:none; transition:all 0.15s;
+}
+.bl-filter-tag:hover { border-color:var(--accent); color:var(--accent); }
+.bl-list { }
+.bl-item {
+  display:grid; grid-template-columns:60px 1fr 120px;
+  gap:32px; padding:24px 0; border-bottom:1px solid var(--border);
+  text-decoration:none; color:var(--text);
+  transition:opacity 0.12s;
+}
+.bl-item:hover { opacity:0.85; }
+.bl-item-num {
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  color:var(--text3); padding-top:5px;
+}
+.bl-item-title {
+  font-family:'Fraunces',Georgia,serif; font-size:22px; line-height:1.2;
+  margin-bottom:8px; letter-spacing:-0.015em; color:var(--text);
+  font-feature-settings:'opsz' 144; transition:color 0.15s;
+}
+.bl-item:hover .bl-item-title { color:var(--accent); }
+.bl-item-desc { font-size:14px; color:var(--text2); margin-bottom:10px; line-height:1.5; }
+.bl-item-tags { display:flex; gap:8px; flex-wrap:wrap; }
+.bl-tag { font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--text3); }
+.bl-item-meta {
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  color:var(--text3); text-align:right; line-height:1.7; padding-top:5px;
+}
+@media (max-width:860px) {
+  .bl-header-inner, .bl-body-inner { padding-left:40px; padding-right:40px; }
+}
+@media (max-width:640px) {
+  .bl-header-inner { padding:40px 20px 24px; }
+  .bl-body-inner { padding:0 20px 80px; }
+  .bl-item { grid-template-columns:48px 1fr; gap:16px; }
+  .bl-item-meta { display:none; }
+  .bl-item-title { font-size:18px; }
+}
+</style>
+{{ end }}
+
 {{ define "main" }}
-<div class="page">
+{{ $allPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" }}
+{{ $sorted := $allPosts.ByDate.Reverse }}
+{{ $total := len $sorted }}
 
-  <div class="tags-header">
-    <div class="sec-title">{{ .Title | default .Section }}</div>
-    {{ partial "search-box.html" (dict "placeholder" "Search articles… (powered by Pagefind)") }}
+<section class="bl-header">
+  <div class="bl-header-inner">
+    <div class="eyebrow" style="margin-bottom:14px">The Blog · {{ $total }} notes</div>
+    <h1 class="bl-h1">Working notes from a Linux desk.</h1>
+    <div class="bl-search-row">
+      {{ partial "search-box.html" (dict "placeholder" (printf "Search %d articles…" $total)) }}
+    </div>
   </div>
+</section>
 
-  <div class="posts-list">
-    {{ $allPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" }}
-    {{ $paginator := .Paginate $allPosts }}
-    {{ range $paginator.Pages }}
-    <a href="{{ .RelPermalink }}" class="post-card">
-      <div class="post-card-meta">
-        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-        {{ range $i, $t := .Params.tags }}{{ if lt $i 2 }}
-        <span class="tag">{{ $t }}</span>
-        {{ end }}{{ end }}
-      </div>
-      <div class="post-card-title">{{ .Title }}</div>
-      {{ with .Description }}<div class="post-card-desc">{{ . }}</div>{{ end }}
-      {{ with .Summary }}<div class="post-card-desc">{{ . | plainify | truncate 120 }}</div>{{ end }}
-    </a>
-    {{ end }}
+<section class="bl-body">
+  <div class="bl-body-inner">
+    <div class="bl-filter-row">
+      <span class="bl-filter-label">FILTER ·</span>
+      {{ range first 8 .Site.Taxonomies.tags.ByCount }}
+      <a href="{{ "/tags/" | relURL }}{{ .Page.Title | urlize }}/" class="bl-filter-tag">{{ .Page.Title }}</a>
+      {{ end }}
+    </div>
+
+    <div class="bl-list">
+      {{ range $i, $p := $sorted }}
+      <a href="{{ $p.RelPermalink }}" class="bl-item">
+        <div class="bl-item-num">№{{ sub $total $i }}</div>
+        <div>
+          <div class="bl-item-title">{{ $p.Title }}</div>
+          {{ with $p.Description }}<div class="bl-item-desc">{{ . }}</div>{{ end }}
+          <div class="bl-item-tags">
+            {{ range $p.Params.tags }}<span class="bl-tag">#{{ . }}</span>{{ end }}
+          </div>
+        </div>
+        <div class="bl-item-meta">
+          {{ $p.Date.Format "02 Jan 2006" }}{{ with $p.Params.readingtime }}<br/>{{ . }} min{{ end }}
+        </div>
+      </a>
+      {{ end }}
+    </div>
   </div>
-
-  {{ partial "pagination.html" . }}
-
-</div>
+</section>
 {{ end }}
 
 {{ define "scripts" }}

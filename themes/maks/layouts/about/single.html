@@ -1,46 +1,231 @@
 {{ define "main" }}
-<div class="page">
+<style>
+.about-pg-hd { width:100%; border-bottom:1px solid var(--border); }
+.about-pg-hd-inner {
+  max-width:1200px; margin:0 auto; padding:72px 64px 40px; width:100%;
+  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:end;
+}
+.about-h1 {
+  font-family:'Fraunces',Georgia,serif; font-size:clamp(32px,5vw,56px);
+  font-weight:400; margin:0; letter-spacing:-0.03em;
+  font-feature-settings:'opsz' 144; color:var(--text);
+}
+.about-lead {
+  font-size:16.5px; color:var(--text2); max-width:480px;
+  margin-top:16px; line-height:1.5;
+}
+.about-term {
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  color:var(--text3); line-height:2; text-align:right;
+}
+.about-term-accent { color:var(--accent); }
 
-  <div class="sec-title">About</div>
+.about-sect { width:100%; border-bottom:1px solid var(--border); }
+.about-sect-inner {
+  max-width:1200px; margin:0 auto; padding:48px 64px; width:100%;
+  display:grid; grid-template-columns:200px 1fr; gap:48px;
+}
+.about-sect-label {
+  font-family:'JetBrains Mono',monospace; font-size:11px;
+  letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--text3); padding-top:4px;
+}
+.about-body-text { font-size:15.5px; color:var(--text); line-height:1.7; }
+.about-stack-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+}
+.about-stack-group h4 {
+  font-family:'Fraunces',Georgia,serif; font-size:18px;
+  margin-bottom:10px; letter-spacing:-0.01em;
+  color:var(--text); font-feature-settings:'opsz' 144;
+}
+.about-stack-group ul {
+  list-style:none; padding:0; margin:0; font-size:13.5px;
+  color:var(--text2); line-height:1.9;
+}
+.about-cert-row {
+  display:grid; grid-template-columns:60px 1fr auto;
+  gap:24px; padding:14px 0;
+  border-bottom:1px solid var(--border); align-items:baseline;
+}
+.about-cert-year { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text3); }
+.about-cert-name { font-size:14px; color:var(--text); }
+.about-cert-state {
+  font-family:'JetBrains Mono',monospace; font-size:10.5px;
+  letter-spacing:0.1em; text-transform:uppercase; white-space:nowrap;
+}
+.about-contact-text { font-size:14px; color:var(--text2); line-height:1.7; }
+.about-contact-links { display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; }
+.about-contact-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 16px; border:1px solid var(--border2);
+  border-radius:999px; text-decoration:none; color:var(--text);
+  font-family:'JetBrains Mono',monospace; font-size:13px;
+  transition:border-color 0.15s, color 0.15s;
+}
+.about-contact-btn:hover { border-color:var(--accent); color:var(--accent); }
 
-  <div class="about-strip" style="text-decoration:none; cursor:default; margin-bottom:0; border-bottom-left-radius:0; border-bottom-right-radius:0; border-bottom:none;">
-    <div class="about-avatar">👨‍💻</div>
-    <div class="about-bio">
-      <div class="about-name">{{ .Site.Params.author }}</div>
-      <div class="about-desc">Linux sysadmin &amp; DevOps in progress · {{ .Site.Params.location }}<br>
-        Studying LPIC-2, AWS, CKA. Writing notes so I don't forget stuff.</div>
+@media (max-width:1024px) {
+  .about-pg-hd-inner,.about-sect-inner { padding-left:40px; padding-right:40px; }
+  .about-stack-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:640px) {
+  .about-pg-hd-inner { padding:40px 20px 32px; grid-template-columns:1fr; gap:24px; }
+  .about-term { text-align:left; }
+  .about-sect-inner { padding:32px 20px; grid-template-columns:1fr; gap:16px; }
+  .about-stack-grid { grid-template-columns:1fr 1fr; gap:20px; }
+  .about-cert-row { grid-template-columns:48px 1fr; }
+  .about-cert-state { display:none; }
+}
+</style>
+
+<!-- ── Header ── -->
+<header class="about-pg-hd">
+  <div class="about-pg-hd-inner">
+    <div>
+      <div class="eyebrow" style="margin-bottom:14px">About · CV available on request</div>
+      <h1 class="about-h1">{{ .Site.Params.author }}.</h1>
+      <p class="about-lead">Linux sysadmin moving into DevOps / SRE. Currently in {{ .Site.Params.location }}. Open to permanent and contract roles.</p>
     </div>
-    <div class="about-skills">
-      <span class="skill-tag">Linux</span><span class="skill-tag">Ubuntu</span>
-      <span class="skill-tag">Bash</span><span class="skill-tag">Docker</span>
-      <span class="skill-tag">Nginx</span><span class="skill-tag">LDAP/AD</span>
-      <span class="skill-tag">iptables</span><span class="skill-tag">Obsidian</span>
+    <div class="about-term">
+      <div>&gt; {{ .Site.Params.location }} · gmt+10</div>
+      <div>&gt; en (native ru)</div>
+      <div>&gt; available from jun 2026</div>
+      <div class="about-term-accent">&gt; reply within 24h</div>
     </div>
-    <div class="about-links">
-      <a href="{{ .Site.Params.github }}" class="about-link">GH</a>
-      <a href="{{ .Site.Params.linkedin }}" class="about-link">in</a>
-      <a href="{{ .Site.Params.telegram }}" class="about-link">✈</a>
-      <span class="about-link obf-link" data-t="mailto" data-v="{{ .Site.Params.email | base64Encode }}">✉</span>
-      <span class="about-link obf-link" data-t="tel" data-v="{{ .Site.Params.phone | base64Encode }}">✆</span>
+  </div>
+</header>
+
+<!-- ── §01 What I do ── -->
+<section class="about-sect">
+  <div class="about-sect-inner">
+    <div class="about-sect-label">§ What I do</div>
+    <div class="about-body-text">
+      I run, debug and document Linux infrastructure. The last three years have been mostly enterprise Ubuntu fleets — fleet-wide config with Ansible, container workloads on Docker and Kubernetes, networking from VLANs to BGP peering, and the unglamorous on-call rotation that holds it all together. The notes on this site are the byproduct.
+    </div>
+  </div>
+</section>
+
+<!-- ── §02 Stack ── -->
+<section class="about-sect">
+  <div class="about-sect-inner">
+    <div class="about-sect-label">§ Stack</div>
+    <div class="about-stack-grid">
+      <div class="about-stack-group">
+        <h4>Operating</h4>
+        <ul><li>Linux (Ubuntu, Debian, RHEL)</li><li>systemd</li><li>LVM, ZFS</li><li>Bash, Python</li></ul>
+      </div>
+      <div class="about-stack-group">
+        <h4>Containers</h4>
+        <ul><li>Docker, Buildkit</li><li>Kubernetes</li><li>Helm, Kustomize</li><li>Cilium, Calico</li></ul>
+      </div>
+      <div class="about-stack-group">
+        <h4>Network</h4>
+        <ul><li>iptables → nftables</li><li>OSPF, BGP basics</li><li>VLAN, 802.1Q</li><li>tcpdump, Wireshark</li></ul>
+      </div>
+      <div class="about-stack-group">
+        <h4>Cloud / IaC</h4>
+        <ul><li>AWS (EC2, IAM, VPC)</li><li>Terraform</li><li>Ansible</li><li>Pulumi (familiar)</li></ul>
+      </div>
+      <div class="about-stack-group">
+        <h4>Observability</h4>
+        <ul><li>Prometheus, Grafana</li><li>Loki, Promtail</li><li>journalctl wizardry</li><li>blackbox exporter</li></ul>
+      </div>
+      <div class="about-stack-group">
+        <h4>Security</h4>
+        <ul><li>SSH hardening</li><li>LDAP / AD</li><li>fail2ban</li><li>Vault basics</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §03 Certifications ── -->
+<section class="about-sect">
+  <div class="about-sect-inner">
+    <div class="about-sect-label">§ Certifications</div>
+    <div>
+      <div class="about-cert-row">
+        <div class="about-cert-year">2025</div>
+        <div class="about-cert-name">LPIC-1 · Linux Professional Institute</div>
+        <div class="about-cert-state" style="color:var(--accent2)">passed</div>
+      </div>
+      <div class="about-cert-row">
+        <div class="about-cert-year">2024</div>
+        <div class="about-cert-name">Network Engineer · OTUS Course</div>
+        <div class="about-cert-state" style="color:var(--accent2)">complete</div>
+      </div>
+      <div class="about-cert-row">
+        <div class="about-cert-year">2024</div>
+        <div class="about-cert-name">Network Architect · OTUS Course</div>
+        <div class="about-cert-state" style="color:var(--accent2)">complete</div>
+      </div>
+      <div class="about-cert-row">
+        <div class="about-cert-year">2026</div>
+        <div class="about-cert-name">LPIC-2 · Exams 201 &amp; 202</div>
+        <div class="about-cert-state" style="color:var(--accent)">in progress · 57%</div>
+      </div>
+      <div class="about-cert-row">
+        <div class="about-cert-year">2026</div>
+        <div class="about-cert-name">CCNA 200-301</div>
+        <div class="about-cert-state" style="color:var(--accent)">in progress · 45%</div>
+      </div>
+      <div class="about-cert-row">
+        <div class="about-cert-year">2026</div>
+        <div class="about-cert-name">AWS SAA-C03</div>
+        <div class="about-cert-state" style="color:var(--accent3)">planned</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §04 Contact ── -->
+<section class="about-sect" style="border-bottom:none">
+  <div class="about-sect-inner" style="padding-bottom:96px">
+    <div class="about-sect-label">§ Contact</div>
+    <div>
+      <div class="about-contact-text">
+        Best reached over email or LinkedIn. Phone &amp; CV exchanged after a short intro call.
+      </div>
+      <div class="about-contact-links">
+        <span class="about-contact-btn obf-link" data-t="mailto" data-v="{{ .Site.Params.email | base64Encode }}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7l9 7 9-7"/></svg>
+          email
+        </span>
+        <a href="{{ .Site.Params.linkedin }}" class="about-contact-btn" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11 7.5"/><path d="M15 9a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7L13 16.5"/></svg>
+          linkedin
+        </a>
+        <a href="{{ .Site.Params.github }}" class="about-contact-btn" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>
+          github
+        </a>
+        <a href="{{ .Site.Params.telegram }}" class="about-contact-btn" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+          telegram
+        </a>
+        {{ with .Site.Params.phone }}
+        <span class="about-contact-btn obf-link" data-t="tel" data-v="{{ . | base64Encode }}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 2 .7 2.9a2 2 0 01-.4 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5c.9.3 1.9.6 2.9.7A2 2 0 0122 16.9z"/></svg>
+          phone
+        </span>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
 <script>
 document.querySelectorAll('.obf-link').forEach(function(el){
-  var v = atob(el.dataset.v);
-  var a = document.createElement('a');
-  a.href = el.dataset.t + ':' + v;
-  a.title = v;
-  a.className = el.className.replace('obf-link','').trim();
-  a.innerHTML = el.innerHTML;
+  if(!el.dataset.v)return;
+  var v=atob(el.dataset.v);
+  if(!v)return;
+  var a=document.createElement('a');
+  a.href=el.dataset.t+':'+v;
+  a.title=v;
+  a.className=el.className.replace('obf-link','').trim();
+  a.innerHTML=el.innerHTML;
   el.replaceWith(a);
 });
 </script>
-    </div>
-  </div>
 
-  {{ partial "certs-widget.html" . }}
-
-  <div class="prose" style="margin-top:32px;">
-    {{ .Content }}
-  </div>
-
-</div>
 {{ end }}

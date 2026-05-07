@@ -22,7 +22,7 @@
   {{ range $i, $q := .Params.questions }}
   <div class="quiz-card" id="q{{ $q.num }}">
     <div class="quiz-q-header">
-      <span class="quiz-q-num">Q{{ $q.num }}</span>
+      <span class="quiz-q-num" style="font-family:'Fraunces',Georgia,serif;font-size:36px;color:var(--text3);font-weight:300;line-height:1;min-width:56px">{{ $q.num }}</span>
       {{ with $q.section }}<span class="quiz-q-section">{{ . }}</span>{{ end }}
     </div>
     <p class="quiz-q-text">{{ $q.text }}</p>
