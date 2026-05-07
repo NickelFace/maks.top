@@ -4,6 +4,7 @@
     "netarch" "/certs/network-architect/"
     "lpic1"   "/certs/lpic-1/"
     "lpic2"   "/certs/lpic-2/"
+    "ccna"    "/certs/ccna/"
 }}
 
 <div class="breadcrumb">
@@ -14,12 +15,25 @@
     <span>{{ .Title }}</span>
 
   {{ else if eq .Section "ccna-quiz" }}
+    <a href="{{ "/certs/ccna/" | relURL }}">CCNA</a>
+    <span>/</span>
     {{ if .IsSection }}
-      <span>CCNA Quiz</span>
+      <span>Quiz</span>
     {{ else }}
-      <a href="{{ "/ccna-quiz/" | relURL }}">CCNA Quiz</a>
+      <a href="{{ "/ccna-quiz/" | relURL }}">Quiz</a>
       <span>/</span>
       <span>Page {{ .Params.quiz_page }}</span>
+    {{ end }}
+
+  {{ else if eq .Section "ccna-labs" }}
+    <a href="{{ "/certs/ccna/" | relURL }}">CCNA</a>
+    <span>/</span>
+    {{ if .IsSection }}
+      <span>Labs</span>
+    {{ else }}
+      <a href="{{ "/ccna-labs/" | relURL }}">Labs</a>
+      <span>/</span>
+      <span>{{ .Title }}</span>
     {{ end }}
 
   {{ else if .IsSection }}

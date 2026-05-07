@@ -50,4 +50,10 @@
 {{ define "scripts" }}
 {{ if .Params.code_toggle }}<script>document.body.dataset.codeToggle='true';</script>{{ end }}
 <script src="{{ "js/article.js" | relURL }}"></script>
+{{ if .Page.Store.Get "hasMermaid" }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+{{ end }}
 {{ end }}
