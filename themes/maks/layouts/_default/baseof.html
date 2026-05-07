@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="color-scheme" content="dark light" id="metaColorScheme">
 {{ with resources.Get "css/critical.css" | minify }}<style>{{ .Content | safeCSS }}</style>{{ end }}
-<script>(function(){var h=document.documentElement;h.classList.add('no-transition');var s=localStorage.getItem('theme');var hr=new Date().getHours();var t=(s==='light'||s==='dark')?s:((hr>=7&&hr<20)?'light':'dark');h.setAttribute('data-theme',t);var m=document.getElementById('metaColorScheme');if(m)m.content=t==='light'?'light dark':'dark light';requestAnimationFrame(function(){requestAnimationFrame(function(){h.classList.remove('no-transition');});});})();</script>
+<link id="favicon" rel="icon" type="image/svg+xml" href="/favicon-light.svg">
+<script>(function(){var h=document.documentElement;h.classList.add('no-transition');var s=localStorage.getItem('theme');var hr=new Date().getHours();var t=(s==='light'||s==='dark')?s:((hr>=7&&hr<20)?'light':'dark');h.setAttribute('data-theme',t);var m=document.getElementById('metaColorScheme');if(m)m.content=t==='light'?'light dark':'dark light';var f=document.getElementById('favicon');if(f)f.href=t==='dark'?'/favicon-dark.svg':'/favicon-light.svg';requestAnimationFrame(function(){requestAnimationFrame(function(){h.classList.remove('no-transition');});});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
@@ -40,7 +41,6 @@
 <meta name="robots" content="noindex, nofollow">
 {{- end }}
 
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
@@ -140,6 +140,8 @@ function applyTheme(t,isAuto){
   document.documentElement.setAttribute('data-theme',isL?'light':'dark');
   var m=document.getElementById('metaColorScheme');
   if(m)m.content=isL?'light dark':'dark light';
+  var f=document.getElementById('favicon');
+  if(f)f.href=isL?'/favicon-light.svg':'/favicon-dark.svg';
   document.querySelectorAll('.theme-btn').forEach(function(b){
     b.setAttribute('aria-pressed',isL?'true':'false');
     b.setAttribute('data-auto',isAuto?'true':'false');
