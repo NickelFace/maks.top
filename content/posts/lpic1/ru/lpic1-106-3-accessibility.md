@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 106.3 — Доступность"
-date: 2026-04-20
+date: 2026-01-12
 description: "Настройки доступности рабочего стола, помощь клавиатуре и мыши (Sticky/Bounce/Slow keys, Mouse Keys, xkbset), нарушения зрения (High Contrast, экранная лупа, экранный диктор Orca). LPIC-1 тема 106.3."
 tags: ["Linux", "LPIC-1", "accessibility", "Orca", "xkbset", "desktop"]
 categories: ["LPIC-1"]

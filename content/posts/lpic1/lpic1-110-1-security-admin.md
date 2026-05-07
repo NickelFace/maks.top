@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 110.1 — Perform Security Administration Tasks"
-date: 2026-04-20
+date: 2026-04-06
 description: "Special permissions SUID/SGID, passwd/chage/usermod, su, lsof, fuser, nmap, ulimit, last/who/w, sudo and /etc/sudoers. LPIC-1 exam topic 110.1."
 tags: ["Linux", "LPIC-1", "security", "sudo", "nmap", "lsof", "ulimit"]
 categories: ["LPIC-1"]

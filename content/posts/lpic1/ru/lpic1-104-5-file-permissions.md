@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.5 — Управление правами доступа и владением файлов"
-date: 2026-04-19
+date: 2025-11-03
 description: "chmod, chown, chgrp, umask, SUID, SGID, sticky bit, октальная и символьная нотация прав. Тема 104.5 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "chmod", "chown", "umask", "SUID", "SGID", "sticky bit", "права доступа"]
 categories: ["LPIC-1"]

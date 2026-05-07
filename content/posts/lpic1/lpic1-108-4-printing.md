@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 108.4 — Manage Printers and Printing"
-date: 2026-04-20
+date: 2026-03-02
 description: "CUPS daemon configuration, lpadmin, lpoptions, lpr, lp, lpstat, lpq, lprm, cancel, lpmove, cupsreject, cupsdisable, cupsenable. LPIC-1 exam topic 108.4."
 tags: ["Linux", "LPIC-1", "printing", "CUPS", "lpr", "admin"]
 categories: ["LPIC-1"]

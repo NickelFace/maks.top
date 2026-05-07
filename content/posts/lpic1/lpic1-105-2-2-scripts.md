@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 105.2 Lesson 2 — Customize or Write Simple Scripts"
-date: 2026-04-19
+date: 2025-12-22
 description: "Full test flags, file comparison, logical modifiers, nocasematch, sync.sh with mapfile, read/seq/exec, command chains, mail, SUID. LPIC-1 exam topic 105.2, lesson 2."
 tags: ["Linux", "LPIC-1", "bash", "scripting", "test", "loops", "case"]
 categories: ["LPIC-1"]

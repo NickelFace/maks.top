@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 102.5 — Use RPM and YUM Package Management"
-date: 2026-04-16
+date: 2025-08-04
 description: "rpm, yum, dnf, zypper — install, query, verify packages, manage repositories, rpm2cpio. LPIC-1 exam topic 102.5."
 tags: ["Linux", "LPIC-1", "RPM", "YUM", "dnf", "zypper"]
 categories: ["LPIC-1"]

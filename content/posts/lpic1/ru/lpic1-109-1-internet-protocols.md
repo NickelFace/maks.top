@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 109.1 — Основы интернет-протоколов"
-date: 2026-04-20
+date: 2026-03-09
 description: "IPv4-адресация, классы адресов, приватные диапазоны, CIDR, TCP/UDP/ICMP, стандартные порты, /etc/services, IPv6 и отличия от IPv4. LPIC-1 тема 109.1."
 tags: ["Linux", "LPIC-1", "networking", "IPv4", "IPv6", "TCP", "UDP"]
 categories: ["LPIC-1"]

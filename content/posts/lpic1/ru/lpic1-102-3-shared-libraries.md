@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 102.3 — Управление разделяемыми библиотеками"
-date: 2026-04-16
+date: 2025-07-21
 description: "Разделяемые библиотеки, соглашение именования, ldconfig, /etc/ld.so.conf, LD_LIBRARY_PATH, ldd. Тема 102.3 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "Библиотеки", "ldconfig"]
 categories: ["LPIC-1"]

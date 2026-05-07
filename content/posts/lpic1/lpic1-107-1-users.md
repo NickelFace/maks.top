@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 107.1 — Manage User and Group Accounts"
-date: 2026-04-20
+date: 2026-01-19
 description: "Creating, modifying, and deleting users and groups; /etc/passwd, /etc/shadow, /etc/group, /etc/gshadow; useradd, usermod, userdel, passwd, chage, getent. LPIC-1 exam topic 107.1."
 tags: ["Linux", "LPIC-1", "users", "groups", "passwd", "shadow", "admin"]
 categories: ["LPIC-1"]

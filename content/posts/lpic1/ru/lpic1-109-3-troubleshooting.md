@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 109.3 — Базовая диагностика сети"
-date: 2026-04-20
+date: 2026-03-23
 description: "ip, ifconfig, route, ping, traceroute, tracepath, netcat (nc), netstat, ss для диагностики сети в Linux. LPIC-1 тема 109.3."
 tags: ["Linux", "LPIC-1", "networking", "troubleshooting", "ping", "traceroute", "netstat", "ss"]
 categories: ["LPIC-1"]

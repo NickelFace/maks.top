@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 102.1 — Design Hard Disk Layout"
-date: 2026-04-16
+date: 2025-07-14
 description: "Disk partitions, mount points, /boot, EFI System Partition, /home, /var, swap and LVM basics. LPIC-1 exam topic 102.1."
 tags: ["Linux", "LPIC-1", "Disks", "LVM", "Filesystems"]
 categories: ["LPIC-1"]

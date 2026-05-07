@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.1 — Создание разделов и файловых систем"
-date: 2026-04-19
+date: 2025-10-13
 description: "MBR и GPT, fdisk, gdisk, parted, mkfs (ext2/3/4, XFS, VFAT, exFAT, Btrfs), swap. Тема 104.1 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "fdisk", "gdisk", "parted", "mkfs", "Btrfs", "XFS", "swap", "разделы"]
 categories: ["LPIC-1"]

@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.10 Проверка IP-параметров на клиентских ОС"
-date: 2026-05-07
+date: 2026-02-15
 description: "Команды для проверки IP-адреса, маски, шлюза, DNS и ARP-таблицы на Windows, macOS и Linux, а также шаблон диагностики сетевых проблем."
 tags: ["CCNA", "Cisco", "Windows", "Linux", "диагностика"]
 categories: ["CCNA"]

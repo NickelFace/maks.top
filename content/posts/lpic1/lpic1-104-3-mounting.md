@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.3 — Control Mounting and Unmounting of Filesystems"
-date: 2026-04-19
+date: 2025-10-27
 description: "mount, umount, /etc/fstab, UUID, LABEL, blkid, lsblk, systemd mount and automount units. LPIC-1 exam topic 104.3."
 tags: ["Linux", "LPIC-1", "mount", "umount", "fstab", "UUID", "blkid", "systemd", "mounting"]
 categories: ["LPIC-1"]

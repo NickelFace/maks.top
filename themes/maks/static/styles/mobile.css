@@ -116,6 +116,9 @@
 }
 .mob-overlay.open { display: block; }
 
+/* ── MOB-NAV lang toggle ── */
+.mob-lang-toggle { font-size: 11px; }
+
 /* ── MOBILE BOTTOM NAV ── */
 .mob-bottom-nav {
   display: none;
@@ -145,6 +148,13 @@
 .mob-bnav-item svg { stroke: currentColor; }
 .mob-bnav-item.active { color: var(--accent); }
 .mob-bnav-item:hover { color: var(--accent); }
+.mob-bnav-more {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 16px;
+  font-family: inherit;
+}
 
 /* ── PROSE PAGE ── */
 .prose-page {
@@ -468,6 +478,27 @@ a.page-btn:hover {
   }
   .mob-toc[open] > summary::before { transform: rotate(90deg); }
   .mob-toc-links { border-top: 1px solid var(--border); padding: 4px 0; }
+
+  /* Posts list filter → horizontal scroll */
+  .bl-filter-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    gap: 6px;
+  }
+  .bl-filter-row::-webkit-scrollbar { display: none; }
+  .bl-filter-tag { white-space: nowrap; flex-shrink: 0; }
+  .bl-filter-label { flex-shrink: 0; }
+  .bl-body-inner { padding: 24px 20px 80px !important; }
+
+  /* Quiz mobile */
+  .quiz-card { padding: 20px 16px; }
+  .quiz-opt  { padding: 14px 16px; }
+  .quiz-nav  { flex-direction: column-reverse; gap: 10px; }
+  .quiz-nav .quiz-btn,
+  .quiz-nav a { width: 100%; justify-content: center; text-align: center; }
 
   /* Namespace map → horizontal scroll */
   .ns-map-grid {

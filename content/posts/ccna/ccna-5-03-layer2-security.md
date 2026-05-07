@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 5.3 Layer 2 Security"
-date: 2026-05-07
+date: 2026-04-17
 description: "Port Security (shutdown/restrict/protect, sticky MAC), DHCP Snooping (trusted/untrusted ports), Dynamic ARP Inspection, and protection against VLAN Hopping and STP attacks."
 tags: ["CCNA", "Cisco", "Port Security", "DHCP Snooping", "security"]
 categories: ["CCNA"]

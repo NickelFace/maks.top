@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.7 — Search Text Files Using Regular Expressions"
-date: 2026-04-16
+date: 2025-09-29
 description: "Regular expressions, BRE vs ERE, grep, egrep, fgrep, sed, find with regex. LPIC-1 exam topic 103.7."
 tags: ["Linux", "LPIC-1", "regex", "grep", "sed", "egrep", "find"]
 categories: ["LPIC-1"]

@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 5.1 Концепции безопасности"
-date: 2026-05-07
+date: 2026-04-11
 description: "Триада CIA, типы угроз (malware, DoS, MITM, phishing), L2-атаки и средства защиты, модели безопасности Defense in Depth и Zero Trust, компоненты сетевой безопасности."
 tags: ["CCNA", "Cisco", "безопасность", "CIA", "угрозы"]
 categories: ["CCNA"]

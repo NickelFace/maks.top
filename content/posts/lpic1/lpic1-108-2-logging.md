@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 108.2 — System Logging"
-date: 2026-04-20
+date: 2026-02-16
 description: "rsyslog configuration with facilities and priorities, logrotate, dmesg, systemd-journald with journalctl filtering and journal management, systemd-cat, ForwardToSyslog. LPIC-1 exam topic 108.2."
 tags: ["Linux", "LPIC-1", "logging", "rsyslog", "journald", "journalctl", "syslog", "admin"]
 categories: ["LPIC-1"]

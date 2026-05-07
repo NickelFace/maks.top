@@ -184,6 +184,39 @@ Template: `themes/maks/layouts/taxonomy/tag.html`
 - Articles show under their topic accordion in the cert page
 - List view uses `_default/list.html` — zero dates (`0001-01-01`) are hidden via `{{ if not .Date.IsZero }}`
 
+## Certs index page (`/certs/`)
+
+Template: `themes/maks/layouts/certs/list.html`
+CSS: `.certs-idx-*` classes appended to `themes/maks/static/styles/cert.css`
+
+Two-zone layout:
+- **Hero** (`certs-idx-hero`): breadcrumb + Fraunces h1 + description + stats sidebar (passed/in-progress/planned/total articles)
+- **Track table** (`certs-idx-table`): column headers + one `<a>` row per cert page
+
+### Row columns
+`40px 1fr 150px 160px 130px 24px` → `# · Track · Status · Articles · Progress · →`
+
+- **Track**: Fraunces cert title + mono sub-line with exam codes (filters `exams[].code` where `len > 2` to skip section numbers like "1"; falls back to `.Description | truncate 64`)
+- **Status badge**: `PASSED` (green tint) / `IN PROGRESS` (amber tint) / `PLANNED` (muted) — same logic as cert single.html
+- **Articles**: `written / expected` + optional labs count from `cert_labs_done` param
+- **Progress**: large Fraunces `$pct%` + 2px bar colored with `cert_color`
+
+### Status / progress logic (mirrors cert single.html)
+```
+credly_badge_id OR cert_url → "passed"
+pct > 0                     → "in progress"
+else                        → "planned"
+
+pct = round(written / expected × 100)  -- if both > 0
+    | progress_pct param                -- fallback
+    | 0
+```
+
+### Responsive breakpoints
+- `≤1024px`: 5-col grid (drops ARTICLES label column)
+- `≤860px`: single-col hero (stats left-aligned)
+- `≤640px`: 2-col row (name + badge + arrow only; `#`, articles, progress hidden)
+
 ## CCNA Quiz
 - 489 questions, 49 pages (p01–p49), 10 per page
 - Questions parsed from `CCNA-200-301-dumps-v8.6.pdf` — community dump, not official

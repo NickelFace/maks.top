@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 109.4 — Configure Client Side DNS"
-date: 2026-04-20
+date: 2026-03-30
 description: "Client-side DNS with /etc/nsswitch.conf, /etc/resolv.conf, /etc/hosts, systemd-resolved, and name resolution tools getent, host, dig. LPIC-1 exam topic 109.4."
 tags: ["Linux", "LPIC-1", "networking", "DNS", "dig", "host", "getent"]
 categories: ["LPIC-1"]

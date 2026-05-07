@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 105.1 — Customize and Use the Shell Environment"
-date: 2026-04-19
+date: 2025-11-24
 description: "Shell types, startup files, environment variables, aliases, functions, source, /etc/skel. LPIC-1 exam topic 105.1."
 tags: ["Linux", "LPIC-1", "bash", "shell", "environment", "alias", "source", "skel"]
 categories: ["LPIC-1"]

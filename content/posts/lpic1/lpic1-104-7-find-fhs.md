@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.7 — Find System Files and Place Files in the Correct Location"
-date: 2026-04-19
+date: 2025-11-17
 description: "FHS directory hierarchy, find, locate, updatedb, which, type, whereis. LPIC-1 exam topic 104.7."
 tags: ["Linux", "LPIC-1", "find", "locate", "FHS", "whereis", "which"]
 categories: ["LPIC-1"]

@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.7 Беспроводные сети"
-date: 2026-05-07
+date: 2026-02-05
 description: "Стандарты 802.11 (Wi-Fi 4/5/6), частотные диапазоны и каналы, компоненты WLAN (AP, WLC, CAPWAP), методы доступа CSMA/CA и стандарты безопасности WPA2/WPA3."
 tags: ["CCNA", "Cisco", "Wi-Fi", "802.11", "WLAN"]
 categories: ["CCNA"]

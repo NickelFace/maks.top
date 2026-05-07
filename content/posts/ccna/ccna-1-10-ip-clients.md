@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.10 Verifying IP Parameters on Client OSes"
-date: 2026-05-07
+date: 2026-02-15
 description: "Commands for verifying IP address, subnet mask, gateway, DNS and ARP table on Windows, macOS and Linux, plus a network troubleshooting template."
 tags: ["CCNA", "Cisco", "Windows", "Linux", "diagnostics"]
 categories: ["CCNA"]

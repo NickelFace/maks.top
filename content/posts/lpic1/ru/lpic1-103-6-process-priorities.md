@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.6 — Приоритеты выполнения процессов"
-date: 2026-04-16
+date: 2025-09-22
 description: "Приоритеты процессов, niceness, nice, renice, schedtool. Тема 103.6 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "процессы", "nice", "renice", "приоритет", "планировщик"]
 categories: ["LPIC-1"]

@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 110.2 — Setup Host Security"
-date: 2026-04-20
+date: 2026-04-13
 description: "Shadow passwords, /etc/passwd and /etc/shadow, /etc/nologin, xinetd superdaemon, systemd.socket, disabling unnecessary services, TCP wrappers with /etc/hosts.allow and /etc/hosts.deny. LPIC-1 exam topic 110.2."
 tags: ["Linux", "LPIC-1", "security", "xinetd", "TCP wrappers", "shadow"]
 categories: ["LPIC-1"]

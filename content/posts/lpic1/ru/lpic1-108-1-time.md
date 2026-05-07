@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 108.1 — Поддержание системного времени"
-date: 2026-04-20
+date: 2026-02-09
 description: "Системные часы и аппаратные часы (RTC), команды date и hwclock, timedatectl, концепции NTP (страта, смещение, дрейф, джиттер), systemd-timesyncd, ntpd с ntp.conf и ntpq, chrony с chronyc и chrony.conf. LPIC-1 тема 108.1."
 tags: ["Linux", "LPIC-1", "time", "NTP", "chrony", "systemd", "admin"]
 categories: ["LPIC-1"]

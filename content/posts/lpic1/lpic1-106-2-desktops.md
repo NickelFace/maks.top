@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 106.2 — Graphical Desktops"
-date: 2026-04-20
+date: 2026-01-05
 description: "Desktop environments (KDE, GNOME, Xfce), widget toolkits GTK+/Qt, desktop interoperability, remote access protocols XDMCP, VNC, RDP, Spice. LPIC-1 exam topic 106.2."
 tags: ["Linux", "LPIC-1", "KDE", "GNOME", "Xfce", "VNC", "RDP", "XDMCP", "desktop"]
 categories: ["LPIC-1"]

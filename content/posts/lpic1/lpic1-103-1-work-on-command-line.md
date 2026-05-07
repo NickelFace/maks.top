@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.1 — Work on the Command Line"
-date: 2026-04-16
+date: 2025-08-18
 description: "pwd, uname, man, apropos, type, which, history, environment variables, PATH, quoting and escaping. LPIC-1 exam topic 103.1."
 tags: ["Linux", "LPIC-1", "Bash", "Shell", "Command Line"]
 categories: ["LPIC-1"]

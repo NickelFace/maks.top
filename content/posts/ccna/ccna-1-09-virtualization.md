@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.9 Virtualization and VRF"
-date: 2026-05-07
+date: 2026-02-11
 description: "Server virtualization fundamentals (Type 1/Type 2 hypervisors), Docker/Kubernetes containers and VRF for creating isolated routing tables on Cisco IOS."
 tags: ["CCNA", "Cisco", "virtualization", "VRF", "containers"]
 categories: ["CCNA"]
