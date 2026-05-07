@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 3.1 Таблица маршрутизации"
+title: "CCNA — 3.1 Routing Table"
 date: 2026-05-07
 description: "IP routing principles: Longest Prefix Match, routing table structure, Administrative Distance (AD), protocol metrics and show ip route commands."
-tags: ["CCNA", "Cisco", "маршрутизация", "OSPF", "административное расстояние"]
+tags: ["CCNA", "Cisco", "routing", "OSPF", "administrative distance"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-3-01-routing-table/"

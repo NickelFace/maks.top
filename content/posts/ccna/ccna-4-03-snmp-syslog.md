@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 4.3 SNMP и Syslog"
+title: "CCNA — 4.3 SNMP and Syslog"
 date: 2026-05-07
 description: "SNMP v1/v2c/v3: Get/Trap/Inform operations, community string configuration and SNMPv3 with encryption; Syslog: severity levels 0–7, message format and logging configuration on Cisco IOS."
-tags: ["CCNA", "Cisco", "SNMP", "Syslog", "мониторинг"]
+tags: ["CCNA", "Cisco", "SNMP", "Syslog", "monitoring"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-4-03-snmp-syslog/"

@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 2.5 Беспроводные архитектуры"
+title: "CCNA — 2.5 Wireless Architectures"
 date: 2026-05-07
 description: "WLAN architectures: Autonomous AP, Lightweight AP with WLC, CAPWAP protocol, FlexConnect mode and Wireless LAN Controller deployment options."
-tags: ["CCNA", "Cisco", "WLC", "CAPWAP", "беспроводные сети"]
+tags: ["CCNA", "Cisco", "WLC", "CAPWAP", "wireless networks"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-2-05-wireless-arch/"
