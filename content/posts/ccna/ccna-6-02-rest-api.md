@@ -2,7 +2,7 @@
 title: "CCNA — 6.2 REST API"
 date: 2026-05-07
 description: "REST API: architectural principles, HTTP methods (CRUD), response codes, JSON/XML/YAML data formats, authentication methods, and example requests to Cisco DNA Center and IOS-XE RESTCONF."
-tags: ["CCNA", "Cisco", "REST API", "JSON", "автоматизация"]
+tags: ["CCNA", "Cisco", "REST API", "JSON", "automation"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-6-02-rest-api/"

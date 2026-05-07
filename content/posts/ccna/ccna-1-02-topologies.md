@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 1.2 Топологии и типы сетей"
+title: "CCNA — 1.2 Topologies and Network Types"
 date: 2026-05-07
 description: "Network types by scale (LAN, WAN, WLAN), physical and logical topologies, the Cisco three-tier hierarchical model, broadcast and collision domains."
-tags: ["CCNA", "Cisco", "топологии", "LAN", "WAN"]
+tags: ["CCNA", "Cisco", "topologies", "LAN", "WAN"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-1-02-topologies/"

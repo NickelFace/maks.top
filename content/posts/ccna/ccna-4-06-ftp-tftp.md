@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 4.6 FTP и TFTP"
+title: "CCNA — 4.6 FTP and TFTP"
 date: 2026-05-07
 description: "Comparison of TFTP (UDP 69) and FTP (TCP 20/21): capabilities, usage for Cisco IOS and configuration backup, and SCP as a secure alternative."
-tags: ["CCNA", "Cisco", "FTP", "TFTP", "IP-сервисы"]
+tags: ["CCNA", "Cisco", "FTP", "TFTP", "IP services"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-4-06-ftp-tftp/"

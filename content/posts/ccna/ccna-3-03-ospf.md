@@ -2,7 +2,7 @@
 title: "CCNA — 3.3 OSPFv2"
 date: 2026-05-07
 description: "OSPFv2: neighbor adjacency process, DR/BDR election, cost calculation, configuration with network and ip ospf commands, authentication and diagnostics."
-tags: ["CCNA", "Cisco", "OSPF", "динамическая маршрутизация", "DR/BDR"]
+tags: ["CCNA", "Cisco", "OSPF", "dynamic routing", "DR/BDR"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-3-03-ospf/"

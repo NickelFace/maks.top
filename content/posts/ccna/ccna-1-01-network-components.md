@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 1.1 Сетевые компоненты и роли"
+title: "CCNA — 1.1 Network Components and Roles"
 date: 2026-05-07
 description: "Overview of network devices (Switch, Router, AP, Firewall), OSI and TCP/IP models, Cisco IOS CLI modes and essential management commands."
-tags: ["CCNA", "Cisco", "OSI", "CLI", "сетевые устройства"]
+tags: ["CCNA", "Cisco", "OSI", "CLI", "network devices"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-1-01-network-components/"
