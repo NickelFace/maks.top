@@ -5,6 +5,7 @@ cert_color: "#f59e0b"
 description: "Cisco Certified Network Associate (200-301) — Enterprise networking fundamentals"
 post_prefix: "ccna"
 post_category: "CCNA"
+expected_articles: 80
 progress_pct: 5
 resources:
   - icon: "📖"
@@ -15,6 +16,10 @@ resources:
     title: "Practice Quiz"
     desc: "489 questions · answer reveal"
     url: "/ccna-quiz/"
+  - icon: "🔬"
+    title: "Lab Solutions"
+    desc: "CCNA lab walkthroughs — step by step"
+    url: "/ccna-labs/"
 exams:
   - code: "200-301"
     title: "Implementing and Administering Cisco Solutions"

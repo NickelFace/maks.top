@@ -1,0 +1,76 @@
+{{ define "head" }}
+<style>
+.labs-index { display: flex; flex-direction: column; gap: 6px; margin-top: 16px; }
+
+.lab-item { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+
+.lab-toggle {
+  width: 100%; display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; background: var(--bg2);
+  border: none; cursor: pointer; text-align: left;
+  color: var(--text); font-family: inherit; font-size: 13px;
+  transition: background .15s;
+}
+.lab-toggle:hover { background: var(--bg3); }
+.lab-item.open .lab-toggle { background: var(--bg3); border-bottom: 1px solid var(--border); }
+
+.lab-num {
+  flex-shrink: 0; min-width: 36px;
+  font-size: 11px; font-weight: 600; color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.lab-title { flex: 1; font-weight: 500; }
+.lab-chevron { flex-shrink: 0; color: var(--text3); font-size: 16px; transition: transform .2s; }
+.lab-item.open .lab-chevron { transform: rotate(90deg); }
+
+.lab-body {
+  display: none; padding: 14px 16px;
+  background: var(--bg); border-top: none;
+}
+.lab-item.open .lab-body { display: block; }
+
+.lab-desc { color: var(--text2); font-size: 13px; margin-bottom: 12px; line-height: 1.6; }
+.lab-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid rgba(0,212,255,.25);
+  transition: border-color .15s;
+}
+.lab-link:hover { border-bottom-color: var(--accent); }
+</style>
+{{ end }}
+
+{{ define "main" }}
+<div class="page">
+
+  {{ partial "breadcrumb.html" . }}
+
+  <div class="sec-title">CCNA Lab Solutions</div>
+  <p style="color:var(--text2);font-size:13px;margin:4px 0 8px">CCNA 200-301 · step-by-step lab walkthroughs</p>
+
+  <div class="labs-index">
+    {{ range sort .Pages ".File.BaseFileName" }}
+    {{ if ne .Params.page_lang "ru" }}
+    <div class="lab-item">
+      <button class="lab-toggle" onclick="toggleLab(this)">
+        <span class="lab-num">{{ index (split .File.BaseFileName "-") 2 }}</span>
+        <span class="lab-title">{{ .Title }}</span>
+        <span class="lab-chevron">›</span>
+      </button>
+      <div class="lab-body">
+        {{ with .Description }}<p class="lab-desc">{{ . }}</p>{{ end }}
+        <a href="{{ .RelPermalink }}" class="lab-link">Open lab →</a>
+      </div>
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+
+</div>
+
+<script>
+function toggleLab(btn) {
+  btn.closest('.lab-item').classList.toggle('open');
+}
+</script>
+{{ end }}

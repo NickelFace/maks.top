@@ -399,3 +399,45 @@
   .quiz-img { max-height: 220px; }
 .quiz-index-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
 }
+
+/* ═══════════════════════════════════════
+   CCNA LABS
+═══════════════════════════════════════ */
+
+.labs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lab-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color .15s, background .15s;
+}
+
+.lab-card:hover {
+  border-color: var(--accent);
+  background: var(--glow);
+}
+
+.lab-card-title {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.lab-card-desc {
+  color: var(--text2);
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .lab-card { padding: 12px 14px; }
+}
