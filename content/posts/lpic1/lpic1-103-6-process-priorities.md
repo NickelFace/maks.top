@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.6 — Modify Process Execution Priorities"
-date: 2026-04-16
+date: 2025-09-22
 description: "Process priorities, niceness, nice, renice, schedtool. LPIC-1 exam topic 103.6."
 tags: ["Linux", "LPIC-1", "processes", "nice", "renice", "priority", "scheduler"]
 categories: ["LPIC-1"]

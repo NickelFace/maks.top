@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.2 — Process Text Streams Using Filters"
-date: 2026-04-16
+date: 2025-08-25
 description: "cat, head, tail, less, nl, od, cut, paste, sort, uniq, tr, sed, split, wc, zcat, md5sum, sha256sum. LPIC-1 exam topic 103.2."
 tags: ["Linux", "LPIC-1", "Bash", "Text Processing", "sed", "awk"]
 categories: ["LPIC-1"]

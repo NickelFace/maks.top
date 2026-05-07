@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.1 Сетевые компоненты и роли"
-date: 2026-05-07
+date: 2026-01-13
 description: "Обзор сетевых устройств (коммутатор, маршрутизатор, AP, Firewall), моделей OSI и TCP/IP, режимов Cisco IOS CLI и основных команд управления."
 tags: ["CCNA", "Cisco", "OSI", "CLI", "сетевые устройства"]
 categories: ["CCNA"]

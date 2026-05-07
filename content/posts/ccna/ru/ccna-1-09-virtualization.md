@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.9 Виртуализация и VRF"
-date: 2026-05-07
+date: 2026-02-11
 description: "Основы виртуализации серверов (Type 1/Type 2 гипервизоры), контейнеры Docker/Kubernetes и VRF для создания изолированных таблиц маршрутизации на Cisco IOS."
 tags: ["CCNA", "Cisco", "виртуализация", "VRF", "контейнеры"]
 categories: ["CCNA"]

@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 4.4 SSH and Device Management"
-date: 2026-05-07
+date: 2026-04-01
 description: "Configuring SSH v2 on Cisco IOS: RSA key generation, VTY lines, configuration management via TFTP, banner messages and device hardening."
 tags: ["CCNA", "Cisco", "SSH", "management", "security"]
 categories: ["CCNA"]

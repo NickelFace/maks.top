@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.4 — Потоки, пайпы и перенаправления"
-date: 2026-04-16
+date: 2025-09-08
 description: "Перенаправление stdin, stdout и stderr, пайпы, tee, xargs, подстановка команд, here documents. Тема 103.4 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "пайпы", "перенаправления", "потоки", "xargs", "tee"]
 categories: ["LPIC-1"]

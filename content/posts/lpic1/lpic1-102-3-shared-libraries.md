@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 102.3 — Manage Shared Libraries"
-date: 2026-04-16
+date: 2025-07-21
 description: "Shared libraries, naming conventions, ldconfig, /etc/ld.so.conf, LD_LIBRARY_PATH, ldd. LPIC-1 exam topic 102.3."
 tags: ["Linux", "LPIC-1", "Libraries", "ldconfig"]
 categories: ["LPIC-1"]

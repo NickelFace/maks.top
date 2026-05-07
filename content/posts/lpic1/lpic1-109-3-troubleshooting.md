@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 109.3 — Basic Network Troubleshooting"
-date: 2026-04-20
+date: 2026-03-23
 description: "ip, ifconfig, route, ping, traceroute, tracepath, netcat (nc), netstat, ss for Linux network troubleshooting. LPIC-1 exam topic 109.3."
 tags: ["Linux", "LPIC-1", "networking", "troubleshooting", "ping", "traceroute", "netstat", "ss"]
 categories: ["LPIC-1"]

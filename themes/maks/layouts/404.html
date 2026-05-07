@@ -9,17 +9,13 @@
       <div class="e404-sub">TTL expired · no route to host</div>
     </div>
     <p class="e404-desc">The route table doesn't have an entry for this URL. It might have moved, been retired, or never existed in the first place.</p>
-    <div class="e404-links">
-      <a href="/" class="e404-btn e404-btn-primary">← Home</a>
-      <a href="/posts/" class="e404-btn e404-btn-secondary">Blog</a>
-      <a href="/kb/" class="e404-btn e404-btn-secondary">Knowledge Base</a>
-    </div>
   </div>
 
   <div class="e404-right">
     <div class="eyebrow">§ Diagnostic</div>
     <div class="e404-cmd">$ traceroute <span id="e404path">/404</span></div>
     <div class="e404-terminal">
+      <div class="e404-mob-cmd e404-dim">$ traceroute <span class="e404-path-mob">/404</span></div>
       <div class="e404-tl e404-dim">traceroute to maks.top, 30 hops max</div>
       <br>
       <div class="e404-tl"><span class="e404-hop">1</span> <span class="e404-host">gateway</span> <span class="e404-dim">0.241 ms</span></div>
@@ -40,11 +36,20 @@
     </form>
   </div>
 
+  <div class="e404-links">
+    <a href="/" class="e404-btn e404-btn-primary">← Home</a>
+    <a href="/posts/" class="e404-btn e404-btn-secondary">Blog</a>
+    <a href="/kb/" class="e404-btn e404-btn-secondary">Knowledge Base</a>
+  </div>
+
 </div>
 <script>
 (function(){
+  var p = window.location.pathname;
   var el = document.getElementById('e404path');
-  if (el) el.textContent = window.location.pathname;
+  if (el) el.textContent = p;
+  var mob = document.querySelector('.e404-path-mob');
+  if (mob) mob.textContent = p;
   document.addEventListener('keydown', function(e){
     if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
       e.preventDefault();

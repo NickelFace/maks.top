@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 102.6 — Linux as a Virtualization Guest"
-date: 2026-04-16
+date: 2025-08-11
 description: "Hypervisor types, full/para/hybrid virtualisation, guest drivers, disk images, VM templates, cloud-init, containers. LPIC-1 exam topic 102.6."
 tags: ["Linux", "LPIC-1", "Virtualization", "KVM", "cloud-init"]
 categories: ["LPIC-1"]

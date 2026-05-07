@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 4.1 NAT"
-date: 2026-05-07
+date: 2026-03-22
 description: "Network Address Translation: Static NAT, Dynamic NAT и PAT (Overload) — терминология Inside/Outside, настройка на Cisco IOS, проверка и диагностика трансляций."
 tags: ["CCNA", "Cisco", "NAT", "PAT", "IP-сервисы"]
 categories: ["CCNA"]

@@ -1,0 +1,147 @@
+{{ define "head" }}
+<link rel="stylesheet" href="{{ "styles/cert.css" | relURL }}">
+{{ end }}
+
+{{ define "main" }}
+{{ $allPosts := where .Site.RegularPages "Section" "posts" }}
+
+{{/* ── First pass: compute per-cert data + summary totals ── */}}
+{{ $nPassed  := 0 }}
+{{ $nInProg  := 0 }}
+{{ $nPlanned := 0 }}
+{{ $nArts    := 0 }}
+
+{{ $certData := slice }}
+{{ range .Pages }}
+  {{ $prefix   := .Params.post_prefix | default "" }}
+  {{ $written  := 0 }}
+  {{ range $allPosts }}
+    {{ if and $prefix (strings.HasPrefix .File.BaseFileName $prefix) }}
+      {{ if ne .Params.page_lang "ru" }}
+        {{ $written = add $written 1 }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $expected := int (.Params.expected_articles | default 0) }}
+  {{ $pct := 0 }}
+  {{ if and (gt $expected 0) (gt $written 0) }}
+    {{ $pct = int (math.Round (mul (div (float $written) (float $expected)) 100)) }}
+  {{ else if .Params.progress_pct }}
+    {{ $pct = int .Params.progress_pct }}
+  {{ end }}
+  {{ $state := "planned" }}
+  {{ if or .Params.credly_badge_id .Params.cert_url }}
+    {{ $state = "passed" }}
+  {{ else if gt $pct 0 }}
+    {{ $state = "in progress" }}
+  {{ end }}
+  {{/* Exam codes sub-line — only use codes with 3+ chars (real exam codes, not section numbers) */}}
+  {{ $codes := slice }}
+  {{ range .Params.exams }}{{ if gt (len .code) 2 }}{{ $codes = $codes | append .code }}{{ end }}{{ end }}
+  {{ $sub := delimit $codes " · " }}
+  {{ if not $sub }}{{ $sub = .Description | truncate 64 }}{{ end }}
+  {{/* Accumulate totals */}}
+  {{ if eq $state "passed"     }}{{ $nPassed  = add $nPassed  1 }}{{ end }}
+  {{ if eq $state "in progress"}}{{ $nInProg  = add $nInProg  1 }}{{ end }}
+  {{ if eq $state "planned"    }}{{ $nPlanned = add $nPlanned 1 }}{{ end }}
+  {{ $nArts = add $nArts $written }}
+  {{ $certData = $certData | append (dict
+      "page"     .
+      "written"  $written
+      "expected" $expected
+      "pct"      $pct
+      "state"    $state
+      "sub"      $sub
+      "color"    (.Params.cert_color | default "var(--accent)")
+  ) }}
+{{ end }}
+
+<div class="certs-idx-page">
+
+  {{/* ── Hero ── */}}
+  <div class="certs-idx-hero">
+    <div>
+      {{ partial "breadcrumb.html" . }}
+      <div class="eyebrow" style="margin:16px 0 12px">§ Certifications · {{ now.Format "2006" }}</div>
+      <h1 class="certs-idx-h1">Receipts <em>for the</em> work.</h1>
+      <p class="certs-idx-desc">Six tracks in flight or passed. Each one ties to articles, labs, and (where applicable) a quiz bank — you can dive into any topic from the cert page.</p>
+    </div>
+    <div class="certs-idx-stats">
+      {{ if gt $nPassed 0  }}<div><strong>{{ $nPassed }}</strong> passed</div>{{ end }}
+      {{ if gt $nInProg 0  }}<div><strong>{{ $nInProg }}</strong> in progress</div>{{ end }}
+      {{ if gt $nPlanned 0 }}<div><strong>{{ $nPlanned }}</strong> planned</div>{{ end }}
+      <div class="certs-idx-stats-div"></div>
+      <div><strong>{{ $nArts }}</strong> articles</div>
+    </div>
+  </div>
+
+  {{/* ── Track table ── */}}
+  <div>
+    <div class="eyebrow" style="margin-bottom:20px">§ All tracks</div>
+
+    <div class="certs-idx-cols">
+      <div>#</div>
+      <div>Track</div>
+      <div>Status</div>
+      <div>Articles</div>
+      <div>Progress</div>
+      <div></div>
+    </div>
+
+    {{ range $i, $c := $certData }}
+    <a href="{{ $c.page.RelPermalink }}" class="certs-idx-row">
+
+      <div class="certs-idx-num">{{ printf "%02d" (add $i 1) }}</div>
+
+      <div class="certs-idx-track">
+        <div class="certs-idx-name">{{ $c.page.Title }}</div>
+        {{ with $c.sub }}<div class="certs-idx-sub">{{ . }}</div>{{ end }}
+      </div>
+
+      <div>
+        {{ if eq $c.state "passed" }}
+          <span class="certs-idx-badge certs-idx-badge-passed">Passed</span>
+        {{ else if eq $c.state "in progress" }}
+          <span class="certs-idx-badge certs-idx-badge-progress">In progress</span>
+        {{ else }}
+          <span class="certs-idx-badge certs-idx-badge-planned">Planned</span>
+        {{ end }}
+      </div>
+
+      <div class="certs-idx-arts">
+        {{ if gt $c.expected 0 }}
+          <div><strong>{{ $c.written }}</strong> / {{ $c.expected }}</div>
+        {{ else if gt $c.written 0 }}
+          <div><strong>{{ $c.written }}</strong> articles</div>
+        {{ else }}
+          <div>—</div>
+        {{ end }}
+        {{ with $c.page.Params.cert_labs_done }}<div>{{ . }} labs</div>{{ end }}
+        {{ with $c.page.Params.cert_quiz_count }}<div>{{ . }} quiz q's</div>{{ end }}
+      </div>
+
+      <div class="certs-idx-pct-wrap">
+        <div class="certs-idx-pct" style="color:{{ $c.color }}">{{ $c.pct }}<span style="font-size:16px;color:var(--text3)">%</span></div>
+        <div class="certs-idx-bar">
+          <div class="certs-idx-bar-fill" style="width:{{ $c.pct }}%;background:{{ $c.color }}"></div>
+        </div>
+      </div>
+
+      <div class="certs-idx-arrow">→</div>
+
+    </a>
+    {{ end }}
+  </div>
+
+</div>
+
+{{/* ── Footnote ── */}}
+<div class="certs-idx-note">
+  <div class="certs-idx-note-inner">
+    <div class="eyebrow">§ How this works</div>
+    <div class="certs-idx-note-body">
+      Each cert track is a folder of articles in <code>/posts/</code> with a <code>cert-N-NN-slug</code> naming convention. Progress percentages auto-compute from <code>expected_articles</code> in cert frontmatter — no manual updates needed. Labs link to <a href="/ccna-labs/">/ccna-labs/</a>; quiz banks live at <a href="/ccna-quiz/">/ccna-quiz/</a>.
+    </div>
+  </div>
+</div>
+{{ end }}

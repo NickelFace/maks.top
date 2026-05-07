@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 110.2 — Настройка безопасности хоста"
-date: 2026-04-20
+date: 2026-04-13
 description: "Теневые пароли, /etc/passwd и /etc/shadow, /etc/nologin, супердемон xinetd, systemd.socket, отключение ненужных служб, TCP wrappers с /etc/hosts.allow и /etc/hosts.deny. LPIC-1 тема 110.2."
 tags: ["Linux", "LPIC-1", "security", "xinetd", "TCP wrappers", "shadow"]
 categories: ["LPIC-1"]

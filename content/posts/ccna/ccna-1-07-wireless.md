@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.7 Wireless Networks"
-date: 2026-05-07
+date: 2026-02-05
 description: "802.11 standards (Wi-Fi 4/5/6), frequency bands and channels, WLAN components (AP, WLC, CAPWAP), CSMA/CA media access method and WPA2/WPA3 security standards."
 tags: ["CCNA", "Cisco", "Wi-Fi", "802.11", "WLAN"]
 categories: ["CCNA"]

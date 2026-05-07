@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 105.2 Lesson 1 — Customize or Write Simple Scripts"
-date: 2026-04-19
+date: 2025-12-15
 description: "Shebang, source and subshell, variables, arrays, arithmetic, echo/printf, test, if/case, for/while/until, read/seq/exec, command chains, mail, script permissions. LPIC-1 exam topic 105.2, lesson 1."
 tags: ["Linux", "LPIC-1", "bash", "scripting", "test", "loops", "case"]
 categories: ["LPIC-1"]

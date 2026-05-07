@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.5 IPv4 адресация и подсети"
-date: 2026-05-07
+date: 2026-01-26
 description: "Структура IPv4-адреса, классы сетей, приватные адреса RFC 1918, таблица масок CIDR, формулы subnetting и VLSM с примерами расчётов."
 tags: ["CCNA", "Cisco", "IPv4", "subnetting", "VLSM"]
 categories: ["CCNA"]

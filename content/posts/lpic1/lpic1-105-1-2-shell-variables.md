@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 105.1 — Shell Variables and Environment (Part 2)"
-date: 2026-04-19
+date: 2025-12-01
 description: "Local and global variables, export, env, common environment variables, aliases, functions, /etc/skel. LPIC-1 exam topic 105.1."
 tags: ["Linux", "LPIC-1", "bash", "shell", "environment", "export", "alias", "PATH"]
 categories: ["LPIC-1"]

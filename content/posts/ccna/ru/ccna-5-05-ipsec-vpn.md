@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 5.5 IPsec и VPN"
-date: 2026-05-07
+date: 2026-04-24
 description: "Типы VPN (site-to-site и remote access), протоколы IPsec (AH и ESP), режимы Transport и Tunnel, фазы IKE и алгоритмы согласования, GRE over IPsec и SSL VPN (Cisco AnyConnect)."
 tags: ["CCNA", "Cisco", "IPsec", "VPN", "безопасность"]
 categories: ["CCNA"]

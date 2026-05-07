@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.2 — Поддержание целостности файловых систем"
-date: 2026-04-19
+date: 2025-10-20
 description: "du, df, fsck, e2fsck, tune2fs, xfs_repair, xfs_fsr, xfs_db — проверка, мониторинг и ремонт файловых систем ext и XFS. Тема 104.2 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "fsck", "e2fsck", "tune2fs", "xfs_repair", "du", "df", "файловые системы"]
 categories: ["LPIC-1"]

@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 105.2 Урок 1 — Настройка и написание простых скриптов"
-date: 2026-04-19
+date: 2025-12-15
 description: "Шебанг, подоболочка, переменные, массивы, арифметика, echo/printf, test, if/case, циклы, read/seq/exec, цепочки команд, права скриптов. LPIC-1 тема 105.2, урок 1."
 tags: ["Linux", "LPIC-1", "bash", "scripting", "test", "loops", "case"]
 categories: ["LPIC-1"]

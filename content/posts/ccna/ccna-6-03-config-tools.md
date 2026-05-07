@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 6.3 Configuration Tools"
-date: 2026-05-07
+date: 2026-05-04
 description: "Ansible (agentless, YAML, push), Puppet and Chef (agent-based, pull), comparison of automation tools, Terraform for IaC, and built-in IOS tools: EEM and TCL scripting."
 tags: ["CCNA", "Cisco", "Ansible", "automation", "configuration"]
 categories: ["CCNA"]

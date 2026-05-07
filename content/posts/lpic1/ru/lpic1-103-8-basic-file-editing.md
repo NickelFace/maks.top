@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.8 — Базовое редактирование файлов"
-date: 2026-04-16
+date: 2025-10-06
 description: "Режимы vi, навигация, вставка, удаление, копирование, поиск, макросы, переменная EDITOR, nano, Emacs. Тема 103.8 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "vi", "vim", "nano", "editor", "text editing"]
 categories: ["LPIC-1"]

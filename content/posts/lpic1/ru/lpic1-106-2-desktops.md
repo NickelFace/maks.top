@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 106.2 — Графические рабочие среды"
-date: 2026-04-20
+date: 2026-01-05
 description: "Рабочие среды KDE, GNOME, Xfce, тулкиты GTK+/Qt, совместимость между средами, протоколы удалённого доступа XDMCP, VNC, RDP, Spice. LPIC-1 тема 106.2."
 tags: ["Linux", "LPIC-1", "KDE", "GNOME", "Xfce", "VNC", "RDP", "XDMCP", "desktop"]
 categories: ["LPIC-1"]

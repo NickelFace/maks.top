@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.2 — Maintain the Integrity of Filesystems"
-date: 2026-04-19
+date: 2025-10-20
 description: "du, df, fsck, e2fsck, tune2fs, xfs_repair, xfs_fsr, xfs_db — monitor disk usage, check and repair ext and XFS filesystems. LPIC-1 exam topic 104.2."
 tags: ["Linux", "LPIC-1", "fsck", "e2fsck", "tune2fs", "xfs_repair", "du", "df", "filesystems"]
 categories: ["LPIC-1"]

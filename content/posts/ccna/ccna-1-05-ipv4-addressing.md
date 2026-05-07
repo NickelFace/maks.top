@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.5 IPv4 Addressing and Subnetting"
-date: 2026-05-07
+date: 2026-01-26
 description: "IPv4 address structure, address classes, RFC 1918 private addresses, CIDR subnet mask table, subnetting formulas and VLSM with calculation examples."
 tags: ["CCNA", "Cisco", "IPv4", "subnetting", "VLSM"]
 categories: ["CCNA"]

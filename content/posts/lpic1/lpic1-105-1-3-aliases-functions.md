@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 105.1 — Aliases, Functions, and Special Variables (Part 3)"
-date: 2026-04-19
+date: 2025-12-08
 description: "Alias quoting, dynamic vs static expansion, Bash functions, special variables $? $$ $!, functions in scripts, function inside alias. LPIC-1 exam topic 105.1."
 tags: ["Linux", "LPIC-1", "bash", "alias", "function", "shell", "environment"]
 categories: ["LPIC-1"]

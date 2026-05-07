@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 106.3 — Accessibility"
-date: 2026-04-20
+date: 2026-01-12
 description: "Desktop accessibility settings, keyboard and mouse assist (Sticky/Bounce/Slow keys, Mouse Keys, xkbset), visual impairments (High Contrast, screen magnifier, Orca screen reader). LPIC-1 exam topic 106.3."
 tags: ["Linux", "LPIC-1", "accessibility", "Orca", "xkbset", "desktop"]
 categories: ["LPIC-1"]

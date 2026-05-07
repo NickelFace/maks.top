@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 5.4 AAA и Wireless Security"
-date: 2026-05-07
+date: 2026-04-21
 description: "AAA (Authentication, Authorization, Accounting): RADIUS vs TACACS+, настройка на Cisco IOS, 802.1X port-based access control и стандарты беспроводной безопасности WPA2/WPA3."
 tags: ["CCNA", "Cisco", "AAA", "RADIUS", "безопасность"]
 categories: ["CCNA"]

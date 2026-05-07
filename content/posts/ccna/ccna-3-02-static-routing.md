@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 3.2 Static Routing"
-date: 2026-05-07
+date: 2026-03-09
 description: "Configuring static routes on Cisco IOS: ip route syntax, default route, floating static routes, IPv6 static routes and topology configuration examples."
 tags: ["CCNA", "Cisco", "static routing", "ip route", "IPv6"]
 categories: ["CCNA"]

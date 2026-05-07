@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.6 — Create and Change Hard and Symbolic Links"
-date: 2026-04-19
+date: 2025-11-10
 description: "ln, ln -s, inode, link count, hard and symbolic links, ls -li, broken links. LPIC-1 exam topic 104.6."
 tags: ["Linux", "LPIC-1", "ln", "symlink", "hardlink", "inode", "links"]
 categories: ["LPIC-1"]

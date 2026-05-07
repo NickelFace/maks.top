@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.3 — Basic File Management"
-date: 2026-04-16
+date: 2025-09-01
 description: "Copying, moving, deleting files, globbing, find, tar, cpio, dd, and compression. LPIC-1 exam topic 103.3."
 tags: ["Linux", "LPIC-1", "files", "find", "tar", "cp", "mv", "rm"]
 categories: ["LPIC-1"]

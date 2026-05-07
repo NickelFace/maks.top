@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 107.2 — Автоматизация задач с помощью планировщиков"
-date: 2026-04-20
+date: 2026-01-26
 description: "Планирование повторяющихся задач через cron и crontab, однократных задач через at/atq/atrm, таймеры systemd с OnCalendar, управление доступом через cron.allow/cron.deny и at.allow/at.deny. LPIC-1 тема 107.2."
 tags: ["Linux", "LPIC-1", "cron", "at", "systemd", "scheduling", "admin"]
 categories: ["LPIC-1"]

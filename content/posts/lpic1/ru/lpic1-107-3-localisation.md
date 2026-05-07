@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 107.3 — Локализация и интернационализация"
-date: 2026-04-20
+date: 2026-02-02
 description: "Настройка временных зон и локали; /etc/timezone, /etc/localtime, /usr/share/zoneinfo/, tzselect, timedatectl, LANG, переменные LC_*, LC_ALL, TZ, конвертация кодировок через iconv. LPIC-1 тема 107.3."
 tags: ["Linux", "LPIC-1", "locale", "timezone", "iconv", "UTF-8", "admin"]
 categories: ["LPIC-1"]

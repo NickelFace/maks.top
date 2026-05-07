@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 109.4 — Настройка DNS на стороне клиента"
-date: 2026-04-20
+date: 2026-03-30
 description: "DNS на стороне клиента: /etc/nsswitch.conf, /etc/resolv.conf, /etc/hosts, systemd-resolved, команды getent, host, dig. LPIC-1 тема 109.4."
 tags: ["Linux", "LPIC-1", "networking", "DNS", "dig", "host", "getent"]
 categories: ["LPIC-1"]

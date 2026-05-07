@@ -56,14 +56,15 @@
 ═══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; width: 100%; }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
+  width: 100%;
   transition: background 0.3s, color 0.3s;
   display: flex;
   flex-direction: column;
@@ -1023,10 +1024,13 @@ footer {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+  grid-template-rows: auto auto;
+  column-gap: 80px;
+  row-gap: 40px;
 }
-.e404-left { display: flex; flex-direction: column; gap: 24px; }
+.e404-left  { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.e404-right { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; gap: 14px; }
+.e404-links { grid-column: 1; grid-row: 2; display: flex; gap: 10px; flex-wrap: wrap; align-self: start; }
 .e404-hero { margin: 8px 0 4px; }
 .e404-lost {
   font-family: 'Fraunces', Georgia, serif;
@@ -1083,7 +1087,6 @@ footer {
 .e404-btn-secondary { border: 1px solid var(--border2); color: var(--text2); }
 .e404-btn-secondary:hover { border-color: var(--text3); color: var(--text); }
 
-.e404-right { display: flex; flex-direction: column; gap: 14px; }
 .e404-cmd {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
@@ -1150,14 +1153,29 @@ footer {
   transition: color 0.15s;
 }
 .e404-sbtn:hover { color: var(--text); }
+.e404-mob-cmd { display: none; }
 
 @media (max-width: 860px) {
-  .e404-page { grid-template-columns: 1fr; gap: 48px; padding: 48px 40px 72px; }
+  .e404-page { grid-template-columns: 1fr; column-gap: 0; padding: 48px 40px 72px; }
+  .e404-right { grid-column: 1; grid-row: 2; margin-top: 40px; }
+  .e404-links { grid-column: 1; grid-row: 3; margin-top: 8px; }
 }
 @media (max-width: 640px) {
-  .e404-page { padding: 40px 20px 60px; }
-  .e404-lost, .e404-packet { font-size: clamp(60px, 18vw, 90px); }
+  .e404-page { padding: 40px 20px 80px; }
+  .e404-right { margin-top: 28px; }
+  /* "Lost packet." on one line */
+  .e404-hero { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15em; }
+  .e404-lost, .e404-packet { font-size: clamp(52px, 15vw, 76px); line-height: 1; }
+  .e404-sub { width: 100%; margin-top: 10px; }
   .e404-desc { font-size: 16px; }
+  /* Hide eyebrow/cmd outside terminal */
+  .e404-right > .eyebrow, .e404-cmd { display: none; }
+  .e404-mob-cmd { display: block; margin-bottom: 10px; }
+  .e404-terminal { padding: 18px 20px; font-size: 12px; }
+  .e404-search { display: none; }
+  /* Buttons full-width stacked */
+  .e404-links { flex-direction: column; margin-top: 0; }
+  .e404-btn { width: 100%; justify-content: center; padding: 14px 18px; font-size: 12px; }
 }
 
 /* ═══════════════════════════════════════

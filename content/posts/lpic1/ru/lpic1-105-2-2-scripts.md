@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 105.2 Урок 2 — Настройка и написание простых скриптов"
-date: 2026-04-19
+date: 2025-12-22
 description: "Полный набор флагов test, сравнение файлов, модификаторы, nocasematch, sync.sh с mapfile, read/seq/exec, цепочки команд, mail, SUID. LPIC-1 тема 105.2, урок 2."
 tags: ["Linux", "LPIC-1", "bash", "scripting", "test", "loops", "case"]
 categories: ["LPIC-1"]

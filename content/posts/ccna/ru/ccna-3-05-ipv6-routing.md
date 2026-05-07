@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 3.5 IPv6 маршрутизация"
-date: 2026-05-07
+date: 2026-03-19
 description: "Включение IPv6 маршрутизации на Cisco IOS, статические IPv6-маршруты, верификация, основы OSPFv3 и протокол NDP как замена ARP."
 tags: ["CCNA", "Cisco", "IPv6", "OSPFv3", "статическая маршрутизация"]
 categories: ["CCNA"]

@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 102.5 — Управление пакетами RPM и YUM"
-date: 2026-04-16
+date: 2025-08-04
 description: "rpm, yum, dnf, zypper — установка, запросы, проверка целостности, репозитории, rpm2cpio. Тема 102.5 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "RPM", "YUM", "dnf", "zypper"]
 categories: ["LPIC-1"]

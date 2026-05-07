@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 104.5 — Manage File Permissions and Ownership"
-date: 2026-04-19
+date: 2025-11-03
 description: "chmod, chown, chgrp, umask, SUID, SGID, sticky bit, octal and symbolic permission notation. LPIC-1 exam topic 104.5."
 tags: ["Linux", "LPIC-1", "chmod", "chown", "umask", "SUID", "SGID", "sticky bit", "permissions"]
 categories: ["LPIC-1"]

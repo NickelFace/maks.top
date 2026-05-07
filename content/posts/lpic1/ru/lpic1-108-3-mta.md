@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 108.3 — Основы агента пересылки почты (MTA)"
-date: 2026-04-20
+date: 2026-02-23
 description: "Концепции MTA и популярные агенты (Sendmail, Postfix, Exim), команды sendmail и mail, управление очередью почты, /etc/aliases и newaliases, ~/.forward для пользовательской переадресации. LPIC-1 тема 108.3."
 tags: ["Linux", "LPIC-1", "email", "MTA", "sendmail", "postfix", "aliases", "admin"]
 categories: ["LPIC-1"]

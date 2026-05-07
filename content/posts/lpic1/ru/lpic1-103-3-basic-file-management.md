@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.3 — Базовое управление файлами"
-date: 2026-04-16
+date: 2025-09-01
 description: "Копирование, перемещение, удаление файлов, глобинг, find, tar, cpio, dd и сжатие. Тема 103.3 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "файлы", "find", "tar", "cp", "mv", "rm"]
 categories: ["LPIC-1"]

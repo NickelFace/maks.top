@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.1 — Работа в командной строке"
-date: 2026-04-16
+date: 2025-08-18
 description: "pwd, uname, man, apropos, type, which, история команд, переменные окружения, PATH, экранирование. Тема 103.1 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "Bash", "Shell", "Командная строка"]
 categories: ["LPIC-1"]

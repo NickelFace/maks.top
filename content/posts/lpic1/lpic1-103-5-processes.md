@@ -1,6 +1,6 @@
 ---
 title: "LPIC-1 103.5 — Create, Monitor and Kill Processes"
-date: 2026-04-16
+date: 2025-09-15
 description: "Job control, nohup, screen, tmux, ps, top, signals, kill, pkill. LPIC-1 exam topic 103.5."
 tags: ["Linux", "LPIC-1", "processes", "ps", "top", "kill", "screen", "tmux", "signals"]
 categories: ["LPIC-1"]
