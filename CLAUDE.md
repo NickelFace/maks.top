@@ -42,7 +42,7 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 | File | Location | Scope |
 |---|---|---|
 | `critical.css` | `assets/css/` | Inlined in `<head>` via `resources.Get \| minify`. Dark/light `html,body` bg + `no-transition`. **Single source of truth for FOUC colors — update here when changing theme bg.** |
-| `global.css` | `static/styles/` | Variables, reset, nav (incl. `.nav-suntime` sunrise/sunset), page, KB cards, tags, pagination, breadcrumb, sticky footer. Utility classes: `.eyebrow`, `.serif`, `.mono` |
+| `global.css` | `static/styles/` | Variables, reset, nav (incl. `.nav-suntime` sunrise/sunset), page, KB cards, tags, pagination, breadcrumb, sticky footer, **404 page** (`.e404-*`). Utility classes: `.eyebrow`, `.serif`, `.mono` |
 | `prose.css` | `static/styles/` | Article body typography + **3-col layout** (`.prose-3col`, `.prose-meta-rail`, `.prose-toc-rail`, `.prose-h1`, `.prose-lead`, `.tldr-card`), `.intro-card`, `.ref-panel`, `.cheat-table`, `.tabs`, `.code-block`, `.sec` |
 | `cert.css` | `static/styles/` | New cert page (`.cert-pg-*`, `.cert-res-*`, `.cert-domain-*`); legacy styles kept for fallback |
 | `quiz.css` | `static/styles/` | CCNA quiz cards, options, scoring badges |
@@ -259,6 +259,17 @@ Personal lab notes live in `content/kb/network-labs/`. EN only, no RU translatio
 
 ## CCNA section layout
 `themes/maks/layouts/_default/ccna-section.html` — used for section landing pages under CCNA (e.g. `/ccna-labs/`, `/ccna-quiz/` list overviews). Renders a section-based header + child page grid.
+
+## 404 page
+
+Template: `themes/maks/layouts/404.html`
+
+Two-column layout (`1fr 1fr`) matching the editorial design system:
+- **Left**: eyebrow `§ Error 404` → big Fraunces "Lost" + italic amber "packet." → mono `TTL EXPIRED · NO ROUTE TO HOST` → italic serif description → nav buttons (dark filled Home + outlined Blog / KB)
+- **Right**: eyebrow `§ Diagnostic` → `$ traceroute <path>` (path filled by JS from `window.location.pathname`) → dark terminal block with fake traceroute output → search input
+
+Search input: pressing `/` focuses it; submitting redirects to `/posts/?q=<term>`.
+CSS classes: `.e404-page`, `.e404-left`, `.e404-right`, `.e404-terminal`, `.e404-search` — all in `global.css`.
 
 ## Breadcrumb partial
 
