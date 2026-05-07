@@ -1,14 +1,61 @@
 {{ define "main" }}
-<div class="page page-404">
-  <div class="page-404-code">404</div>
-  <div class="page-404-title">Page not found</div>
-  <div class="page-404-desc">
-    The page you're looking for doesn't exist or has been moved.
+<div class="e404-page">
+
+  <div class="e404-left">
+    <div class="eyebrow">§ Error 404 · Page not found</div>
+    <div class="e404-hero">
+      <div class="e404-lost">Lost</div>
+      <div class="e404-packet">packet.</div>
+      <div class="e404-sub">TTL expired · no route to host</div>
+    </div>
+    <p class="e404-desc">The route table doesn't have an entry for this URL. It might have moved, been retired, or never existed in the first place.</p>
+    <div class="e404-links">
+      <a href="/" class="e404-btn e404-btn-primary">← Home</a>
+      <a href="/posts/" class="e404-btn e404-btn-secondary">Blog</a>
+      <a href="/kb/" class="e404-btn e404-btn-secondary">Knowledge Base</a>
+    </div>
   </div>
-  <div class="page-404-links">
-    <a href="/" class="btn-404 btn-404-primary">← Home</a>
-    <a href="/posts/" class="btn-404 btn-404-secondary">Blog</a>
-    <a href="/certs/" class="btn-404 btn-404-secondary">Certs</a>
+
+  <div class="e404-right">
+    <div class="eyebrow">§ Diagnostic</div>
+    <div class="e404-cmd">$ traceroute <span id="e404path">/404</span></div>
+    <div class="e404-terminal">
+      <div class="e404-tl e404-dim">traceroute to maks.top, 30 hops max</div>
+      <br>
+      <div class="e404-tl"><span class="e404-hop">1</span> <span class="e404-host">gateway</span> <span class="e404-dim">0.241 ms</span></div>
+      <div class="e404-tl"><span class="e404-hop">2</span> <span class="e404-host">cdn.cloudflare.net</span> <span class="e404-dim">1.872 ms</span></div>
+      <div class="e404-tl"><span class="e404-hop">3</span> <span class="e404-host">maks.top</span> <span class="e404-dim">12.04 ms</span></div>
+      <div class="e404-tl"><span class="e404-hop">4</span> <span class="e404-dim">★ ★ ★</span> &nbsp;<span class="e404-dim">Request timed out</span></div>
+      <div class="e404-tl"><span class="e404-hop">5</span> <span class="e404-dim">★ ★ ★</span> &nbsp;<span class="e404-dim">Request timed out</span></div>
+      <br>
+      <div class="e404-tl e404-err">! destination unreachable: 404 not found</div>
+      <br>
+      <div class="e404-tl e404-dim">try: <a href="/posts/" class="e404-tlink">/posts/</a>, <a href="/kb/" class="e404-tlink">/kb/</a>, or</div>
+      <div class="e404-tl e404-dim">use search (press /) ▶</div>
+    </div>
+    <form class="e404-search" id="e404search">
+      <span class="e404-slash">/</span>
+      <input type="text" class="e404-sinput" placeholder="Search the site instead..." autocomplete="off" id="e404input">
+      <button type="submit" class="e404-sbtn">← Enter</button>
+    </form>
   </div>
+
 </div>
+<script>
+(function(){
+  var el = document.getElementById('e404path');
+  if (el) el.textContent = window.location.pathname;
+  document.addEventListener('keydown', function(e){
+    if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      document.getElementById('e404input').focus();
+    }
+  });
+  document.getElementById('e404search').addEventListener('submit', function(e){
+    e.preventDefault();
+    var q = document.getElementById('e404input').value.trim();
+    window.location.href = q ? '/posts/?q=' + encodeURIComponent(q) : '/posts/';
+  });
+})();
+</script>
 {{ end }}
