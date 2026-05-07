@@ -13,16 +13,22 @@ content/
   posts/ru/           ← RU translations (build: list: never, render: always)
   posts/neteng/       ← Network Engineer course (EN)
   posts/neteng/ru/    ← Network Engineer course (RU)
+  posts/ccna/         ← CCNA 200-301 theory articles (EN, 36 files, ccna-N-NN-slug)
+  posts/ccna/ru/      ← CCNA theory RU shadow pages (build: list: never, render: always)
   certs/              ← Cert overview pages (type: certs)
   kb/                 ← Knowledge base (flat EN pages + subsections)
   kb/docs/            ← Site documentation (was content/docs/, moved here for breadcrumb consistency)
   kb/docs/ru/         ← RU translations of docs (build: list: never, render: always)
   kb/ru/              ← KB RU translations (build: list: never, render: always)
   ccna-quiz/          ← Quiz pages p01–p49 (type: ccna-quiz)
+  ccna-labs/          ← CCNA lab solutions (type: ccna-labs, 24 files)
+  ccna-labs/ru/       ← CCNA labs RU shadow pages (build: list: never, render: always)
   about/
 
 themes/maks/
   layouts/            ← Hugo templates per section
+  layouts/_default/_markup/render-codeblock-mermaid.html  ← Mermaid render hook
+  layouts/ccna-labs/  ← list.html (toggle accordion) for /ccna-labs/
   assets/css/         ← critical.css (inlined at build time via resources.Get)
   static/styles/      ← CSS files (loaded as external <link>)
   static/fonts/       ← Self-hosted woff2 (JetBrains Mono, Unbounded)
@@ -39,12 +45,12 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 | `global.css` | `static/styles/` | Variables, reset, nav, page, KB cards (.kb-card, .kb-card-meta, .kb-card-section), tags, pagination, breadcrumb, sticky footer |
 | `prose.css` | `static/styles/` | Article body typography, post-header/post-meta, `.intro-card`, `.ref-panel`, `.cheat-table`, `.tabs`, `.code-block`, `.sec` divider (used in KB and posts) |
 | `cert.css` | `static/styles/` | Cert overview page (hero, accordion topics) |
-| `quiz.css` | `static/styles/` | CCNA quiz cards, options, scoring badges |
+| `quiz.css` | `static/styles/` | CCNA quiz cards, options, scoring badges; also CCNA labs list (`.labs-index`, `.lab-item`, `.lab-toggle`, `.lab-body`) |
 | `ns.css` | `static/styles/` | linux-namespaces page only (ns-specific: `.ns-card`, `.ns-grid`, `.ns-map*`, `.stag*`) |
 | `home.css` | `static/styles/` | Homepage layout |
 | `mobile.css` | `static/styles/` | Mobile-specific overrides |
 | `fonts.css` | `static/styles/` | @font-face for self-hosted fonts |
-| `chroma.css` | `static/styles/` | Hugo syntax highlighting — loaded only on `posts`, `kb` pages (docs are now under `kb/docs/` so also covered) |
+| `chroma.css` | `static/styles/` | Hugo syntax highlighting — loaded on `posts`, `kb`, and `ccna-labs` single pages (NOT on ccna-labs list page) |
 
 ## CSS variables (defined in global.css)
 ```css
@@ -174,6 +180,35 @@ Template: `themes/maks/layouts/taxonomy/tag.html`
 - Images: `static/img/quiz/img-NNN.jpg`, mapped to questions by PDF page range (131 questions have images)
 - Image mapping may have errors — user will verify manually
 - Layout: `themes/maks/layouts/ccna-quiz/single.html` and `list.html`
+- Breadcrumb: `maks.top / CCNA / Quiz / Page N` — CCNA links to `/certs/ccna/`
+
+## CCNA Theory Articles
+- 36 articles in `content/posts/ccna/`, named `ccna-N-NN-slug.md` (e.g. `ccna-1-01-network-components.md`)
+- Naming: `ccna-{domain}-{zero-padded-num}-{slug}` — sorts correctly, cert template prefix `ccna-N-` matches per domain
+- EN files: English content, `page_lang: "en"`, `lang_pair: "/posts/ccna/ru/{slug}/"`
+- RU shadow pages: `content/posts/ccna/ru/`, Russian content, `pagefind_ignore: true`, `build: {list: never, render: always}`
+- `content/posts/ccna/_index.md` has `build: {render: never, list: never}` — section itself does not render
+- Domains: 1 (11 articles), 2 (5), 3 (5), 4 (6), 5 (5), 6 (4)
+- Cert page `/certs/ccna/` shows these under topic accordions via `post_prefix: "ccna"` + `expected_articles: 80`
+- Mermaid diagrams in some articles — rendered via hook + CDN JS (see Mermaid section below)
+
+## CCNA Lab Solutions
+- 24 labs in `content/ccna-labs/`, named `ccna-lab-NN-slug.md`
+- Standalone section at `/ccna-labs/` (not under `/posts/`)
+- EN files: English content, `page_lang: "en"`, `lang_pair: "/ccna-labs/ru/{slug}/"`
+- RU shadow pages: `content/ccna-labs/ru/`, Russian content, same build flags as other RU pages
+- List page (`/ccna-labs/`): toggle accordion — click lab to expand description + "Open lab →" link
+  - Template: `themes/maks/layouts/ccna-labs/list.html` with inline CSS (no external dependency)
+  - JS: `toggleLab()` function inline in template
+- Single lab pages use `_default/single.html` — `prose.css` + `chroma.css` load via `baseof.html` (`.IsPage` check)
+- Breadcrumb: `maks.top / CCNA / Labs / Lab Title` — CCNA links to `/certs/ccna/`
+- `ccna-labs/` section added to `$certMap` in breadcrumb partial
+
+## Mermaid diagrams
+- Render hook: `themes/maks/layouts/_default/_markup/render-codeblock-mermaid.html`
+  - Wraps ` ```mermaid ` blocks in `<pre class="mermaid">`, sets `hasMermaid` page store flag
+- JS loader in `_default/single.html` scripts block: loads Mermaid ESM from CDN only when `hasMermaid` is true
+  - Theme: `dark` to match site
 
 ## KB section structure
 
@@ -215,8 +250,9 @@ Personal lab notes live in `content/kb/network-labs/`. EN only, no RU translatio
 ## Breadcrumb partial
 
 Shared partial at `themes/maks/layouts/partials/breadcrumb.html`. Called via `{{ partial "breadcrumb.html" . }}` in all templates.
-- Handles: certs (2-segment), sections (current as plain text), KB sub-pages (links to parent section via `.Parent.Title`), ccna-quiz pages (Page N), regular pages (section link + title)
-- `$certMap` maps post sub-folders (neteng, lpic1, lpic2…) to cert page URLs
+- Handles: certs (2-segment), sections (current as plain text), KB sub-pages (links to parent section via `.Parent.Title`), ccna-quiz pages (Page N), ccna-labs pages, regular pages (section link + title)
+- `$certMap` maps post sub-folders (neteng, lpic1, lpic2, ccna…) to cert page URLs
+- `ccna-quiz` and `ccna-labs` sections both show `CCNA →` link pointing to `/certs/ccna/`
 
 ## Sticky footer
 
