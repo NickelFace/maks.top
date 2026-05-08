@@ -35,11 +35,14 @@ Hugo searches for a template in this order (first match wins):
 
 | Page | Template lookup (in order) |
 |---|---|
-| `/posts/lpic2-200-1/` | `layouts/posts/single.html` → `layouts/_default/single.html` |
+| `/posts/ccna-1-01-slug/` | `layouts/posts/single.html` → `layouts/_default/single.html` |
 | `/posts/linux-namespaces/` | `layouts/posts/linux-namespaces.html` → `layouts/posts/single.html` |
+| `/certs/` | `layouts/certs/list.html` |
 | `/certs/ccna/` | `layouts/certs/single.html` → `layouts/_default/single.html` |
 | `/ccna-quiz/p01/` | `layouts/ccna-quiz/single.html` |
 | `/ccna-quiz/` | `layouts/ccna-quiz/list.html` |
+| `/ccna-labs/` | `layouts/ccna-labs/list.html` |
+| `/ccna-labs/ccna-lab-NN/` | `layouts/ccna-labs/single.html` → `layouts/_default/single.html` |
 | `/about/` | `layouts/about/single.html` → `layouts/_default/single.html` |
 | `/` | `layouts/index.html` |
 | `/posts/` | `layouts/posts/list.html` → `layouts/_default/list.html` |
@@ -59,12 +62,23 @@ maks.top/
 ├── content/                         # Content (markdown)
 │   ├── about.md                     # /about/ page
 │   ├── posts/                       # /posts/ section (blog)
-│   │   ├── lpic2-200-1-*.md         # LPIC-2 articles
-│   │   └── linux-namespaces.md      # Interactive namespace explorer
+│   │   ├── ccna/                    # 36 CCNA 200-301 theory articles (ccna-N-NN-slug.md)
+│   │   │   └── ru/                  # RU translations (build: list: never)
+│   │   ├── lpic1/                   # LPIC-1 articles
+│   │   │   └── ru/
+│   │   ├── lpic2/                   # LPIC-2 articles
+│   │   │   └── ru/
+│   │   ├── neteng/                  # Network Engineer course
+│   │   │   └── ru/
+│   │   ├── netarch/                 # Network Architect articles
+│   │   └── misc/                    # Miscellaneous (linux-namespaces, etc.)
+│   ├── ccna-labs/                   # /ccna-labs/ section — 24 lab solutions
+│   │   └── ru/                      # RU translations
 │   ├── certs/                       # /certs/ section
 │   │   ├── ccna.md                  # CCNA cert page (accordion + resource tiles)
 │   │   ├── lpic-1.md, lpic-2.md     # LPIC cert pages
-│   │   ├── network-engineer.md      # OTUS course: 17 topics, 24 articles
+│   │   ├── network-engineer.md      # OTUS course
+│   │   ├── network-architect.md     # OTUS Network Architect course
 │   │   └── aws-saa.md
 │   ├── ccna-quiz/                   # /ccna-quiz/ section
 │   │   ├── _index.md                # Quiz index page (49-tile grid)
@@ -86,7 +100,12 @@ maks.top/
 │
 ├── static/                          # Global static files
 │   ├── img/quiz/                    # 247 JPEG images extracted from CCNA PDF
-│   ├── roadmap/index.html           # Static roadmap page (/roadmap/)
+│   ├── img/neteng/                  # Per-lab images (01/, 02/, … 17/)
+│   ├── roadmap/                     # Static roadmap pages
+│   │   ├── index.html               # Main roadmap (/roadmap/)
+│   │   ├── ccna/index.html          # CCNA 200-301 sub-roadmap
+│   │   ├── aws/index.html           # AWS SAA-C03 sub-roadmap
+│   │   └── lpic/index.html          # LPIC-1 + LPIC-2 combined sub-roadmap
 │   └── CNAME                        # Custom domain for GitHub Pages
 │
 └── themes/maks/                     # Custom theme
@@ -104,35 +123,43 @@ maks.top/
     │   ├── ccna-quiz/
     │   │   ├── list.html            # Quiz index (49 page tiles)
     │   │   └── single.html          # Quiz page: questions, options, scoring
+    │   ├── ccna-labs/
+    │   │   └── list.html            # Labs list: flat grid (number, title, tool, duration)
     │   ├── about/
     │   │   └── single.html          # About page with certs-widget
     │   ├── certs/
+    │   │   ├── list.html            # Certs index /certs/: track table with progress
     │   │   └── single.html          # Cert overview: hero, resource tiles, accordion
     │   ├── taxonomy/
     │   │   └── tag.html             # Tags with interactive filtering
     │   ├── kb/
-    │   │   └── list.html            # KB index grouped by Params.group
+    │   │   └── section.html         # KB index grouped by Params.group
     │   ├── partials/                # Reusable fragments
     │   │   ├── certs-widget.html    # Cert cards for About page
     │   │   ├── pagination.html      # Dot-grid pagination (shared CSS in global.css)
+    │   │   ├── search-box.html      # Search input UI
     │   │   └── breadcrumb.html      # Breadcrumb navigation
     │   └── shortcodes/              # Shortcode components for markdown
     │       ├── ns-card.html         # Linux namespace card (uses --c variable)
+    │       ├── topology.html        # Declarative SVG network diagram
     │       └── code.html            # Code block with Chroma highlighting
     │
     └── static/                      # Theme static files
         ├── js/
-        │   ├── site.js              # Global functions (theme, menu)
+        │   ├── article.js           # Reading progress, ToC, copy buttons, lightbox
+        │   ├── pagefind-search.js   # Pagefind search UI for /posts/ and /tags/
+        │   ├── taxonomy.js          # Tag filter logic + article grid on /tags/
         │   └── ns.js                # Namespace explorer logic
         └── styles/
             ├── global.css           # Variables, nav, common components, pagination
             ├── home.css             # Home page styles
             ├── prose.css            # Article typography, NS cards, tabs, ref-panel
-            ├── cert.css             # Cert pages (hero, resource tiles, accordion)
+            ├── cert.css             # Cert pages (hero, resource tiles, accordion, certs index)
             ├── quiz.css             # CCNA quiz cards, options, scoring badges
             ├── ns.css               # linux-namespaces page layout only
-            ├── chroma.css           # Syntax highlighting: Dracula (dark) / GitHub (light)
-            ├── fonts.css            # @font-face: Inter (body), JetBrains Mono, Unbounded
+            ├── chroma.css           # Syntax highlighting (dark/light)
+            ├── topology.css         # .topology SVG diagram figure styles
+            ├── fonts.css            # @font-face: Inter (body), JetBrains Mono
             └── mobile.css           # Mobile nav and breakpoints
 ```
 
@@ -147,13 +174,13 @@ git push origin hugo
 GitHub Actions (.github/workflows/deploy.yml)
         │
         ├── actions/checkout@v4          # Clones repo with submodules
-        ├── peaceiris/actions-hugo@v3    # Installs Hugo (latest, extended)
+        ├── wget hugo_extended .deb       # Installs Hugo (version pinned in workflow)
         ├── hugo --minify --gc           # Builds site into public/
         │   ├── --minify: compresses HTML/CSS/JS
         │   └── --gc: removes unused cache files
         ├── pagefind --site public        # Indexes content for search
-        ├── actions/upload-pages-artifact # Uploads public/ as artifact
-        └── actions/deploy-pages@v4       # Deploys to GitHub Pages
+        ├── actions/upload-pages-artifact@v5 # Uploads public/ as artifact
+        └── actions/deploy-pages@v5       # Deploys to GitHub Pages
                 │
                 ▼
         https://maks.top/
@@ -215,7 +242,7 @@ Each template has access to `.` (dot) — the current page context:
 | `.Params.tags` | []string | From frontmatter `tags:` |
 | `.Permalink` | string | Full page URL |
 | `.RelPermalink` | string | Relative URL |
-| `.Section` | string | Section: "posts", "certs", "ccna-quiz" |
+| `.Section` | string | Section: "posts", "certs", "ccna-quiz", "ccna-labs", "kb" |
 | `.IsHome` | bool | true only for the home page |
 | `.Site` | Site | Global site object |
 | `.Site.Params` | map | Parameters from `[params]` in hugo.toml |

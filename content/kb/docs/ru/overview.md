@@ -39,11 +39,14 @@ Hugo ищет шаблон в таком порядке (первый найде
 
 | Страница | Поиск шаблонов (по порядку) |
 |---|---|
-| `/posts/lpic2-200-1/` | `layouts/posts/single.html` → `layouts/_default/single.html` |
+| `/posts/ccna-1-01-slug/` | `layouts/posts/single.html` → `layouts/_default/single.html` |
 | `/posts/linux-namespaces/` | `layouts/posts/linux-namespaces.html` → `layouts/posts/single.html` |
+| `/certs/` | `layouts/certs/list.html` |
 | `/certs/ccna/` | `layouts/certs/single.html` → `layouts/_default/single.html` |
 | `/ccna-quiz/p01/` | `layouts/ccna-quiz/single.html` |
 | `/ccna-quiz/` | `layouts/ccna-quiz/list.html` |
+| `/ccna-labs/` | `layouts/ccna-labs/list.html` |
+| `/ccna-labs/ccna-lab-NN/` | `layouts/ccna-labs/single.html` → `layouts/_default/single.html` |
 | `/about/` | `layouts/about/single.html` → `layouts/_default/single.html` |
 | `/` | `layouts/index.html` |
 | `/posts/` | `layouts/posts/list.html` → `layouts/_default/list.html` |
@@ -63,12 +66,23 @@ maks.top/
 ├── content/                         # Контент (markdown)
 │   ├── about.md                     # Страница /about/
 │   ├── posts/                       # Раздел /posts/ (блог)
-│   │   ├── lpic2-200-1-*.md         # Статьи LPIC-2
-│   │   └── linux-namespaces.md      # Интерактивный explorer namespace'ов
+│   │   ├── ccna/                    # 36 статей CCNA 200-301 (ccna-N-NN-slug.md)
+│   │   │   └── ru/                  # RU-переводы (build: list: never)
+│   │   ├── lpic1/                   # Статьи LPIC-1
+│   │   │   └── ru/
+│   │   ├── lpic2/                   # Статьи LPIC-2
+│   │   │   └── ru/
+│   │   ├── neteng/                  # Курс Network Engineer
+│   │   │   └── ru/
+│   │   ├── netarch/                 # Статьи Network Architect
+│   │   └── misc/                    # Разное (linux-namespaces и др.)
+│   ├── ccna-labs/                   # Раздел /ccna-labs/ — 24 решения лабораторных
+│   │   └── ru/                      # RU-переводы
 │   ├── certs/                       # Раздел /certs/
 │   │   ├── ccna.md                  # Страница CCNA (аккордеон + плитки ресурсов)
 │   │   ├── lpic-1.md, lpic-2.md     # Страницы LPIC
-│   │   ├── network-engineer.md      # Курс OTUS: 17 тем, 24 статьи
+│   │   ├── network-engineer.md      # Курс OTUS
+│   │   ├── network-architect.md     # Курс OTUS Network Architect
 │   │   └── aws-saa.md
 │   ├── ccna-quiz/                   # Раздел /ccna-quiz/
 │   │   ├── _index.md                # Индекс квиза (сетка из 49 плиток)
@@ -90,7 +104,12 @@ maks.top/
 │
 ├── static/                          # Глобальные статические файлы
 │   ├── img/quiz/                    # 247 JPEG-изображений из PDF CCNA
-│   ├── roadmap/index.html           # Статическая страница роадмапа (/roadmap/)
+│   ├── img/neteng/                  # Изображения лабораторных (01/, 02/, … 17/)
+│   ├── roadmap/                     # Статические страницы роадмапа
+│   │   ├── index.html               # Главный роадмап (/roadmap/)
+│   │   ├── ccna/index.html          # Суб-роадмап CCNA 200-301
+│   │   ├── aws/index.html           # Суб-роадмап AWS SAA-C03
+│   │   └── lpic/index.html          # Суб-роадмап LPIC-1 + LPIC-2
 │   └── CNAME                        # Кастомный домен для GitHub Pages
 │
 └── themes/maks/                     # Кастомная тема
@@ -108,35 +127,43 @@ maks.top/
     │   ├── ccna-quiz/
     │   │   ├── list.html            # Индекс квиза (49 плиток)
     │   │   └── single.html          # Страница квиза: вопросы, варианты, баллы
+    │   ├── ccna-labs/
+    │   │   └── list.html            # Список лабораторных: плоская сетка
     │   ├── about/
     │   │   └── single.html          # Страница About с certs-widget
     │   ├── certs/
+    │   │   ├── list.html            # Индекс /certs/: таблица треков с прогрессом
     │   │   └── single.html          # Cert overview: hero, плитки ресурсов, аккордеон
     │   ├── taxonomy/
     │   │   └── tag.html             # Теги с интерактивной фильтрацией
     │   ├── kb/
-    │   │   └── list.html            # Индекс KB, сгруппированный по Params.group
+    │   │   └── section.html         # Индекс KB, сгруппированный по Params.group
     │   ├── partials/                # Переиспользуемые фрагменты
     │   │   ├── certs-widget.html    # Карточки сертификаций для About
     │   │   ├── pagination.html      # Dot-grid пагинация (CSS в global.css)
+    │   │   ├── search-box.html      # UI строки поиска
     │   │   └── breadcrumb.html      # Хлебные крошки
     │   └── shortcodes/              # Shortcode-компоненты для markdown
     │       ├── ns-card.html         # Карточка Linux namespace (использует --c)
+    │       ├── topology.html        # Декларативная SVG-диаграмма сети
     │       └── code.html            # Code block с Chroma подсветкой
     │
     └── static/                      # Статические файлы темы
         ├── js/
-        │   ├── site.js              # Глобальные функции (тема, меню)
+        │   ├── article.js           # Progress bar, ToC, кнопки копирования, lightbox
+        │   ├── pagefind-search.js   # Pagefind UI для /posts/ и /tags/
+        │   ├── taxonomy.js          # Фильтрация по тегам + сетка статей на /tags/
         │   └── ns.js                # Логика namespace explorer
         └── styles/
             ├── global.css           # Переменные, nav, общие компоненты, пагинация
             ├── home.css             # Стили главной страницы
             ├── prose.css            # Типографика, NS-карточки, tabs, ref-panel
-            ├── cert.css             # Страницы сертификаций (hero, плитки, аккордеон)
+            ├── cert.css             # Страницы сертификаций (hero, плитки, аккордеон, индекс)
             ├── quiz.css             # CCNA квиз: карточки, варианты, баллы
             ├── ns.css               # Только layout страницы linux-namespaces
-            ├── chroma.css           # Подсветка синтаксиса (Dracula / GitHub)
-            ├── fonts.css            # @font-face: Inter (body), JetBrains Mono, Unbounded
+            ├── chroma.css           # Подсветка синтаксиса (тёмная/светлая)
+            ├── topology.css         # Стили SVG-диаграмм .topology
+            ├── fonts.css            # @font-face: Inter (body), JetBrains Mono
             └── mobile.css           # Мобильная навигация и breakpoints
 ```
 
@@ -151,13 +178,13 @@ git push origin hugo
 GitHub Actions (.github/workflows/deploy.yml)
         │
         ├── actions/checkout@v4          # Клонирует репо с submodules
-        ├── peaceiris/actions-hugo@v3    # Устанавливает Hugo (latest, extended)
+        ├── wget hugo_extended .deb       # Устанавливает Hugo (версия в workflow)
         ├── hugo --minify --gc           # Собирает сайт в public/
         │   ├── --minify: сжимает HTML/CSS/JS
         │   └── --gc: удаляет неиспользуемые файлы кэша
         ├── pagefind --site public        # Индексирует контент для поиска
-        ├── actions/upload-pages-artifact # Загружает public/ как артефакт
-        └── actions/deploy-pages@v4       # Деплоит на GitHub Pages
+        ├── actions/upload-pages-artifact@v5 # Загружает public/ как артефакт
+        └── actions/deploy-pages@v5       # Деплоит на GitHub Pages
                 │
                 ▼
         https://maks.top/
@@ -219,7 +246,7 @@ paginate = 10                   # Постов на страницу в лист
 | `.Params.tags` | []string | Из frontmatter `tags:` |
 | `.Permalink` | string | Полный URL страницы |
 | `.RelPermalink` | string | Относительный URL |
-| `.Section` | string | Раздел: "posts", "certs", "ccna-quiz" |
+| `.Section` | string | Раздел: "posts", "certs", "ccna-quiz", "ccna-labs", "kb" |
 | `.IsHome` | bool | true только для главной страницы |
 | `.Site` | Site | Глобальный объект сайта |
 | `.Site.Params` | map | Параметры из `[params]` в hugo.toml |
