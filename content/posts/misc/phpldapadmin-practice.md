@@ -85,7 +85,7 @@ sudo dpkg-reconfigure slapd
 
 The lab is built on the `lpiclab.com` domain:
 
-```
+```ascii
 dc=lpiclab,dc=com
 ├── ou=People          # users
 │   ├── uid=jsmith
