@@ -27,7 +27,7 @@ page_lang: "en"
 
 ### Debian/Ubuntu directory structure:
 
-```
+```ascii
 /etc/apache2/
 ├── apache2.conf          # Main config
 ├── ports.conf            # Listen directives

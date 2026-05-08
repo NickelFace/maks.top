@@ -31,7 +31,7 @@ build:
 
 ### Структура директорий Debian/Ubuntu:
 
-```
+```ascii
 /etc/apache2/
 ├── apache2.conf          # Основной конфиг
 ├── ports.conf            # Listen directives
