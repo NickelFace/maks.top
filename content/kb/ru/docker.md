@@ -19,7 +19,7 @@ Docker: <strong>жизненный цикл контейнера</strong> — з
 
 ## Жизненный цикл контейнера
 
-```
+```ascii
 docker run ──► running ──► stopped ──► (удалён)
                   │                        ▲
                   └── docker stop ─────────┤

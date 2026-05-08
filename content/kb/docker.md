@@ -15,7 +15,7 @@ Docker: <strong>container lifecycle</strong> — run, stop, remove. Key <code>do
 
 ## Container lifecycle
 
-```
+```ascii
 docker run ──► running ──► stopped ──► (removed)
                   │                        ▲
                   └── docker stop ─────────┤
