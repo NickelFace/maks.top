@@ -9,20 +9,21 @@ tags: ["docs"]
 
 ## CSS architecture
 
-Styles are split into 9 files by **scope** (area of application):
+Styles are split into 11 files by **scope** (area of application):
 
 | File | Location | Loaded | Purpose |
 |---|---|---|---|
 | `critical.css` | `themes/maks/assets/css/` | inlined in `<head>` | FOUC prevention: dark/light `html,body` bg + `no-transition` rule |
 | `global.css` | `themes/maks/static/styles/` | everywhere | Variables, nav, base components, dot-grid pagination |
 | `mobile.css` | `themes/maks/static/styles/` | everywhere | Mobile nav, breakpoints |
-| `fonts.css` | `themes/maks/static/styles/` | everywhere | `@font-face` for Inter (body), JetBrains Mono (code) |
+| `fonts.css` | `themes/maks/static/styles/` | everywhere | `@font-face` for Inter (body), JetBrains Mono (code). Fraunces loaded via Google Fonts `<link>` in `baseof.html` |
 | `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs | Article typography, NS cards/tabs/ref-panel, section divider |
 | `home.css` | `themes/maks/static/styles/` | `/` only | Hero, recent posts, KB grid, cert-grid |
-| `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, resource tiles, accordion topics |
+| `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, resource tiles, accordion topics, certs index page |
 | `quiz.css` | `themes/maks/static/styles/` | `/ccna-quiz/*` | Quiz cards, option states, scoring badges |
 | `ns.css` | `themes/maks/static/styles/` | `/posts/linux-namespaces/` | Two-column page layout, TOC sidebar, progress, filter row |
-| `chroma.css` | `themes/maks/static/styles/` | everywhere | Syntax highlighting (Dracula dark / GitHub light) |
+| `topology.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | `.topology` figure + SVG diagram styles |
+| `chroma.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Syntax highlighting (dark/light) |
 
 Loading in `baseof.html`:
 ```html
@@ -49,26 +50,25 @@ Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
 
 | Variable | Dark | Light | Purpose |
 |---|---|---|---|
-| `--accent` | `#00d4ff` | `#00d4ff` | Primary accent (cyan) |
-| `--accent2` | `#7c3aed` | `#7c3aed` | Secondary accent (purple) |
-| `--accent3` | `#10b981` | `#10b981` | Third accent (green) |
+| `--accent` | `oklch(0.78 0.14 70)` | `oklch(0.72 0.14 65)` | Primary accent (amber) |
+| `--accent2` | `oklch(0.70 0.09 155)` | `oklch(0.58 0.08 155)` | Secondary accent (moss green) |
+| `--accent3` | `oklch(0.65 0.13 35)` | `oklch(0.55 0.13 35)` | Tertiary accent (rust) |
 | `--warn` | `#f59e0b` | `#f59e0b` | Warning (amber) |
 | `--danger` | `#ef4444` | `#ef4444` | Danger / error (red) |
-| `--bg` | `#13151f` | `#f5f7fa` | Main background |
-| `--bg2` | `#1c1f2e` | `#ffffff` | Cards, panels |
-| `--bg3` | `#252840` | `#eef2f8` | Hover states |
-| `--border` | `#2d3356` | `#d1dbe8` | Borders |
-| `--border2` | `#353a60` | `#c2cfe0` | Secondary borders |
-| `--text` | `#e2e8f0` | `#1a2235` | Primary text |
-| `--text2` | `#94a3b8` | `#475569` | Secondary text |
-| `--text3` | `#64748b` | `#94a3b8` | Muted text (date, meta) |
-| `--glow` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.06)` | Hover highlight |
-| `--tag-bg` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.08)` | Tag background |
-| `--tag-color` | `#67e8f9` | `#0369a1` | Tag text color |
-| `--grid-line` | `rgba(0,212,255,0.03)` | `rgba(0,150,180,0.04)` | Dot-grid background lines |
-| `--shadow` | `0 4px 24px rgba(0,0,0,0.5)` | `0 4px 24px rgba(0,0,0,0.10)` | Box shadow |
-| `--nav-blur` | `rgba(19,21,31,0.85)` | `rgba(245,247,250,0.90)` | Nav backdrop blur color |
-| `--code-bg` | `#0d1520` | `#f6f8fa` | Code block background |
+| `--bg` | `#16140F` | `#F6F3EC` | Main background |
+| `--bg2` | `#1F1C16` | `#EFEBE0` | Cards, panels |
+| `--bg3` | `#2A2620` | `#E6E1D2` | Hover states |
+| `--border` | `#34302A` | `#D9D3C1` | Borders |
+| `--border2` | `#45403A` | `#C8C0A9` | Secondary borders |
+| `--text` | `#ECE7DA` | `#1B1A17` | Primary text |
+| `--text2` | `#B6B0A0` | `#4B4942` | Secondary text |
+| `--text3` | `#807A6B` | `#7A7567` | Muted text (date, meta) |
+| `--glow` | `oklch(0.78 0.14 70 / 0.16)` | `oklch(0.72 0.14 65 / 0.14)` | Hover highlight |
+| `--tag-bg` | `oklch(0.78 0.14 70 / 0.10)` | `oklch(0.72 0.14 65 / 0.10)` | Tag background |
+| `--shadow` | `0 1px 0 rgba(0,0,0,0.4), 0 16px 40px -20px rgba(0,0,0,0.5)` | `0 1px 0 rgba(27,26,23,0.04), 0 12px 32px -16px rgba(27,26,23,0.18)` | Box shadow |
+| `--nav-blur` | `rgba(22,20,15,0.90)` | `rgba(246,243,236,0.92)` | Nav backdrop blur color |
+| `--code-bg` | `#100E09` | `#EDE9DF` | Code block background |
+| `--radius` | `6px` | `6px` | Border-radius base |
 
 **Per-component variables** (set via inline `style=""`):
 | Variable | Used by | Description |

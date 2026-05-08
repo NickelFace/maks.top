@@ -101,9 +101,9 @@ GitHub Actions (.github/workflows/deploy.yml)
         │
         ├── 5. pagefind --site public  ← builds search index into public/pagefind/
         │
-        ├── 6. actions/upload-pages-artifact@v3
+        ├── 6. actions/upload-pages-artifact@v5
         │
-        └── 7. actions/deploy-pages@v4
+        └── 7. actions/deploy-pages@v5
                     │
                     ▼
             https://maks.top/

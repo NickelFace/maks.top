@@ -13,20 +13,21 @@ tags: ["docs"]
 
 ## Архитектура CSS
 
-Стили разбиты на 9 файлов по принципу **scope** (область применения):
+Стили разбиты на 11 файлов по принципу **scope** (область применения):
 
 | Файл | Расположение | Загружается | Назначение |
 |---|---|---|---|
 | `critical.css` | `themes/maks/assets/css/` | инлайн в `<head>` | Предотвращение FOUC: фон `html,body` для обеих тем + правило `no-transition` |
 | `global.css` | `themes/maks/static/styles/` | везде | Переменные, nav, базовые компоненты, dot-grid пагинация |
 | `mobile.css` | `themes/maks/static/styles/` | везде | Мобильная навигация, breakpoints |
-| `fonts.css` | `themes/maks/static/styles/` | везде | `@font-face` для Inter (body), JetBrains Mono (код) |
+| `fonts.css` | `themes/maks/static/styles/` | везде | `@font-face` для Inter (body), JetBrains Mono. Fraunces загружается через Google Fonts `<link>` в `baseof.html` |
 | `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs | Типографика, NS-карточки/tabs/ref-panel, section divider |
 | `home.css` | `themes/maks/static/styles/` | только `/` | Hero, recent posts, KB grid, cert-grid |
-| `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, плитки ресурсов, аккордеон тем |
+| `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, плитки ресурсов, аккордеон тем, индекс /certs/ |
 | `quiz.css` | `themes/maks/static/styles/` | `/ccna-quiz/*` | Карточки квиза, состояния вариантов, значки баллов |
 | `ns.css` | `themes/maks/static/styles/` | `/posts/linux-namespaces/` | Двухколоночный layout, TOC sidebar, прогресс, фильтры |
-| `chroma.css` | `themes/maks/static/styles/` | везде | Подсветка синтаксиса (Dracula тёмная / GitHub светлая) |
+| `topology.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Стили SVG-диаграмм `.topology` |
+| `chroma.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Подсветка синтаксиса (тёмная/светлая) |
 
 Загрузка в `baseof.html`:
 ```html
@@ -53,26 +54,25 @@ tags: ["docs"]
 
 | Переменная | Dark | Light | Назначение |
 |---|---|---|---|
-| `--accent` | `#00d4ff` | `#00d4ff` | Основной акцент (циан) |
-| `--accent2` | `#7c3aed` | `#7c3aed` | Вторичный акцент (фиолетовый) |
-| `--accent3` | `#10b981` | `#10b981` | Третий акцент (зелёный) |
+| `--accent` | `oklch(0.78 0.14 70)` | `oklch(0.72 0.14 65)` | Основной акцент (янтарный) |
+| `--accent2` | `oklch(0.70 0.09 155)` | `oklch(0.58 0.08 155)` | Вторичный акцент (мох-зелёный) |
+| `--accent3` | `oklch(0.65 0.13 35)` | `oklch(0.55 0.13 35)` | Третий акцент (ржавый) |
 | `--warn` | `#f59e0b` | `#f59e0b` | Предупреждение (amber) |
 | `--danger` | `#ef4444` | `#ef4444` | Ошибка / опасность (красный) |
-| `--bg` | `#13151f` | `#f5f7fa` | Основной фон |
-| `--bg2` | `#1c1f2e` | `#ffffff` | Карточки, панели |
-| `--bg3` | `#252840` | `#eef2f8` | Hover-состояния |
-| `--border` | `#2d3356` | `#d1dbe8` | Границы |
-| `--border2` | `#353a60` | `#c2cfe0` | Вторичные границы |
-| `--text` | `#e2e8f0` | `#1a2235` | Основной текст |
-| `--text2` | `#94a3b8` | `#475569` | Вторичный текст |
-| `--text3` | `#64748b` | `#94a3b8` | Приглушённый текст |
-| `--glow` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.06)` | Hover-подсветка |
-| `--tag-bg` | `rgba(0,212,255,0.08)` | `rgba(0,150,180,0.08)` | Фон тегов |
-| `--tag-color` | `#67e8f9` | `#0369a1` | Цвет текста тегов |
-| `--grid-line` | `rgba(0,212,255,0.03)` | `rgba(0,150,180,0.04)` | Линии dot-grid фона |
-| `--shadow` | `0 4px 24px rgba(0,0,0,0.5)` | `0 4px 24px rgba(0,0,0,0.10)` | Box shadow |
-| `--nav-blur` | `rgba(19,21,31,0.85)` | `rgba(245,247,250,0.90)` | Фон навигации (backdrop blur) |
-| `--code-bg` | `#0d1520` | `#f6f8fa` | Фон блоков кода |
+| `--bg` | `#16140F` | `#F6F3EC` | Основной фон |
+| `--bg2` | `#1F1C16` | `#EFEBE0` | Карточки, панели |
+| `--bg3` | `#2A2620` | `#E6E1D2` | Hover-состояния |
+| `--border` | `#34302A` | `#D9D3C1` | Границы |
+| `--border2` | `#45403A` | `#C8C0A9` | Вторичные границы |
+| `--text` | `#ECE7DA` | `#1B1A17` | Основной текст |
+| `--text2` | `#B6B0A0` | `#4B4942` | Вторичный текст |
+| `--text3` | `#807A6B` | `#7A7567` | Приглушённый текст |
+| `--glow` | `oklch(0.78 0.14 70 / 0.16)` | `oklch(0.72 0.14 65 / 0.14)` | Hover-подсветка |
+| `--tag-bg` | `oklch(0.78 0.14 70 / 0.10)` | `oklch(0.72 0.14 65 / 0.10)` | Фон тегов |
+| `--shadow` | `0 1px 0 rgba(0,0,0,0.4), 0 16px 40px -20px rgba(0,0,0,0.5)` | `0 1px 0 rgba(27,26,23,0.04), 0 12px 32px -16px rgba(27,26,23,0.18)` | Box shadow |
+| `--nav-blur` | `rgba(22,20,15,0.90)` | `rgba(246,243,236,0.92)` | Фон навигации (backdrop blur) |
+| `--code-bg` | `#100E09` | `#EDE9DF` | Фон блоков кода |
+| `--radius` | `6px` | `6px` | Базовый border-radius |
 
 **Переменные компонентов** (задаются через inline `style=""`):
 | Переменная | Используется | Описание |
