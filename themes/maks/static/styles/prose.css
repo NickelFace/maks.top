@@ -503,12 +503,24 @@ pre.mermaid svg { max-width: 100%; height: auto; }
   pre.mermaid svg { min-width: 520px; }
 }
 
+/* .cheat-table IS a <table> — needs display:block to make overflow-x work */
 @media (max-width: 640px) {
-  .cheat-table,
-  .ref-panel,
+  .cheat-table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cheat-table tbody,
+  .cheat-table thead { display: table; width: max-content; min-width: 100%; }
+
+  /* ref-panel has overflow:hidden — override so inner body scroll is visible */
+  .ref-panel { overflow: visible; }
+  .ref-panel-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
   .intro-card,
   .tldr-card { max-width: 100%; overflow-x: auto; }
-  .cheat-table table { width: max-content; min-width: 100%; }
 }
 
 @media (max-width: 900px) {
