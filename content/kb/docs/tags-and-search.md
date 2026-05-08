@@ -241,7 +241,7 @@ The `baseof.html` template reads this and adds `data-pagefind-ignore="all"` to `
 
 ## Data flow summary
 
-```
+```ascii
 Build time (Hugo):
   content/posts/*.md
     └── frontmatter.tags → Hugo taxonomy → /tags/{tag}/ pages
