@@ -423,3 +423,62 @@ details > :not(summary) {
   border-top: 1px solid var(--border);
 }
 
+
+/* ═══════════════════════════════════════
+   MOBILE OVERFLOW CONTAINMENT (≤ 640 px)
+═══════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .prose table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+  }
+  .prose table tbody,
+  .prose table thead { display: table; width: max-content; min-width: 100%; }
+  .prose table th,
+  .prose table td { white-space: nowrap; }
+}
+
+@media (max-width: 640px) {
+  .prose pre {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 11px;
+    line-height: 1.65;
+  }
+  .prose pre::-webkit-scrollbar { height: 4px; }
+  .prose pre::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+}
+
+.prose pre.ascii-art,
+.prose pre code.language-ascii {
+  font-variant-ligatures: none;
+  tab-size: 2;
+}
+@media (max-width: 640px) {
+  .prose pre.ascii-art { font-size: 10.5px; }
+}
+
+.ascii-art-wrap pre {
+  font-variant-ligatures: none;
+  tab-size: 2;
+}
+@media (max-width: 640px) {
+  .ascii-art-wrap pre { font-size: 10.5px; overflow-x: auto; }
+}
+
+.topology { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.topology svg { max-width: 100%; height: auto; }
+@media (max-width: 640px) {
+  .topology svg { min-width: 480px; }
+}
+
+.prose p > code,
+.prose li > code {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}

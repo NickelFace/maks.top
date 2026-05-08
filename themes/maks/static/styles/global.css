@@ -58,6 +58,8 @@
 
 html { scroll-behavior: smooth; overflow-x: clip; width: 100%; }
 
+main, .post, .prose, .kb-section, .cert-pg-header-inner { min-width: 0; max-width: 100%; }
+
 body {
   background: var(--bg);
   color: var(--text);
