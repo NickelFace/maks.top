@@ -424,7 +424,7 @@ update-grub
 
 ## Структура /boot/ и /boot/grub/
 
-```
+```ascii
 /boot/
 ├── vmlinuz-5.15.0-91-generic    # сжатый образ ядра
 ├── System.map-5.15.0-91-generic # таблица символов ядра
