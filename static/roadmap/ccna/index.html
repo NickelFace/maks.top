@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CCNA 200-301 Roadmap — 6 доменов, 36 статей на maks.top, labs, quiz, трекер прогресса">
+<title>CCNA 200-301 Roadmap — maks.top</title>
+<link id="favicon" rel="icon" type="image/svg+xml" href="/favicon-light.svg">
+<script>(function(){var s=localStorage.getItem('theme');var hr=new Date().getHours();var t=(s==='light'||s==='dark')?s:((hr>=7&&hr<20)?'light':'dark');document.documentElement.setAttribute('data-theme',t);var f=document.getElementById('favicon');if(f)f.href=t==='dark'?'/favicon-dark.svg':'/favicon-light.svg';})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/fonts.css">
+<link rel="stylesheet" href="/styles/global.css">
+<link rel="stylesheet" href="/styles/mobile.css">
+<style>
+.rdm-page { max-width: 900px; margin: 0 auto; padding: 40px 40px 96px; }
+@media(max-width:640px){ .rdm-page { padding: 28px 20px 72px; } }
+
+/* Breadcrumb */
+.breadcrumb { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); margin-bottom: 28px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.breadcrumb a { color: var(--text3); text-decoration: none; transition: color 0.12s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb .sep { color: var(--border2); }
+
+/* Hero */
+.rdm-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+.rdm-h1 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(32px, 4.5vw, 48px); font-weight: 400; line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 14px; color: var(--text); font-feature-settings: 'opsz' 144; }
+.rdm-h1 em { font-style: italic; color: var(--accent); }
+.rdm-lead { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 600px; margin-bottom: 32px; }
+
+/* Exam params */
+.params-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin-bottom: 32px; }
+.param-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+.param-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+.param-value { font-size: 13.5px; font-weight: 500; color: var(--text); }
+
+/* Overall progress bar */
+.overall-progress { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 28px; }
+.op-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.op-title { font-size: 13px; font-weight: 500; }
+.op-count { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text2); }
+.op-bar { height: 4px; background: var(--border); border-radius: 2px; position: relative; margin-bottom: 8px; }
+.op-fill { position: absolute; inset: 0 auto 0 0; border-radius: 2px; background: var(--accent); transition: width 0.4s; }
+.op-domains { display: flex; gap: 12px; flex-wrap: wrap; }
+.op-domain { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); }
+.op-domain strong { color: var(--text2); }
+
+/* Quick links */
+.quick-links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.ql-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-family: 'JetBrains Mono', monospace; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text2); text-decoration: none; transition: all 0.12s; white-space: nowrap; }
+.ql-btn:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in oklab, var(--accent) 8%, var(--bg2)); }
+
+/* Divider */
+.rdm-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0 24px; }
+
+/* Section label */
+.rdm-section-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.rdm-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Domain accordion */
+.domain { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+.domain-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px; cursor: pointer;
+  background: var(--bg2); transition: background 0.12s;
+  list-style: none; user-select: none;
+}
+.domain-header:hover { background: var(--bg3); }
+.domain-header::-webkit-details-marker { display: none; }
+details[open] > .domain-header { border-bottom: 1px solid var(--border); }
+
+.domain-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); min-width: 24px; }
+.domain-name { font-size: 14px; font-weight: 500; flex: 1; }
+.domain-weight { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text3); }
+.domain-prog { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text2); white-space: nowrap; }
+.domain-arrow { font-size: 12px; color: var(--text3); transition: transform 0.2s; margin-left: 4px; }
+details[open] .domain-arrow { transform: rotate(90deg); }
+
+.domain-body { padding: 8px 0; }
+
+/* Topic items */
+.topic-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 18px; transition: background 0.1s;
+}
+.topic-item:hover { background: color-mix(in oklab, var(--accent) 4%, transparent); }
+
+.topic-cb { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; flex-shrink: 0; border: 1.5px solid var(--border2); border-radius: 4px; cursor: pointer; position: relative; background: var(--bg); transition: all 0.15s; }
+.topic-cb:checked { background: var(--accent); border-color: var(--accent); }
+.topic-cb:checked::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: 2px solid var(--bg); border-top: none; border-left: none; transform: rotate(40deg); }
+
+.topic-link { font-size: 13px; color: var(--text2); text-decoration: none; flex: 1; line-height: 1.4; transition: color 0.12s; }
+.topic-link:hover { color: var(--accent); }
+.topic-item.done .topic-link { color: var(--text3); text-decoration: line-through; }
+
+.topic-tag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; padding: 1px 6px; border-radius: 3px; background: var(--bg3); color: var(--text3); border: 1px solid var(--border); white-space: nowrap; flex-shrink: 0; }
+
+/* Domain progress mini-bar */
+.domain-prog-bar { display: flex; align-items: center; gap: 6px; min-width: 80px; }
+.dpb-track { width: 48px; height: 3px; background: var(--border); border-radius: 2px; position: relative; }
+.dpb-fill { position: absolute; inset: 0 auto 0 0; border-radius: 2px; background: var(--accent); transition: width 0.3s; }
+.dpb-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); white-space: nowrap; }
+
+/* Exam tips */
+.tips-grid { display: grid; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.tip-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 1px solid var(--border); }
+.tip-row:last-child { border-bottom: none; }
+.tip-cell { padding: 10px 14px; font-size: 12px; }
+.tip-cell:first-child { color: var(--text2); background: var(--bg2); border-right: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.tip-cell:last-child { color: var(--text2); background: var(--bg); }
+.tip-cell strong { color: var(--text); }
+.tips-header { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg3); border-bottom: 1px solid var(--border); }
+.tips-header div { padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+.tips-header div:first-child { border-right: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<nav class="desk-nav">
+  <a href="/" class="nav-logo">maks.top</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts/">Blog</a></li>
+    <li><a href="/certs/">Certs</a></li>
+    <li><a href="/kb/">Knowledge Base</a></li>
+    <li><a href="/about/">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
+  </div>
+</nav>
+<nav class="mob-nav">
+  <a href="/" class="nav-logo">maks.top</a>
+  <div class="mob-nav-right">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtnMob" title="Toggle theme">🌙</button>
+    <button class="burger" id="burgerBtn" onclick="toggleMobMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-drawer" id="mobDrawer">
+  <a href="/">Home</a><a href="/posts/">Blog</a><a href="/certs/">Certs</a><a href="/kb/">Knowledge Base</a><a href="/about/">About</a>
+</div>
+<div class="mob-overlay" id="mobOverlay" onclick="closeMobMenu()"></div>
+
+<main class="rdm-page">
+
+  <div class="breadcrumb">
+    <a href="/">maks.top</a><span class="sep">/</span>
+    <a href="/roadmap/">Roadmap</a><span class="sep">/</span>
+    <span>CCNA 200-301</span>
+  </div>
+
+  <div class="rdm-eyebrow">§ CCNA 200-301 · Cisco Certified Network Associate</div>
+  <h1 class="rdm-h1">Сетевая <em>база.</em></h1>
+  <p class="rdm-lead">6 доменов экзамена, 36 статей на maks.top с разборами тем, 24 lab-решения в Packet Tracer и квиз на 489 вопросов. Отмечай темы по мере изучения — прогресс сохраняется в браузере.</p>
+
+  <!-- Exam params -->
+  <div class="params-grid">
+    <div class="param-card"><div class="param-label">Код</div><div class="param-value">200-301</div></div>
+    <div class="param-card"><div class="param-label">Вопросов</div><div class="param-value">~100</div></div>
+    <div class="param-card"><div class="param-label">Время</div><div class="param-value">120 минут</div></div>
+    <div class="param-card"><div class="param-label">Проходной балл</div><div class="param-value">825 / 1000</div></div>
+    <div class="param-card"><div class="param-label">Стоимость</div><div class="param-value">$330 USD</div></div>
+    <div class="param-card"><div class="param-label">Действие</div><div class="param-value">3 года</div></div>
+  </div>
+
+  <!-- Overall progress -->
+  <div class="overall-progress">
+    <div class="op-header">
+      <span class="op-title">Общий прогресс</span>
+      <span class="op-count" id="op-count">0 / 36 тем</span>
+    </div>
+    <div class="op-bar"><div class="op-fill" id="op-fill" style="width:0%"></div></div>
+    <div class="op-domains">
+      <span class="op-domain">D1 <strong id="d1p">0/11</strong></span>
+      <span class="op-domain">D2 <strong id="d2p">0/5</strong></span>
+      <span class="op-domain">D3 <strong id="d3p">0/5</strong></span>
+      <span class="op-domain">D4 <strong id="d4p">0/6</strong></span>
+      <span class="op-domain">D5 <strong id="d5p">0/5</strong></span>
+      <span class="op-domain">D6 <strong id="d6p">0/4</strong></span>
+    </div>
+  </div>
+
+  <!-- Quick links -->
+  <div class="quick-links">
+    <a href="/certs/ccna/" class="ql-btn">🎓 Cert page</a>
+    <a href="/ccna-quiz/" class="ql-btn">📝 Quiz (489 вопросов)</a>
+    <a href="/ccna-labs/" class="ql-btn">🔬 Labs (24 решения)</a>
+    <a href="/posts/ccna/" class="ql-btn">📚 Все статьи</a>
+  </div>
+
+  <hr class="rdm-divider">
+
+  <!-- DOMAIN 1 -->
+  <div class="rdm-section-label">Домены экзамена</div>
+
+  <div class="domain">
+    <details open>
+      <summary class="domain-header">
+        <span class="domain-num">D1</span>
+        <span class="domain-name">Network Fundamentals</span>
+        <span class="domain-weight">20%</span>
+        <span class="domain-prog-bar">
+          <span class="dpb-track"><span class="dpb-fill" id="d1-bar" style="width:0%"></span></span>
+          <span class="dpb-text" id="d1-txt">0/11</span>
+        </span>
+        <span class="domain-arrow">›</span>
+      </summary>
+      <div class="domain-body" id="domain-d1">
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-01">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-01">
+          <a href="/posts/ccna/ccna-1-01-network-components/" class="topic-link" target="_blank">Network Components — маршрутизаторы, коммутаторы, межсетевые экраны, точки доступа</a>
+          <span class="topic-tag">1.1</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-02">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-02">
+          <a href="/posts/ccna/ccna-1-02-topologies/" class="topic-link" target="_blank">Network Topologies — звезда, mesh, гибридные, WAN/LAN/MAN</a>
+          <span class="topic-tag">1.2</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-03">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-03">
+          <a href="/posts/ccna/ccna-1-03-interfaces/" class="topic-link" target="_blank">Physical Interfaces — типы кабелей, UTP категории, оптика, PoE</a>
+          <span class="topic-tag">1.3</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-04">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-04">
+          <a href="/posts/ccna/ccna-1-04-tcp-udp/" class="topic-link" target="_blank">TCP and UDP — сегментация, флаги, handshake, сравнение протоколов</a>
+          <span class="topic-tag">1.4</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-05">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-05">
+          <a href="/posts/ccna/ccna-1-05-ipv4-addressing/" class="topic-link" target="_blank">IPv4 Addressing — классы, CIDR, broadcast, маски подсети</a>
+          <span class="topic-tag">1.5</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-05a">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-05a">
+          <a href="/posts/ccna/ccna-1-05a-subnetting/" class="topic-link" target="_blank">Subnetting Practice — деление на подсети, VLSM, расчёт хостов</a>
+          <span class="topic-tag">1.5+</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-06">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-06">
+          <a href="/posts/ccna/ccna-1-06-ipv6/" class="topic-link" target="_blank">IPv6 Addressing — формат, типы адресов, EUI-64, DHCPv6, SLAAC</a>
+          <span class="topic-tag">1.6</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-07">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-07">
+          <a href="/posts/ccna/ccna-1-07-wireless/" class="topic-link" target="_blank">Wireless Networks — 802.11 стандарты, 2.4/5 GHz, SSID, безопасность WiFi</a>
+          <span class="topic-tag">1.7</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-08">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-08">
+          <a href="/posts/ccna/ccna-1-08-switching-concepts/" class="topic-link" target="_blank">Switching Concepts — MAC-таблица, CAM, broadcast domain, STP intro</a>
+          <span class="topic-tag">1.8</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-09">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-09">
+          <a href="/posts/ccna/ccna-1-09-virtualization/" class="topic-link" target="_blank">Virtualization and VRF — гипервизоры, VMs, контейнеры, VRF</a>
+          <span class="topic-tag">1.9</span>
+        </div>
+        <div class="topic-item" data-domain="d1" data-key="ccna-1-10">
+          <input type="checkbox" class="topic-cb" data-key="ccna-1-10">
+          <a href="/posts/ccna/ccna-1-10-ip-clients/" class="topic-link" target="_blank">IP on Client OSes — Windows/Linux/Mac: ifconfig, ip addr, ipconfig</a>
+          <span class="topic-tag">1.10</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- DOMAIN 2 -->
+  <div class="domain">
+    <details>
+      <summary class="domain-header">
+        <span class="domain-num">D2</span>
+        <span class="domain-name">Network Access</span>
+        <span class="domain-weight">20%</span>
+        <span class="domain-prog-bar">
+          <span class="dpb-track"><span class="dpb-fill" id="d2-bar" style="width:0%"></span></span>
+          <span class="dpb-text" id="d2-txt">0/5</span>
+        </span>
+        <span class="domain-arrow">›</span>
+      </summary>
+      <div class="domain-body" id="domain-d2">
+        <div class="topic-item" data-domain="d2" data-key="ccna-2-01">
+          <input type="checkbox" class="topic-cb" data-key="ccna-2-01">
+          <a href="/posts/ccna/ccna-2-01-vlans-trunks/" class="topic-link" target="_blank">VLANs and Trunks — создание VLAN, 802.1Q, inter-VLAN routing, DTP</a>
+          <span class="topic-tag">2.1</span>
+        </div>
+        <div class="topic-item" data-domain="d2" data-key="ccna-2-02">
+          <input type="checkbox" class="topic-cb" data-key="ccna-2-02">
+          <a href="/posts/ccna/ccna-2-02-cdp-lldp/" class="topic-link" target="_blank">CDP and LLDP — протоколы обнаружения соседей, таблицы, отключение</a>
+          <span class="topic-tag">2.2</span>
+        </div>
+        <div class="topic-item" data-domain="d2" data-key="ccna-2-03">
+          <input type="checkbox" class="topic-cb" data-key="ccna-2-03">
+          <a href="/posts/ccna/ccna-2-03-etherchannel/" class="topic-link" target="_blank">EtherChannel — LACP, PAgP, агрегация каналов, балансировка</a>
+          <span class="topic-tag">2.3</span>
+        </div>
+        <div class="topic-item" data-domain="d2" data-key="ccna-2-04">
+          <input type="checkbox" class="topic-cb" data-key="ccna-2-04">
+          <a href="/posts/ccna/ccna-2-04-stp/" class="topic-link" target="_blank">Spanning Tree Protocol — STP/RSTP, root bridge, port states, Portfast</a>
+          <span class="topic-tag">2.4</span>
+        </div>
+        <div class="topic-item" data-domain="d2" data-key="ccna-2-05">
+          <input type="checkbox" class="topic-cb" data-key="ccna-2-05">
+          <a href="/posts/ccna/ccna-2-05-wireless-arch/" class="topic-link" target="_blank">Wireless Architectures — WLC, AP режимы, Cisco DNA, контроллер</a>
+          <span class="topic-tag">2.5</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- DOMAIN 3 -->
+  <div class="domain">
+    <details>
+      <summary class="domain-header">
+        <span class="domain-num">D3</span>
+        <span class="domain-name">IP Connectivity</span>
+        <span class="domain-weight">25%</span>
+        <span class="domain-prog-bar">
+          <span class="dpb-track"><span class="dpb-fill" id="d3-bar" style="width:0%"></span></span>
+          <span class="dpb-text" id="d3-txt">0/5</span>
+        </span>
+        <span class="domain-arrow">›</span>
+      </summary>
+      <div class="domain-body" id="domain-d3">
+        <div class="topic-item" data-domain="d3" data-key="ccna-3-01">
+          <input type="checkbox" class="topic-cb" data-key="ccna-3-01">
+          <a href="/posts/ccna/ccna-3-01-routing-table/" class="topic-link" target="_blank">Routing Table — AD, метрики, longest match, connected/static/dynamic</a>
+          <span class="topic-tag">3.1</span>
+        </div>
+        <div class="topic-item" data-domain="d3" data-key="ccna-3-02">
+          <input type="checkbox" class="topic-cb" data-key="ccna-3-02">
+          <a href="/posts/ccna/ccna-3-02-static-routing/" class="topic-link" target="_blank">Static Routing — настройка, default route, floating static, рекурсия</a>
+          <span class="topic-tag">3.2</span>
+        </div>
+        <div class="topic-item" data-domain="d3" data-key="ccna-3-03">
+          <input type="checkbox" class="topic-cb" data-key="ccna-3-03">
+          <a href="/posts/ccna/ccna-3-03-ospf/" class="topic-link" target="_blank">OSPFv2 — алгоритм Dijkstra, DR/BDR, area, cost, LSA типы</a>
+          <span class="topic-tag">3.3</span>
+        </div>
+        <div class="topic-item" data-domain="d3" data-key="ccna-3-04">
+          <input type="checkbox" class="topic-cb" data-key="ccna-3-04">
+          <a href="/posts/ccna/ccna-3-04-fhrp/" class="topic-link" target="_blank">FHRP / HSRP — HSRP, VRRP, GLBP, active/standby, preemption</a>
+          <span class="topic-tag">3.4</span>
+        </div>
+        <div class="topic-item" data-domain="d3" data-key="ccna-3-05">
+          <input type="checkbox" class="topic-cb" data-key="ccna-3-05">
+          <a href="/posts/ccna/ccna-3-05-ipv6-routing/" class="topic-link" target="_blank">IPv6 Routing — статические IPv6 маршруты, OSPFv3, redistribution</a>
+          <span class="topic-tag">3.5</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- DOMAIN 4 -->
+  <div class="domain">
+    <details>
+      <summary class="domain-header">
+        <span class="domain-num">D4</span>
+        <span class="domain-name">IP Services</span>
+        <span class="domain-weight">10%</span>
+        <span class="domain-prog-bar">
+          <span class="dpb-track"><span class="dpb-fill" id="d4-bar" style="width:0%"></span></span>
+          <span class="dpb-text" id="d4-txt">0/6</span>
+        </span>
+        <span class="domain-arrow">›</span>
+      </summary>
+      <div class="domain-body" id="domain-d4">
+        <div class="topic-item" data-domain="d4" data-key="ccna-4-01">
+          <input type="checkbox" class="topic-cb" data-key="ccna-4-01">
+          <a href="/posts/ccna/ccna-4-01-nat/" class="topic-link" target="_blank">NAT — статический, динамический, PAT/overload, верификация</a>
+          <span class="topic-tag">4.1</span>
+        </div>
+        <div class="topic-item" data-domain="d4" data-key="ccna-4-02">
+          <input type="checkbox" class="topic-cb" data-key="ccna-4-02">
+          <a href="/posts/ccna/ccna-4-02-ntp-dhcp/" class="topic-link" target="_blank">NTP and DHCP — DHCP сервер/relay, NTP иерархия, stratum</a>
+          <span class="topic-tag">4.2</span>
+        </div>
+        <div class="topic-item" data-domain="d4" data-key="ccna-4-03">
+          <input type="checkbox" class="topic-cb" data-key="ccna-4-03">
+          <a href="/posts/ccna/ccna-4-03-snmp-syslog/" class="topic-link" target="_blank">SNMP and Syslog — версии SNMP, OID, уровни syslog, logging buffered</a>
+          <span class="topic-tag">4.3</span>
+        </div>
+        <div class="topic-item" data-domain="d4" data-key="ccna-4-04">
+          <input type="checkbox" class="topic-cb" data-key="ccna-4-04">
+          <a href="/posts/ccna/ccna-4-04-ssh-management/" class="topic-link" target="_blank">SSH and Device Management — SSH v2, console/VTY, AAA intro, hardening</a>
+          <span class="topic-tag">4.4</span>
+        </div>
+        <div class="topic-item" data-domain="d4" data-key="ccna-4-05">
+          <input type="checkbox" class="topic-cb" data-key="ccna-4-05">
+          <a href="/posts/ccna/ccna-4-05-qos/" class="topic-link" target="_blank">QoS — маркировка DSCP/CoS, очереди, shaping vs policing, trust</a>
+          <span class="topic-tag">4.5</span>
+        </div>
+        <div class="topic-item" data-domain="d4" data-key="ccna-4-06">
+          <input type="checkbox" class="topic-cb" data-key="ccna-4-06">
+          <a href="/posts/ccna/ccna-4-06-ftp-tftp/" class="topic-link" target="_blank">FTP and TFTP — обновление IOS, backup конфига, passive/active</a>
+          <span class="topic-tag">4.6</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- DOMAIN 5 -->
+  <div class="domain">
+    <details>
+      <summary class="domain-header">
+        <span class="domain-num">D5</span>
+        <span class="domain-name">Security Fundamentals</span>
+        <span class="domain-weight">15%</span>
+        <span class="domain-prog-bar">
+          <span class="dpb-track"><span class="dpb-fill" id="d5-bar" style="width:0%"></span></span>
+          <span class="dpb-text" id="d5-txt">0/5</span>
+        </span>
+        <span class="domain-arrow">›</span>
+      </summary>
+      <div class="domain-body" id="domain-d5">
+        <div class="topic-item" data-domain="d5" data-key="ccna-5-01">
+          <input type="checkbox" class="topic-cb" data-key="ccna-5-01">
+          <a href="/posts/ccna/ccna-5-01-security-concepts/" class="topic-link" target="_blank">Security Concepts — CIA триада, угрозы, атаки, mitigation</a>
+          <span class="topic-tag">5.1</span>
+        </div>
+        <div class="topic-item" data-domain="d5" data-key="ccna-5-02">
+          <input type="checkbox" class="topic-cb" data-key="ccna-5-02">
+          <a href="/posts/ccna/ccna-5-02-acl/" class="topic-link" target="_blank">Access Control Lists — standard/extended ACL, named, wildcard маски</a>
+          <span class="topic-tag">5.2</span>
+        </div>
+        <div class="topic-item" data-domain="d5" data-key="ccna-5-03">
+          <input type="checkbox" class="topic-cb" data-key="ccna-5-03">
+          <a href="/posts/ccna/ccna-5-03-layer2-security/" class="topic-link" target="_blank">Layer 2 Security — port security, DHCP snooping, DAI, 802.1X</a>
+          <span class="topic-tag">5.3</span>
+        </div>
+        <div class="topic-item" data-domain="d5" data-key="ccna-5-04">
+          <input type="checkbox" class="topic-cb" data-key="ccna-5-04">
+          <a href="/posts/ccna/ccna-5-04-aaa-wireless/" class="topic-link" target="_blank">AAA and Wireless Security — RADIUS, TACACS+, WPA2/WPA3, EAP</a>
+          <span class="topic-tag">5.4</span>
+        </div>
+        <div class="topic-item" data-domain="d5" data-key="ccna-5-05">
+          <input type="checkbox" class="topic-cb" data-key="ccna-5-05">
+          <a href="/posts/ccna/ccna-5-05-ipsec-vpn/" class="topic-link" target="_blank">IPsec and VPN — IKE, ESP/AH, Site-to-Site VPN, GRE, DMVPN intro</a>
+          <span class="topic-tag">5.5</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- DOMAIN 6 -->
+  <div class="domain">
+    <details>
+      <summary class="domain-header">
+        <span class="domain-num">D6</span>
+        <span class="domain-name">Automation & Programmability</span>
+        <span class="domain-weight">10%</span>
+        <span class="domain-prog-bar">
+          <span class="dpb-track"><span class="dpb-fill" id="d6-bar" style="width:0%"></span></span>
+          <span class="dpb-text" id="d6-txt">0/4</span>
+        </span>
+        <span class="domain-arrow">›</span>
+      </summary>
+      <div class="domain-body" id="domain-d6">
+        <div class="topic-item" data-domain="d6" data-key="ccna-6-01">
+          <input type="checkbox" class="topic-cb" data-key="ccna-6-01">
+          <a href="/posts/ccna/ccna-6-01-sdn/" class="topic-link" target="_blank">SDN and DNA Center — controller-based networking, Cisco DNA, ACI</a>
+          <span class="topic-tag">6.1</span>
+        </div>
+        <div class="topic-item" data-domain="d6" data-key="ccna-6-02">
+          <input type="checkbox" class="topic-cb" data-key="ccna-6-02">
+          <a href="/posts/ccna/ccna-6-02-rest-api/" class="topic-link" target="_blank">REST API — HTTP методы, JSON/XML, Postman, Cisco DevNet sandbox</a>
+          <span class="topic-tag">6.2</span>
+        </div>
+        <div class="topic-item" data-domain="d6" data-key="ccna-6-03">
+          <input type="checkbox" class="topic-cb" data-key="ccna-6-03">
+          <a href="/posts/ccna/ccna-6-03-config-tools/" class="topic-link" target="_blank">Configuration Tools — Ansible, Puppet, Chef для сетевых устройств</a>
+          <span class="topic-tag">6.3</span>
+        </div>
+        <div class="topic-item" data-domain="d6" data-key="ccna-6-04">
+          <input type="checkbox" class="topic-cb" data-key="ccna-6-04">
+          <a href="/posts/ccna/ccna-6-04-python-automation/" class="topic-link" target="_blank">Python and Network Automation — Netmiko, NAPALM, Nornir basics</a>
+          <span class="topic-tag">6.4</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <hr class="rdm-divider">
+
+  <!-- EXAM TIPS -->
+  <div class="rdm-section-label">Ключевые темы экзамена</div>
+  <div class="tips-grid">
+    <div class="tips-header"><div>Тема</div><div>Что нужно знать чётко</div></div>
+    <div class="tip-row"><div class="tip-cell">Subnetting</div><div class="tip-cell">Считать на скорость: сколько хостов, адрес сети, broadcast. VLSM без калькулятора.</div></div>
+    <div class="tip-row"><div class="tip-cell">STP root bridge</div><div class="tip-cell">Выбирается по наименьшему Bridge ID (priority + MAC). Portfast только на access-портах.</div></div>
+    <div class="tip-row"><div class="tip-cell">OSPF DR/BDR</div><div class="tip-cell">Выбирается по highest router-id / highest loopback / highest interface IP. Broadcast vs P2P.</div></div>
+    <div class="tip-row"><div class="tip-cell">ACL порядок правил</div><div class="tip-cell">Первое совпавшее правило применяется. Implicit deny в конце. Стандартный ACL — ближе к dst.</div></div>
+    <div class="tip-row"><div class="tip-cell">NAT PAT</div><div class="tip-cell">ip nat inside/outside на интерфейсах. overload = PAT. Проверить show ip nat translations.</div></div>
+    <div class="tip-row"><div class="tip-cell">HSRP vs VRRP</div><div class="tip-cell">HSRP: Cisco proprietary, active/standby. VRRP: open standard, master/backup. GLBP: load balancing.</div></div>
+    <div class="tip-row"><div class="tip-cell">802.1Q vs ISL</div><div class="tip-cell">802.1Q — стандарт, 4-байт тег, native VLAN не тегируется. ISL — устаревший Cisco, инкапсуляция.</div></div>
+    <div class="tip-row"><div class="tip-cell">WPA2 vs WPA3</div><div class="tip-cell">WPA3 — SAE вместо PSK, обязателен для Wi-Fi 6. WPA2 — AES/CCMP. WEP = уязвим, не использовать.</div></div>
+  </div>
+
+  <hr class="rdm-divider">
+
+  <div style="text-align:center;padding:8px 0">
+    <a href="/roadmap/" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:0.05em;">← Вернуться к DevOps Roadmap</a>
+  </div>
+
+</main>
+
+<nav class="mob-bottom-nav">
+  <a href="/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></a>
+  <a href="/posts/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg><span>Blog</span></a>
+  <a href="/certs/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg><span>Certs</span></a>
+  <a href="/kb/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>KB</span></a>
+  <a href="/about/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>About</span></a>
+</nav>
+
+<footer>
+  <span class="footer-logo">maks.top</span>
+  <span>Hugo · GitHub Pages · Pagefind</span>
+  <span>Sydney · 2026</span>
+</footer>
+
+<script>
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  const next=isDark?'light':'dark';
+  html.setAttribute('data-theme',next);
+  localStorage.setItem('theme',next);
+  const f=document.getElementById('favicon');
+  if(f)f.href=next==='dark'?'/favicon-dark.svg':'/favicon-light.svg';
+  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=isDark?'☀️':'🌙');
+}
+function toggleMobMenu(){
+  const d=document.getElementById('mobDrawer'),o=document.getElementById('mobOverlay'),b=document.getElementById('burgerBtn');
+  const open=d.classList.toggle('open');
+  o.classList.toggle('open',open);b.classList.toggle('open',open);
+}
+function closeMobMenu(){
+  document.getElementById('mobDrawer').classList.remove('open');
+  document.getElementById('mobOverlay').classList.remove('open');
+  document.getElementById('burgerBtn').classList.remove('open');
+}
+(function(){
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=isDark?'🌙':'☀️');
+})();
+
+// Progress tracking
+const STORE_KEY = 'rdm.ccna';
+const DOMAINS = {
+  d1: { total: 11, keys: ['ccna-1-01','ccna-1-02','ccna-1-03','ccna-1-04','ccna-1-05','ccna-1-05a','ccna-1-06','ccna-1-07','ccna-1-08','ccna-1-09','ccna-1-10'] },
+  d2: { total: 5,  keys: ['ccna-2-01','ccna-2-02','ccna-2-03','ccna-2-04','ccna-2-05'] },
+  d3: { total: 5,  keys: ['ccna-3-01','ccna-3-02','ccna-3-03','ccna-3-04','ccna-3-05'] },
+  d4: { total: 6,  keys: ['ccna-4-01','ccna-4-02','ccna-4-03','ccna-4-04','ccna-4-05','ccna-4-06'] },
+  d5: { total: 5,  keys: ['ccna-5-01','ccna-5-02','ccna-5-03','ccna-5-04','ccna-5-05'] },
+  d6: { total: 4,  keys: ['ccna-6-01','ccna-6-02','ccna-6-03','ccna-6-04'] }
+};
+const TOTAL = 36;
+
+function loadData() { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+function saveData(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+
+function updateUI(data) {
+  let grand = 0;
+  Object.entries(DOMAINS).forEach(([dKey, info]) => {
+    const done = info.keys.filter(k => data[k]).length;
+    grand += done;
+    const pct = Math.round(done / info.total * 100);
+    const bar = document.getElementById(dKey + '-bar');
+    const txt = document.getElementById(dKey + '-txt');
+    if(bar) bar.style.width = pct + '%';
+    if(txt) txt.textContent = done + '/' + info.total;
+    const shortId = dKey.replace('d','') + 'p';
+    const sp = document.getElementById(dKey.replace('d','d') + 'p') || document.getElementById(shortId);
+    if(sp) sp.textContent = done + '/' + info.total;
+  });
+  const grandPct = Math.round(grand / TOTAL * 100);
+  const fill = document.getElementById('op-fill');
+  const count = document.getElementById('op-count');
+  if(fill) fill.style.width = grandPct + '%';
+  if(count) count.textContent = grand + ' / ' + TOTAL + ' тем · ' + grandPct + '%';
+}
+
+function updateDomainCounters(data) {
+  ['d1','d2','d3','d4','d5','d6'].forEach(d => {
+    const sp = document.getElementById(d+'p');
+    if(!sp) return;
+    const info = DOMAINS[d];
+    const done = info.keys.filter(k=>data[k]).length;
+    sp.textContent = done + '/' + info.total;
+  });
+}
+
+// Init checkboxes
+const data = loadData();
+document.querySelectorAll('.topic-cb').forEach(cb => {
+  const key = cb.dataset.key;
+  cb.checked = !!data[key];
+  const item = cb.closest('.topic-item');
+  if(cb.checked && item) item.classList.add('done');
+
+  cb.addEventListener('change', () => {
+    const d = loadData();
+    d[key] = cb.checked;
+    saveData(d);
+    const item = cb.closest('.topic-item');
+    if(item) item.classList.toggle('done', cb.checked);
+    updateUI(d);
+    updateDomainCounters(d);
+  });
+});
+
+updateUI(data);
+updateDomainCounters(data);
+</script>
+</body>
+</html>

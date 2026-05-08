@@ -3,288 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DevOps роадмап — ресурсы и план движения от LPIC-2 до работы в Сиднее">
+<meta name="description" content="DevOps Engineering Roadmap — путь от CCNA до AWS, Kubernetes и production DevOps-роли в Сиднее">
 <title>DevOps Roadmap — maks.top</title>
 <link id="favicon" rel="icon" type="image/svg+xml" href="/favicon-light.svg">
 <script>(function(){var s=localStorage.getItem('theme');var hr=new Date().getHours();var t=(s==='light'||s==='dark')?s:((hr>=7&&hr<20)?'light':'dark');document.documentElement.setAttribute('data-theme',t);var f=document.getElementById('favicon');if(f)f.href=t==='dark'?'/favicon-dark.svg':'/favicon-light.svg';})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles/fonts.css">
 <link rel="stylesheet" href="/styles/global.css">
 <link rel="stylesheet" href="/styles/mobile.css">
 <style>
-  .rdm-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
-    margin-bottom: 16px;
-  }
+/* ── PAGE ── */
+.rdm-page { max-width: 900px; margin: 0 auto; padding: 56px 40px 96px; }
+@media(max-width:640px){ .rdm-page { padding: 36px 20px 72px; } }
 
-  .rdm-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    transition: border-color 0.15s;
-  }
-  .rdm-card:hover { border-color: var(--border2); }
+/* ── HERO ── */
+.rdm-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 14px;
+}
+.rdm-h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.04;
+  letter-spacing: -0.03em; margin: 0 0 16px; color: var(--text);
+  font-feature-settings: 'opsz' 144;
+}
+.rdm-h1 em { font-style: italic; color: var(--accent); }
+.rdm-lead { font-size: 15px; color: var(--text2); line-height: 1.65; max-width: 600px; margin-bottom: 40px; }
 
-  .rdm-card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    gap: 8px;
-  }
+/* ── PHASE FLOW ── */
+.phase-flow {
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  padding: 4px 0 16px; margin-bottom: 40px; scrollbar-width: none;
+}
+.phase-flow::-webkit-scrollbar { display: none; }
+.pf-node {
+  flex-shrink: 0; display: flex; flex-direction: column; align-items: center;
+  gap: 6px; text-align: center; min-width: 100px;
+}
+.pf-circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--text3); transition: all 0.15s;
+}
+.pf-node.active .pf-circle {
+  border-color: var(--accent); color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 10%, var(--bg2));
+}
+.pf-node.done .pf-circle {
+  border-color: var(--accent2); color: var(--accent2);
+  background: color-mix(in oklab, var(--accent2) 10%, var(--bg2));
+}
+.pf-label { font-size: 11px; color: var(--text3); line-height: 1.3; max-width: 90px; }
+.pf-node.active .pf-label { color: var(--text2); }
+.pf-arrow {
+  flex-shrink: 0; width: 32px; height: 1px; background: var(--border);
+  position: relative; margin-bottom: 28px;
+}
+.pf-arrow::after {
+  content: ''; position: absolute; right: -1px; top: -3px;
+  width: 0; height: 0;
+  border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+  border-left: 5px solid var(--border);
+}
 
-  .rdm-card-name {
-    font-size: 15px;
-    font-weight: 500;
-  }
+/* ── DIVIDER ── */
+.rdm-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0 32px; }
 
-  .rdm-badge {
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  .rdm-badge-free    { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }
-  .rdm-badge-paid    { background: rgba(245,158,11,0.12); color: var(--warn); border: 1px solid rgba(245,158,11,0.25); }
-  .rdm-badge-freemium { background: rgba(0,212,255,0.08); color: var(--accent); border: 1px solid rgba(0,212,255,0.2); }
+/* ── SECTION LABEL ── */
+.rdm-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.rdm-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  .rdm-card-focus {
-    font-size: 12px;
-    color: var(--text2);
-    margin-bottom: 10px;
-  }
+/* ── SUB-ROADMAP CARDS ── */
+.subrm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media(max-width:640px){ .subrm-grid { grid-template-columns: 1fr; } }
 
-  .rdm-tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.subrm-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px 20px 16px;
+  text-decoration: none; color: var(--text);
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative; overflow: hidden;
+}
+.subrm-card:hover { border-color: var(--border2); background: var(--bg3); }
+.subrm-card.disabled { opacity: 0.5; pointer-events: none; cursor: default; }
 
-  .rdm-tag {
-    font-size: 11px;
-    padding: 2px 7px;
-    background: var(--bg3);
-    color: var(--text2);
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
-  .rdm-tag-hl {
-    background: var(--glow);
-    color: var(--accent);
-    border-color: rgba(0,212,255,0.25);
-  }
+.subrm-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.subrm-card-title { font-size: 16px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.subrm-card-icon { font-size: 18px; }
 
-  .rdm-note {
-    font-size: 12px;
-    color: var(--text2);
-    margin-bottom: 24px;
-    padding: 10px 14px;
-    background: var(--bg2);
-    border-radius: 8px;
-    border-left: 2px solid var(--accent);
-    line-height: 1.6;
-  }
+.subrm-badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 999px;
+  white-space: nowrap;
+}
+.subrm-badge-done     { background: color-mix(in oklab, var(--accent2) 14%, transparent); color: var(--accent2); border: 1px solid color-mix(in oklab, var(--accent2) 35%, transparent); }
+.subrm-badge-progress { background: color-mix(in oklab, var(--accent) 12%, transparent);  color: var(--accent);  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); }
+.subrm-badge-planned  { background: transparent; color: var(--text3); border: 1px solid var(--border2); }
 
-  /* Phase cards */
-  .phase {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 16px;
-    padding: 1.1rem 1.25rem;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 10px;
-    transition: border-color 0.15s;
-  }
-  .phase:hover { border-color: var(--border2); }
+.subrm-desc { font-size: 12.5px; color: var(--text3); line-height: 1.5; }
 
-  .phase-num {
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--accent);
-    line-height: 1;
-    padding-top: 2px;
-    font-family: 'JetBrains Mono', monospace;
-  }
+.subrm-progress-row { display: flex; flex-direction: column; gap: 5px; }
+.subrm-progress-bar { height: 2px; background: var(--border); border-radius: 1px; position: relative; }
+.subrm-progress-fill { position: absolute; inset: 0 auto 0 0; border-radius: 1px; transition: width 0.3s; }
+.subrm-progress-fill-green  { background: var(--accent2); }
+.subrm-progress-fill-amber  { background: var(--accent); }
+.subrm-progress-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  color: var(--text3); display: flex; justify-content: space-between;
+}
+.subrm-progress-label strong { color: var(--text2); }
 
-  .phase-body .phase-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
-  }
+.subrm-card-arrow {
+  position: absolute; right: 18px; bottom: 16px;
+  font-size: 12px; color: var(--text3);
+  transition: color 0.15s, transform 0.15s;
+}
+.subrm-card:hover .subrm-card-arrow { color: var(--accent); transform: translateX(3px); }
 
-  .phase-title { font-size: 15px; font-weight: 500; }
+/* ── RESOURCE CARDS ── */
+.rdm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 14px; }
 
-  .phase-time {
-    font-size: 11px;
-    padding: 3px 8px;
-    background: var(--glow);
-    color: var(--accent);
-    border-radius: 4px;
-    font-weight: 500;
-    border: 1px solid rgba(0,212,255,0.2);
-  }
+.rdm-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px; transition: border-color 0.15s;
+}
+.rdm-card:hover { border-color: var(--border2); }
+.rdm-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; gap: 8px; }
+.rdm-card-name { font-size: 14px; font-weight: 500; }
+.rdm-badge { font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
+.rdm-badge-free    { background: color-mix(in oklab, var(--accent2) 12%, transparent); color: var(--accent2); border: 1px solid color-mix(in oklab, var(--accent2) 25%, transparent); }
+.rdm-badge-paid    { background: color-mix(in oklab, var(--accent) 10%, transparent); color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); }
+.rdm-badge-freemium { background: color-mix(in oklab, var(--text3) 10%, transparent); color: var(--text2); border: 1px solid var(--border2); }
+.rdm-card-focus { font-size: 12px; color: var(--text2); margin-bottom: 8px; }
+.rdm-tag-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.rdm-tag { font-size: 10.5px; padding: 2px 6px; background: var(--bg3); color: var(--text2); border-radius: 4px; border: 1px solid var(--border); }
+.rdm-tag-hl { background: color-mix(in oklab, var(--accent) 8%, var(--bg3)); color: var(--accent); border-color: color-mix(in oklab, var(--accent) 22%, transparent); }
 
-  .phase-goal {
-    font-size: 13px;
-    color: var(--text2);
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
+.rdm-note {
+  font-size: 12px; color: var(--text2); margin-bottom: 24px;
+  padding: 10px 14px; background: var(--bg2); border-radius: 8px;
+  border-left: 2px solid var(--accent); line-height: 1.6;
+}
 
-  .phase-list { list-style: none; font-size: 13px; }
-  .phase-list li {
-    padding: 3px 0;
-    padding-left: 16px;
-    position: relative;
-    color: var(--text);
-    line-height: 1.5;
-  }
-  .phase-list li::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 11px;
-    top: 5px;
-  }
+/* ── PHASES ── */
+.phase {
+  display: grid; grid-template-columns: 60px 1fr; gap: 14px;
+  padding: 16px 18px; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; margin-bottom: 10px; transition: border-color 0.15s;
+}
+.phase:hover { border-color: var(--border2); }
+.phase-num {
+  font-size: 26px; font-weight: 300; color: var(--accent); line-height: 1;
+  padding-top: 2px; font-family: 'JetBrains Mono', monospace;
+}
+.phase-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+.phase-title { font-size: 14px; font-weight: 500; }
+.phase-time { font-size: 10px; padding: 3px 8px; background: color-mix(in oklab, var(--accent) 10%, transparent); color: var(--accent); border-radius: 4px; font-weight: 500; border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent); }
+.phase-goal { font-size: 12.5px; color: var(--text2); margin-bottom: 8px; line-height: 1.5; }
+.phase-list { list-style: none; font-size: 12.5px; }
+.phase-list li { padding: 2px 0 2px 14px; position: relative; color: var(--text2); line-height: 1.5; }
+.phase-list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 5px; }
+.milestone { display: inline-block; margin-top: 8px; font-size: 11px; padding: 3px 9px; background: color-mix(in oklab, var(--accent2) 10%, transparent); color: var(--accent2); border: 1px solid color-mix(in oklab, var(--accent2) 25%, transparent); border-radius: 4px; font-weight: 500; }
 
-  .milestone {
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 12px;
-    padding: 4px 10px;
-    background: rgba(16,185,129,0.1);
-    color: #10b981;
-    border: 1px solid rgba(16,185,129,0.25);
-    border-radius: 4px;
-    font-weight: 500;
-  }
+/* ── PARALLEL ── */
+.parallel {
+  background: var(--bg2); border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent);
+  border-radius: 10px; padding: 16px 18px; margin-top: 12px; position: relative; overflow: hidden;
+}
+.parallel::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, color-mix(in oklab, var(--accent) 5%, transparent), transparent); pointer-events: none; }
+.parallel-title { font-size: 12.5px; font-weight: 600; color: var(--accent); margin-bottom: 8px; position: relative; }
+.parallel-items { font-size: 12.5px; color: var(--text2); position: relative; }
+.parallel-items div { padding: 2px 0; }
 
-  /* Principle cards */
-  .principle {
-    padding: 1rem 1.25rem;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 10px;
-    transition: border-color 0.15s;
-  }
-  .principle:hover { border-color: var(--border2); }
-
-  .principle-title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .principle-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    background: var(--glow);
-    color: var(--accent);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 600;
-    font-family: 'JetBrains Mono', monospace;
-    flex-shrink: 0;
-  }
-
-  .principle-body {
-    font-size: 13px;
-    color: var(--text2);
-    padding-left: 30px;
-    line-height: 1.6;
-  }
-
-  /* Parallel block */
-  .parallel {
-    background: var(--bg2);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 10px;
-    padding: 1.1rem 1.25rem;
-    margin-top: 14px;
-    position: relative;
-    overflow: hidden;
-  }
-  .parallel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, var(--glow), transparent);
-    pointer-events: none;
-  }
-
-  .parallel-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 8px;
-    position: relative;
-  }
-
-  .parallel-items {
-    font-size: 13px;
-    color: var(--text);
-    position: relative;
-  }
-
-  .parallel-items div {
-    padding: 3px 0;
-    color: var(--text2);
-  }
-  .parallel-items div::first-letter { color: var(--accent); }
-
-  /* Page header */
-  .rdm-header { margin-bottom: 2.5rem; }
-  .rdm-header h1 {
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-  .rdm-header .rdm-sub {
-    font-size: 13px;
-    color: var(--text2);
-  }
-
-  .rdm-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.5rem 0 1.5rem;
-  }
-
-  .rdm-section-label {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .rdm-section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+/* ── PRINCIPLES ── */
+.principle { padding: 14px 16px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; transition: border-color 0.15s; }
+.principle:hover { border-color: var(--border2); }
+.principle-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.principle-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: color-mix(in oklab, var(--accent) 10%, transparent); color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent); border-radius: 50%; font-size: 10px; font-weight: 600; font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+.principle-body { font-size: 12.5px; color: var(--text2); padding-left: 28px; line-height: 1.6; }
 </style>
 </head>
 <body>
 
-<!-- ═══ DESKTOP NAV ═══ -->
 <nav class="desk-nav">
   <a href="/" class="nav-logo">maks.top</a>
   <ul class="nav-links">
@@ -298,108 +212,160 @@
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
   </div>
 </nav>
-
-<!-- ═══ MOBILE NAV ═══ -->
 <nav class="mob-nav">
   <a href="/" class="nav-logo">maks.top</a>
   <div class="mob-nav-right">
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtnMob" title="Toggle theme">🌙</button>
-    <button class="burger" id="burgerBtn" onclick="toggleMobMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="burger" id="burgerBtn" onclick="toggleMobMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
-<!-- ═══ MOBILE DRAWER ═══ -->
 <div class="mob-drawer" id="mobDrawer">
-  <a href="/">Home</a>
-  <a href="/posts/">Blog</a>
-  <a href="/certs/">Certs</a>
-  <a href="/kb/">Knowledge Base</a>
-  <a href="/about/">About</a>
+  <a href="/">Home</a><a href="/posts/">Blog</a><a href="/certs/">Certs</a><a href="/kb/">Knowledge Base</a><a href="/about/">About</a>
 </div>
 <div class="mob-overlay" id="mobOverlay" onclick="closeMobMenu()"></div>
 
-<main class="page" style="max-width: 860px;">
+<main class="rdm-page">
 
-  <div class="rdm-header">
-    <h1>DevOps роадмап</h1>
-    <p class="rdm-sub">Обновлённая карта ресурсов и план движения от LPIC-2 до работы в Сиднее</p>
+  <!-- HERO -->
+  <div class="rdm-eyebrow">§ Roadmap · DevOps Engineering</div>
+  <h1 class="rdm-h1">Путь в <em>DevOps.</em></h1>
+  <p class="rdm-lead">От сетевой базы до production-роли в Сиднее. Каждая фаза — отдельный роадмап с чеклистами, ссылками на статьи и трекером прогресса.</p>
+
+  <!-- PHASE FLOW -->
+  <div class="phase-flow" id="phaseFlow">
+    <div class="pf-node active">
+      <div class="pf-circle">01</div>
+      <div class="pf-label">LPIC-2<br>Linux Admin</div>
+    </div>
+    <div class="pf-arrow"></div>
+    <div class="pf-node">
+      <div class="pf-circle">02</div>
+      <div class="pf-label">CCNA<br>200-301</div>
+    </div>
+    <div class="pf-arrow"></div>
+    <div class="pf-node">
+      <div class="pf-circle">03</div>
+      <div class="pf-label">AWS<br>SAA-C03</div>
+    </div>
+    <div class="pf-arrow"></div>
+    <div class="pf-node">
+      <div class="pf-circle">04</div>
+      <div class="pf-label">Terraform<br>CI/CD</div>
+    </div>
+    <div class="pf-arrow"></div>
+    <div class="pf-node">
+      <div class="pf-circle">05</div>
+      <div class="pf-label">Kubernetes<br>CKA</div>
+    </div>
+    <div class="pf-arrow"></div>
+    <div class="pf-node">
+      <div class="pf-circle">06</div>
+      <div class="pf-label">DevOps Pro<br>Специализация</div>
+    </div>
   </div>
 
-  <div class="rdm-section-label">Тренажёры Linux и DevOps</div>
-  <div class="rdm-grid">
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">SadServers</span><span class="rdm-badge rdm-badge-freemium">Freemium</span></div>
-      <div class="rdm-card-focus">CTF-задачи, сломан сервер почини его</div>
-      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">Эталон жанра</span><span class="rdm-tag">Linux</span><span class="rdm-tag">Docker</span><span class="rdm-tag">K8s</span><span class="rdm-tag">Авто-проверка</span></div>
-    </div>
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">Killercoda</span><span class="rdm-badge rdm-badge-freemium">Freemium</span></div>
-      <div class="rdm-card-focus">Наследник Katacoda, сценарии и playground</div>
-      <div class="rdm-tag-row"><span class="rdm-tag">Linux</span><span class="rdm-tag">Kubernetes</span><span class="rdm-tag">CKA/CKAD</span><span class="rdm-tag">Docker</span><span class="rdm-tag">Свободный режим</span></div>
-    </div>
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">Instruqt</span><span class="rdm-badge rdm-badge-free">Бесплатно*</span></div>
-      <div class="rdm-card-focus">Hosted labs от вендоров, доступ через их порталы</div>
-      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">HashiCorp Terraform</span><span class="rdm-tag">Vault</span><span class="rdm-tag">Consul</span><span class="rdm-tag">Cloud VMs</span></div>
-    </div>
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">OverTheWire</span><span class="rdm-badge rdm-badge-free">Бесплатно</span></div>
-      <div class="rdm-card-focus">Bandit и другие варгеймы через SSH</div>
-      <div class="rdm-tag-row"><span class="rdm-tag">Linux</span><span class="rdm-tag">Security</span><span class="rdm-tag">Bash</span><span class="rdm-tag">CTF</span></div>
-    </div>
-  </div>
+  <!-- SUB-ROADMAPS -->
+  <div class="rdm-section-label">Суб-роадмапы</div>
 
-  <div class="rdm-note">
-    <strong>* про Instruqt.</strong> Платформа B2B, но контент для учащегося бесплатен. Треки HashiCorp, Redpanda, Datadog открыты через developer-порталы этих компаний. Под Terraform лучший бесплатный практикум в сети.
+  <div class="subrm-grid">
+    <!-- CCNA -->
+    <a href="/roadmap/ccna/" class="subrm-card" id="card-ccna">
+      <div class="subrm-card-top">
+        <div class="subrm-card-title"><span class="subrm-card-icon">📡</span> CCNA 200-301</div>
+        <span class="subrm-badge subrm-badge-progress" id="badge-ccna">In Progress</span>
+      </div>
+      <div class="subrm-desc">Cisco Certified Network Associate — сетевая база, 6 доменов, 36 статей на maks.top</div>
+      <div class="subrm-progress-row">
+        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" id="bar-ccna" style="width:0%"></div></div>
+        <div class="subrm-progress-label"><span id="label-ccna">0 / 36 тем</span><strong id="pct-ccna">0%</strong></div>
+      </div>
+      <span class="subrm-card-arrow">→</span>
+    </a>
+
+    <!-- AWS -->
+    <a href="/roadmap/aws/" class="subrm-card" id="card-aws">
+      <div class="subrm-card-top">
+        <div class="subrm-card-title"><span class="subrm-card-icon">☁️</span> AWS SAA-C03</div>
+        <span class="subrm-badge subrm-badge-planned" id="badge-aws">Planned</span>
+      </div>
+      <div class="subrm-desc">Solutions Architect Associate — 8 фаз, IAM · EC2 · S3 · VPC · Serverless · Security</div>
+      <div class="subrm-progress-row">
+        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" id="bar-aws" style="width:0%"></div></div>
+        <div class="subrm-progress-label"><span id="label-aws">0 / 64 темы</span><strong id="pct-aws">0%</strong></div>
+      </div>
+      <span class="subrm-card-arrow">→</span>
+    </a>
+
+    <!-- Docker -->
+    <div class="subrm-card disabled">
+      <div class="subrm-card-top">
+        <div class="subrm-card-title"><span class="subrm-card-icon">🐳</span> Docker</div>
+        <span class="subrm-badge subrm-badge-planned">Coming Soon</span>
+      </div>
+      <div class="subrm-desc">Containers, images, Compose, networking, volumes — база перед Kubernetes</div>
+      <div class="subrm-progress-row">
+        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" style="width:0%"></div></div>
+        <div class="subrm-progress-label"><span>— / — тем</span><strong>—</strong></div>
+      </div>
+    </div>
+
+    <!-- Terraform -->
+    <div class="subrm-card disabled">
+      <div class="subrm-card-top">
+        <div class="subrm-card-title"><span class="subrm-card-icon">🏗️</span> Terraform</div>
+        <span class="subrm-badge subrm-badge-planned">Coming Soon</span>
+      </div>
+      <div class="subrm-desc">HashiCorp Terraform Associate — IaC, modules, state, AWS provider, CI/CD integration</div>
+      <div class="subrm-progress-row">
+        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" style="width:0%"></div></div>
+        <div class="subrm-progress-label"><span>— / — тем</span><strong>—</strong></div>
+      </div>
+    </div>
+
+    <!-- K8s -->
+    <div class="subrm-card disabled">
+      <div class="subrm-card-top">
+        <div class="subrm-card-title"><span class="subrm-card-icon">⚙️</span> Kubernetes / CKA</div>
+        <span class="subrm-badge subrm-badge-planned">Coming Soon</span>
+      </div>
+      <div class="subrm-desc">Certified Kubernetes Administrator — pods, services, deployments, RBAC, troubleshooting</div>
+      <div class="subrm-progress-row">
+        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" style="width:0%"></div></div>
+        <div class="subrm-progress-label"><span>— / — тем</span><strong>—</strong></div>
+      </div>
+    </div>
+
+    <!-- LPIC-2 -->
+    <div class="subrm-card disabled">
+      <div class="subrm-card-top">
+        <div class="subrm-card-title"><span class="subrm-card-icon">🐧</span> LPIC-2</div>
+        <span class="subrm-badge subrm-badge-planned">Coming Soon</span>
+      </div>
+      <div class="subrm-desc">Linux Professional Institute — ядро, сеть, сервисы, безопасность, администрирование</div>
+      <div class="subrm-progress-row">
+        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" style="width:0%"></div></div>
+        <div class="subrm-progress-label"><span>— / — тем</span><strong>—</strong></div>
+      </div>
+    </div>
   </div>
 
   <hr class="rdm-divider">
 
-  <div class="rdm-section-label">Подготовка к сертификации</div>
-  <div class="rdm-grid">
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">killer.sh</span><span class="rdm-badge rdm-badge-freemium">В цене экзамена</span></div>
-      <div class="rdm-card-focus">Симуляторы CKA/CKAD/CKS от Killer Shell</div>
-      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">Обязателен под CKA</span><span class="rdm-tag">2 захода × 36ч</span><span class="rdm-tag">Kubernetes</span></div>
-    </div>
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">Tutorials Dojo</span><span class="rdm-badge rdm-badge-paid">Платно</span></div>
-      <div class="rdm-card-focus">Mock-экзамены под AWS SAA/SOA/DOP, лучший в индустрии</div>
-      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">Must-have под AWS</span><span class="rdm-tag">Review mode</span><span class="rdm-tag">Cheat sheets</span></div>
-    </div>
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">AWS Skill Builder</span><span class="rdm-badge rdm-badge-freemium">Freemium</span></div>
-      <div class="rdm-card-focus">Официальные курсы и Cloud Quest от AWS</div>
-      <div class="rdm-tag-row"><span class="rdm-tag">AWS</span><span class="rdm-tag">Лабы в sandbox</span><span class="rdm-tag">Геймификация</span></div>
-    </div>
-    <div class="rdm-card">
-      <div class="rdm-card-top"><span class="rdm-card-name">KodeKloud</span><span class="rdm-badge rdm-badge-paid">Платно</span></div>
-      <div class="rdm-card-focus">Курсы + playgrounds по Docker, K8s, Terraform, Ansible</div>
-      <div class="rdm-tag-row"><span class="rdm-tag">DevOps bundle</span><span class="rdm-tag">Mumshad Mannambeth</span></div>
-    </div>
-  </div>
-
-  <hr class="rdm-divider">
-
-  <div class="rdm-section-label">План по фазам</div>
+  <!-- PLAN PO FAZAM -->
+  <div class="rdm-section-label">Plan po fazam</div>
 
   <div class="phase">
     <div class="phase-num">01</div>
     <div class="phase-body">
       <div class="phase-top">
-        <span class="phase-title">Завершить LPIC-2</span>
-        <span class="phase-time">сейчас — 3 месяца</span>
+        <span class="phase-title">Linux Administration — LPIC-2</span>
+        <span class="phase-time">сейчас</span>
       </div>
-      <div class="phase-goal">Закрыть экзамены 201 и 202, получить первый весомый сертификат в резюме.</div>
+      <div class="phase-goal">Уверенная работа с Linux в production-контексте. База для AWS EC2, контейнеров и автоматизации.</div>
       <ul class="phase-list">
-        <li>Пройти все разделы borosan.gitbook.io/lpic2book, помечать слабые места в Obsidian</li>
-        <li>201: capacity planning, ядро, загрузка, файловые системы, RAID/LVM, сеть</li>
-        <li>202: DNS, web-серверы, file sharing, network client management, email, безопасность</li>
-        <li>Каждую тему закреплять на ubuntu-test, не просто читать</li>
-        <li>Последние 2 недели перед экзаменом только SadServers + прогон mock-вопросов</li>
-        <li>Записаться в Pearson VUE Sydney, оба экзамена подряд с разницей в 2-3 недели</li>
+        <li>201: capacity planning, ядро, файловые системы, RAID/LVM, сеть</li>
+        <li>202: DNS, web-серверы, file sharing, email, безопасность</li>
+        <li>SadServers + KillerCoda для закрепления</li>
       </ul>
       <div class="milestone">Майлстоун: LPIC-2 в LinkedIn и CV</div>
     </div>
@@ -409,19 +375,16 @@
     <div class="phase-num">02</div>
     <div class="phase-body">
       <div class="phase-top">
-        <span class="phase-title">AWS Solutions Architect Associate</span>
-        <span class="phase-time">3 — 6 месяцев</span>
+        <span class="phase-title">Сетевая база — CCNA 200-301</span>
+        <span class="phase-time">далее</span>
       </div>
-      <div class="phase-goal">Выйти на уровень junior-требований Sydney-рынка. Без AWS резюме не читают.</div>
+      <div class="phase-goal">Понять как работает сеть на уровне протоколов, иметь словарь для cloud-networking и DevOps-собеседований.</div>
       <ul class="phase-list">
-        <li>Курс Stephane Maarek или Adrian Cantrill на Udemy, один из двух</li>
-        <li>AWS Free Tier: развернуть реальные EC2, VPC, S3, IAM, RDS руками</li>
-        <li>Проект в homelab: static site на S3 + CloudFront + Route53 со своим maks.top</li>
-        <li>Проект посложнее: Docker-приложение на ECS Fargate с ALB</li>
-        <li>Tutorials Dojo mock-экзамены, добиться стабильных 85%+ перед записью на real exam</li>
-        <li>Сдать SAA-C03, начать откликаться на junior DevOps вакансии в Сиднее</li>
+        <li>6 доменов: Network Fundamentals · Access · IP Connectivity · Services · Security · Automation</li>
+        <li>36 статей на maks.top + 24 lab-решения + 489-вопросный квиз</li>
+        <li><a href="/roadmap/ccna/" style="color:var(--accent)">→ Открыть CCNA Roadmap</a></li>
       </ul>
-      <div class="milestone">Майлстоун: AWS SAA + первые собеседования</div>
+      <div class="milestone">Майлстоун: CCNA в LinkedIn</div>
     </div>
   </div>
 
@@ -429,19 +392,16 @@
     <div class="phase-num">03</div>
     <div class="phase-body">
       <div class="phase-top">
-        <span class="phase-title">Terraform и CI/CD</span>
-        <span class="phase-time">6 — 9 месяцев</span>
+        <span class="phase-title">Cloud — AWS Solutions Architect Associate</span>
+        <span class="phase-time">3–6 месяцев</span>
       </div>
-      <div class="phase-goal">Закрыть Infrastructure-as-Code и базовую автоматизацию деплоя, сделать портфолио.</div>
+      <div class="phase-goal">Войти на уровень junior-требований Sydney-рынка. Без AWS резюме не читают.</div>
       <ul class="phase-list">
-        <li>HashiCorp Learn + Instruqt треки под Terraform, все хенды-он</li>
-        <li>Переписать AWS homelab из фазы 2 целиком на Terraform модули</li>
-        <li>GitHub Actions: базовые workflows (lint, test, build, deploy на AWS)</li>
-        <li>Ansible базовый уровень, playbooks под настройку своих серверов</li>
-        <li>Сдать Terraform Associate (недорого, хороший сигнал работодателю)</li>
-        <li>Вести homelab репозиторий публично, пушить минимум 3-4 раза в неделю</li>
+        <li>8 фаз: IAM · EC2/S3/VPC · Databases · Serverless · Security · Hybrid · Practice</li>
+        <li>Tutorials Dojo — стабильные 85%+ перед записью на реальный экзамен</li>
+        <li><a href="/roadmap/aws/" style="color:var(--accent)">→ Открыть AWS Roadmap</a></li>
       </ul>
-      <div class="milestone">Майлстоун: Terraform cert + видимый GitHub портфель</div>
+      <div class="milestone">Майлстоун: AWS SAA + первые собеседования</div>
     </div>
   </div>
 
@@ -449,18 +409,16 @@
     <div class="phase-num">04</div>
     <div class="phase-body">
       <div class="phase-top">
-        <span class="phase-title">Kubernetes и CKA</span>
-        <span class="phase-time">9 — 12 месяцев</span>
+        <span class="phase-title">IaC и CI/CD — Terraform + GitHub Actions</span>
+        <span class="phase-time">6–9 месяцев</span>
       </div>
-      <div class="phase-goal">Контейнерная оркестрация, самая дорогая строчка в резюме после AWS.</div>
+      <div class="phase-goal">Infrastructure-as-Code и базовая автоматизация деплоя; публичное портфолио на GitHub.</div>
       <ul class="phase-list">
-        <li>KodeKloud CKA course (Mumshad) или Cantrill, плюс книга Kubernetes Up and Running</li>
-        <li>Поднять k3s в homelab на основной машине, деплоить туда реальные сервисы</li>
-        <li>Killercoda сценарии под CKA ежедневно последний месяц</li>
-        <li>killer.sh два полных захода, оба до зелёной зоны</li>
-        <li>Сдать CKA, обновить CV и LinkedIn в тот же день</li>
+        <li>Переписать AWS homelab целиком на Terraform модули</li>
+        <li>GitHub Actions: lint → test → build → deploy на AWS</li>
+        <li>Ansible базовый уровень, Terraform Associate</li>
       </ul>
-      <div class="milestone">Майлстоун: CKA, мидл-уровень запросов по зарплате</div>
+      <div class="milestone">Майлстоун: Terraform cert + видимый GitHub портфель</div>
     </div>
   </div>
 
@@ -468,95 +426,151 @@
     <div class="phase-num">05</div>
     <div class="phase-body">
       <div class="phase-top">
-        <span class="phase-title">AWS DevOps Pro и специализация</span>
-        <span class="phase-time">12 — 18 месяцев</span>
+        <span class="phase-title">Orchestration — Kubernetes / CKA</span>
+        <span class="phase-time">9–12 месяцев</span>
       </div>
-      <div class="phase-goal">Закрыть топовый AWS-сертификат и выбрать вертикаль дальнейшего роста.</div>
+      <div class="phase-goal">Контейнерная оркестрация — самая дорогая строчка в резюме после AWS.</div>
+      <ul class="phase-list">
+        <li>KodeKloud CKA + k3s в homelab с реальными сервисами</li>
+        <li>Killercoda ежедневно, killer.sh два захода до зелёной зоны</li>
+      </ul>
+      <div class="milestone">Майлстоун: CKA, мидл-уровень запросов по зарплате</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-num">06</div>
+    <div class="phase-body">
+      <div class="phase-top">
+        <span class="phase-title">AWS DevOps Pro и специализация</span>
+        <span class="phase-time">12–18 месяцев</span>
+      </div>
+      <div class="phase-goal">Выбрать вертикаль: Platform Engineering · SRE · Security · Data Platform.</div>
       <ul class="phase-list">
         <li>AWS DOP-C02 через Cantrill + Tutorials Dojo</li>
-        <li>По желанию SOA-C02 между SAA и DOP для тройной AWS-сертификации</li>
-        <li>Выбор направления: Platform Engineering, SRE, Security, или Data Platform</li>
-        <li>Глубокое погружение в observability (Prometheus, Grafana, Datadog) или security</li>
-        <li>Начать писать в блоге не только как ученик, но как практик</li>
+        <li>Observability: Prometheus, Grafana, OpenTelemetry</li>
       </ul>
-      <div class="milestone">Майлстоун: стабильная DevOps-роль + выбранная специализация</div>
+      <div class="milestone">Майлстоун: стабильная DevOps-роль + специализация</div>
     </div>
   </div>
 
   <div class="parallel">
     <div class="parallel-title">Параллельно всё время</div>
     <div class="parallel-items">
-      <div>▸ Homelab растёт вместе со скиллами, не отдельно от учёбы</div>
-      <div>▸ GitHub-профиль публичный, с README, pinned repos, регулярными коммитами</div>
-      <div>▸ Технический блог на maks.top, минимум пост в 2 недели</div>
+      <div>▸ Homelab растёт вместе со скиллами — документируй как production (README, runbooks)</div>
+      <div>▸ GitHub-профиль публичный, pinned repos, регулярные коммиты</div>
+      <div>▸ Технический блог <a href="https://maks.top/posts/" style="color:var(--accent)">maks.top</a> — минимум пост в 2 недели</div>
       <div>▸ Откликаться на вакансии уже с LPIC-2, не ждать полного набора сертов</div>
-      <div>▸ Sydney DevOps meetups, DevOps Days Sydney, Kubernetes Sydney</div>
+      <div>▸ Sydney DevOps meetups: DevOps Days · Kubernetes Sydney · AWS User Group</div>
     </div>
   </div>
 
   <hr class="rdm-divider">
 
+  <!-- TRAINERS -->
+  <div class="rdm-section-label">Тренажёры Linux и DevOps</div>
+  <div class="rdm-grid">
+    <a href="https://sadservers.com" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">SadServers</span><span class="rdm-badge rdm-badge-freemium">Freemium</span></div>
+      <div class="rdm-card-focus">CTF-задачи — сломан сервер, почини</div>
+      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">Эталон жанра</span><span class="rdm-tag">Linux</span><span class="rdm-tag">Docker</span><span class="rdm-tag">K8s</span></div>
+    </div></a>
+    <a href="https://killercoda.com" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">Killercoda</span><span class="rdm-badge rdm-badge-freemium">Freemium</span></div>
+      <div class="rdm-card-focus">Сценарии и playground — CKA/CKAD</div>
+      <div class="rdm-tag-row"><span class="rdm-tag">Linux</span><span class="rdm-tag">Kubernetes</span><span class="rdm-tag">Docker</span></div>
+    </div></a>
+    <a href="https://developer.hashicorp.com/terraform/tutorials" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">Instruqt / HashiCorp</span><span class="rdm-badge rdm-badge-free">Бесплатно</span></div>
+      <div class="rdm-card-focus">Hosted labs от вендоров через их порталы</div>
+      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">Terraform</span><span class="rdm-tag">Vault</span><span class="rdm-tag">Consul</span></div>
+    </div></a>
+    <a href="https://overthewire.org/wargames/bandit/" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">OverTheWire Bandit</span><span class="rdm-badge rdm-badge-free">Бесплатно</span></div>
+      <div class="rdm-card-focus">Linux CLI через SSH — wargame-формат</div>
+      <div class="rdm-tag-row"><span class="rdm-tag">Linux</span><span class="rdm-tag">Security</span><span class="rdm-tag">Bash</span></div>
+    </div></a>
+  </div>
+
+  <!-- CERT PREP -->
+  <div class="rdm-section-label" style="margin-top:24px">Подготовка к сертификации</div>
+  <div class="rdm-grid">
+    <a href="https://killer.sh" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">killer.sh</span><span class="rdm-badge rdm-badge-freemium">В цене экзамена</span></div>
+      <div class="rdm-card-focus">CKA/CKAD/CKS симуляторы от Killer Shell</div>
+      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">Обязателен под CKA</span><span class="rdm-tag">2 захода × 36ч</span></div>
+    </div></a>
+    <a href="https://tutorialsdojo.com" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">Tutorials Dojo</span><span class="rdm-badge rdm-badge-paid">Платно</span></div>
+      <div class="rdm-card-focus">Mock-экзамены AWS SAA/SOA/DOP — лучший</div>
+      <div class="rdm-tag-row"><span class="rdm-tag rdm-tag-hl">Must-have под AWS</span><span class="rdm-tag">Review mode</span></div>
+    </div></a>
+    <a href="https://skillbuilder.aws" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">AWS Skill Builder</span><span class="rdm-badge rdm-badge-freemium">Freemium</span></div>
+      <div class="rdm-card-focus">Официальные курсы и Cloud Quest от AWS</div>
+      <div class="rdm-tag-row"><span class="rdm-tag">AWS</span><span class="rdm-tag">Sandbox labs</span></div>
+    </div></a>
+    <a href="https://kodekloud.com" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="rdm-card">
+      <div class="rdm-card-top"><span class="rdm-card-name">KodeKloud</span><span class="rdm-badge rdm-badge-paid">Платно</span></div>
+      <div class="rdm-card-focus">Docker, K8s, Terraform, Ansible в одном месте</div>
+      <div class="rdm-tag-row"><span class="rdm-tag">DevOps bundle</span><span class="rdm-tag">Mumshad</span></div>
+    </div></a>
+  </div>
+
+  <div class="rdm-note">
+    <strong>Про Instruqt.</strong> Платформа B2B, но для учащегося бесплатна. HashiCorp, Redpanda, Datadog открыты через developer-порталы этих компаний. Под Terraform — лучший бесплатный практикум в сети.
+  </div>
+
+  <hr class="rdm-divider">
+
+  <!-- PRINCIPLES -->
   <div class="rdm-section-label">Принципы эффективного изучения</div>
 
   <div class="principle">
     <div class="principle-title"><span class="principle-num">1</span>Сначала сделай, потом читай</div>
-    <div class="principle-body">Любая новая тема начинается с попытки настроить сервис руками до того как сядешь за книгу. Получил ошибку, упёрся в непонятное, пошёл читать документацию прицельно под проблему. Это в десять раз эффективнее пассивного чтения.</div>
+    <div class="principle-body">Любая тема — с попытки настроить сервис руками. Получил ошибку → читай документацию прицельно под проблему. В десять раз эффективнее пассивного чтения.</div>
   </div>
-
   <div class="principle">
     <div class="principle-title"><span class="principle-num">2</span>Пиши пока учишься</div>
-    <div class="principle-body">Блог это не тщеславие, а проверка понимания. Если не можешь объяснить тему постом на 800 слов, значит не понял. Плюс контент работает на тебя круглосуточно, HR и инженеры реально гуглят кандидатов.</div>
+    <div class="principle-body">Блог — проверка понимания. Если не можешь объяснить постом на 800 слов, значит не понял. Плюс контент работает на тебя круглосуточно.</div>
   </div>
-
   <div class="principle">
     <div class="principle-title"><span class="principle-num">3</span>Не гонись за коллекцией сертов</div>
-    <div class="principle-body">Максимум один серт в квартал, с реальной практикой между ними. Пять сертификатов без проекта в GitHub читаются как красный флаг. Один серт с публичным портфолио под него читается как инженер.</div>
+    <div class="principle-body">Максимум один серт в квартал с реальной практикой между ними. Пять сертификатов без проекта в GitHub — красный флаг. Один серт с публичным портфолио — читается как инженер.</div>
   </div>
-
   <div class="principle">
     <div class="principle-title"><span class="principle-num">4</span>Пропорция 70/30</div>
-    <div class="principle-body">Семьдесят процентов времени терминал, тридцать процентов видео и книги. Если пропорция перекашивается в сторону пассивного контента, знания не закрепляются и быстро уходят.</div>
+    <div class="principle-body">70% времени — терминал, 30% — видео и книги. Если пропорция перекашивается в сторону пассивного контента, знания не закрепляются.</div>
   </div>
-
   <div class="principle">
     <div class="principle-title"><span class="principle-num">5</span>Откликайся рано и итерируй</div>
-    <div class="principle-body">Первые собеседования не про то чтобы получить оффер, а про то чтобы понять чего не хватает. После LPIC-2 уже можно подавать, отказы это обратная связь для корректировки учёбы. Ждать полного набора сертов ошибка.</div>
+    <div class="principle-body">Первые собеседования не про оффер, а про то, чего не хватает. После LPIC-2 уже можно подавать. Отказы — обратная связь.</div>
   </div>
-
   <div class="principle">
     <div class="principle-title"><span class="principle-num">6</span>Находи сообщество</div>
-    <div class="principle-body">В Сиднее активное DevOps-комьюнити, meetup.com, DevOps Days, Kubernetes community days. Личные контакты в этой сфере решают больше чем CV в ATS. Плюс через сообщество находятся менторы, которых нет онлайн.</div>
+    <div class="principle-body">В Сиднее активное DevOps-комьюнити. Личные контакты решают больше чем CV в ATS. Через сообщество находятся менторы, которых нет онлайн.</div>
   </div>
-
   <div class="principle">
     <div class="principle-title"><span class="principle-num">7</span>Документируй homelab как production</div>
-    <div class="principle-body">README, runbooks, disaster recovery план. Относись к своей инфраструктуре как к рабочей. Это формирует правильные привычки и выглядит сильно на интервью, когда рассказываешь про свою setup.</div>
+    <div class="principle-body">README, runbooks, DR-план. Формирует правильные привычки и выглядит сильно на интервью, когда рассказываешь про свой setup.</div>
   </div>
 
 </main>
 
-<!-- ═══ MOBILE BOTTOM NAV ═══ -->
 <nav class="mob-bottom-nav">
-  <a href="/" class="mob-bnav-item">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-    <span>Home</span>
-  </a>
-  <a href="/posts/" class="mob-bnav-item">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-    <span>Blog</span>
-  </a>
-  <a href="/certs/" class="mob-bnav-item">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-    <span>Certs</span>
-  </a>
-  <a href="/kb/" class="mob-bnav-item">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-    <span>KB</span>
-  </a>
-  <a href="/about/" class="mob-bnav-item">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-    <span>About</span>
-  </a>
+  <a href="/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></a>
+  <a href="/posts/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg><span>Blog</span></a>
+  <a href="/certs/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg><span>Certs</span></a>
+  <a href="/kb/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>KB</span></a>
+  <a href="/about/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>About</span></a>
 </nav>
 
 <footer>
@@ -572,16 +586,14 @@ function toggleTheme(){
   const next=isDark?'light':'dark';
   html.setAttribute('data-theme',next);
   localStorage.setItem('theme',next);
-  const icon=isDark?'☀️':'🌙';
-  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=icon);
+  const f=document.getElementById('favicon');
+  if(f)f.href=next==='dark'?'/favicon-dark.svg':'/favicon-light.svg';
+  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=isDark?'☀️':'🌙');
 }
 function toggleMobMenu(){
-  const d=document.getElementById('mobDrawer');
-  const o=document.getElementById('mobOverlay');
-  const b=document.getElementById('burgerBtn');
+  const d=document.getElementById('mobDrawer'),o=document.getElementById('mobOverlay'),b=document.getElementById('burgerBtn');
   const open=d.classList.toggle('open');
-  o.classList.toggle('open',open);
-  b.classList.toggle('open',open);
+  o.classList.toggle('open',open);b.classList.toggle('open',open);
 }
 function closeMobMenu(){
   document.getElementById('mobDrawer').classList.remove('open');
@@ -590,11 +602,31 @@ function closeMobMenu(){
 }
 (function(){
   const t=localStorage.getItem('theme');
-  if(t==='light'){
-    document.documentElement.setAttribute('data-theme','light');
-    document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent='☀️');
-  }
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=isDark?'🌙':'☀️');
 })();
+
+// Live progress from localStorage
+function loadProgress(key, total, barId, labelId, pctId, badgeId) {
+  const data = JSON.parse(localStorage.getItem(key) || '{}');
+  const done = Object.values(data).filter(Boolean).length;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  const bar = document.getElementById(barId);
+  const lbl = document.getElementById(labelId);
+  const pctEl = document.getElementById(pctId);
+  const badge = document.getElementById(badgeId);
+  if(bar) bar.style.width = pct + '%';
+  if(lbl) lbl.textContent = done + ' / ' + total + ' тем';
+  if(pctEl) pctEl.textContent = pct + '%';
+  if(badge) {
+    if(pct === 100) { badge.className='subrm-badge subrm-badge-done'; badge.textContent='Passed'; }
+    else if(pct > 0) { badge.className='subrm-badge subrm-badge-progress'; badge.textContent='In Progress'; }
+    else { badge.className='subrm-badge subrm-badge-planned'; badge.textContent='Planned'; }
+  }
+}
+
+loadProgress('rdm.ccna', 36, 'bar-ccna', 'label-ccna', 'pct-ccna', 'badge-ccna');
+loadProgress('rdm.aws',  64, 'bar-aws',  'label-aws',  'pct-aws',  'badge-aws');
 </script>
 </body>
 </html>
