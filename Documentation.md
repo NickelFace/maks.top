@@ -9,6 +9,20 @@
 
 ---
 
+## Redesign — May 2026
+
+Visual refresh of the network engineering portfolio. Backwards-compatible content; templates and CSS only. What to look at:
+
+- **`/`** — recruiter-focused homepage with cert-progress widget
+- **`/certs/`** — track table; status pills now read correctly under both light and dark themes
+- **`/about/`** — hire-me layout with contact-reveal
+- **404** — `Lost packet.` with a fake `traceroute` terminal
+- Mobile (≤ 640 px) — wide tables, code blocks and topology SVGs scroll inside their card; the page itself never overflows
+
+Everything is built off the design system in `themes/maks/static/styles/global.css` (sun-aware palette) plus `prose.css`, `cert.css`, `home.css`, `quiz.css`, `mobile.css`. No new dependencies; no JS framework adopted; Pagefind search unchanged.
+
+---
+
 ## Navigation
 
 | Section | What's inside |

@@ -43,7 +43,7 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 |---|---|---|
 | `critical.css` | `assets/css/` | Inlined in `<head>` via `resources.Get \| minify`. Dark/light `html,body` bg + `no-transition`. **Single source of truth for FOUC colors — update here when changing theme bg.** |
 | `global.css` | `static/styles/` | Variables, reset, nav (incl. `.nav-suntime` sunrise/sunset), page, KB cards, tags, pagination, breadcrumb, sticky footer, **404 page** (`.e404-*`). Utility classes: `.eyebrow`, `.serif`, `.mono` |
-| `prose.css` | `static/styles/` | Article body typography + **3-col layout** (`.prose-3col`, `.prose-meta-rail`, `.prose-toc-rail`, `.prose-h1`, `.prose-lead`, `.tldr-card`), `.intro-card`, `.ref-panel`, `.cheat-table`, `.tabs`, `.code-block`, `.sec` |
+| `prose.css` | `static/styles/` | Article body typography + **3-col layout** (`.prose-3col`, `.prose-meta-rail`, `.prose-toc-rail`, `.prose-h1`, `.prose-lead`, `.tldr-card`), `.intro-card`, `.ref-panel`, `.cheat-table`, `.tabs`, `.code-block`, `.sec` + **mobile overflow containment for tables, code, ASCII art and topology SVG (≤ 640 px)** |
 | `cert.css` | `static/styles/` | New cert page (`.cert-pg-*`, `.cert-res-*`, `.cert-domain-*`); legacy styles kept for fallback |
 | `quiz.css` | `static/styles/` | CCNA quiz cards, options, scoring badges |
 | `ns.css` | `static/styles/` | linux-namespaces page only (ns-specific: `.ns-card`, `.ns-grid`, `.ns-map*`, `.stag*`) |
@@ -65,6 +65,27 @@ static/img/quiz/      ← 247 JPEG images extracted from CCNA PDF
 --code-bg  /* night: #100E09 / day: #EDE9DF */
 --radius   /* border-radius base: 6px */
 ```
+
+## Status badges (certs index)
+
+The `/certs/` page uses three pill states with theme-safe tints:
+- `.certs-idx-badge-passed`   — `var(--accent2)` (moss) outline + 14% fill
+- `.certs-idx-badge-progress` — `var(--accent)`  (amber) outline + 14% fill
+- `.certs-idx-badge-planned`  — `var(--text3)` outline, no fill
+
+Tints use `color-mix(in oklab, currentColor 14%, transparent)` so they scale across light/dark themes without per-theme overrides. **Do not hard-code `oklch(...)` backgrounds on these badges** — that was the source of the contrast bug fixed in `fix(certs): badge contrast across themes`.
+
+## Mobile content overflow rules (≤ 640 px)
+
+Wide content inside articles is contained, never page-wide. Single source of truth lives at the bottom of `prose.css` under the `MOBILE OVERFLOW CONTAINMENT` heading. Affected types:
+
+- `.prose table` — flipped to `display: block; overflow-x: auto`. Cells use `white-space: nowrap`. Header and body still align via `display: table; width: max-content`.
+- `.prose pre` — explicit `overflow-x: auto` plus tighter font + thin scrollbar hint.
+- `.prose pre.ascii-art` / `.ascii-art-wrap pre` — opt-in class for non-network ASCII (filesystem trees, LDAP DITs). Disables ligatures, shrinks font on mobile, scrolls horizontally.
+- `.topology` — wraps the SVG in a horizontal scroller; SVG enforces `min-width: 480px` so labels stay legible.
+- `.prose p > code, .prose li > code` — long inline code wraps with `overflow-wrap: anywhere`.
+
+Page-level guard: `html, body { overflow-x: clip; }` in `global.css`. `min-width: 0` set on `main, .post, .prose, .kb-section, .cert-pg-header-inner`.
 
 ## Tags — non-clickable everywhere except /tags/ page
 Tags (`<span class="tag">`) are **decorative only** across the whole site — no hover effect, no links, `pointer-events: none`. The `/tags/` taxonomy page is the only place with interactive tag buttons.
@@ -386,3 +407,16 @@ Search index built during `hugo`. RU pages excluded with `pagefind_ignore: true`
 ```
 Node kinds: `router` `switch` `server` `cloud` `pc` `fw` (and fallback generic rect).
 Coordinates: `at col,row` (0-indexed). Links: `A — B` or `A — B label="text"`.
+
+### Migration policy: ASCII art → topology shortcode
+
+Network diagrams expressed as ASCII inside fenced code blocks are considered legacy. Each post migrated to the shortcode also migrates its `ru/` shadow in the same commit. Conversion rules:
+
+- Boxes-and-lines diagrams → `topology` (preferred).
+- Filesystem / DIT / config trees → keep as code block with language `ascii`, or wrap in `<div class="ascii-art-wrap">`. Mobile CSS handles the rest.
+- Timing / sequence / frame-structure diagrams → keep as code block, no migration; the same `.ascii-art-wrap` works.
+
+Audit grep:
+```bash
+grep -rln --include='*.md' -E '(├──|└──|│   ├)' content/
+```
