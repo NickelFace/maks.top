@@ -176,7 +176,7 @@ cp -p /usr/sbin/rndc /var/cache/bind/usr/sbin
 
 ### Chroot environment structure:
 
-```
+```ascii
 /var/cache/bind/          ← new root (/)
 ├── dev/null
 ├── etc/
