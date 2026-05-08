@@ -31,7 +31,7 @@ themes/maks/
   layouts/ccna-labs/  ← list.html (toggle accordion) for /ccna-labs/
   assets/css/         ← critical.css (inlined at build time via resources.Get)
   static/styles/      ← CSS files (loaded as external <link>)
-  static/fonts/       ← Self-hosted woff2 (JetBrains Mono, Unbounded)
+  static/fonts/       ← Self-hosted woff2 (Inter, JetBrains Mono)
   static/img/         ← Images
 
 static/img/neteng/    ← Per-lab folders: 01/, 02/, … 17/
@@ -356,7 +356,6 @@ In `about/single.html` the values are rendered as base64 `data-v` attributes and
 - **Fraunces** (display/logo, serif) — loaded via Google Fonts link in `baseof.html`
 - **Inter** (body text, wt 400–600) — self-hosted woff2
 - **JetBrains Mono** (monospace/code/labels) — self-hosted woff2
-- Unbounded woff2 files remain in `static/fonts/` but are no longer referenced in CSS
 Inter subsets: `Inter-latin.woff2`, `Inter-latin-ext.woff2`, `Inter-cyrillic.woff2`, `Inter-cyrillic-ext.woff2`.
 
 ## Pagefind

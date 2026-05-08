@@ -20,7 +20,7 @@ tags: ["docs"]
 | `critical.css` | `themes/maks/assets/css/` | инлайн в `<head>` | Предотвращение FOUC: фон `html,body` для обеих тем + правило `no-transition` |
 | `global.css` | `themes/maks/static/styles/` | везде | Переменные, nav, базовые компоненты, dot-grid пагинация |
 | `mobile.css` | `themes/maks/static/styles/` | везде | Мобильная навигация, breakpoints |
-| `fonts.css` | `themes/maks/static/styles/` | везде | `@font-face` для Inter (body), JetBrains Mono (код), Unbounded (заголовки) |
+| `fonts.css` | `themes/maks/static/styles/` | везде | `@font-face` для Inter (body), JetBrains Mono (код) |
 | `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs | Типографика, NS-карточки/tabs/ref-panel, section divider |
 | `home.css` | `themes/maks/static/styles/` | только `/` | Hero, recent posts, KB grid, cert-grid |
 | `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, плитки ресурсов, аккордеон тем |
@@ -115,7 +115,7 @@ tags: ["docs"]
 |---|---|
 | `.panel` | Карточка: `background: var(--bg2)`, border, `border-radius: 10px` |
 | `.panel-head` | Flex-заголовок панели |
-| `.sec-title` | Заголовок секции H2 (шрифт Unbounded, gradient) |
+| `.sec-title` | Заголовок секции H2 (gradient) |
 
 ### Карточки статей
 
@@ -164,7 +164,7 @@ tags: ["docs"]
 | `.cert-grid` | Сетка из 4 колонок |
 | `.cert-card` | Карточка с кастомной переменной `--cert-color` |
 | `.cert-badge` | Emoji-иконка |
-| `.cert-name` | Название (шрифт Unbounded, `color: var(--cert-color)`) |
+| `.cert-name` | Название (`color: var(--cert-color)`) |
 
 ---
 
@@ -245,7 +245,7 @@ tags: ["docs"]
 |---|---|
 | `.cert-hero` | Hero-блок. `--cert-color` задаёт цвет границы и текста |
 | `.cert-hero-badge` | Emoji-иконка |
-| `.cert-hero-name` | Название сертификата (шрифт Unbounded) |
+| `.cert-hero-name` | Название сертификата |
 | `.cert-hero-desc` | Текст описания |
 | `.cert-resources` | Flex-строка плиток ресурсов |
 | `.cert-resource-card` | Плитка: flex-column, иконка + заголовок + описание |
