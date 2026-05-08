@@ -180,7 +180,7 @@ cp -p /usr/sbin/rndc /var/cache/bind/usr/sbin
 
 ### Структура chroot-окружения:
 
-```
+```ascii
 /var/cache/bind/          ← новый корень (/)
 ├── dev/null
 ├── etc/
