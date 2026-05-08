@@ -71,7 +71,9 @@
     {{ end }}
 
   {{ else if eq .Section "kb" }}
-    {{/* KB pages — link to parent subsection if nested */}}
+    {{/* KB pages — KB root → subsection (if nested) → title */}}
+    <a href="{{ "/kb/" | relURL }}">KB</a>
+    <span>/</span>
     {{ if .File }}
       {{ $parts := split .File.Dir "/" }}
       {{ if gt (len $parts) 2 }}
