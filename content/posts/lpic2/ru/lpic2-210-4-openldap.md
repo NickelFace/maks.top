@@ -28,7 +28,7 @@ LDAP оптимизирован для **частых чтений и редки
 
 Каталог построен в виде иерархического дерева, аналогичного DNS:
 
-```
+```ascii
 dc=example,dc=com
     ├── ou=People
     │     ├── uid=alice
@@ -133,7 +133,7 @@ directory       /var/lib/ldap
 Начиная с OpenLDAP 2.3, конфигурация хранится в виде LDIF-файлов в `/etc/openldap/slapd.d/`. Эти файлы **нельзя редактировать вручную** — только через `ldapadd`, `ldapdelete`, `ldapmodify`. Ключевое преимущество: изменения применяются **без перезапуска slapd**.
 
 Структура каталога `slapd.d`:
-```
+```ascii
 /etc/openldap/slapd.d/
 ├── cn=config/
 │   ├── cn=module{0}.ldif
