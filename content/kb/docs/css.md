@@ -16,7 +16,7 @@ Styles are split into 9 files by **scope** (area of application):
 | `critical.css` | `themes/maks/assets/css/` | inlined in `<head>` | FOUC prevention: dark/light `html,body` bg + `no-transition` rule |
 | `global.css` | `themes/maks/static/styles/` | everywhere | Variables, nav, base components, dot-grid pagination |
 | `mobile.css` | `themes/maks/static/styles/` | everywhere | Mobile nav, breakpoints |
-| `fonts.css` | `themes/maks/static/styles/` | everywhere | `@font-face` for Inter (body), JetBrains Mono (code), Unbounded (headings) |
+| `fonts.css` | `themes/maks/static/styles/` | everywhere | `@font-face` for Inter (body), JetBrains Mono (code) |
 | `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs | Article typography, NS cards/tabs/ref-panel, section divider |
 | `home.css` | `themes/maks/static/styles/` | `/` only | Hero, recent posts, KB grid, cert-grid |
 | `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, resource tiles, accordion topics |
@@ -111,7 +111,7 @@ Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
 |---|---|
 | `.panel` | Card: `background: var(--bg2)`, border, `border-radius: 10px`, `padding: 20px` |
 | `.panel-head` | Flex panel header: `.panel-title` + `.panel-more` |
-| `.sec-title` | H2 section heading (Unbounded font, gradient) |
+| `.sec-title` | H2 section heading (gradient) |
 
 ### Articles (post-card — blog list)
 
@@ -191,7 +191,7 @@ Shared by both blog (`pagination.html` partial) and quiz (hardcoded in `ccna-qui
 | `.cert-grid` | 4-column grid |
 | `.cert-card` | Card with `--cert-color` custom variable |
 | `.cert-badge` | Emoji icon |
-| `.cert-name` | Name (Unbounded font, `color: var(--cert-color)`) |
+| `.cert-name` | Name (`color: var(--cert-color)`) |
 | `.cert-sub` | Subtitle |
 
 ---
@@ -272,7 +272,7 @@ Applied to `.prose` (article body) and available in any post, KB, or docs page.
 |---|---|
 | `.cert-hero` | Hero block. `--cert-color` sets border and text color |
 | `.cert-hero-badge` | Emoji icon |
-| `.cert-hero-name` | Cert name (Unbounded font) |
+| `.cert-hero-name` | Cert name |
 | `.cert-hero-desc` | Description text |
 | `.cert-resources` | Flex row of resource tiles |
 | `.cert-resource-card` | Tile: flex-column, icon + title + desc. Hover uses `color-mix(--cert-color)` |
