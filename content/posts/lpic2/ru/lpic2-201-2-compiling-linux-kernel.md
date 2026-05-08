@@ -236,7 +236,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg   # RHEL/CentOS
 
 Модули ядра — это объектные файлы `.ko`, загружаемые в ядро по требованию. Все модули хранятся в иерархии каталогов под `/lib/modules/<kernel-version>/`.
 
-```
+```ascii
 /lib/modules/4.3.3/
 ├── kernel/
 │   ├── drivers/
