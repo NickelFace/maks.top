@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LPIC-1 + LPIC-2 Roadmap — 85 тем Linux Administration, статьи на maks.top, трекер прогресса">
+<title>LPIC-1 + LPIC-2 Roadmap — maks.top</title>
+<link id="favicon" rel="icon" type="image/svg+xml" href="/favicon-light.svg">
+<script>(function(){var s=localStorage.getItem('theme');var hr=new Date().getHours();var t=(s==='light'||s==='dark')?s:((hr>=7&&hr<20)?'light':'dark');document.documentElement.setAttribute('data-theme',t);var f=document.getElementById('favicon');if(f)f.href=t==='dark'?'/favicon-dark.svg':'/favicon-light.svg';})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/fonts.css">
+<link rel="stylesheet" href="/styles/global.css">
+<link rel="stylesheet" href="/styles/mobile.css">
+<style>
+.rdm-page { max-width: 900px; margin: 0 auto; padding: 40px 40px 96px; }
+@media(max-width:640px){ .rdm-page { padding: 28px 20px 72px; } }
+
+.breadcrumb { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); margin-bottom: 28px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.breadcrumb a { color: var(--text3); text-decoration: none; transition: color 0.12s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb .sep { color: var(--border2); }
+
+.rdm-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+.rdm-h1 { font-family: 'Fraunces', Georgia, serif; font-size: clamp(32px, 4.5vw, 48px); font-weight: 400; line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 14px; color: var(--text); font-feature-settings: 'opsz' 144; }
+.rdm-h1 em { font-style: italic; color: var(--accent2); }
+.rdm-lead { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 600px; margin-bottom: 32px; }
+
+/* Exam params - two columns */
+.exams-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+@media(max-width:640px){ .exams-grid { grid-template-columns: 1fr; } }
+.exam-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+.exam-card-title { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.exam-card-title span { font-size: 13px; font-weight: 600; }
+.exam-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; }
+.exam-badge-1 { background: color-mix(in oklab, var(--accent2) 14%, transparent); color: var(--accent2); border: 1px solid color-mix(in oklab, var(--accent2) 30%, transparent); }
+.exam-badge-2 { background: color-mix(in oklab, #7c3aed 14%, transparent); color: #a78bfa; border: 1px solid color-mix(in oklab, #7c3aed 30%, transparent); }
+.exam-params { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+.ep { }
+.ep-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); }
+.ep-value { font-size: 12.5px; color: var(--text2); }
+
+/* Overall progress */
+.overall-progress { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
+.op-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.op-title { font-size: 13px; font-weight: 500; }
+.op-count { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text2); }
+.op-bar { height: 4px; background: var(--border); border-radius: 2px; position: relative; margin-bottom: 8px; }
+.op-fill { position: absolute; inset: 0 auto 0 0; border-radius: 2px; background: var(--accent2); transition: width 0.4s; }
+.op-sub { display: flex; gap: 16px; flex-wrap: wrap; }
+.op-sub-item { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); }
+.op-sub-item strong { color: var(--text2); }
+
+/* Init notice */
+.init-notice { font-size: 12px; color: var(--text3); padding: 10px 14px; background: var(--bg2); border: 1px solid var(--border); border-left: 2px solid var(--accent2); border-radius: 6px; margin-bottom: 24px; line-height: 1.6; }
+.init-notice strong { color: var(--text2); }
+
+/* Quick links */
+.quick-links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.ql-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-family: 'JetBrains Mono', monospace; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text2); text-decoration: none; transition: all 0.12s; white-space: nowrap; }
+.ql-btn:hover { border-color: var(--accent2); color: var(--accent2); background: color-mix(in oklab, var(--accent2) 8%, var(--bg2)); }
+
+.rdm-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0 24px; }
+.rdm-section-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.rdm-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Exam section header */
+.exam-section { margin-bottom: 8px; }
+.exam-section-hdr { display: flex; align-items: center; gap: 10px; padding: 10px 0 8px; }
+.exam-section-name { font-size: 13px; font-weight: 600; color: var(--text2); }
+.exam-section-prog { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); }
+.exam-section-bar { flex: 1; height: 2px; background: var(--border); border-radius: 1px; max-width: 120px; position: relative; }
+.exam-section-fill { position: absolute; inset: 0 auto 0 0; border-radius: 1px; background: var(--accent2); transition: width 0.3s; }
+
+/* Domain accordion */
+.domain { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+.domain-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; background: var(--bg2); transition: background 0.12s; list-style: none; user-select: none; }
+.domain-header:hover { background: var(--bg3); }
+.domain-header::-webkit-details-marker { display: none; }
+details[open] > .domain-header { border-bottom: 1px solid var(--border); }
+.domain-num { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text3); min-width: 28px; }
+.domain-name { font-size: 13.5px; font-weight: 500; flex: 1; }
+.domain-prog-bar { display: flex; align-items: center; gap: 5px; }
+.dpb-track { width: 44px; height: 3px; background: var(--border); border-radius: 2px; position: relative; }
+.dpb-fill { position: absolute; inset: 0 auto 0 0; border-radius: 2px; background: var(--accent2); transition: width 0.3s; }
+.dpb-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); white-space: nowrap; min-width: 32px; text-align: right; }
+.domain-arrow { font-size: 12px; color: var(--text3); transition: transform 0.2s; margin-left: 2px; }
+details[open] .domain-arrow { transform: rotate(90deg); }
+.domain-body { padding: 4px 0; }
+
+/* Topic items */
+.topic-item { display: flex; align-items: center; gap: 10px; padding: 6px 16px; transition: background 0.1s; }
+.topic-item:hover { background: color-mix(in oklab, var(--accent2) 4%, transparent); }
+.topic-cb { appearance: none; -webkit-appearance: none; width: 15px; height: 15px; flex-shrink: 0; border: 1.5px solid var(--border2); border-radius: 3px; cursor: pointer; position: relative; background: var(--bg); transition: all 0.15s; }
+.topic-cb:checked { background: var(--accent2); border-color: var(--accent2); }
+.topic-cb:checked::after { content: ''; position: absolute; left: 3px; top: 1px; width: 5px; height: 8px; border: 2px solid var(--bg); border-top: none; border-left: none; transform: rotate(40deg); }
+.topic-link { font-size: 12.5px; color: var(--text2); text-decoration: none; flex: 1; line-height: 1.4; transition: color 0.12s; }
+.topic-link:hover { color: var(--accent2); }
+.topic-item.done .topic-link { color: var(--text3); text-decoration: line-through; }
+.topic-tag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; padding: 1px 6px; border-radius: 3px; background: var(--bg3); color: var(--text3); border: 1px solid var(--border); white-space: nowrap; flex-shrink: 0; }
+
+/* Reset button */
+.reset-row { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+.reset-btn { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; padding: 6px 12px; border-radius: 5px; border: 1px solid var(--border2); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.12s; }
+.reset-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+.check-all-btn { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; padding: 6px 12px; border-radius: 5px; border: 1px solid var(--border2); background: transparent; color: var(--text3); cursor: pointer; transition: all 0.12s; }
+.check-all-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+.reset-hint { font-size: 11px; color: var(--text3); }
+</style>
+</head>
+<body>
+
+<nav class="desk-nav">
+  <a href="/" class="nav-logo">maks.top</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li><li><a href="/posts/">Blog</a></li>
+    <li><a href="/certs/">Certs</a></li><li><a href="/kb/">Knowledge Base</a></li>
+    <li><a href="/about/">About</a></li>
+  </ul>
+  <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button></div>
+</nav>
+<nav class="mob-nav">
+  <a href="/" class="nav-logo">maks.top</a>
+  <div class="mob-nav-right">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtnMob" title="Toggle theme">🌙</button>
+    <button class="burger" id="burgerBtn" onclick="toggleMobMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-drawer" id="mobDrawer">
+  <a href="/">Home</a><a href="/posts/">Blog</a><a href="/certs/">Certs</a><a href="/kb/">Knowledge Base</a><a href="/about/">About</a>
+</div>
+<div class="mob-overlay" id="mobOverlay" onclick="closeMobMenu()"></div>
+
+<main class="rdm-page">
+
+  <div class="breadcrumb">
+    <a href="/">maks.top</a><span class="sep">/</span>
+    <a href="/roadmap/">Roadmap</a><span class="sep">/</span>
+    <span>LPIC-1 + LPIC-2</span>
+  </div>
+
+  <div class="rdm-eyebrow">§ LPIC-1 + LPIC-2 · Linux Professional Institute</div>
+  <h1 class="rdm-h1">Linux <em>до мозга костей.</em></h1>
+  <p class="rdm-lead">44 темы LPIC-1 (Exam 101 + 102) и 41 тема LPIC-2 (Exam 201 + 202) — всё с разборами на maks.top. Первый визит: все темы отмечены как пройденные. Снимай галочки с того, что хочешь повторить.</p>
+
+  <!-- Exam params -->
+  <div class="exams-grid">
+    <div class="exam-card">
+      <div class="exam-card-title">
+        <span>LPIC-1</span>
+        <span class="exam-badge exam-badge-1">Linux Admin I</span>
+      </div>
+      <div class="exam-params">
+        <div class="ep"><div class="ep-label">Экзамены</div><div class="ep-value">101 + 102</div></div>
+        <div class="ep"><div class="ep-label">Вопросов</div><div class="ep-value">60 каждый</div></div>
+        <div class="ep"><div class="ep-label">Время</div><div class="ep-value">90 мин каждый</div></div>
+        <div class="ep"><div class="ep-label">Проходной балл</div><div class="ep-value">500 / 800</div></div>
+        <div class="ep"><div class="ep-label">Стоимость</div><div class="ep-value">~$200 USD</div></div>
+        <div class="ep"><div class="ep-label">Действие</div><div class="ep-value">5 лет</div></div>
+      </div>
+    </div>
+    <div class="exam-card">
+      <div class="exam-card-title">
+        <span>LPIC-2</span>
+        <span class="exam-badge exam-badge-2">Linux Admin II</span>
+      </div>
+      <div class="exam-params">
+        <div class="ep"><div class="ep-label">Экзамены</div><div class="ep-value">201 + 202</div></div>
+        <div class="ep"><div class="ep-label">Вопросов</div><div class="ep-value">60 каждый</div></div>
+        <div class="ep"><div class="ep-label">Время</div><div class="ep-value">90 мин каждый</div></div>
+        <div class="ep"><div class="ep-label">Проходной балл</div><div class="ep-value">500 / 800</div></div>
+        <div class="ep"><div class="ep-label">Стоимость</div><div class="ep-value">~$200 USD</div></div>
+        <div class="ep"><div class="ep-label">Требование</div><div class="ep-value">LPIC-1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overall progress -->
+  <div class="overall-progress">
+    <div class="op-header">
+      <span class="op-title">Общий прогресс</span>
+      <span class="op-count" id="op-count">0 / 85 тем</span>
+    </div>
+    <div class="op-bar"><div class="op-fill" id="op-fill" style="width:0%"></div></div>
+    <div class="op-sub">
+      <span class="op-sub-item">LPIC-1 Exam 101 <strong id="e101cnt">0/22</strong></span>
+      <span class="op-sub-item">LPIC-1 Exam 102 <strong id="e102cnt">0/22</strong></span>
+      <span class="op-sub-item">LPIC-2 Exam 201 <strong id="e201cnt">0/20</strong></span>
+      <span class="op-sub-item">LPIC-2 Exam 202 <strong id="e202cnt">0/21</strong></span>
+    </div>
+  </div>
+
+  <div class="init-notice" id="initNotice" style="display:none">
+    <strong>Первый визит</strong> — все 85 тем отмечены как пройденные. Сними галочки с тем, которые хочешь повторить перед экзаменом.
+  </div>
+
+  <!-- Quick links -->
+  <div class="quick-links">
+    <a href="/certs/lpic-1/" class="ql-btn">🐧 LPIC-1 cert page</a>
+    <a href="/certs/lpic-2/" class="ql-btn">🐧 LPIC-2 cert page</a>
+    <a href="/posts/lpic1/" class="ql-btn">📚 Статьи LPIC-1</a>
+    <a href="/posts/lpic2/" class="ql-btn">📚 Статьи LPIC-2</a>
+  </div>
+
+  <!-- Reset controls -->
+  <div class="reset-row">
+    <button class="check-all-btn" onclick="checkAll()">✓ Отметить всё</button>
+    <button class="reset-btn" onclick="uncheckAll()">✗ Сбросить всё</button>
+    <span class="reset-hint">Используй для подготовки к повторению</span>
+  </div>
+
+  <hr class="rdm-divider">
+
+  <!-- ═══ LPIC-1 ═══ -->
+  <div class="rdm-section-label">LPIC-1 — Linux Administrator I</div>
+
+  <!-- Exam 101 header -->
+  <div class="exam-section">
+    <div class="exam-section-hdr">
+      <span class="exam-section-name">Exam 101 — Hardware · Boot · CLI · Filesystems</span>
+      <div class="exam-section-bar"><div class="exam-section-fill" id="e101-bar" style="width:0%"></div></div>
+      <span class="exam-section-prog" id="e101-prog">0 / 22</span>
+    </div>
+
+    <!-- Topic 101 -->
+    <div class="domain">
+      <details open>
+        <summary class="domain-header">
+          <span class="domain-num">101</span>
+          <span class="domain-name">System Architecture</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t101-bar" style="width:0%"></span></span><span class="dpb-text" id="t101-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-101-1"><input type="checkbox" class="topic-cb" data-key="l1-101-1"><a href="/posts/lpic1/lpic1-101-1-hardware-settings/" class="topic-link" target="_blank">101.1 Hardware Settings — BIOS/UEFI, IRQ, DMA, /sys, /proc, lsmod</a><span class="topic-tag">101.1</span></div>
+          <div class="topic-item" data-key="l1-101-2"><input type="checkbox" class="topic-cb" data-key="l1-101-2"><a href="/posts/lpic1/lpic1-101-2-boot-the-system/" class="topic-link" target="_blank">101.2 Boot the System — GRUB2, kernel parameters, init sequence</a><span class="topic-tag">101.2</span></div>
+          <div class="topic-item" data-key="l1-101-3"><input type="checkbox" class="topic-cb" data-key="l1-101-3"><a href="/posts/lpic1/lpic1-101-3-runlevels-boot-targets/" class="topic-link" target="_blank">101.3 Runlevels / Boot Targets — SysV vs systemd targets, runlevel команды</a><span class="topic-tag">101.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 102 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">102</span>
+          <span class="domain-name">Linux Installation & Package Management</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t102-bar" style="width:0%"></span></span><span class="dpb-text" id="t102-txt">0/5</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-102-1"><input type="checkbox" class="topic-cb" data-key="l1-102-1"><a href="/posts/lpic1/lpic1-102-1-hard-disk-layout/" class="topic-link" target="_blank">102.1 Hard Disk Layout — MBR vs GPT, разделы, swap, LVM basics</a><span class="topic-tag">102.1</span></div>
+          <div class="topic-item" data-key="l1-102-3"><input type="checkbox" class="topic-cb" data-key="l1-102-3"><a href="/posts/lpic1/lpic1-102-3-shared-libraries/" class="topic-link" target="_blank">102.3 Shared Libraries — ldd, ldconfig, LD_LIBRARY_PATH</a><span class="topic-tag">102.3</span></div>
+          <div class="topic-item" data-key="l1-102-4"><input type="checkbox" class="topic-cb" data-key="l1-102-4"><a href="/posts/lpic1/lpic1-102-4-debian-package-management/" class="topic-link" target="_blank">102.4 Debian Package Management — dpkg, apt, apt-get</a><span class="topic-tag">102.4</span></div>
+          <div class="topic-item" data-key="l1-102-5"><input type="checkbox" class="topic-cb" data-key="l1-102-5"><a href="/posts/lpic1/lpic1-102-5-rpm-yum-package-management/" class="topic-link" target="_blank">102.5 RPM / YUM / DNF Package Management</a><span class="topic-tag">102.5</span></div>
+          <div class="topic-item" data-key="l1-102-6"><input type="checkbox" class="topic-cb" data-key="l1-102-6"><a href="/posts/lpic1/lpic1-102-6-linux-virtualization-guest/" class="topic-link" target="_blank">102.6 Linux Virtualization Guest — KVM, containers, cloud-init</a><span class="topic-tag">102.6</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 103 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">103</span>
+          <span class="domain-name">GNU and Unix Commands</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t103-bar" style="width:0%"></span></span><span class="dpb-text" id="t103-txt">0/8</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-103-1"><input type="checkbox" class="topic-cb" data-key="l1-103-1"><a href="/posts/lpic1/lpic1-103-1-work-on-command-line/" class="topic-link" target="_blank">103.1 Work on the Command Line — bash, история, переменные, алиасы</a><span class="topic-tag">103.1</span></div>
+          <div class="topic-item" data-key="l1-103-2"><input type="checkbox" class="topic-cb" data-key="l1-103-2"><a href="/posts/lpic1/lpic1-103-2-text-filters/" class="topic-link" target="_blank">103.2 Text Filters — cat, head, tail, grep, sort, uniq, wc, tr, cut</a><span class="topic-tag">103.2</span></div>
+          <div class="topic-item" data-key="l1-103-3"><input type="checkbox" class="topic-cb" data-key="l1-103-3"><a href="/posts/lpic1/lpic1-103-3-basic-file-management/" class="topic-link" target="_blank">103.3 Basic File Management — ls, cp, mv, rm, mkdir, find, tar, gzip</a><span class="topic-tag">103.3</span></div>
+          <div class="topic-item" data-key="l1-103-4"><input type="checkbox" class="topic-cb" data-key="l1-103-4"><a href="/posts/lpic1/lpic1-103-4-streams-pipes-redirects/" class="topic-link" target="_blank">103.4 Streams, Pipes & Redirects — stdin/stdout/stderr, >, >>, |, tee</a><span class="topic-tag">103.4</span></div>
+          <div class="topic-item" data-key="l1-103-5"><input type="checkbox" class="topic-cb" data-key="l1-103-5"><a href="/posts/lpic1/lpic1-103-5-processes/" class="topic-link" target="_blank">103.5 Processes — ps, top, kill, signals, nice, jobs, bg, fg</a><span class="topic-tag">103.5</span></div>
+          <div class="topic-item" data-key="l1-103-6"><input type="checkbox" class="topic-cb" data-key="l1-103-6"><a href="/posts/lpic1/lpic1-103-6-process-priorities/" class="topic-link" target="_blank">103.6 Process Priorities — nice, renice, ionice</a><span class="topic-tag">103.6</span></div>
+          <div class="topic-item" data-key="l1-103-7"><input type="checkbox" class="topic-cb" data-key="l1-103-7"><a href="/posts/lpic1/lpic1-103-7-regular-expressions/" class="topic-link" target="_blank">103.7 Regular Expressions — regex, grep -E, sed, awk basics</a><span class="topic-tag">103.7</span></div>
+          <div class="topic-item" data-key="l1-103-8"><input type="checkbox" class="topic-cb" data-key="l1-103-8"><a href="/posts/lpic1/lpic1-103-8-basic-file-editing/" class="topic-link" target="_blank">103.8 Basic File Editing — vi/vim команды, nano</a><span class="topic-tag">103.8</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 104 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">104</span>
+          <span class="domain-name">Devices, Linux Filesystems, FHS</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t104-bar" style="width:0%"></span></span><span class="dpb-text" id="t104-txt">0/6</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-104-1"><input type="checkbox" class="topic-cb" data-key="l1-104-1"><a href="/posts/lpic1/lpic1-104-1-partitions-filesystems/" class="topic-link" target="_blank">104.1 Partitions & Filesystems — fdisk, parted, mkfs, ext4/xfs/btrfs</a><span class="topic-tag">104.1</span></div>
+          <div class="topic-item" data-key="l1-104-2"><input type="checkbox" class="topic-cb" data-key="l1-104-2"><a href="/posts/lpic1/lpic1-104-2-filesystem-integrity/" class="topic-link" target="_blank">104.2 Filesystem Integrity — fsck, e2fsck, df, du</a><span class="topic-tag">104.2</span></div>
+          <div class="topic-item" data-key="l1-104-3"><input type="checkbox" class="topic-cb" data-key="l1-104-3"><a href="/posts/lpic1/lpic1-104-3-mounting/" class="topic-link" target="_blank">104.3 Mounting — mount, umount, /etc/fstab, UUID</a><span class="topic-tag">104.3</span></div>
+          <div class="topic-item" data-key="l1-104-5"><input type="checkbox" class="topic-cb" data-key="l1-104-5"><a href="/posts/lpic1/lpic1-104-5-file-permissions/" class="topic-link" target="_blank">104.5 File Permissions — chmod, chown, SUID/SGID/Sticky, umask, ACL</a><span class="topic-tag">104.5</span></div>
+          <div class="topic-item" data-key="l1-104-6"><input type="checkbox" class="topic-cb" data-key="l1-104-6"><a href="/posts/lpic1/lpic1-104-6-links/" class="topic-link" target="_blank">104.6 Hard & Symbolic Links — ln, inode, различия</a><span class="topic-tag">104.6</span></div>
+          <div class="topic-item" data-key="l1-104-7"><input type="checkbox" class="topic-cb" data-key="l1-104-7"><a href="/posts/lpic1/lpic1-104-7-find-fhs/" class="topic-link" target="_blank">104.7 Find Files & FHS — find, locate, updatedb, стандарт FHS</a><span class="topic-tag">104.7</span></div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Exam 102 header -->
+  <div class="exam-section" style="margin-top:16px">
+    <div class="exam-section-hdr">
+      <span class="exam-section-name">Exam 102 — Shell · GUI · Users · System · Network · Security</span>
+      <div class="exam-section-bar"><div class="exam-section-fill" id="e102-bar" style="width:0%"></div></div>
+      <span class="exam-section-prog" id="e102-prog">0 / 22</span>
+    </div>
+
+    <!-- Topic 105 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">105</span>
+          <span class="domain-name">Shells and Shell Scripting</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t105-bar" style="width:0%"></span></span><span class="dpb-text" id="t105-txt">0/5</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-105-1-1"><input type="checkbox" class="topic-cb" data-key="l1-105-1-1"><a href="/posts/lpic1/lpic1-105-1-1-shell-environment/" class="topic-link" target="_blank">105.1 Shell Environment — PATH, export, env, source, .bashrc, .profile</a><span class="topic-tag">105.1</span></div>
+          <div class="topic-item" data-key="l1-105-1-2"><input type="checkbox" class="topic-cb" data-key="l1-105-1-2"><a href="/posts/lpic1/lpic1-105-1-2-shell-variables/" class="topic-link" target="_blank">105.1 Shell Variables — $VAR, ${VAR}, special vars: $?, $$, $!, $#</a><span class="topic-tag">105.1+</span></div>
+          <div class="topic-item" data-key="l1-105-1-3"><input type="checkbox" class="topic-cb" data-key="l1-105-1-3"><a href="/posts/lpic1/lpic1-105-1-3-aliases-functions/" class="topic-link" target="_blank">105.1 Aliases & Functions — alias, unalias, function syntax</a><span class="topic-tag">105.1+</span></div>
+          <div class="topic-item" data-key="l1-105-2-1"><input type="checkbox" class="topic-cb" data-key="l1-105-2-1"><a href="/posts/lpic1/lpic1-105-2-1-scripts/" class="topic-link" target="_blank">105.2 Shell Scripts (Part 1) — shebang, условия, циклы, test</a><span class="topic-tag">105.2</span></div>
+          <div class="topic-item" data-key="l1-105-2-2"><input type="checkbox" class="topic-cb" data-key="l1-105-2-2"><a href="/posts/lpic1/lpic1-105-2-2-scripts/" class="topic-link" target="_blank">105.2 Shell Scripts (Part 2) — функции, массивы, case, read</a><span class="topic-tag">105.2+</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 106 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">106</span>
+          <span class="domain-name">User Interfaces and Desktops</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t106-bar" style="width:0%"></span></span><span class="dpb-text" id="t106-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-106-1"><input type="checkbox" class="topic-cb" data-key="l1-106-1"><a href="/posts/lpic1/lpic1-106-1-x11/" class="topic-link" target="_blank">106.1 X Window System — X11, Wayland, display managers</a><span class="topic-tag">106.1</span></div>
+          <div class="topic-item" data-key="l1-106-2"><input type="checkbox" class="topic-cb" data-key="l1-106-2"><a href="/posts/lpic1/lpic1-106-2-desktops/" class="topic-link" target="_blank">106.2 Graphical Desktops — GNOME, KDE, Xfce, remote desktop</a><span class="topic-tag">106.2</span></div>
+          <div class="topic-item" data-key="l1-106-3"><input type="checkbox" class="topic-cb" data-key="l1-106-3"><a href="/posts/lpic1/lpic1-106-3-accessibility/" class="topic-link" target="_blank">106.3 Accessibility — orca, brltty, визуальные настройки</a><span class="topic-tag">106.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 107 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">107</span>
+          <span class="domain-name">Administrative Tasks</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t107-bar" style="width:0%"></span></span><span class="dpb-text" id="t107-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-107-1"><input type="checkbox" class="topic-cb" data-key="l1-107-1"><a href="/posts/lpic1/lpic1-107-1-users/" class="topic-link" target="_blank">107.1 User & Group Management — useradd, usermod, groupadd, passwd, /etc/passwd</a><span class="topic-tag">107.1</span></div>
+          <div class="topic-item" data-key="l1-107-2"><input type="checkbox" class="topic-cb" data-key="l1-107-2"><a href="/posts/lpic1/lpic1-107-2-scheduling/" class="topic-link" target="_blank">107.2 Scheduling Tasks — cron, crontab, at, anacron, systemd timers</a><span class="topic-tag">107.2</span></div>
+          <div class="topic-item" data-key="l1-107-3"><input type="checkbox" class="topic-cb" data-key="l1-107-3"><a href="/posts/lpic1/lpic1-107-3-localisation/" class="topic-link" target="_blank">107.3 Localisation — locale, timezone, timedatectl, iconv</a><span class="topic-tag">107.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 108 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">108</span>
+          <span class="domain-name">Essential System Services</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t108-bar" style="width:0%"></span></span><span class="dpb-text" id="t108-txt">0/4</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-108-1"><input type="checkbox" class="topic-cb" data-key="l1-108-1"><a href="/posts/lpic1/lpic1-108-1-time/" class="topic-link" target="_blank">108.1 System Time — hwclock, timedatectl, NTP, chrony</a><span class="topic-tag">108.1</span></div>
+          <div class="topic-item" data-key="l1-108-2"><input type="checkbox" class="topic-cb" data-key="l1-108-2"><a href="/posts/lpic1/lpic1-108-2-logging/" class="topic-link" target="_blank">108.2 System Logging — syslog, rsyslog, journald, logrotate</a><span class="topic-tag">108.2</span></div>
+          <div class="topic-item" data-key="l1-108-3"><input type="checkbox" class="topic-cb" data-key="l1-108-3"><a href="/posts/lpic1/lpic1-108-3-mta/" class="topic-link" target="_blank">108.3 MTA Basics — Postfix, sendmail, mail aliases, nullmailer</a><span class="topic-tag">108.3</span></div>
+          <div class="topic-item" data-key="l1-108-4"><input type="checkbox" class="topic-cb" data-key="l1-108-4"><a href="/posts/lpic1/lpic1-108-4-printing/" class="topic-link" target="_blank">108.4 Printing — CUPS, lpr, lpq, lprm, PPD</a><span class="topic-tag">108.4</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 109 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">109</span>
+          <span class="domain-name">Networking Fundamentals</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t109-bar" style="width:0%"></span></span><span class="dpb-text" id="t109-txt">0/4</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-109-1"><input type="checkbox" class="topic-cb" data-key="l1-109-1"><a href="/posts/lpic1/lpic1-109-1-internet-protocols/" class="topic-link" target="_blank">109.1 Internet Protocols — TCP/IP, IPv4/IPv6, ports, ICMP</a><span class="topic-tag">109.1</span></div>
+          <div class="topic-item" data-key="l1-109-2"><input type="checkbox" class="topic-cb" data-key="l1-109-2"><a href="/posts/lpic1/lpic1-109-2-network-config/" class="topic-link" target="_blank">109.2 Network Configuration — ip, ifconfig, nmcli, /etc/network/interfaces</a><span class="topic-tag">109.2</span></div>
+          <div class="topic-item" data-key="l1-109-3"><input type="checkbox" class="topic-cb" data-key="l1-109-3"><a href="/posts/lpic1/lpic1-109-3-troubleshooting/" class="topic-link" target="_blank">109.3 Network Troubleshooting — ping, traceroute, netstat, ss, tcpdump</a><span class="topic-tag">109.3</span></div>
+          <div class="topic-item" data-key="l1-109-4"><input type="checkbox" class="topic-cb" data-key="l1-109-4"><a href="/posts/lpic1/lpic1-109-4-dns/" class="topic-link" target="_blank">109.4 DNS Client — /etc/resolv.conf, /etc/hosts, dig, nslookup, host</a><span class="topic-tag">109.4</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 110 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">110</span>
+          <span class="domain-name">Security</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t110-bar" style="width:0%"></span></span><span class="dpb-text" id="t110-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l1-110-1"><input type="checkbox" class="topic-cb" data-key="l1-110-1"><a href="/posts/lpic1/lpic1-110-1-security-admin/" class="topic-link" target="_blank">110.1 Security Administration — su, sudo, /etc/sudoers, PAM basics, ulimit</a><span class="topic-tag">110.1</span></div>
+          <div class="topic-item" data-key="l1-110-2"><input type="checkbox" class="topic-cb" data-key="l1-110-2"><a href="/posts/lpic1/lpic1-110-2-host-security/" class="topic-link" target="_blank">110.2 Host Security — iptables basics, xinetd/inetd, SSH hardening</a><span class="topic-tag">110.2</span></div>
+          <div class="topic-item" data-key="l1-110-3"><input type="checkbox" class="topic-cb" data-key="l1-110-3"><a href="/posts/lpic1/lpic1-110-3-encryption/" class="topic-link" target="_blank">110.3 Encryption — GPG, openssl, LUKS, symmetric/asymmetric</a><span class="topic-tag">110.3</span></div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <hr class="rdm-divider">
+
+  <!-- ═══ LPIC-2 ═══ -->
+  <div class="rdm-section-label">LPIC-2 — Linux Administrator II</div>
+
+  <!-- Exam 201 header -->
+  <div class="exam-section">
+    <div class="exam-section-hdr">
+      <span class="exam-section-name">Exam 201 — Kernel · Boot · Storage · Networking · System</span>
+      <div class="exam-section-bar"><div class="exam-section-fill" id="e201-bar" style="width:0%"></div></div>
+      <span class="exam-section-prog" id="e201-prog">0 / 20</span>
+    </div>
+
+    <!-- Topic 200 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">200</span>
+          <span class="domain-name">Capacity Planning</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t200-bar" style="width:0%"></span></span><span class="dpb-text" id="t200-txt">0/2</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-200-1"><input type="checkbox" class="topic-cb" data-key="l2-200-1"><a href="/posts/lpic2/lpic2-200-1-capacity-planning/" class="topic-link" target="_blank">200.1 Capacity Planning — sar, iostat, vmstat, collectd, SNMP</a><span class="topic-tag">200.1</span></div>
+          <div class="topic-item" data-key="l2-200-2"><input type="checkbox" class="topic-cb" data-key="l2-200-2"><a href="/posts/lpic2/lpic2-200-2-predict-future-resource-needs/" class="topic-link" target="_blank">200.2 Predict Resource Needs — тренды, мониторинг, прогнозирование</a><span class="topic-tag">200.2</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 201 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">201</span>
+          <span class="domain-name">Linux Kernel</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t201-bar" style="width:0%"></span></span><span class="dpb-text" id="t201-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-201-1"><input type="checkbox" class="topic-cb" data-key="l2-201-1"><a href="/posts/lpic2/lpic2-201-1-kernel-components/" class="topic-link" target="_blank">201.1 Kernel Components — модули, /boot, uname, /proc/sys</a><span class="topic-tag">201.1</span></div>
+          <div class="topic-item" data-key="l2-201-2"><input type="checkbox" class="topic-cb" data-key="l2-201-2"><a href="/posts/lpic2/lpic2-201-2-compiling-linux-kernel/" class="topic-link" target="_blank">201.2 Compiling Linux Kernel — make menuconfig, make, make install</a><span class="topic-tag">201.2</span></div>
+          <div class="topic-item" data-key="l2-201-3"><input type="checkbox" class="topic-cb" data-key="l2-201-3"><a href="/posts/lpic2/lpic2-201-3-kernel-runtime-management/" class="topic-link" target="_blank">201.3 Kernel Runtime Management — modprobe, sysctl, /sys, udev</a><span class="topic-tag">201.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 202 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">202</span>
+          <span class="domain-name">System Startup</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t202-bar" style="width:0%"></span></span><span class="dpb-text" id="t202-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-202-1"><input type="checkbox" class="topic-cb" data-key="l2-202-1"><a href="/posts/lpic2/lpic2-202-1-sysv-init-systemd/" class="topic-link" target="_blank">202.1 SysV Init & systemd — unit files, targets, dependencies, journalctl</a><span class="topic-tag">202.1</span></div>
+          <div class="topic-item" data-key="l2-202-2"><input type="checkbox" class="topic-cb" data-key="l2-202-2"><a href="/posts/lpic2/lpic2-202-2-system-recovery/" class="topic-link" target="_blank">202.2 System Recovery — rescue mode, emergency mode, initrd, fsck</a><span class="topic-tag">202.2</span></div>
+          <div class="topic-item" data-key="l2-202-3"><input type="checkbox" class="topic-cb" data-key="l2-202-3"><a href="/posts/lpic2/lpic2-202-3-alternate-bootloaders/" class="topic-link" target="_blank">202.3 Alternate Bootloaders — GRUB Legacy, GRUB2 advanced, PXE, UEFI</a><span class="topic-tag">202.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 203 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">203</span>
+          <span class="domain-name">Filesystem & Devices</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t203-bar" style="width:0%"></span></span><span class="dpb-text" id="t203-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-203-1"><input type="checkbox" class="topic-cb" data-key="l2-203-1"><a href="/posts/lpic2/lpic2-203-1-operating-linux-filesystem/" class="topic-link" target="_blank">203.1 Operating Linux Filesystem — ext4/xfs/btrfs/ZFS tune, inode, journal</a><span class="topic-tag">203.1</span></div>
+          <div class="topic-item" data-key="l2-203-2"><input type="checkbox" class="topic-cb" data-key="l2-203-2"><a href="/posts/lpic2/lpic2-203-2-maintaining-linux-filesystem/" class="topic-link" target="_blank">203.2 Maintaining Filesystems — fsck, tune2fs, xfs_repair, btrfs scrub</a><span class="topic-tag">203.2</span></div>
+          <div class="topic-item" data-key="l2-203-3"><input type="checkbox" class="topic-cb" data-key="l2-203-3"><a href="/posts/lpic2/lpic2-203-3-filesystem-options/" class="topic-link" target="_blank">203.3 Filesystem Options — tmpfs, NFS mount options, automount, quota</a><span class="topic-tag">203.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 204 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">204</span>
+          <span class="domain-name">Advanced Storage</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t204-bar" style="width:0%"></span></span><span class="dpb-text" id="t204-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-204-1"><input type="checkbox" class="topic-cb" data-key="l2-204-1"><a href="/posts/lpic2/lpic2-204-1-configuring-raid/" class="topic-link" target="_blank">204.1 Configuring RAID — mdadm, RAID 0/1/5/10, мониторинг, восстановление</a><span class="topic-tag">204.1</span></div>
+          <div class="topic-item" data-key="l2-204-2"><input type="checkbox" class="topic-cb" data-key="l2-204-2"><a href="/posts/lpic2/lpic2-204-2-storage-device-access/" class="topic-link" target="_blank">204.2 Storage Device Access — udev rules, iSCSI, multipath, SAN basics</a><span class="topic-tag">204.2</span></div>
+          <div class="topic-item" data-key="l2-204-3"><input type="checkbox" class="topic-cb" data-key="l2-204-3"><a href="/posts/lpic2/lpic2-204-3-logical-volume-manager/" class="topic-link" target="_blank">204.3 Logical Volume Manager — pvcreate, vgcreate, lvcreate, snapshots, resize</a><span class="topic-tag">204.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 205 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">205</span>
+          <span class="domain-name">Networking Configuration</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t205-bar" style="width:0%"></span></span><span class="dpb-text" id="t205-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-205-1"><input type="checkbox" class="topic-cb" data-key="l2-205-1"><a href="/posts/lpic2/lpic2-205-1-basic-networking-configuration/" class="topic-link" target="_blank">205.1 Basic Networking Config — ip, routes, bonding/bridge, VLAN interfaces</a><span class="topic-tag">205.1</span></div>
+          <div class="topic-item" data-key="l2-205-2"><input type="checkbox" class="topic-cb" data-key="l2-205-2"><a href="/posts/lpic2/lpic2-205-2-advanced-network-configuration/" class="topic-link" target="_blank">205.2 Advanced Network Config — netfilter, tc (traffic control), iproute2 advanced</a><span class="topic-tag">205.2</span></div>
+          <div class="topic-item" data-key="l2-205-3"><input type="checkbox" class="topic-cb" data-key="l2-205-3"><a href="/posts/lpic2/lpic2-205-3-troubleshooting-network/" class="topic-link" target="_blank">205.3 Troubleshooting Network — wireshark/tcpdump, ss, netstat, MTU, ARP</a><span class="topic-tag">205.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 206 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">206</span>
+          <span class="domain-name">System Maintenance</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t206-bar" style="width:0%"></span></span><span class="dpb-text" id="t206-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-206-1"><input type="checkbox" class="topic-cb" data-key="l2-206-1"><a href="/posts/lpic2/lpic2-206-1-make-install-from-source/" class="topic-link" target="_blank">206.1 Make & Install from Source — ./configure, make, checkinstall, pkg-config</a><span class="topic-tag">206.1</span></div>
+          <div class="topic-item" data-key="l2-206-2"><input type="checkbox" class="topic-cb" data-key="l2-206-2"><a href="/posts/lpic2/lpic2-206-2-backup-operations/" class="topic-link" target="_blank">206.2 Backup Operations — tar, rsync, dump/restore, Amanda, Bacula</a><span class="topic-tag">206.2</span></div>
+          <div class="topic-item" data-key="l2-206-3"><input type="checkbox" class="topic-cb" data-key="l2-206-3"><a href="/posts/lpic2/lpic2-206-3-notify-users/" class="topic-link" target="_blank">206.3 Notify Users — wall, /etc/motd, /etc/issue, write, mesg</a><span class="topic-tag">206.3</span></div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Exam 202 header -->
+  <div class="exam-section" style="margin-top:16px">
+    <div class="exam-section-hdr">
+      <span class="exam-section-name">Exam 202 — DNS · Web · File Sharing · Email · Security</span>
+      <div class="exam-section-bar"><div class="exam-section-fill" id="e202-bar" style="width:0%"></div></div>
+      <span class="exam-section-prog" id="e202-prog">0 / 21</span>
+    </div>
+
+    <!-- Topic 207 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">207</span>
+          <span class="domain-name">DNS</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t207-bar" style="width:0%"></span></span><span class="dpb-text" id="t207-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-207-1"><input type="checkbox" class="topic-cb" data-key="l2-207-1"><a href="/posts/lpic2/lpic2-207-1-basic-dns-server-configuration/" class="topic-link" target="_blank">207.1 Basic DNS Server — BIND, named.conf, zones, A/MX/CNAME/PTR записи</a><span class="topic-tag">207.1</span></div>
+          <div class="topic-item" data-key="l2-207-2"><input type="checkbox" class="topic-cb" data-key="l2-207-2"><a href="/posts/lpic2/lpic2-207-2-dns-zone-management/" class="topic-link" target="_blank">207.2 DNS Zone Management — zone transfers, AXFR, NOTIFY, rndc</a><span class="topic-tag">207.2</span></div>
+          <div class="topic-item" data-key="l2-207-3"><input type="checkbox" class="topic-cb" data-key="l2-207-3"><a href="/posts/lpic2/lpic2-207-3-dns-server-security/" class="topic-link" target="_blank">207.3 DNS Server Security — DNSSEC, TSIG, split DNS, chroot</a><span class="topic-tag">207.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 208 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">208</span>
+          <span class="domain-name">Web Services</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t208-bar" style="width:0%"></span></span><span class="dpb-text" id="t208-txt">0/4</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-208-1"><input type="checkbox" class="topic-cb" data-key="l2-208-1"><a href="/posts/lpic2/lpic2-208-1-apache-basic-configuration/" class="topic-link" target="_blank">208.1 Apache Basic Config — VirtualHosts, .htaccess, modules, logs</a><span class="topic-tag">208.1</span></div>
+          <div class="topic-item" data-key="l2-208-2"><input type="checkbox" class="topic-cb" data-key="l2-208-2"><a href="/posts/lpic2/lpic2-208-2-https-configuration/" class="topic-link" target="_blank">208.2 HTTPS Configuration — SSL/TLS, Let's Encrypt, certbot, Apache/Nginx HTTPS</a><span class="topic-tag">208.2</span></div>
+          <div class="topic-item" data-key="l2-208-3"><input type="checkbox" class="topic-cb" data-key="l2-208-3"><a href="/posts/lpic2/lpic2-208-3-squid-proxy/" class="topic-link" target="_blank">208.3 Squid Proxy — ACL, caching, SSL bump, reverse proxy</a><span class="topic-tag">208.3</span></div>
+          <div class="topic-item" data-key="l2-208-4"><input type="checkbox" class="topic-cb" data-key="l2-208-4"><a href="/posts/lpic2/lpic2-208-4-nginx/" class="topic-link" target="_blank">208.4 Nginx — server blocks, reverse proxy, load balancing, FastCGI</a><span class="topic-tag">208.4</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 209 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">209</span>
+          <span class="domain-name">File Sharing</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t209-bar" style="width:0%"></span></span><span class="dpb-text" id="t209-txt">0/2</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-209-1"><input type="checkbox" class="topic-cb" data-key="l2-209-1"><a href="/posts/lpic2/lpic2-209-1-samba/" class="topic-link" target="_blank">209.1 Samba — smb.conf, shares, users, winbind, AD integration</a><span class="topic-tag">209.1</span></div>
+          <div class="topic-item" data-key="l2-209-2"><input type="checkbox" class="topic-cb" data-key="l2-209-2"><a href="/posts/lpic2/lpic2-209-2-nfs/" class="topic-link" target="_blank">209.2 NFS — /etc/exports, mount options, NFSv4, autofs</a><span class="topic-tag">209.2</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 210 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">210</span>
+          <span class="domain-name">Network Client Management</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t210-bar" style="width:0%"></span></span><span class="dpb-text" id="t210-txt">0/4</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-210-1"><input type="checkbox" class="topic-cb" data-key="l2-210-1"><a href="/posts/lpic2/lpic2-210-1-dhcp/" class="topic-link" target="_blank">210.1 DHCP — isc-dhcp-server, dhcpd.conf, reservations, relay agent</a><span class="topic-tag">210.1</span></div>
+          <div class="topic-item" data-key="l2-210-2"><input type="checkbox" class="topic-cb" data-key="l2-210-2"><a href="/posts/lpic2/lpic2-210-2-pam/" class="topic-link" target="_blank">210.2 PAM — /etc/pam.d/, модули, stacking, pwquality</a><span class="topic-tag">210.2</span></div>
+          <div class="topic-item" data-key="l2-210-3"><input type="checkbox" class="topic-cb" data-key="l2-210-3"><a href="/posts/lpic2/lpic2-210-3-ldap-client/" class="topic-link" target="_blank">210.3 LDAP Client — /etc/ldap.conf, nss_ldap, PAM LDAP, sssd</a><span class="topic-tag">210.3</span></div>
+          <div class="topic-item" data-key="l2-210-4"><input type="checkbox" class="topic-cb" data-key="l2-210-4"><a href="/posts/lpic2/lpic2-210-4-openldap/" class="topic-link" target="_blank">210.4 OpenLDAP — slapd, DIT, schemas, ACL, репликация, ldapmodify</a><span class="topic-tag">210.4</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 211 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">211</span>
+          <span class="domain-name">Email Services</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t211-bar" style="width:0%"></span></span><span class="dpb-text" id="t211-txt">0/3</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-211-1"><input type="checkbox" class="topic-cb" data-key="l2-211-1"><a href="/posts/lpic2/lpic2-211-1-email-servers/" class="topic-link" target="_blank">211.1 Email Servers — Postfix, Exim, qmail, main.cf, virtual domains</a><span class="topic-tag">211.1</span></div>
+          <div class="topic-item" data-key="l2-211-2"><input type="checkbox" class="topic-cb" data-key="l2-211-2"><a href="/posts/lpic2/lpic2-211-2-email-delivery/" class="topic-link" target="_blank">211.2 Email Delivery — procmail, SPAM-фильтрация, SpamAssassin, amavisd</a><span class="topic-tag">211.2</span></div>
+          <div class="topic-item" data-key="l2-211-3"><input type="checkbox" class="topic-cb" data-key="l2-211-3"><a href="/posts/lpic2/lpic2-211-3-mailbox-access/" class="topic-link" target="_blank">211.3 Mailbox Access — Dovecot, IMAP/POP3, SSL, Courier</a><span class="topic-tag">211.3</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Topic 212 -->
+    <div class="domain">
+      <details>
+        <summary class="domain-header">
+          <span class="domain-num">212</span>
+          <span class="domain-name">System Security</span>
+          <span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" id="t212-bar" style="width:0%"></span></span><span class="dpb-text" id="t212-txt">0/5</span></span>
+          <span class="domain-arrow">›</span>
+        </summary>
+        <div class="domain-body">
+          <div class="topic-item" data-key="l2-212-1"><input type="checkbox" class="topic-cb" data-key="l2-212-1"><a href="/posts/lpic2/lpic2-212-1-configuring-router/" class="topic-link" target="_blank">212.1 Configuring a Router — iptables/nftables, IP forwarding, NAT, MASQUERADE</a><span class="topic-tag">212.1</span></div>
+          <div class="topic-item" data-key="l2-212-2"><input type="checkbox" class="topic-cb" data-key="l2-212-2"><a href="/posts/lpic2/lpic2-212-2-ftp-servers/" class="topic-link" target="_blank">212.2 FTP Servers — vsftpd, ProFTPD, passive mode, chroot, TLS</a><span class="topic-tag">212.2</span></div>
+          <div class="topic-item" data-key="l2-212-3"><input type="checkbox" class="topic-cb" data-key="l2-212-3"><a href="/posts/lpic2/lpic2-212-3-openssh/" class="topic-link" target="_blank">212.3 Secure Shell — sshd_config, key-based auth, tunnelling, сертификаты</a><span class="topic-tag">212.3</span></div>
+          <div class="topic-item" data-key="l2-212-4"><input type="checkbox" class="topic-cb" data-key="l2-212-4"><a href="/posts/lpic2/lpic2-212-4-security-tasks/" class="topic-link" target="_blank">212.4 Security Tasks — fail2ban, intrusion detection, Lynis, auditd</a><span class="topic-tag">212.4</span></div>
+          <div class="topic-item" data-key="l2-212-5"><input type="checkbox" class="topic-cb" data-key="l2-212-5"><a href="/posts/lpic2/lpic2-212-5-openvpn/" class="topic-link" target="_blank">212.5 OpenVPN — TLS, PKI, server/client config, tap vs tun</a><span class="topic-tag">212.5</span></div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <hr class="rdm-divider">
+  <div style="text-align:center;padding:8px 0">
+    <a href="/roadmap/" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:0.05em;">← Вернуться к DevOps Roadmap</a>
+  </div>
+
+</main>
+
+<nav class="mob-bottom-nav">
+  <a href="/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></a>
+  <a href="/posts/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg><span>Blog</span></a>
+  <a href="/certs/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg><span>Certs</span></a>
+  <a href="/kb/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>KB</span></a>
+  <a href="/about/" class="mob-bnav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>About</span></a>
+</nav>
+
+<footer>
+  <span class="footer-logo">maks.top</span>
+  <span>Hugo · GitHub Pages · Pagefind</span>
+  <span>Sydney · 2026</span>
+</footer>
+
+<script>
+function toggleTheme(){
+  const html=document.documentElement;const isDark=html.getAttribute('data-theme')==='dark';const next=isDark?'light':'dark';
+  html.setAttribute('data-theme',next);localStorage.setItem('theme',next);
+  const f=document.getElementById('favicon');if(f)f.href=next==='dark'?'/favicon-dark.svg':'/favicon-light.svg';
+  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=isDark?'☀️':'🌙');
+}
+function toggleMobMenu(){
+  const d=document.getElementById('mobDrawer'),o=document.getElementById('mobOverlay'),b=document.getElementById('burgerBtn');
+  const open=d.classList.toggle('open');o.classList.toggle('open',open);b.classList.toggle('open',open);
+}
+function closeMobMenu(){
+  document.getElementById('mobDrawer').classList.remove('open');
+  document.getElementById('mobOverlay').classList.remove('open');
+  document.getElementById('burgerBtn').classList.remove('open');
+}
+(function(){
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.querySelectorAll('#themeBtn,#themeBtnMob').forEach(b=>b.textContent=isDark?'🌙':'☀️');
+})();
+
+const STORE_KEY = 'rdm.lpic';
+const INIT_KEY  = 'rdm.lpic.init';
+
+// Topic groupings
+const GROUPS = {
+  t101:  { keys:['l1-101-1','l1-101-2','l1-101-3'], bar:'t101-bar', txt:'t101-txt' },
+  t102:  { keys:['l1-102-1','l1-102-3','l1-102-4','l1-102-5','l1-102-6'], bar:'t102-bar', txt:'t102-txt' },
+  t103:  { keys:['l1-103-1','l1-103-2','l1-103-3','l1-103-4','l1-103-5','l1-103-6','l1-103-7','l1-103-8'], bar:'t103-bar', txt:'t103-txt' },
+  t104:  { keys:['l1-104-1','l1-104-2','l1-104-3','l1-104-5','l1-104-6','l1-104-7'], bar:'t104-bar', txt:'t104-txt' },
+  t105:  { keys:['l1-105-1-1','l1-105-1-2','l1-105-1-3','l1-105-2-1','l1-105-2-2'], bar:'t105-bar', txt:'t105-txt' },
+  t106:  { keys:['l1-106-1','l1-106-2','l1-106-3'], bar:'t106-bar', txt:'t106-txt' },
+  t107:  { keys:['l1-107-1','l1-107-2','l1-107-3'], bar:'t107-bar', txt:'t107-txt' },
+  t108:  { keys:['l1-108-1','l1-108-2','l1-108-3','l1-108-4'], bar:'t108-bar', txt:'t108-txt' },
+  t109:  { keys:['l1-109-1','l1-109-2','l1-109-3','l1-109-4'], bar:'t109-bar', txt:'t109-txt' },
+  t110:  { keys:['l1-110-1','l1-110-2','l1-110-3'], bar:'t110-bar', txt:'t110-txt' },
+  t200:  { keys:['l2-200-1','l2-200-2'], bar:'t200-bar', txt:'t200-txt' },
+  t201:  { keys:['l2-201-1','l2-201-2','l2-201-3'], bar:'t201-bar', txt:'t201-txt' },
+  t202:  { keys:['l2-202-1','l2-202-2','l2-202-3'], bar:'t202-bar', txt:'t202-txt' },
+  t203:  { keys:['l2-203-1','l2-203-2','l2-203-3'], bar:'t203-bar', txt:'t203-txt' },
+  t204:  { keys:['l2-204-1','l2-204-2','l2-204-3'], bar:'t204-bar', txt:'t204-txt' },
+  t205:  { keys:['l2-205-1','l2-205-2','l2-205-3'], bar:'t205-bar', txt:'t205-txt' },
+  t206:  { keys:['l2-206-1','l2-206-2','l2-206-3'], bar:'t206-bar', txt:'t206-txt' },
+  t207:  { keys:['l2-207-1','l2-207-2','l2-207-3'], bar:'t207-bar', txt:'t207-txt' },
+  t208:  { keys:['l2-208-1','l2-208-2','l2-208-3','l2-208-4'], bar:'t208-bar', txt:'t208-txt' },
+  t209:  { keys:['l2-209-1','l2-209-2'], bar:'t209-bar', txt:'t209-txt' },
+  t210:  { keys:['l2-210-1','l2-210-2','l2-210-3','l2-210-4'], bar:'t210-bar', txt:'t210-txt' },
+  t211:  { keys:['l2-211-1','l2-211-2','l2-211-3'], bar:'t211-bar', txt:'t211-txt' },
+  t212:  { keys:['l2-212-1','l2-212-2','l2-212-3','l2-212-4','l2-212-5'], bar:'t212-bar', txt:'t212-txt' }
+};
+
+const EXAMS = {
+  e101: { groups:['t101','t102','t103','t104'], total:22, bar:'e101-bar', prog:'e101-prog', cnt:'e101cnt' },
+  e102: { groups:['t105','t106','t107','t108','t109','t110'], total:22, bar:'e102-bar', prog:'e102-prog', cnt:'e102cnt' },
+  e201: { groups:['t200','t201','t202','t203','t204','t205','t206'], total:20, bar:'e201-bar', prog:'e201-prog', cnt:'e201cnt' },
+  e202: { groups:['t207','t208','t209','t210','t211','t212'], total:21, bar:'e202-bar', prog:'e202-prog', cnt:'e202cnt' }
+};
+const TOTAL = 85;
+
+function getAllKeys() {
+  return Object.values(GROUPS).flatMap(g => g.keys);
+}
+
+function loadData() { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+function saveData(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+
+// Pre-check all on first visit
+if (!localStorage.getItem(INIT_KEY)) {
+  const d = {};
+  getAllKeys().forEach(k => d[k] = true);
+  saveData(d);
+  localStorage.setItem(INIT_KEY, '1');
+  const notice = document.getElementById('initNotice');
+  if (notice) notice.style.display = 'block';
+}
+
+function updateUI(data) {
+  let grand = 0;
+
+  // Per-topic bars
+  Object.entries(GROUPS).forEach(([, g]) => {
+    const done = g.keys.filter(k => data[k]).length;
+    const pct = Math.round(done / g.keys.length * 100);
+    const bar = document.getElementById(g.bar);
+    const txt = document.getElementById(g.txt);
+    if (bar) bar.style.width = pct + '%';
+    if (txt) txt.textContent = done + '/' + g.keys.length;
+  });
+
+  // Per-exam bars + counters
+  Object.entries(EXAMS).forEach(([, e]) => {
+    const done = e.groups.reduce((s, gk) => s + GROUPS[gk].keys.filter(k => data[k]).length, 0);
+    grand += done;
+    const pct = Math.round(done / e.total * 100);
+    const bar = document.getElementById(e.bar);
+    const prog = document.getElementById(e.prog);
+    const cnt = document.getElementById(e.cnt);
+    if (bar) bar.style.width = pct + '%';
+    if (prog) prog.textContent = done + ' / ' + e.total;
+    if (cnt) cnt.textContent = done + '/' + e.total;
+  });
+
+  // Overall
+  const pct = Math.round(grand / TOTAL * 100);
+  const fill = document.getElementById('op-fill');
+  const count = document.getElementById('op-count');
+  if (fill) fill.style.width = pct + '%';
+  if (count) count.textContent = grand + ' / ' + TOTAL + ' тем · ' + pct + '%';
+}
+
+// Init checkboxes
+const data = loadData();
+document.querySelectorAll('.topic-cb').forEach(cb => {
+  const key = cb.dataset.key;
+  cb.checked = !!data[key];
+  const item = cb.closest('.topic-item');
+  if (cb.checked && item) item.classList.add('done');
+  cb.addEventListener('change', () => {
+    const d = loadData();
+    d[key] = cb.checked;
+    saveData(d);
+    const it = cb.closest('.topic-item');
+    if (it) it.classList.toggle('done', cb.checked);
+    updateUI(d);
+  });
+});
+updateUI(data);
+
+function checkAll() {
+  const d = {};
+  getAllKeys().forEach(k => d[k] = true);
+  saveData(d);
+  document.querySelectorAll('.topic-cb').forEach(cb => {
+    cb.checked = true;
+    const it = cb.closest('.topic-item');
+    if (it) it.classList.add('done');
+  });
+  updateUI(d);
+}
+
+function uncheckAll() {
+  saveData({});
+  document.querySelectorAll('.topic-cb').forEach(cb => {
+    cb.checked = false;
+    const it = cb.closest('.topic-item');
+    if (it) it.classList.remove('done');
+  });
+  updateUI({});
+}
+</script>
+</body>
+</html>
