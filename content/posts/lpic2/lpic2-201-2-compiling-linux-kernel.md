@@ -232,7 +232,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg   # RHEL/CentOS
 
 Kernel modules are `.ko` object files loaded into the kernel on demand. All modules live in a directory hierarchy under `/lib/modules/<kernel-version>/`.
 
-```
+```ascii
 /lib/modules/4.3.3/
 ├── kernel/
 │   ├── drivers/
