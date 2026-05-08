@@ -335,18 +335,19 @@
       </div>
     </div>
 
-    <!-- LPIC-2 -->
-    <div class="subrm-card disabled">
+    <!-- LPIC -->
+    <a href="/roadmap/lpic/" class="subrm-card" id="card-lpic">
       <div class="subrm-card-top">
-        <div class="subrm-card-title"><span class="subrm-card-icon">🐧</span> LPIC-2</div>
-        <span class="subrm-badge subrm-badge-planned">Coming Soon</span>
+        <div class="subrm-card-title"><span class="subrm-card-icon">🐧</span> Linux (LPIC-1, LPIC-2)</div>
+        <span class="subrm-badge subrm-badge-progress" id="badge-lpic">In Progress</span>
       </div>
-      <div class="subrm-desc">Linux Professional Institute — ядро, сеть, сервисы, безопасность, администрирование</div>
+      <div class="subrm-desc">Linux Professional Institute — 44 темы LPIC-1 + 41 тема LPIC-2, статьи на maks.top</div>
       <div class="subrm-progress-row">
-        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" style="width:0%"></div></div>
-        <div class="subrm-progress-label"><span>— / — тем</span><strong>—</strong></div>
+        <div class="subrm-progress-bar"><div class="subrm-progress-fill subrm-progress-fill-amber" id="bar-lpic" style="width:0%"></div></div>
+        <div class="subrm-progress-label"><span id="label-lpic">0 / 85 тем</span><strong id="pct-lpic">0%</strong></div>
       </div>
-    </div>
+      <span class="subrm-card-arrow">→</span>
+    </a>
   </div>
 
   <hr class="rdm-divider">
@@ -627,6 +628,7 @@ function loadProgress(key, total, barId, labelId, pctId, badgeId) {
 
 loadProgress('rdm.ccna', 36, 'bar-ccna', 'label-ccna', 'pct-ccna', 'badge-ccna');
 loadProgress('rdm.aws',  64, 'bar-aws',  'label-aws',  'pct-aws',  'badge-aws');
+loadProgress('rdm.lpic', 85, 'bar-lpic', 'label-lpic', 'pct-lpic', 'badge-lpic');
 </script>
 </body>
 </html>
