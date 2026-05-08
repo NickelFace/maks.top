@@ -79,7 +79,7 @@ Browser cache often masks CSS changes during local development:
 
 Deploys automatically on every push to the **`hugo`** branch.
 
-```
+```ascii
 git push origin hugo
         │
         ▼

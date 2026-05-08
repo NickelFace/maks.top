@@ -51,7 +51,7 @@ Key rule: **a more specific path always overrides the default**.
 
 ## Directory structure
 
-```
+```ascii
 maks.top/
 │
 ├── hugo.toml                        # Site configuration
@@ -140,7 +140,7 @@ maks.top/
 
 ## Build pipeline: from push to live site
 
-```
+```ascii
 git push origin hugo
         │
         ▼
