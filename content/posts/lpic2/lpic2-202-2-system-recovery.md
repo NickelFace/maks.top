@@ -420,7 +420,7 @@ update-grub
 
 ## /boot/ and /boot/grub/ Layout
 
-```
+```ascii
 /boot/
 ├── vmlinuz-5.15.0-91-generic    # compressed kernel image
 ├── System.map-5.15.0-91-generic # kernel symbol table
