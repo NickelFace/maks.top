@@ -591,19 +591,40 @@
 .certs-idx-badge {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 999px;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-self: start;
+  border: 1px solid currentColor;
+  background: transparent;
+  isolation: isolate;
 }
 
-.certs-idx-badge-passed   { background: oklch(0.28 0.06 150 / 0.5); color: var(--accent2); }
-.certs-idx-badge-progress { background: oklch(0.26 0.06 70  / 0.4); color: var(--accent);  }
-.certs-idx-badge-planned  { background: var(--bg3); color: var(--text3); }
+.certs-idx-badge-passed {
+  color: var(--accent2);
+  background: color-mix(in oklab, var(--accent2) 14%, transparent);
+}
+.certs-idx-badge-progress {
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+}
+.certs-idx-badge-planned {
+  color: var(--text3);
+  border-color: var(--border);
+  background: transparent;
+}
+
+.certs-idx-row:hover .certs-idx-badge {
+  background: color-mix(in oklab, currentColor 18%, transparent);
+}
+.certs-idx-row:hover .certs-idx-badge-planned {
+  background: var(--bg3);
+}
 
 .certs-idx-arts {
   font-family: 'JetBrains Mono', monospace;
