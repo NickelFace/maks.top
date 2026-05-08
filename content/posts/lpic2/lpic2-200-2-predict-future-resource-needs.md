@@ -326,7 +326,7 @@ Example: disk is 70% full, growing at 5% per month
 
 ### Consequences
 
-```
+```ascii
 Resource Exhaustion
        │
        ├──► Denial of Service (DoS)
