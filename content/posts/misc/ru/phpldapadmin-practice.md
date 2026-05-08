@@ -89,7 +89,7 @@ sudo dpkg-reconfigure slapd
 
 Стенд построен на базе домена `lpiclab.com`:
 
-```
+```ascii
 dc=lpiclab,dc=com
 ├── ou=People          # пользователи
 │   ├── uid=jsmith
