@@ -46,6 +46,14 @@
   {{ else if .IsSection }}
     {{ if eq .Section "posts" }}
       <span>Blog</span>
+    {{ else if eq .Section "kb" }}
+      {{ if .Parent.IsHome }}
+        <span>KB</span>
+      {{ else }}
+        <a href="{{ "/kb/" | relURL }}">KB</a>
+        <span>/</span>
+        <span>{{ .Title }}</span>
+      {{ end }}
     {{ else }}
       <span>{{ .Section }}</span>
     {{ end }}
