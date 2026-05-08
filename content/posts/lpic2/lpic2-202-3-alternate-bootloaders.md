@@ -102,7 +102,7 @@ syslinux --install -m -a /dev/sdb1
 
 ISOLINUX boots from CD/DVD. Unlike `syslinux`, the ISOLINUX installer does not write directly to a device — it generates an ISO image from a directory using `xorriso`. The directory must contain an `isolinux/` folder with `isolinux.bin`.
 
-```
+```ascii
 # Minimum directory structure for building an ISO
 my-iso/
 ├── isolinux/
@@ -250,7 +250,7 @@ Boot sequence for BIOS:
 
 TFTP server layout:
 
-```
+```ascii
 /tftpboot/
 ├── pxelinux.0                 # main PXELINUX bootloader
 ├── ldlinux.c32                # required library
@@ -313,7 +313,7 @@ On systems with Windows 8, UEFI settings can be reached via "Advanced startup op
 
 Shim is a small signed bootloader shim. UEFI launches `shim.efi`, which in turn launches `grubx64.efi`. This is convenient: shim is signed by a third party, while GRUB can be updated without re-signing.
 
-```
+```ascii
 ESP (/boot/efi/)
 └── EFI/
     └── uefi/
@@ -344,7 +344,7 @@ bootctl update
 
 The ESP must be mounted, preferably at `/boot`. Configuration is stored in `/boot/loader/`:
 
-```
+```ascii
 /boot/loader/
 ├── loader.conf           # main bootloader config
 └── entries/
