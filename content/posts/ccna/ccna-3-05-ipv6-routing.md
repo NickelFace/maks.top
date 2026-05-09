@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 3.5 IPv6 Routing"
-date: 2026-03-19
+date: 2026-08-21
 description: "Enabling IPv6 routing on Cisco IOS, IPv6 static routes, verification, OSPFv3 basics and NDP as the IPv6 replacement for ARP."
 tags: ["CCNA", "Cisco", "IPv6", "OSPFv3", "static routing"]
 categories: ["CCNA"]

@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 4.2 NTP and DHCP"
-date: 2026-03-26
+date: 2026-08-26
 description: "Configuring a DHCP server on Cisco IOS, relay agent (ip helper-address), NTP stratum, time synchronization and NTP authentication."
 tags: ["CCNA", "Cisco", "NTP", "DHCP", "IP services"]
 categories: ["CCNA"]

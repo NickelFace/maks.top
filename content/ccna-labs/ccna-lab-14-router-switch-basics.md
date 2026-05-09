@@ -1,6 +1,6 @@
 ---
 title: "Lab 14 — Cisco Router and Switch Basics"
-date: 2026-05-07
+date: 2026-10-11
 description: "Basic router and switch configuration: CDP, speed/duplex, interface descriptions"
 tags: ["CCNA", "Cisco", "Lab", "CDP", "Interfaces"]
 categories: ["CCNA"]

@@ -1,6 +1,6 @@
 ---
 title: "Lab 25-2 — Spanning Tree Configuration"
-date: 2026-05-07
+date: 2026-11-08
 description: "Настройка Rapid PVST+, PortFast и BPDU Guard для защиты портов"
 tags: ["CCNA", "Cisco", "Lab", "STP", "RSTP", "PortFast", "BPDU Guard"]
 categories: ["CCNA"]

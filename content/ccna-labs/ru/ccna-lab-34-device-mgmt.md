@@ -1,6 +1,6 @@
 ---
 title: "Lab 34 — Network Device Management"
-date: 2026-05-07
+date: 2026-11-25
 description: "Настройка SNMP, Syslog и NTP для мониторинга сетевых устройств"
 tags: ["CCNA", "Cisco", "Lab", "SNMP", "Syslog", "NTP"]
 categories: ["CCNA"]

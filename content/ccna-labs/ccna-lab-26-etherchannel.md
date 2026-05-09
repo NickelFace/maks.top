@@ -1,6 +1,6 @@
 ---
 title: "Lab 26-1 — EtherChannel Configuration"
-date: 2026-05-07
+date: 2026-11-10
 description: "Configuring EtherChannel: LACP, PAgP, and static mode with load balancing"
 tags: ["CCNA", "Cisco", "Lab", "EtherChannel", "LACP", "PAgP"]
 categories: ["CCNA"]

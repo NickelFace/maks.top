@@ -1,6 +1,6 @@
 ---
 title: "Lab 24-1 — HSRP Configuration"
-date: 2026-05-07
+date: 2026-11-03
 description: "Configuring HSRP for default gateway redundancy with preemption and interface tracking"
 tags: ["CCNA", "Cisco", "Lab", "HSRP", "FHRP", "Redundancy"]
 categories: ["CCNA"]

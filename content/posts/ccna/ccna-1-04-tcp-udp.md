@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.4 TCP and UDP"
-date: 2026-01-23
+date: 2026-07-09
 description: "Comparison of TCP and UDP, three-way handshake, flow control, well-known port number table and diagnostic commands."
 tags: ["CCNA", "Cisco", "TCP", "UDP", "transport layer"]
 categories: ["CCNA"]

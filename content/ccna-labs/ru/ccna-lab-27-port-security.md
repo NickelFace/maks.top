@@ -1,6 +1,6 @@
 ---
 title: "Lab 27-1 — Port Security Configuration"
-date: 2026-05-07
+date: 2026-11-13
 description: "Настройка Port Security: режимы нарушения и Sticky MAC"
 tags: ["CCNA", "Cisco", "Lab", "Port Security", "Layer 2 Security"]
 categories: ["CCNA"]

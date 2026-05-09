@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 2.2 CDP и LLDP"
-date: 2026-02-21
+date: 2026-08-01
 description: "Сравнение Cisco Discovery Protocol и Link Layer Discovery Protocol (802.1AB): принципы работы, таймеры, собираемая информация и команды настройки."
 tags: ["CCNA", "Cisco", "CDP", "LLDP", "обнаружение соседей"]
 categories: ["CCNA"]

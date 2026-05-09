@@ -1,6 +1,6 @@
 ---
 title: "Lab 11 — Cisco Device Functions"
-date: 2026-05-07
+date: 2026-10-03
 description: "Изучение MAC-таблицы коммутатора и таблицы маршрутизации роутера"
 tags: ["CCNA", "Cisco", "Lab", "MAC-table", "Routing Table"]
 categories: ["CCNA"]

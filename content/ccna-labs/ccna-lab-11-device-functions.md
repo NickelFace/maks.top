@@ -1,6 +1,6 @@
 ---
 title: "Lab 11 — Cisco Device Functions"
-date: 2026-05-07
+date: 2026-10-03
 description: "Exploring the switch MAC address table and the router routing table"
 tags: ["CCNA", "Cisco", "Lab", "MAC-table", "Routing Table"]
 categories: ["CCNA"]
