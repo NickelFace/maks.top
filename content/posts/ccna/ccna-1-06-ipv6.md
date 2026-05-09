@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.6 IPv6 Addressing"
-date: 2026-02-02
+date: 2026-07-16
 description: "IPv6 address structure and types, abbreviation rules, SLAAC, EUI-64, DHCPv6 and Cisco IOS commands for IPv6 configuration and verification."
 tags: ["CCNA", "Cisco", "IPv6", "SLAAC", "NDP"]
 categories: ["CCNA"]

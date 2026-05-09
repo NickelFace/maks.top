@@ -1,6 +1,6 @@
 ---
 title: "Lab 18 — Connectivity Troubleshooting"
-date: 2026-05-07
+date: 2026-10-21
 description: "Finding and fixing connectivity issues using the Cisco troubleshooting methodology"
 tags: ["CCNA", "Cisco", "Lab", "Troubleshooting", "Connectivity"]
 categories: ["CCNA"]

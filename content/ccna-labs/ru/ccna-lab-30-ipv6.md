@@ -1,6 +1,6 @@
 ---
 title: "Lab 30-1 — IPv6 Configuration"
-date: 2026-05-07
+date: 2026-11-20
 description: "Настройка IPv6: ручная адресация, EUI-64, SLAAC и статические маршруты"
 tags: ["CCNA", "Cisco", "Lab", "IPv6", "SLAAC"]
 categories: ["CCNA"]

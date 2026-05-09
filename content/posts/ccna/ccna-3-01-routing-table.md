@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 3.1 Routing Table"
-date: 2026-03-06
+date: 2026-08-11
 description: "IP routing principles: Longest Prefix Match, routing table structure, Administrative Distance (AD), protocol metrics and show ip route commands."
 tags: ["CCNA", "Cisco", "routing", "OSPF", "administrative distance"]
 categories: ["CCNA"]

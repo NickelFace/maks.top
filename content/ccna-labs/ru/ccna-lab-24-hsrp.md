@@ -1,6 +1,6 @@
 ---
 title: "Lab 24-1 — HSRP Configuration"
-date: 2026-05-07
+date: 2026-11-03
 description: "Настройка HSRP для резервирования шлюза по умолчанию с preemption и interface tracking"
 tags: ["CCNA", "Cisco", "Lab", "HSRP", "FHRP", "Redundancy"]
 categories: ["CCNA"]

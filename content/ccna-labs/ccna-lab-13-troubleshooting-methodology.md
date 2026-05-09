@@ -1,6 +1,6 @@
 ---
 title: "Lab 13 — The Cisco Troubleshooting Methodology"
-date: 2026-05-07
+date: 2026-10-08
 description: "Practicing the troubleshooting methodology using a broken DNS scenario"
 tags: ["CCNA", "Cisco", "Lab", "Troubleshooting", "DNS"]
 categories: ["CCNA"]

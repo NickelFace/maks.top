@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 2.1 VLANы и транки"
-date: 2026-02-18
+date: 2026-07-29
 description: "Конфигурация VLANов, access и trunk-портов, тегирование 802.1Q, inter-VLAN маршрутизация (Router-on-a-Stick, SVI) и протокол VTP на коммутаторах Cisco."
 tags: ["CCNA", "Cisco", "VLAN", "trunk", "802.1Q"]
 categories: ["CCNA"]

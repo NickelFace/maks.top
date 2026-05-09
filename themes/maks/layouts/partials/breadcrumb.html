@@ -19,7 +19,13 @@
   <span>/</span>
 
   {{ if eq .Section "certs" }}
-    <span>{{ .Title }}</span>
+    {{ if .IsSection }}
+      <span>Certs</span>
+    {{ else }}
+      <a href="{{ "/certs/" | relURL }}">Certs</a>
+      <span>/</span>
+      <span>{{ .Title }}</span>
+    {{ end }}
 
   {{ else if eq .Section "ccna-quiz" }}
     <a href="{{ "/certs/ccna/" | relURL }}">CCNA</a>

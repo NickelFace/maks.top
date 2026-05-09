@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 2.4 Spanning Tree Protocol"
-date: 2026-02-28
+date: 2026-08-06
 description: "STP and RSTP: Root Bridge election, port roles, port states, protective features PortFast/BPDU Guard/Root Guard and configuring Rapid-PVST+ on Cisco switches."
 tags: ["CCNA", "Cisco", "STP", "RSTP", "Spanning Tree"]
 categories: ["CCNA"]

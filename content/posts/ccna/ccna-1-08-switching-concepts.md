@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.8 Switching Concepts"
-date: 2026-02-08
+date: 2026-07-21
 description: "Ethernet switch operation principles: MAC address learning, forwarding and flooding, MAC Address Table, Store-and-Forward/Cut-through modes, duplex mismatch."
 tags: ["CCNA", "Cisco", "switching", "MAC table", "Ethernet"]
 categories: ["CCNA"]

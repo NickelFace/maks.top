@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.3 Physical Interfaces and Cables"
-date: 2026-01-20
+date: 2026-07-06
 description: "Types of copper and fiber-optic Ethernet cables, T568A/B standards, connectors, Ethernet speed standards and IOS commands for interface configuration."
 tags: ["CCNA", "Cisco", "Ethernet", "cables", "interfaces"]
 categories: ["CCNA"]

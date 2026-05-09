@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 6.4 Python и автоматизация сетей"
-date: 2026-05-07
+date: 2026-09-28
 description: "Python для сетевых инженеров: библиотеки paramiko, netmiko и NAPALM для автоматизации CLI, работа с REST API через requests, обработка JSON-ответов DNA Center."
 tags: ["CCNA", "Cisco", "Python", "netmiko", "автоматизация"]
 categories: ["CCNA"]

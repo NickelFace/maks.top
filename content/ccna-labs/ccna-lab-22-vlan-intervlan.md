@@ -1,6 +1,6 @@
 ---
 title: "Lab 22-1 — VLAN and Inter-VLAN Routing"
-date: 2026-05-07
+date: 2026-10-28
 description: "Configuring VLANs, trunk ports, Router-on-a-Stick, and SVI on an L3 switch"
 tags: ["CCNA", "Cisco", "Lab", "VLAN", "Trunk", "Router-on-a-Stick", "SVI"]
 categories: ["CCNA"]

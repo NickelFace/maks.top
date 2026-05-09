@@ -1,6 +1,6 @@
 ---
 title: "Lab 04 — The IOS Operating System"
-date: 2026-05-07
+date: 2026-10-01
 description: "Introduction to Cisco IOS CLI: modes, navigation, and configuration management"
 tags: ["CCNA", "Cisco", "Lab", "IOS CLI"]
 categories: ["CCNA"]

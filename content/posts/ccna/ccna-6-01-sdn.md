@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 6.1 SDN and DNA Center"
-date: 2026-04-27
+date: 2026-09-20
 description: "Software-Defined Networking: separating the control and data planes, Northbound and Southbound APIs, Cisco DNA Center (Intent-Based Networking), SD-Access, NETCONF/RESTCONF, and YANG."
 tags: ["CCNA", "Cisco", "SDN", "DNA Center", "automation"]
 categories: ["CCNA"]

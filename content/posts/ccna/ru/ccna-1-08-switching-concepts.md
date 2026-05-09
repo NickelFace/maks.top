@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 1.8 Концепции коммутации"
-date: 2026-02-08
+date: 2026-07-21
 description: "Принципы работы коммутатора Ethernet: обучение MAC-адресам, пересылка и флудинг, MAC Address Table, режимы Store-and-Forward/Cut-through, duplex mismatch."
 tags: ["CCNA", "Cisco", "коммутация", "MAC-таблица", "Ethernet"]
 categories: ["CCNA"]

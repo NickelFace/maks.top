@@ -1,6 +1,6 @@
 ---
 title: "Lab 25-1 — Spanning Tree Troubleshooting"
-date: 2026-05-07
+date: 2026-11-05
 description: "Диагностика STP: определение Root Bridge и оптимизация топологии"
 tags: ["CCNA", "Cisco", "Lab", "STP", "Troubleshooting"]
 categories: ["CCNA"]

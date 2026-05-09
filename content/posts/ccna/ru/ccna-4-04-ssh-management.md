@@ -1,6 +1,6 @@
 ---
 title: "CCNA — 4.4 SSH и управление устройствами"
-date: 2026-04-01
+date: 2026-08-31
 description: "Настройка SSH v2 на Cisco IOS: генерация RSA-ключей, VTY-линии, управление конфигурацией через TFTP, banner messages и hardening устройств."
 tags: ["CCNA", "Cisco", "SSH", "управление", "безопасность"]
 categories: ["CCNA"]

@@ -1,6 +1,6 @@
 ---
 title: "Lab 17 — Dynamic Routing Protocols"
-date: 2026-05-07
+date: 2026-10-18
 description: "Configuring dynamic routing: RIPv2 and EIGRP"
 tags: ["CCNA", "Cisco", "Lab", "RIP", "EIGRP"]
 categories: ["CCNA"]

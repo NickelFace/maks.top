@@ -1,6 +1,6 @@
 ---
 title: "Lab 28-1 — ACL Configuration"
-date: 2026-05-07
+date: 2026-11-15
 description: "Настройка стандартных и расширенных ACL для фильтрации трафика"
 tags: ["CCNA", "Cisco", "Lab", "ACL", "Security"]
 categories: ["CCNA"]
