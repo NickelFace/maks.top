@@ -7,6 +7,15 @@ post_prefix: "netarch"
 post_category: "Network Architect"
 expected_articles: 9
 cert_url: "https://otus.ru/certificate/4c96622346d542378b69e703d7c73a36/en/"
+resources:
+  - icon: "📝"
+    title: "Lab Writeups"
+    desc: "All 9 labs — DC fabric, VxLAN EVPN"
+    url: "/posts/netarch/"
+  - icon: "💾"
+    title: "GitHub Repository"
+    desc: "Topologies and configs, bilingual EN/RU"
+    url: "https://github.com/NickelFace/OTUS-Network-Architect"
 exams:
   - code: "1"
     title: "DC Underlay & Overlay"
