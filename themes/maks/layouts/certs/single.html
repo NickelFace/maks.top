@@ -75,7 +75,7 @@
     <div class="eyebrow" style="margin-bottom:20px">Resources</div>
     <div class="cert-res-grid">
       {{ range . }}
-      <a href="{{ .url | relURL }}" class="cert-res-card">
+      <a href="{{ .url | relURL }}" class="cert-res-card"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>
         <div class="cert-res-icon">{{ .icon }}</div>
         <div style="flex:1">
           <div class="cert-res-title">{{ .title }}</div>

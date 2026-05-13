@@ -7,6 +7,15 @@ post_prefix: "neteng"
 post_category: "Network Engineer"
 expected_articles: 20
 cert_url: "https://otus.ru/certificate/22c44457902541e6aba62359ca47b0f9/en/"
+resources:
+  - icon: "📝"
+    title: "Lab Writeups"
+    desc: "All 17 labs — step-by-step walkthroughs"
+    url: "/posts/neteng/"
+  - icon: "💾"
+    title: "GitHub Repository"
+    desc: "Configs, topologies, bilingual EN/RU"
+    url: "https://github.com/NickelFace/OTUS-Network-Engineer"
 exams:
   - code: "1"
     title: "Network Engineer Course"
