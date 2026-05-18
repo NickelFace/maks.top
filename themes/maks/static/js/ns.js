@@ -1,7 +1,7 @@
 /* ─── DATA ──────────────────────────────────────────────── */
 const NS_DATA = [
   {
-    name:"UTS", flag:"CLONE_NEWUTS", icon:"🖥️", color:"#00d4ff",
+    name:"UTS", flag:"CLONE_NEWUTS", icon:"🖥️", color:"var(--ns-uts)",
     summary:"Isolates hostname and NIS domain name",
     desc:"Each process or container gets its own <strong>hostname</strong> and <strong>NIS domainname</strong> without affecting the host system. Docker uses this so each container reports its own hostname rather than the host's.",
     tabs:[
@@ -27,7 +27,7 @@ lsns -t uts`
     ]
   },
   {
-    name:"PID", flag:"CLONE_NEWPID", icon:"⚙️", color:"#7c3aed",
+    name:"PID", flag:"CLONE_NEWPID", icon:"⚙️", color:"var(--ns-pid)",
     summary:"Isolates the process ID number space",
     desc:"Processes are numbered <strong>independently starting from PID 1</strong>. The first process in the namespace becomes the <em>init</em> — if it exits, the kernel kills everything else in that namespace. From outside, processes remain visible with their real PIDs.",
     tabs:[
@@ -54,7 +54,7 @@ sudo nsenter --target $CPID --pid -- ps aux`
     ]
   },
   {
-    name:"Network", flag:"CLONE_NEWNET", icon:"🌐", color:"#10b981",
+    name:"Network", flag:"CLONE_NEWNET", icon:"🌐", color:"var(--ns-net)",
     summary:"Full network stack isolation per namespace",
     desc:"Each net namespace gets its own <strong>network interfaces</strong>, routing tables, iptables/nftables rules, and sockets. Docker uses veth pairs to connect each container's isolated eth0 back to the host bridge.",
     tabs:[
@@ -84,7 +84,7 @@ sudo ip netns delete mynet`
     ]
   },
   {
-    name:"Mount", flag:"CLONE_NEWNS", icon:"📁", color:"#f59e0b",
+    name:"Mount", flag:"CLONE_NEWNS", icon:"📁", color:"var(--ns-mnt)",
     summary:"Isolates the filesystem mount table",
     desc:"The <strong>oldest namespace</strong> (Linux 2.4.19). A process can mount/unmount filesystems without affecting other processes. Docker mounts the container's rootfs via a new mount namespace, keeping the host filesystem untouched.",
     tabs:[
@@ -112,7 +112,7 @@ ls /   <span class="out"># → container rootfs</span>`
     ]
   },
   {
-    name:"IPC", flag:"CLONE_NEWIPC", icon:"📨", color:"#f472b6",
+    name:"IPC", flag:"CLONE_NEWIPC", icon:"📨", color:"var(--ns-ipc)",
     summary:"Isolates SysV IPC and POSIX message queues",
     desc:"Isolates <strong>System V IPC objects</strong> (message queues, semaphores, shared memory segments) and POSIX message queues. Without IPC namespaces, processes in different containers could interact via shared memory keys.",
     tabs:[
@@ -134,7 +134,7 @@ ipcs -a`
     ]
   },
   {
-    name:"User", flag:"CLONE_NEWUSER", icon:"👤", color:"#818cf8",
+    name:"User", flag:"CLONE_NEWUSER", icon:"👤", color:"var(--ns-user)",
     summary:"Maps UIDs/GIDs — unprivileged user can be root inside",
     desc:"The most powerful namespace. An <strong>unprivileged process</strong> can obtain UID 0 (root) inside the namespace while remaining a normal user outside. Rootless Docker/Podman is built entirely on this. No <code>sudo</code> required.",
     tabs:[
@@ -158,7 +158,7 @@ sysctl kernel.unprivileged_userns_clone
     ]
   },
   {
-    name:"Cgroup", flag:"CLONE_NEWCGROUP", icon:"📊", color:"#34d399",
+    name:"Cgroup", flag:"CLONE_NEWCGROUP", icon:"📊", color:"var(--ns-cgroup)",
     summary:"Hides real cgroup path — process sees its own root",
     desc:"Added in <strong>Linux 4.6</strong>. Without it, a process inside a container could read its full cgroup path (<code>/docker/abc123/...</code>), revealing that it's containerised. With a cgroup namespace it only sees <code>/</code>.",
     tabs:[
@@ -180,7 +180,7 @@ readlink /proc/$$/ns/cgroup`
     ]
   },
   {
-    name:"Time", flag:"CLONE_NEWTIME", icon:"⏱️", color:"#fb923c",
+    name:"Time", flag:"CLONE_NEWTIME", icon:"⏱️", color:"var(--ns-time)",
     summary:"Isolates CLOCK_MONOTONIC & CLOCK_BOOTTIME (Linux 5.6+)",
     desc:"The <strong>newest namespace</strong> (Linux 5.6, March 2020). Useful for container live migration between hosts — the monotonic clock doesn't reset during transfer. <code>CLOCK_REALTIME</code> cannot be virtualised.",
     tabs:[
