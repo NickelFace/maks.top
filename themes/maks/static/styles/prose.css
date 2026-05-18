@@ -269,9 +269,9 @@ body.show-ru .ru-text { display: block; }
    left: meta rail · center: article · right: TOC
 ═══════════════════════════════════════ */
 .prose-3col {
-  max-width: 1320px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 48px 80px;
+  padding: 40px 56px 80px;
   display: grid;
   grid-template-columns: 200px 1fr 220px;
   gap: 40px;
