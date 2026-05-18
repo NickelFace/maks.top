@@ -77,15 +77,15 @@
       <div class="filter-row">
         <span class="filter-label">Filter:</span>
         <button class="f-btn on"  style="--c:var(--accent)"      onclick="nsSetFilter('all',this)">All</button>
-        <button class="f-btn"     style="--c:#94a3b8"            onclick="nsSetFilter('general',this)">General</button>
-        <button class="f-btn"     style="--c:#00d4ff"            onclick="nsSetFilter('uts',this)">UTS</button>
-        <button class="f-btn"     style="--c:#7c3aed"            onclick="nsSetFilter('pid',this)">PID</button>
-        <button class="f-btn"     style="--c:#10b981"            onclick="nsSetFilter('net',this)">NET</button>
-        <button class="f-btn"     style="--c:#f59e0b"            onclick="nsSetFilter('mnt',this)">MNT</button>
-        <button class="f-btn"     style="--c:#f472b6"            onclick="nsSetFilter('ipc',this)">IPC</button>
-        <button class="f-btn"     style="--c:#818cf8"            onclick="nsSetFilter('user',this)">User</button>
-        <button class="f-btn"     style="--c:#34d399"            onclick="nsSetFilter('cgroup',this)">Cgroup</button>
-        <button class="f-btn"     style="--c:#fb923c"            onclick="nsSetFilter('time',this)">Time</button>
+        <button class="f-btn"     style="--c:var(--ns-general)"  onclick="nsSetFilter('general',this)">General</button>
+        <button class="f-btn"     style="--c:var(--ns-uts)"      onclick="nsSetFilter('uts',this)">UTS</button>
+        <button class="f-btn"     style="--c:var(--ns-pid)"      onclick="nsSetFilter('pid',this)">PID</button>
+        <button class="f-btn"     style="--c:var(--ns-net)"      onclick="nsSetFilter('net',this)">NET</button>
+        <button class="f-btn"     style="--c:var(--ns-mnt)"      onclick="nsSetFilter('mnt',this)">MNT</button>
+        <button class="f-btn"     style="--c:var(--ns-ipc)"      onclick="nsSetFilter('ipc',this)">IPC</button>
+        <button class="f-btn"     style="--c:var(--ns-user)"     onclick="nsSetFilter('user',this)">User</button>
+        <button class="f-btn"     style="--c:var(--ns-cgroup)"   onclick="nsSetFilter('cgroup',this)">Cgroup</button>
+        <button class="f-btn"     style="--c:var(--ns-time)"     onclick="nsSetFilter('time',this)">Time</button>
       </div>
       <div class="ref-panel">
         <div class="ref-panel-head">lsns / unshare / nsenter cheatsheet</div>

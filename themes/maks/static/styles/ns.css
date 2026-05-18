@@ -5,6 +5,18 @@
    live in prose.css.
 ═══════════════════════════════════════ */
 
+:root {
+  --ns-general: oklch(0.74 0.04 70);
+  --ns-uts:     oklch(0.74 0.12 215);
+  --ns-pid:     oklch(0.68 0.16 295);
+  --ns-net:     oklch(0.74 0.14 155);
+  --ns-mnt:     oklch(0.78 0.14 75);
+  --ns-ipc:     oklch(0.74 0.14 350);
+  --ns-user:    oklch(0.72 0.12 270);
+  --ns-cgroup:  oklch(0.76 0.13 165);
+  --ns-time:    oklch(0.74 0.15 50);
+}
+
 /* ─── PAGE LAYOUT ────────────────────────────────────────── */
 .ns-page-wrap {
   position: relative; z-index: 1;
