@@ -40,6 +40,18 @@
   },{rootMargin:'-10% 0px -80% 0px'});
   heads.forEach(h=>{if(h.id)observer.observe(h);});
 
+  const lastLink=aside.querySelector('a:last-child');
+  if(lastLink){
+    window.addEventListener('scroll',()=>{
+      if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4){
+        if(active)active.classList.remove('cur');
+        active=lastLink;
+        lastLink.classList.add('cur');
+        lastLink.scrollIntoView({block:'nearest'});
+      }
+    },{passive:true});
+  }
+
   const mobToc=document.createElement('details');
   mobToc.className='mob-toc';
   mobToc.innerHTML='<summary>Contents</summary><div class="mob-toc-links">'+
@@ -64,29 +76,21 @@
 })();
 
 /* Copy buttons on code blocks */
-document.querySelectorAll('pre:not(.chroma)').forEach(pre=>{
-  if(pre.closest('.code-block'))return;
-  const wrap=document.createElement('div');
-  wrap.className='code-block';
-  const lbl=document.createElement('div');
-  lbl.className='code-label';
-  lbl.innerHTML='<span>code</span><button class="copy-btn" onclick="cpPre(this)">copy</button>';
-  pre.parentNode.insertBefore(wrap,pre);
-  wrap.appendChild(lbl);
-  wrap.appendChild(pre);
-});
-document.querySelectorAll('.highlight').forEach(hl=>{
-  if(hl.closest('.code-block'))return;
-  const pre=hl.querySelector('pre');
-  const lang=pre&&pre.querySelector('code[data-lang]')?pre.querySelector('code[data-lang]').dataset.lang:'code';
+function wrapBlock(el,lang){
+  if(el.closest('.code-block'))return;
   const wrap=document.createElement('div');
   wrap.className='code-block';
   const lbl=document.createElement('div');
   lbl.className='code-label';
   lbl.innerHTML='<span>'+lang+'</span><button class="copy-btn" onclick="cpPre(this)">copy</button>';
-  hl.parentNode.insertBefore(wrap,hl);
+  el.parentNode.insertBefore(wrap,el);
   wrap.appendChild(lbl);
-  wrap.appendChild(hl);
+  wrap.appendChild(el);
+}
+document.querySelectorAll('pre:not(.chroma)').forEach(pre=>wrapBlock(pre,'code'));
+document.querySelectorAll('.highlight').forEach(hl=>{
+  const code=hl.querySelector('pre code[data-lang]');
+  wrapBlock(hl,code?code.dataset.lang:'code');
 });
 function cpPre(btn){
   const pre=btn.closest('.code-block').querySelector('pre');
