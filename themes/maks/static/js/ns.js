@@ -379,7 +379,7 @@ function nsInitScrollProgress() {
 function nsInitTocHighlight() {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && entry.target.classList.contains('active')) {
         const i = entry.target.id.replace('nc', '');
         document.querySelectorAll('.toc-item').forEach(t => t.classList.remove('hl'));
         const item = document.querySelector(`.toc-item[data-idx="${i}"]`);
