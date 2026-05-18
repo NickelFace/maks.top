@@ -14,18 +14,13 @@
 /* ── HEADINGS ── */
 .home-h1 {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: clamp(36px, 5.5vw, 68px);
+  font-size: var(--h1-hero);
   font-weight: 400;
   line-height: 1.02;
   letter-spacing: -0.035em;
   margin: 0;
   color: var(--text);
   font-feature-settings: 'opsz' 144;
-}
-
-.home-h1-em {
-  font-style: italic;
-  color: var(--text2);
 }
 
 .home-h2 {

@@ -51,7 +51,7 @@
 .kb-sub-header { max-width:1200px; margin:0 auto; padding:56px 64px 32px; width:100%; }
 .kb-sub-body { max-width:1200px; margin:0 auto; padding:32px 64px 80px; width:100%; }
 .kb-sub-h1 {
-  font-family:'Fraunces',Georgia,serif; font-size:clamp(28px,4vw,42px);
+  font-family:'Fraunces',Georgia,serif; font-size:var(--h1-page);
   font-weight:400; margin:0; letter-spacing:-0.03em;
   font-feature-settings:'opsz' 144; color:var(--text);
 }
@@ -83,7 +83,7 @@
   <header class="kb-pg-header">
     <div class="kb-pg-header-inner">
       {{ partial "breadcrumb.html" . }}
-      <h1 style="font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,4vw,42px);font-weight:400;margin:0;letter-spacing:-0.03em;font-feature-settings:'opsz' 144;color:var(--text)">Knowledge base.</h1>
+      <h1 class="kb-sub-h1">Knowledge base.</h1>
       <p style="font-size:16px;color:var(--text2);max-width:640px;margin-top:16px;line-height:1.55">Reference pages I keep going back to. Grouped by domain, hand-curated, linked from the relevant blog posts and labs.</p>
     </div>
   </header>
