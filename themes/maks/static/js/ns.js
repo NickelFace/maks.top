@@ -314,7 +314,7 @@ function buildCheatTable(filter, tbodyId) {
 function nsToggleCard(card) {
   const wasActive = card.classList.contains('active');
   card.classList.toggle('active');
-  if (!wasActive) nsUpdateProgress();
+  if (!wasActive) { openedCount++; nsUpdateProgress(); }
 }
 
 function nsJumpTo(i) {
@@ -323,6 +323,7 @@ function nsJumpTo(i) {
   if (mb) mb.classList.add('sel');
   const card = document.getElementById('nc' + i);
   if (!card) return;
+  if (!card.classList.contains('active')) { openedCount++; }
   card.classList.add('active');
   card.scrollIntoView({ behavior:'smooth', block:'start' });
   nsUpdateProgress();
@@ -347,32 +348,31 @@ function nsCopyCode(e, btn) {
 }
 
 /* ─── PROGRESS ──────────────────────────────────────────── */
+let openedCount = 0;
+let progFill, progTxt;
+
 function nsUpdateProgress() {
-  const opened = document.querySelectorAll('.ns-card.active').length;
-  const pct    = Math.round((opened / NS_DATA.length) * 100);
-  const fill   = document.getElementById('progFill');
-  const txt    = document.getElementById('progTxt');
-  if (fill) fill.style.width = pct + '%';
-  if (txt)  txt.innerHTML = `<span>${opened} of ${NS_DATA.length} types</span><span style="color:var(--accent)">${pct}%</span>`;
+  const pct = Math.round((openedCount / NS_DATA.length) * 100);
+  if (progFill) progFill.style.width = pct + '%';
+  if (progTxt)  progTxt.innerHTML = `<span>${openedCount} of ${NS_DATA.length} types</span><span style="color:var(--accent)">${pct}%</span>`;
 }
 
 /* ─── SCROLL PROGRESS ───────────────────────────────────── */
 function nsInitScrollProgress() {
+  progFill = document.getElementById('progFill');
+  progTxt  = document.getElementById('progTxt');
+  const main = document.querySelector('.ns-page-main');
+  if (!main) return;
   window.addEventListener('scroll', () => {
-    const main = document.querySelector('.ns-page-main');
-    if (!main) return;
-    const rect   = main.getBoundingClientRect();
-    const total  = main.offsetHeight - window.innerHeight;
+    const rect    = main.getBoundingClientRect();
+    const total   = main.offsetHeight - window.innerHeight;
     const scrolled = Math.min(Math.max(-rect.top, 0), total);
-    const pct    = total > 0 ? Math.round((scrolled / total) * 100) : 0;
-    const opened = document.querySelectorAll('.ns-card.active').length;
-    const cardPct = Math.round((opened / NS_DATA.length) * 100);
-    const combined = Math.max(pct, cardPct);
-    const fill = document.getElementById('progFill');
-    const txt  = document.getElementById('progTxt');
-    if (fill) fill.style.width = combined + '%';
-    if (txt)  txt.innerHTML = `<span>${opened} of ${NS_DATA.length} types</span><span style="color:var(--accent)">${combined}%</span>`;
-  });
+    const scrollPct = total > 0 ? Math.round((scrolled / total) * 100) : 0;
+    const cardPct   = Math.round((openedCount / NS_DATA.length) * 100);
+    const combined  = Math.max(scrollPct, cardPct);
+    if (progFill) progFill.style.width = combined + '%';
+    if (progTxt)  progTxt.innerHTML = `<span>${openedCount} of ${NS_DATA.length} types</span><span style="color:var(--accent)">${combined}%</span>`;
+  }, {passive: true});
 }
 
 /* ─── TOC HIGHLIGHT (IntersectionObserver) ──────────────── */
