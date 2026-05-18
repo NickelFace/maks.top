@@ -36,7 +36,7 @@
     <div class="cert-pg-hero-grid">
       <div>
         <div class="eyebrow" style="margin-bottom:10px">{{ $eyebrow }}</div>
-        <h1 class="cert-pg-h1">{{ .Title }}<span class="cert-pg-h1-em">{{ with .Params.cert_tagline }} {{ . }}{{ end }}</span></h1>
+        <h1 class="cert-pg-h1">{{ .Title }}<em class="h1-em">{{ with .Params.cert_tagline }} {{ . }}{{ end }}</em></h1>
         {{ with .Description }}
         <p style="font-size:15.5px;color:var(--text2);max-width:640px;line-height:1.6;margin-top:16px">{{ . }}</p>
         {{ end }}

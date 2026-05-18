@@ -28,6 +28,10 @@
   --shadow:    0 1px 0 rgba(0,0,0,0.4), 0 16px 40px -20px rgba(0,0,0,0.5);
   --nav-blur:  rgba(22,20,15,0.90);
   --code-bg:   #100E09;
+  /* h1 scale tokens */
+  --h1-hero:    clamp(36px, 5.5vw, 68px);
+  --h1-page:    clamp(28px, 4vw, 44px);
+  --h1-article: clamp(28px, 4vw, 46px);
 }
 
 [data-theme="light"] {
@@ -50,6 +54,8 @@
   --nav-blur:  rgba(246,243,236,0.92);
   --code-bg:   #EDE9DF;
 }
+
+.h1-em { font-style: italic; color: var(--text2); font-weight: inherit; }
 
 /* ═══════════════════════════════════════
    BASE

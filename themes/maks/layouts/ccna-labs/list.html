@@ -3,7 +3,7 @@
 .labs-pg-hd { width:100%; border-bottom:1px solid var(--border); }
 .labs-pg-hd-inner { max-width:1200px; margin:0 auto; padding:56px 64px 32px; width:100%; }
 .labs-pg-h1 {
-  font-family:'Fraunces',Georgia,serif; font-size:clamp(26px,3.5vw,40px);
+  font-family:'Fraunces',Georgia,serif; font-size:var(--h1-page);
   font-weight:400; margin:0; letter-spacing:-0.03em;
   font-feature-settings:'opsz' 144; color:var(--text);
 }
@@ -44,7 +44,7 @@
 <header class="labs-pg-hd">
   <div class="labs-pg-hd-inner">
     {{ partial "breadcrumb.html" . }}
-    <h1 class="labs-pg-h1">CCNA labs <em style="font-style:italic;color:var(--text2)">— solved &amp; annotated.</em></h1>
+    <h1 class="labs-pg-h1">CCNA labs <em class="h1-em">— solved &amp; annotated.</em></h1>
     <p style="font-size:15.5px;color:var(--text2);max-width:640px;margin-top:14px;line-height:1.55">{{ len (where .Pages "Params.page_lang" "ne" "ru") }} hands-on scenarios in Packet Tracer and EVE-NG. Each lab links to the topology, my running config, and what I broke trying to solve it.</p>
   </div>
 </header>
