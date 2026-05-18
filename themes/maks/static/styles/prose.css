@@ -197,7 +197,7 @@ body.show-ru .ru-text { display: block; }
 .cheat-table tr:hover td { background: var(--bg3); }
 .cheat-table .mono { color: var(--accent); }
 .cheat-table .desc { color: var(--text2); }
-.stag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 600; }
+.stag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 600; white-space: nowrap; overflow-wrap: normal; word-break: keep-all; letter-spacing: 0.02em; }
 .stag-general { --c: var(--ns-general); }
 .stag-uts     { --c: var(--ns-uts); }
 .stag-pid     { --c: var(--ns-pid); }
