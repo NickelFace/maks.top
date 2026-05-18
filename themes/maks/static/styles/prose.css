@@ -269,12 +269,12 @@ body.show-ru .ru-text { display: block; }
    left: meta rail · center: article · right: TOC
 ═══════════════════════════════════════ */
 .prose-3col {
-  max-width: 1180px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 40px 64px 80px;
+  padding: 40px 48px 80px;
   display: grid;
   grid-template-columns: 200px 1fr 220px;
-  gap: 48px;
+  gap: 40px;
   width: 100%;
   align-items: start;
 }
@@ -361,13 +361,13 @@ body.show-ru .ru-text { display: block; }
 }
 
 /* ── responsive ── */
-@media (max-width: 1100px) {
+@media (max-width: 1240px) {
   .prose-3col {
     grid-template-columns: 1fr 200px;
     padding: 40px 40px 80px;
   }
   .prose-meta-rail { display: none; }
-  .prose-toc-rail { display: block; }
+  .prose-toc-rail  { display: block; }
 }
 
 @media (max-width: 860px) {

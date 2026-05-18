@@ -1,0 +1,137 @@
+{{ define "head" }}
+<link rel="stylesheet" href="{{ "styles/ns.css" | relURL }}">
+{{- if eq .Params.page_lang "en" -}}
+{{- $desc := cond (ne .Description "") .Description .Site.Params.description -}}
+{{- $ld := dict
+  "@context" "https://schema.org"
+  "@type"    "Article"
+  "headline"      .Title
+  "description"   $desc
+  "url"           .Permalink
+  "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified"  (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+  "author"        (dict "@type" "Person" "name" .Site.Params.author)
+  "publisher"     (dict "@type" "Organization" "name" .Site.Title "url" .Site.BaseURL)
+-}}
+<script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+{{- end }}
+{{ end }}
+
+{{ define "main" }}
+{{/* Post number (blog posts only) — mirrors _default/single.html */}}
+{{ $postNum := 0 }}
+{{ if eq .Section "posts" }}
+  {{ $allPosts := where (where .Site.RegularPages "Section" "posts") "Params.page_lang" "ne" "ru" }}
+  {{ $sorted := $allPosts.ByDate.Reverse }}
+  {{ $total := len $sorted }}
+  {{ range $i, $p := $sorted }}
+    {{ if eq $p.RelPermalink $.RelPermalink }}{{ $postNum = sub $total $i }}{{ end }}
+  {{ end }}
+{{ end }}
+
+<div id="prosePage" class="prose-3col">
+
+  <!-- ── meta rail ── -->
+  <aside class="prose-meta-rail">
+    {{ if $postNum }}
+    <div class="pmr-label">METADATA</div>
+    <div>№ {{ $postNum }}</div>
+    {{ end }}
+    <div>{{ .Date.Format "02 Jan 2006" }}</div>
+    {{ with .Params.readingtime }}<div>{{ . }} min read</div>{{ end }}
+    {{ with .Params.tags }}
+    <div class="pmr-tags">
+      {{ range . }}#{{ . }}<br/>{{ end }}
+    </div>
+    {{ end }}
+    {{ if .Params.lang_pair }}
+    <div class="pmr-lang">
+      {{ if eq .Params.page_lang "ru" }}RU · <a href="{{ .Params.lang_pair | relURL }}" style="color:var(--text3)">EN available</a>{{ else }}EN · <a href="{{ .Params.lang_pair | relURL }}" style="color:var(--text3)">RU available</a>{{ end }}
+    </div>
+    {{ end }}
+  </aside>
+
+  <!-- ── article ──
+       NB: class `ns-page-main` is preserved on purpose — `nsInitScrollProgress`
+       in static/js/ns.js scopes scroll calculations to `.ns-page-main`. -->
+  <article class="ns-page-main">
+    {{ partial "breadcrumb.html" . }}
+    <h1 class="prose-h1">{{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="prose-lead">{{ . }}</p>
+    {{ end }}
+
+    <div class="prose" id="articleBody">
+      {{ .Content }}
+
+      <!-- ── NS-specific in-article modules ── -->
+      <div class="ns-map">
+        <div class="ns-map-title">Namespace Map</div>
+        <div class="ns-map-grid" id="nsMap"></div>
+      </div>
+
+      <div class="sec">All Namespace Types</div>
+      <div class="ns-grid" id="nsGrid"></div>
+
+      <div class="sec">Quick reference</div>
+      <div class="filter-row">
+        <span class="filter-label">Filter:</span>
+        <button class="f-btn on"  style="--c:var(--accent)"      onclick="nsSetFilter('all',this)">All</button>
+        <button class="f-btn"     style="--c:#94a3b8"            onclick="nsSetFilter('general',this)">General</button>
+        <button class="f-btn"     style="--c:#00d4ff"            onclick="nsSetFilter('uts',this)">UTS</button>
+        <button class="f-btn"     style="--c:#7c3aed"            onclick="nsSetFilter('pid',this)">PID</button>
+        <button class="f-btn"     style="--c:#10b981"            onclick="nsSetFilter('net',this)">NET</button>
+        <button class="f-btn"     style="--c:#f59e0b"            onclick="nsSetFilter('mnt',this)">MNT</button>
+        <button class="f-btn"     style="--c:#f472b6"            onclick="nsSetFilter('ipc',this)">IPC</button>
+        <button class="f-btn"     style="--c:#818cf8"            onclick="nsSetFilter('user',this)">User</button>
+        <button class="f-btn"     style="--c:#34d399"            onclick="nsSetFilter('cgroup',this)">Cgroup</button>
+        <button class="f-btn"     style="--c:#fb923c"            onclick="nsSetFilter('time',this)">Time</button>
+      </div>
+      <div class="ref-panel">
+        <div class="ref-panel-head">lsns / unshare / nsenter cheatsheet</div>
+        <div class="ref-panel-body">
+          <table class="cheat-table">
+            <thead><tr><th>Command</th><th>What it does</th><th>Type</th></tr></thead>
+            <tbody id="cheatBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-link" style="margin-top:48px; font-family:'JetBrains Mono',monospace; font-size:12px;">
+      <a href="{{ .Section | relURL }}" style="color:var(--text3); text-decoration:none; transition:color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text3)'">← Back to {{ .Section }}</a>
+    </div>
+  </article>
+
+  <!-- ── right rail ──
+       `#tocAside` is what article.js looks for; it bails early when the article
+       has ≤2 h2/h3 (true for this post — markdown body has no h2/h3), so the
+       NS-specific TOC inside `#tocBody` stays intact. -->
+  <aside id="tocAside" class="prose-toc-rail">
+    <div class="toc-box">
+      <div class="toc-head">Contents</div>
+      <div class="toc-body" id="tocBody"></div>
+    </div>
+    <div class="progress-box">
+      <div class="progress-lbl">Reading Progress</div>
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      <div class="progress-txt" id="progTxt">
+        <span>0 of 8 types</span><span>0%</span>
+      </div>
+    </div>
+  </aside>
+
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ "js/article.js" | relURL }}"></script>
+<script src="{{ "js/ns.js" | relURL }}"></script>
+<script>
+function nsSetFilter(f, btn) {
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  buildCheatTable(f, 'cheatBody');
+}
+</script>
+{{ end }}

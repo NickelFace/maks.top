@@ -68,6 +68,18 @@
 .ns-pre .cm  { color: #4b5563; }
 .ns-pre .out { color: #6b7280; font-style: italic; }
 
+/* ─── PAGE HEADER ────────────────────────────────────────── */
+.ns-page-main .post-meta { margin-bottom: 20px; }
+.ns-page-main .post-meta-tags .tag {
+  pointer-events: none;
+  cursor: default;
+}
+.ns-page-main .post-meta-tags .tag:hover {
+  border-color: var(--border);
+  color: var(--text2);
+  background: var(--tag-bg);
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 860px) {
   .ns-page-wrap { grid-template-columns: 1fr; padding: 20px 16px 100px; }
