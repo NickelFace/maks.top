@@ -4,7 +4,7 @@
 {{- /* Returns: $act (int), $pct (int 0-100) */ -}}
 
 {{- $ne    := .Site.GetPage "/certs/network-engineer" -}}
-{{- $neAct := len (where $enPosts "Params.categories" "intersect" (slice $ne.Params.post_category)) -}}
+{{- $neAct := 0 -}}{{- range $enPosts -}}{{- if strings.HasPrefix .File.BaseFileName $ne.Params.post_prefix -}}{{- $neAct = add $neAct 1 -}}{{- end -}}{{- end -}}
 {{- $nePct := $ne.Params.progress_pct | default 0 -}}
 {{- if gt ($ne.Params.expected_articles | default 0) 0 -}}
   {{- $nePct = int (math.Round (div (mul (float $neAct) 100.0) (float $ne.Params.expected_articles))) -}}
@@ -12,7 +12,7 @@
 {{- end -}}
 
 {{- $na    := .Site.GetPage "/certs/network-architect" -}}
-{{- $naAct := len (where $enPosts "Params.categories" "intersect" (slice $na.Params.post_category)) -}}
+{{- $naAct := 0 -}}{{- range $enPosts -}}{{- if strings.HasPrefix .File.BaseFileName $na.Params.post_prefix -}}{{- $naAct = add $naAct 1 -}}{{- end -}}{{- end -}}
 {{- $naPct := $na.Params.progress_pct | default 0 -}}
 {{- if gt ($na.Params.expected_articles | default 0) 0 -}}
   {{- $naPct = int (math.Round (div (mul (float $naAct) 100.0) (float $na.Params.expected_articles))) -}}
@@ -20,7 +20,7 @@
 {{- end -}}
 
 {{- $l1    := .Site.GetPage "/certs/lpic-1" -}}
-{{- $l1Act := len (where $enPosts "Params.categories" "intersect" (slice $l1.Params.post_category)) -}}
+{{- $l1Act := 0 -}}{{- range $enPosts -}}{{- if strings.HasPrefix .File.BaseFileName $l1.Params.post_prefix -}}{{- $l1Act = add $l1Act 1 -}}{{- end -}}{{- end -}}
 {{- $l1Pct := $l1.Params.progress_pct | default 0 -}}
 {{- if gt ($l1.Params.expected_articles | default 0) 0 -}}
   {{- $l1Pct = int (math.Round (div (mul (float $l1Act) 100.0) (float $l1.Params.expected_articles))) -}}
@@ -28,7 +28,7 @@
 {{- end -}}
 
 {{- $l2    := .Site.GetPage "/certs/lpic-2" -}}
-{{- $l2Act := len (where $enPosts "Params.categories" "intersect" (slice $l2.Params.post_category)) -}}
+{{- $l2Act := 0 -}}{{- range $enPosts -}}{{- if strings.HasPrefix .File.BaseFileName $l2.Params.post_prefix -}}{{- $l2Act = add $l2Act 1 -}}{{- end -}}{{- end -}}
 {{- $l2Pct := $l2.Params.progress_pct | default 0 -}}
 {{- if gt ($l2.Params.expected_articles | default 0) 0 -}}
   {{- $l2Pct = int (math.Round (div (mul (float $l2Act) 100.0) (float $l2.Params.expected_articles))) -}}
@@ -36,7 +36,7 @@
 {{- end -}}
 
 {{- $aws   := .Site.GetPage "/certs/aws-saa" -}}
-{{- $awsAct := len (where $enPosts "Params.categories" "intersect" (slice $aws.Params.post_category)) -}}
+{{- $awsAct := 0 -}}{{- range $enPosts -}}{{- if strings.HasPrefix .File.BaseFileName $aws.Params.post_prefix -}}{{- $awsAct = add $awsAct 1 -}}{{- end -}}{{- end -}}
 {{- $awsPct := $aws.Params.progress_pct | default 0 -}}
 {{- if gt ($aws.Params.expected_articles | default 0) 0 -}}
   {{- $awsPct = int (math.Round (div (mul (float $awsAct) 100.0) (float $aws.Params.expected_articles))) -}}
@@ -44,7 +44,7 @@
 {{- end -}}
 
 {{- $ccna   := .Site.GetPage "/certs/ccna" -}}
-{{- $ccnaAct := len (where $enPosts "Params.categories" "intersect" (slice $ccna.Params.post_category)) -}}
+{{- $ccnaAct := 0 -}}{{- range $enPosts -}}{{- if strings.HasPrefix .File.BaseFileName $ccna.Params.post_prefix -}}{{- $ccnaAct = add $ccnaAct 1 -}}{{- end -}}{{- end -}}
 {{- $ccnaPct := $ccna.Params.progress_pct | default 0 -}}
 {{- if gt ($ccna.Params.expected_articles | default 0) 0 -}}
   {{- $ccnaPct = int (math.Round (div (mul (float $ccnaAct) 100.0) (float $ccna.Params.expected_articles))) -}}
