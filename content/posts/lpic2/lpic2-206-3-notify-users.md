@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 206.3 — Notifying Users on System-Related Issues"
-date: 2025-12-30
+date: 2025-10-01
 description: "/etc/issue, /etc/issue.net, /etc/motd, wall, shutdown (-k/-c/--no-wall), mesg, systemctl service/target management. LPIC-2 exam topic 206.3."
 tags: ["Linux", "LPIC-2", "wall", "motd", "systemctl", "shutdown"]
 categories: ["LPIC-2"]

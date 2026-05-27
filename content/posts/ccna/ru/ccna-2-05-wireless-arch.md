@@ -148,4 +148,4 @@ Switch(config-if)# spanning-tree portfast trunk      # ускорить подн
 | [Lightweight AP vs Autonomous AP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/cisco-wireless-architectures) | Сравнение архитектур: Autonomous, Lightweight, Cloud-managed |
 | [FlexConnect — Cisco](https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/flexconnect-design-guide.html) | Cisco FlexConnect: работа AP при потере связи с WLC |
 | [Jeremy's IT Lab — Wireless Architectures (YouTube)](https://www.youtube.com/watch?v=2vMHpH0bX7Y) | Autonomous AP, Lightweight AP, WLC, CAPWAP из серии Free CCNA |
-| [Cisco DNA Center Wireless — Cisco](https://www.cisco.com/c/en/us/products/cloud-systems-management/dna-center/index.html) | Управление беспроводной сетью через DNA Center |
+| [Cisco Catalyst Center Wireless — Cisco](https://www.cisco.com/c/en/us/products/cloud-systems-management/dna-center/index.html) | Управление беспроводной сетью через Catalyst Center |

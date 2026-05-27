@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 207.2 — Creating and Managing DNS Zones"
-date: 2026-01-17
+date: 2025-10-23
 description: "Синтаксис файлов зон, запись SOA, типы ресурсных записей (A/AAAA/PTR/MX/NS/CNAME), прямые и обратные зоны, конфигурация master/slave/stub, делегирование зон, glue-записи, named-checkzone, named-compilezone. Тема экзамена LPIC-2 207.2."
 tags: ["Linux", "LPIC-2", "DNS", "BIND", "zones", "SOA"]
 categories: ["LPIC-2"]

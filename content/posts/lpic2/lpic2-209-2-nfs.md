@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 209.2 — NFS Server Configuration"
-date: 2026-03-19
+date: 2026-01-10
 description: "NFSv3 architecture and daemons, /etc/exports format and options, exportfs, showmount, rpcinfo, nfsstat, client-side mounting, squashing, TCP Wrappers for NFS, NFSv4 overview. LPIC-2 exam topic 209.2."
 tags: ["Linux", "LPIC-2", "NFS", "file sharing", "exports", "rpcbind"]
 categories: ["LPIC-2"]

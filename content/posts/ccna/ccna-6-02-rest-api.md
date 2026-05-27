@@ -1,7 +1,7 @@
 ---
 title: "CCNA — 6.2 REST API"
 date: 2026-09-23
-description: "REST API: architectural principles, HTTP methods (CRUD), response codes, JSON/XML/YAML data formats, authentication methods, and example requests to Cisco DNA Center and IOS-XE RESTCONF."
+description: "REST API: architectural principles, HTTP methods (CRUD), response codes, JSON/XML/YAML data formats, authentication methods, and example requests to Cisco Catalyst Center and IOS-XE RESTCONF."
 tags: ["CCNA", "Cisco", "REST API", "JSON", "automation"]
 categories: ["CCNA"]
 page_lang: "en"
@@ -12,7 +12,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-02-rest-api/"
 
 **API (Application Programming Interface)** is an interface that allows programs to communicate with each other.
 
-**REST API** (RESTful API) is an HTTP-based architectural style for APIs — the standard for interacting with network controllers (Cisco DNA Center, APIC, IOS-XE).
+**REST API** (RESTful API) is an HTTP-based architectural style for APIs — the standard for interacting with network controllers (Cisco Catalyst Center, APIC, IOS-XE).
 
 ---
 
@@ -145,7 +145,7 @@ ospf_enabled: true
 
 ---
 
-## Example: Cisco DNA Center API
+## Example: Cisco Catalyst Center API
 
 ```python
 import requests
@@ -203,4 +203,4 @@ curl -X PUT \
 | [JSON — json.org](https://www.json.org/json-en.html) | Official JSON format standard |
 | [REST API — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/rest-api) | REST: principles, HTTP methods, CRUD, status codes |
 | [Jeremy's IT Lab — REST APIs (YouTube)](https://www.youtube.com/watch?v=G0RM7eS0vw8) | REST API, JSON, Postman from the Free CCNA series |
-| [Cisco DNA Center API Reference](https://developer.cisco.com/docs/dna-center/#!api-quick-start) | Intent API and REST endpoints reference for DNA Center |
+| [Cisco Catalyst Center API Reference](https://developer.cisco.com/docs/dna-center/#!api-quick-start) | Intent API and REST endpoints reference for Catalyst Center |

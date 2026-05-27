@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 204.1 — Configuring RAID"
-date: 2025-10-22
+date: 2025-07-03
 description: "Уровни RAID (0/1/4/5/Linear), аппаратный и программный RAID, mdadm create/assemble/manage, /proc/mdstat, mdadm.conf, запасные диски и процедура замены диска. Тема экзамена LPIC-2 204.1."
 tags: ["Linux", "RAID", "LPIC-2", "mdadm", "storage"]
 categories: ["LPIC-2"]

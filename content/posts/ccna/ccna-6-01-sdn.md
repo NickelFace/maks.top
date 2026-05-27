@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 6.1 SDN and DNA Center"
+title: "CCNA — 6.1 SDN and Catalyst Center"
 date: 2026-09-20
-description: "Software-Defined Networking: separating the control and data planes, Northbound and Southbound APIs, Cisco DNA Center (Intent-Based Networking), SD-Access, NETCONF/RESTCONF, and YANG."
-tags: ["CCNA", "Cisco", "SDN", "DNA Center", "automation"]
+description: "Software-Defined Networking: separating the control and data planes, Northbound and Southbound APIs, Cisco Catalyst Center (Intent-Based Networking), SD-Access, NETCONF/RESTCONF, and YANG."
+tags: ["CCNA", "Cisco", "SDN", "Catalyst Center", "automation"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-6-01-sdn/"
@@ -62,11 +62,11 @@ graph TD
 
 ---
 
-## Cisco DNA Center
+## Cisco Catalyst Center
 
-**Cisco DNA Center (Catalyst Center)** is a network automation and management platform.
+**Cisco Catalyst Center** (formerly DNA Center) is a network automation and management platform.
 
-### DNA Center Capabilities
+### Catalyst Center Capabilities
 
 | Feature | Description |
 |---|---|
@@ -82,7 +82,7 @@ graph TD
 ```mermaid
 graph LR
     Apps["Applications / Scripts"]
-    DNA["DNA Center"]
+    DNA["Catalyst Center"]
     Devices["Devices"]
 
     Apps <-->|"REST API (Northbound)"| DNA
@@ -124,9 +124,9 @@ graph LR
 
 | Resource | Description |
 |---|---|
-| [Cisco DNA Center Documentation](https://developer.cisco.com/docs/dna-center/) | Official DNA Center documentation: API, Intent API |
+| [Cisco Catalyst Center Documentation](https://developer.cisco.com/docs/dna-center/) | Official Catalyst Center documentation: API, Intent API |
 | [SDN Overview — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/software-defined-networking-sdn) | SDN: control/data plane separation, OpenFlow, controllers |
 | [Cisco SD-Access](https://www.cisco.com/c/en/us/solutions/enterprise-networks/software-defined-access/index.html) | SD-Access: fabric, underlay/overlay, policy, segmentation |
-| [Jeremy's IT Lab — SDN and Automation (YouTube)](https://www.youtube.com/watch?v=UdmgpxTq6Yw) | SDN, DNA Center, management and automation from the Free CCNA series |
-| [Cisco DevNet — DNA Center Sandbox](https://developer.cisco.com/site/sandbox/) | Free lab environment for learning the DNA Center API |
+| [Jeremy's IT Lab — SDN and Automation (YouTube)](https://www.youtube.com/watch?v=UdmgpxTq6Yw) | SDN, Catalyst Center, management and automation from the Free CCNA series |
+| [Cisco DevNet — Catalyst Center Sandbox](https://developer.cisco.com/site/sandbox/) | Free lab environment for learning the Catalyst Center API |
 | [OpenFlow — Open Networking Foundation](https://opennetworking.org/sdn-definition/) | SDN definition and the OpenFlow protocol from ONF |

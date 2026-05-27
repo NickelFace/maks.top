@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 200.1 — Measuring and Diagnosing Resource Usage"
-date: 2025-07-18
+date: 2025-03-02
 description: "CPU, memory, disk I/O and network monitoring tools: top, vmstat, iostat, sar, ss, lsof and more. LPIC-2 exam topic 200.1."
 tags: ["Linux", "Performance", "LPIC-2", "Monitoring", "sysstat"]
 categories: ["LPIC-2"]

@@ -1,8 +1,8 @@
 ---
-title: "CCNA — 6.1 SDN и DNA Center"
+title: "CCNA — 6.1 SDN и Catalyst Center"
 date: 2026-09-20
-description: "Software-Defined Networking: разделение control/data plane, Northbound и Southbound API, Cisco DNA Center (Intent-Based Networking), SD-Access, NETCONF/RESTCONF и YANG."
-tags: ["CCNA", "Cisco", "SDN", "DNA Center", "автоматизация"]
+description: "Software-Defined Networking: разделение control/data plane, Northbound и Southbound API, Cisco Catalyst Center (Intent-Based Networking), SD-Access, NETCONF/RESTCONF и YANG."
+tags: ["CCNA", "Cisco", "SDN", "Catalyst Center", "автоматизация"]
 categories: ["CCNA"]
 page_lang: "ru"
 lang_pair: "/posts/ccna/ccna-6-01-sdn/"
@@ -66,11 +66,11 @@ graph TD
 
 ---
 
-## Cisco DNA Center
+## Cisco Catalyst Center
 
-**Cisco DNA Center (Catalyst Center)** — платформа автоматизации и управления сетями.
+**Cisco Catalyst Center** (ранее DNA Center) — платформа автоматизации и управления сетями.
 
-### Возможности DNA Center
+### Возможности Catalyst Center
 
 | Функция | Описание |
 |---|---|
@@ -86,7 +86,7 @@ graph TD
 ```mermaid
 graph LR
     Apps["Приложения / скрипты"]
-    DNA["DNA Center"]
+    DNA["Catalyst Center"]
     Devices["Устройства"]
 
     Apps <-->|"REST API (Northbound)"| DNA
@@ -128,9 +128,9 @@ graph LR
 
 | Ресурс | Описание |
 |---|---|
-| [Cisco DNA Center Documentation](https://developer.cisco.com/docs/dna-center/) | Официальная документация DNA Center: API, Intent API |
+| [Cisco Catalyst Center Documentation](https://developer.cisco.com/docs/dna-center/) | Официальная документация Catalyst Center: API, Intent API |
 | [SDN Overview — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/software-defined-networking-sdn) | SDN: разделение control/data plane, OpenFlow, контроллеры |
 | [Cisco SD-Access](https://www.cisco.com/c/en/us/solutions/enterprise-networks/software-defined-access/index.html) | SD-Access: fabric, underlay/overlay, policy, segmentation |
-| [Jeremy's IT Lab — SDN and Automation (YouTube)](https://www.youtube.com/watch?v=UdmgpxTq6Yw) | SDN, DNA Center, управление и автоматизация из серии Free CCNA |
-| [Cisco DevNet — DNA Center Sandbox](https://developer.cisco.com/site/sandbox/) | Бесплатная лаборатория для изучения DNA Center API |
+| [Jeremy's IT Lab — SDN and Automation (YouTube)](https://www.youtube.com/watch?v=UdmgpxTq6Yw) | SDN, Catalyst Center, управление и автоматизация из серии Free CCNA |
+| [Cisco DevNet — Catalyst Center Sandbox](https://developer.cisco.com/site/sandbox/) | Бесплатная лаборатория для изучения Catalyst Center API |
 | [OpenFlow — Open Networking Foundation](https://opennetworking.org/sdn-definition/) | Определение SDN и протокол OpenFlow от ONF |

@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 201.1 — Kernel Components"
-date: 2025-08-04
+date: 2025-03-24
 description: "Архитектура ядра Linux, типы образов, схемы нумерации версий, модули ядра и структура каталогов. Тема экзамена LPIC-2 201.1."
 tags: ["Linux", "Kernel", "LPIC-2", "Modules"]
 categories: ["LPIC-2"]

@@ -17,9 +17,10 @@ lang_pair: "/posts/ccna/ru/ccna-1-07-wireless/"
 | 802.11g | 2.4 GHz | 54 Mbps | ~38 m | Backward compatible with b |
 | 802.11n | 2.4/5 GHz | 600 Mbps | ~70 m | Wi-Fi 4, MIMO |
 | 802.11ac | 5 GHz | 3.5 Gbps | ~35 m | Wi-Fi 5, MU-MIMO |
-| 802.11ax | 2.4/5/6 GHz | 9.6 Gbps | ~30 m | Wi-Fi 6, OFDMA |
+| 802.11ax | 2.4/5 GHz | 9.6 Gbps | ~30 m | **Wi-Fi 6**, OFDMA, MU-MIMO |
+| 802.11ax | 6 GHz | 9.6 Gbps | ~20 m | **Wi-Fi 6E**, 6 GHz only, less interference |
 
-> **💡 Tip:** A common exam topic: 802.11n was the first standard to support dual-band (2.4 and 5 GHz).
+> **💡 Tip:** A common exam topic: 802.11n was the first standard to support dual-band (2.4 and 5 GHz). Wi-Fi 6E = 802.11ax extended to the 6 GHz band (same technology, new spectrum).
 
 ---
 
@@ -37,7 +38,14 @@ lang_pair: "/posts/ccna/ru/ccna-1-07-wireless/"
 - Channel width: 20, 40, 80, 160 MHz
 - Less interference, shorter range
 
-> **⚠️ Note:** The 2.4 GHz band is congested (Bluetooth, microwaves, other APs). Use 5 GHz when possible.
+### 6 GHz (Wi-Fi 6E)
+
+- Available only with Wi-Fi 6E (802.11ax) devices
+- ~60 channels of 20 MHz width (US) — much more capacity
+- No legacy devices → minimal interference
+- Shorter range than 5 GHz; best for high-density indoor environments
+
+> **⚠️ Note:** The 2.4 GHz band is congested (Bluetooth, microwaves, other APs). Use 5 GHz when possible. Use 6 GHz (Wi-Fi 6E) for maximum throughput in dense environments.
 
 ---
 

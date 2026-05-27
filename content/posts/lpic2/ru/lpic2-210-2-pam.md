@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 210.2 — PAM Authentication"
-date: 2026-04-05
+date: 2026-02-01
 description: "Типы модулей PAM (auth/account/password/session), управляющие флаги (required/requisite/sufficient/optional), pam_unix, pam_cracklib, pam_limits, pam_listfile, pam_ldap, SSSD с pam_sss, структура /etc/passwd и /etc/shadow, nsswitch.conf. Тема экзамена LPIC-2 210.2."
 tags: ["Linux", "LPIC-2", "PAM", "authentication", "SSSD", "security"]
 categories: ["LPIC-2"]

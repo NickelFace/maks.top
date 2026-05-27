@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 206.1 — Make and Install Programs from Source"
-date: 2025-12-13
+date: 2025-09-08
 description: "Building from source: tar archives, configure script, Makefile targets (all/install/clean/distclean), install utility, uname, patch. LPIC-2 exam topic 206.1."
 tags: ["Linux", "LPIC-2", "gcc", "make", "compile", "build"]
 categories: ["LPIC-2"]

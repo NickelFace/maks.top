@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 206.1 — Make and Install Programs from Source"
-date: 2025-12-13
+date: 2025-09-08
 description: "Сборка из исходников: tar-архивы, скрипт configure, цели Makefile (all/install/clean/distclean), утилита install, uname, patch. Тема экзамена LPIC-2 206.1."
 tags: ["Linux", "LPIC-2", "gcc", "make", "compile", "build"]
 categories: ["LPIC-2"]

@@ -1,7 +1,7 @@
 ---
 title: "CCNA — 6.4 Python and Network Automation"
 date: 2026-09-28
-description: "Python for network engineers: paramiko, netmiko, and NAPALM libraries for CLI automation, working with REST APIs via requests, and parsing JSON responses from DNA Center."
+description: "Python for network engineers: paramiko, netmiko, and NAPALM libraries for CLI automation, working with REST APIs via requests, and parsing JSON responses from Catalyst Center."
 tags: ["CCNA", "Cisco", "Python", "netmiko", "automation"]
 categories: ["CCNA"]
 page_lang: "en"
@@ -20,7 +20,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-04-python-automation/"
 | Collect `show version` from 50 routers | ~2 hours | ~30 seconds |
 | Change VLAN on 100 switches | All day | 1 script |
 | Verify configuration compliance | Difficult | Automated |
-| Retrieve data from DNA Center API | Browser | requests + JSON |
+| Retrieve data from Catalyst Center API | Browser | requests + JSON |
 
 **Key libraries for networking:**
 
@@ -235,7 +235,7 @@ device.close()
 
 ## Working with JSON and APIs
 
-### Parsing a JSON Response from DNA Center
+### Parsing a JSON Response from Catalyst Center
 
 ```python
 import requests
@@ -294,7 +294,7 @@ For the CCNA exam, Python and automation questions focus on:
 | Why Python | Automate repetitive tasks, scale operations |
 | Netmiko vs Paramiko | Netmiko — more convenient, purpose-built for networking |
 | NAPALM | Unified API for multiple vendors |
-| JSON | Data format used in REST APIs (DNA Center, RESTCONF) |
+| JSON | Data format used in REST APIs (Catalyst Center, RESTCONF) |
 | `requests` | Library for HTTP requests to REST APIs |
 | Idempotency | Running a script twice produces the same result (like Ansible) |
 
@@ -309,7 +309,7 @@ flowchart LR
     Python --> Netmiko["netmiko\nSSH for Networks\ncisco_ios, nxos..."]
     Python --> NAPALM["napalm\nMulti-vendor API"]
     Python --> Requests["requests\nHTTP / REST API"]
-    Requests --> DNA["DNA Center\nJSON Responses"]
+    Requests --> DNA["Catalyst Center\nJSON Responses"]
     NAPALM --> IOS["Cisco IOS"]
     NAPALM --> EOS["Arista EOS"]
     NAPALM --> JunOS["Juniper JunOS"]

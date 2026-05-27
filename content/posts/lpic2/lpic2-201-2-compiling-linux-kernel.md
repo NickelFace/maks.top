@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 201.2 — Compiling the Linux Kernel"
-date: 2025-08-13
+date: 2025-04-05
 description: "Full kernel build cycle: source layout, make targets, kernel image installation, initrd/initramfs, DKMS, and dracut. LPIC-2 exam topic 201.2."
 tags: ["Linux", "Kernel", "LPIC-2", "DKMS", "make"]
 categories: ["LPIC-2"]

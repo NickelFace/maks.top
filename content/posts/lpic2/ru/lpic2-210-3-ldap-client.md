@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 210.3 — LDAP Client Usage"
-date: 2026-04-14
+date: 2026-02-12
 description: "Структура дерева LDAP, DN/RDN, формат LDIF, ldapsearch с фильтрами, ldapadd/ldapdelete/ldapmodify/ldappasswd, области поиска, slapadd vs ldapadd. Тема экзамена LPIC-2 210.3."
 tags: ["Linux", "LPIC-2", "LDAP", "OpenLDAP", "directory", "authentication"]
 categories: ["LPIC-2"]

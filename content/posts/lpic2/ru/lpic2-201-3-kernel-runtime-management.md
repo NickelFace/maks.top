@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 201.3 — Kernel Runtime Management"
-date: 2025-08-22
+date: 2025-04-16
 description: "Управление работающим ядром Linux: модули, /proc, sysctl, udev, инструменты анализа оборудования и трассировки. Тема экзамена LPIC-2 201.3."
 tags: ["Linux", "Kernel", "LPIC-2", "udev", "sysctl", "Modules"]
 categories: ["LPIC-2"]

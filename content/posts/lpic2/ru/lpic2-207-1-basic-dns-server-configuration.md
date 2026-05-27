@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 207.1 — Basic DNS Server Configuration"
-date: 2026-01-08
+date: 2025-10-12
 description: "Компоненты BIND, структура named.conf (options/logging/zone), кэширующий сервер, rndc, named-checkconf/named-checkzone, dig и host. Альтернативные DNS-серверы: dnsmasq, djbdns, PowerDNS. Тема экзамена LPIC-2 207.1."
 tags: ["Linux", "LPIC-2", "DNS", "BIND", "named", "dig"]
 categories: ["LPIC-2"]

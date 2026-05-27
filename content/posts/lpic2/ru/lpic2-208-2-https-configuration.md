@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 208.2 — Apache HTTPS Configuration"
-date: 2026-02-12
+date: 2025-11-26
 description: "SSL/TLS с mod_ssl: генерация ключа/CSR, самоподписанные сертификаты, CA.pl, SNI, wildcard-сертификаты, цепочки сертификатов, отключение слабых протоколов и шифров, ServerTokens, TraceEnable. Тема экзамена LPIC-2 208.2."
 tags: ["Linux", "LPIC-2", "Apache", "HTTPS", "SSL", "TLS", "mod_ssl"]
 categories: ["LPIC-2"]

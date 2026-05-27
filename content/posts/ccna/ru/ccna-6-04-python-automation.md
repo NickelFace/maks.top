@@ -1,7 +1,7 @@
 ---
 title: "CCNA — 6.4 Python и автоматизация сетей"
 date: 2026-09-28
-description: "Python для сетевых инженеров: библиотеки paramiko, netmiko и NAPALM для автоматизации CLI, работа с REST API через requests, обработка JSON-ответов DNA Center."
+description: "Python для сетевых инженеров: библиотеки paramiko, netmiko и NAPALM для автоматизации CLI, работа с REST API через requests, обработка JSON-ответов Catalyst Center."
 tags: ["CCNA", "Cisco", "Python", "netmiko", "автоматизация"]
 categories: ["CCNA"]
 page_lang: "ru"
@@ -24,7 +24,7 @@ build:
 | Собрать `show version` с 50 роутеров | ~2 часа | ~30 секунд |
 | Изменить VLAN на 100 коммутаторах | Весь день | 1 скрипт |
 | Проверить соответствие конфигурации | Сложно | Автоматически |
-| Получить данные из DNA Center API | Браузер | requests + JSON |
+| Получить данные из Catalyst Center API | Браузер | requests + JSON |
 
 **Ключевые библиотеки для сетей:**
 
@@ -239,7 +239,7 @@ device.close()
 
 ## Работа с JSON и API
 
-### Разбор JSON-ответа от DNA Center
+### Разбор JSON-ответа от Catalyst Center
 
 ```python
 import requests
@@ -298,7 +298,7 @@ print(json.dumps(config, indent=2))
 | Зачем Python | Автоматизация повторяющихся задач, масштабирование |
 | Netmiko vs Paramiko | Netmiko — удобнее, специально для сетей |
 | NAPALM | Единый API для разных вендоров |
-| JSON | Формат данных в REST API (DNA Center, RESTCONF) |
+| JSON | Формат данных в REST API (Catalyst Center, RESTCONF) |
 | `requests` | Библиотека для HTTP-запросов к REST API |
 | Идемпотентность | Применение скрипта дважды = тот же результат (как Ansible) |
 
@@ -313,7 +313,7 @@ flowchart LR
     Python --> Netmiko["netmiko\nSSH для сетей\ncisco_ios, nxos..."]
     Python --> NAPALM["napalm\nМультивендор API"]
     Python --> Requests["requests\nHTTP / REST API"]
-    Requests --> DNA["DNA Center\nJSON ответы"]
+    Requests --> DNA["Catalyst Center\nJSON ответы"]
     NAPALM --> IOS["Cisco IOS"]
     NAPALM --> EOS["Arista EOS"]
     NAPALM --> JunOS["Juniper JunOS"]

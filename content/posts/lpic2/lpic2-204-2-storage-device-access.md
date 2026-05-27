@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 204.2 — Adjusting Storage Device Access"
-date: 2025-10-30
+date: 2025-07-14
 description: "hdparm, sdparm, tune2fs, sysctl/proc, SSD TRIM, NVMe, iSCSI initiator/target configuration, scsi_id, WWID/WWN/IQN/LUN identifiers, SAN protocols, and LUN persistence via udev. LPIC-2 exam topic 204.2."
 tags: ["Linux", "storage", "LPIC-2", "iSCSI", "hdparm", "NVMe", "SAN"]
 categories: ["LPIC-2"]

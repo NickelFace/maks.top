@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 210.1 — DHCP Configuration"
-date: 2026-03-27
+date: 2026-01-21
 description: "Настройка ISC DHCPd: структура dhcpd.conf, глобальные параметры, subnet/range, статические хосты, группы, BOOTP/PXE, DHCP-ретранслятор (dhcrelay), файл аренд, логирование, IPv6 и radvd. Тема экзамена LPIC-2 210.1."
 tags: ["Linux", "LPIC-2", "DHCP", "ISC DHCPd", "networking", "radvd"]
 categories: ["LPIC-2"]

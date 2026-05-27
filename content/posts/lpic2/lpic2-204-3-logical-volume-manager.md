@@ -1,6 +1,6 @@
 ---
 title: "LPIC-2 204.3 — Logical Volume Manager (LVM)"
-date: 2025-11-08
+date: 2025-07-26
 description: "LVM architecture (PV/VG/LV), full deployment cycle, extending and reducing volumes, LVM snapshots, Device Mapper, and lvm.conf filters. LPIC-2 exam topic 204.3."
 tags: ["Linux", "LVM", "LPIC-2", "storage", "Device Mapper"]
 categories: ["LPIC-2"]
