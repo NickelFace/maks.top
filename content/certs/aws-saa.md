@@ -7,6 +7,10 @@ post_prefix: "aws-saa"
 post_category: "AWS SAA"
 expected_articles: 40
 resources:
+  - icon: "🗺️"
+    title: "Roadmap"
+    desc: "SAA-C03 domains and prep milestones"
+    url: "/roadmap/aws/"
   - icon: "📖"
     title: "AWS Docs"
     desc: "Official AWS documentation"

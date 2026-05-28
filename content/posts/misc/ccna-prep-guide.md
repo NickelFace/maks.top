@@ -6,7 +6,11 @@ tags: ["Networking", "CCNA", "Cisco", "Certification"]
 categories: ["CCNA"]
 page_lang: "en"
 lang_pair: "/posts/misc/ru/ccna-prep-guide/"
+aliases:
+  - "/posts/ccna-prep-guide/"
 ---
+
+> **Note:** A structured CCNA study plan now lives at [/roadmap/ccna/](/roadmap/ccna/). This page stays as the long-form resource list.
 
 > Exam code: **200-301** · Current version: **v1.1** (2024) · Duration: **120 min** · Passing score: ~825/1000
 

@@ -8,6 +8,10 @@ post_category: "Network Architect"
 expected_articles: 9
 cert_url: "https://otus.ru/certificate/4c96622346d542378b69e703d7c73a36/en/"
 resources:
+  - icon: "🗺️"
+    title: "Roadmap"
+    desc: "9 labs · DC fabric, VxLAN EVPN"
+    url: "/roadmap/network-architect/"
   - icon: "📝"
     title: "Lab Writeups"
     desc: "All 9 labs — DC fabric, VxLAN EVPN"

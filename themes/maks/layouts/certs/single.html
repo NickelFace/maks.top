@@ -22,9 +22,9 @@
   {{ $pct = int .Params.progress_pct }}
 {{ end }}
 
-{{/* Derive cert state */}}
+{{/* Derive cert state — purely from pct */}}
 {{ $state := "planned" }}
-{{ if or .Params.credly_badge_id .Params.cert_url }}{{ $state = "passed" }}{{ else if gt $pct 0 }}{{ $state = "in progress" }}{{ end }}
+{{ if ge $pct 100 }}{{ $state = "passed" }}{{ else if gt $pct 0 }}{{ $state = "in progress" }}{{ end }}
 
 {{/* Eyebrow: title + exam_code + state */}}
 {{ $eyebrow := printf "%s · %s" .Title $state }}

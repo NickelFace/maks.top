@@ -1,0 +1,10 @@
+{{ define "head" }}
+<link rel="stylesheet" href="{{ "styles/roadmap.css" | relURL }}">
+{{ end }}
+
+{{ define "main" }}
+<main class="rdm-page">
+{{ partial "breadcrumb.html" . }}
+{{ .Content }}
+</main>
+{{ end }}

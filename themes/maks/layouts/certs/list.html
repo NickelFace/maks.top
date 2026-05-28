@@ -30,10 +30,8 @@
     {{ $pct = int .Params.progress_pct }}
   {{ end }}
   {{ $state := "planned" }}
-  {{ if or .Params.credly_badge_id .Params.cert_url }}
-    {{ $state = "passed" }}
-  {{ else if gt $pct 0 }}
-    {{ $state = "in progress" }}
+  {{ if ge $pct 100 }}{{ $state = "passed" }}
+  {{ else if gt $pct 0 }}{{ $state = "in progress" }}
   {{ end }}
   {{/* Exam codes sub-line — only use codes with 3+ chars (real exam codes, not section numbers) */}}
   {{ $codes := slice }}

@@ -8,10 +8,10 @@ post_category: "CCNA"
 expected_articles: 80
 progress_pct: 5
 resources:
-  - icon: "📖"
-    title: "Prep Guide"
-    desc: "Books, courses, labs, registration"
-    url: "/posts/ccna-prep-guide/"
+  - icon: "🗺️"
+    title: "CCNA Roadmap"
+    desc: "200-301 domains, milestones, progress tracker"
+    url: "/roadmap/ccna/"
   - icon: "🎯"
     title: "Practice Quiz"
     desc: "489 questions · answer reveal"

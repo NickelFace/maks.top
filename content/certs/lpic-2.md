@@ -7,6 +7,11 @@ credly_badge_id: "b47b3e1d-e1d4-4a65-97e8-d97a58067985"
 post_prefix: "lpic2"
 post_category: "LPIC-2"
 expected_articles: 41
+resources:
+  - icon: "🗺️"
+    title: "LPIC-2 Roadmap"
+    desc: "Exams 201 & 202 — domains, topics, progress tracker"
+    url: "/roadmap/lpic-2/"
 exams:
   - code: "201"
     title: "Advanced Linux Administration"

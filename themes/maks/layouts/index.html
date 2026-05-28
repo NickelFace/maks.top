@@ -51,12 +51,33 @@
   {{- if gt $ccnaPct 100 -}}{{- $ccnaPct = 100 -}}{{- end -}}
 {{- end -}}
 
+{{- /* State + color picker, one helper, six certs */ -}}
+{{- $stateFor := dict
+    "passed"      (dict "label" "passed"       "color" "var(--accent2)")
+    "in progress" (dict "label" "in progress"  "color" "var(--accent)")
+    "planned"     (dict "label" "planned"      "color" "var(--accent3)")
+-}}
+{{- $l1State   := "planned" -}}{{- if ge $l1Pct   100 -}}{{- $l1State   = "passed" -}}{{- else if gt $l1Pct   0 -}}{{- $l1State   = "in progress" -}}{{- end -}}
+{{- $neState   := "planned" -}}{{- if ge $nePct   100 -}}{{- $neState   = "passed" -}}{{- else if gt $nePct   0 -}}{{- $neState   = "in progress" -}}{{- end -}}
+{{- $naState   := "planned" -}}{{- if ge $naPct   100 -}}{{- $naState   = "passed" -}}{{- else if gt $naPct   0 -}}{{- $naState   = "in progress" -}}{{- end -}}
+{{- $l2State   := "planned" -}}{{- if ge $l2Pct   100 -}}{{- $l2State   = "passed" -}}{{- else if gt $l2Pct   0 -}}{{- $l2State   = "in progress" -}}{{- end -}}
+{{- $awsState  := "planned" -}}{{- if ge $awsPct  100 -}}{{- $awsState  = "passed" -}}{{- else if gt $awsPct  0 -}}{{- $awsState  = "in progress" -}}{{- end -}}
+{{- $ccnaState := "planned" -}}{{- if ge $ccnaPct 100 -}}{{- $ccnaState = "passed" -}}{{- else if gt $ccnaPct 0 -}}{{- $ccnaState = "in progress" -}}{{- end -}}
+{{- $l1S   := index $stateFor $l1State   -}}
+{{- $neS   := index $stateFor $neState   -}}
+{{- $naS   := index $stateFor $naState   -}}
+{{- $l2S   := index $stateFor $l2State   -}}
+{{- $awsS  := index $stateFor $awsState  -}}
+{{- $ccnaS := index $stateFor $ccnaState -}}
+
 {{- /* ── KB data ── */ -}}
 {{- $allKb := where (where .Site.RegularPages "Section" "kb") "Params.page_lang" "ne" "ru" -}}
 {{- $kbDirect := slice -}}
 {{- range $allKb -}}{{- if eq .File.Dir "kb/" -}}{{- $kbDirect = $kbDirect | append . -}}{{- end -}}{{- end -}}
 {{- $kbRoot := .Site.GetPage "/kb" -}}
 {{- $kbSections := $kbRoot.Sections -}}
+
+<main class="home-page">
 
 <!-- ═══════════════════════════════════════
      HERO
@@ -101,64 +122,71 @@
   </div>
   <div class="home-cert-grid">
 
+    {{- $l1Color   := $l1.Params.cert_color   | default "var(--accent)" -}}
+    {{- $neColor   := $ne.Params.cert_color   | default "var(--accent)" -}}
+    {{- $naColor   := $na.Params.cert_color   | default "var(--accent)" -}}
+    {{- $l2Color   := $l2.Params.cert_color   | default "var(--accent)" -}}
+    {{- $awsColor  := $aws.Params.cert_color  | default "var(--accent)" -}}
+    {{- $ccnaColor := $ccna.Params.cert_color | default "var(--accent)" -}}
+
     <a href="{{ "/certs/lpic-1/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">
         <div class="home-cc-name">LPIC-1</div>
-        <div class="home-cc-state" style="color:var(--accent2)">passed</div>
+        <div class="home-cc-state" style="color:{{ $l1S.color | safeCSS }}">{{ $l1S.label }}</div>
       </div>
       <div class="home-cc-sub">Linux Professional Institute</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l1Pct }}%;background:var(--accent2)"></div></div>
-      <div class="home-cc-meta">16 Feb 2025 · {{ $l1Act }} articles</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l1Pct }}%;background:{{ $l1Color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>16 Feb 2025 · {{ $l1Act }} articles</span><span class="home-cc-pct" style="color:{{ $l1Color | safeCSS }}">{{ $l1Pct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/network-engineer/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">
         <div class="home-cc-name">Network Engineer</div>
-        <div class="home-cc-state" style="color:var(--accent2)">complete</div>
+        <div class="home-cc-state" style="color:{{ $neS.color | safeCSS }}">{{ $neS.label }}</div>
       </div>
       <div class="home-cc-sub">Cisco R&amp;S · OTUS</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $nePct }}%;background:var(--accent2)"></div></div>
-      <div class="home-cc-meta">{{ $neAct }} / {{ $ne.Params.expected_articles | default "17" }} labs</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $nePct }}%;background:{{ $neColor | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $neAct }} / {{ $ne.Params.expected_articles | default "17" }} labs</span><span class="home-cc-pct" style="color:{{ $neColor | safeCSS }}">{{ $nePct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/network-architect/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">
         <div class="home-cc-name">Network Architect</div>
-        <div class="home-cc-state" style="color:var(--accent2)">complete</div>
+        <div class="home-cc-state" style="color:{{ $naS.color | safeCSS }}">{{ $naS.label }}</div>
       </div>
       <div class="home-cc-sub">Data Center · VxLAN EVPN</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $naPct }}%;background:var(--accent2)"></div></div>
-      <div class="home-cc-meta">{{ $naAct }} / {{ $na.Params.expected_articles | default "13" }} labs</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $naPct }}%;background:{{ $naColor | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $naAct }} / {{ $na.Params.expected_articles | default "13" }} labs</span><span class="home-cc-pct" style="color:{{ $naColor | safeCSS }}">{{ $naPct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/lpic-2/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">
         <div class="home-cc-name">LPIC-2</div>
-        <div class="home-cc-state" style="color:var(--accent)">in progress</div>
+        <div class="home-cc-state" style="color:{{ $l2S.color | safeCSS }}">{{ $l2S.label }}</div>
       </div>
       <div class="home-cc-sub">Exams 201 &amp; 202</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l2Pct }}%;background:var(--accent)"></div></div>
-      <div class="home-cc-meta">{{ $l2Act }} / {{ $l2.Params.expected_articles }} articles</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l2Pct }}%;background:{{ $l2Color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $l2Act }} / {{ $l2.Params.expected_articles }} articles</span><span class="home-cc-pct" style="color:{{ $l2Color | safeCSS }}">{{ $l2Pct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/aws-saa/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">
         <div class="home-cc-name">AWS SAA-C03</div>
-        <div class="home-cc-state" style="color:var(--accent3)">planned</div>
+        <div class="home-cc-state" style="color:{{ $awsS.color | safeCSS }}">{{ $awsS.label }}</div>
       </div>
       <div class="home-cc-sub">Solutions Architect Assoc.</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $awsPct }}%;background:var(--accent3)"></div></div>
-      <div class="home-cc-meta">Q2 2026</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $awsPct }}%;background:{{ $awsColor | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $awsAct }} / {{ $aws.Params.expected_articles }} articles · Q2 2026</span><span class="home-cc-pct" style="color:{{ $awsColor | safeCSS }}">{{ $awsPct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/ccna/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">
         <div class="home-cc-name">CCNA 200-301</div>
-        <div class="home-cc-state" style="color:var(--accent)">in progress</div>
+        <div class="home-cc-state" style="color:{{ $ccnaS.color | safeCSS }}">{{ $ccnaS.label }}</div>
       </div>
       <div class="home-cc-sub">Cisco Certified Network Assoc.</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $ccnaPct }}%;background:var(--accent)"></div></div>
-      <div class="home-cc-meta">{{ $ccnaAct }} / {{ $ccna.Params.expected_articles }} articles</div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $ccnaPct }}%;background:{{ $ccnaColor | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $ccnaAct }} / {{ $ccna.Params.expected_articles }} articles</span><span class="home-cc-pct" style="color:{{ $ccnaColor | safeCSS }}">{{ $ccnaPct }}%</span></div>
     </a>
 
   </div>
@@ -276,6 +304,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 {{ end }}
 

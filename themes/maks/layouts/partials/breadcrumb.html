@@ -49,6 +49,12 @@
       <span>{{ .Title }}</span>
     {{ end }}
 
+  {{ else if eq .Section "roadmap" }}
+    <a href="{{ "/certs/" | relURL }}">Certs</a>
+    <span>/</span>
+    {{ with .Params.cert_link }}<a href="{{ . | relURL }}">{{ $.Params.cert_name | default $.Title }}</a><span>/</span>{{ end }}
+    <span>Roadmap</span>
+
   {{ else if .IsSection }}
     {{ if eq .Section "posts" }}
       <span>Blog</span>

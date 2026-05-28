@@ -51,13 +51,32 @@
   {{- if gt $ccnaPct 100 -}}{{- $ccnaPct = 100 -}}{{- end -}}
 {{- end -}}
 
+{{- /* State + color picker */ -}}
+{{- $stateFor := dict
+    "passed"      (dict "label" "passed"       "color" "var(--accent2)")
+    "in progress" (dict "label" "in progress"  "color" "var(--accent)")
+    "planned"     (dict "label" "planned"      "color" "var(--accent3)")
+-}}
+{{- $neState   := "planned" -}}{{- if ge $nePct   100 -}}{{- $neState   = "passed" -}}{{- else if gt $nePct   0 -}}{{- $neState   = "in progress" -}}{{- end -}}
+{{- $naState   := "planned" -}}{{- if ge $naPct   100 -}}{{- $naState   = "passed" -}}{{- else if gt $naPct   0 -}}{{- $naState   = "in progress" -}}{{- end -}}
+{{- $l1State   := "planned" -}}{{- if ge $l1Pct   100 -}}{{- $l1State   = "passed" -}}{{- else if gt $l1Pct   0 -}}{{- $l1State   = "in progress" -}}{{- end -}}
+{{- $l2State   := "planned" -}}{{- if ge $l2Pct   100 -}}{{- $l2State   = "passed" -}}{{- else if gt $l2Pct   0 -}}{{- $l2State   = "in progress" -}}{{- end -}}
+{{- $awsState  := "planned" -}}{{- if ge $awsPct  100 -}}{{- $awsState  = "passed" -}}{{- else if gt $awsPct  0 -}}{{- $awsState  = "in progress" -}}{{- end -}}
+{{- $ccnaState := "planned" -}}{{- if ge $ccnaPct 100 -}}{{- $ccnaState = "passed" -}}{{- else if gt $ccnaPct 0 -}}{{- $ccnaState = "in progress" -}}{{- end -}}
+{{- $neS   := index $stateFor $neState   -}}
+{{- $naS   := index $stateFor $naState   -}}
+{{- $l1S   := index $stateFor $l1State   -}}
+{{- $l2S   := index $stateFor $l2State   -}}
+{{- $awsS  := index $stateFor $awsState  -}}
+{{- $ccnaS := index $stateFor $ccnaState -}}
+
 <div class="panel-head">
   <span class="panel-title">Certification Notes</span>
   <a href="{{ "/certs/" | relURL }}" class="panel-more">all →</a>
 </div>
 <div class="cert-grid">
 
-  <a href="/certs/network-engineer/" class="cert-card cert-card-featured" style="--cert-color:#22c55e">
+  <a href="/certs/network-engineer/" class="cert-card cert-card-featured" style="--cert-color:{{ $neS.color | safeCSS }}">
     <div class="cert-top">
       <div class="cert-badge">🔌</div>
       <div class="cert-name">Network Engineer</div>
@@ -65,10 +84,10 @@
     </div>
     <div class="cert-sub">Cisco Routing &amp; Switching · OTUS Course · {{ $neAct }} articles</div>
     <div class="progress-bar"><div class="progress-fill" style="width:{{ $nePct }}%"></div></div>
-    <div class="progress-label"><span>Course complete</span><span class="pct">✓ All notes</span></div>
+    <div class="progress-label"><span>{{ $neS.label }}</span><span class="pct">{{ $nePct }}%</span></div>
   </a>
 
-  <a href="/certs/network-architect/" class="cert-card cert-card-featured" style="--cert-color:#f59e0b">
+  <a href="/certs/network-architect/" class="cert-card cert-card-featured" style="--cert-color:{{ $naS.color | safeCSS }}">
     <div class="cert-top">
       <div class="cert-badge">🏗️</div>
       <div class="cert-name">Network Architect</div>
@@ -76,10 +95,10 @@
     </div>
     <div class="cert-sub">Data Center Design · VxLAN EVPN · OTUS Course · {{ $naAct }} articles</div>
     <div class="progress-bar"><div class="progress-fill" style="width:{{ $naPct }}%"></div></div>
-    <div class="progress-label"><span>Course complete</span><span class="pct">✓ All labs</span></div>
+    <div class="progress-label"><span>{{ $naS.label }}</span><span class="pct">{{ $naPct }}%</span></div>
   </a>
 
-  <a href="/certs/lpic-1/" class="cert-card" style="--cert-color:#00d4ff">
+  <a href="/certs/lpic-1/" class="cert-card" style="--cert-color:{{ $l1S.color | safeCSS }}">
     <div class="cert-top">
       <div class="cert-badge">🐧</div>
       <div class="cert-name">LPIC-1</div>
@@ -87,28 +106,28 @@
     </div>
     <div class="cert-sub">Linux Professional Institute · 16 Feb 2025 · {{ $l1Act }} articles</div>
     <div class="progress-bar"><div class="progress-fill" style="width:{{ $l1Pct }}%"></div></div>
-    <div class="progress-label"><span>Passed</span><span class="pct">✓ lpi.org</span></div>
+    <div class="progress-label"><span>{{ $l1S.label }}</span><span class="pct">{{ $l1Pct }}%</span></div>
   </a>
 
-  <a href="/certs/lpic-2/" class="cert-card" style="--cert-color:#7c3aed">
+  <a href="/certs/lpic-2/" class="cert-card" style="--cert-color:{{ $l2S.color | safeCSS }}">
     <div class="cert-top"><div class="cert-badge">🖥️</div><div class="cert-name">LPIC-2</div></div>
     <div class="cert-sub">Linux Professional Institute · Exams 201 &amp; 202 · {{ $l2Act }} / {{ $l2.Params.expected_articles }} articles</div>
     <div class="progress-bar"><div class="progress-fill" style="width:{{ $l2Pct }}%"></div></div>
-    <div class="progress-label"><span>In progress</span><span class="pct">{{ $l2Pct }}%</span></div>
+    <div class="progress-label"><span>{{ $l2S.label }}</span><span class="pct">{{ $l2Pct }}%</span></div>
   </a>
 
-  <a href="/certs/aws-saa/" class="cert-card" style="--cert-color:#10b981">
+  <a href="/certs/aws-saa/" class="cert-card" style="--cert-color:{{ $awsS.color | safeCSS }}">
     <div class="cert-top"><div class="cert-badge">☁️</div><div class="cert-name">AWS SAA</div></div>
     <div class="cert-sub">Solutions Architect Associate · C03</div>
     <div class="progress-bar"><div class="progress-fill" style="width:{{ $awsPct }}%"></div></div>
-    <div class="progress-label"><span>Planned</span><span class="pct">{{ $awsPct }}%</span></div>
+    <div class="progress-label"><span>{{ $awsS.label }}</span><span class="pct">{{ $awsPct }}%</span></div>
   </a>
 
-  <a href="/certs/ccna/" class="cert-card" style="--cert-color:#f59e0b">
+  <a href="/certs/ccna/" class="cert-card" style="--cert-color:{{ $ccnaS.color | safeCSS }}">
     <div class="cert-top"><div class="cert-badge">🌐</div><div class="cert-name">CCNA</div></div>
     <div class="cert-sub">Cisco Certified Network Associate · 200-301</div>
     <div class="progress-bar"><div class="progress-fill" style="width:{{ $ccnaPct }}%"></div></div>
-    <div class="progress-label"><span>Queued</span><span class="pct">{{ $ccnaPct }}%</span></div>
+    <div class="progress-label"><span>{{ $ccnaS.label }}</span><span class="pct">{{ $ccnaPct }}%</span></div>
   </a>
 
 </div>

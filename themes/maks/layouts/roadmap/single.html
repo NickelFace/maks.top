@@ -1,0 +1,18 @@
+{{ define "head" }}
+<link rel="stylesheet" href="{{ "styles/roadmap.css" | relURL }}">
+{{ end }}
+
+{{ define "main" }}
+<main class="rdm-page"
+  {{ with .Params.store_key }}data-store-key="{{ . }}"{{ end }}
+  {{ with .Params.total }}data-total="{{ . }}"{{ end }}
+  {{ with .Params.total_label }}data-total-label="{{ . }}"{{ end }}
+  {{ if .Params.default_checked }}data-default-checked="true"{{ end }}>
+{{ partial "breadcrumb.html" . }}
+{{ .Content }}
+</main>
+{{ end }}
+
+{{ define "scripts" }}
+{{ if .Params.store_key }}<script src="{{ "js/roadmap.js" | relURL }}" defer></script>{{ end }}
+{{ end }}
