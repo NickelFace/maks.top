@@ -15,11 +15,10 @@ tags: ["docs"]
 
 | Файл | Загружается | Назначение |
 |---|---|---|
-| Inline в `baseof.html` `<script>` | каждая страница | Глобальные функции (тема, меню) + restore из localStorage |
-| `static/js/site.js` | **нигде не подключён** | Дублирует функции из baseof (устаревший) |
-| Inline в `_default/single.html` `{{ block "scripts" }}` | страницы статей | Progress bar + ToC + copy buttons |
-| Inline в `posts/list.html` `{{ block "scripts" }}` | `/posts/` | Pagefind поиск |
-| Inline в `taxonomy/tag.html` `{{ block "scripts" }}` | `/tags/` | Pagefind поиск + tag filter |
+| Inline в `baseof.html` `<script>` | каждая страница | Глобальные функции (тема, меню) |
+| `static/js/article.js` | страницы статей через `_default/single.html` | Progress bar, ToC, copy buttons, lightbox |
+| `static/js/pagefind-search.js` | `/posts/` и `/tags/` | Pagefind search UI |
+| `static/js/taxonomy.js` | `/tags/` (после inline POSTS[]) | Tag filter логика + article grid |
 | Inline в `certs/single.html` `{{ block "scripts" }}` | `/certs/*` | Accordion toggle |
 | `static/js/ns.js` | `/posts/linux-namespaces/` | Namespace explorer (данные + рендер) |
 
@@ -91,28 +90,31 @@ function closeMobMenu()
 
 ---
 
-### IIFE — restore state
+### `applyTheme(t, isAuto)`
 
 ```js
-(function () {
-  const t = localStorage.getItem('theme');
-  if (t === 'light') { ... }
-  const lang = localStorage.getItem('lang') || 'en';
-  if (lang === 'ru') { ... }
-})();
+function applyTheme(t, isAuto)
 ```
 
-**Выполняется:** сразу при загрузке страницы (Immediately Invoked Function Expression).
+**Единый источник истины состояния темы.** Вызывается при загрузке страницы и из `toggleTheme()`.
 
 **Что делает:**
-- Если `localStorage.theme === 'light'` → применяет светлую тему и ставит ☀️
-- Если `localStorage.lang === 'ru'` → ставит `.active` на кнопку RU
+1. Устанавливает атрибут `data-theme` на `<html>` (`"dark"` или `"light"`)
+2. Меняет иконку на всех `.theme-btn`
+3. Устанавливает `aria-pressed` на кнопках темы
+4. Устанавливает `data-auto="true"` на кнопках в авто-режиме (CSS показывает пунктирную рамку)
 
-> **Зачем IIFE, а не просто код?** Изоляция переменных (`t`, `lang`) от глобального scope.
+**Логика авто-определения:** если `localStorage('theme')` отсутствует или равен `'auto'`, код проверяет локальный час:
+- 7–20 → `"light"`, иначе → `"dark"`
+- В авто-режиме запускается `setInterval` (10 мин), который переключает тему при смене интервала
+
+Для сброса в авто-режим: `localStorage.removeItem('theme')` в консоли браузера.
 
 ---
 
-## _default/single.html — inline scripts
+## article.js — функции страницы статьи
+
+**Путь:** `static/js/article.js` — загружается на всех одиночных страницах статей через блок scripts в `_default/single.html`.
 
 ### Reading progress bar
 
@@ -168,7 +170,36 @@ function cpPre(btn) {
 
 ---
 
-## `posts/list.html` — Pagefind поиск
+### Code toggle
+
+Активируется через `document.body.dataset.codeToggle === 'true'`. Устанавливается в блоке scripts страницы, когда `code_toggle: true` в frontmatter. Добавляет UI разворачивания/сворачивания для `<details>`-блоков в теле статьи.
+
+### Image lightbox
+
+Оборачивает теги `<img>` внутри `.prose` обработчиком клика, который открывает изображение на весь экран в оверлее lightbox. Клик по оверлею или нажатие Escape закрывает его.
+
+---
+
+## Mermaid диаграммы — ленивая загрузка
+
+Поддержка Mermaid реализована через render hook в `themes/maks/layouts/_default/_markup/render-codeblock-mermaid.html`. Он оборачивает ` ```mermaid ` блоки в `<pre class="mermaid">` и устанавливает флаг `hasMermaid` в page store.
+
+В блоке scripts `_default/single.html`:
+
+```js
+{{ if .Store.Get "hasMermaid" }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+{{ end }}
+```
+
+Mermaid JS загружается с CDN **только на страницах, содержащих mermaid-блок** — не глобально.
+
+---
+
+## `static/js/pagefind-search.js` — Pagefind поиск
 
 ```js
 let pf = null;

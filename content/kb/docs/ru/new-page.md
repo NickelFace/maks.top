@@ -19,6 +19,7 @@ tags: ["docs"]
 | Интерактивный эксплорер (карточки, вкладки, JS) | interactive | `layouts/posts/<slug>.html` |
 | Страница обзора сертификации | cert | `layouts/certs/single.html` |
 | Запись базы знаний | prose | `_default/single.html` |
+| Двуязычный пост курса (Network Engineer) | bilingual | `_default/single.html` (пара EN + RU) |
 
 ---
 
@@ -304,6 +305,100 @@ topic.num   = "01"
 
 ---
 
+## Тип 4 — Двуязычный пост курса (Network Engineer)
+
+Для лабораторных работ Network Engineer и аналогичных постов курса. Используется стандартный `_default/single.html`, но требует парных EN/RU файлов и особых соглашений по контенту.
+
+### Шаг 1: создать EN-файл
+
+```bash
+content/posts/neteng/neteng-NN-my-topic.md
+```
+
+```yaml
+---
+title: "Network Engineer — NN. My Topic"
+date: 2026-01-01
+description: "..."
+tags: ["Networking", "OSPF"]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "en"
+lang_pair: "/posts/neteng/ru/neteng-NN-my-topic/"
+---
+```
+
+### Шаг 2: создать RU-файл
+
+```bash
+content/posts/neteng/ru/neteng-NN-my-topic.md
+```
+
+```yaml
+---
+title: "Network Engineer — NN. Тема"
+date: 2026-01-01
+description: "..."
+tags: ["Networking", "OSPF"]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "ru"
+lang_pair: "/posts/neteng/neteng-NN-my-topic/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+### Соглашения по контенту
+
+- Верхний заголовок — `##` (h2), никогда `#` (h1)
+- Длинный CLI-вывод — только в `<details>`, никогда в обычных code block:
+
+```html
+<details>
+<summary>RouterName — описание команды</summary>
+<pre><code>
+... вывод ...
+</code></pre>
+</details>
+```
+
+- Короткие фрагменты конфига (≤5 строк) — обычные ` ``` ` блоки
+- Разделы разделяются `---`
+- Последняя строка: `*Network Engineer Course | Lab NN*`
+- Изображения в `static/img/neteng/NN/`, называются последовательно `1.png`, `2.png` …
+
+---
+
+## Использование шорткода topology
+
+ASCII-диаграммы сетей в code block считаются legacy. Используйте шорткод `topology`.
+
+```
+{{</* topology cols="4" rows="3" caption="OSPF baseline" */>}}
+  cloud  ISP    "AS 64512"   at 0,1
+  router R1     "GW · BGP"   at 1,1
+  switch CORE   "VLAN 10/20" at 2,1
+  server srv-01 "10.0.10.4"  at 3,0
+  server srv-02 "10.0.10.5"  at 3,2
+
+  ISP  — R1
+  R1   — CORE  label="trunk · 1G"
+  CORE — srv-01
+  CORE — srv-02
+{{</* /topology */>}}
+```
+
+**Типы узлов:** `router` `switch` `server` `cloud` `pc` `fw`
+
+**Координаты:** `at col,row` (с нуля). **Связи:** `A — B` или `A — B label="text"`.
+
+Правило миграции: при миграции EN-поста с ASCII-диаграммами — мигрируйте `ru/`-shadow в том же коммите.
+
+---
+
 ## Добавление двуязычной страницы
 
 Чтобы страница переключалась между EN и RU:
@@ -329,10 +424,16 @@ content/kb/docs/ru/my-topic.md
 title: "Моя тема"
 page_lang: "ru"
 lang_pair: "/kb/docs/my-topic/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 ```
 
 Функция `setLang()` в `baseof.html` читает `lang_pair` из `<meta id="page-lang">` и делает редирект при переключении языка. Без этих полей кнопки языка только меняют визуальное состояние — редиректа нет.
+
+> **Важно:** всегда добавляйте `pagefind_ignore: true` и `build: {list: never, render: always}` в RU-страницы — без этого страница появится в листингах и в поиске.
 
 ---
 

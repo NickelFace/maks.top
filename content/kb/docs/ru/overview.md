@@ -117,10 +117,13 @@ maks.top/
     │
     ├── layouts/                     # Шаблоны Hugo (Go templates)
     │   ├── index.html               # Главная страница /
+    │   ├── 404.html                 # Кастомная страница 404
     │   ├── _default/
     │   │   ├── baseof.html          # Базовый layout (обёртка для всех страниц)
-    │   │   ├── single.html          # Статья с ToC и progress bar
-    │   │   └── list.html            # Листинг страниц с пагинацией
+    │   │   ├── single.html          # Статья с ToC, progress bar, Mermaid
+    │   │   ├── list.html            # Листинг страниц с пагинацией
+    │   │   └── _markup/
+    │   │       └── render-codeblock-mermaid.html  # Render hook для Mermaid
     │   ├── posts/
     │   │   ├── list.html            # Листинг постов + Pagefind поиск
     │   │   └── linux-namespaces.html # Интерактивный explorer namespace'ов

@@ -80,42 +80,51 @@ function closeMobMenu()
 
 ---
 
-### `applyTheme(theme)`
+### `applyTheme(t, isAuto)`
 
 ```js
-function applyTheme(theme)
+function applyTheme(t, isAuto)
 ```
 
 **Single source of truth for theme state.** Called on page load and by `toggleTheme()`.
 
 **What it does:**
-1. Sets `data-theme` attribute on `<html>`
-2. Updates icon on all `#themeBtn`, `#themeBtnMob`
+1. Sets `data-theme` attribute on `<html>` (`"dark"` or `"light"`)
+2. Updates icon on all `.theme-btn`
 3. Sets `aria-pressed` on theme buttons
+4. Sets `data-auto="true"` on buttons when `isAuto` is true (CSS shows dashed border)
 
-Called at end of `<body>` as: `applyTheme(localStorage.getItem('theme') || 'dark')`
+**Auto-detect logic:** if `localStorage('theme')` is absent or `'auto'`, the init code checks local hour:
+- 7–20 → `"light"`, otherwise → `"dark"`
+- If auto mode is active, a `setInterval` (10 min) re-evaluates the hour and switches if needed
+
+To reset to auto: `localStorage.removeItem('theme')` in browser console.
 
 ---
 
 ## article.js — article page functions
 
-**Path:** `static/js/article.js` — loaded on all single article pages.
+**Path:** `static/js/article.js` — loaded on all single article pages via `_default/single.html` scripts block.
 
 ### Reading progress bar
 
-Uses `#readingBar` — a CSS-styled `<div id="readingBar">` injected at page load. Width updated on `scroll` event: `scrollY / (scrollHeight - viewportHeight) * 100%`.
+Creates `<div id="readingBar">` fixed at top of viewport. Width updated on `scroll` event: `scrollY / (scrollHeight - viewportHeight) * 100%`.
 
 ### ToC builder
 
-Finds all `h2`, `h3` inside `#articleBody`. Only activates if more than 2 headings exist. Inserts links into `#tocAside`, adds `.has-toc` to `.page` at width ≥ 860px, highlights active heading via `IntersectionObserver`.
+Finds all `h2`, `h3` inside `#articleBody`. Only activates if more than 2 headings exist. Inserts links into `#tocAside`, adds `.has-toc` to `.page` at width ≥ 860px. `IntersectionObserver` with `rootMargin: '-10% 0px -80% 0px'` highlights the active heading — considers a heading active when it's in the top 20% of viewport.
 
 ### Copy buttons
 
-For each `<pre>` not inside `.code-block`, wraps it in `.code-block` and adds a copy button. The `{{</* code */>}}` shortcode handles its own copy button separately.
+For each `<pre>` not inside `.code-block`, wraps it in `.code-block` and adds a copy button. The `{{</* code */>}}` shortcode handles its own copy button separately via `cpCode()`.
 
 ### Code toggle
 
-Activated via `document.body.dataset.codeToggle === 'true'`. Set in the page scripts block when `code_toggle: true` in frontmatter.
+Activated via `document.body.dataset.codeToggle === 'true'`. Set in the page scripts block when `code_toggle: true` in frontmatter. Adds expand/collapse UI to `<details>` blocks in the article body.
+
+### Image lightbox
+
+Wraps `<img>` tags inside `.prose` with a click handler that opens the image full-screen in a lightbox overlay. Clicking the overlay or pressing Escape closes it.
 
 ---
 
@@ -140,6 +149,25 @@ const currentTag = "linux"; // or "" if on /tags/ root
 ```
 
 ---
+
+---
+
+## Mermaid diagrams — lazy loading
+
+Mermaid diagrams are supported via a render hook at `themes/maks/layouts/_default/_markup/render-codeblock-mermaid.html`. It wraps ` ```mermaid ` blocks in `<pre class="mermaid">` and sets a `hasMermaid` page store flag.
+
+In `_default/single.html` scripts block:
+
+```js
+{{ if .Store.Get "hasMermaid" }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+{{ end }}
+```
+
+Mermaid JS is loaded from CDN **only on pages that actually contain a mermaid block** — not globally.
 
 ---
 

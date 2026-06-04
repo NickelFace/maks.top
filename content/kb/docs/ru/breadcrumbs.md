@@ -1,7 +1,7 @@
 ---
 title: "Breadcrumbs"
 date: 2026-04-13
-description: "Реализация breadcrumbs в шаблонах — разметка, CSS и различия по типам страниц"
+description: "Реализация breadcrumbs в шаблонах — партиал, CSS и поддержка KB-подразделов"
 page_lang: "ru"
 lang_pair: "/kb/docs/breadcrumbs/"
 pagefind_ignore: true
@@ -13,17 +13,57 @@ tags: ["docs"]
 
 ## Обзор
 
-Breadcrumbs — это чистый HTML, без партиалов и шорткодов. Каждый шаблон, которому они нужны, включает блок `.breadcrumb` напрямую. Общего партиала для breadcrumbs нет.
+Breadcrumbs реализованы как **общий партиал** в `themes/maks/layouts/partials/breadcrumb.html`.
 
-**Страницы с breadcrumbs:**
+Все шаблоны, которым нужны breadcrumbs, вызывают:
+```html
+{{ partial "breadcrumb.html" . }}
+```
 
-| Страница | Шаблон | Breadcrumb |
-|---|---|---|
-| `/posts/lpic2-*/` | `_default/single.html` | `maks.top / posts / Заголовок страницы` |
-| `/posts/linux-namespaces/` | `posts/linux-namespaces.html` | `maks.top / posts / Заголовок страницы` |
-| `/certs/lpic-2/` | `certs/single.html` | `maks.top / Заголовок страницы` |
+**Шаблоны, использующие партиал:**
 
-**Страницы без breadcrumbs:** `/` (главная), `/posts/` (список), `/tags/`, `/about/`.
+| Шаблон | Страницы |
+|---|---|
+| `_default/single.html` | Все посты, docs, KB страницы, ccna-labs singles |
+| `kb/section.html` | Индекс KB и лендинги подразделов |
+| `certs/single.html` | Страницы обзора сертификаций |
+| `certs/list.html` | Индекс `/certs/` |
+| `ccna-labs/list.html` | Список `/ccna-labs/` |
+| `posts/linux-namespaces.html` | Статья Linux namespaces |
+
+---
+
+## Логика партиала
+
+```
+themes/maks/layouts/partials/breadcrumb.html
+```
+
+Партиал рендерит разные сегменты в зависимости от типа страницы:
+
+| Случай | Вывод |
+|---|---|
+| `eq .Section "certs"` | `maks.top / certs / Заголовок страницы` |
+| `eq .Section "ccna-quiz"` | `maks.top / CCNA / Quiz / Страница N` (CCNA — ссылка на `/certs/ccna/`) |
+| `eq .Section "ccna-labs"` | `maks.top / CCNA / Labs / Заголовок` (CCNA — ссылка на `/certs/ccna/`) |
+| `.IsSection` | `maks.top / название-раздела` (индекс раздела — текущая страница как обычный текст) |
+| KB подстраница (`Section=kb`, depth=2) | `maks.top / kb / Заголовок раздела / Заголовок страницы` |
+| Пост с префиксом cert-раздела (`neteng`, `lpic1` и т.д.) | `maks.top / Название сертификата / Заголовок` (ссылка на страницу сертификации) |
+| Обычные страницы | `maks.top / раздел / Заголовок страницы` |
+
+---
+
+## Поддержка KB-подразделов
+
+Для страниц вида `/kb/cisco-services/nat-dhcp/` партиал определяет второй сегмент пути из `.File.Dir` и проверяет, является ли он известным cert-разделом (`$certMap`) или KB-страницей:
+
+```go
+{{ if eq $.Section "kb" }}
+  <a href="{{ (printf "/%s/%s/" $.Section $sub) | relURL }}">{{ $.Parent.Title | default $sub }}</a>
+{{ end }}
+```
+
+Это делает средний сегмент (`Cisco — Network Services`) кликабельной ссылкой на индекс подраздела.
 
 ---
 
@@ -33,100 +73,28 @@ Breadcrumbs — это чистый HTML, без партиалов и шорт�
 .breadcrumb       { font-size: 11px; color: var(--text3); margin-bottom: 24px; }
 .breadcrumb a     { color: var(--text3); text-decoration: none; }
 .breadcrumb a:hover { color: var(--accent); }
-.breadcrumb span  { margin: 0 6px; }   /* разделитель "/" */
+.breadcrumb span  { margin: 0 6px; }
 ```
 
-Все ссылки breadcrumb по умолчанию имеют цвет `--text3` (приглушённый), при наведении меняются на `--accent` (циановый). Разделители `/` — простые элементы `<span>` с горизонтальными отступами.
+Все ссылки breadcrumb — `--text3` (приглушённый) по умолчанию, при наведении — `--accent`.
 
 ---
 
-## Реализация по шаблонам
+## Карта cert-разделов
 
-### `_default/single.html` — prose-статьи
+Партиал содержит словарь `$certMap`, который сопоставляет имена подпапок постов с URL страниц сертификатов:
 
-Используется всеми постами кроме `linux-namespaces`, а также страницами `docs/`.
-
-```html
-<div class="breadcrumb">
-  <a href="{{ "/" | relURL }}">maks.top</a>
-  <span>/</span>
-  <a href="{{ .Section | relURL }}">{{ .Section }}</a>
-  <span>/</span>
-  {{ .Title }}
-</div>
+```go
+{{ $certMap := dict
+    "neteng"  "/certs/network-engineer/"
+    "netarch" "/certs/network-architect/"
+    "lpic1"   "/certs/lpic-1/"
+    "lpic2"   "/certs/lpic-2/"
+    "ccna"    "/certs/ccna/"
+}}
 ```
 
-**Динамический средний сегмент** — использует `.Section` как для URL, так и для метки:
-
-| Страница | Значение `.Section` | Результат |
-|---|---|---|
-| `/posts/lpic2-200-1/` | `posts` | `maks.top / posts / LPIC-2 200.1 ...` |
-| `/kb/docs/overview/` | `docs` | `maks.top / docs / Обзор проекта` |
-| `/kb/some-topic/` | `kb` | `maks.top / kb / Заголовок темы` |
-
-Последний сегмент (текущая страница) — простой текст, не ссылка.
-
----
-
-### `posts/linux-namespaces.html` — интерактивная статья
-
-Захардкожен вместо использования `.Section` — функционально идентично, но с явными строками пути:
-
-```html
-<div class="breadcrumb">
-  <a href="{{ "/" | relURL }}">maks.top</a><span>/</span>
-  <a href="{{ "/posts/" | relURL }}">posts</a><span>/</span>
-  <span style="color:var(--text2)">{{ .Title }}</span>
-</div>
-```
-
-**Отличия от `_default/single.html`:**
-- Средняя ссылка захардкожена как `"/posts/"` вместо `{{ .Section | relURL }}`
-- Заголовок текущей страницы обёрнут в `<span style="color:var(--text2)">` вместо простого текста — чуть светлее, чем `--text3`
-- Разделители расставлены без пробелов: `</a><span>/</span>` вместо `</a> <span>/</span>`
-
-Это косметические расхождения. Визуальный результат одинаковый.
-
----
-
-### `certs/single.html` — страницы сертификаций
-
-Только два сегмента — без ссылки на раздел:
-
-```html
-<div class="breadcrumb">
-  <a href="{{ "/" | relURL }}">maks.top</a>
-  <span>/</span>
-  <span style="color:var(--text2)">{{ .Title }}</span>
-</div>
-```
-
-`/certs/` пропускается, потому что страницы-индекса сертификаций не существует — клик по ней вызвал бы 404. Страницы сертификаций расположены напрямую под корнем в навигации, поэтому двухсегментный breadcrumb `maks.top / LPIC-2` корректен.
-
----
-
-## Почему нет партиала для breadcrumbs?
-
-Три шаблона — три немного разные структуры. Средний сегмент отличается в зависимости от контекста. `.Section` решает общий случай в `_default/single.html`, но `linux-namespaces.html` хардкодит его, а `certs/single.html` вовсе опускает.
-
-Если breadcrumbs в будущем нужно будет расширить до большего количества уровней, стоит вынести в партиал:
-
-```
-themes/maks/layouts/partials/breadcrumb.html
-```
-
-```html
-{{/*  Вызов: {{ partial "breadcrumb.html" . }}  */}}
-<div class="breadcrumb">
-  <a href="{{ "/" | relURL }}">maks.top</a>
-  {{ with .Section }}
-  <span>/</span>
-  <a href="{{ . | relURL }}">{{ . }}</a>
-  {{ end }}
-  <span>/</span>
-  <span style="color:var(--text2)">{{ .Title }}</span>
-</div>
-```
+Используется для постов в `/posts/neteng/`, `/posts/lpic1/` и т.д. — средний сегмент breadcrumb ссылается на соответствующую страницу сертификата вместо подпапки posts.
 
 ---
 

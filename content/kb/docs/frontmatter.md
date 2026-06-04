@@ -85,6 +85,9 @@ These are custom fields, read via `.Params.*` in `certs/single.html`.
 | `post_category` | string | **yes** | Hugo category used in course posts (e.g. `"LPIC-2"`). Used by `certs-widget.html` to count articles |
 | `expected_articles` | int | no | Planned total article count — enables auto-calculated progress % in the widget |
 | `progress_pct` | int | no | Manual fallback % when `expected_articles` is not set (e.g. early-stage courses with no articles yet) |
+| `credly_badge_id` | string | no | Credly badge ID — marks the cert as **passed** (overrides progress logic) |
+| `cert_url` | string | no | Alternative to `credly_badge_id` — any URL marks cert as passed |
+| `cert_labs_done` | int | no | Number of completed labs, shown in the certs index `Articles` column |
 | `exams` | []Exam | no | List of exams with topics. Without it — "coming soon" page |
 
 ### `exams` structure
@@ -116,6 +119,169 @@ No match:    lpic2-201-1-kernel.md             ✗
 ```
 
 This means **the article file's slug determines which topic it belongs to**.
+
+---
+
+## Bilingual content fields
+
+All EN pages with a RU counterpart use these fields. Applies to posts, KB, docs, ccna-labs.
+
+| Field | Type | Page | Description |
+|---|---|---|---|
+| `page_lang` | string | EN + RU | `"en"` or `"ru"` — identifies the page language |
+| `lang_pair` | string | EN + RU | URL of the paired page in the other language |
+| `pagefind_ignore` | bool | **RU only** | `true` — excludes the page from Pagefind search index |
+| `build.list` | string | **RU only** | `never` — hides the page from section listings |
+| `build.render` | string | **RU only** | `always` — ensures Hugo renders the page even when unlisted |
+
+### EN page example
+```yaml
+page_lang: "en"
+lang_pair: "/posts/neteng/ru/neteng-07-ipv4-ipv6/"
+```
+
+### RU page example
+```yaml
+page_lang: "ru"
+lang_pair: "/posts/neteng/neteng-07-ipv4-ipv6/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+```
+
+> **Without `build: {list: never}`** the RU page appears in `/posts/` listing and inflates post count. Without `pagefind_ignore: true` it pollutes search with duplicate Russian content.
+
+---
+
+## Fields for KB pages (`content/kb/*.md`)
+
+### Flat pages (directly in `content/kb/`)
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `title` | string | **yes** | Page title |
+| `description` | string | **yes** | Shown in the KB card on `/kb/` |
+| `icon` | string | no | Emoji icon shown in the card |
+| `group` | string | **yes** | KB section group. One of: `"Linux Core"`, `"Networking"`, `"Cloud & DevOps"`, `"Security"`, `"Cases"` |
+| `tags` | []string | recommended | Tag filtering |
+| `date` | date | **yes** | Must be a past date — Hugo skips future/today dates |
+
+### Subsection `_index.md` (`content/kb/{name}/_index.md`)
+
+Same fields as flat pages. Child articles do **not** need `group:` — only `_index.md` carries it.
+
+---
+
+## Fields for Network Engineer course posts
+
+Network Engineer posts are bilingual course posts with a specific format. Files live in `content/posts/neteng/` (EN) and `content/posts/neteng/ru/` (RU).
+
+### EN post
+```yaml
+---
+title: "Network Engineer — NN. Title"
+date: 2026-01-01
+description: "..."
+tags: [...]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "en"
+lang_pair: "/posts/neteng/ru/neteng-NN-slug/"
+---
+```
+
+### RU post
+```yaml
+---
+title: "Network Engineer — NN. Заголовок"
+date: 2026-01-01
+description: "..."
+tags: [...]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "ru"
+lang_pair: "/posts/neteng/neteng-NN-slug/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+| Field | Notes |
+|---|---|
+| `code_toggle` | `true` — enables JS-collapsible `<details>` blocks for long CLI output |
+| `categories` | Must match `post_category` in the cert frontmatter for article counting |
+
+---
+
+## Fields for CCNA theory articles
+
+Theory articles: `content/posts/ccna/ccna-{domain}-{num}-{slug}.md` (EN), `content/posts/ccna/ru/` (RU).
+
+Naming example: `ccna-1-01-network-components.md` → domain 1, topic 01.
+
+```yaml
+# EN
+---
+title: "CCNA 200-301 — Title"
+date: 2026-01-01
+tags: [...]
+categories: ["CCNA 200-301"]
+page_lang: "en"
+lang_pair: "/posts/ccna/ru/ccna-1-01-network-components/"
+---
+
+# RU shadow
+---
+title: "CCNA 200-301 — Заголовок"
+page_lang: "ru"
+lang_pair: "/posts/ccna/ccna-1-01-network-components/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+The `content/posts/ccna/_index.md` has `build: {render: never, list: never}` — the section itself does not render.
+
+---
+
+## Fields for CCNA lab solutions
+
+Lab solutions: `content/ccna-labs/ccna-lab-NN-slug.md` (EN), `content/ccna-labs/ru/` (RU).
+
+```yaml
+# EN
+---
+title: "CCNA Lab NN — Title"
+date: 2026-01-01
+description: "..."
+tags: [...]
+page_lang: "en"
+lang_pair: "/ccna-labs/ru/ccna-lab-NN-slug/"
+tool: "Packet Tracer"
+duration: "30 min"
+---
+
+# RU shadow
+---
+title: "CCNA Лаб NN — Заголовок"
+page_lang: "ru"
+lang_pair: "/ccna-labs/ccna-lab-NN-slug/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+| Field | Default | Notes |
+|---|---|---|
+| `tool` | `"Packet Tracer"` | Software used, shown in the `/ccna-labs/` grid |
+| `duration` | `"—"` | Estimated time, shown in the grid |
 
 ---
 

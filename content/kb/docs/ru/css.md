@@ -21,7 +21,7 @@ tags: ["docs"]
 | `global.css` | `themes/maks/static/styles/` | везде | Переменные, nav, базовые компоненты, dot-grid пагинация |
 | `mobile.css` | `themes/maks/static/styles/` | везде | Мобильная навигация, breakpoints |
 | `fonts.css` | `themes/maks/static/styles/` | везде | `@font-face` для Inter (body), JetBrains Mono. Fraunces загружается через Google Fonts `<link>` в `baseof.html` |
-| `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs | Типографика, NS-карточки/tabs/ref-panel, section divider |
+| `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs, ccna-labs singles | Типографика, NS-карточки/tabs/ref-panel, section divider, mobile overflow containment |
 | `home.css` | `themes/maks/static/styles/` | только `/` | Hero, recent posts, KB grid, cert-grid |
 | `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, плитки ресурсов, аккордеон тем, индекс /certs/ |
 | `quiz.css` | `themes/maks/static/styles/` | `/ccna-quiz/*` | Карточки квиза, состояния вариантов, значки баллов |
@@ -166,6 +166,16 @@ tags: ["docs"]
 | `.cert-badge` | Emoji-иконка |
 | `.cert-name` | Название (`color: var(--cert-color)`) |
 
+### Страница 404
+
+| Класс | Описание |
+|---|---|
+| `.e404-page` | Двухколоночная grid-обёртка (`1fr 1fr`) |
+| `.e404-left` | Левая колонка: заголовок, описание, кнопки навигации |
+| `.e404-right` | Правая колонка: терминал traceroute, поле поиска |
+| `.e404-terminal` | Тёмный терминальный блок с имитацией traceroute |
+| `.e404-search` | Поле поиска: отправляет на `/posts/?q=<term>` |
+
 ---
 
 ## mobile.css — справочник классов
@@ -227,6 +237,20 @@ tags: ["docs"]
 | `.stag` | Inline-значок типа namespace |
 | `.stag-uts/.stag-pid/.stag-net/…` | Цветовые варианты по типу |
 | `.back-link` | Ссылка "← Back to posts" внизу страницы |
+
+### Mobile overflow containment (≤ 640 пx)
+
+Широкий контент внутри статей никогда не вызывает горизонтальный скролл страницы. Единый источник правил — под заголовком `MOBILE OVERFLOW CONTAINMENT` в конце `prose.css`.
+
+| Селектор | Правило |
+|---|---|
+| `.prose table` | `display: block; overflow-x: auto`. Ячейки: `white-space: nowrap` |
+| `.prose pre` | `overflow-x: auto`, уменьшенный шрифт, тонкая полоска прокрутки |
+| `.prose pre.ascii-art` / `.ascii-art-wrap pre` | Opt-in для нетопологических ASCII (деревья, LDAP). Горизонтальная прокрутка, меньший шрифт на мобиле |
+| `.topology` | Горизонтальный скроллер-обёртка. SVG имеет `min-width: 480px` для читаемости |
+| `.prose p > code, .prose li > code` | `overflow-wrap: anywhere` для длинного inline-кода |
+
+Защита страницы: `html, body { overflow-x: clip; }` в `global.css`. `min-width: 0` на `main, .post, .prose, .kb-section, .cert-pg-header-inner`.
 
 ### TOC sidebar (в `_default/single.html`)
 

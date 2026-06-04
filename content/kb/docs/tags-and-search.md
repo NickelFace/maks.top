@@ -237,6 +237,8 @@ The `baseof.html` template reads this and adds `data-pagefind-ignore="all"` to `
 <body{{ if .Params.pagefind_ignore }} data-pagefind-ignore="all"{{ end }}>
 ```
 
+**All RU shadow pages** (`page_lang: "ru"`) must have `pagefind_ignore: true` — without it they pollute the search index with duplicate Russian content. The `POSTS[]` array in `tag.html` already excludes RU pages via `{{ if ne .Params.page_lang "ru" }}`, but Pagefind indexing is a separate pipeline step that needs the frontmatter flag.
+
 ---
 
 ## Data flow summary

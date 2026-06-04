@@ -20,9 +20,11 @@ Every template that needs them calls:
 
 | Template | Pages |
 |---|---|
-| `_default/single.html` | All posts, docs, KB pages |
+| `_default/single.html` | All posts, docs, KB pages, ccna-labs singles |
 | `kb/section.html` | KB index and sub-section landing pages |
 | `certs/single.html` | Cert overview pages |
+| `certs/list.html` | `/certs/` index |
+| `ccna-labs/list.html` | `/ccna-labs/` list |
 | `posts/linux-namespaces.html` | Linux namespaces article |
 
 ---
@@ -37,10 +39,12 @@ The partial renders different segments depending on page type:
 
 | Case | Output |
 |---|---|
-| `eq .Section "certs"` | `maks.top / Page Title` (no section link — no certs index) |
-| `eq .Section "ccna-quiz"` | `maks.top / CCNA Quiz / Page N` (page number from filename) |
+| `eq .Section "certs"` | `maks.top / certs / Page Title` |
+| `eq .Section "ccna-quiz"` | `maks.top / CCNA / Quiz / Page N` (CCNA links to `/certs/ccna/`) |
+| `eq .Section "ccna-labs"` | `maks.top / CCNA / Labs / Page Title` (CCNA links to `/certs/ccna/`) |
 | `.IsSection` | `maks.top / section-name` (section index — current page as plain text) |
 | KB sub-page (`Section=kb`, depth=2) | `maks.top / kb / Parent Section Title / Page Title` |
+| Post with cert section prefix (`neteng`, `lpic1`, etc.) | `maks.top / Cert Name / Page Title` (cert name links to cert page) |
 | Other regular pages | `maks.top / section / Page Title` |
 
 ---
@@ -82,6 +86,7 @@ The partial has a `$certMap` dict mapping sub-folder names to cert page URLs:
     "netarch" "/certs/network-architect/"
     "lpic1"   "/certs/lpic-1/"
     "lpic2"   "/certs/lpic-2/"
+    "ccna"    "/certs/ccna/"
 }}
 ```
 

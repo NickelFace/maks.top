@@ -113,10 +113,13 @@ maks.top/
     │
     ├── layouts/                     # Hugo templates (Go templates)
     │   ├── index.html               # Home page /
+    │   ├── 404.html                 # Custom 404 page
     │   ├── _default/
     │   │   ├── baseof.html          # Base layout (wrapper for all pages)
-    │   │   ├── single.html          # Article with ToC and progress bar
-    │   │   └── list.html            # Page listing with pagination
+    │   │   ├── single.html          # Article with ToC, progress bar, Mermaid
+    │   │   ├── list.html            # Page listing with pagination
+    │   │   └── _markup/
+    │   │       └── render-codeblock-mermaid.html  # Mermaid render hook
     │   ├── posts/
     │   │   ├── list.html            # Blog listing + Pagefind search
     │   │   └── linux-namespaces.html # Interactive namespace explorer

@@ -444,5 +444,23 @@ grep -rln --include='*.md' -E '(├──|└──|│   ├)' content/
 | Новый пост (EN) | `hugo` собирается без ошибок, страница отдаётся |
 | EN + RU пост | оба файла созданы; RU имеет `pagefind_ignore: true` + `build: {list: never, render: always}` |
 | CSS изменение | нет конфликтов имён классов, mobile breakpoint проверен |
-| Структурное изменение | `CLAUDE.md`, `Documentation.md`, `content/kb/docs/` обновлены (EN + RU) |
+| Структурное изменение | `CLAUDE.md` обновлён + соответствующий doc из таблицы ниже обновлён (EN + RU) |
 | Любой коммит | `hugo` проходит без ошибок перед `git commit` |
+
+## Doc update map
+
+При любом структурном изменении обновить **оба файла**: EN + `ru/` shadow.
+
+| Что изменилось | Какой doc обновить |
+|---|---|
+| Шаблон в `themes/maks/layouts/` | `content/kb/docs/templates.md` |
+| Шорткод в `themes/maks/layouts/shortcodes/` | `content/kb/docs/templates.md` |
+| Партиал `breadcrumb.html` | `content/kb/docs/breadcrumbs.md` |
+| CSS в `themes/maks/static/styles/` | `content/kb/docs/css.md` |
+| JS в `themes/maks/static/js/` | `content/kb/docs/javascript.md` |
+| `hugo.toml` | `content/kb/docs/overview.md` |
+| Новый тип frontmatter поля | `content/kb/docs/frontmatter.md` |
+| Новый тип страницы / новый раздел | `content/kb/docs/new-page.md` + `overview.md` |
+| Структура директорий | `content/kb/docs/overview.md` |
+| Deploy pipeline (`.github/workflows/`) | `content/kb/docs/deploy.md` |
+| Tag/search поведение | `content/kb/docs/tags-and-search.md` |

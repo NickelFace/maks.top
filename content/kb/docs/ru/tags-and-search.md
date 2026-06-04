@@ -261,6 +261,8 @@ pagefind_ignore: true
 <body{{ if .Params.pagefind_ignore }} data-pagefind-ignore="all"{{ end }}>
 ```
 
+**Все RU shadow-страницы** (`page_lang: "ru"`) должны иметь `pagefind_ignore: true` — без этого они засоряют поисковый индекс дублирующим русскоязычным контентом. Массив `POSTS[]` в `tag.html` уже исключает RU-страницы через `{{ if ne .Params.page_lang "ru" }}`, но индексирование Pagefind — отдельный шаг pipeline, которому нужен флаг во frontmatter.
+
 ---
 
 ## Общий поток данных

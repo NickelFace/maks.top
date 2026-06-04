@@ -258,6 +258,28 @@ Accepts a context with `.Paginator`. Always shows first/last page, `cur-1`, `cur
 
 ---
 
+## 404.html — not found page
+
+**Path:** `themes/maks/layouts/404.html`
+
+Two-column layout:
+- **Left:** eyebrow `§ Error 404` → Fraunces "Lost" + italic amber "packet." → mono `TTL EXPIRED · NO ROUTE TO HOST` → description → nav buttons
+- **Right:** eyebrow `§ Diagnostic` → fake traceroute terminal → search input
+
+`window.location.pathname` is injected into the traceroute output via JS. The search input redirects to `/posts/?q=<term>` on submit. Pressing `/` focuses the search input.
+
+CSS classes: `.e404-page`, `.e404-left`, `.e404-right`, `.e404-terminal`, `.e404-search` — all in `global.css`.
+
+---
+
+## Mermaid render hook
+
+**Path:** `themes/maks/layouts/_default/_markup/render-codeblock-mermaid.html`
+
+Wraps ` ```mermaid ` code blocks in `<pre class="mermaid">` and sets a `hasMermaid` flag in page store. `_default/single.html` uses the flag to conditionally load Mermaid ESM from CDN only on pages that need it.
+
+---
+
 ## shortcodes/
 
 ### `code`
@@ -274,6 +296,38 @@ command
 | `label` | string | — | Additional label (small text) |
 
 Renders `.code-block` with a copy button. `.Inner` — body between tags, passed through `htmlEscape`.
+
+### `topology`
+
+Declarative SVG network diagram. Replaces ASCII art topology in posts and labs.
+
+```
+{{</* topology cols="4" rows="3" caption="OSPF baseline" */>}}
+  cloud  ISP    "AS 64512"   at 0,1
+  router R1     "GW · BGP"   at 1,1
+  switch CORE   "VLAN 10/20" at 2,1
+  server srv-01 "10.0.10.4"  at 3,0
+  server srv-02 "10.0.10.5"  at 3,2
+
+  ISP  — R1
+  R1   — CORE  label="trunk · 1G"
+  CORE — srv-01
+  CORE — srv-02
+{{</* /topology */>}}
+```
+
+| Parameter | Required | Description |
+|---|---|---|
+| `cols` | yes | Number of grid columns |
+| `rows` | yes | Number of grid rows |
+| `caption` | no | Caption below the diagram |
+
+Node line format: `{kind} {id} "{label}" at {col},{row}`  
+Link line format: `{id} — {id}` or `{id} — {id} label="{text}"`
+
+**Node kinds:** `router` `switch` `server` `cloud` `pc` `fw` (and fallback generic rect).
+
+Styles are in `topology.css`. Loaded on `posts`, `kb`, and `ccna-labs` single pages.
 
 ### `ns-card`
 

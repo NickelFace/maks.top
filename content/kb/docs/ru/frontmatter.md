@@ -86,6 +86,12 @@ categories: ["LPIC-2"]
 | `cert_color` | string | **да** | CSS-цвет (hex). Используется для `--cert-color` и border |
 | `description` | string | **да** | Подзаголовок в hero-блоке |
 | `post_prefix` | string | **да** | Префикс для поиска постов по slug (напр. `"lpic2"`) |
+| `post_category` | string | **да** | Категория Hugo из постов курса (напр. `"LPIC-2"`). Используется `certs-widget.html` для подсчёта статей |
+| `expected_articles` | int | нет | Плановое количество статей — включает авторасчёт % прогресса |
+| `progress_pct` | int | нет | Ручной % прогресса, когда `expected_articles` не задан |
+| `credly_badge_id` | string | нет | ID бейджа Credly — помечает сертификат как **сданный** |
+| `cert_url` | string | нет | Альтернатива `credly_badge_id` — любой URL помечает сертификат как сданный |
+| `cert_labs_done` | int | нет | Количество выполненных лаб, отображается в столбце «Статьи» в индексе сертификатов |
 | `exams` | []Exam | нет | Список экзаменов с темами. Без него — страница "coming soon" |
 
 ### Структура `exams`
@@ -117,6 +123,169 @@ topic.num   = "200"
 ```
 
 Таким образом, **slug файла статьи определяет к какой теме она принадлежит**.
+
+---
+
+## Поля двуязычного контента
+
+Все EN-страницы с RU-копией используют следующие поля. Применяется к постам, KB, docs, ccna-labs.
+
+| Поле | Тип | Страница | Описание |
+|---|---|---|---|
+| `page_lang` | string | EN + RU | `"en"` или `"ru"` — язык страницы |
+| `lang_pair` | string | EN + RU | URL парной страницы на другом языке |
+| `pagefind_ignore` | bool | **только RU** | `true` — исключает страницу из поискового индекса Pagefind |
+| `build.list` | string | **только RU** | `never` — скрывает страницу из листингов разделов |
+| `build.render` | string | **только RU** | `always` — Hugo рендерит страницу, даже если она скрыта из списков |
+
+### Пример EN-страницы
+```yaml
+page_lang: "en"
+lang_pair: "/posts/neteng/ru/neteng-07-ipv4-ipv6/"
+```
+
+### Пример RU-страницы
+```yaml
+page_lang: "ru"
+lang_pair: "/posts/neteng/neteng-07-ipv4-ipv6/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+```
+
+> **Без `build: {list: never}`** RU-страница появляется в листинге `/posts/` и удваивает счётчик. Без `pagefind_ignore: true` дублирует контент в поиске.
+
+---
+
+## Поля для страниц KB (`content/kb/*.md`)
+
+### Плоские страницы (прямо в `content/kb/`)
+
+| Поле | Тип | Обязательно | Описание |
+|---|---|---|---|
+| `title` | string | **да** | Заголовок страницы |
+| `description` | string | **да** | Показывается в карточке KB на `/kb/` |
+| `icon` | string | нет | Emoji-иконка в карточке |
+| `group` | string | **да** | Группа раздела KB. Одно из: `"Linux Core"`, `"Networking"`, `"Cloud & DevOps"`, `"Security"`, `"Cases"` |
+| `tags` | []string | рекомендуется | Теги для фильтрации |
+| `date` | date | **да** | Должна быть прошедшей — Hugo пропускает будущие/сегодняшние даты |
+
+### `_index.md` подраздела (`content/kb/{name}/_index.md`)
+
+Те же поля, что и у плоских страниц. Дочерние статьи подраздела **не** имеют `group:` — он берётся только из `_index.md`.
+
+---
+
+## Поля постов курса Network Engineer
+
+Посты Network Engineer — двуязычные посты курса с особым форматом. Файлы: `content/posts/neteng/` (EN), `content/posts/neteng/ru/` (RU).
+
+### EN-пост
+```yaml
+---
+title: "Network Engineer — NN. Заголовок"
+date: 2026-01-01
+description: "..."
+tags: [...]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "en"
+lang_pair: "/posts/neteng/ru/neteng-NN-slug/"
+---
+```
+
+### RU-пост
+```yaml
+---
+title: "Network Engineer — NN. Заголовок"
+date: 2026-01-01
+description: "..."
+tags: [...]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "ru"
+lang_pair: "/posts/neteng/neteng-NN-slug/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+| Поле | Примечание |
+|---|---|
+| `code_toggle` | `true` — включает JS-сворачивание `<details>`-блоков с длинным CLI-выводом |
+| `categories` | Должно совпадать с `post_category` в frontmatter страницы сертификации |
+
+---
+
+## Поля теоретических статей CCNA
+
+Статьи: `content/posts/ccna/ccna-{domain}-{num}-{slug}.md` (EN), `content/posts/ccna/ru/` (RU).
+
+Пример имени файла: `ccna-1-01-network-components.md` → домен 1, тема 01.
+
+```yaml
+# EN
+---
+title: "CCNA 200-301 — Заголовок"
+date: 2026-01-01
+tags: [...]
+categories: ["CCNA 200-301"]
+page_lang: "en"
+lang_pair: "/posts/ccna/ru/ccna-1-01-network-components/"
+---
+
+# RU shadow
+---
+title: "CCNA 200-301 — Заголовок"
+page_lang: "ru"
+lang_pair: "/posts/ccna/ccna-1-01-network-components/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+Файл `content/posts/ccna/_index.md` имеет `build: {render: never, list: never}` — сам раздел не рендерится.
+
+---
+
+## Поля лабораторных работ CCNA
+
+Лабы: `content/ccna-labs/ccna-lab-NN-slug.md` (EN), `content/ccna-labs/ru/` (RU).
+
+```yaml
+# EN
+---
+title: "CCNA Lab NN — Title"
+date: 2026-01-01
+description: "..."
+tags: [...]
+page_lang: "en"
+lang_pair: "/ccna-labs/ru/ccna-lab-NN-slug/"
+tool: "Packet Tracer"
+duration: "30 min"
+---
+
+# RU shadow
+---
+title: "CCNA Лаб NN — Заголовок"
+page_lang: "ru"
+lang_pair: "/ccna-labs/ccna-lab-NN-slug/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+| Поле | По умолчанию | Примечание |
+|---|---|---|
+| `tool` | `"Packet Tracer"` | ПО для лабы, отображается в сетке `/ccna-labs/` |
+| `duration` | `"—"` | Расчётное время, отображается в сетке |
 
 ---
 

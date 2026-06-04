@@ -228,8 +228,7 @@ CSS читает атрибут через `[data-theme="light"]` и перек�
 
 ### certs-widget.html
 
-Вставляется на главную (`index.html`) и about (`about/single.html`).  
-Хардкодит 4 карточки с прогресс-барами. Прогресс обновляется вручную (`width:62%` и т.д.).
+Вставляется на главную (`index.html`) и about (`about/single.html`). Количество статей и процент прогресса вычисляются динамически из `post_category` + `expected_articles` / `progress_pct` во frontmatter каждой страницы сертификации. Подробности — в [Frontmatter](/kb/docs/ru/frontmatter/).
 
 ### pagination.html
 
@@ -238,9 +237,31 @@ CSS читает атрибут через `[data-theme="light"]` и перек�
 - Показывает `cur-1`, `cur`, `cur+1`
 - Между ними вставляет `···` если есть пропуск
 
-### search.html
+### search-box.html
 
-Существует, но нигде не используется через `partial`. Поиск встроен инлайн в `posts/list.html` и `taxonomy/tag.html`.
+Рендерит UI поля поиска. Принимает параметр `.placeholder`. Используется в `index.html`, `posts/list.html`, `taxonomy/tag.html`.
+
+---
+
+## 404.html — страница ошибки
+
+**Путь:** `themes/maks/layouts/404.html`
+
+Двухколоночный layout:
+- **Левая:** eyebrow `§ Error 404` → Fraunces "Lost" + italic amber "packet." → mono `TTL EXPIRED · NO ROUTE TO HOST` → описание → навигационные кнопки
+- **Правая:** eyebrow `§ Diagnostic` → терминал с fake traceroute → поле поиска
+
+`window.location.pathname` вставляется в вывод traceroute через JS. Поиск редиректит на `/posts/?q=<term>`. Нажатие `/` фокусирует поле поиска.
+
+CSS-классы: `.e404-page`, `.e404-left`, `.e404-right`, `.e404-terminal`, `.e404-search` — все в `global.css`.
+
+---
+
+## Mermaid render hook
+
+**Путь:** `themes/maks/layouts/_default/_markup/render-codeblock-mermaid.html`
+
+Оборачивает ` ```mermaid ` блоки в `<pre class="mermaid">` и устанавливает флаг `hasMermaid` в page store. `_default/single.html` использует этот флаг для условной загрузки Mermaid ESM с CDN — только на страницах, которые в нём нуждаются.
 
 ---
 
@@ -260,6 +281,38 @@ CSS читает атрибут через `[data-theme="light"]` и перек�
 | `label` | string | — | Дополнительная метка (мелким текстом) |
 
 Рендерит `.code-block` с кнопкой copy. `.Inner` — тело между тегами, проходит через `htmlEscape`.
+
+### `topology`
+
+Декларативная SVG-диаграмма сети. Заменяет ASCII-топологию в постах и лабах.
+
+```
+{{</* topology cols="4" rows="3" caption="OSPF baseline" */>}}
+  cloud  ISP    "AS 64512"   at 0,1
+  router R1     "GW · BGP"   at 1,1
+  switch CORE   "VLAN 10/20" at 2,1
+  server srv-01 "10.0.10.4"  at 3,0
+  server srv-02 "10.0.10.5"  at 3,2
+
+  ISP  — R1
+  R1   — CORE  label="trunk · 1G"
+  CORE — srv-01
+  CORE — srv-02
+{{</* /topology */>}}
+```
+
+| Параметр | Обязательный | Описание |
+|---|---|---|
+| `cols` | да | Количество столбцов сетки |
+| `rows` | да | Количество строк сетки |
+| `caption` | нет | Подпись под диаграммой |
+
+Формат строки узла: `{kind} {id} "{label}" at {col},{row}`  
+Формат строки связи: `{id} — {id}` или `{id} — {id} label="{text}"`
+
+**Типы узлов:** `router` `switch` `server` `cloud` `pc` `fw` (и обобщённый прямоугольник по умолчанию).
+
+Стили — в `topology.css`. Загружается на одиночных страницах `posts`, `kb` и `ccna-labs`.
 
 ### `ns-card`
 

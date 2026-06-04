@@ -15,6 +15,7 @@ tags: ["docs"]
 | Interactive explorer (cards, tabs, JS) | interactive | `layouts/posts/<slug>.html` |
 | Certification overview page | cert | `layouts/certs/single.html` |
 | Knowledge base entry | prose | `_default/single.html` |
+| Bilingual course post (Network Engineer) | bilingual | `_default/single.html` (EN + RU pair) |
 
 ---
 
@@ -300,6 +301,100 @@ Open `themes/maks/layouts/partials/certs-widget.html` and add a card to the grid
 
 ---
 
+## Type 4 — Network Engineer / bilingual course post
+
+For Network Engineer labs and similar course posts. Uses the standard `_default/single.html` but requires paired EN/RU files and specific content conventions.
+
+### Step 1: create the EN file
+
+```bash
+content/posts/neteng/neteng-NN-my-topic.md
+```
+
+```yaml
+---
+title: "Network Engineer — NN. My Topic"
+date: 2026-01-01
+description: "..."
+tags: ["Networking", "OSPF"]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "en"
+lang_pair: "/posts/neteng/ru/neteng-NN-my-topic/"
+---
+```
+
+### Step 2: create the RU file
+
+```bash
+content/posts/neteng/ru/neteng-NN-my-topic.md
+```
+
+```yaml
+---
+title: "Network Engineer — NN. Тема"
+date: 2026-01-01
+description: "..."
+tags: ["Networking", "OSPF"]
+categories: ["Network Engineer"]
+code_toggle: true
+page_lang: "ru"
+lang_pair: "/posts/neteng/neteng-NN-my-topic/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
+---
+```
+
+### Content conventions
+
+- Top heading is `##` (h2), never `#` (h1)
+- Long CLI outputs go in `<details>` blocks — never bare fenced code blocks:
+
+```html
+<details>
+<summary>RouterName — command description</summary>
+<pre><code>
+... output ...
+</code></pre>
+</details>
+```
+
+- Short config snippets (≤5 lines) can use plain ` ``` ` blocks
+- Sections separated with `---`
+- Last line: `*Network Engineer Course | Lab NN*`
+- Images in `static/img/neteng/NN/`, named sequentially `1.png`, `2.png` …
+
+---
+
+## Using the topology shortcode
+
+Network diagrams expressed as ASCII inside fenced code blocks are considered legacy. Use the `topology` shortcode instead.
+
+```
+{{</* topology cols="4" rows="3" caption="OSPF baseline" */>}}
+  cloud  ISP    "AS 64512"   at 0,1
+  router R1     "GW · BGP"   at 1,1
+  switch CORE   "VLAN 10/20" at 2,1
+  server srv-01 "10.0.10.4"  at 3,0
+  server srv-02 "10.0.10.5"  at 3,2
+
+  ISP  — R1
+  R1   — CORE  label="trunk · 1G"
+  CORE — srv-01
+  CORE — srv-02
+{{</* /topology */>}}
+```
+
+**Node kinds:** `router` `switch` `server` `cloud` `pc` `fw`
+
+**Coordinates:** `at col,row` (0-indexed). **Links:** `A — B` or `A — B label="text"`.
+
+Migration rule: when migrating an EN post that uses ASCII topology diagrams, migrate the `ru/` shadow in the same commit.
+
+---
+
 ## Adding a bilingual page
 
 To make a page switchable between EN and RU:
@@ -325,10 +420,16 @@ content/kb/docs/ru/my-topic.md
 title: "Моя тема"
 page_lang: "ru"
 lang_pair: "/kb/docs/my-topic/"
+pagefind_ignore: true
+build:
+  list: never
+  render: always
 ---
 ```
 
 The `setLang()` function in `baseof.html` reads `lang_pair` from `<meta id="page-lang">` and redirects when the user switches language. Without these fields the language buttons only toggle their visual state — no redirect happens.
+
+> **Important:** always add `pagefind_ignore: true` and `build: {list: never, render: always}` to RU pages — without them the page appears in listings and the search index.
 
 ---
 

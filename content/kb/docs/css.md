@@ -17,7 +17,7 @@ Styles are split into 11 files by **scope** (area of application):
 | `global.css` | `themes/maks/static/styles/` | everywhere | Variables, nav, base components, dot-grid pagination |
 | `mobile.css` | `themes/maks/static/styles/` | everywhere | Mobile nav, breakpoints |
 | `fonts.css` | `themes/maks/static/styles/` | everywhere | `@font-face` for Inter (body), JetBrains Mono (code). Fraunces loaded via Google Fonts `<link>` in `baseof.html` |
-| `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs | Article typography, NS cards/tabs/ref-panel, section divider |
+| `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs, ccna-labs singles | Article typography, NS cards/tabs/ref-panel, section divider, mobile overflow containment |
 | `home.css` | `themes/maks/static/styles/` | `/` only | Hero, recent posts, KB grid, cert-grid |
 | `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, resource tiles, accordion topics, certs index page |
 | `quiz.css` | `themes/maks/static/styles/` | `/ccna-quiz/*` | Quiz cards, option states, scoring badges |
@@ -158,6 +158,16 @@ Defined in `prose.css`. Used in `_default/single.html` for all article pages.
 | `.kb-section-title` | Group heading above a `.kb-cards` grid |
 | `.kb-empty` | Empty state message |
 
+### 404 page
+
+| Class | Description |
+|---|---|
+| `.e404-page` | Two-column grid wrapper (`1fr 1fr`) |
+| `.e404-left` | Left column: title, description, nav buttons |
+| `.e404-right` | Right column: traceroute terminal, search input |
+| `.e404-terminal` | Dark terminal block with fake traceroute output |
+| `.e404-search` | Search input: submits to `/posts/?q=<term>` |
+
 ### Sticky footer
 
 `body` uses `display: flex; flex-direction: column` + `min-height: 100vh`.  
@@ -254,6 +264,20 @@ Applied to `.prose` (article body) and available in any post, KB, or docs page.
 | `.stag` | Inline namespace type badge |
 | `.stag-uts/.stag-pid/.stag-net/…` | Per-type color variants |
 | `.back-link` | "← Back to posts" link at page bottom |
+
+### Mobile overflow containment (≤ 640 px)
+
+Wide content inside articles never overflows the page. Single source of truth under the `MOBILE OVERFLOW CONTAINMENT` heading at the bottom of `prose.css`.
+
+| Selector | Rule |
+|---|---|
+| `.prose table` | `display: block; overflow-x: auto`. Cells use `white-space: nowrap`. Header/body still align via `display: table; width: max-content` |
+| `.prose pre` | `overflow-x: auto`, tighter font, thin scrollbar hint |
+| `.prose pre.ascii-art` / `.ascii-art-wrap pre` | Opt-in class for non-network ASCII (trees, LDAP DITs). Disables ligatures, shrinks font on mobile, scrolls horizontally |
+| `.topology` | Horizontal scroller wrapper. SVG has `min-width: 480px` so labels stay legible |
+| `.prose p > code, .prose li > code` | `overflow-wrap: anywhere` for long inline code |
+
+Page guard: `html, body { overflow-x: clip; }` in `global.css`. `min-width: 0` set on `main, .post, .prose, .kb-section, .cert-pg-header-inner`.
 
 ### ToC sidebar (in `_default/single.html`)
 
