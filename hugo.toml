@@ -10,7 +10,7 @@ theme = "maks"
 
 [params]
   author      = "Maks"
-  description = "Linux & DevOps Knowledge Base — LPIC-2 · AWS · CKA · Networking"
+  description = "Network Engineer — CCNA · LPIC-2 · VxLAN/EVPN · ZeroTier · Homelab"
   location    = "Sydney, AU"
   github      = "https://github.com/NickelFace"
   linkedin    = "https://www.linkedin.com/in/lopunov/"
