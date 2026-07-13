@@ -17,14 +17,15 @@ theme = "maks"
   telegram    = "https://t.me/nickelface"
   email       = ""
   phone       = ""
-  og_image    = ""   # default OG image path, e.g. "/img/og-default.png" (1200×630px)
+  og_image    = "/og-default.png"   # default OG image (1200×630px), lives in static/
+  home_title  = "Maks Lopunov — Linux & DevOps Knowledge Base"
 
 [taxonomies]
   tag      = "tags"
   category = "categories"
 
 [outputs]
-  home    = ["HTML"]
+  home    = ["HTML", "RSS"]
   section = ["HTML"]
   page    = ["HTML"]
 

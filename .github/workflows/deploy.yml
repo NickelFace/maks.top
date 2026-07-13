@@ -3,6 +3,8 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches: [hugo]
+  schedule:
+    - cron: '0 20 * * *'   # 06:00 Sydney (AEST)
   workflow_dispatch:
 
 permissions:
