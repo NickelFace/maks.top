@@ -152,6 +152,7 @@ function toggleTheme(){
   var cur=document.documentElement.getAttribute('data-theme');
   var next=cur==='light'?'dark':'light';
   localStorage.setItem('theme',next);
+  localStorage.setItem('themeTime',Date.now());
   applyTheme(next,false);
 }
 function setLang(lang){
@@ -176,7 +177,9 @@ function closeMobMenu(){
 }
 (function(){
   var s=localStorage.getItem('theme');
-  var isAuto=!s||s==='auto';
+  var t=parseInt(localStorage.getItem('themeTime'),10);
+  var expired=!t||(Date.now()-t>1800000);
+  var isAuto=!s||s==='auto'||expired;
   applyTheme(isAuto?getAutoTheme():s,isAuto);
   if(isAuto){setInterval(function(){applyTheme(getAutoTheme(),true);},600000);}
 })();
