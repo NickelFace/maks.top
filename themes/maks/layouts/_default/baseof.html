@@ -8,13 +8,13 @@
 <script>(function(){var h=document.documentElement;h.classList.add('no-transition');var s=localStorage.getItem('theme');var hr=new Date().getHours();var t=(s==='light'||s==='dark')?s:((hr>=7&&hr<20)?'light':'dark');h.setAttribute('data-theme',t);var m=document.getElementById('metaColorScheme');if(m)m.content=t==='light'?'light dark':'dark light';var f=document.getElementById('favicon');if(f)f.href=t==='dark'?'/favicon-dark.svg':'/favicon-light.svg';requestAnimationFrame(function(){requestAnimationFrame(function(){h.classList.remove('no-transition');});});})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ .Site.Params.home_title | default .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
 
 {{- $canonical := .Permalink }}
 {{- if eq .Params.page_lang "ru" }}{{- with .Params.lang_pair }}{{- $canonical = absURL . }}{{- end }}{{- end }}
 <link rel="canonical" href="{{ $canonical }}">
 
-{{- $title  := cond .IsHome .Site.Title (printf "%s — %s" .Title .Site.Title) }}
+{{- $title  := cond .IsHome (.Site.Params.home_title | default .Site.Title) (printf "%s — %s" .Title .Site.Title) }}
 {{- $desc   := cond (ne .Description "") .Description .Site.Params.description }}
 {{- $ogImg  := .Params.image | default .Site.Params.og_image }}
 <meta property="og:type"        content="{{ if .IsPage }}article{{ else }}website{{ end }}">

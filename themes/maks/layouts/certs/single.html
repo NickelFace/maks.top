@@ -94,7 +94,7 @@
     {{ $topicCount := 0 }}
     {{ range .Params.exams }}{{ $topicCount = add $topicCount (len .topics) }}{{ end }}
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);margin-bottom:24px">
-      {{ len .Params.exams }} exam{{ if gt (len .Params.exams) 1 }}s{{ end }} · {{ $topicCount }} topics · {{ $written }} articles
+      {{ len .Params.exams }} exam{{ if gt (len .Params.exams) 1 }}s{{ end }} · {{ $topicCount }} topics · {{ $written }} article{{ if ne $written 1 }}s{{ end }}
     </div>
 
     {{ range .Params.exams }}
