@@ -39,8 +39,6 @@ Hugo searches for a template in this order (first match wins):
 | `/posts/linux-namespaces/` | `layouts/posts/linux-namespaces.html` → `layouts/posts/single.html` |
 | `/certs/` | `layouts/certs/list.html` |
 | `/certs/ccna/` | `layouts/certs/single.html` → `layouts/_default/single.html` |
-| `/ccna-quiz/p01/` | `layouts/ccna-quiz/single.html` |
-| `/ccna-quiz/` | `layouts/ccna-quiz/list.html` |
 | `/ccna-labs/` | `layouts/ccna-labs/list.html` |
 | `/ccna-labs/ccna-lab-NN/` | `layouts/ccna-labs/single.html` → `layouts/_default/single.html` |
 | `/about/` | `layouts/about/single.html` → `layouts/_default/single.html` |
@@ -80,9 +78,6 @@ maks.top/
 │   │   ├── network-engineer.md      # OTUS course
 │   │   ├── network-architect.md     # OTUS Network Architect course
 │   │   └── aws-saa.md
-│   ├── ccna-quiz/                   # /ccna-quiz/ section
-│   │   ├── _index.md                # Quiz index page (49-tile grid)
-│   │   └── p01.md – p49.md          # 489 questions, 10 per page, YAML frontmatter
 │   ├── kb/                          # /kb/ section (quick references)
 │   │   ├── linux-network.md         # ip, ss, tcpdump, nmcli, iptables
 │   │   ├── bash.md                  # Variables, arrays, loops, functions
@@ -99,7 +94,6 @@ maks.top/
 │   └── docs/                        # /kb/docs/ section (this documentation)
 │
 ├── static/                          # Global static files
-│   ├── img/quiz/                    # 247 JPEG images extracted from CCNA PDF
 │   ├── img/neteng/                  # Per-lab images (01/, 02/, … 17/)
 │   ├── roadmap/                     # Static roadmap pages
 │   │   ├── index.html               # Main roadmap (/roadmap/)
@@ -123,9 +117,6 @@ maks.top/
     │   ├── posts/
     │   │   ├── list.html            # Blog listing + Pagefind search
     │   │   └── linux-namespaces.html # Interactive namespace explorer
-    │   ├── ccna-quiz/
-    │   │   ├── list.html            # Quiz index (49 page tiles)
-    │   │   └── single.html          # Quiz page: questions, options, scoring
     │   ├── ccna-labs/
     │   │   └── list.html            # Labs list: flat grid (number, title, tool, duration)
     │   ├── about/
@@ -158,7 +149,6 @@ maks.top/
             ├── home.css             # Home page styles
             ├── prose.css            # Article typography, NS cards, tabs, ref-panel
             ├── cert.css             # Cert pages (hero, resource tiles, accordion, certs index)
-            ├── quiz.css             # CCNA quiz cards, options, scoring badges
             ├── ns.css               # linux-namespaces page layout only
             ├── chroma.css           # Syntax highlighting (dark/light)
             ├── topology.css         # .topology SVG diagram figure styles
@@ -245,7 +235,7 @@ Each template has access to `.` (dot) — the current page context:
 | `.Params.tags` | []string | From frontmatter `tags:` |
 | `.Permalink` | string | Full page URL |
 | `.RelPermalink` | string | Relative URL |
-| `.Section` | string | Section: "posts", "certs", "ccna-quiz", "ccna-labs", "kb" |
+| `.Section` | string | Section: "posts", "certs", "ccna-labs", "kb" |
 | `.IsHome` | bool | true only for the home page |
 | `.Site` | Site | Global site object |
 | `.Site.Params` | map | Parameters from `[params]` in hugo.toml |

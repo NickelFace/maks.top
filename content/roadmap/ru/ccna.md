@@ -45,7 +45,6 @@ total_label: "тем"
 
 <div class="quick-links">
 <a href="/certs/ccna/" class="ql-btn">🎓 Cert page</a>
-<a href="/ccna-quiz/" class="ql-btn">📝 Quiz (489 вопросов)</a>
 <a href="/ccna-labs/" class="ql-btn">🔬 Labs (24 решения)</a>
 <a href="/posts/ccna/" class="ql-btn">📚 Все статьи</a>
 </div>

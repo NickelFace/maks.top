@@ -41,7 +41,6 @@ total_label: "topics"
 
 <div class="quick-links">
 <a href="/certs/ccna/" class="ql-btn">🎓 Cert page</a>
-<a href="/ccna-quiz/" class="ql-btn">📝 Quiz (489 questions)</a>
 <a href="/ccna-labs/" class="ql-btn">🔬 Labs (24 walkthroughs)</a>
 <a href="/posts/ccna/" class="ql-btn">📚 All articles</a>
 </div>

@@ -40,7 +40,6 @@ The partial renders different segments depending on page type:
 | Case | Output |
 |---|---|
 | `eq .Section "certs"` | `maks.top / certs / Page Title` |
-| `eq .Section "ccna-quiz"` | `maks.top / CCNA / Quiz / Page N` (CCNA links to `/certs/ccna/`) |
 | `eq .Section "ccna-labs"` | `maks.top / CCNA / Labs / Page Title` (CCNA links to `/certs/ccna/`) |
 | `.IsSection` | `maks.top / section-name` (section index — current page as plain text) |
 | KB sub-page (`Section=kb`, depth=2) | `maks.top / kb / Parent Section Title / Page Title` |

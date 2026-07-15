@@ -44,7 +44,6 @@ themes/maks/layouts/partials/breadcrumb.html
 | Случай | Вывод |
 |---|---|
 | `eq .Section "certs"` | `maks.top / certs / Заголовок страницы` |
-| `eq .Section "ccna-quiz"` | `maks.top / CCNA / Quiz / Страница N` (CCNA — ссылка на `/certs/ccna/`) |
 | `eq .Section "ccna-labs"` | `maks.top / CCNA / Labs / Заголовок` (CCNA — ссылка на `/certs/ccna/`) |
 | `.IsSection` | `maks.top / название-раздела` (индекс раздела — текущая страница как обычный текст) |
 | KB подстраница (`Section=kb`, depth=2) | `maks.top / kb / Заголовок раздела / Заголовок страницы` |

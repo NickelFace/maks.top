@@ -43,8 +43,6 @@ Hugo ищет шаблон в таком порядке (первый найде
 | `/posts/linux-namespaces/` | `layouts/posts/linux-namespaces.html` → `layouts/posts/single.html` |
 | `/certs/` | `layouts/certs/list.html` |
 | `/certs/ccna/` | `layouts/certs/single.html` → `layouts/_default/single.html` |
-| `/ccna-quiz/p01/` | `layouts/ccna-quiz/single.html` |
-| `/ccna-quiz/` | `layouts/ccna-quiz/list.html` |
 | `/ccna-labs/` | `layouts/ccna-labs/list.html` |
 | `/ccna-labs/ccna-lab-NN/` | `layouts/ccna-labs/single.html` → `layouts/_default/single.html` |
 | `/about/` | `layouts/about/single.html` → `layouts/_default/single.html` |
@@ -84,9 +82,6 @@ maks.top/
 │   │   ├── network-engineer.md      # Курс OTUS
 │   │   ├── network-architect.md     # Курс OTUS Network Architect
 │   │   └── aws-saa.md
-│   ├── ccna-quiz/                   # Раздел /ccna-quiz/
-│   │   ├── _index.md                # Индекс квиза (сетка из 49 плиток)
-│   │   └── p01.md – p49.md          # 489 вопросов, по 10 на страницу
 │   ├── kb/                          # Раздел /kb/ (краткие справочники)
 │   │   ├── linux-network.md         # ip, ss, tcpdump, nmcli, iptables
 │   │   ├── bash.md                  # Переменные, массивы, циклы, функции
@@ -103,7 +98,6 @@ maks.top/
 │   └── docs/                        # Раздел /kb/docs/ (эта документация)
 │
 ├── static/                          # Глобальные статические файлы
-│   ├── img/quiz/                    # 247 JPEG-изображений из PDF CCNA
 │   ├── img/neteng/                  # Изображения лабораторных (01/, 02/, … 17/)
 │   ├── roadmap/                     # Статические страницы роадмапа
 │   │   ├── index.html               # Главный роадмап (/roadmap/)
@@ -127,9 +121,6 @@ maks.top/
     │   ├── posts/
     │   │   ├── list.html            # Листинг постов + Pagefind поиск
     │   │   └── linux-namespaces.html # Интерактивный explorer namespace'ов
-    │   ├── ccna-quiz/
-    │   │   ├── list.html            # Индекс квиза (49 плиток)
-    │   │   └── single.html          # Страница квиза: вопросы, варианты, баллы
     │   ├── ccna-labs/
     │   │   └── list.html            # Список лабораторных: плоская сетка
     │   ├── about/
@@ -162,7 +153,6 @@ maks.top/
             ├── home.css             # Стили главной страницы
             ├── prose.css            # Типографика, NS-карточки, tabs, ref-panel
             ├── cert.css             # Страницы сертификаций (hero, плитки, аккордеон, индекс)
-            ├── quiz.css             # CCNA квиз: карточки, варианты, баллы
             ├── ns.css               # Только layout страницы linux-namespaces
             ├── chroma.css           # Подсветка синтаксиса (тёмная/светлая)
             ├── topology.css         # Стили SVG-диаграмм .topology
@@ -249,7 +239,7 @@ paginate = 10                   # Постов на страницу в лист
 | `.Params.tags` | []string | Из frontmatter `tags:` |
 | `.Permalink` | string | Полный URL страницы |
 | `.RelPermalink` | string | Относительный URL |
-| `.Section` | string | Раздел: "posts", "certs", "ccna-quiz", "ccna-labs", "kb" |
+| `.Section` | string | Раздел: "posts", "certs", "ccna-labs", "kb" |
 | `.IsHome` | bool | true только для главной страницы |
 | `.Site` | Site | Глобальный объект сайта |
 | `.Site.Params` | map | Параметры из `[params]` в hugo.toml |

@@ -24,7 +24,6 @@ tags: ["docs"]
 | `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs, ccna-labs singles | Типографика, NS-карточки/tabs/ref-panel, section divider, mobile overflow containment |
 | `home.css` | `themes/maks/static/styles/` | только `/` | Hero, recent posts, KB grid, cert-grid |
 | `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, плитки ресурсов, аккордеон тем, индекс /certs/ |
-| `quiz.css` | `themes/maks/static/styles/` | `/ccna-quiz/*` | Карточки квиза, состояния вариантов, значки баллов |
 | `ns.css` | `themes/maks/static/styles/` | `/posts/linux-namespaces/` | Двухколоночный layout, TOC sidebar, прогресс, фильтры |
 | `topology.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Стили SVG-диаграмм `.topology` |
 | `chroma.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Подсветка синтаксиса (тёмная/светлая) |
@@ -41,7 +40,7 @@ tags: ["docs"]
 {{ if or (eq .Type "posts") (eq .Type "about") (eq .Type "docs") (eq .Type "kb") }}
   <link href="/styles/prose.css">{{ end }}
 <link rel="stylesheet" href="/styles/mobile.css">   <!-- всегда -->
-{{ block "head" . }}{{ end }}  <!-- cert.css / quiz.css / ns.css добавляются здесь -->
+{{ block "head" . }}{{ end }}  <!-- cert.css / ns.css добавляются здесь -->
 ```
 
 > **Зачем `critical.css` инлайнится:** цвета фона тёмной/светлой темы должны применяться до загрузки любого внешнего CSS, чтобы предотвратить белую вспышку при навигации. `critical.css` находится в `assets/`, поэтому Hugo может прочитать и встроить его во время сборки через `resources.Get`. **При изменении цветов темы обновляй `critical.css` И переменные `:root` в `global.css` — они должны совпадать.**
@@ -138,7 +137,7 @@ tags: ["docs"]
 
 ### Пагинация (dot-grid)
 
-Используется как в блоге (`pagination.html`), так и в квизе (`ccna-quiz/single.html`).
+Используется в блоге (`pagination.html`).
 
 | Класс | Описание |
 |---|---|
@@ -289,34 +288,6 @@ tags: ["docs"]
 | `.cert-topic-body` | Тело аккордеона: `max-height: 0` → `scrollHeight` через JS |
 | `.cert-post-link` | Ссылка на статью внутри темы |
 | `.cert-post-title` | Заголовок статьи: `color: var(--accent)` |
-
----
-
-## quiz.css — CCNA квиз
-
-| Класс | Описание |
-|---|---|
-| `.quiz-disclaimer` | Предупреждение вверху страниц квиза |
-| `.quiz-index-grid` | Сетка из 49 плиток страниц |
-| `.quiz-index-card` | Плитка страницы с номером |
-| `.quiz-index-card.visited` | Посещённая страница: зелёная граница и номер |
-| `.quiz-page` | Контейнер страницы квиза |
-| `.quiz-progress-wrap` | Тонкий progress bar вверху |
-| `.quiz-card` | Карточка вопроса |
-| `.quiz-q-num` | Значок номера вопроса |
-| `.quiz-q-text` | Текст вопроса |
-| `.quiz-images` | Область изображений |
-| `.quiz-multi-hint` | Значок "Choose N" для вопросов с множественным выбором |
-| `.quiz-options` | Список вариантов ответа |
-| `.quiz-opt` | Один вариант: radio/checkbox + буква + текст |
-| `.quiz-opt.selected` | Выбранный пользователем вариант |
-| `.quiz-opt.correct` | Правильный вариант (после reveal): зелёный |
-| `.quiz-opt.wrong` | Неправильно выбранный вариант: красный |
-| `.quiz-opt.missed` | Правильный, но не выбранный: жёлтый |
-| `.quiz-reveal-btn` | Кнопка "Show Answer" / "Hide Answer" |
-| `.quiz-score-badge` | Inline-значок результата |
-| `.quiz-answer` | Блок ответа с объяснением |
-| `.quiz-explanation` | Текст объяснения |
 
 ---
 

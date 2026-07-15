@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /ccna-quiz/
 
 Sitemap: https://maks.top/sitemap.xml

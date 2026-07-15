@@ -20,7 +20,6 @@ Styles are split into 11 files by **scope** (area of application):
 | `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs, ccna-labs singles | Article typography, NS cards/tabs/ref-panel, section divider, mobile overflow containment |
 | `home.css` | `themes/maks/static/styles/` | `/` only | Hero, recent posts, KB grid, cert-grid |
 | `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, resource tiles, accordion topics, certs index page |
-| `quiz.css` | `themes/maks/static/styles/` | `/ccna-quiz/*` | Quiz cards, option states, scoring badges |
 | `ns.css` | `themes/maks/static/styles/` | `/posts/linux-namespaces/` | Two-column page layout, TOC sidebar, progress, filter row |
 | `topology.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | `.topology` figure + SVG diagram styles |
 | `chroma.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Syntax highlighting (dark/light) |
@@ -37,7 +36,7 @@ Loading in `baseof.html`:
 {{ if or (eq .Type "posts") (eq .Type "about") (eq .Type "docs") (eq .Type "kb") }}
   <link href="/styles/prose.css">{{ end }}
 <link rel="stylesheet" href="/styles/mobile.css">   <!-- always -->
-{{ block "head" . }}{{ end }}  <!-- cert.css / quiz.css / ns.css added here -->
+{{ block "head" . }}{{ end }}  <!-- cert.css / ns.css added here -->
 ```
 
 > **Why `critical.css` is inlined:** Dark/light background colors must be applied before any external CSS loads to prevent a white flash on navigation. `critical.css` lives in `assets/` so Hugo can read and inline it at build time via `resources.Get`. **When changing theme colors, update `critical.css` AND `global.css` `:root` — they must stay in sync.**
@@ -175,7 +174,7 @@ Defined in `prose.css`. Used in `_default/single.html` for all article pages.
 
 ### Pagination (dot-grid)
 
-Shared by both blog (`pagination.html` partial) and quiz (hardcoded in `ccna-quiz/single.html`).
+Used by the blog (`pagination.html` partial).
 
 | Class | Description |
 |---|---|
@@ -315,32 +314,6 @@ Page guard: `html, body { overflow-x: clip; }` in `global.css`. `min-width: 0` s
 | `.cert-topic-body` | Accordion body: `max-height: 0` → `scrollHeight` via JS |
 | `.cert-post-link` | Link to an article inside a topic |
 | `.cert-post-title` | Article title: `color: var(--accent)` |
-
----
-
-## quiz.css — CCNA quiz
-
-| Class | Description |
-|---|---|
-| `.quiz-disclaimer` | Warning notice at the top of quiz pages |
-| `.quiz-index-grid` | Grid of 49 page tiles |
-| `.quiz-index-tile` | Page tile with number |
-| `.quiz-page-header` | Page title + progress bar |
-| `.quiz-progress-bar` | Thin accent-colored progress indicator |
-| `.q-card` | Question card wrapper |
-| `.q-num` | Question number badge |
-| `.q-text` | Question body text |
-| `.q-image` | Question image (`max-width: 100%`) |
-| `.q-multi-hint` | "Choose N" badge for multi-answer questions |
-| `.q-options` | List of answer options |
-| `.q-option` | Single option: radio/checkbox + label |
-| `.q-option.selected` | User-selected option |
-| `.q-option.correct` | Correct option (after reveal): green |
-| `.q-option.wrong` | Wrong selected option: red |
-| `.q-option.missed` | Correct option user missed: yellow |
-| `.reveal-btn` | "Show Answer" / "Hide Answer" toggle |
-| `.score-badge` | Inline score: correct / total |
-| `.q-explanation` | Explanation text shown after reveal |
 
 ---
 

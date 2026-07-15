@@ -27,17 +27,6 @@
       <span>{{ .Title }}</span>
     {{ end }}
 
-  {{ else if eq .Section "ccna-quiz" }}
-    <a href="{{ "/certs/ccna/" | relURL }}">CCNA</a>
-    <span>/</span>
-    {{ if .IsSection }}
-      <span>Quiz</span>
-    {{ else }}
-      <a href="{{ "/ccna-quiz/" | relURL }}">Quiz</a>
-      <span>/</span>
-      <span>Page {{ .Params.quiz_page }}</span>
-    {{ end }}
-
   {{ else if eq .Section "ccna-labs" }}
     <a href="{{ "/certs/ccna/" | relURL }}">CCNA</a>
     <span>/</span>
