@@ -1,5 +1,5 @@
 ---
-title: "Cisco — Dynamic Routing Protocols"
+title: "Cisco Dynamic Routing Protocols"
 description: "EIGRP, OSPF, RIP, BGP — configuration and verification commands"
 icon: "🔀"
 group: "Networking"

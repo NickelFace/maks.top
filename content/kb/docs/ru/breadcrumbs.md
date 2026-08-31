@@ -62,7 +62,7 @@ themes/maks/layouts/partials/breadcrumb.html
 {{ end }}
 ```
 
-Это делает средний сегмент (`Cisco — Network Services`) кликабельной ссылкой на индекс подраздела.
+Это делает средний сегмент (`Cisco Network Services`) кликабельной ссылкой на индекс подраздела.
 
 ---
 

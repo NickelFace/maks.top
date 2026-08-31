@@ -1,5 +1,5 @@
 ---
-title: "Cisco — Network Services"
+title: "Cisco Network Services"
 description: "NAT, DHCP, ISP connectivity, IP SLA, PPPoE, Policy-Based Routing"
 icon: "⚙️"
 group: "Networking"

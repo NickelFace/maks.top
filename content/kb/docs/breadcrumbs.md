@@ -58,7 +58,7 @@ For pages like `/kb/cisco-services/nat-dhcp/`, the partial detects a second path
 {{ end }}
 ```
 
-This makes the middle crumb (`Cisco — Network Services`) a clickable link to the sub-section index.
+This makes the middle crumb (`Cisco Network Services`) a clickable link to the sub-section index.
 
 ---
 

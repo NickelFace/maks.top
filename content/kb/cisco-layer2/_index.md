@@ -1,5 +1,5 @@
 ---
-title: "Cisco — Layer 2 Switching"
+title: "Cisco Layer 2 Switching"
 description: "VLANs, VTP, STP/RSTP, EtherChannel, FHRP, Frame-Relay, PPP"
 icon: "🔌"
 group: "Networking"
