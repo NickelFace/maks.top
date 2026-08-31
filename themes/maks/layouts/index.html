@@ -55,7 +55,7 @@
 {{- $stateFor := dict
     "passed"      (dict "label" "passed"       "color" "var(--accent2)")
     "in progress" (dict "label" "in progress"  "color" "var(--accent)")
-    "planned"     (dict "label" "planned"      "color" "var(--accent3)")
+    "planned"     (dict "label" "planned"      "color" "var(--text3)")
 -}}
 {{- $l1State   := "planned" -}}{{- if ge $l1Pct   100 -}}{{- $l1State   = "passed" -}}{{- else if gt $l1Pct   0 -}}{{- $l1State   = "in progress" -}}{{- end -}}
 {{- $neState   := "planned" -}}{{- if ge $nePct   100 -}}{{- $neState   = "passed" -}}{{- else if gt $nePct   0 -}}{{- $neState   = "in progress" -}}{{- end -}}
@@ -122,21 +122,14 @@
   </div>
   <div class="home-cert-grid">
 
-    {{- $l1Color   := $l1.Params.cert_color   | default "var(--accent)" -}}
-    {{- $neColor   := $ne.Params.cert_color   | default "var(--accent)" -}}
-    {{- $naColor   := $na.Params.cert_color   | default "var(--accent)" -}}
-    {{- $l2Color   := $l2.Params.cert_color   | default "var(--accent)" -}}
-    {{- $awsColor  := $aws.Params.cert_color  | default "var(--accent)" -}}
-    {{- $ccnaColor := $ccna.Params.cert_color | default "var(--accent)" -}}
-
     <a href="{{ "/certs/lpic-1/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">
         <div class="home-cc-name">LPIC-1</div>
         <div class="home-cc-state" style="color:{{ $l1S.color | safeCSS }}">{{ $l1S.label }}</div>
       </div>
       <div class="home-cc-sub">Linux Professional Institute</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l1Pct }}%;background:{{ $l1Color | safeCSS }}"></div></div>
-      <div class="home-cc-meta"><span>16 Feb 2025 · {{ $l1Act }} articles</span><span class="home-cc-pct" style="color:{{ $l1Color | safeCSS }}">{{ $l1Pct }}%</span></div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l1Pct }}%;background:{{ $l1S.color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>16 Feb 2025 · {{ $l1Act }} articles</span><span class="home-cc-pct" style="color:{{ $l1S.color | safeCSS }}">{{ $l1Pct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/network-engineer/" | relURL }}" class="home-cert-card">
@@ -145,8 +138,8 @@
         <div class="home-cc-state" style="color:{{ $neS.color | safeCSS }}">{{ $neS.label }}</div>
       </div>
       <div class="home-cc-sub">Cisco R&amp;S · OTUS</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $nePct }}%;background:{{ $neColor | safeCSS }}"></div></div>
-      <div class="home-cc-meta"><span>{{ $neAct }} / {{ $ne.Params.expected_articles | default "17" }} labs</span><span class="home-cc-pct" style="color:{{ $neColor | safeCSS }}">{{ $nePct }}%</span></div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $nePct }}%;background:{{ $neS.color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $neAct }} / {{ $ne.Params.expected_articles | default "17" }} labs</span><span class="home-cc-pct" style="color:{{ $neS.color | safeCSS }}">{{ $nePct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/network-architect/" | relURL }}" class="home-cert-card">
@@ -155,8 +148,8 @@
         <div class="home-cc-state" style="color:{{ $naS.color | safeCSS }}">{{ $naS.label }}</div>
       </div>
       <div class="home-cc-sub">Data Center · VxLAN EVPN</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $naPct }}%;background:{{ $naColor | safeCSS }}"></div></div>
-      <div class="home-cc-meta"><span>{{ $naAct }} / {{ $na.Params.expected_articles | default "13" }} labs</span><span class="home-cc-pct" style="color:{{ $naColor | safeCSS }}">{{ $naPct }}%</span></div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $naPct }}%;background:{{ $naS.color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $naAct }} / {{ $na.Params.expected_articles | default "13" }} labs</span><span class="home-cc-pct" style="color:{{ $naS.color | safeCSS }}">{{ $naPct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/lpic-2/" | relURL }}" class="home-cert-card">
@@ -165,8 +158,8 @@
         <div class="home-cc-state" style="color:{{ $l2S.color | safeCSS }}">{{ $l2S.label }}</div>
       </div>
       <div class="home-cc-sub">Exams 201 &amp; 202</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l2Pct }}%;background:{{ $l2Color | safeCSS }}"></div></div>
-      <div class="home-cc-meta"><span>{{ $l2Act }} / {{ $l2.Params.expected_articles }} articles</span><span class="home-cc-pct" style="color:{{ $l2Color | safeCSS }}">{{ $l2Pct }}%</span></div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $l2Pct }}%;background:{{ $l2S.color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $l2Act }} / {{ $l2.Params.expected_articles }} articles</span><span class="home-cc-pct" style="color:{{ $l2S.color | safeCSS }}">{{ $l2Pct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/aws-saa/" | relURL }}" class="home-cert-card">
@@ -175,8 +168,8 @@
         <div class="home-cc-state" style="color:{{ $awsS.color | safeCSS }}">{{ $awsS.label }}</div>
       </div>
       <div class="home-cc-sub">Solutions Architect Assoc.</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $awsPct }}%;background:{{ $awsColor | safeCSS }}"></div></div>
-      <div class="home-cc-meta"><span>{{ $awsAct }} / {{ $aws.Params.expected_articles }} articles · Q3 2026</span><span class="home-cc-pct" style="color:{{ $awsColor | safeCSS }}">{{ $awsPct }}%</span></div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $awsPct }}%;background:{{ $awsS.color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $awsAct }} / {{ $aws.Params.expected_articles }} articles · Q3 2026</span><span class="home-cc-pct" style="color:{{ $awsS.color | safeCSS }}">{{ $awsPct }}%</span></div>
     </a>
 
     <a href="{{ "/certs/ccna/" | relURL }}" class="home-cert-card">
@@ -185,8 +178,8 @@
         <div class="home-cc-state" style="color:{{ $ccnaS.color | safeCSS }}">{{ $ccnaS.label }}</div>
       </div>
       <div class="home-cc-sub">Cisco Certified Network Assoc.</div>
-      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $ccnaPct }}%;background:{{ $ccnaColor | safeCSS }}"></div></div>
-      <div class="home-cc-meta"><span>{{ $ccnaAct }} / {{ $ccna.Params.expected_articles }} articles</span><span class="home-cc-pct" style="color:{{ $ccnaColor | safeCSS }}">{{ $ccnaPct }}%</span></div>
+      <div class="home-cc-bar"><div class="home-cc-fill" style="width:{{ $ccnaPct }}%;background:{{ $ccnaS.color | safeCSS }}"></div></div>
+      <div class="home-cc-meta"><span>{{ $ccnaAct }} / {{ $ccna.Params.expected_articles }} articles</span><span class="home-cc-pct" style="color:{{ $ccnaS.color | safeCSS }}">{{ $ccnaPct }}%</span></div>
     </a>
 
   </div>

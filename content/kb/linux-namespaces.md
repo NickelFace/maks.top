@@ -1,5 +1,6 @@
 ---
 title: "Linux Namespaces"
+mark: linux
 description: "All 8 Linux namespace types explained with interactive examples and practical commands."
 icon: "🌐"
 group: "Linux Core"

@@ -50,7 +50,7 @@
       "pct"      $pct
       "state"    $state
       "sub"      $sub
-      "color"    (.Params.cert_color | default "var(--accent)")
+      "color"    (cond (eq $state "passed") "var(--accent2)" (cond (eq $state "in progress") "var(--accent)" "var(--text3)"))
   ) }}
 {{ end }}
 
@@ -119,7 +119,7 @@
       </div>
 
       <div class="certs-idx-pct-wrap">
-        <div class="certs-idx-pct" style="color:{{ $c.color }}">{{ $c.pct }}<span style="font-size:16px;color:var(--text3)">%</span></div>
+        <div class="certs-idx-pct" style="color:{{ if eq $c.state "planned" }}var(--text3){{ else }}var(--text){{ end }}">{{ $c.pct }}<span style="font-size:16px;color:var(--text3)">%</span></div>
         <div class="certs-idx-bar">
           <div class="certs-idx-bar-fill" style="width:{{ $c.pct }}%;background:{{ $c.color }}"></div>
         </div>

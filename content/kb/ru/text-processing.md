@@ -1,5 +1,6 @@
 ---
 title: "Text Processing"
+mark: bash
 description: "grep, awk, sed, cut, sort, uniq, xargs: обработка текста в командной строке"
 icon: "📝"
 group: "Linux Core"

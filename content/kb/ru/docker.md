@@ -1,5 +1,6 @@
 ---
 title: "Docker"
+mark: docker
 description: "Контейнеры: запуск, управление, логи и очистка через docker run, ps, stop, rm, exec, inspect"
 icon: "🐳"
 group: "Cloud & DevOps"

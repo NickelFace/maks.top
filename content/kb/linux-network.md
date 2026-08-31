@@ -1,5 +1,6 @@
 ---
 title: "Linux Networking"
+mark: linux
 description: "ip, ss, tcpdump, nmcli, iptables: commands and examples"
 icon: "🌐"
 group: "Networking"

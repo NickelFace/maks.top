@@ -1,5 +1,6 @@
 ---
 title: "Bash & Scripting"
+mark: bash
 description: "Variables, arrays, conditionals, loops, functions, parameter expansion"
 icon: "🐚"
 group: "Linux Core"

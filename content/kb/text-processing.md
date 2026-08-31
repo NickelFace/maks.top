@@ -1,5 +1,6 @@
 ---
 title: "Text Processing"
+mark: bash
 description: "grep, awk, sed, cut, sort, uniq, xargs: text processing on the command line"
 icon: "📝"
 group: "Linux Core"

@@ -1,5 +1,6 @@
 ---
 title: "iptables / nftables"
+mark: linux
 description: "Linux firewall: цепочки, таблицы, NAT, stateful-фильтрация, персистентность"
 icon: "🔥"
 group: "Security"

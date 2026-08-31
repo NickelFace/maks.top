@@ -1,5 +1,6 @@
 ---
 title: "Cisco IOS Management"
+mark: cisco
 description: "General commands, IOS upgrade, password recovery, ROMMON, err-disabled"
 icon: "💻"
 group: "Networking"

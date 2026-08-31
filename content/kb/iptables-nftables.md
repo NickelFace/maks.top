@@ -1,5 +1,6 @@
 ---
 title: "iptables / nftables"
+mark: linux
 description: "Linux firewall: chains, tables, NAT, stateful filtering, persistence"
 icon: "🔥"
 group: "Security"

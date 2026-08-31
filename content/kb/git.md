@@ -1,5 +1,6 @@
 ---
 title: "Git"
+mark: git
 description: "commit, branch, rebase, stash, reset, cherry-pick: commands and patterns"
 icon: "🌿"
 group: "Cloud & DevOps"

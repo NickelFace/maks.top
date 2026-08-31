@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes"
+mark: kubernetes
 description: "Container orchestration: pods, deployments, services, config, scaling"
 icon: "☸️"
 group: "Cloud & DevOps"

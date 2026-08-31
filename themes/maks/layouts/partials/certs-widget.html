@@ -55,7 +55,7 @@
 {{- $stateFor := dict
     "passed"      (dict "label" "passed"       "color" "var(--accent2)")
     "in progress" (dict "label" "in progress"  "color" "var(--accent)")
-    "planned"     (dict "label" "planned"      "color" "var(--accent3)")
+    "planned"     (dict "label" "planned"      "color" "var(--text3)")
 -}}
 {{- $neState   := "planned" -}}{{- if ge $nePct   100 -}}{{- $neState   = "passed" -}}{{- else if gt $nePct   0 -}}{{- $neState   = "in progress" -}}{{- end -}}
 {{- $naState   := "planned" -}}{{- if ge $naPct   100 -}}{{- $naState   = "passed" -}}{{- else if gt $naPct   0 -}}{{- $naState   = "in progress" -}}{{- end -}}

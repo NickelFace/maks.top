@@ -1,6 +1,5 @@
 {{ define "head" }}
 <link rel="stylesheet" href="{{ "styles/cert.css" | relURL }}">
-<style>:root { --cert-color: {{ .Params.cert_color | default "var(--accent)" }}; }</style>
 {{ end }}
 
 {{ define "main" }}
@@ -25,12 +24,13 @@
 {{/* Derive cert state — purely from pct */}}
 {{ $state := "planned" }}
 {{ if ge $pct 100 }}{{ $state = "passed" }}{{ else if gt $pct 0 }}{{ $state = "in progress" }}{{ end }}
+{{ $stateColor := cond (eq $state "passed") "var(--accent2)" (cond (eq $state "in progress") "var(--accent)" "var(--text3)") }}
 
 {{/* Eyebrow: title + exam_code + state */}}
 {{ $eyebrow := printf "%s · %s" .Title $state }}
 {{ with .Params.exams }}{{ $eyebrow = printf "%s · %s · %s" $.Title (index . 0).code $state }}{{ end }}
 
-<header class="cert-pg-header">
+<header class="cert-pg-header" style="--cert-color:{{ $stateColor | safeCSS }}">
   <div class="cert-pg-header-inner">
     {{ partial "breadcrumb.html" . }}
     <div class="cert-pg-hero-grid">
@@ -48,7 +48,7 @@
           <div class="cert-passed-word">Passed</div>
         </div>
         {{ else }}
-        <div class="cert-pg-pct" style="color:var(--cert-color,var(--accent))">{{ $pct }}<span style="font-size:28px">%</span></div>
+        <div class="cert-pg-pct" style="color:{{ if eq $state "planned" }}var(--text3){{ else }}var(--text){{ end }}">{{ $pct }}<span style="font-size:28px">%</span></div>
         {{ end }}
         <div class="cert-pg-stat-lines">
           {{ if gt $expected 0 }}<div>{{ $written }} / {{ $expected }} articles</div>{{ end }}
@@ -68,7 +68,7 @@
   </div>
 </header>
 
-<div class="cert-pg-body">
+<div class="cert-pg-body" style="--cert-color:{{ $stateColor | safeCSS }}">
   <div class="cert-pg-body-inner">
 
     {{ with .Params.resources }}

@@ -1,5 +1,6 @@
 ---
 title: "Linux Namespaces"
+mark: linux
 description: "Все 8 типов пространств имён Linux с интерактивными примерами и практическими командами."
 icon: "🌐"
 group: "Linux Core"

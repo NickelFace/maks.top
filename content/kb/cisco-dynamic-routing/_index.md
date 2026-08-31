@@ -1,5 +1,6 @@
 ---
 title: "Cisco Dynamic Routing Protocols"
+mark: cisco
 description: "EIGRP, OSPF, RIP, BGP: configuration and verification commands"
 icon: "🔀"
 group: "Networking"

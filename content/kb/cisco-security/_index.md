@@ -1,5 +1,6 @@
 ---
 title: "Cisco Security"
+mark: cisco
 description: "ACL, Port Security, DHCP Snooping, IP Source Guard, Dynamic ARP Inspection"
 icon: "🛡️"
 group: "Networking"

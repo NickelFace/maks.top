@@ -1,0 +1,6 @@
+{{- /* KB card glyph: brand mark when the page declares `mark:`, Fraunces letter otherwise. */ -}}
+{{- with .Params.mark -}}
+<svg class="kb-edit-mark" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="{{ "img/icons.svg" | relURL }}#{{ . }}"></use></svg>
+{{- else -}}
+<div class="kb-edit-letter">{{ substr .Title 0 1 | strings.ToUpper }}</div>
+{{- end -}}

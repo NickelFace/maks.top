@@ -1,5 +1,6 @@
 ---
 title: "SadServers"
+mark: linux
 description: "Timed Linux troubleshooting scenarios, solved and written up step by step"
 icon: "🩺"
 group: "Cases"

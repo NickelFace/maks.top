@@ -1,5 +1,6 @@
 ---
 title: "Bash & Scripting"
+mark: bash
 description: "Переменные, массивы, условия, циклы, функции, parameter expansion"
 icon: "🐚"
 group: "Linux Core"

@@ -34,10 +34,12 @@
 }
 .kb-edit-card:hover { background:var(--bg2); }
 .kb-edit-letter {
-  font-family:'Fraunces',Georgia,serif; font-size:36px;
-  color:var(--accent); line-height:1; font-weight:300;
+  font-family:'Fraunces',Georgia,serif; font-size:30px;
+  color:var(--accent); line-height:0.86; height:26px; font-weight:300;
   letter-spacing:-0.04em; font-feature-settings:'opsz' 144;
 }
+.kb-edit-mark { display:block; height:26px; color:var(--text3); transition:color 0.15s; }
+.kb-edit-card:hover .kb-edit-mark { color:var(--accent); }
 .kb-edit-title { font-size:15px; font-weight:600; margin-top:8px; color:var(--text); }
 .kb-edit-desc { font-size:12.5px; color:var(--text3); line-height:1.5; flex:1; }
 .kb-edit-tags { display:flex; gap:6px; margin-top:6px; }
@@ -115,17 +117,16 @@
       </div>
       <div class="kb-edit-grid">
         {{ range sort $combined "Title" }}
-        {{ $letter := substr .Title 0 1 | strings.ToUpper }}
         {{ if .IsSection }}
         <a href="{{ .RelPermalink }}" class="kb-edit-card">
-          <div class="kb-edit-letter">{{ $letter }}</div>
+          {{ partial "kb-mark.html" . }}
           <div class="kb-edit-title">{{ .Title }}</div>
           {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
           <div class="kb-edit-meta">{{ len .Pages }} pages →</div>
         </a>
         {{ else }}
         <a href="{{ .RelPermalink }}" class="kb-edit-card">
-          <div class="kb-edit-letter">{{ $letter }}</div>
+          {{ partial "kb-mark.html" . }}
           <div class="kb-edit-title">{{ .Title }}</div>
           {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
           {{ with .Params.tags }}
@@ -153,9 +154,8 @@
     </div>
     <div class="kb-edit-grid">
       {{ range $ungrouped }}
-      {{ $letter := substr .Title 0 1 | strings.ToUpper }}
       <a href="{{ .Permalink }}" class="kb-edit-card">
-        <div class="kb-edit-letter">{{ $letter }}</div>
+        {{ partial "kb-mark.html" . }}
         <div class="kb-edit-title">{{ .Title }}</div>
         {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
       </a>
@@ -192,9 +192,8 @@
   <div class="kb-sub-body">
     <div class="kb-edit-grid">
       {{ range .Pages.ByTitle }}
-      {{ $letter := substr .Title 0 1 | strings.ToUpper }}
       <a href="{{ .RelPermalink }}" class="kb-edit-card">
-        <div class="kb-edit-letter">{{ $letter }}</div>
+        {{ partial "kb-mark.html" . }}
         <div class="kb-edit-title">{{ .Title }}</div>
         {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
         {{ with .Params.tags }}
