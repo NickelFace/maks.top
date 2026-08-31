@@ -1,0 +1,138 @@
+{{ define "head" }}
+<style>
+.pc-header { width:100%; border-bottom:1px solid var(--border); }
+.pc-header-inner { max-width:1200px; margin:0 auto; padding:56px 64px 32px; width:100%; }
+.pc-h1 { font-family:'Fraunces',Georgia,serif; font-size:var(--h1-page); font-weight:400;
+         margin:0; letter-spacing:-0.03em; font-feature-settings:'opsz' 144; color:var(--text); }
+.pc-lede { font-size:16px; color:var(--text2); max-width:640px; margin-top:16px; line-height:1.55; }
+.pc-body { max-width:1200px; margin:0 auto; padding:32px 64px 80px; width:100%; }
+
+.pc-controls { display:flex; flex-direction:column; gap:14px; margin-bottom:24px; }
+.pc-search { width:100%; max-width:420px; padding:10px 12px; font-family:'JetBrains Mono',monospace;
+             font-size:13px; color:var(--text); background:var(--bg); border:1px solid var(--border); }
+.pc-search:focus { outline:none; border-color:var(--accent); }
+.pc-tags { display:flex; flex-wrap:wrap; gap:6px; max-height:96px; overflow:hidden; }
+.pc-tags.open { max-height:none; }
+.pc-chip { font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.04em;
+           padding:4px 8px; border:1px solid var(--border); color:var(--text3);
+           background:var(--bg); cursor:pointer; user-select:none; }
+.pc-chip:hover { color:var(--text); border-color:var(--text3); }
+.pc-chip.on { color:var(--bg); background:var(--accent); border-color:var(--accent); }
+.pc-more { font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--accent);
+           background:none; border:none; padding:0; cursor:pointer; align-self:flex-start; }
+.pc-count { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text3);
+            letter-spacing:0.1em; border-bottom:1px solid var(--text); padding-bottom:10px; }
+
+.pc-list { border:1px solid var(--border); border-top:none; }
+.pc-row { display:grid; grid-template-columns:1fr 150px 90px; gap:16px; align-items:baseline;
+          padding:16px 18px; border-top:1px solid var(--border); background:var(--bg); }
+.pc-row:hover { background:var(--bg2); }
+.pc-name { font-size:15px; font-weight:600; color:var(--text); text-decoration:none; }
+.pc-name:hover { color:var(--accent); }
+.pc-desc { font-size:12.5px; color:var(--text3); line-height:1.5; margin-top:4px; }
+.pc-rowtags { display:flex; flex-wrap:wrap; gap:6px; }
+.pc-rowtag { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text3); }
+.pc-dl { font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--accent);
+         text-decoration:none; letter-spacing:0.04em; text-align:right; }
+.pc-empty { padding:40px 18px; color:var(--text3); font-size:14px; border-top:1px solid var(--border); }
+.pc-note { margin-top:32px; font-size:12.5px; color:var(--text3); line-height:1.6; max-width:640px; }
+
+@media (max-width:1024px) { .pc-header-inner,.pc-body { padding-left:40px; padding-right:40px; } }
+@media (max-width:640px) {
+  .pc-header-inner { padding:40px 20px 24px; }
+  .pc-body { padding:24px 20px 80px; }
+  .pc-row { grid-template-columns:1fr; gap:8px; }
+  .pc-dl { text-align:left; }
+}
+</style>
+{{ end }}
+
+{{ define "main" }}
+{{ $pages := .Pages.ByTitle }}
+<header class="pc-header">
+  <div class="pc-header-inner">
+    {{ partial "breadcrumb.html" . }}
+    <h1 class="pc-h1">{{ .Title }}.</h1>
+    <p class="pc-lede">{{ .Description }} Filter by protocol, open the capture page for details,
+      or download the <code>.cap</code> straight into Wireshark.</p>
+  </div>
+</header>
+
+<div class="pc-body">
+  <div class="pc-controls">
+    <input class="pc-search" id="pcSearch" type="search" placeholder="filter by name, protocol or description…" autocomplete="off">
+    <div class="pc-tags" id="pcTags">
+      {{ range $name, $terms := .Site.Taxonomies.tags }}
+        {{ $has := false }}
+        {{ range $terms }}{{ if and (in .Page.RelPermalink "/kb/pcap/") (ne .Page.RelPermalink "/kb/pcap/") }}{{ $has = true }}{{ end }}{{ end }}
+        {{ if $has }}<span class="pc-chip" data-tag="{{ $name | lower }}">{{ $name }}</span>{{ end }}
+      {{ end }}
+    </div>
+    <button class="pc-more" id="pcMore" type="button">show all protocols ↓</button>
+  </div>
+
+  <div class="pc-count" id="pcCount">{{ printf "%03d" (len $pages) }} CAPTURES</div>
+
+  <div class="pc-list" id="pcList">
+    {{ range $pages }}
+    <div class="pc-row" data-tags="{{ delimit (apply .Params.tags "lower" ".") " " }}"
+         data-search="{{ printf "%s %s %s" .Title .Description (delimit .Params.tags " ") | lower }}">
+      <div>
+        <a class="pc-name" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <div class="pc-desc">{{ .Description }}</div>
+        <div class="pc-rowtags">{{ range first 6 .Params.tags }}<span class="pc-rowtag">#{{ . }}</span>{{ end }}</div>
+      </div>
+      <div class="pc-rowtag">{{ .Params.packets }} pkts · {{ .Params.filesize }}</div>
+      <a class="pc-dl" href="/pcap/{{ .Params.capture_file }}">download ↓</a>
+    </div>
+    {{ end }}
+    <div class="pc-empty" id="pcEmpty" hidden>Nothing matches that filter.</div>
+  </div>
+
+  <p class="pc-note">Archived from packetlife.net by Jeremy Stretch, offline since 2024.
+  See also the <a href="/kb/cheat-sheets/">network cheat sheets</a> from the same archive.</p>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+(function () {
+  var rows  = Array.prototype.slice.call(document.querySelectorAll('.pc-row'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.pc-chip'));
+  var input = document.getElementById('pcSearch');
+  var count = document.getElementById('pcCount');
+  var empty = document.getElementById('pcEmpty');
+  var tags  = document.getElementById('pcTags');
+  var more  = document.getElementById('pcMore');
+  var active = null;
+
+  function apply() {
+    var q = input.value.trim().toLowerCase();
+    var shown = 0;
+    rows.forEach(function (r) {
+      var okTag  = !active || (' ' + r.dataset.tags + ' ').indexOf(' ' + active + ' ') !== -1;
+      var okText = !q || r.dataset.search.indexOf(q) !== -1;
+      var ok = okTag && okText;
+      r.hidden = !ok;
+      if (ok) shown++;
+    });
+    count.textContent = ('000' + shown).slice(-3) + (shown === 1 ? ' CAPTURE' : ' CAPTURES');
+    empty.hidden = shown !== 0;
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var t = c.dataset.tag;
+      active = active === t ? null : t;
+      chips.forEach(function (x) { x.classList.toggle('on', x.dataset.tag === active); });
+      apply();
+    });
+  });
+  input.addEventListener('input', apply);
+  more.addEventListener('click', function () {
+    var open = tags.classList.toggle('open');
+    more.textContent = open ? 'show fewer protocols ↑' : 'show all protocols ↓';
+  });
+})();
+</script>
+{{ end }}
