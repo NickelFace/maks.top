@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 101.3 — Change Runlevels, Boot Targets, Shutdown and Reboot"
+title: "LPIC-1 101.3 Change Runlevels, Boot Targets, Shutdown and Reboot"
 date: 2025-07-09
 description: "SysVinit runlevels, systemd targets, telinit, systemctl isolate, shutdown, wall, acpid. LPIC-1 exam topic 101.3."
 tags: ["Linux", "LPIC-1", "systemd", "SysVinit", "Runlevels"]

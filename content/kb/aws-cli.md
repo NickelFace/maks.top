@@ -1,6 +1,6 @@
 ---
 title: "AWS CLI"
-description: "EC2, S3, IAM, VPC, ECS — frequently used commands"
+description: "EC2, S3, IAM, VPC, ECS: frequently used commands"
 icon: "☁️"
 group: "Cloud & DevOps"
 tags: ["AWS", "Cloud", "CLI", "DevOps"]

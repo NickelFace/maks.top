@@ -1,5 +1,5 @@
 ---
-title: "Lab 15 — Cisco Device Management"
+title: "Lab 15: Cisco Device Management"
 date: 2026-10-13
 description: "Factory reset, password recovery, configuration and IOS backup via TFTP"
 tags: ["CCNA", "Cisco", "Lab", "Password Recovery", "TFTP", "IOS Upgrade"]

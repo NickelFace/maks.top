@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 02. STP"
+title: "Network Engineer 02. STP"
 date: 2025-08-12
 description: "Лабораторная работа: построение коммутируемой сети с резервными каналами. Выбор корневого моста, стоимость порта, приоритет порта."
 tags: ["Networking", "STP", "Spanning Tree", "Cisco"]

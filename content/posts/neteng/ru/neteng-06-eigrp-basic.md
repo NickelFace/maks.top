@@ -1,7 +1,7 @@
 ---
-title: "Network Engineer — 06. EIGRP for IPv4 (базовая настройка)"
+title: "Network Engineer 06. EIGRP for IPv4 (базовая настройка)"
 date: 2025-10-01
-description: "Лабораторная работа: базовая настройка EIGRP для IPv4 — соседи, таблица топологии, настройка пропускной способности, пассивные интерфейсы."
+description: "Лабораторная работа по базовой настройке EIGRP для IPv4: соседи, таблица топологии, настройка пропускной способности, пассивные интерфейсы."
 tags: ["Networking", "EIGRP", "Routing", "Cisco"]
 categories: ["Network Engineer"]
 code_toggle: true

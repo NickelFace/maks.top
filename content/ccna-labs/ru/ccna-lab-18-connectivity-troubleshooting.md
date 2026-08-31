@@ -1,5 +1,5 @@
 ---
-title: "Lab 18 — Connectivity Troubleshooting"
+title: "Lab 18: Connectivity Troubleshooting"
 date: 2026-10-21
 description: "Поиск и устранение проблем связности с применением методологии Cisco"
 tags: ["CCNA", "Cisco", "Lab", "Troubleshooting", "Connectivity"]

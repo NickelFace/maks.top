@@ -10,7 +10,7 @@ theme = "maks"
 
 [params]
   author      = "Maks"
-  description = "Linux & DevOps Knowledge Base — LPIC-2 · AWS · CKA · Networking"
+  description = "Linux & DevOps Knowledge Base: LPIC-2, AWS, CKA, Networking"
   location    = "Sydney, AU"
   github      = "https://github.com/NickelFace"
   linkedin    = "https://www.linkedin.com/in/lopunov/"
@@ -18,7 +18,7 @@ theme = "maks"
   email       = ""
   phone       = ""
   og_image    = "/og-default.png"   # default OG image (1200×630px), lives in static/
-  home_title  = "Maks Lopunov — Linux & DevOps Knowledge Base"
+  home_title  = "Maks Lopunov · Linux & DevOps Knowledge Base"
 
 [taxonomies]
   tag      = "tags"

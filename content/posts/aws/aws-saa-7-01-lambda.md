@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 7.01 AWS Lambda"
+title: "AWS SAA 7.01 AWS Lambda"
 date: 2026-05-09
 draft: true
-description: "Lambda execution model, triggers, concurrency, cold starts, VPC networking, Lambda@Edge vs CloudFront Functions, Destinations, and Lambda URLs — full SAA-C03 coverage."
+description: "Lambda execution model, triggers, concurrency, cold starts, VPC networking, Lambda@Edge vs CloudFront Functions, Destinations, and Lambda URLs: full SAA-C03 coverage."
 tags: ["AWS", "SAA-C03", "Lambda", "serverless", "compute"]
 categories: ["AWS SAA"]
 page_lang: "en"

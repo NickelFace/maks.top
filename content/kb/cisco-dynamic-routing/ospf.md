@@ -1,5 +1,5 @@
 ---
-title: "Cisco OSPF — Configuration Reference"
+title: "Cisco OSPF Configuration Reference"
 description: "OSPF: configuration, areas, filtering, summarization, redistribution, authentication"
 icon: "🔷"
 tags: ["Cisco", "OSPF", "routing", "dynamic-routing", "IOS", "area", "redistribution"]

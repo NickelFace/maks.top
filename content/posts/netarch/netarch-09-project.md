@@ -1,7 +1,7 @@
 ---
-title: "Network Architect — 09. Project: CP Migration from Multicast to EVPN"
+title: "Network Architect 09. Project: CP Migration from Multicast to EVPN"
 date: 2026-02-14
-description: "OTUS Network Architect: final project — VxLAN Control Plane migration plan from Multicast to EVPN, Multipod"
+description: "OTUS Network Architect final project: VxLAN Control Plane migration plan from Multicast to EVPN, Multipod"
 tags:
   - "Networking"
   - "VxLAN"

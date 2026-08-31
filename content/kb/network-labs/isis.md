@@ -1,5 +1,5 @@
 ---
-title: "IS-IS Protocol — L1/L2 Levels"
+title: "IS-IS Protocol: L1/L2 Levels"
 description: "IS-IS configuration with Level-1 and Level-2 areas on a 9-router topology"
 icon: "🗺️"
 tags: ["Networking", "IS-IS", "Routing", "Cisco"]

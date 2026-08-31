@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 211.3 — Managing Mailbox Access"
+title: "LPIC-2 211.3 Managing Mailbox Access"
 date: 2026-03-29
 description: "Протоколы POP3 и IMAP, базовое знакомство с Courier MTA, настройка Dovecot IMAP/POP3 (10-auth/10-mail/10-ssl/10-master.conf), механизмы аутентификации, maildir и mbox, настройка TLS, утилиты doveadm/doveconf. Тема экзамена LPIC-2 211.3."
 tags: ["Linux", "LPIC-2", "Dovecot", "Courier", "IMAP", "POP3", "email", "TLS"]

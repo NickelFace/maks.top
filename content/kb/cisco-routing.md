@@ -1,6 +1,6 @@
 ---
 title: "Cisco IOS Routing"
-description: "OSPF, EIGRP, BGP — configuration and verification commands"
+description: "OSPF, EIGRP, BGP: configuration and verification commands"
 icon: "🔀"
 group: "Networking"
 tags: ["Cisco", "OSPF", "EIGRP", "BGP", "IOS"]

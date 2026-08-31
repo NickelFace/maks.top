@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 203.3 — Creating and Configuring Filesystem Options"
+title: "LPIC-2 203.3 Creating and Configuring Filesystem Options"
 date: 2025-06-22
 description: "Автомонтирование AutoFS, расширения ISO9660 (Rock Ridge/Joliet/El Torito), UDF, mkisofs/cdrecord, dm-crypt, LUKS, eCryptfs и юниты автомонтирования systemd. Тема экзамена LPIC-2 203.3."
 tags: ["Linux", "Filesystem", "LPIC-2", "AutoFS", "LUKS", "ISO9660", "UDF", "encryption"]

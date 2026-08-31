@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 104.1 — Create Partitions and Filesystems"
+title: "LPIC-1 104.1 Create Partitions and Filesystems"
 date: 2025-10-13
 description: "MBR and GPT partition tables, fdisk, gdisk, parted, mkfs (ext2/3/4, XFS, VFAT, exFAT, Btrfs), swap. LPIC-1 exam topic 104.1."
 tags: ["Linux", "LPIC-1", "fdisk", "gdisk", "parted", "mkfs", "Btrfs", "XFS", "swap", "partitions"]

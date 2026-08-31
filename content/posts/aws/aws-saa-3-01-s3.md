@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 3.01 S3 Fundamentals"
+title: "AWS SAA 3.01 S3 Fundamentals"
 date: 2026-05-09
 draft: true
-description: "S3 buckets, storage classes, versioning, access control, encryption, static hosting — everything the SAA-C03 exam tests."
+description: "S3 buckets, storage classes, versioning, access control, encryption, static hosting: everything the SAA-C03 exam tests."
 tags: ["AWS", "SAA-C03", "S3", "Storage"]
 categories: ["AWS SAA"]
 page_lang: "en"

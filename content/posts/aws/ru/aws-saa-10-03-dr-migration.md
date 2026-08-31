@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 10.03 Аварийное восстановление и миграция"
+title: "AWS SAA 10.03 Аварийное восстановление и миграция"
 date: 2026-05-09
-description: "Стратегии DR, RPO/RTO, AWS Backup, семейство Snow, DataSync, Storage Gateway, DMS и 7 стратегий миграции — полное покрытие DR и миграции для SAA-C03."
+description: "Стратегии DR, RPO/RTO, AWS Backup, семейство Snow, DataSync, Storage Gateway, DMS и 7 стратегий миграции. Полное покрытие DR и миграции для SAA-C03."
 tags: ["AWS", "SAA-C03", "disaster recovery", "migration", "DMS", "Snow", "DataSync"]
 categories: ["AWS SAA"]
 page_lang: "ru"

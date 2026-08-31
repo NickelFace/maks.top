@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 107.2 — Automate System Administration Tasks by Scheduling Jobs"
+title: "LPIC-1 107.2 Automate System Administration Tasks by Scheduling Jobs"
 date: 2026-01-26
 description: "Scheduling recurring jobs with cron and crontab, one-time jobs with at/atq/atrm, systemd timers with OnCalendar, access control via cron.allow/cron.deny and at.allow/at.deny. LPIC-1 exam topic 107.2."
 tags: ["Linux", "LPIC-1", "cron", "at", "systemd", "scheduling", "admin"]

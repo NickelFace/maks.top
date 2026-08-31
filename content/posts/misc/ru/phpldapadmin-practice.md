@@ -1,5 +1,5 @@
 ---
-title: "phpLDAPadmin — практика и траблшутинг"
+title: "phpLDAPadmin: практика и траблшутинг"
 date: 2026-04-11
 description: "Установка phpLDAPadmin на Ubuntu 24.04, решение конфликта mpm_event с PHP-FPM, работа с LDAP-деревом через GUI, смена паролей и тренировочные задачи."
 tags: ["Linux", "OpenLDAP", "LDAP", "phpLDAPadmin", "Apache", "PHP", "Ubuntu"]

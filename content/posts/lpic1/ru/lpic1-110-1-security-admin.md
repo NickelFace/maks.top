@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 110.1 — Выполнение задач по администрированию безопасности"
+title: "LPIC-1 110.1 Выполнение задач по администрированию безопасности"
 date: 2026-04-06
 description: "Специальные права SUID/SGID, passwd/chage/usermod, su, lsof, fuser, nmap, ulimit, last/who/w, sudo и /etc/sudoers. LPIC-1 тема 110.1."
 tags: ["Linux", "LPIC-1", "security", "sudo", "nmap", "lsof", "ulimit"]

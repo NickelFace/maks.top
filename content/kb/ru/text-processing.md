@@ -1,6 +1,6 @@
 ---
 title: "Text Processing"
-description: "grep, awk, sed, cut, sort, uniq, xargs — обработка текста в командной строке"
+description: "grep, awk, sed, cut, sort, uniq, xargs: обработка текста в командной строке"
 icon: "📝"
 group: "Linux Core"
 tags: ["grep", "awk", "sed", "xargs", "Linux"]

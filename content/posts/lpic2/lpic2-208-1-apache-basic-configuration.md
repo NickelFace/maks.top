@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 208.1 — Basic Apache Configuration"
+title: "LPIC-2 208.1 Basic Apache Configuration"
 date: 2025-11-15
 description: "Apache httpd architecture, configuration files, MPM models, DSO modules, access control (2.2 vs 2.4 syntax), virtual hosting, mod_perl, mod_php, logging, and monitoring. LPIC-2 exam topic 208.1."
 tags: ["Linux", "LPIC-2", "Apache", "HTTP", "VirtualHost", "web server"]

@@ -2,7 +2,7 @@
 title: "Network Architect"
 cert_badge: "🏗️"
 cert_color: "#f59e0b"
-description: "OTUS Network Architect Course — Data Center Design, VxLAN EVPN, Underlay/Overlay"
+description: "OTUS Network Architect Course: Data Center Design, VxLAN EVPN, Underlay/Overlay"
 post_prefix: "netarch"
 post_category: "Network Architect"
 expected_articles: 9
@@ -14,7 +14,7 @@ resources:
     url: "/roadmap/network-architect/"
   - icon: "📝"
     title: "Lab Writeups"
-    desc: "All 9 labs — DC fabric, VxLAN EVPN"
+    desc: "All 9 labs: DC fabric, VxLAN EVPN"
     url: "/posts/netarch/"
   - icon: "💾"
     title: "GitHub Repository"

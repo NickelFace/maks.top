@@ -1,5 +1,5 @@
 ---
-title: "Lab 37 — Wireless Fundamentals Configuration"
+title: "Lab 37: Wireless Fundamentals Configuration"
 date: 2026-11-28
 description: "Настройка беспроводной сети через Cisco WLC: WLAN, WPA2, управление AP"
 tags: ["CCNA", "Cisco", "Lab", "Wireless", "WLC", "WPA2"]

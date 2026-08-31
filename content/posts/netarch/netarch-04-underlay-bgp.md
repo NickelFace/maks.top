@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 04. Underlay BGP"
+title: "Network Architect 04. Underlay BGP"
 date: 2025-11-01
 description: "OTUS Network Architect: eBGP configuration for DC Underlay with route-map and peer-templates"
 tags:

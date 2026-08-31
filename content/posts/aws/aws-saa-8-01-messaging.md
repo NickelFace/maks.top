@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 8.01 SQS, SNS, Kinesis & EventBridge"
+title: "AWS SAA 8.01 SQS, SNS, Kinesis & EventBridge"
 date: 2026-05-09
 draft: true
-description: "SQS Standard vs FIFO, SNS fan-out, Kinesis Data Streams vs Firehose, EventBridge rules, Amazon MQ — full messaging and event-driven architecture coverage for SAA-C03."
+description: "SQS Standard vs FIFO, SNS fan-out, Kinesis Data Streams vs Firehose, EventBridge rules, Amazon MQ: full messaging and event-driven architecture coverage for SAA-C03."
 tags: ["AWS", "SAA-C03", "SQS", "SNS", "Kinesis", "EventBridge", "messaging"]
 categories: ["AWS SAA"]
 page_lang: "en"

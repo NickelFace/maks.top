@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 212.1 — Configuring a Router"
+title: "LPIC-2 212.1 Configuring a Router"
 date: 2026-04-09
 description: "IP forwarding, NAT/masquerading, iptables tables and chains, SNAT/DNAT/MASQUERADE, port forwarding, nftables basics, sysctl.conf. LPIC-2 exam topic 212.1."
 tags: ["Linux", "LPIC-2", "iptables", "nftables", "NAT", "routing", "firewall"]

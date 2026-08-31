@@ -1,5 +1,5 @@
 ---
-title: "JavaScript — Функции и Справочник Событий"
+title: "JavaScript: Функции и Справочник Событий"
 date: 2026-04-11
 description: "Все JavaScript функции: где определены, откуда вызываются и что делают"
 page_lang: "ru"

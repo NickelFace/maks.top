@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 2.01 EC2 Instances: Types, Purchasing, AMI, Metadata"
+title: "AWS SAA 2.01 EC2 Instances: Types, Purchasing, AMI, Metadata"
 date: 2026-05-09
 draft: true
-description: "EC2 instance families, purchasing options with cost tradeoffs, AMI types, IMDSv2, placement groups, and key exam traps — complete SAA-C03 coverage."
+description: "EC2 instance families, purchasing options with cost tradeoffs, AMI types, IMDSv2, placement groups, and key exam traps: complete SAA-C03 coverage."
 tags: ["AWS", "SAA-C03", "EC2", "compute", "AMI", "Spot"]
 categories: ["AWS SAA"]
 page_lang: "en"

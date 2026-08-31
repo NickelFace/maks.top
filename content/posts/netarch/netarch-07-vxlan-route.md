@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 07. VxLAN Route (L3 EVPN)"
+title: "Network Architect 07. VxLAN Route (L3 EVPN)"
 date: 2026-01-03
 description: "OTUS Network Architect: L3 routing between clients in Overlay, per-client VNI, VPC pair"
 tags:

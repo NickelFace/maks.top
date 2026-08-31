@@ -1,5 +1,5 @@
 ---
-title: "CCNA — Subnetting — Практика и методика"
+title: "CCNA Subnetting: Практика и методика"
 date: 2026-07-14
 description: "Практические задачи по subnetting с разбором: алгоритм быстрого расчёта, задачи по VLSM, wildcard маски и типичные ошибки на экзамене."
 tags: ["CCNA", "Cisco", "subnetting", "VLSM", "IPv4"]

@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 202.2 — System Recovery"
+title: "LPIC-2 202.2 System Recovery"
 date: 2025-05-08
 description: "Процесс загрузки Linux, GRUB Legacy и GRUB 2, initrd/initramfs, UEFI/NVMe, сценарии восстановления с fsck, SysV init. Тема экзамена LPIC-2 202.2."
 tags: ["Linux", "GRUB", "Boot", "LPIC-2", "Recovery", "UEFI"]

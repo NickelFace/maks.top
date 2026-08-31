@@ -1,5 +1,5 @@
 ---
-title: "Templates — Layout Reference"
+title: "Templates: Layout Reference"
 date: 2026-04-11
 description: "Every Hugo template file: what it renders, data context, block structure"
 page_lang: "en"

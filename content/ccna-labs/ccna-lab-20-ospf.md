@@ -1,5 +1,5 @@
 ---
-title: "Lab 20-1 — OSPF Configuration"
+title: "Lab 20-1: OSPF Configuration"
 date: 2026-10-26
 description: "Configuring OSPFv2: neighbors, DR/BDR election, and interface cost"
 tags: ["CCNA", "Cisco", "Lab", "OSPF", "DR/BDR"]

@@ -1,6 +1,6 @@
 ---
 title: "Git"
-description: "commit, branch, rebase, stash, reset, cherry-pick — commands and patterns"
+description: "commit, branch, rebase, stash, reset, cherry-pick: commands and patterns"
 icon: "🌿"
 group: "Cloud & DevOps"
 tags: ["Git", "DevOps", "VCS"]

@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 211.1 — Using E-mail Servers"
+title: "LPIC-2 211.1 Using E-mail Servers"
 date: 2026-03-07
 description: "SMTP protocol, Postfix architecture, main.cf and master.cf, aliases, virtual domains, lookup tables, relay configuration, TLS in Postfix, Sendmail configuration files, Exim, Postfix utilities (postconf/postmap/postqueue/postsuper). LPIC-2 exam topic 211.1."
 tags: ["Linux", "LPIC-2", "Postfix", "SMTP", "email", "Sendmail", "Exim", "MTA"]

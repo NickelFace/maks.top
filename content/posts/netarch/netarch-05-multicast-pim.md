@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 05. Multicast PIM"
+title: "Network Architect 05. Multicast PIM"
 date: 2025-11-21
 description: "OTUS Network Architect: PIM Sparse-Mode and BSR configuration in DC topology, multicast via EVE-NG"
 tags:

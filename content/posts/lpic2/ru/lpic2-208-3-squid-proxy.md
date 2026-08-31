@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 208.3 — Squid Caching Proxy"
+title: "LPIC-2 208.3 Squid Caching Proxy"
 date: 2025-12-07
 description: "Конфигурация Squid 3.x: параметры squid.conf, типы ACL, правила http_access, схемы аутентификации пользователей (basic/digest/ntlm/negotiate), редиректоры, управление памятью и команды squid -k. Тема экзамена LPIC-2 208.3."
 tags: ["Linux", "LPIC-2", "Squid", "proxy", "cache", "ACL"]

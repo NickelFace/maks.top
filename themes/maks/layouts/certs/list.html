@@ -62,7 +62,7 @@
       {{ partial "breadcrumb.html" . }}
       <div class="eyebrow" style="margin:16px 0 12px">§ Certifications · {{ now.Format "2006" }}</div>
       <h1 class="certs-idx-h1">Receipts <em class="h1-em">for the</em> work.</h1>
-      <p class="certs-idx-desc">Six tracks in flight or passed. Each one ties to articles, labs, and (where applicable) a quiz bank — you can dive into any topic from the cert page.</p>
+      <p class="certs-idx-desc">Six tracks in flight or passed. Each one ties to articles, labs, and (where applicable) a quiz bank, so you can dive into any topic from the cert page.</p>
     </div>
     <div class="certs-idx-stats">
       {{ if gt $nPassed 0  }}<div><strong>{{ $nPassed }}</strong> passed</div>{{ end }}
@@ -112,7 +112,7 @@
         {{ else if gt $c.written 0 }}
           <div><strong>{{ $c.written }}</strong> articles</div>
         {{ else }}
-          <div>—</div>
+          <div>none yet</div>
         {{ end }}
         {{ with $c.page.Params.cert_labs_done }}<div>{{ . }} labs</div>{{ end }}
         {{ with $c.page.Params.cert_quiz_count }}<div>{{ . }} quiz q's</div>{{ end }}
@@ -138,7 +138,7 @@
   <div class="certs-idx-note-inner">
     <div class="eyebrow">§ How this works</div>
     <div class="certs-idx-note-body">
-      Each cert track is a folder of articles in <code>/posts/</code> with a <code>cert-N-NN-slug</code> naming convention. Progress percentages auto-compute from <code>expected_articles</code> in cert frontmatter — no manual updates needed. Labs link to <a href="/ccna-labs/">/ccna-labs/</a>.
+      Each cert track is a folder of articles in <code>/posts/</code> with a <code>cert-N-NN-slug</code> naming convention. Progress percentages auto-compute from <code>expected_articles</code> in cert frontmatter, so no manual updates are needed. Labs link to <a href="/ccna-labs/">/ccna-labs/</a>.
     </div>
   </div>
 </div>

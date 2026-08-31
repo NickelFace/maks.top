@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 212.4 — Security Tasks"
+title: "LPIC-2 212.4 Security Tasks"
 date: 2026-05-13
 description: "Управление ключами GPG/OpenPGP, обнаружение вторжений (fail2ban, portsentry), сертификаты OpenSSL, инструменты аудита безопасности (nmap, lsof, fuser, netstat, arp), хеширование паролей. Тема экзамена LPIC-2 212.4."
 tags: ["Linux", "LPIC-2", "GPG", "OpenPGP", "fail2ban", "portsentry", "nmap", "lsof", "john", "OpenSSL", "security"]

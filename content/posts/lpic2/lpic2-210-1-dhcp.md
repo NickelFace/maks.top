@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 210.1 — DHCP Configuration"
+title: "LPIC-2 210.1 DHCP Configuration"
 date: 2026-01-21
 description: "ISC DHCPd configuration: dhcpd.conf structure, global parameters, subnet/range, static hosts, groups, BOOTP/PXE, DHCP relay (dhcrelay), lease file, logging, IPv6 and radvd. LPIC-2 exam topic 210.1."
 tags: ["Linux", "LPIC-2", "DHCP", "ISC DHCPd", "networking", "radvd"]

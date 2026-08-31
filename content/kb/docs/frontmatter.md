@@ -1,5 +1,5 @@
 ---
-title: "Frontmatter — Fields Reference"
+title: "Frontmatter: Fields Reference"
 date: 2026-04-11
 description: "All frontmatter fields by content type with types, required status, and descriptions"
 page_lang: "en"
@@ -52,7 +52,7 @@ my_param: "value"        # custom → .Params.my_param
 
 ```yaml
 ---
-title: "LPIC-2 200.1 — Measuring and Diagnosing Resource Usage"
+title: "LPIC-2 200.1 Measuring and Diagnosing Resource Usage"
 date: 2026-04-10
 description: "CPU, memory, disk I/O monitoring: top, vmstat, iostat, sar. LPIC-2 topic 200.1."
 tags: ["Linux", "Performance", "LPIC-2", "Monitoring"]
@@ -180,7 +180,7 @@ Network Engineer posts are bilingual course posts with a specific format. Files 
 ### EN post
 ```yaml
 ---
-title: "Network Engineer — NN. Title"
+title: "Network Engineer NN. Title"
 date: 2026-01-01
 description: "..."
 tags: [...]
@@ -194,7 +194,7 @@ lang_pair: "/posts/neteng/ru/neteng-NN-slug/"
 ### RU post
 ```yaml
 ---
-title: "Network Engineer — NN. Заголовок"
+title: "Network Engineer NN. Заголовок"
 date: 2026-01-01
 description: "..."
 tags: [...]
@@ -225,7 +225,7 @@ Naming example: `ccna-1-01-network-components.md` → domain 1, topic 01.
 ```yaml
 # EN
 ---
-title: "CCNA 200-301 — Title"
+title: "CCNA 200-301 Title"
 date: 2026-01-01
 tags: [...]
 categories: ["CCNA 200-301"]
@@ -235,7 +235,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-01-network-components/"
 
 # RU shadow
 ---
-title: "CCNA 200-301 — Заголовок"
+title: "CCNA 200-301 Заголовок"
 page_lang: "ru"
 lang_pair: "/posts/ccna/ccna-1-01-network-components/"
 pagefind_ignore: true
@@ -256,7 +256,7 @@ Lab solutions: `content/ccna-labs/ccna-lab-NN-slug.md` (EN), `content/ccna-labs/
 ```yaml
 # EN
 ---
-title: "CCNA Lab NN — Title"
+title: "CCNA Lab NN: Title"
 date: 2026-01-01
 description: "..."
 tags: [...]
@@ -268,7 +268,7 @@ duration: "30 min"
 
 # RU shadow
 ---
-title: "CCNA Лаб NN — Заголовок"
+title: "CCNA Лаб NN: Заголовок"
 page_lang: "ru"
 lang_pair: "/ccna-labs/ccna-lab-NN-slug/"
 pagefind_ignore: true

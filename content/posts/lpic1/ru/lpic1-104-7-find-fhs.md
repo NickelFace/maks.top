@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 104.7 — Поиск системных файлов и правильное их размещение"
+title: "LPIC-1 104.7 Поиск системных файлов и правильное их размещение"
 date: 2025-11-17
 description: "Стандарт FHS, find, locate, updatedb, which, type, whereis. Тема 104.7 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "find", "locate", "FHS", "whereis", "which"]

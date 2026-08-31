@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 109.2 — Persistent Network Configuration"
+title: "LPIC-1 109.2 Persistent Network Configuration"
 date: 2026-03-16
 description: "Network interface naming conventions, /etc/network/interfaces, ifup/ifdown, hostname configuration, /etc/hosts, /etc/resolv.conf, NetworkManager/nmcli, systemd-networkd. LPIC-1 exam topic 109.2."
 tags: ["Linux", "LPIC-1", "networking", "NetworkManager", "nmcli", "systemd-networkd"]

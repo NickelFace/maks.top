@@ -41,7 +41,7 @@ content/posts/my-topic-title.md
 
 ```yaml
 ---
-title: "LPIC-2 205.4 — Название темы"
+title: "LPIC-2 205.4 Название темы"
 date: 2026-04-13
 description: "Одно-два предложения. Используется в meta-теге и превью карточки статьи."
 tags: ["Linux", "LPIC-2", "Networking"]
@@ -317,7 +317,7 @@ content/posts/neteng/neteng-NN-my-topic.md
 
 ```yaml
 ---
-title: "Network Engineer — NN. My Topic"
+title: "Network Engineer NN. My Topic"
 date: 2026-01-01
 description: "..."
 tags: ["Networking", "OSPF"]
@@ -336,7 +336,7 @@ content/posts/neteng/ru/neteng-NN-my-topic.md
 
 ```yaml
 ---
-title: "Network Engineer — NN. Тема"
+title: "Network Engineer NN. Тема"
 date: 2026-01-01
 description: "..."
 tags: ["Networking", "OSPF"]

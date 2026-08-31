@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 17. Corporate Office Network"
+title: "Network Engineer 17. Corporate Office Network"
 date: 2026-01-09
 description: "Designing and configuring a corporate network using Cisco's three-tier hierarchical model with OSPF, HSRP, STP, DHCP, PAT, and L2 Security"
 tags: ["Networking", "OSPF", "HSRP", "STP", "DHCP", "NAT", "Cisco", "OTUS"]

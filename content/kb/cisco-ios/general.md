@@ -1,5 +1,5 @@
 ---
-title: "Cisco IOS — General Commands"
+title: "Cisco IOS General Commands"
 description: "Essential Cisco IOS commands: modes, interfaces, routing, CDP/LLDP, file operations"
 icon: "📋"
 tags: ["Cisco", "IOS", "commands", "general", "CDP", "LLDP", "TCAM"]

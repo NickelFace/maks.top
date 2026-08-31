@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 207.3 — DNS Server Security"
+title: "LPIC-2 207.3 DNS Server Security"
 date: 2025-11-03
 description: "Безопасность BIND: скрытие версии, ACL, allow-query/allow-transfer, непривилегированный пользователь, chroot-окружение, split DNS, транзакционные подписи TSIG, DNSSEC (ZSK/KSK, RRSIG/NSEC/NSEC3/DS), записи DANE/TLSA. Тема экзамена LPIC-2 207.3."
 tags: ["Linux", "LPIC-2", "DNS", "BIND", "DNSSEC", "TSIG", "security"]

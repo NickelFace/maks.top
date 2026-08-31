@@ -1,5 +1,5 @@
 ---
-title: "Lab 33-1 — Cisco Device Security Configuration"
+title: "Lab 33-1: Cisco Device Security Configuration"
 date: 2026-11-23
 description: "Комплексная настройка безопасности устройств: SSH, AAA, пароли и hardening"
 tags: ["CCNA", "Cisco", "Lab", "SSH", "AAA", "Hardening"]

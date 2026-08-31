@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 6.02 DynamoDB"
+title: "AWS SAA 6.02 DynamoDB"
 date: 2026-05-09
 draft: true
-description: "DynamoDB data model, capacity modes, RCU/WCU math, GSI vs LSI, Streams, DAX, Global Tables, transactions, and TTL — the SAA-C03 NoSQL deep dive."
+description: "DynamoDB data model, capacity modes, RCU/WCU math, GSI vs LSI, Streams, DAX, Global Tables, transactions, and TTL: the SAA-C03 NoSQL deep dive."
 tags: ["AWS", "SAA-C03", "DynamoDB", "NoSQL", "databases"]
 categories: ["AWS SAA"]
 page_lang: "en"

@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 08. Policy-Based Routing (PBR)"
+title: "Network Engineer 08. Policy-Based Routing (PBR)"
 date: 2025-10-26
 description: "Настройка маршрутизации на основе политик для офиса Чокурдах: распределение трафика между двумя аплинками и отслеживание с помощью IP SLA"
 tags: ["Networking", "PBR", "IP SLA", "Routing", "Cisco", "OTUS"]

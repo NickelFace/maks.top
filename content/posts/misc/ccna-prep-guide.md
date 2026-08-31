@@ -1,5 +1,5 @@
 ---
-title: "CCNA 200-301 — Preparation Guide"
+title: "CCNA 200-301: Preparation Guide"
 date: 2026-03-01
 description: "Complete resource list for CCNA 200-301 exam preparation: books, video courses, practice labs, exam tips and registration."
 tags: ["Networking", "CCNA", "Cisco", "Certification"]

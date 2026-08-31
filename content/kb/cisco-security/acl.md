@@ -1,6 +1,6 @@
 ---
-title: "Cisco ACL — Access Control Lists"
-description: "Standard, extended, named, VACL, PACL — configuration and diagnostics"
+title: "Cisco ACL: Access Control Lists"
+description: "Standard, extended, named, VACL, PACL: configuration and diagnostics"
 icon: "🚦"
 tags: ["Cisco", "ACL", "security", "filtering", "IOS", "VACL", "PACL"]
 date: 2026-04-22

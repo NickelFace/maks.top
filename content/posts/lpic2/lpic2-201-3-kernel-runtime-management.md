@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 201.3 — Kernel Runtime Management"
+title: "LPIC-2 201.3 Kernel Runtime Management"
 date: 2025-04-16
 description: "Managing the running Linux kernel: modules, /proc, sysctl, udev, hardware analysis tools, and tracing utilities. LPIC-2 exam topic 201.3."
 tags: ["Linux", "Kernel", "LPIC-2", "udev", "sysctl", "Modules"]

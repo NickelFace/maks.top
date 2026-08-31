@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 13. BGP Path Selection and Filtering"
+title: "Network Engineer 13. BGP Path Selection and Filtering"
 date: 2025-12-07
 description: "Configuring BGP route filtering for the Moscow and St. Petersburg offices, restricting provider advertisements to default route only"
 tags: ["Networking", "BGP", "Filtering", "Routing", "Cisco", "OTUS"]

@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 102.4 — Управление пакетами Debian"
+title: "LPIC-1 102.4 Управление пакетами Debian"
 date: 2025-07-28
 description: "dpkg, apt-get, apt-cache, apt-file, sources.list, разрешение зависимостей. Тема 102.4 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "Debian", "dpkg", "apt"]

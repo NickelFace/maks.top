@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 108.1 — Maintain System Time"
+title: "LPIC-1 108.1 Maintain System Time"
 date: 2026-02-09
 description: "System clock vs hardware clock, date and hwclock commands, timedatectl, NTP concepts (stratum, offset, drift, jitter), systemd-timesyncd, ntpd with ntp.conf and ntpq, chrony with chronyc and chrony.conf. LPIC-1 exam topic 108.1."
 tags: ["Linux", "LPIC-1", "time", "NTP", "chrony", "systemd", "admin"]

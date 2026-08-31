@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 202.1 — SysV Init and systemd"
+title: "LPIC-2 202.1 SysV Init and systemd"
 date: 2025-04-27
 description: "System startup customisation: SysV runlevels, inittab, init scripts, chkconfig, update-rc.d, systemd units and targets, mkinitrd, LSB. LPIC-2 exam topic 202.1."
 tags: ["Linux", "systemd", "SysV", "LPIC-2", "Boot"]

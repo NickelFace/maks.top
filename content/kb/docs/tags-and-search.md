@@ -1,7 +1,7 @@
 ---
 title: "Tags & Search"
 date: 2026-04-13
-description: "How tag filtering and Pagefind full-text search work — architecture, data flow, and implementation details"
+description: "How tag filtering and Pagefind full-text search work: architecture, data flow, and implementation details"
 page_lang: "en"
 lang_pair: "/kb/docs/ru/tags-and-search/"
 tags: ["docs"]
@@ -67,7 +67,7 @@ The entire post list is serialized into a JS array during the Hugo build:
 const POSTS = [
   {
     url:       "https://maks.top/posts/lpic2-200-1.../",
-    title:     "LPIC-2 200.1 — Capacity Planning",
+    title:     "LPIC-2 200.1 Capacity Planning",
     date:      "2026-04-10",
     tags:      ["linux", "lpic-2", "monitoring"],    // urlized — for filtering
     tagLabels: ["Linux", "LPIC-2", "Monitoring"],    // original — for display

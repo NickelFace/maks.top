@@ -1,5 +1,5 @@
 ---
-title: "Cisco FHRP — HSRP, VRRP, GLBP"
+title: "Cisco FHRP: HSRP, VRRP, GLBP"
 description: "Gateway redundancy: HSRP, VRRP, GLBP configuration and diagnostics"
 icon: "🔁"
 tags: ["Cisco", "HSRP", "VRRP", "GLBP", "FHRP", "redundancy", "gateway", "IOS"]

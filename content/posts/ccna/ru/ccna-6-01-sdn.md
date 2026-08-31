@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 6.1 SDN и Catalyst Center"
+title: "CCNA 6.1 SDN и Catalyst Center"
 date: 2026-09-20
 description: "Software-Defined Networking: разделение control/data plane, Northbound и Southbound API, Cisco Catalyst Center (Intent-Based Networking), SD-Access, NETCONF/RESTCONF и YANG."
 tags: ["CCNA", "Cisco", "SDN", "Catalyst Center", "автоматизация"]

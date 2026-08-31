@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 02. Underlay OSPF"
+title: "Network Architect 02. Underlay OSPF"
 date: 2025-09-22
 description: "OTUS Network Architect: настройка OSPF для Underlay сети в дата-центре на Cisco NX-OS"
 tags:

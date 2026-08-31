@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 7.02 ECS, EKS и Fargate"
+title: "AWS SAA 7.02 ECS, EKS и Fargate"
 date: 2026-05-09
-description: "Task definitions ECS, типы запуска (EC2 vs Fargate), узловые группы EKS, ECR, автомасштабирование сервисов и выбор между контейнерными сервисами — полный разбор для SAA-C03."
+description: "Task definitions ECS, типы запуска (EC2 vs Fargate), узловые группы EKS, ECR, автомасштабирование сервисов и выбор между контейнерными сервисами. Полный разбор для SAA-C03."
 tags: ["AWS", "SAA-C03", "ECS", "EKS", "Fargate", "containers"]
 categories: ["AWS SAA"]
 page_lang: "ru"

@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 203.2 — Maintaining a Linux Filesystem"
+title: "LPIC-2 203.2 Maintaining a Linux Filesystem"
 date: 2025-06-11
 description: "fsck/e2fsck, tune2fs, dumpe2fs, debugfs, подтома и снимки Btrfs, утилиты XFS (xfs_repair/xfs_dump), обзор ZFS и мониторинг дисков SMART с помощью smartctl/smartd. Тема экзамена LPIC-2 203.2."
 tags: ["Linux", "Filesystem", "LPIC-2", "btrfs", "xfs", "ZFS", "SMART", "fsck"]

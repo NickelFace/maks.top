@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 4.02 VPC Продвинутый уровень — Подключение"
+title: "AWS SAA 4.02 VPC Продвинутый уровень: Подключение"
 date: 2026-05-09
-description: "VPC Endpoints, Peering, Transit Gateway, Site-to-Site VPN, Direct Connect, PrivateLink — гибридная и межVPC-связность для SAA-C03."
+description: "VPC Endpoints, Peering, Transit Gateway, Site-to-Site VPN, Direct Connect, PrivateLink. Гибридная и межVPC-связность для SAA-C03."
 tags: ["AWS", "SAA-C03", "VPC", "Networking", "Direct Connect", "Transit Gateway"]
 categories: ["AWS SAA"]
 page_lang: "ru"

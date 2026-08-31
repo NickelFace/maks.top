@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 6.01 RDS & Aurora"
+title: "AWS SAA 6.01 RDS & Aurora"
 date: 2026-05-09
 draft: true
-description: "RDS engines, Multi-AZ, Read Replicas, RDS Proxy, Aurora architecture, Aurora Serverless v2, Global Database — everything the SAA-C03 exam tests about managed relational databases."
+description: "RDS engines, Multi-AZ, Read Replicas, RDS Proxy, Aurora architecture, Aurora Serverless v2, Global Database: everything the SAA-C03 exam tests about managed relational databases."
 tags: ["AWS", "SAA-C03", "RDS", "Aurora", "databases"]
 categories: ["AWS SAA"]
 page_lang: "en"

@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 10.03 Disaster Recovery & Migration"
+title: "AWS SAA 10.03 Disaster Recovery & Migration"
 date: 2026-05-09
 draft: true
-description: "DR strategies, RPO/RTO, AWS Backup, Snow family, DataSync, Storage Gateway, DMS, and the 7Rs — complete DR and migration coverage for SAA-C03."
+description: "DR strategies, RPO/RTO, AWS Backup, Snow family, DataSync, Storage Gateway, DMS, and the 7Rs: complete DR and migration coverage for SAA-C03."
 tags: ["AWS", "SAA-C03", "disaster recovery", "migration", "DMS", "Snow", "DataSync"]
 categories: ["AWS SAA"]
 page_lang: "en"

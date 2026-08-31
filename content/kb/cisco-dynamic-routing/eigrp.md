@@ -1,5 +1,5 @@
 ---
-title: "Cisco EIGRP — Configuration Reference"
+title: "Cisco EIGRP Configuration Reference"
 description: "EIGRP: configuration, timers, authentication, load balancing, diagnostics"
 icon: "⚡"
 tags: ["Cisco", "EIGRP", "routing", "dynamic-routing", "IOS"]

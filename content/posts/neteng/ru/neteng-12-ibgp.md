@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 12. iBGP"
+title: "Network Engineer 12. iBGP"
 date: 2025-11-28
 description: "Настройка iBGP в московском офисе и у провайдера Триада, выбор приоритетного провайдера и балансировка трафика в С.-Петербурге"
 tags: ["Networking", "BGP", "iBGP", "Routing", "Cisco", "OTUS"]

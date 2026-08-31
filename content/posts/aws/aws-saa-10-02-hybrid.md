@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 10.02 Hybrid Connectivity"
+title: "AWS SAA 10.02 Hybrid Connectivity"
 date: 2026-05-09
 draft: true
-description: "Direct Connect, Site-to-Site VPN, Client VPN, and Transit Gateway — hybrid network connectivity for SAA-C03 with key tradeoffs, HA patterns, and exam traps."
+description: "Direct Connect, Site-to-Site VPN, Client VPN, and Transit Gateway: hybrid network connectivity for SAA-C03 with key tradeoffs, HA patterns, and exam traps."
 tags: ["AWS", "SAA-C03", "Direct Connect", "VPN", "Transit Gateway", "networking"]
 categories: ["AWS SAA"]
 page_lang: "en"

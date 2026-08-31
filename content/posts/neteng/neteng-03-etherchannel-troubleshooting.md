@@ -1,7 +1,7 @@
 ---
-title: "Network Engineer — 03. EtherChannel Troubleshooting"
+title: "Network Engineer 03. EtherChannel Troubleshooting"
 date: 2025-08-28
-description: "Lab: diagnosing and fixing EtherChannel issues — protocol mismatch, mode conflicts, VLAN mismatches, shutdown ports."
+description: "Lab on diagnosing and fixing EtherChannel issues: protocol mismatch, mode conflicts, VLAN mismatches, shutdown ports."
 tags: ["Networking", "EtherChannel", "Troubleshooting", "Cisco"]
 categories: ["Network Engineer"]
 code_toggle: true

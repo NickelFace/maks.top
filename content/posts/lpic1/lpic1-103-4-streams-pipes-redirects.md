@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 103.4 — Streams, Pipes and Redirects"
+title: "LPIC-1 103.4 Streams, Pipes and Redirects"
 date: 2025-09-08
 description: "Redirecting stdin, stdout and stderr, pipes, tee, xargs, command substitution, here documents. LPIC-1 exam topic 103.4."
 tags: ["Linux", "LPIC-1", "pipes", "redirects", "streams", "xargs", "tee"]

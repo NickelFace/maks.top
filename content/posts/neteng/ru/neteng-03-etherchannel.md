@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 03. EtherChannel"
+title: "Network Engineer 03. EtherChannel"
 date: 2025-08-20
 description: "Лабораторная работа: настройка EtherChannel с LACP и PAgP. Настройка port-channel, транкинг VLAN через агрегированные каналы."
 tags: ["Networking", "EtherChannel", "LACP", "PAgP", "Cisco"]

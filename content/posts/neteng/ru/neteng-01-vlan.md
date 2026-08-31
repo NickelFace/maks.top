@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 01. VLAN"
+title: "Network Engineer 01. VLAN"
 date: 2025-08-03
 description: "Лабораторная работа: настройка расширенных VLAN, VTP и DTP. Транковые каналы, DTP, VLAN расширенного диапазона."
 tags: ["Networking", "VLAN", "VTP", "Cisco"]

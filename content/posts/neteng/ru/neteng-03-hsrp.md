@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 03. HSRP"
+title: "Network Engineer 03. HSRP"
 date: 2025-09-06
 description: "Лабораторная работа: настройка резервирования первого перехода с помощью HSRP. Активный/резервный маршрутизатор, виртуальный IP, приоритет и вытеснение."
 tags: ["Networking", "HSRP", "Redundancy", "Cisco"]

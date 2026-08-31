@@ -1,7 +1,7 @@
 ---
-title: "Network Engineer — 10. OSPFv3 for IPv6"
+title: "Network Engineer 10. OSPFv3 for IPv6"
 date: 2025-11-12
-description: "Настройка OSPFv3 для IPv6 с сохранением той же логики, что и в OSPFv2 — метрики, таймеры, фильтры"
+description: "Настройка OSPFv3 для IPv6 с сохранением той же логики, что и в OSPFv2: метрики, таймеры, фильтры"
 tags: ["Networking", "OSPFv3", "IPv6", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
 code_toggle: true

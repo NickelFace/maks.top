@@ -1,7 +1,7 @@
 ---
-title: "CCNA — 3.4 HSRP и FHRP"
+title: "CCNA 3.4 HSRP и FHRP"
 date: 2026-08-18
-description: "Протоколы отказоустойчивости первого хопа: HSRP (v1/v2), VRRP и GLBP — виртуальный IP, выбор Active/Standby, preempt, interface tracking и команды настройки."
+description: "Протоколы отказоустойчивости первого хопа HSRP (v1/v2), VRRP и GLBP: виртуальный IP, выбор Active/Standby, preempt, interface tracking и команды настройки."
 tags: ["CCNA", "Cisco", "HSRP", "FHRP", "отказоустойчивость"]
 categories: ["CCNA"]
 page_lang: "ru"

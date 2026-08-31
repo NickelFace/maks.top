@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "Containers: run, manage, logs, cleanup — docker run, ps, stop, rm, exec, inspect"
+description: "Containers: run, manage, logs, cleanup with docker run, ps, stop, rm, exec, inspect"
 icon: "🐳"
 group: "Cloud & DevOps"
 tags: ["Docker", "Containers", "DevOps"]

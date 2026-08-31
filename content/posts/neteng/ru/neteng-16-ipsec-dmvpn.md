@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 16. IPSec over DMVPN"
+title: "Network Engineer 16. IPSec over DMVPN"
 date: 2026-01-01
 description: "Настройка GRE поверх IPSec между Москвой и Санкт-Петербургом, а также DMVPN поверх IPSec между Москвой, Чокурдахом и Лабытнанги"
 tags: ["Networking", "IPSec", "DMVPN", "GRE", "VPN", "Cisco", "OTUS"]

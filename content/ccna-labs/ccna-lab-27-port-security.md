@@ -1,5 +1,5 @@
 ---
-title: "Lab 27-1 — Port Security Configuration"
+title: "Lab 27-1: Port Security Configuration"
 date: 2026-11-13
 description: "Configuring Port Security: violation modes and Sticky MAC"
 tags: ["CCNA", "Cisco", "Lab", "Port Security", "Layer 2 Security"]

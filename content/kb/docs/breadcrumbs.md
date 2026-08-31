@@ -1,7 +1,7 @@
 ---
 title: "Breadcrumbs"
 date: 2026-04-22
-description: "How breadcrumbs are implemented across templates — partial, CSS, and KB sub-section support"
+description: "How breadcrumbs are implemented across templates: partial, CSS, and KB sub-section support"
 page_lang: "en"
 lang_pair: "/kb/docs/ru/breadcrumbs/"
 tags: ["docs"]

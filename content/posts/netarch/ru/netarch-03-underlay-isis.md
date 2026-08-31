@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 03. Underlay IS-IS"
+title: "Network Architect 03. Underlay IS-IS"
 date: 2025-10-12
 description: "OTUS Network Architect: настройка IS-IS для Underlay сети в ДЦ на Cisco NX-OS"
 tags:

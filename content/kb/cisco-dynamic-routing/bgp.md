@@ -1,5 +1,5 @@
 ---
-title: "Cisco BGP — Configuration Reference"
+title: "Cisco BGP Configuration Reference"
 description: "BGP: eBGP/iBGP setup, attributes, filtering, route-maps, peer groups, multihomed ISP"
 icon: "🌍"
 tags: ["Cisco", "BGP", "routing", "dynamic-routing", "IOS", "eBGP", "iBGP", "route-map"]

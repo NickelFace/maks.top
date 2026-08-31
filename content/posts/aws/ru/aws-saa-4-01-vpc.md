@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 4.01 Основы VPC"
+title: "AWS SAA 4.01 Основы VPC"
 date: 2026-05-09
-description: "Компоненты VPC, подсети, таблицы маршрутизации, Internet Gateway, NAT, Security Groups, NACL, DNS и Flow Logs — сетевая основа SAA-C03."
+description: "Компоненты VPC, подсети, таблицы маршрутизации, Internet Gateway, NAT, Security Groups, NACL, DNS и Flow Logs. Сетевая основа SAA-C03."
 tags: ["AWS", "SAA-C03", "VPC", "Networking"]
 categories: ["AWS SAA"]
 page_lang: "ru"

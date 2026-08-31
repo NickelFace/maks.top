@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 4.01 VPC Fundamentals"
+title: "AWS SAA 4.01 VPC Fundamentals"
 date: 2026-05-09
 draft: true
-description: "VPC components, subnets, route tables, Internet Gateway, NAT, Security Groups, NACLs, DNS, and Flow Logs — the SAA-C03 networking foundation."
+description: "VPC components, subnets, route tables, Internet Gateway, NAT, Security Groups, NACLs, DNS, and Flow Logs: the SAA-C03 networking foundation."
 tags: ["AWS", "SAA-C03", "VPC", "Networking"]
 categories: ["AWS SAA"]
 page_lang: "en"

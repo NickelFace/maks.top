@@ -2,7 +2,7 @@
 title: "AWS SAA"
 cert_badge: "☁️"
 cert_color: "#10b981"
-description: "AWS Certified Solutions Architect — Associate (SAA-C03)"
+description: "AWS Certified Solutions Architect Associate (SAA-C03)"
 post_prefix: "aws-saa"
 post_category: "AWS SAA"
 expected_articles: 40
@@ -17,15 +17,15 @@ resources:
     url: "https://docs.aws.amazon.com/"
   - icon: "🎯"
     title: "Tutorials Dojo"
-    desc: "Practice exams — SAA-C03"
+    desc: "Practice exams: SAA-C03"
     url: "https://tutorialsdojo.com/courses/aws-certified-solutions-architect-associate-practice-exams/"
   - icon: "🎓"
     title: "Cantrill Course"
-    desc: "Adrian Cantrill — SAA-C03"
+    desc: "Adrian Cantrill, SAA-C03"
     url: "https://learn.cantrill.io/p/aws-certified-solutions-architect-associate-saa-c03"
 exams:
   - code: "SAA-C03"
-    title: "AWS Certified Solutions Architect — Associate"
+    title: "AWS Certified Solutions Architect Associate"
     topics:
       - {num: "1", title: "IAM & Identity"}
       - {num: "2", title: "Compute: EC2 & Storage"}

@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 101.2 — Boot the System"
+title: "LPIC-1 101.2 Boot the System"
 date: 2025-07-05
 description: "Последовательность загрузки, BIOS и UEFI, GRUB 2, параметры ядра, initramfs, SysVinit, systemd, dmesg и journalctl. Тема 101.2 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "Boot", "systemd", "GRUB"]

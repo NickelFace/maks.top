@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 7.02 ECS, EKS & Fargate"
+title: "AWS SAA 7.02 ECS, EKS & Fargate"
 date: 2026-05-09
 draft: true
-description: "ECS task definitions, launch types (EC2 vs Fargate), EKS node groups, ECR, service auto scaling, and when to choose each container service — SAA-C03 container deep dive."
+description: "ECS task definitions, launch types (EC2 vs Fargate), EKS node groups, ECR, service auto scaling, and when to choose each container service: SAA-C03 container deep dive."
 tags: ["AWS", "SAA-C03", "ECS", "EKS", "Fargate", "containers"]
 categories: ["AWS SAA"]
 page_lang: "en"

@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 1.6 IPv6 адресация"
+title: "CCNA 1.6 IPv6 адресация"
 date: 2026-07-16
 description: "Структура и типы IPv6-адресов, правила сокращения, SLAAC, EUI-64, DHCPv6 и команды Cisco IOS для настройки и диагностики IPv6."
 tags: ["CCNA", "Cisco", "IPv6", "SLAAC", "NDP"]

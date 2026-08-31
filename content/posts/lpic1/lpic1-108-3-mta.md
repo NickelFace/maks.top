@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 108.3 — Mail Transfer Agent (MTA) Basics"
+title: "LPIC-1 108.3 Mail Transfer Agent (MTA) Basics"
 date: 2026-02-23
 description: "MTA concepts and common MTAs (Sendmail, Postfix, Exim), sendmail and mail commands, mail queue management, /etc/aliases and newaliases, ~/.forward for per-user forwarding. LPIC-1 exam topic 108.3."
 tags: ["Linux", "LPIC-1", "email", "MTA", "sendmail", "postfix", "aliases", "admin"]

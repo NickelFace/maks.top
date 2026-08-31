@@ -1,5 +1,5 @@
 ---
-title: "CSS — Architecture & Class Reference"
+title: "CSS: Architecture & Class Reference"
 date: 2026-04-15
 description: "CSS file structure, theme variables, and full class reference for maks.top"
 page_lang: "en"

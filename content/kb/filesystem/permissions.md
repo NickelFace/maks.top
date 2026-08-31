@@ -1,6 +1,6 @@
 ---
 title: "Permissions & ACL"
-description: "chmod, chown, umask, setfacl/getfacl — Linux file permissions"
+description: "chmod, chown, umask, setfacl/getfacl: Linux file permissions"
 icon: "🔐"
 tags: ["Linux", "chmod", "chown", "ACL", "permissions", "umask"]
 date: 2026-04-14

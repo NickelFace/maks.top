@@ -1,5 +1,5 @@
 ---
-title: "Lab 29-1 — NAT Configuration"
+title: "Lab 29-1: NAT Configuration"
 date: 2026-11-18
 description: "Настройка Static NAT, Dynamic NAT и PAT на Cisco IOS"
 tags: ["CCNA", "Cisco", "Lab", "NAT", "PAT"]

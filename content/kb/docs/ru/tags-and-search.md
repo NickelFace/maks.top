@@ -1,7 +1,7 @@
 ---
 title: "Теги и поиск"
 date: 2026-04-13
-description: "Как работают фильтрация по тегам и полнотекстовый поиск Pagefind — архитектура, поток данных и детали реализации"
+description: "Как работают фильтрация по тегам и полнотекстовый поиск Pagefind: архитектура, поток данных и детали реализации"
 page_lang: "ru"
 lang_pair: "/kb/docs/tags-and-search/"
 pagefind_ignore: true
@@ -71,7 +71,7 @@ tags: ["Linux", "LPIC-2", "Networking"]
 const POSTS = [
   {
     url:       "https://maks.top/posts/lpic2-200-1.../",
-    title:     "LPIC-2 200.1 — Capacity Planning",
+    title:     "LPIC-2 200.1 Capacity Planning",
     date:      "2026-04-10",
     tags:      ["linux", "lpic-2", "monitoring"],    // urlized — для фильтрации
     tagLabels: ["Linux", "LPIC-2", "Monitoring"],    // оригинал — для отображения

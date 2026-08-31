@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 09. OSPF Route Filtering"
+title: "Network Engineer 09. OSPF Route Filtering"
 date: 2025-11-03
 description: "Настройка OSPF в московском офисе с разбивкой на зоны и фильтрацией маршрутов между зонами"
 tags: ["Networking", "OSPF", "Routing", "Filtering", "Cisco", "OTUS"]

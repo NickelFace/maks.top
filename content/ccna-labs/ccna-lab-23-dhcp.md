@@ -1,5 +1,5 @@
 ---
-title: "Lab 23-1 — DHCP Configuration"
+title: "Lab 23-1: DHCP Configuration"
 date: 2026-10-31
 description: "Configuring a DHCP server on a router and DHCP Relay (ip helper-address)"
 tags: ["CCNA", "Cisco", "Lab", "DHCP", "Relay"]

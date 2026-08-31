@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 12. iBGP"
+title: "Network Engineer 12. iBGP"
 date: 2025-11-28
 description: "Configuring iBGP in the Moscow office and Triada provider, setting preferred provider and traffic load balancing in St. Petersburg"
 tags: ["Networking", "BGP", "iBGP", "Routing", "Cisco", "OTUS"]

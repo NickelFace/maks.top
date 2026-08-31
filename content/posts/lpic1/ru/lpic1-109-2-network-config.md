@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 109.2 — Постоянная сетевая конфигурация"
+title: "LPIC-1 109.2 Постоянная сетевая конфигурация"
 date: 2026-03-16
 description: "Именование сетевых интерфейсов, /etc/network/interfaces, ifup/ifdown, настройка имени хоста, /etc/hosts, /etc/resolv.conf, NetworkManager/nmcli, systemd-networkd. LPIC-1 тема 109.2."
 tags: ["Linux", "LPIC-1", "networking", "NetworkManager", "nmcli", "systemd-networkd"]

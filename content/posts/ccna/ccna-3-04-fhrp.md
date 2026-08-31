@@ -1,7 +1,7 @@
 ---
-title: "CCNA — 3.4 HSRP and FHRP"
+title: "CCNA 3.4 HSRP and FHRP"
 date: 2026-08-18
-description: "First Hop Redundancy Protocols: HSRP (v1/v2), VRRP and GLBP — virtual IP, Active/Standby election, preempt, interface tracking and configuration commands."
+description: "First Hop Redundancy Protocols HSRP (v1/v2), VRRP and GLBP: virtual IP, Active/Standby election, preempt, interface tracking and configuration commands."
 tags: ["CCNA", "Cisco", "HSRP", "FHRP", "high availability"]
 categories: ["CCNA"]
 page_lang: "en"

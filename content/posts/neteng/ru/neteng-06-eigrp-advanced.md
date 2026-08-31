@@ -1,7 +1,7 @@
 ---
-title: "Network Engineer — 06. EIGRP for IPv4 (Advanced Features)"
+title: "Network Engineer 06. EIGRP for IPv4 (Advanced Features)"
 date: 2025-10-09
-description: "Лабораторная работа: расширенные функции EIGRP — автосуммаризация, перераспределение статики, таймеры hello/hold, процент пропускной способности"
+description: "Лабораторная работа по расширенным функциям EIGRP: автосуммаризация, перераспределение статики, таймеры hello/hold, процент пропускной способности"
 tags: ["Networking", "EIGRP", "Routing", "Cisco", "OTUS"]
 categories: ["Network Engineer"]
 code_toggle: true

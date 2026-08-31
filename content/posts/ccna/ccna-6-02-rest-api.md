@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 6.2 REST API"
+title: "CCNA 6.2 REST API"
 date: 2026-09-23
 description: "REST API: architectural principles, HTTP methods (CRUD), response codes, JSON/XML/YAML data formats, authentication methods, and example requests to Cisco Catalyst Center and IOS-XE RESTCONF."
 tags: ["CCNA", "Cisco", "REST API", "JSON", "automation"]

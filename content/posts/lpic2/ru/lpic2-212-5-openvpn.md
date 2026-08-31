@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 212.5 — OpenVPN"
+title: "LPIC-2 212.5 OpenVPN"
 date: 2026-05-24
 description: "Режимы туннеля OpenVPN (tun/tap), настройка PKI и сертификатов, конфигурация сервера и клиента, статический ключ vs режим TLS, маршрутизация, конфигурация /etc/openvpn. Тема экзамена LPIC-2 212.5."
 tags: ["Linux", "LPIC-2", "OpenVPN", "VPN", "PKI", "TLS", "networking"]

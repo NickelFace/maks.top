@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 3.3 OSPFv2"
+title: "CCNA 3.3 OSPFv2"
 date: 2026-08-16
 description: "OSPFv2: процесс установки соседства, выбор DR/BDR, вычисление стоимости (Cost), настройка с командами network и ip ospf, аутентификация и диагностика."
 tags: ["CCNA", "Cisco", "OSPF", "динамическая маршрутизация", "DR/BDR"]

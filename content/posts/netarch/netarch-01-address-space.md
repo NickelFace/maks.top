@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 01. Address Space Design (CLOS)"
+title: "Network Architect 01. Address Space Design (CLOS)"
 date: 2025-09-03
 description: "OTUS Network Architect: CLOS topology with 3 Spine + 4 Leaf, address space distribution for Underlay network"
 tags:

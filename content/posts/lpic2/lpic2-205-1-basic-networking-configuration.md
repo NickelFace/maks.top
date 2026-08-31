@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 205.1 — Basic Networking Configuration"
+title: "LPIC-2 205.1 Basic Networking Configuration"
 date: 2025-08-06
 description: "ifconfig, route, ip addr/route, ARP, loopback interface, default gateway, and wireless tools (iw, iwconfig, iwlist). LPIC-2 exam topic 205.1."
 tags: ["Linux", "networking", "LPIC-2", "ip", "ifconfig", "ARP", "wifi"]

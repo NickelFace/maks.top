@@ -1,5 +1,5 @@
 ---
-title: "Lab 04 — The IOS Operating System"
+title: "Lab 04: The IOS Operating System"
 date: 2026-10-01
 description: "Знакомство с CLI Cisco IOS: режимы, навигация, управление конфигурацией"
 tags: ["CCNA", "Cisco", "Lab", "IOS CLI"]

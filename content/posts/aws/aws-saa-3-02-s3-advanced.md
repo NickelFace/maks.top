@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 3.02 S3 Advanced"
+title: "AWS SAA 3.02 S3 Advanced"
 date: 2026-05-09
 draft: true
-description: "Lifecycle rules, replication, performance optimization, event notifications, Object Lock, pre-signed URLs, S3 Select, and Access Points — SAA-C03 deep dive."
+description: "Lifecycle rules, replication, performance optimization, event notifications, Object Lock, pre-signed URLs, S3 Select, and Access Points: SAA-C03 deep dive."
 tags: ["AWS", "SAA-C03", "S3", "Storage"]
 categories: ["AWS SAA"]
 page_lang: "en"

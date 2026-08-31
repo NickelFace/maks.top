@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 07. IP Addressing (IPv4/IPv6)"
+title: "Network Engineer 07. IP Addressing (IPv4/IPv6)"
 date: 2025-10-18
 description: "Diploma project: IPv4/IPv6 address space planning, VLANs, management networks, link-local addressing."
 tags: ["Networking", "IPv4", "IPv6", "VLAN", "Cisco"]

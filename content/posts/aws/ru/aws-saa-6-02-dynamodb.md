@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 6.02 DynamoDB"
+title: "AWS SAA 6.02 DynamoDB"
 date: 2026-05-09
-description: "Модель данных DynamoDB, режимы ёмкости, математика RCU/WCU, GSI vs LSI, Streams, DAX, Global Tables, транзакции и TTL — полный разбор NoSQL для SAA-C03."
+description: "Модель данных DynamoDB, режимы ёмкости, математика RCU/WCU, GSI vs LSI, Streams, DAX, Global Tables, транзакции и TTL. Полный разбор NoSQL для SAA-C03."
 tags: ["AWS", "SAA-C03", "DynamoDB", "NoSQL", "databases"]
 categories: ["AWS SAA"]
 page_lang: "ru"

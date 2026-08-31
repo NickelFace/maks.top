@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 5.02 Route 53"
+title: "AWS SAA 5.02 Route 53"
 date: 2026-05-09
 draft: true
-description: "DNS record types, Alias vs CNAME, all routing policies, health checks, private hosted zones, and Route 53 Resolver — SAA-C03 complete reference."
+description: "DNS record types, Alias vs CNAME, all routing policies, health checks, private hosted zones, and Route 53 Resolver: SAA-C03 complete reference."
 tags: ["AWS", "SAA-C03", "Route 53", "DNS", "Networking"]
 categories: ["AWS SAA"]
 page_lang: "en"

@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 10.01 Edge Delivery и CloudFront"
+title: "AWS SAA 10.01 Edge Delivery и CloudFront"
 date: 2026-05-09
-description: "CloudFront CDN, Lambda@Edge vs CloudFront Functions, Global Accelerator, S3 Transfer Acceleration — все edge-сервисы доставки для SAA-C03 с ключевыми отличиями и ловушками экзамена."
+description: "CloudFront CDN, Lambda@Edge vs CloudFront Functions, Global Accelerator, S3 Transfer Acceleration. Все edge-сервисы доставки для SAA-C03 с ключевыми отличиями и ловушками экзамена."
 tags: ["AWS", "SAA-C03", "CloudFront", "Global Accelerator", "CDN", "edge"]
 categories: ["AWS SAA"]
 page_lang: "ru"

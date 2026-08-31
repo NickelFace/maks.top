@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 202.3 — Alternate Bootloaders"
+title: "LPIC-2 202.3 Alternate Bootloaders"
 date: 2025-05-19
 description: "LILO, Syslinux family (SYSLINUX/ISOLINUX/EXTLINUX/PXELINUX), PXE network boot for BIOS and UEFI, Secure Boot with shim.efi, systemd-boot, and U-Boot. LPIC-2 exam topic 202.3."
 tags: ["Linux", "Boot", "LPIC-2", "PXE", "UEFI", "Syslinux", "systemd-boot", "U-Boot"]

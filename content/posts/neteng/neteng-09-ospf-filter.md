@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 09. OSPF Route Filtering"
+title: "Network Engineer 09. OSPF Route Filtering"
 date: 2025-11-03
 description: "Configuring OSPF in the Moscow office with area segmentation and inter-area route filtering"
 tags: ["Networking", "OSPF", "Routing", "Filtering", "Cisco", "OTUS"]

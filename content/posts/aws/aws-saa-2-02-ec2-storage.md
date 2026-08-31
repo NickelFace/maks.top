@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 2.02 EC2 Storage: EBS, EFS, FSx, Instance Store"
+title: "AWS SAA 2.02 EC2 Storage: EBS, EFS, FSx, Instance Store"
 date: 2026-05-09
 draft: true
-description: "EBS volume types and when to use them, EFS performance modes, FSx family comparison, Instance Store tradeoffs — complete SAA-C03 storage coverage."
+description: "EBS volume types and when to use them, EFS performance modes, FSx family comparison, Instance Store tradeoffs: complete SAA-C03 storage coverage."
 tags: ["AWS", "SAA-C03", "EBS", "EFS", "FSx", "storage", "EC2"]
 categories: ["AWS SAA"]
 page_lang: "en"

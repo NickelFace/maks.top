@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 6.5 ИИ и машинное обучение в сетях"
+title: "CCNA 6.5 ИИ и машинное обучение в сетях"
 date: 2026-10-02
 description: "ИИ и МО в сетевых операциях: supervised/unsupervised learning, применения в сетях (обнаружение аномалий, предсказание трафика, классификация угроз), Cisco Catalyst Center AI Analytics."
 tags: ["CCNA", "Cisco", "AI", "машинное обучение", "автоматизация"]

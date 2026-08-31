@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 1.02 IAM Advanced: Organizations, SCP, Identity Center, Cognito"
+title: "AWS SAA 1.02 IAM Advanced: Organizations, SCP, Identity Center, Cognito"
 date: 2026-05-09
-description: "AWS Organizations, Service Control Policies, IAM Identity Center (SSO), федерация SAML/OIDC, Cognito User Pools vs Identity Pools и RAM — полное покрытие SAA-C03."
+description: "AWS Organizations, Service Control Policies, IAM Identity Center (SSO), федерация SAML/OIDC, Cognito User Pools vs Identity Pools и RAM. Полное покрытие SAA-C03."
 tags: ["AWS", "SAA-C03", "IAM", "Organizations", "Cognito", "SSO", "RAM"]
 categories: ["AWS SAA"]
 page_lang: "ru"

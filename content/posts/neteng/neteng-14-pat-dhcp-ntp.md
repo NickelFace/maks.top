@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 14. PAT, DHCP, NTP"
+title: "Network Engineer 14. PAT, DHCP, NTP"
 date: 2025-12-15
 description: "Configuring NAT/PAT, DHCP server, and NTP time synchronization for the Moscow, St. Petersburg, and Chokurdakh offices"
 tags: ["Networking", "NAT", "PAT", "DHCP", "NTP", "Cisco", "OTUS"]

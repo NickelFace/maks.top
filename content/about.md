@@ -1,7 +1,7 @@
 ---
 title: "About"
 type: "about"
-description: "Network engineer turned DevOps — BGP/OSPF/EVPN to Kubernetes and CI/CD"
+description: "Network engineer turned DevOps: BGP/OSPF/EVPN to Kubernetes and CI/CD"
 date: 2026-04-10
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Lab 12 — The Life of a Packet"
+title: "Lab 12: The Life of a Packet"
 date: 2026-10-06
 description: "Tracing a packet's path through the network: ARP, DNS, and MAC address changes at each hop"
 tags: ["CCNA", "Cisco", "Lab", "ARP", "DNS", "Packet Flow"]

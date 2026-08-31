@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 2.3 EtherChannel"
+title: "CCNA 2.3 EtherChannel"
 date: 2026-08-03
 description: "EtherChannel link aggregation: LACP and PAgP protocols, mode compatibility table, Layer 2/3 EtherChannel configuration and load balancing algorithms."
 tags: ["CCNA", "Cisco", "EtherChannel", "LACP", "PAgP"]

@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 103.8 — Basic File Editing"
+title: "LPIC-1 103.8 Basic File Editing"
 date: 2025-10-06
 description: "vi modes, navigation, insert, delete, copy-paste, search, macros, EDITOR variable, nano, Emacs. LPIC-1 exam topic 103.8."
 tags: ["Linux", "LPIC-1", "vi", "vim", "nano", "editor", "text editing"]

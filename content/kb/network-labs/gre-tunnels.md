@@ -1,5 +1,5 @@
 ---
-title: "GRE Tunnels — Hub-and-Spoke"
+title: "GRE Tunnels: Hub-and-Spoke"
 description: "GRE tunnel configuration in Hub-and-Spoke topology with NAT"
 icon: "🔗"
 tags: ["Networking", "GRE", "VPN", "Tunneling", "Cisco"]

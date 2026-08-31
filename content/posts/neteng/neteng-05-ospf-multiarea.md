@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 05. OSPF Multiarea"
+title: "Network Engineer 05. OSPF Multiarea"
 date: 2025-09-22
 description: "Lab: configuring OSPFv2 for multiple areas. ABR, ASBR, inter-area summarization, MD5 authentication."
 tags: ["Networking", "OSPF", "Multiarea", "Routing", "Cisco"]

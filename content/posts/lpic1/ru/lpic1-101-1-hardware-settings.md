@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 101.1 — Determine and Configure Hardware Settings"
+title: "LPIC-1 101.1 Determine and Configure Hardware Settings"
 date: 2025-07-01
 description: "BIOS/UEFI, псевдофайловые системы /proc/ /sys/ /dev/, sysfs, udev, dbus, модули ядра, lspci, lsusb. Тема 101.1 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "Hardware", "Kernel"]

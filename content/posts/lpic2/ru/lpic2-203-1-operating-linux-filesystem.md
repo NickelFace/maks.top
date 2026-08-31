@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 203.1 — Operating the Linux Filesystem"
+title: "LPIC-2 203.1 Operating the Linux Filesystem"
 date: 2025-05-31
 description: "Структура каталогов FHS, mkfs, mount/umount, формат /etc/fstab, UUID и blkid, разделы и файлы подкачки, юниты монтирования systemd и команда sync. Тема экзамена LPIC-2 203.1."
 tags: ["Linux", "Filesystem", "LPIC-2", "fstab", "mount", "UUID", "swap"]

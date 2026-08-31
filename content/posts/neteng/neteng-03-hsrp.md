@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 03. HSRP"
+title: "Network Engineer 03. HSRP"
 date: 2025-09-06
 description: "Lab: configuring first-hop redundancy with HSRP. Active/standby routers, virtual IP, priority and preemption."
 tags: ["Networking", "HSRP", "Redundancy", "Cisco"]

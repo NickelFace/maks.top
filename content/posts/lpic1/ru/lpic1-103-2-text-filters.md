@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 103.2 — Обработка текстовых потоков фильтрами"
+title: "LPIC-1 103.2 Обработка текстовых потоков фильтрами"
 date: 2025-08-25
 description: "cat, head, tail, less, nl, od, cut, paste, sort, uniq, tr, sed, split, wc, zcat, md5sum, sha256sum. Тема 103.2 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "Bash", "Обработка текста", "sed"]

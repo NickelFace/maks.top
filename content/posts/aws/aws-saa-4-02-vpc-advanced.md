@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 4.02 VPC Advanced — Connectivity"
+title: "AWS SAA 4.02 VPC Advanced: Connectivity"
 date: 2026-05-09
 draft: true
-description: "VPC Endpoints, Peering, Transit Gateway, Site-to-Site VPN, Direct Connect, PrivateLink — hybrid and cross-VPC connectivity for SAA-C03."
+description: "VPC Endpoints, Peering, Transit Gateway, Site-to-Site VPN, Direct Connect, PrivateLink: hybrid and cross-VPC connectivity for SAA-C03."
 tags: ["AWS", "SAA-C03", "VPC", "Networking", "Direct Connect", "Transit Gateway"]
 categories: ["AWS SAA"]
 page_lang: "en"

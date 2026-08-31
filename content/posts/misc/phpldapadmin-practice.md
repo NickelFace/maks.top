@@ -1,5 +1,5 @@
 ---
-title: "phpLDAPadmin — Practice and Troubleshooting"
+title: "phpLDAPadmin: Practice and Troubleshooting"
 date: 2026-02-24
 description: "Installing phpLDAPadmin on Ubuntu 24.04, resolving the mpm_event conflict with PHP-FPM, working with the LDAP tree through the GUI, changing passwords, and hands-on exercises."
 tags: ["Linux", "OpenLDAP", "LDAP", "phpLDAPadmin", "Apache", "PHP", "Ubuntu"]

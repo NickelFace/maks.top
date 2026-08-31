@@ -1,7 +1,7 @@
 ---
 title: "Breadcrumbs"
 date: 2026-04-13
-description: "Реализация breadcrumbs в шаблонах — партиал, CSS и поддержка KB-подразделов"
+description: "Реализация breadcrumbs в шаблонах: партиал, CSS и поддержка KB-подразделов"
 page_lang: "ru"
 lang_pair: "/kb/docs/breadcrumbs/"
 pagefind_ignore: true

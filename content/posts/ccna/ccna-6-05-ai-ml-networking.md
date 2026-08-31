@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 6.5 AI and Machine Learning in Networking"
+title: "CCNA 6.5 AI and Machine Learning in Networking"
 date: 2026-10-02
 description: "AI and ML in network operations: supervised and unsupervised learning, networking use cases (anomaly detection, traffic prediction, threat classification), Cisco Catalyst Center AI Analytics."
 tags: ["CCNA", "Cisco", "AI", "machine learning", "automation"]

@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 17. Corporate Office Network"
+title: "Network Engineer 17. Corporate Office Network"
 date: 2026-01-09
 description: "Проектирование и настройка корпоративной сети по трёхуровневой иерархической модели Cisco с использованием OSPF, HSRP, STP, DHCP, PAT и средств защиты L2"
 tags: ["Networking", "OSPF", "HSRP", "STP", "DHCP", "NAT", "Cisco", "OTUS"]

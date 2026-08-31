@@ -1,5 +1,5 @@
 ---
-title: "Frontmatter — Справочник Полей"
+title: "Frontmatter: Справочник Полей"
 date: 2026-04-11
 description: "Все поля frontmatter по типам контента с типами, обязательностью и описаниями"
 page_lang: "ru"
@@ -56,7 +56,7 @@ my_param: "value"        # кастомное → .Params.my_param
 
 ```yaml
 ---
-title: "LPIC-2 200.1 — Measuring and Diagnosing Resource Usage"
+title: "LPIC-2 200.1 Measuring and Diagnosing Resource Usage"
 date: 2026-04-10
 description: "CPU, memory, disk I/O monitoring: top, vmstat, iostat, sar. LPIC-2 topic 200.1."
 tags: ["Linux", "Performance", "LPIC-2", "Monitoring"]
@@ -184,7 +184,7 @@ build:
 ### EN-пост
 ```yaml
 ---
-title: "Network Engineer — NN. Заголовок"
+title: "Network Engineer NN. Заголовок"
 date: 2026-01-01
 description: "..."
 tags: [...]
@@ -198,7 +198,7 @@ lang_pair: "/posts/neteng/ru/neteng-NN-slug/"
 ### RU-пост
 ```yaml
 ---
-title: "Network Engineer — NN. Заголовок"
+title: "Network Engineer NN. Заголовок"
 date: 2026-01-01
 description: "..."
 tags: [...]
@@ -229,7 +229,7 @@ build:
 ```yaml
 # EN
 ---
-title: "CCNA 200-301 — Заголовок"
+title: "CCNA 200-301 Заголовок"
 date: 2026-01-01
 tags: [...]
 categories: ["CCNA 200-301"]
@@ -239,7 +239,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-01-network-components/"
 
 # RU shadow
 ---
-title: "CCNA 200-301 — Заголовок"
+title: "CCNA 200-301 Заголовок"
 page_lang: "ru"
 lang_pair: "/posts/ccna/ccna-1-01-network-components/"
 pagefind_ignore: true
@@ -260,7 +260,7 @@ build:
 ```yaml
 # EN
 ---
-title: "CCNA Lab NN — Title"
+title: "CCNA Lab NN: Title"
 date: 2026-01-01
 description: "..."
 tags: [...]
@@ -272,7 +272,7 @@ duration: "30 min"
 
 # RU shadow
 ---
-title: "CCNA Лаб NN — Заголовок"
+title: "CCNA Лаб NN: Заголовок"
 page_lang: "ru"
 lang_pair: "/ccna-labs/ccna-lab-NN-slug/"
 pagefind_ignore: true

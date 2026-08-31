@@ -1,7 +1,7 @@
 ---
-title: "Network Engineer — 06. EIGRP for IPv4 (Basic)"
+title: "Network Engineer 06. EIGRP for IPv4 (Basic)"
 date: 2025-10-01
-description: "Lab: basic EIGRP for IPv4 — neighbors, topology table, bandwidth tuning, passive interfaces."
+description: "Lab on basic EIGRP for IPv4: neighbors, topology table, bandwidth tuning, passive interfaces."
 tags: ["Networking", "EIGRP", "Routing", "Cisco"]
 categories: ["Network Engineer"]
 code_toggle: true

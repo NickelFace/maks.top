@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 3.02 S3 Продвинутый уровень"
+title: "AWS SAA 3.02 S3 Продвинутый уровень"
 date: 2026-05-09
-description: "Lifecycle-правила, репликация, производительность, уведомления о событиях, Object Lock, pre-signed URL, S3 Select и Access Points — углублённый разбор для SAA-C03."
+description: "Lifecycle-правила, репликация, производительность, уведомления о событиях, Object Lock, pre-signed URL, S3 Select и Access Points. Углублённый разбор для SAA-C03."
 tags: ["AWS", "SAA-C03", "S3", "Storage"]
 categories: ["AWS SAA"]
 page_lang: "ru"

@@ -1,5 +1,5 @@
 ---
-title: "JavaScript — Functions & Event Reference"
+title: "JavaScript: Functions & Event Reference"
 date: 2026-04-11
 description: "All JavaScript functions, where they're defined, called from, and what they do"
 page_lang: "en"

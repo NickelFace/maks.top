@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 01. VLAN"
+title: "Network Engineer 01. VLAN"
 date: 2025-08-03
 description: "Lab: configuring Extended VLAN, VTP and DTP. Trunk links, DTP, extended-range VLANs."
 tags: ["Networking", "VLAN", "VTP", "Cisco"]

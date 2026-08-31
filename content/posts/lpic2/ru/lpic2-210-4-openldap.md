@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 210.4 — Configuring an OpenLDAP Server"
+title: "LPIC-2 210.4 Configuring an OpenLDAP Server"
 date: 2026-02-23
 description: "Конфигурация OpenLDAP slapd (slapd.conf vs slapd-config/LDIF), distinguished names, серверные утилиты (slapadd/slapcat/slapindex/slappasswd), ACL, настройка TLS, интеграция клиентов с NSLCD и PAM. Тема экзамена LPIC-2 210.4."
 tags: ["Linux", "LPIC-2", "OpenLDAP", "LDAP", "slapd", "directory server"]

@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 08. Policy-Based Routing (PBR)"
+title: "Network Engineer 08. Policy-Based Routing (PBR)"
 date: 2025-10-26
 description: "Configuring Policy-Based Routing for the Chokurdakh office with traffic distribution between two uplinks and IP SLA tracking"
 tags: ["Networking", "PBR", "IP SLA", "Routing", "Cisco", "OTUS"]

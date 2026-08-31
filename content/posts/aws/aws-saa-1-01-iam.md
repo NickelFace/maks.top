@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 1.01 IAM Fundamentals"
+title: "AWS SAA 1.01 IAM Fundamentals"
 date: 2026-05-09
 draft: true
-description: "IAM users, groups, roles, policies, policy evaluation logic, instance profiles, permission boundaries, cross-account access, and STS — everything the SAA-C03 exam tests."
+description: "IAM users, groups, roles, policies, policy evaluation logic, instance profiles, permission boundaries, cross-account access, and STS: everything the SAA-C03 exam tests."
 tags: ["AWS", "SAA-C03", "IAM", "security", "STS"]
 categories: ["AWS SAA"]
 page_lang: "en"

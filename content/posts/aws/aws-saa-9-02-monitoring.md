@@ -1,8 +1,8 @@
 ---
-title: "AWS SAA — 9.02 Monitoring & Observability"
+title: "AWS SAA 9.02 Monitoring & Observability"
 date: 2026-05-09
 draft: true
-description: "CloudWatch, CloudTrail, AWS Config, Trusted Advisor, X-Ray, and AWS Health — complete monitoring stack for SAA-C03 with key differences and exam traps."
+description: "CloudWatch, CloudTrail, AWS Config, Trusted Advisor, X-Ray, and AWS Health: complete monitoring stack for SAA-C03 with key differences and exam traps."
 tags: ["AWS", "SAA-C03", "CloudWatch", "CloudTrail", "Config", "X-Ray", "monitoring"]
 categories: ["AWS SAA"]
 page_lang: "en"

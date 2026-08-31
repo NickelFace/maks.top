@@ -37,7 +37,7 @@ content/posts/my-topic-title.md
 
 ```yaml
 ---
-title: "LPIC-2 205.4 — My Topic Title"
+title: "LPIC-2 205.4 My Topic Title"
 date: 2026-04-13
 description: "One or two sentences. Used in meta tag and post card preview."
 tags: ["Linux", "LPIC-2", "Networking"]
@@ -313,7 +313,7 @@ content/posts/neteng/neteng-NN-my-topic.md
 
 ```yaml
 ---
-title: "Network Engineer — NN. My Topic"
+title: "Network Engineer NN. My Topic"
 date: 2026-01-01
 description: "..."
 tags: ["Networking", "OSPF"]
@@ -332,7 +332,7 @@ content/posts/neteng/ru/neteng-NN-my-topic.md
 
 ```yaml
 ---
-title: "Network Engineer — NN. Тема"
+title: "Network Engineer NN. Тема"
 date: 2026-01-01
 description: "..."
 tags: ["Networking", "OSPF"]

@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 9.02 Мониторинг и наблюдаемость"
+title: "AWS SAA 9.02 Мониторинг и наблюдаемость"
 date: 2026-05-09
-description: "CloudWatch, CloudTrail, AWS Config, Trusted Advisor, X-Ray и AWS Health — полный стек мониторинга для SAA-C03 с ключевыми отличиями и ловушками экзамена."
+description: "CloudWatch, CloudTrail, AWS Config, Trusted Advisor, X-Ray и AWS Health. Полный стек мониторинга для SAA-C03 с ключевыми отличиями и ловушками экзамена."
 tags: ["AWS", "SAA-C03", "CloudWatch", "CloudTrail", "Config", "X-Ray", "monitoring"]
 categories: ["AWS SAA"]
 page_lang: "ru"

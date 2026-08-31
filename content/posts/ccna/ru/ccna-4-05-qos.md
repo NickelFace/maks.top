@@ -1,7 +1,7 @@
 ---
-title: "CCNA — 4.5 QoS"
+title: "CCNA 4.5 QoS"
 date: 2026-09-03
-description: "Quality of Service: классификация и маркировка трафика (DSCP/CoS), очереди LLQ/CBWFQ, policing vs shaping и WRED — модель Per-Hop Behavior для приоритизации VoIP и видео."
+description: "Quality of Service: классификация и маркировка трафика (DSCP/CoS), очереди LLQ/CBWFQ, policing vs shaping, WRED и модель Per-Hop Behavior для приоритизации VoIP и видео."
 tags: ["CCNA", "Cisco", "QoS", "DSCP", "IP-сервисы"]
 categories: ["CCNA"]
 page_lang: "ru"

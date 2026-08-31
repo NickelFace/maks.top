@@ -1,5 +1,5 @@
 ---
-title: "Обзор проекта — Архитектура и Pipeline"
+title: "Обзор проекта: Архитектура и Pipeline"
 date: 2026-04-15
 description: "Hugo pipeline, структура директорий и процесс деплоя maks.top"
 page_lang: "ru"

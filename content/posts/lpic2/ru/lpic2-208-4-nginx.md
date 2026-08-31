@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 208.4 — Nginx as Web Server and Reverse Proxy"
+title: "LPIC-2 208.4 Nginx as Web Server and Reverse Proxy"
 date: 2025-12-18
 description: "Архитектура Nginx, конфигурация обратного прокси, настройка виртуальных серверов, PHP через FastCGI (php-fpm), proxy_pass против fastcgi_pass, блоки location, try_files. Тема экзамена LPIC-2 208.4."
 tags: ["Linux", "LPIC-2", "Nginx", "reverse proxy", "FastCGI", "web server"]

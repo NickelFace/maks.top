@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 211.2 — Managing E-Mail Delivery"
+title: "LPIC-2 211.2 Managing E-Mail Delivery"
 date: 2026-03-18
 description: "Синтаксис и флаги рецептов procmail, язык фильтрации Sieve (RFC 5228), команды действий/управления/проверки, расширение vacation, форматы mbox и maildir, интеграция Dovecot LDA и LMTP с Postfix. Тема экзамена LPIC-2 211.2."
 tags: ["Linux", "LPIC-2", "Postfix", "Dovecot", "Procmail", "Sieve", "email", "MDA"]

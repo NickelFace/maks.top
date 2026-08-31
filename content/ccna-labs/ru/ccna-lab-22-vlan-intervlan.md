@@ -1,5 +1,5 @@
 ---
-title: "Lab 22-1 — VLAN and Inter-VLAN Routing"
+title: "Lab 22-1: VLAN and Inter-VLAN Routing"
 date: 2026-10-28
 description: "Настройка VLAN, trunk-портов, Router-on-a-Stick и SVI на L3-коммутаторе"
 tags: ["CCNA", "Cisco", "Lab", "VLAN", "Trunk", "Router-on-a-Stick", "SVI"]

@@ -1,5 +1,5 @@
 ---
-title: "Lab 19-1 — IGP Interior Gateway Protocol Fundamentals"
+title: "Lab 19-1: IGP Interior Gateway Protocol Fundamentals"
 date: 2026-10-23
 description: "Configuring EIGRP: neighbor relationships, topology table, and Feasible Successor"
 tags: ["CCNA", "Cisco", "Lab", "EIGRP", "IGP"]

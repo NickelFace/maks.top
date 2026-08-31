@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 103.7 — Поиск в текстовых файлах с помощью регулярных выражений"
+title: "LPIC-1 103.7 Поиск в текстовых файлах с помощью регулярных выражений"
 date: 2025-09-29
 description: "Регулярные выражения, BRE и ERE, grep, egrep, fgrep, sed, find с regex. Тема 103.7 экзамена LPIC-1."
 tags: ["Linux", "LPIC-1", "regex", "grep", "sed", "egrep", "find"]

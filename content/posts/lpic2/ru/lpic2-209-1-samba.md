@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 209.1 — Samba Server Configuration"
+title: "LPIC-2 209.1 Samba Server Configuration"
 date: 2025-12-29
 description: "Демоны Samba (smbd/nmbd/winbindd), структура smb.conf, глобальные директивы, настройка общих ресурсов, уровни безопасности, бэкенды passdb, ACL, сопоставление имён пользователей, монтирование CIFS-ресурсов, WINS, присоединение к домену AD. Тема экзамена LPIC-2 209.1."
 tags: ["Linux", "LPIC-2", "Samba", "SMB", "CIFS", "Winbind", "Active Directory", "file sharing"]

@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 11. BGP Basics"
+title: "Network Engineer 11. BGP Basics"
 date: 2025-11-20
 description: "Configuring eBGP between autonomous systems to enable connectivity between the Moscow and St. Petersburg offices"
 tags: ["Networking", "BGP", "eBGP", "Routing", "Cisco", "OTUS"]

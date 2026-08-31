@@ -1,5 +1,5 @@
 ---
-title: "AWS SAA — 6.03 ElastiCache & Caching Strategies"
+title: "AWS SAA 6.03 ElastiCache & Caching Strategies"
 date: 2026-05-09
 draft: true
 description: "Redis vs Memcached deep dive, caching patterns (lazy loading, write-through), cluster mode, security, and CloudFront/API Gateway edge caching for SAA-C03."

@@ -1,5 +1,5 @@
 ---
-title: "CCNA — 5.2 ACL"
+title: "CCNA 5.2 ACL"
 date: 2026-09-10
 description: "Access Control Lists на Cisco IOS: Standard и Extended ACL, wildcard маски, именованные ACL, применение к интерфейсам и VTY-линиям, IPv6 ACL и диагностика."
 tags: ["CCNA", "Cisco", "ACL", "фильтрация трафика", "безопасность"]

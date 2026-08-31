@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 10.02 Гибридное подключение"
+title: "AWS SAA 10.02 Гибридное подключение"
 date: 2026-05-09
-description: "Direct Connect, Site-to-Site VPN, Client VPN и Transit Gateway — гибридная сетевая связность для SAA-C03 с ключевыми отличиями, паттернами HA и ловушками экзамена."
+description: "Direct Connect, Site-to-Site VPN, Client VPN и Transit Gateway. Гибридная сетевая связность для SAA-C03 с ключевыми отличиями, паттернами HA и ловушками экзамена."
 tags: ["AWS", "SAA-C03", "Direct Connect", "VPN", "Transit Gateway", "networking"]
 categories: ["AWS SAA"]
 page_lang: "ru"

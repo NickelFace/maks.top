@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 08. VxLAN Multipod"
+title: "Network Architect 08. VxLAN Multipod"
 date: 2026-01-24
 description: "OTUS Network Architect: L2/L3 связанность между двумя подами через Multipod VxLAN EVPN"
 tags:

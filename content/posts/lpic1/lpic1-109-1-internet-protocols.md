@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 109.1 — Fundamentals of Internet Protocols"
+title: "LPIC-1 109.1 Fundamentals of Internet Protocols"
 date: 2026-03-09
 description: "IPv4 addressing, address classes, private ranges, CIDR, TCP/UDP/ICMP, common ports, /etc/services, IPv6 addressing and key differences. LPIC-1 exam topic 109.1."
 tags: ["Linux", "LPIC-1", "networking", "IPv4", "IPv6", "TCP", "UDP"]

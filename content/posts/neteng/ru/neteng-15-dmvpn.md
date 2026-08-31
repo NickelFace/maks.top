@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 15. DMVPN"
+title: "Network Engineer 15. DMVPN"
 date: 2025-12-23
 description: "Настройка GRE-туннеля между Москвой и Санкт-Петербургом, а также DMVPN между Москвой, Чокурдахом и Лабытнанги"
 tags: ["Networking", "DMVPN", "GRE", "VPN", "Cisco", "OTUS"]

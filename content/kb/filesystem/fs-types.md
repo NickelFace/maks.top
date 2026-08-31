@@ -1,6 +1,6 @@
 ---
 title: "Filesystem Types"
-description: "ext4, XFS, Btrfs, ZFS — differences, advantages, and use cases"
+description: "ext4, XFS, Btrfs, ZFS: differences, advantages, and use cases"
 icon: "🗃️"
 tags: ["Linux", "ext4", "XFS", "Btrfs", "ZFS", "filesystem"]
 date: 2026-04-14

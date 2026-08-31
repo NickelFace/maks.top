@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 9.01 Сервисы безопасности"
+title: "AWS SAA 9.01 Сервисы безопасности"
 date: 2026-05-09
-description: "KMS, Secrets Manager, Parameter Store, ACM, WAF, Shield, GuardDuty, Inspector, Macie и Security Hub — все сервисы безопасности для SAA-C03 с ключевыми отличиями и ловушками экзамена."
+description: "KMS, Secrets Manager, Parameter Store, ACM, WAF, Shield, GuardDuty, Inspector, Macie и Security Hub. Все сервисы безопасности для SAA-C03 с ключевыми отличиями и ловушками экзамена."
 tags: ["AWS", "SAA-C03", "KMS", "WAF", "GuardDuty", "Secrets Manager", "security"]
 categories: ["AWS SAA"]
 page_lang: "ru"

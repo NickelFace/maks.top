@@ -1,6 +1,6 @@
 ---
 title: "Cases"
-description: "Practical cases — real scenarios with setup, configuration, and lessons learned"
+description: "Practical cases: real scenarios with setup, configuration, and lessons learned"
 icon: "🗂️"
 group: "Cases"
 tags: ["Linux", "Networking", "FTP", "Practical"]

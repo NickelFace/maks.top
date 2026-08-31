@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 6.03 ElastiCache и стратегии кеширования"
+title: "AWS SAA 6.03 ElastiCache и стратегии кеширования"
 date: 2026-05-09
-description: "Redis vs Memcached, паттерны кеширования (lazy loading, write-through), cluster mode, безопасность, кеш CloudFront и API Gateway — полный разбор для SAA-C03."
+description: "Redis vs Memcached, паттерны кеширования (lazy loading, write-through), cluster mode, безопасность, кеш CloudFront и API Gateway. Полный разбор для SAA-C03."
 tags: ["AWS", "SAA-C03", "ElastiCache", "Redis", "caching"]
 categories: ["AWS SAA"]
 page_lang: "ru"

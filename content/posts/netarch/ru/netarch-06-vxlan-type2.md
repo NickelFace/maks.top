@@ -1,5 +1,5 @@
 ---
-title: "Network Architect — 06. VxLAN Type 2 (L2 EVPN)"
+title: "Network Architect 06. VxLAN Type 2 (L2 EVPN)"
 date: 2025-12-11
 description: "OTUS Network Architect: VxLAN EVPN Overlay для L2 связанности между клиентами, Spine как Route Reflector"
 tags:

@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 5.01 Elastic Load Balancing и Auto Scaling"
+title: "AWS SAA 5.01 Elastic Load Balancing и Auto Scaling"
 date: 2026-05-09
-description: "Различия ALB, NLB, GWLB, CLB, балансировка между AZ, политики Auto Scaling, lifecycle hooks и Instance Refresh — полное руководство по SAA-C03."
+description: "Различия ALB, NLB, GWLB, CLB, балансировка между AZ, политики Auto Scaling, lifecycle hooks и Instance Refresh. Полное руководство по SAA-C03."
 tags: ["AWS", "SAA-C03", "ELB", "Auto Scaling", "ALB", "NLB"]
 categories: ["AWS SAA"]
 page_lang: "ru"

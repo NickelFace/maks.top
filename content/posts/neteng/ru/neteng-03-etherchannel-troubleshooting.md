@@ -1,7 +1,7 @@
 ---
-title: "Network Engineer — 03. EtherChannel Troubleshooting"
+title: "Network Engineer 03. EtherChannel Troubleshooting"
 date: 2025-08-28
-description: "Лабораторная работа: диагностика и устранение проблем EtherChannel — несовпадение протоколов, конфликт режимов, несоответствие VLAN, отключённые порты."
+description: "Лабораторная работа по диагностике и устранению проблем EtherChannel: несовпадение протоколов, конфликт режимов, несоответствие VLAN, отключённые порты."
 tags: ["Networking", "EtherChannel", "Troubleshooting", "Cisco"]
 categories: ["Network Engineer"]
 code_toggle: true

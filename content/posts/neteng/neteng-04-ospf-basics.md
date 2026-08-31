@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 04. OSPF Basics"
+title: "Network Engineer 04. OSPF Basics"
 date: 2025-09-14
 description: "Lab: configuring OSPFv2 single-area. Router IDs, passive interfaces, neighbors, routing table, OSPF metric."
 tags: ["Networking", "OSPF", "Routing", "Cisco"]

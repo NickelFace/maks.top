@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 108.4 — Управление принтерами и печатью"
+title: "LPIC-1 108.4 Управление принтерами и печатью"
 date: 2026-03-02
 description: "Настройка CUPS, lpadmin, lpoptions, lpr, lp, lpstat, lpq, lprm, cancel, lpmove, cupsreject, cupsdisable, cupsenable. LPIC-1 тема 108.4."
 tags: ["Linux", "LPIC-1", "printing", "CUPS", "lpr", "admin"]

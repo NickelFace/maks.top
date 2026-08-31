@@ -44,7 +44,7 @@
 <header class="labs-pg-hd">
   <div class="labs-pg-hd-inner">
     {{ partial "breadcrumb.html" . }}
-    <h1 class="labs-pg-h1">CCNA labs <em class="h1-em">— solved &amp; annotated.</em></h1>
+    <h1 class="labs-pg-h1">CCNA labs, <em class="h1-em">solved &amp; annotated.</em></h1>
     <p style="font-size:15.5px;color:var(--text2);max-width:640px;margin-top:14px;line-height:1.55">{{ len (where .Pages "Params.page_lang" "ne" "ru") }} hands-on scenarios in Packet Tracer and EVE-NG. Each lab links to the topology, my running config, and what I broke trying to solve it.</p>
   </div>
 </header>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="labs-item-tool">{{ .Params.tool | default "Packet Tracer" }}</div>
-    <div class="labs-item-dur">{{ .Params.duration | default "—" }}</div>
+    <div class="labs-item-dur">{{ .Params.duration | default "n/a" }}</div>
     <div class="labs-arrow">→</div>
   </a>
   {{ end }}

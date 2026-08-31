@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 108.2 — Системное журналирование"
+title: "LPIC-1 108.2 Системное журналирование"
 date: 2026-02-16
 description: "Настройка rsyslog: категории и приоритеты, logrotate, dmesg, systemd-journald с фильтрацией journalctl и управлением журналом, systemd-cat, ForwardToSyslog. LPIC-1 тема 108.2."
 tags: ["Linux", "LPIC-1", "logging", "rsyslog", "journald", "journalctl", "syslog", "admin"]

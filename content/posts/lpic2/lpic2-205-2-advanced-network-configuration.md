@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 205.2 — Advanced Network Configuration"
+title: "LPIC-2 205.2 Advanced Network Configuration"
 date: 2025-08-17
 description: "VPN and IPSEC (ESP/AH/IKE, Openswan), multihomed hosts, network analysis tools: ping, traceroute, arp, arpwatch, tcpdump, mtr, netstat, ss, lsof, nmap, nc. LPIC-2 exam topic 205.2."
 tags: ["Linux", "networking", "LPIC-2", "IPsec", "VPN", "tcpdump", "nmap"]

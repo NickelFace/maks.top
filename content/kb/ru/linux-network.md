@@ -1,6 +1,6 @@
 ---
 title: "Linux Networking"
-description: "ip, ss, tcpdump, nmcli, iptables — команды с примерами"
+description: "ip, ss, tcpdump, nmcli, iptables: команды с примерами"
 icon: "🌐"
 group: "Networking"
 tags: ["Linux", "ip", "ss", "tcpdump", "iptables", "nmcli"]

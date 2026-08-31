@@ -1,6 +1,6 @@
 ---
 title: "LVM"
-description: "pvcreate, vgcreate, lvcreate, lvextend, snapshots — Logical Volume Manager"
+description: "pvcreate, vgcreate, lvcreate, lvextend, snapshots: Logical Volume Manager"
 icon: "🗄️"
 tags: ["Linux", "LVM", "storage", "filesystem"]
 date: 2026-04-14

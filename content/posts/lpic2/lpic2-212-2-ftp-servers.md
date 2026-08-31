@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 212.2 — Managing FTP Servers"
+title: "LPIC-2 212.2 Managing FTP Servers"
 date: 2026-04-20
 description: "FTP active vs passive mode, vsftpd configuration, Pure-FTPd, ProFTPD, anonymous FTP, /etc/ftpusers, FTPS/TLS, FTP ports 20 and 21. LPIC-2 exam topic 212.2."
 tags: ["Linux", "LPIC-2", "FTP", "vsftpd", "ProFTPD", "Pure-FTPd", "TLS"]

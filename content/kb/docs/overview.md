@@ -1,5 +1,5 @@
 ---
-title: "Project Overview — Architecture & Pipeline"
+title: "Project Overview: Architecture & Pipeline"
 date: 2026-04-15
 description: "Hugo pipeline, directory structure, and deployment flow for maks.top"
 page_lang: "en"

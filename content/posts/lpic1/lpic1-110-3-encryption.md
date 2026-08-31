@@ -1,5 +1,5 @@
 ---
-title: "LPIC-1 110.3 — Securing Data with Encryption"
+title: "LPIC-1 110.3 Securing Data with Encryption"
 date: 2026-04-20
 description: "OpenSSH client configuration, key-based logins, ssh-agent, server host keys, SSH port tunnels, X11 forwarding, GnuPG key generation, encryption, signing and revocation. LPIC-1 exam topic 110.3."
 tags: ["Linux", "LPIC-1", "security", "SSH", "GPG", "encryption", "OpenSSH"]

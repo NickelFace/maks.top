@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 05. OSPF Multiarea"
+title: "Network Engineer 05. OSPF Multiarea"
 date: 2025-09-22
 description: "Лабораторная работа: настройка OSPFv2 для нескольких зон. ABR, ASBR, межзональное суммирование, аутентификация MD5."
 tags: ["Networking", "OSPF", "Multiarea", "Routing", "Cisco"]

@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 5.02 Route 53"
+title: "AWS SAA 5.02 Route 53"
 date: 2026-05-09
-description: "Типы DNS-записей, Alias против CNAME, все политики маршрутизации, health checks, приватные hosted zones и Route 53 Resolver — полный справочник SAA-C03."
+description: "Типы DNS-записей, Alias против CNAME, все политики маршрутизации, health checks, приватные hosted zones и Route 53 Resolver. Полный справочник SAA-C03."
 tags: ["AWS", "SAA-C03", "Route 53", "DNS", "Networking"]
 categories: ["AWS SAA"]
 page_lang: "ru"

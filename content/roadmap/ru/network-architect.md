@@ -1,6 +1,6 @@
 ---
 title: "Network Architect Roadmap"
-description: "OTUS Network Architect Course — 9 лаб по DC underlay/overlay, VxLAN EVPN, статус PASSED"
+description: "OTUS Network Architect Course: 9 лаб по DC underlay/overlay, VxLAN EVPN, статус PASSED"
 page_lang: "ru"
 lang_pair: "/roadmap/network-architect/"
 pagefind_ignore: true
@@ -16,7 +16,7 @@ total_label: "лаб"
 
 <div class="rdm-eyebrow">§ Network Architect Roadmap · 2025</div>
 <h1 class="rdm-h1">Data center <em>fabric.</em></h1>
-<p class="rdm-lead">9 лаб OTUS Network Architect — CLOS-фабрика, underlay (OSPF/IS-IS/BGP), multicast и L2/L3 EVPN. Это retro: как делал и где конфиги.</p>
+<p class="rdm-lead">9 лаб OTUS Network Architect: CLOS-фабрика, underlay (OSPF/IS-IS/BGP), multicast и L2/L3 EVPN. Это retro: как делал и где конфиги.</p>
 
 <div class="params-grid">
 <div class="param-card"><div class="param-label">Курс</div><div class="param-value">OTUS Network Architect</div></div>
@@ -54,32 +54,32 @@ total_label: "лаб"
 <div class="domain"><details open>
 <summary class="domain-header"><span class="domain-num">01</span><span class="domain-name">Underlay · CLOS, IGP, BGP</span><span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" style="width:100%;background:var(--accent2)"></span></span><span class="dpb-text">4/4</span></span><span class="domain-arrow">›</span></summary>
 <div class="domain-body">
-<div class="topic-item"><a href="/posts/netarch/netarch-01-address-space/" class="topic-link">01 · Address Space Design — CLOS, loopback план, point-to-point /31</a><span class="topic-tag">Design</span></div>
-<div class="topic-item"><a href="/posts/netarch/netarch-02-underlay-ospf/" class="topic-link">02 · Underlay OSPF — single-area, scaling, hello/dead</a><span class="topic-tag">OSPF</span></div>
-<div class="topic-item"><a href="/posts/netarch/netarch-03-underlay-isis/" class="topic-link">03 · Underlay IS-IS — L1/L2, wide metrics, IPv6</a><span class="topic-tag">IS-IS</span></div>
-<div class="topic-item"><a href="/posts/netarch/netarch-04-underlay-bgp/" class="topic-link">04 · Underlay BGP — eBGP unnumbered, ASN-per-rack, ECMP</a><span class="topic-tag">BGP</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-01-address-space/" class="topic-link">01 · Address Space Design: CLOS, loopback план, point-to-point /31</a><span class="topic-tag">Design</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-02-underlay-ospf/" class="topic-link">02 · Underlay OSPF: single-area, scaling, hello/dead</a><span class="topic-tag">OSPF</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-03-underlay-isis/" class="topic-link">03 · Underlay IS-IS: L1/L2, wide metrics, IPv6</a><span class="topic-tag">IS-IS</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-04-underlay-bgp/" class="topic-link">04 · Underlay BGP: eBGP unnumbered, ASN-per-rack, ECMP</a><span class="topic-tag">BGP</span></div>
 </div>
 </details></div>
 
 <div class="domain"><details>
 <summary class="domain-header"><span class="domain-num">02</span><span class="domain-name">Multicast · базовая mcast</span><span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" style="width:100%;background:var(--accent2)"></span></span><span class="dpb-text">1/1</span></span><span class="domain-arrow">›</span></summary>
 <div class="domain-body">
-<div class="topic-item"><a href="/posts/netarch/netarch-05-multicast-pim/" class="topic-link">05 · Multicast PIM — sparse/dense mode, RP, BSR, anycast-RP</a><span class="topic-tag">PIM</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-05-multicast-pim/" class="topic-link">05 · Multicast PIM: sparse/dense mode, RP, BSR, anycast-RP</a><span class="topic-tag">PIM</span></div>
 </div>
 </details></div>
 
 <div class="domain"><details>
 <summary class="domain-header"><span class="domain-num">03</span><span class="domain-name">VxLAN EVPN · L2/L3 overlay</span><span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" style="width:100%;background:var(--accent2)"></span></span><span class="dpb-text">3/3</span></span><span class="domain-arrow">›</span></summary>
 <div class="domain-body">
-<div class="topic-item"><a href="/posts/netarch/netarch-06-vxlan-type2/" class="topic-link">06 · VxLAN Type-2 (L2 EVPN) — VNI, NVE, BGP EVPN AF</a><span class="topic-tag">EVPN</span></div>
-<div class="topic-item"><a href="/posts/netarch/netarch-07-vxlan-route/" class="topic-link">07 · VxLAN Type-5 (L3 EVPN) — symmetric IRB, route leaking</a><span class="topic-tag">EVPN</span></div>
-<div class="topic-item"><a href="/posts/netarch/netarch-08-vxlan-multipod/" class="topic-link">08 · VxLAN Multipod — inter-pod routing, route-reflectors</a><span class="topic-tag">EVPN</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-06-vxlan-type2/" class="topic-link">06 · VxLAN Type-2 (L2 EVPN): VNI, NVE, BGP EVPN AF</a><span class="topic-tag">EVPN</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-07-vxlan-route/" class="topic-link">07 · VxLAN Type-5 (L3 EVPN): symmetric IRB, route leaking</a><span class="topic-tag">EVPN</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-08-vxlan-multipod/" class="topic-link">08 · VxLAN Multipod: inter-pod routing, route-reflectors</a><span class="topic-tag">EVPN</span></div>
 </div>
 </details></div>
 
 <div class="domain"><details>
 <summary class="domain-header"><span class="domain-num">04</span><span class="domain-name">Project · итоговая работа</span><span class="domain-prog-bar"><span class="dpb-track"><span class="dpb-fill" style="width:100%;background:var(--accent2)"></span></span><span class="dpb-text">1/1</span></span><span class="domain-arrow">›</span></summary>
 <div class="domain-body">
-<div class="topic-item"><a href="/posts/netarch/netarch-09-project/" class="topic-link">09 · Project — миграция с CP multicast на EVPN, full DC fabric</a><span class="topic-tag">Project</span></div>
+<div class="topic-item"><a href="/posts/netarch/netarch-09-project/" class="topic-link">09 · Project: миграция с CP multicast на EVPN, full DC fabric</a><span class="topic-tag">Project</span></div>
 </div>
 </details></div>

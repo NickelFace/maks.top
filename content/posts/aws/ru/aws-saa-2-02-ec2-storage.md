@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 2.02 Хранилище EC2: EBS, EFS, FSx, Instance Store"
+title: "AWS SAA 2.02 Хранилище EC2: EBS, EFS, FSx, Instance Store"
 date: 2026-05-09
-description: "Типы EBS и выбор между ними, режимы производительности EFS, сравнение семейства FSx, компромиссы Instance Store — полное покрытие хранилища для SAA-C03."
+description: "Типы EBS и выбор между ними, режимы производительности EFS, сравнение семейства FSx, компромиссы Instance Store. Полное покрытие хранилища для SAA-C03."
 tags: ["AWS", "SAA-C03", "EBS", "EFS", "FSx", "storage", "EC2"]
 categories: ["AWS SAA"]
 page_lang: "ru"

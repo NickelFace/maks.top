@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 8.02 API Gateway и AppSync"
+title: "AWS SAA 8.02 API Gateway и AppSync"
 date: 2026-05-09
-description: "REST vs HTTP vs WebSocket API, интеграции, троттлинг, кеширование, авторизаторы, VPC Link, AppSync GraphQL — полное покрытие API Gateway для SAA-C03."
+description: "REST vs HTTP vs WebSocket API, интеграции, троттлинг, кеширование, авторизаторы, VPC Link, AppSync GraphQL. Полное покрытие API Gateway для SAA-C03."
 tags: ["AWS", "SAA-C03", "API Gateway", "AppSync", "serverless"]
 categories: ["AWS SAA"]
 page_lang: "ru"

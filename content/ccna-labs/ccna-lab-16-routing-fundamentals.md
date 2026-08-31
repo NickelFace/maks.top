@@ -1,5 +1,5 @@
 ---
-title: "Lab 16 — Routing Fundamentals"
+title: "Lab 16: Routing Fundamentals"
 date: 2026-10-16
 description: "Configuring static routing and analyzing the routing table"
 tags: ["CCNA", "Cisco", "Lab", "Static Routing"]

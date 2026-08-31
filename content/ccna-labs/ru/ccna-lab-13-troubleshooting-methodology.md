@@ -1,5 +1,5 @@
 ---
-title: "Lab 13 — The Cisco Troubleshooting Methodology"
+title: "Lab 13: The Cisco Troubleshooting Methodology"
 date: 2026-10-08
 description: "Тренировка методологии поиска неисправностей на примере нерабочего DNS"
 tags: ["CCNA", "Cisco", "Lab", "Troubleshooting", "DNS"]

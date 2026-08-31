@@ -1,5 +1,5 @@
 ---
-title: "LPIC-2 212.3 — Secure Shell (OpenSSH)"
+title: "LPIC-2 212.3 Secure Shell (OpenSSH)"
 date: 2026-05-02
 description: "Настройка клиента и сервера OpenSSH, аутентификация по ключам, ssh-keygen/ssh-agent/ssh-copy-id, проброс портов, перенаправление X11, SCP/SFTP, усиление безопасности sshd_config. Тема экзамена LPIC-2 212.3."
 tags: ["Linux", "LPIC-2", "OpenSSH", "SSH", "SCP", "SFTP", "port forwarding", "X11"]

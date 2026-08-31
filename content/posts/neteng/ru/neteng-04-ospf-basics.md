@@ -1,5 +1,5 @@
 ---
-title: "Network Engineer — 04. OSPF Basics"
+title: "Network Engineer 04. OSPF Basics"
 date: 2025-09-14
 description: "Лабораторная работа: настройка OSPFv2 для одной зоны. Идентификаторы маршрутизаторов, пассивные интерфейсы, соседи, таблица маршрутизации, метрика OSPF."
 tags: ["Networking", "OSPF", "Routing", "Cisco"]

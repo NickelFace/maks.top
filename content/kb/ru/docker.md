@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-description: "Контейнеры: запуск, управление, логи, очистка — docker run, ps, stop, rm, exec, inspect"
+description: "Контейнеры: запуск, управление, логи и очистка через docker run, ps, stop, rm, exec, inspect"
 icon: "🐳"
 group: "Cloud & DevOps"
 tags: ["Docker", "Containers", "DevOps"]

@@ -1,7 +1,7 @@
 ---
-title: "Network Engineer — 06. EIGRP for IPv4 (Advanced)"
+title: "Network Engineer 06. EIGRP for IPv4 (Advanced)"
 date: 2025-10-09
-description: "Lab: advanced EIGRP features — auto-summary, redistribute static default route, hello/hold timers, bandwidth percent."
+description: "Lab on advanced EIGRP features: auto-summary, redistribute static default route, hello/hold timers, bandwidth percent."
 tags: ["Networking", "EIGRP", "Routing", "Cisco"]
 categories: ["Network Engineer"]
 code_toggle: true

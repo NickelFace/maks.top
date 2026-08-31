@@ -1,7 +1,7 @@
 ---
-title: "AWS SAA — 7.01 AWS Lambda"
+title: "AWS SAA 7.01 AWS Lambda"
 date: 2026-05-09
-description: "Модель выполнения Lambda, триггеры, параллелизм, холодные старты, сетевая работа в VPC, Lambda@Edge vs CloudFront Functions, Destinations и Lambda URLs — полное покрытие SAA-C03."
+description: "Модель выполнения Lambda, триггеры, параллелизм, холодные старты, сетевая работа в VPC, Lambda@Edge vs CloudFront Functions, Destinations и Lambda URLs. Полное покрытие SAA-C03."
 tags: ["AWS", "SAA-C03", "Lambda", "serverless", "compute"]
 categories: ["AWS SAA"]
 page_lang: "ru"

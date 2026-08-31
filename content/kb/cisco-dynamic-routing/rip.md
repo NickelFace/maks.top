@@ -1,5 +1,5 @@
 ---
-title: "Cisco RIP — Configuration Reference"
+title: "Cisco RIP Configuration Reference"
 description: "RIPv2: configuration, timers, summarization, redistribution, diagnostics"
 icon: "🔄"
 tags: ["Cisco", "RIP", "RIPv2", "routing", "dynamic-routing", "IOS"]
