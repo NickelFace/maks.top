@@ -30,7 +30,3 @@ Open it with `wireshark DTP.cap` or inspect from the shell:
 tshark -r DTP.cap -c 20
 tcpdump -r DTP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

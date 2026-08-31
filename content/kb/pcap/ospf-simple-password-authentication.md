@@ -30,7 +30,3 @@ Open it with `wireshark ospf simple password authentication.cap` or inspect from
 tshark -r ospf simple password authentication.cap -c 20
 tcpdump -r ospf simple password authentication.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

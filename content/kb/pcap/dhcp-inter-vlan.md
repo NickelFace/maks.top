@@ -30,7 +30,3 @@ Open it with `wireshark DHCP_Inter_VLAN.cap` or inspect from the shell:
 tshark -r DHCP_Inter_VLAN.cap -c 20
 tcpdump -r DHCP_Inter_VLAN.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

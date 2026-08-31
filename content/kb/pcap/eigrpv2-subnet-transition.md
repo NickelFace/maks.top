@@ -30,7 +30,3 @@ Open it with `wireshark EIGRPv2_subnet_transition.cap` or inspect from the shell
 tshark -r EIGRPv2_subnet_transition.cap -c 20
 tcpdump -r EIGRPv2_subnet_transition.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

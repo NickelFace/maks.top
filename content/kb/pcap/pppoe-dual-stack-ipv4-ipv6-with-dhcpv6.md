@@ -30,7 +30,3 @@ Open it with `wireshark PPPoE_Dual-Stack_IPv4_IPv6-with_DHCPv6.cap` or inspect f
 tshark -r PPPoE_Dual-Stack_IPv4_IPv6-with_DHCPv6.cap -c 20
 tcpdump -r PPPoE_Dual-Stack_IPv4_IPv6-with_DHCPv6.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

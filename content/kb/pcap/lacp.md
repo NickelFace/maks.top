@@ -32,7 +32,3 @@ Open it with `wireshark LACP.cap` or inspect from the shell:
 tshark -r LACP.cap -c 20
 tcpdump -r LACP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

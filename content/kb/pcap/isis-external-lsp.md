@@ -30,7 +30,3 @@ Open it with `wireshark ISIS_external_lsp.cap` or inspect from the shell:
 tshark -r ISIS_external_lsp.cap -c 20
 tcpdump -r ISIS_external_lsp.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark VRRP_preempt.cap` or inspect from the shell:
 tshark -r VRRP_preempt.cap -c 20
 tcpdump -r VRRP_preempt.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

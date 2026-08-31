@@ -30,7 +30,3 @@ Open it with `wireshark PIM-DM_pruning.cap` or inspect from the shell:
 tshark -r PIM-DM_pruning.cap -c 20
 tcpdump -r PIM-DM_pruning.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

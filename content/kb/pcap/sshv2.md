@@ -30,7 +30,3 @@ Open it with `wireshark SSHv2.cap` or inspect from the shell:
 tshark -r SSHv2.cap -c 20
 tcpdump -r SSHv2.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

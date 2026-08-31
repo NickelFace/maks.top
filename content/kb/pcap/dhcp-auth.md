@@ -30,7 +30,3 @@ Open it with `wireshark dhcp-auth.cap` or inspect from the shell:
 tshark -r dhcp-auth.cap -c 20
 tcpdump -r dhcp-auth.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

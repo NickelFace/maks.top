@@ -30,7 +30,3 @@ Open it with `wireshark HTTP.cap` or inspect from the shell:
 tshark -r HTTP.cap -c 20
 tcpdump -r HTTP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -34,7 +34,3 @@ Open it with `wireshark bgp orf prefix advertisement.pcapng.cap` or inspect from
 tshark -r bgp orf prefix advertisement.pcapng.cap -c 20
 tcpdump -r bgp orf prefix advertisement.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

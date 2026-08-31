@@ -30,7 +30,3 @@ Open it with `wireshark HSRP_coup.cap` or inspect from the shell:
 tshark -r HSRP_coup.cap -c 20
 tcpdump -r HSRP_coup.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

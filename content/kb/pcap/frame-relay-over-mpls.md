@@ -30,7 +30,3 @@ Open it with `wireshark Frame-Relay over MPLS.pcap.cap` or inspect from the shel
 tshark -r Frame-Relay over MPLS.pcap.cap -c 20
 tcpdump -r Frame-Relay over MPLS.pcap.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

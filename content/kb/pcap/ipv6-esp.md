@@ -30,7 +30,3 @@ Open it with `wireshark IPv6-ESP.pcapng.cap` or inspect from the shell:
 tshark -r IPv6-ESP.pcapng.cap -c 20
 tcpdump -r IPv6-ESP.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

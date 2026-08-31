@@ -30,7 +30,3 @@ Open it with `wireshark gmail.pcapng.cap` or inspect from the shell:
 tshark -r gmail.pcapng.cap -c 20
 tcpdump -r gmail.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

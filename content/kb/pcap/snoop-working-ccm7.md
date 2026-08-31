@@ -30,7 +30,3 @@ Open it with `wireshark snoop-working-ccm7.cap` or inspect from the shell:
 tshark -r snoop-working-ccm7.cap -c 20
 tcpdump -r snoop-working-ccm7.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

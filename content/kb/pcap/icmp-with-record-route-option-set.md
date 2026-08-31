@@ -30,7 +30,3 @@ Open it with `wireshark icmp with record route option set.cap` or inspect from t
 tshark -r icmp with record route option set.cap -c 20
 tcpdump -r icmp with record route option set.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

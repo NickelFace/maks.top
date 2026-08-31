@@ -30,7 +30,3 @@ Open it with `wireshark arp_pcap.pcapng.cap` or inspect from the shell:
 tshark -r arp_pcap.pcapng.cap -c 20
 tcpdump -r arp_pcap.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

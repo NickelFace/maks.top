@@ -30,7 +30,3 @@ Open it with `wireshark cm4116_telnet.cap` or inspect from the shell:
 tshark -r cm4116_telnet.cap -c 20
 tcpdump -r cm4116_telnet.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

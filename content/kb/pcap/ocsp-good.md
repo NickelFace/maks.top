@@ -30,7 +30,3 @@ Open it with `wireshark OCSP-Good.cap` or inspect from the shell:
 tshark -r OCSP-Good.cap -c 20
 tcpdump -r OCSP-Good.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

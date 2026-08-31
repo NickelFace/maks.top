@@ -30,7 +30,3 @@ Open it with `wireshark PIMv2_hellos.cap` or inspect from the shell:
 tshark -r PIMv2_hellos.cap -c 20
 tcpdump -r PIMv2_hellos.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

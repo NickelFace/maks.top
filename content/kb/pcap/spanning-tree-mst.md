@@ -30,7 +30,3 @@ Open it with `wireshark Spanning Tree - MST.pcapng.cap` or inspect from the shel
 tshark -r Spanning Tree - MST.pcapng.cap -c 20
 tcpdump -r Spanning Tree - MST.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

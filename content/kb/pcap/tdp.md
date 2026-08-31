@@ -30,7 +30,3 @@ Open it with `wireshark TDP.cap` or inspect from the shell:
 tshark -r TDP.cap -c 20
 tcpdump -r TDP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

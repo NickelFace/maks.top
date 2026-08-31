@@ -30,7 +30,3 @@ Open it with `wireshark EIGRP_subnet_up.cap` or inspect from the shell:
 tshark -r EIGRP_subnet_up.cap -c 20
 tcpdump -r EIGRP_subnet_up.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

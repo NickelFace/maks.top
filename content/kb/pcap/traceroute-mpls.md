@@ -34,7 +34,3 @@ Open it with `wireshark traceroute_MPLS.cap` or inspect from the shell:
 tshark -r traceroute_MPLS.cap -c 20
 tcpdump -r traceroute_MPLS.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

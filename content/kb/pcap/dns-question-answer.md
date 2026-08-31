@@ -30,7 +30,3 @@ Open it with `wireshark DNS Question & Answer.pcapng.cap` or inspect from the sh
 tshark -r DNS Question & Answer.pcapng.cap -c 20
 tcpdump -r DNS Question & Answer.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

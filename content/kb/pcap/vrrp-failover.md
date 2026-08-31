@@ -30,7 +30,3 @@ Open it with `wireshark VRRP_failover.cap` or inspect from the shell:
 tshark -r VRRP_failover.cap -c 20
 tcpdump -r VRRP_failover.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

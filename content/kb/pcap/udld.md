@@ -30,7 +30,3 @@ Open it with `wireshark UDLD.cap` or inspect from the shell:
 tshark -r UDLD.cap -c 20
 tcpdump -r UDLD.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark BGP_MD5.cap` or inspect from the shell:
 tshark -r BGP_MD5.cap -c 20
 tcpdump -r BGP_MD5.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -32,7 +32,3 @@ Open it with `wireshark no-advertise community.pcapng.cap` or inspect from the s
 tshark -r no-advertise community.pcapng.cap -c 20
 tcpdump -r no-advertise community.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark PIM_register_register-stop.cap` or inspect from the shel
 tshark -r PIM_register_register-stop.cap -c 20
 tcpdump -r PIM_register_register-stop.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

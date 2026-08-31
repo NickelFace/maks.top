@@ -30,7 +30,3 @@ Open it with `wireshark SNMPv2c_get_requests.cap` or inspect from the shell:
 tshark -r SNMPv2c_get_requests.cap -c 20
 tcpdump -r SNMPv2c_get_requests.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

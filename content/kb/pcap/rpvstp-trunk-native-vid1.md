@@ -30,7 +30,3 @@ Open it with `wireshark rpvstp-trunk-native-vid1.pcap.cap` or inspect from the s
 tshark -r rpvstp-trunk-native-vid1.pcap.cap -c 20
 tcpdump -r rpvstp-trunk-native-vid1.pcap.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

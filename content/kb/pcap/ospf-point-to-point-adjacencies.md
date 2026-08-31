@@ -30,7 +30,3 @@ Open it with `wireshark OSPF_point-to-point_adjacencies.cap` or inspect from the
 tshark -r OSPF_point-to-point_adjacencies.cap -c 20
 tcpdump -r OSPF_point-to-point_adjacencies.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

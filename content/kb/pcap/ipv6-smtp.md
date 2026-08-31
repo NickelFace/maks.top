@@ -30,7 +30,3 @@ Open it with `wireshark ipv6-smtp.pcapng.cap` or inspect from the shell:
 tshark -r ipv6-smtp.pcapng.cap -c 20
 tcpdump -r ipv6-smtp.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

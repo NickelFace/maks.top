@@ -30,7 +30,3 @@ Open it with `wireshark Open Network Connection.pcapng.cap` or inspect from the 
 tshark -r Open Network Connection.pcapng.cap -c 20
 tcpdump -r Open Network Connection.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

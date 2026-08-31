@@ -38,7 +38,3 @@ Open it with `wireshark 802.1Q_tunneling.cap` or inspect from the shell:
 tshark -r 802.1Q_tunneling.cap -c 20
 tcpdump -r 802.1Q_tunneling.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

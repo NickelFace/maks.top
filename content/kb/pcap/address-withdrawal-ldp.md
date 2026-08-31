@@ -30,7 +30,3 @@ Open it with `wireshark address withdrawal ldp.pcapng.cap` or inspect from the s
 tshark -r address withdrawal ldp.pcapng.cap -c 20
 tcpdump -r address withdrawal ldp.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

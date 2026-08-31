@@ -30,7 +30,3 @@ Open it with `wireshark ICMP_over_L2TPv3_Pseudowire.pcap.cap` or inspect from th
 tshark -r ICMP_over_L2TPv3_Pseudowire.pcap.cap -c 20
 tcpdump -r ICMP_over_L2TPv3_Pseudowire.pcap.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

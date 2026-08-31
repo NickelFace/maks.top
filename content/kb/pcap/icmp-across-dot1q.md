@@ -30,7 +30,3 @@ Open it with `wireshark ICMP_across_dot1q.cap` or inspect from the shell:
 tshark -r ICMP_across_dot1q.cap -c 20
 tcpdump -r ICMP_across_dot1q.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

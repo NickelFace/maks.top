@@ -30,7 +30,3 @@ Open it with `wireshark path_MTU_discovery.cap` or inspect from the shell:
 tshark -r path_MTU_discovery.cap -c 20
 tcpdump -r path_MTU_discovery.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

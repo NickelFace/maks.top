@@ -30,7 +30,3 @@ Open it with `wireshark TCP_SACK.cap` or inspect from the shell:
 tshark -r TCP_SACK.cap -c 20
 tcpdump -r TCP_SACK.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

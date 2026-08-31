@@ -30,7 +30,3 @@ Open it with `wireshark FCoE_Flogi_FDisc_Negotiation.cap` or inspect from the sh
 tshark -r FCoE_Flogi_FDisc_Negotiation.cap -c 20
 tcpdump -r FCoE_Flogi_FDisc_Negotiation.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

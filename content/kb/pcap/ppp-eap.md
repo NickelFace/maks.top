@@ -30,7 +30,3 @@ Open it with `wireshark PPP_EAP.cap` or inspect from the shell:
 tshark -r PPP_EAP.cap -c 20
 tcpdump -r PPP_EAP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

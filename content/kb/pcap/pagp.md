@@ -34,7 +34,3 @@ Open it with `wireshark PAGP.cap` or inspect from the shell:
 tshark -r PAGP.cap -c 20
 tcpdump -r PAGP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

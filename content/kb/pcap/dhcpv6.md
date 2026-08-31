@@ -30,7 +30,3 @@ Open it with `wireshark DHCPv6.cap` or inspect from the shell:
 tshark -r DHCPv6.cap -c 20
 tcpdump -r DHCPv6.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

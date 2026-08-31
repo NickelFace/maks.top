@@ -30,7 +30,3 @@ Open it with `wireshark bgp as confed sequence.pcapng.cap` or inspect from the s
 tshark -r bgp as confed sequence.pcapng.cap -c 20
 tcpdump -r bgp as confed sequence.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

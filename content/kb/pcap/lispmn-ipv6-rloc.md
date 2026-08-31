@@ -30,7 +30,3 @@ Open it with `wireshark lispmn_IPv6-RLOC.pcapng.cap` or inspect from the shell:
 tshark -r lispmn_IPv6-RLOC.pcapng.cap -c 20
 tcpdump -r lispmn_IPv6-RLOC.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

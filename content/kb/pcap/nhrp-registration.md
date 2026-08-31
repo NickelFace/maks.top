@@ -30,7 +30,3 @@ Open it with `wireshark NHRP_registration.cap` or inspect from the shell:
 tshark -r NHRP_registration.cap -c 20
 tcpdump -r NHRP_registration.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

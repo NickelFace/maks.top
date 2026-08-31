@@ -30,7 +30,3 @@ Open it with `wireshark OSPFv3_with_AH.cap` or inspect from the shell:
 tshark -r OSPFv3_with_AH.cap -c 20
 tcpdump -r OSPFv3_with_AH.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

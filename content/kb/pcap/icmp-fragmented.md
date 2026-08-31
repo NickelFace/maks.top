@@ -30,7 +30,3 @@ Open it with `wireshark icmp fragmented.cap` or inspect from the shell:
 tshark -r icmp fragmented.cap -c 20
 tcpdump -r icmp fragmented.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

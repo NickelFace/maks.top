@@ -30,7 +30,3 @@ Open it with `wireshark MSDP.cap` or inspect from the shell:
 tshark -r MSDP.cap -c 20
 tcpdump -r MSDP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

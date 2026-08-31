@@ -30,7 +30,3 @@ Open it with `wireshark MSTP_Intra-Region_BPDUs.cap` or inspect from the shell:
 tshark -r MSTP_Intra-Region_BPDUs.cap -c 20
 tcpdump -r MSTP_Intra-Region_BPDUs.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

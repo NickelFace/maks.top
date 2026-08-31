@@ -30,7 +30,3 @@ Open it with `wireshark PIM-SM_join_prune.cap` or inspect from the shell:
 tshark -r PIM-SM_join_prune.cap -c 20
 tcpdump -r PIM-SM_join_prune.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

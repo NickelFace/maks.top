@@ -30,7 +30,3 @@ Open it with `wireshark WCCPv2.pcap.cap` or inspect from the shell:
 tshark -r WCCPv2.pcap.cap -c 20
 tcpdump -r WCCPv2.pcap.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark ospf over gre tunnel.cap` or inspect from the shell:
 tshark -r ospf over gre tunnel.cap -c 20
 tcpdump -r ospf over gre tunnel.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

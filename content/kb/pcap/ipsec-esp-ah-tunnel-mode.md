@@ -30,7 +30,3 @@ Open it with `wireshark IPsec_ESP-AH_tunnel_mode.cap` or inspect from the shell:
 tshark -r IPsec_ESP-AH_tunnel_mode.cap -c 20
 tcpdump -r IPsec_ESP-AH_tunnel_mode.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

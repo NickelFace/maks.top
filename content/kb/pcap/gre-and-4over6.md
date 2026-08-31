@@ -30,7 +30,3 @@ Open it with `wireshark gre_and_4over6.cap` or inspect from the shell:
 tshark -r gre_and_4over6.cap -c 20
 tcpdump -r gre_and_4over6.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

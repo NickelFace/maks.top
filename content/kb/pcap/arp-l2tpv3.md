@@ -30,7 +30,3 @@ Open it with `wireshark arp_l2tpv3.cap` or inspect from the shell:
 tshark -r arp_l2tpv3.cap -c 20
 tcpdump -r arp_l2tpv3.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

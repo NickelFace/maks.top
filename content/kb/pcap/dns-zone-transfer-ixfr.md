@@ -30,7 +30,3 @@ Open it with `wireshark dns-zone-transfer-ixfr.cap` or inspect from the shell:
 tshark -r dns-zone-transfer-ixfr.cap -c 20
 tcpdump -r dns-zone-transfer-ixfr.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

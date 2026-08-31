@@ -30,7 +30,3 @@ Open it with `wireshark 4-byte_AS_numbers_Full_Support.cap` or inspect from the 
 tshark -r 4-byte_AS_numbers_Full_Support.cap -c 20
 tcpdump -r 4-byte_AS_numbers_Full_Support.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark telnet.cap` or inspect from the shell:
 tshark -r telnet.cap -c 20
 tcpdump -r telnet.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

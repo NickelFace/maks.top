@@ -30,7 +30,3 @@ Open it with `wireshark connection termination.cap` or inspect from the shell:
 tshark -r connection termination.cap -c 20
 tcpdump -r connection termination.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

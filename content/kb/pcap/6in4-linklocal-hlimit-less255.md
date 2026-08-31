@@ -30,7 +30,3 @@ Open it with `wireshark 6in4-linklocal-hlimit-less255.pcapng.cap` or inspect fro
 tshark -r 6in4-linklocal-hlimit-less255.pcapng.cap -c 20
 tcpdump -r 6in4-linklocal-hlimit-less255.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

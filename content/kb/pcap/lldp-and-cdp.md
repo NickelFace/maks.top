@@ -30,7 +30,3 @@ Open it with `wireshark LLDP_and_CDP.cap` or inspect from the shell:
 tshark -r LLDP_and_CDP.cap -c 20
 tcpdump -r LLDP_and_CDP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

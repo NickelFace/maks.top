@@ -30,7 +30,3 @@ Open it with `wireshark 802.1D_spanning_tree.cap` or inspect from the shell:
 tshark -r 802.1D_spanning_tree.cap -c 20
 tcpdump -r 802.1D_spanning_tree.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

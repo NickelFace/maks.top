@@ -30,7 +30,3 @@ Open it with `wireshark packet-c.cap` or inspect from the shell:
 tshark -r packet-c.cap -c 20
 tcpdump -r packet-c.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

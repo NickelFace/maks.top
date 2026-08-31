@@ -30,7 +30,3 @@ Open it with `wireshark 4-byte_AS_numbers_Mixed_Scenario.cap` or inspect from th
 tshark -r 4-byte_AS_numbers_Mixed_Scenario.cap -c 20
 tcpdump -r 4-byte_AS_numbers_Mixed_Scenario.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

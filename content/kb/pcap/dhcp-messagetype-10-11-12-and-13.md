@@ -30,7 +30,3 @@ Open it with `wireshark DHCP_MessageType 10,11,12 and 13.cap` or inspect from th
 tshark -r DHCP_MessageType 10,11,12 and 13.cap -c 20
 tcpdump -r DHCP_MessageType 10,11,12 and 13.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

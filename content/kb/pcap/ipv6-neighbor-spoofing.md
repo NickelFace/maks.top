@@ -30,7 +30,3 @@ Open it with `wireshark ipv6_neighbor_spoofing.cap` or inspect from the shell:
 tshark -r ipv6_neighbor_spoofing.cap -c 20
 tcpdump -r ipv6_neighbor_spoofing.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark mrinfo_query.cap` or inspect from the shell:
 tshark -r mrinfo_query.cap -c 20
 tcpdump -r mrinfo_query.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

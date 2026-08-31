@@ -30,7 +30,3 @@ Open it with `wireshark Auto-RP.cap` or inspect from the shell:
 tshark -r Auto-RP.cap -c 20
 tcpdump -r Auto-RP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark 802.1w_rapid_STP.cap` or inspect from the shell:
 tshark -r 802.1w_rapid_STP.cap -c 20
 tcpdump -r 802.1w_rapid_STP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark mGRE_ICMP.cap` or inspect from the shell:
 tshark -r mGRE_ICMP.cap -c 20
 tcpdump -r mGRE_ICMP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark ICMPv6_echos.cap` or inspect from the shell:
 tshark -r ICMPv6_echos.cap -c 20
 tcpdump -r ICMPv6_echos.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

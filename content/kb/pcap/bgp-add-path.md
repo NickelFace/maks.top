@@ -32,7 +32,3 @@ Open it with `wireshark bgp-add-path.cap` or inspect from the shell:
 tshark -r bgp-add-path.cap -c 20
 tcpdump -r bgp-add-path.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

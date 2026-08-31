@@ -30,7 +30,3 @@ Open it with `wireshark OSPF_broadcast_adjacencies.cap` or inspect from the shel
 tshark -r OSPF_broadcast_adjacencies.cap -c 20
 tcpdump -r OSPF_broadcast_adjacencies.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

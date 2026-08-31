@@ -30,7 +30,3 @@ Open it with `wireshark ISAKMP_sa_setup.cap` or inspect from the shell:
 tshark -r ISAKMP_sa_setup.cap -c 20
 tcpdump -r ISAKMP_sa_setup.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

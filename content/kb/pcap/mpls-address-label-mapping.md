@@ -38,7 +38,3 @@ Open it with `wireshark mpls address label mapping.pcapng.cap` or inspect from t
 tshark -r mpls address label mapping.pcapng.cap -c 20
 tcpdump -r mpls address label mapping.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

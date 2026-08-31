@@ -30,7 +30,3 @@ Open it with `wireshark VRRP_Malformed_DoS.cap` or inspect from the shell:
 tshark -r VRRP_Malformed_DoS.cap -c 20
 tcpdump -r VRRP_Malformed_DoS.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

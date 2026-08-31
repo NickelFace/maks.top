@@ -30,7 +30,3 @@ Open it with `wireshark EIGRP_goodbye.cap` or inspect from the shell:
 tshark -r EIGRP_goodbye.cap -c 20
 tcpdump -r EIGRP_goodbye.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

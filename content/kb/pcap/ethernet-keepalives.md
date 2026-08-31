@@ -30,7 +30,3 @@ Open it with `wireshark Ethernet_keepalives.cap` or inspect from the shell:
 tshark -r Ethernet_keepalives.cap -c 20
 tcpdump -r Ethernet_keepalives.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

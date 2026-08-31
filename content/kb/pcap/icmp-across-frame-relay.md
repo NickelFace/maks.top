@@ -30,7 +30,3 @@ Open it with `wireshark ICMP_across_frame_relay.cap` or inspect from the shell:
 tshark -r ICMP_across_frame_relay.cap -c 20
 tcpdump -r ICMP_across_frame_relay.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

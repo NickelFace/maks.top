@@ -30,7 +30,3 @@ Open it with `wireshark IPv6_NDP.cap` or inspect from the shell:
 tshark -r IPv6_NDP.cap -c 20
 tcpdump -r IPv6_NDP.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

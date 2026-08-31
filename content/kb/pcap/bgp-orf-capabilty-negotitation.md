@@ -30,7 +30,3 @@ Open it with `wireshark bgp orf capabilty negotitation.pcapng.cap` or inspect fr
 tshark -r bgp orf capabilty negotitation.pcapng.cap -c 20
 tcpdump -r bgp orf capabilty negotitation.pcapng.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

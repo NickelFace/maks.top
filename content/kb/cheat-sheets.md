@@ -9,7 +9,7 @@ date: 2026-08-31
 
 <div class="intro-card">
 Single-page reference sheets covering routing protocols, switching, IPsec, QoS and
-packet analysis. Archived from packetlife.net by Jeremy Stretch, offline since 2024.
+packet analysis.
 </div>
 
 | Sheet | Size | Download |

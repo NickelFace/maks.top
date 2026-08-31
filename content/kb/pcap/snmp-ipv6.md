@@ -30,7 +30,3 @@ Open it with `wireshark snmp-ipv6.cap` or inspect from the shell:
 tshark -r snmp-ipv6.cap -c 20
 tcpdump -r snmp-ipv6.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

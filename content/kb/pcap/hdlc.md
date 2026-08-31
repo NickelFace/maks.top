@@ -30,7 +30,3 @@ Open it with `wireshark HDLC.cap` or inspect from the shell:
 tshark -r HDLC.cap -c 20
 tcpdump -r HDLC.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

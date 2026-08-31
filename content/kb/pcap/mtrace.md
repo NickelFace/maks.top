@@ -30,7 +30,3 @@ Open it with `wireshark mtrace.cap` or inspect from the shell:
 tshark -r mtrace.cap -c 20
 tcpdump -r mtrace.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

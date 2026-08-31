@@ -30,7 +30,3 @@ Open it with `wireshark LDP_adjacency.cap` or inspect from the shell:
 tshark -r LDP_adjacency.cap -c 20
 tcpdump -r LDP_adjacency.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

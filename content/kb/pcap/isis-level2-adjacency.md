@@ -30,7 +30,3 @@ Open it with `wireshark ISIS_level2_adjacency.cap` or inspect from the shell:
 tshark -r ISIS_level2_adjacency.cap -c 20
 tcpdump -r ISIS_level2_adjacency.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

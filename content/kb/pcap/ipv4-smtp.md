@@ -30,7 +30,3 @@ Open it with `wireshark ipv4-smtp.cap` or inspect from the shell:
 tshark -r ipv4-smtp.cap -c 20
 tcpdump -r ipv4-smtp.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark gratuitous arp hsrp.cap` or inspect from the shell:
 tshark -r gratuitous arp hsrp.cap -c 20
 tcpdump -r gratuitous arp hsrp.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

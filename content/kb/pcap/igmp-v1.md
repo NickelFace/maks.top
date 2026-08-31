@@ -30,7 +30,3 @@ Open it with `wireshark IGMP_V1.cap` or inspect from the shell:
 tshark -r IGMP_V1.cap -c 20
 tcpdump -r IGMP_V1.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

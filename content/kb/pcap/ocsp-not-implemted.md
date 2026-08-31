@@ -30,7 +30,3 @@ Open it with `wireshark OCSP-Not_Implemted.cap` or inspect from the shell:
 tshark -r OCSP-Not_Implemted.cap -c 20
 tcpdump -r OCSP-Not_Implemted.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

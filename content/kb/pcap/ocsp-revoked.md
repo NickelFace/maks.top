@@ -30,7 +30,3 @@ Open it with `wireshark OCSP-Revoked.cap` or inspect from the shell:
 tshark -r OCSP-Revoked.cap -c 20
 tcpdump -r OCSP-Revoked.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

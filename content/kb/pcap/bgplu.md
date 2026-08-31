@@ -30,7 +30,3 @@ Open it with `wireshark bgplu.cap` or inspect from the shell:
 tshark -r bgplu.cap -c 20
 tcpdump -r bgplu.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

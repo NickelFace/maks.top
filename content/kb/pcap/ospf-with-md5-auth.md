@@ -30,7 +30,3 @@ Open it with `wireshark OSPF_with_MD5_auth.cap` or inspect from the shell:
 tshark -r OSPF_with_MD5_auth.cap -c 20
 tcpdump -r OSPF_with_MD5_auth.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

@@ -30,7 +30,3 @@ Open it with `wireshark LDP_Ethernet_FrameRelay.pcap.cap` or inspect from the sh
 tshark -r LDP_Ethernet_FrameRelay.pcap.cap -c 20
 tcpdump -r LDP_Ethernet_FrameRelay.pcap.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

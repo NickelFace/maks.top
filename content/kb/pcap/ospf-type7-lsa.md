@@ -30,7 +30,3 @@ Open it with `wireshark OSPF_type7_LSA.cap` or inspect from the shell:
 tshark -r OSPF_type7_LSA.cap -c 20
 tcpdump -r OSPF_type7_LSA.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.

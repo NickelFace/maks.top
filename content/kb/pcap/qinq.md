@@ -30,7 +30,3 @@ Open it with `wireshark QinQ.pcap.cap` or inspect from the shell:
 tshark -r QinQ.pcap.cap -c 20
 tcpdump -r QinQ.pcap.cap -nn -v
 ```
-
----
-
-Archived from packetlife.net by Jeremy Stretch, offline since 2024.
