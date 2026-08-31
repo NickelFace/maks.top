@@ -1,0 +1,171 @@
+{{ define "head" }}
+<link rel="stylesheet" href="{{ "styles/ipcalc.css" | relURL }}">
+{{ end }}
+
+{{ define "main" }}
+<header class="ic-header">
+  <div class="ic-header-inner">
+    {{ partial "breadcrumb.html" . }}
+    <h1 class="ic-h1">{{ .Title }}.</h1>
+    <p class="ic-lede">{{ .Description }} Everything runs in the browser, nothing is sent anywhere.</p>
+  </div>
+</header>
+
+<div class="ic-body">
+
+  <div class="ic-tabs" role="tablist">
+    <button class="ic-tab on" data-tab="v4" role="tab" aria-selected="true" type="button">IPv4</button>
+    <button class="ic-tab" data-tab="vlsm" role="tab" aria-selected="false" type="button">VLSM</button>
+    <button class="ic-tab" data-tab="v6" role="tab" aria-selected="false" type="button">IPv6</button>
+  </div>
+
+  {{/* ═══════════════════════════ IPv4 ═══════════════════════════ */}}
+  <div class="ic-panel" data-panel="v4">
+    <div class="ic-form">
+      <div class="ic-field">
+        <label class="ic-label" for="v4Addr">Address</label>
+        <input class="ic-input addr" id="v4Addr" type="text" value="192.168.1.1"
+               autocomplete="off" spellcheck="false" inputmode="decimal">
+      </div>
+      <div class="ic-field">
+        <label class="ic-label" for="v4Prefix">Prefix</label>
+        <input class="ic-input num" id="v4Prefix" type="number" min="0" max="32" value="26">
+      </div>
+      <div class="ic-field">
+        <label class="ic-label" for="v4Slider">Slide</label>
+        <input class="ic-range" id="v4Slider" type="range" min="0" max="32" value="26"
+               aria-label="Prefix length">
+      </div>
+      <div class="ic-field">
+        <label class="ic-label" for="v4Mask">Netmask</label>
+        <select class="ic-select" id="v4Mask"></select>
+      </div>
+    </div>
+    <p class="ic-err" id="v4Err" hidden></p>
+
+    <div id="v4Out">
+      <div class="ic-block">
+        <div class="ic-block-hd"><div class="ic-block-name">Network details</div></div>
+        <div class="ic-rows" id="v4Details"></div>
+      </div>
+
+      <div class="ic-block">
+        <div class="ic-block-hd">
+          <div class="ic-block-name">Binary notation</div>
+          <div class="ic-block-meta">host bits in accent</div>
+        </div>
+        <div class="ic-bits" id="v4Bits"></div>
+      </div>
+
+      <div class="ic-block">
+        <div class="ic-block-hd">
+          <div class="ic-block-name">Classic ipcalc output</div>
+          <button class="ic-copy" id="v4Copy" type="button">copy</button>
+        </div>
+        <pre class="ic-pre" id="v4Classic"></pre>
+      </div>
+
+      <div class="ic-block">
+        <div class="ic-block-hd">
+          <div class="ic-block-name">Sibling subnets</div>
+          <div class="ic-block-meta" id="v4SibHead"></div>
+        </div>
+        <div class="ic-sibs" id="v4Siblings"></div>
+      </div>
+    </div>
+  </div>
+
+  {{/* ═══════════════════════════ VLSM ═══════════════════════════ */}}
+  <div class="ic-panel" data-panel="vlsm" hidden>
+    <div class="ic-form">
+      <div class="ic-field">
+        <label class="ic-label" for="vBase">Base block</label>
+        <input class="ic-input addr" id="vBase" type="text" value="192.168.1.0/24"
+               autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+    <div class="ic-field" style="margin-top:16px">
+      <label class="ic-label" for="vReq">Subnets, one per line</label>
+      <textarea class="ic-textarea" id="vReq" spellcheck="false">Sales, 50
+Engineering, 25
+WAN link, 2</textarea>
+    </div>
+    <p class="ic-hint">Write a name, a comma, then how many hosts it needs. Biggest block is
+      allocated first, so every subnet lands on its natural boundary.</p>
+    <p class="ic-err" id="vErr" hidden></p>
+
+    <div id="vOut">
+      <div class="ic-block">
+        <div class="ic-block-hd">
+          <div class="ic-block-name">Allocation</div>
+          <button class="ic-copy" id="vCopy" type="button">copy plan</button>
+        </div>
+        <div class="ic-allocs" id="vAlloc"></div>
+        <div class="ic-warn" id="vUnalloc" hidden></div>
+        <div class="ic-summary" id="vSummary"></div>
+      </div>
+
+      <div class="ic-block">
+        <div class="ic-block-hd"><div class="ic-block-name">Free blocks</div></div>
+        <div class="ic-frees" id="vFree"></div>
+      </div>
+    </div>
+  </div>
+
+  {{/* ═══════════════════════════ IPv6 ═══════════════════════════ */}}
+  <div class="ic-panel" data-panel="v6" hidden>
+    <div class="ic-form">
+      <div class="ic-field">
+        <label class="ic-label" for="v6Addr">Address</label>
+        <input class="ic-input addr" id="v6Addr" type="text" value="2001:db8:acad:1::42"
+               autocomplete="off" spellcheck="false" style="width:280px">
+      </div>
+      <div class="ic-field">
+        <label class="ic-label" for="v6Prefix">Prefix</label>
+        <input class="ic-input num" id="v6Prefix" type="number" min="0" max="128" value="64">
+      </div>
+      <div class="ic-field">
+        <label class="ic-label" for="v6Slider">Slide</label>
+        <input class="ic-range" id="v6Slider" type="range" min="0" max="128" value="64"
+               aria-label="Prefix length">
+      </div>
+    </div>
+    <p class="ic-err" id="v6Err" hidden></p>
+
+    <div id="v6Out">
+      <div class="ic-block">
+        <div class="ic-block-hd">
+          <div class="ic-block-name">Prefix details</div>
+          <button class="ic-copy" id="v6Copy" type="button">copy</button>
+        </div>
+        <div class="ic-rows" id="v6Details"></div>
+      </div>
+
+      <div class="ic-block">
+        <div class="ic-block-hd">
+          <div class="ic-block-name">Nibble view</div>
+          <div class="ic-block-meta">host nibbles in accent</div>
+        </div>
+        <div class="ic-bits" id="v6Nibbles"></div>
+      </div>
+
+      <div class="ic-block">
+        <div class="ic-block-hd">
+          <div class="ic-block-name">Reverse pointer</div>
+          <button class="ic-copy" id="v6PtrCopy" type="button">copy</button>
+        </div>
+        <div class="ic-bits" id="v6Ptr"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="ic-note">Same maths as my Android app
+  <a href="https://github.com/NickelFace/ipcalc-android">ipcalc-android</a>, ported to JavaScript and
+  checked against the same unit tests.</p>
+
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ "js/ipcalc.js" | relURL }}"></script>
+{{ end }}

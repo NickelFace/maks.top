@@ -1,0 +1,124 @@
+/* IP Calc: IPv4 / VLSM / IPv6 calculator page */
+
+.ic-header { width:100%; border-bottom:1px solid var(--border); }
+.ic-header-inner { max-width:1200px; margin:0 auto; padding:56px 64px 32px; width:100%; }
+.ic-h1 { font-family:'Fraunces',Georgia,serif; font-size:var(--h1-page); font-weight:400;
+         margin:0; letter-spacing:-0.03em; font-feature-settings:'opsz' 144; color:var(--text); }
+.ic-lede { font-size:16px; color:var(--text2); max-width:640px; margin-top:16px; line-height:1.55; }
+.ic-body { max-width:1200px; margin:0 auto; padding:32px 64px 80px; width:100%; }
+
+/* tabs */
+.ic-tabs { display:flex; gap:1px; background:var(--border); border:1px solid var(--border);
+           margin-bottom:28px; }
+.ic-tab { flex:1; background:var(--bg); border:none; padding:12px 16px; cursor:pointer;
+          font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em;
+          color:var(--text3); transition:background 0.15s,color 0.15s; }
+.ic-tab:hover { color:var(--text); background:var(--bg2); }
+.ic-tab.on { color:var(--bg); background:var(--accent); }
+
+/* inputs */
+.ic-form { display:flex; flex-wrap:wrap; gap:20px; align-items:flex-end; margin-bottom:8px; }
+.ic-field { display:flex; flex-direction:column; gap:6px; }
+.ic-label { font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em;
+            color:var(--text3); text-transform:uppercase; }
+.ic-input, .ic-select, .ic-textarea {
+  font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--text);
+  background:var(--bg); border:1px solid var(--border); padding:9px 11px; }
+.ic-input:focus, .ic-select:focus, .ic-textarea:focus { outline:none; border-color:var(--accent); }
+.ic-input.addr { width:200px; }
+.ic-input.num { width:76px; }
+.ic-select { min-width:220px; }
+.ic-textarea { width:100%; min-height:132px; line-height:1.6; resize:vertical; }
+.ic-range { width:220px; accent-color:var(--accent); }
+.ic-hint { font-size:12px; color:var(--text3); line-height:1.5; margin:6px 0 22px; }
+.ic-err { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--danger);
+          margin:10px 0 0; }
+
+/* section blocks */
+.ic-block { margin-top:36px; }
+.ic-block-hd { display:flex; justify-content:space-between; align-items:baseline;
+               border-bottom:1px solid var(--text); padding-bottom:10px; margin-bottom:16px; gap:16px; }
+.ic-block-name { font-family:'Fraunces',Georgia,serif; font-size:20px; letter-spacing:-0.015em;
+                 font-feature-settings:'opsz' 144; color:var(--text); }
+.ic-block-meta { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text3);
+                 letter-spacing:0.08em; text-align:right; }
+.ic-copy { font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.06em;
+           color:var(--accent); background:none; border:1px solid var(--border); padding:4px 9px;
+           cursor:pointer; white-space:nowrap; }
+.ic-copy:hover { border-color:var(--accent); }
+
+/* key/value rows */
+.ic-rows { border:1px solid var(--border); border-bottom:none; }
+.ic-row { display:grid; grid-template-columns:200px 1fr; gap:16px; padding:10px 16px;
+          border-bottom:1px solid var(--border); background:var(--bg); }
+.ic-row:nth-child(odd) { background:var(--bg2); }
+.ic-key { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em;
+          color:var(--text3); text-transform:uppercase; align-self:center; }
+.ic-val { font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--text);
+          word-break:break-all; align-self:center; }
+.ic-val.ic-strong { color:var(--accent); font-weight:600; }
+
+/* binary and nibble views */
+.ic-bits { font-family:'JetBrains Mono',monospace; font-size:14px; line-height:1.9;
+           background:var(--code-bg); border:1px solid var(--border); padding:16px;
+           overflow-x:auto; white-space:pre; }
+.ic-net { color:var(--text2); }
+.ic-host { color:var(--accent); font-weight:700; }
+.ic-sep { color:var(--text3); }
+
+.ic-pre { font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.65;
+          background:var(--code-bg); border:1px solid var(--border); padding:16px;
+          overflow-x:auto; white-space:pre; color:var(--text); margin:0; }
+
+/* sibling subnets */
+.ic-sibs { border:1px solid var(--border); border-bottom:none; max-height:420px; overflow-y:auto; }
+.ic-sib { display:grid; grid-template-columns:64px 200px 1fr; gap:14px; padding:8px 16px;
+          border-bottom:1px solid var(--border); font-family:'JetBrains Mono',monospace;
+          font-size:12.5px; background:var(--bg); }
+.ic-sib:nth-child(odd) { background:var(--bg2); }
+.ic-sib.on { background:var(--tag-bg); }
+.ic-sib.on .ic-sib-net { color:var(--accent); font-weight:700; }
+.ic-sib-i { color:var(--text3); }
+.ic-sib-net { color:var(--text); }
+.ic-sib-range { color:var(--text3); }
+
+/* vlsm */
+.ic-allocs, .ic-frees { border:1px solid var(--border); border-bottom:none; }
+.ic-alloc { display:grid; grid-template-columns:1.2fr 1.1fr 1.1fr 1.6fr 1.3fr 0.7fr; gap:14px;
+            padding:12px 16px; border-bottom:1px solid var(--border);
+            font-family:'JetBrains Mono',monospace; font-size:12.5px; background:var(--bg);
+            align-items:baseline; }
+.ic-alloc:nth-child(odd) { background:var(--bg2); }
+.ic-alloc-name { color:var(--text); font-weight:600; font-family:inherit; }
+.ic-alloc-net { color:var(--accent); font-weight:600; }
+.ic-alloc-mask, .ic-alloc-range, .ic-alloc-hosts { color:var(--text3); }
+.ic-alloc-spare { color:var(--text3); text-align:right; }
+.ic-free { display:grid; grid-template-columns:200px 1fr; gap:14px; padding:9px 16px;
+           border-bottom:1px solid var(--border); font-family:'JetBrains Mono',monospace;
+           font-size:12.5px; background:var(--bg); }
+.ic-free:nth-child(odd) { background:var(--bg2); }
+.ic-free-net { color:var(--text); }
+.ic-free-size { color:var(--text3); }
+.ic-warn { border:1px solid var(--warn); padding:14px 16px; margin-top:20px; }
+.ic-warn-title { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em;
+                 text-transform:uppercase; color:var(--warn); margin-bottom:8px; }
+.ic-warn-row { font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--text2); }
+.ic-summary { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text3);
+              margin-top:14px; }
+
+.ic-note { margin-top:40px; font-size:12.5px; color:var(--text3); line-height:1.6; max-width:640px; }
+
+@media (max-width:1024px) {
+  .ic-header-inner, .ic-body { padding-left:40px; padding-right:40px; }
+  .ic-alloc { grid-template-columns:1fr 1fr; }
+  .ic-alloc-spare { text-align:left; }
+}
+@media (max-width:640px) {
+  .ic-header-inner { padding:40px 20px 24px; }
+  .ic-body { padding:24px 20px 80px; }
+  .ic-tabs { flex-direction:column; }
+  .ic-row, .ic-sib, .ic-free { grid-template-columns:1fr; gap:4px; }
+  .ic-alloc { grid-template-columns:1fr; gap:4px; }
+  .ic-input.addr, .ic-select, .ic-range { width:100%; }
+  .ic-field { width:100%; }
+}
