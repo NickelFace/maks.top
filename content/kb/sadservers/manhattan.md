@@ -21,11 +21,35 @@ running and the reason is two layers deep.
 |---|---|
 | Scenario | Manhattan |
 | Level | Medium |
+| Type | Fix |
+| Tags | disk volumes, postgres, systemd |
+| Root (sudo) access | yes |
 | Time limit | 20 min |
 | Solved in | 12 min |
 | Goal | one successful `INSERT` |
 
-![Manhattan scenario walkthrough at a glance](/img/sadservers/manhattan.png)
+## The brief
+
+> Your objective is to be able to insert a row in an existing Postgres database. The issue is
+> not specific to Postgres and you don't need to know details about it (although it may help).
+>
+> Helpful Postgres information: it's a service that listens to a port (`:5432`) and writes to
+> disk in a data directory, the location of which is defined in the `data_directory` parameter
+> of the configuration file `/etc/postgresql/14/main/postgresql.conf`. In our case Postgres is
+> managed by *systemd* as a unit with name `postgresql`.
+
+The whole test is one command, run as the default admin user:
+
+```bash
+sudo -u postgres psql -c "insert into persons(name) values ('jane smith');" -d dt
+```
+
+```
+INSERT 0 1
+```
+
+That is it. No cleanup, no second assertion — get that one line back and the scenario is done.
+Everything below is how I got there.
 
 ## Step 1. Ask systemd, get a green light
 

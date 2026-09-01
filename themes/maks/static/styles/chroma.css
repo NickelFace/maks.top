@@ -154,3 +154,8 @@
 [data-theme="light"] .chroma .kr { font-weight: 600 }
 [data-theme="light"] .chroma .gd { background-color: #FBE9E9 }
 [data-theme="light"] .chroma .gi { background-color: #E4F4EC }
+
+/* Bare command names. Chroma tags builtins (.nb) and keywords (.k) but never the
+   command itself, so `systemctl status postgresql` came out flat. The codeblock
+   render hook wraps the leading word of each shell line in .cmd. */
+.chroma .cmd { color: var(--code-cmd); }

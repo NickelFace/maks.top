@@ -42,6 +42,6 @@ theme = "maks"
   [markup.highlight]
     noClasses   = false
     codeFences  = true
-    guessSyntax = true
+    guessSyntax = false
     lineNos     = false
     tabWidth    = 2

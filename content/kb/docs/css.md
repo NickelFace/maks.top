@@ -24,6 +24,10 @@ Styles are split into 11 files by **scope** (area of application):
 | `topology.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | `.topology` figure + SVG diagram styles |
 | `chroma.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Syntax highlighting. Also **declares the `--code-*` token palette** that `prose.css` and `ns.css` read |
 
+Fenced code blocks are rendered by `themes/maks/layouts/_default/_markup/render-codeblock.html`.
+`render-codeblock-mermaid.html` sits beside it and wins for ```` ```mermaid ````, since Hugo
+prefers a language-specific hook over the generic one.
+
 Loading in `baseof.html`:
 ```html
 <!-- Inlined via Hugo asset pipeline - single source of truth for FOUC colors -->
@@ -124,6 +128,27 @@ fenced blocks.
 Everything except strings is cool. Strings stay warm deliberately — one warm hue inside a
 code block is the cheapest way to break up a quoted argument, and it is the only place
 warmth survives in the Slate palette.
+
+### `.cmd` — the command name
+
+Chroma tags shell builtins (`.nb`) and keywords (`.k`) but never a bare command name, so a
+line like `systemctl status postgresql` came out of the highlighter with no tokens at all
+and rendered flat. `render-codeblock.html` wraps the leading word of each shell line in
+`.cmd`, which takes `--code-cmd`.
+
+The regex only fires when the word sits flush against the start of the line span, so an
+indented continuation is left alone, and a line that already opens with a token span — a
+comment, keyword or builtin — never matches. It also requires a trailing space, tab,
+newline or tag, so `FOO=bar` is not mistaken for a command.
+
+### Commands and output are different objects
+
+A fence with no language is **output**, not "some language we should guess at".
+`hugo.toml` sets `guessSyntax = false`: with it on, Chroma labelled bare blocks
+`fallback`, `gdscript` or worse and coloured them from an unrelated grammar. Output blocks
+are not highlighted at all — they are the machine talking back, so they sit on a raised
+surface in muted `--code-out`. Telling a command from its output at a glance is the point;
+the two must never look alike.
 
 > **Load-order caveat:** `--code-*` is declared in `chroma.css`, which loads only for
 > `posts`, `kb` and `ccna-labs` single pages. `prose.css` also loads on `about`, where
@@ -318,9 +343,13 @@ Applied to `.prose` (article body) and available in any post, KB, or docs page.
 |---|---|
 | `.intro-card` | Highlighted intro block: `border-left: 3px solid var(--accent)` |
 | `.sec` | Section divider: uppercase label + full-width line after |
-| `.code-block` | Code wrapper: label bar + Chroma content |
+| `.code-block` | Code wrapper: label bar + content. Emitted server-side by `layouts/_default/_markup/render-codeblock.html`, so the label is there before JS runs |
+| `.code-block[data-kind="command"]` | A shell fence. Recessed `--code-bg` well, syntax highlighted |
+| `.code-block[data-kind="output"]` | A fence with no language. Raised `--bg2` surface, 3px `--border2` rule down the left, text in `--code-out`, not highlighted |
+| `.code-block[data-kind="code"]` | Any other language. Same well as `command`, no `.cmd` marking |
 | `.code-label` | Bar: language + copy button |
 | `.copy-btn` | "copy" → "ok!" (resets after 1.5s) |
+| `.out-pre` | The `<pre>` inside an output block |
 | `.ns-grid` | Card grid for NS cards |
 | `.ns-card` | Expandable card. Animated via `@keyframes fadeUp`. No per-card colour |
 | `.ns-card.active` | Expanded: `border-color: var(--accent)`; the icon and name go accent too |

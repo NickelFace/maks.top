@@ -1,0 +1,40 @@
+{{- /*
+  Code block renderer.
+
+  Splits fenced blocks into two kinds, because a terminal session is two different
+  things wearing the same clothes:
+
+    command — what you type.   Highlighted, dark well, command name in --code-cmd.
+    output  — what you get back. Not code, so not highlighted: flat surface, muted
+              --code-out text, so it reads as a quotation of the machine.
+
+  A fence with no language is output, not "some language we should guess at".
+  Chroma's guesser used to label these blocks bash/gdscript/ru/en and colour them
+  from an unrelated grammar; hugo.toml now sets guessSyntax = false.
+
+  Chroma tags shell builtins (.nb) and keywords (.k) but never a bare command name,
+  so `systemctl status postgresql` came out entirely uncoloured. The replaceRE below
+  wraps the first bare word of each line in .cmd. It only fires when the word sits
+  flush against the start of the line span — an indented continuation or a line that
+  already opens with a token span (comment, keyword, builtin) is left alone — and it
+  requires a trailing space, tab, newline or tag so that FOO=bar is not mistaken for
+  a command.
+*/ -}}
+{{- $lang := lower (trim (.Type | default "") " ") -}}
+{{- $shells := slice "bash" "sh" "shell" "zsh" "console" "shell-session" -}}
+{{- $plain := slice "" "text" "txt" "output" "out" "plain" "ascii" -}}
+{{- $isShell := in $shells $lang -}}
+{{- $isOutput := in $plain $lang -}}
+{{- $kind := cond $isOutput "output" (cond $isShell "command" "code") -}}
+{{- $label := cond (eq $lang "") "output" $lang -}}
+{{- $body := "" -}}
+{{- if $isOutput -}}
+  {{- $body = printf "<pre class=\"out-pre\"><code>%s</code></pre>" (htmlEscape .Inner) -}}
+{{- else -}}
+  {{- $h := string (transform.Highlight .Inner $lang) -}}
+  {{- if $isShell -}}
+    {{- $h = replaceRE `(<span class="cl">)([a-zA-Z_][\w.\-/]*)([ \t\n<])` `${1}<span class="cmd">${2}</span>${3}` $h -}}
+  {{- end -}}
+  {{- $body = $h -}}
+{{- end -}}
+<div class="code-block" data-kind="{{ $kind }}"><div class="code-label"><span>{{ $label }}</span><button class="copy-btn" onclick="cpPre(this)">copy</button></div>{{ $body | safeHTML }}</div>
