@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-109-1-internet-protocols/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -36,9 +36,9 @@ IPv4 addresses are 32-bit numbers written as four decimal octets separated by do
 | A | 1–126 | /8 | Large networks |
 | B | 128–191 | /16 | Medium networks |
 | C | 192–223 | /24 | Small networks |
-| D | 224–239 | — | Multicast |
-| E | 240–255 | — | Reserved/experimental |
-| — | 127.0.0.0/8 | — | Loopback (127.0.0.1) |
+| D | 224–239 | n/a | Multicast |
+| E | 240–255 | n/a | Reserved/experimental |
+| n/a | 127.0.0.0/8 | n/a | Loopback (127.0.0.1) |
 
 ### Private (RFC 1918) Ranges
 
@@ -54,8 +54,8 @@ These addresses are not routed on the public internet and require NAT to communi
 
 A subnet mask defines which bits of an address identify the network and which identify the host.
 
-- `/24` = `255.255.255.0` — 256 addresses, 254 usable hosts
-- `/25` = `255.255.255.128` — 128 addresses, 126 usable hosts
+- `/24` = `255.255.255.0`: 256 addresses, 254 usable hosts
+- `/25` = `255.255.255.128`: 128 addresses, 126 usable hosts
 - Usable hosts = 2ⁿ − 2, where n is the number of host bits
 
 **Network address**: all host bits set to 0 (first address in range).  
@@ -65,7 +65,7 @@ Example: `192.168.1.0/24` → network `192.168.1.0`, broadcast `192.168.1.255`, 
 
 ### Special Addresses
 
-- **Default route**: `0.0.0.0/0` — matches any destination; used as the gateway of last resort.
+- **Default route**: `0.0.0.0/0`, matches any destination; used as the gateway of last resort.
 - **NAT** (Network Address Translation): allows multiple hosts with private IPs to share a single public IP.
 - **TTL** (Time to Live): decremented by each router; packet dropped when TTL reaches 0, preventing routing loops.
 
@@ -102,19 +102,19 @@ The file `/etc/services` maps service names to port numbers and protocols.
 
 ## Transport Layer Protocols
 
-### TCP — Transmission Control Protocol
+### TCP: Transmission Control Protocol
 
 - Connection-oriented: establishes a connection before data transfer via the 3-way handshake (SYN → SYN-ACK → ACK).
 - Reliable: guarantees delivery, order, and error checking.
 - Used by HTTP, HTTPS, SSH, SMTP, FTP.
 
-### UDP — User Datagram Protocol
+### UDP: User Datagram Protocol
 
 - Connectionless: sends datagrams without establishing a connection.
 - Unreliable: no delivery guarantees.
 - Lower overhead; used where speed matters more than reliability (DNS queries, NTP, streaming).
 
-### ICMP — Internet Control Message Protocol
+### ICMP: Internet Control Message Protocol
 
 - Not a transport protocol; carries control and diagnostic messages.
 - Used by `ping` (echo request/reply) and `traceroute`.
@@ -145,8 +145,8 @@ fe80::1
 
 | Type | Description |
 |---|---|
-| Global unicast | 2000::/3 — publicly routable |
-| Link-local unicast | fe80::/10 — not routed beyond a link |
+| Global unicast | 2000::/3, publicly routable |
+| Link-local unicast | fe80::/10, not routed beyond a link |
 | Loopback | ::1 |
 | Multicast | ff00::/8 |
 | Anycast | One address shared by multiple interfaces; nearest responds |
@@ -173,7 +173,7 @@ IPv4 classes:
   C: 192–223   /24   private: 192.168.0.0/16
   loopback: 127.0.0.1
 
-CIDR: /prefix — host bits = 32-prefix; usable hosts = 2^n - 2
+CIDR: /prefix - host bits = 32-prefix; usable hosts = 2^n - 2
   network addr = host bits all 0
   broadcast    = host bits all 1
 
@@ -185,7 +185,7 @@ Key ports:
   161 SNMP    162 SNMPTRAP  389 LDAP  443 HTTPS  465 SMTPS
   514 RSH/Syslog  636 LDAPS  993 IMAPS  995 POP3S
 
-/etc/services — maps service names to port/protocol
+/etc/services - maps service names to port/protocol
 
 TCP: connection-oriented, reliable (SYN/SYN-ACK/ACK)
 UDP: connectionless, unreliable, low overhead
@@ -220,13 +220,13 @@ IPv6:
 15. What replaces ARP in IPv6? → NDP (Neighbor Discovery Protocol)
 16. How are IPv6 addresses abbreviated? → Drop leading zeros per group; replace one run of consecutive all-zero groups with `::`.
 17. How is an IPv6 address written in a URL? → Enclosed in brackets: `http://[2001:db8::1]/`
-18. What does SLAAC stand for? → Stateless Address Autoconfiguration — allows a host to configure its own IPv6 address without DHCP.
+18. What does SLAAC stand for? → Stateless Address Autoconfiguration, allows a host to configure its own IPv6 address without DHCP.
 
 ---
 
 ## Exercises
 
-### Exercise 1 — Subnetting
+### Exercise 1: Subnetting
 
 A network administrator uses `172.16.10.0/28`. What is the broadcast address and how many usable hosts are available?
 
@@ -243,24 +243,24 @@ Usable hosts: 14 (addresses `172.16.10.1` through `172.16.10.14`)
 
 ---
 
-### Exercise 2 — Private Range Identification
+### Exercise 2: Private Range Identification
 
 Classify these addresses as private or public: `10.0.0.1`, `172.15.0.1`, `172.16.0.1`, `192.168.100.1`, `8.8.8.8`.
 
 <details>
 <summary>Answer</summary>
 
-- `10.0.0.1` — private (10.0.0.0/8)
-- `172.15.0.1` — public (172.15.x.x is outside 172.16.0.0/12)
-- `172.16.0.1` — private (172.16.0.0/12)
-- `192.168.100.1` — private (192.168.0.0/16)
-- `8.8.8.8` — public
+- `10.0.0.1`: private (10.0.0.0/8)
+- `172.15.0.1`: public (172.15.x.x is outside 172.16.0.0/12)
+- `172.16.0.1`: private (172.16.0.0/12)
+- `192.168.100.1`: private (192.168.0.0/16)
+- `8.8.8.8`: public
 
 </details>
 
 ---
 
-### Exercise 3 — IPv6 Abbreviation
+### Exercise 3: IPv6 Abbreviation
 
 Abbreviate the address `2001:0db8:0000:0000:0001:0000:0000:0001`.
 
@@ -276,20 +276,20 @@ The two trailing zero groups (`0:0`) are shorter than the pair in positions 3–
 
 ---
 
-### Exercise 4 — Protocol Selection
+### Exercise 4: Protocol Selection
 
 You are writing a real-time video streaming application where occasional lost packets are acceptable but low latency is critical. Which transport protocol should you use?
 
 <details>
 <summary>Answer</summary>
 
-UDP — it is connectionless and has lower overhead. Lost packets are not retransmitted, which is acceptable for streaming where latency matters more than perfect reliability.
+UDP is connectionless and has lower overhead. Lost packets are not retransmitted, which is acceptable for streaming where latency matters more than perfect reliability.
 
 </details>
 
 ---
 
-### Exercise 5 — Port Lookup
+### Exercise 5: Port Lookup
 
 What command would look up the port number for the `imaps` service?
 

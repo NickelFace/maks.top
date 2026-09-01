@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-105-1-1-shell-environment/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -27,7 +27,7 @@ Key files and utilities: `.`, `source`, `/etc/bash.bashrc`, `/etc/profile`, `env
 
 An **interactive** shell reads commands from a terminal and displays a prompt. It starts when you open a terminal emulator, log in at the console, or connect via SSH.
 
-A **non-interactive** shell starts to execute a script or a single command without user involvement — for example, `bash script.sh` or a cron job.
+A **non-interactive** shell starts to execute a script or a single command without user involvement, for example, `bash script.sh` or a cron job.
 
 ### Login vs Non-login
 
@@ -37,7 +37,7 @@ A **non-login shell** opens after login: a new terminal window in a graphical en
 
 ### Four Combinations
 
-Each shell simultaneously belongs to one of two interactive/non-interactive pairs and one of two login/non-login pairs — four combinations in total.
+Each shell simultaneously belongs to one of two interactive/non-interactive pairs and one of two login/non-login pairs, four combinations in total.
 
 **Interactive login:** Logging in at a text console, SSH, `su -`, `sudo -i`. The right place for user startup settings.
 
@@ -96,7 +96,7 @@ login_shell    off     # off = non-login, on = login
 | `--norc` | Skip `/etc/bash.bashrc` and `~/.bashrc` |
 | `--rcfile FILE` | Use FILE instead of the standard rc files |
 
-`bash --noprofile --norc` starts a completely clean shell — useful for debugging.
+`bash --noprofile --norc` starts a completely clean shell, useful for debugging.
 
 ### The su Command
 
@@ -150,23 +150,23 @@ Use the login variant when you need the target user's environment variables; oth
 
 ### Global Files
 
-`/etc/profile` — the main global file for login shells. Read by all users at login. Sets `PATH`, `PS1`, and similar variables. Sources `/etc/bash.bashrc` (on Debian) and runs all scripts from `/etc/profile.d/*.sh`.
+`/etc/profile`: the main global file for login shells. Read by all users at login. Sets `PATH`, `PS1`, and similar variables. Sources `/etc/bash.bashrc` (on Debian) and runs all scripts from `/etc/profile.d/*.sh`.
 
-`/etc/bash.bashrc` — global file for interactive shells. Read directly for non-login; sourced via `/etc/profile` for login. This makes it apply to every interactive session. On Red Hat-based systems the equivalent is `/etc/bashrc`.
+`/etc/bash.bashrc`: global file for interactive shells. Read directly for non-login; sourced via `/etc/profile` for login. This makes it apply to every interactive session. On Red Hat-based systems the equivalent is `/etc/bashrc`.
 
-`/etc/profile.d/*.sh` — drop-in directory for package and administrator additions to the global environment. Sourced from `/etc/profile`.
+`/etc/profile.d/*.sh`: drop-in directory for package and administrator additions to the global environment. Sourced from `/etc/profile`.
 
 ### User Files
 
-`~/.bash_profile` — personal login file. Takes priority over `~/.bash_login` and `~/.profile`.
+`~/.bash_profile`: personal login file. Takes priority over `~/.bash_login` and `~/.profile`.
 
-`~/.bash_login` — alternative login file. Read only if `~/.bash_profile` does not exist.
+`~/.bash_login`: alternative login file. Read only if `~/.bash_profile` does not exist.
 
-`~/.profile` — universal login file, compatible with other Bourne-family shells. Read if neither `~/.bash_profile` nor `~/.bash_login` exists. By default adds `~/bin` to `PATH` and sources `~/.bashrc`.
+`~/.profile`: universal login file, compatible with other Bourne-family shells. Read if neither `~/.bash_profile` nor `~/.bash_login` exists. By default adds `~/bin` to `PATH` and sources `~/.bashrc`.
 
-`~/.bashrc` — file for interactive non-login shells. Contains history settings, aliases, functions. Often sourced from `~/.bash_profile` so login sessions also pick up these settings.
+`~/.bashrc`: file for interactive non-login shells. Contains history settings, aliases, functions. Often sourced from `~/.bash_profile` so login sessions also pick up these settings.
 
-`~/.bash_logout` — executed when a login shell exits. Good for cleaning up temporary files or logs.
+`~/.bash_logout`: executed when a login shell exits. Good for cleaning up temporary files or logs.
 
 ### File Reading Order
 
@@ -175,7 +175,7 @@ Use the login variant when you need the target user's environment variables; oth
 1. `/etc/profile` → sources `/etc/bash.bashrc` + `/etc/profile.d/*.sh`
 2. First found of: `~/.bash_profile`, `~/.bash_login`, `~/.profile` → standard `~/.profile` additionally sources `~/.bashrc`
 
-On a Debian system, the login shell effectively reads all four files: `/etc/bash.bashrc`, `/etc/profile`, `~/.bashrc`, `~/.profile` — via the sourcing chain.
+On a Debian system, the login shell effectively reads all four files: `/etc/bash.bashrc`, `/etc/profile`, `~/.bashrc`, `~/.profile`, via the sourcing chain.
 
 **Interactive non-login shell:**
 
@@ -184,7 +184,7 @@ On a Debian system, the login shell effectively reads all four files: `/etc/bash
 
 **Non-interactive non-login shell:** reads no startup files. Uses the parent environment. Exception: if `BASH_ENV` is set, Bash reads the file it points to before executing the script.
 
-Local files override global ones — a user's `~/.bash_profile` is read after `/etc/profile`, so user settings win.
+Local files override global ones, a user's `~/.bash_profile` is read after `/etc/profile`, so user settings win.
 
 **Practical guideline:** `PATH` and general environment variables go in `~/.bash_profile` (or `/etc/profile`). Aliases and functions needed in every terminal go in `~/.bashrc`. To make a login session see them too, add `source ~/.bashrc` to `~/.bash_profile`.
 
@@ -228,7 +228,7 @@ $ export PATH="$HOME/bin:$PATH"
 
 Make it permanent: add the same line to `~/.bashrc` or `~/.bash_profile`. For all users, edit `/etc/profile` or drop a file in `/etc/profile.d/`.
 
-Order matters. Bash takes the first match, so a directory at the start overrides standard commands of the same name — powerful but potentially dangerous.
+Order matters. Bash takes the first match, so a directory at the start overrides standard commands of the same name: powerful but potentially dangerous.
 
 `unset PATH` leaves the shell unable to find commands by short name. Every program must be called by its absolute path.
 
@@ -247,7 +247,7 @@ $ unalias ll            # remove one
 $ unalias -a            # remove all
 ```
 
-An alias only works at the start of a command. It cannot accept arguments — use functions for that.
+An alias only works at the start of a command. It cannot accept arguments; use functions for that.
 
 To bypass an alias and call the original command:
 
@@ -315,7 +315,7 @@ Functions are more powerful than aliases: they accept arguments, contain logic, 
 
 `source file` and `. file` are equivalent. Both read the file and execute its commands in the current shell without spawning a child process.
 
-This matters: changes to variables, aliases, and functions persist in the current session. Running a file as a regular script (`./file.sh`) executes it in a child shell — all changes are lost when that child exits.
+This matters: changes to variables, aliases, and functions persist in the current session. Running a file as a regular script (`./file.sh`) executes it in a child shell; all changes are lost when that child exits.
 
 Typical use: after editing `~/.bashrc`, apply changes immediately:
 
@@ -343,7 +343,7 @@ $ ls -la /etc/skel
 
 Administrators can add any files or directories here: editor settings, project templates, corporate aliases, baseline scripts. Every new user gets a copy.
 
-Changes to `/etc/skel` do not affect existing users — only those created afterward.
+Changes to `/etc/skel` do not affect existing users, only those created afterward.
 
 Specify an alternative template directory with `useradd -k`:
 
@@ -365,7 +365,7 @@ SKEL=/etc/skel
 SKEL_IGNORE_REGEX="dpkg-(old|new|dist|save)"
 ```
 
-`SKEL_IGNORE_REGEX` filters files by regex — by default excludes `.dpkg-old`, `.dpkg-new`, and similar package manager artifacts.
+`SKEL_IGNORE_REGEX` filters files by regex, by default excludes `.dpkg-old`, `.dpkg-new`, and similar package manager artifacts.
 
 Without the `-m` flag, `useradd` does not create a home directory and does not copy from `/etc/skel`. `adduser` (Debian's Perl wrapper) always creates the home directory.
 
@@ -387,21 +387,21 @@ bash --norc                  # skip rc files
 bash --rcfile FILE           # use custom rc file
 bash --noprofile --norc      # clean shell for debugging
 
-# su — with environment (login)
+# su - with environment (login)
 su - user                    # = su -l user = su --login user
 su -                         # become root in login session
 
-# su — without environment (non-login)
+# su - without environment (non-login)
 su user
 su
 
-# sudo — with environment (login)
+# sudo - with environment (login)
 sudo -i                      # root login shell
 sudo -i command              # run in login environment and return
 sudo su - user               # login user via chain
 sudo su -                    # login root via chain
 
-# sudo — without environment (non-login)
+# sudo - without environment (non-login)
 sudo -s                      # non-login root
 sudo -u user -s              # non-login as user
 sudo su user
@@ -489,7 +489,7 @@ export BASH_ENV=/path/init.sh   # Bash reads init.sh before running the script
 
 ## Exercises
 
-### Exercise 1 — Shell types by launch method
+### Exercise 1: Shell types by launch method
 
 Fill in the table for each launch method: interactive or not, login or not, what `echo $0` outputs.
 
@@ -520,7 +520,7 @@ Patterns: SSH, text console, and `su -` give a login shell with the leading dash
 
 ---
 
-### Exercise 2 — su and sudo commands for each shell type
+### Exercise 2: su and sudo commands for each shell type
 
 Write the `su` and `sudo` commands for each scenario.
 
@@ -587,13 +587,13 @@ $ sudo su user2
 $ sudo -u user2 -s
 ```
 
-Mnemonic: the dash in `su -`, the `-i` flag in `sudo`, and `-l`/`--login` are all equivalent — they start a login session with the full environment of the target user.
+Mnemonic: the dash in `su -`, the `-i` flag in `sudo`, and `-l`/`--login` are all equivalent; they start a login session with the full environment of the target user.
 
 </details>
 
 ---
 
-### Exercise 3 — Which startup files are read
+### Exercise 3: Which startup files are read
 
 For each shell type, indicate which startup files will be read. Assume `/root/` has no `.profile` or `.bashrc` (fresh Debian install).
 
@@ -618,14 +618,14 @@ Notes:
 
 - The root row is built on the assumption that `/root/` has no `.profile` or `.bashrc`. On a fresh Debian install, root's home is minimal. If an admin places those files there, they will be read too.
 - `/etc/bash.bashrc` appears for all interactive shells: for non-login directly, for login via the `/etc/profile` sourcing chain. Hence "Yes" in every interactive row.
-- `~/.profile` is a login file — non-login shells do not read it.
+- `~/.profile` is a login file: non-login shells do not read it.
 - `~/.bashrc` for login user2: read indirectly because `~/.profile` by default contains `source ~/.bashrc`.
 
 </details>
 
 ---
 
-### Exercise 4 — Hello world function
+### Exercise 4: Hello world function
 
 A file contains this function:
 
@@ -668,7 +668,7 @@ Hello world!
 
 ---
 
-### Exercise 5 — Script interactivity
+### Exercise 5: Script interactivity
 
 Given this script:
 
@@ -684,7 +684,7 @@ echo "Hello world!"
 <details>
 <summary>Answer</summary>
 
-**a)** No. There is no user input — commands are not typed by a person in real time. The shell runs the script from start to finish without waiting for any response.
+**a)** No. There is no user input; commands are not typed by a person in real time. The shell runs the script from start to finish without waiting for any response.
 
 **b)** Needing user input. A script becomes interactive when it waits for a response, for example via `read`:
 
@@ -698,7 +698,7 @@ echo "Hello, $name"
 
 ---
 
-### Exercise 6 — Applying ~/.bashrc changes
+### Exercise 6: Applying ~/.bashrc changes
 
 After editing variables in `~/.bashrc`, you need to apply the changes without opening a new terminal. From the home directory, two commands work.
 
@@ -721,7 +721,7 @@ Both read the file and execute it in the current shell. Without this, the new co
 
 ---
 
-### Exercise 7 — Switching to a tty when the GUI freezes
+### Exercise 7: Switching to a tty when the GUI freezes
 
 John is in an X Window session with a terminal emulator, but the session has frozen. He needs a working text shell.
 
@@ -747,7 +747,7 @@ These are the two main login files. Additionally, via the sourcing chain: `/etc/
 
 ---
 
-### Exercise 8 — ~/.bash_login for all new users
+### Exercise 8: ~/.bash_login for all new users
 
 Linda asked her admin to create `~/.bash_login` that prints the date and time on login. Other users liked the idea. The admin wants this file to appear automatically for all future users.
 

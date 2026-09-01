@@ -8,13 +8,13 @@ lang_pair: "/posts/lpic2/ru/lpic2-200-1-capacity-planning/"
 page_lang: "en"
 ---
 
-> **Exam weight: 6 points** — one of the highest-weighted topics in section 200.
+> **Exam weight: 6 points**. One of the highest-weighted topics in section 200.
 
 The core principle: **"You can't manage what you can't measure."** Resource monitoring falls into three categories:
 
-- **Operational** — watching the current state of the system
-- **Diagnostic** — finding the root cause of a specific problem
-- **Capacity** — collecting data for capacity planning
+- **Operational**: watching the current state of the system
+- **Diagnostic**: finding the root cause of a specific problem
+- **Capacity**: collecting data for capacity planning
 
 Key metrics to track on every system: uptime, CPU load average, RAM and swap usage, disk I/O, network I/O, firewall and router throughput.
 
@@ -72,7 +72,7 @@ KiB Swap:   392188 total,        0 used,   392188 free,   270552 cached
 | `sy` | Kernel space |
 | `ni` | Processes with altered nice value |
 | `id` | Idle |
-| `wa` | I/O wait — **high value = disk bottleneck** |
+| `wa` | I/O wait: **high value = disk bottleneck** |
 | `hi` | Hardware interrupts |
 | `si` | Software interrupts |
 | `st` | Steal time (hypervisor stole CPU from this VM) |
@@ -99,11 +99,11 @@ htop            # launch
 htop -u user    # filter by user
 ```
 
-> **Tip:** `htop`'s key advantage over `top`: process management (kill, renice) without knowing the PID — all through an interactive interface with function keys.
+> **Tip:** `htop`'s key advantage over `top`: process management (kill, renice) without knowing the PID, all through an interactive interface with function keys.
 
 ---
 
-### sar — System Activity Reporter
+### sar: System Activity Reporter
 
 Collects, stores, and displays system activity. Data is stored in `/var/log/sa/` (by the `sadc` daemon). Package: `sysstat`.
 
@@ -122,7 +122,7 @@ sar -w                 # swapping activity
 sar -f /var/log/sa/sa15  # data from a file (15th of the month)
 ```
 
-Example — CPU (no options):
+Example. CPU (no options):
 
 ```
 $ sar
@@ -136,7 +136,7 @@ Linux 3.2.0-4-686-pae (debian)  05/07/2013  _i686_  (2 CPU)
 Average:    all      0.64      0.14      4.19      0.06      0.00     94.98
 ```
 
-Example — disk stats (`sar -d`):
+Example. Disk stats (`sar -d`):
 
 ```
 $ sar -d
@@ -167,9 +167,9 @@ Average:  dev8-0     3.49     85.63     30.14     33.15     0.01    2.36    1.19
 
 `ps` supports three syntax styles that can be mixed:
 
-- **UNIX** — with a single dash: `ps -ef`
-- **BSD** — without a dash: `ps aux`
-- **GNU long** — with two dashes: `ps --forest`
+- **UNIX**, with a single dash: `ps -ef`
+- **BSD**, without a dash: `ps aux`
+- **GNU long**, with two dashes: `ps --forest`
 
 ```bash
 ps aux              # all processes (BSD syntax)
@@ -182,11 +182,11 @@ ps -u username      # processes of a specific user
 
 | Code | Meaning |
 |---|---|
-| `R` | Running — executing or in run queue |
-| `S` | Sleeping — interruptible wait |
-| `D` | **Uninterruptible sleep — waiting for I/O** |
-| `Z` | Zombie — finished but not reaped by parent |
-| `T` | Stopped — halted by a signal |
+| `R` | Running: executing or in run queue |
+| `S` | Sleeping: interruptible wait |
+| `D` | **Uninterruptible sleep: waiting for I/O** |
+| `Z` | Zombie: finished but not reaped by parent |
+| `T` | Stopped: halted by a signal |
 | `s` | Session leader |
 | `+` | In foreground process group |
 
@@ -253,22 +253,22 @@ procs ---memory-- ---swap-- -----io---- -system-- ----cpu----
  0  0      0 109152  33824 242204    0    0     0     2  124  239  0  1 98  0
 ```
 
-> **Warning:** The **first row** shows averages since boot — **ignore it** when analysing current load.
+> **Warning:** The **first row** shows averages since boot, **ignore it** when analysing current load.
 
 **Column reference:**
 
 | Section | Column | Meaning |
 |---|---|---|
-| **procs** | `r` | Processes in run queue — waiting for CPU |
-| **procs** | `b` | Processes in block queue — **uninterruptible sleep** (waiting for I/O) |
+| **procs** | `r` | Processes in run queue: waiting for CPU |
+| **procs** | `b` | Processes in block queue: **uninterruptible sleep** (waiting for I/O) |
 | **memory** | `swpd` | Used virtual (swap) memory, KB |
 | **memory** | `free` | Free RAM (not cache, not buffers), KB |
-| **memory** | `buff` | Buffers — contain **raw disk blocks** |
-| **memory** | `cache` | Cache — contains **files** |
-| **swap** | `si` | Swap in — pages/sec **from disk to RAM** |
-| **swap** | `so` | Swap out — pages/sec **from RAM to disk** |
-| **io** | `bi` | Blocks in — blocks/sec **from** block device |
-| **io** | `bo` | Blocks out — blocks/sec **to** block device |
+| **memory** | `buff` | Buffers: contain **raw disk blocks** |
+| **memory** | `cache` | Cache: contains **files** |
+| **swap** | `si` | Swap in: pages/sec **from disk to RAM** |
+| **swap** | `so` | Swap out: pages/sec **from RAM to disk** |
+| **io** | `bi` | Blocks in: blocks/sec **from** block device |
+| **io** | `bo` | Blocks out: blocks/sec **to** block device |
 | **system** | `in` | Interrupts/sec (including timer) |
 | **system** | `cs` | Context switches/sec |
 | **cpu** | `us` | % user space |
@@ -322,7 +322,7 @@ iostat -x           # extended device statistics
 iostat -y 1 5       # suppress the first row (boot average)
 ```
 
-Example — basic output:
+Example. Basic output:
 
 ```
 $ iostat
@@ -338,7 +338,7 @@ sda              12.21       214.81        17.38     333479      26980
 | `tps` | Transactions per second to the device |
 | `kB_read/s` | KB/s read |
 | `kB_wrtn/s` | KB/s written |
-| `%iowait` | % CPU waiting for I/O — **high value = bottleneck** |
+| `%iowait` | % CPU waiting for I/O: **high value = bottleneck** |
 
 > **Tip:** `watch` turns any static utility into a dynamic one:
 > ```bash
@@ -349,7 +349,7 @@ sda              12.21       214.81        17.38     333479      26980
 
 ### iotop
 
-The `top` equivalent for disk I/O — shows load per process in real time. Displays I/O bandwidth per process/thread, I/O priority, and the percentage of time spent on swap-in and I/O wait.
+The `top` equivalent for disk I/O, shows load per process in real time. Displays I/O bandwidth per process/thread, I/O priority, and the percentage of time spent on swap-in and I/O wait.
 
 ```bash
 iotop               # interactive mode
@@ -393,7 +393,7 @@ lsof -u username        # user's files
 lsof -F                 # machine-readable output
 ```
 
-Example — who has a file open:
+Example. Who has a file open:
 
 ```
 $ sudo lsof /var/run/utmp
@@ -403,7 +403,7 @@ gdm-simpl 4040 root   10u   REG   0,14     5376  636 /run/utmp
 
 | Column | Meaning |
 |---|---|
-| `FD` | File descriptor — `r`=read, `w`=write, `u`=read+write |
+| `FD` | File descriptor: `r`=read, `w`=write, `u`=read+write |
 | `TYPE` | File type: `REG`=file, `DIR`=directory, `IPv4`/`IPv6`=network |
 | `DEVICE` | Device numbers (major, minor) |
 | `NODE` | Inode number |
@@ -433,7 +433,7 @@ netstat -an         # all connections without name resolution
 
 ### ss
 
-The modern replacement for `netstat` — reads data directly from kernel space and provides more information about TCP states.
+The modern replacement for `netstat`, reads data directly from kernel space and provides more information about TCP states.
 
 ```bash
 ss                  # all connections
@@ -508,13 +508,13 @@ Processes block in D-state (vmstat column b)
 Artificially low CPU load (CPU idles, waiting for I/O)
 ```
 
-> **Warning:** RAM shortage **artificially suppresses** CPU load. After adding RAM, CPU load will increase — that is normal.
+> **Warning:** RAM shortage **artificially suppresses** CPU load. After adding RAM, CPU load will increase; that is normal.
 
 ---
 
 ## Correlating Symptoms and Problems
 
-> **Important:** All resource problems share a common trait — one or more resources cannot handle the load under certain conditions. Resources are interconnected: CPU, physical/virtual memory, storage, network interfaces, I/O between components.
+> **Important:** All resource problems share a common trait, one or more resources cannot handle the load under certain conditions. Resources are interconnected: CPU, physical/virtual memory, storage, network interfaces, I/O between components.
 
 | Symptom | Likely cause | Diagnostic tools |
 |---|---|---|
@@ -642,7 +642,7 @@ ip route show
 
 **Q4.** The `si` and `so` columns in `vmstat` consistently show high values. What does this mean and what is the likely cause?
 
-**Answer:** Intensive swap in/out — the system is actively moving memory pages between RAM and swap. The likely cause is insufficient physical RAM. The consequence is system slowdown due to slow disk I/O substituting for memory.
+**Answer:** Intensive swap in/out; the system is actively moving memory pages between RAM and swap. The likely cause is insufficient physical RAM. The consequence is system slowdown due to slow disk I/O substituting for memory.
 
 ---
 

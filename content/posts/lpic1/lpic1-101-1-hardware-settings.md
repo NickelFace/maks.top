@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-101-1-hardware-settings/"
 page_lang: "en"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 101
+> **Exam weight: 2**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -23,7 +23,7 @@ page_lang: "en"
 
 ## BIOS and UEFI: configuration before the OS loads
 
-Before the operating system starts, hardware can be configured directly in the BIOS or UEFI utility. You enter it at power-on by pressing the appropriate key — usually Del, F2 or F12. The exact key depends on the manufacturer and is typically shown on screen during POST.
+Before the operating system starts, hardware can be configured directly in the BIOS or UEFI utility. You enter it at power-on by pressing the appropriate key: usually Del, F2 or F12. The exact key depends on the manufacturer and is typically shown on screen during POST.
 
 BIOS (Basic Input/Output System) was used on x86 motherboards until the mid-2000s. From the late 2000s onwards it began to be replaced by UEFI (Unified Extensible Firmware Interface), which offers richer capabilities: device identification, testing, configuration and firmware updates. In practice both are still commonly called "BIOS" because they serve the same purpose.
 
@@ -50,15 +50,15 @@ Linux provides three pseudo-filesystems through which you can read hardware info
 Useful files:
 
 ```
-/proc/cpuinfo       — CPU information
-/proc/meminfo       — memory information
-/proc/interrupts    — interrupt table (IRQ)
-/proc/ioports       — I/O port ranges
-/proc/dma           — DMA channels in use
-/proc/bus/pci/      — PCI devices
+/proc/cpuinfo       - CPU information
+/proc/meminfo       - memory information
+/proc/interrupts    - interrupt table (IRQ)
+/proc/ioports       - I/O port ranges
+/proc/dma           - DMA channels in use
+/proc/bus/pci/      - PCI devices
 ```
 
-Example — view the CPU model:
+Example. View the CPU model:
 
 ```bash
 cat /proc/cpuinfo | grep "model name"
@@ -108,8 +108,8 @@ udev manages dynamic device files in `/dev/`. The kernel detects a device event 
 
 udev handles two scenarios:
 
-- **Coldplug** — devices already connected when the machine powers on. udev processes them during system startup.
-- **Hotplug** — devices connected while the system is running (e.g. a USB flash drive). The kernel supports hotplug since version 2.6.
+- **Coldplug**: devices already connected when the machine powers on. udev processes them during system startup.
+- **Hotplug**: devices connected while the system is running (e.g. a USB flash drive). The kernel supports hotplug since version 2.6.
 
 udev relies on sysfs (`/sys/`) for device information. Rules for device identification are stored in `/etc/udev/rules.d/`. Base rules are provided by the distribution; you can add your own for specific cases.
 
@@ -150,25 +150,25 @@ Partition naming: for `sd` disks just append a number: `/dev/sda1`, `/dev/sda2`.
 
 Each device uses one or more resources:
 
-**IRQ (Interrupt Request)** — interrupt line the device uses to signal the CPU. View current assignments:
+**IRQ (Interrupt Request)**. Interrupt line the device uses to signal the CPU. View current assignments:
 
 ```bash
 cat /proc/interrupts
 ```
 
-**I/O Ports** — address ranges for data exchange with the device:
+**I/O Ports**. Address ranges for data exchange with the device:
 
 ```bash
 cat /proc/ioports
 ```
 
-**DMA (Direct Memory Access)** — channels for direct memory access, bypassing the CPU:
+**DMA (Direct Memory Access)**. Channels for direct memory access, bypassing the CPU:
 
 ```bash
 cat /proc/dma
 ```
 
-**Memory-mapped I/O** — physical memory ranges reserved for devices.
+**Memory-mapped I/O**: physical memory ranges reserved for devices.
 
 ---
 
@@ -254,7 +254,7 @@ This is useful before writing parameters to `/etc/modprobe.d/`.
 
 ## Inspecting PCI devices: lspci
 
-`lspci` lists all devices connected to the PCI/PCIe bus — video cards, NICs, SATA controllers, USB expansion cards. Some devices are soldered onto the motherboard; others are inserted into expansion slots.
+`lspci` lists all devices connected to the PCI/PCIe bus, video cards, NICs, SATA controllers, USB expansion cards. Some devices are soldered onto the motherboard; others are inserted into expansion slots.
 
 Note: many hardware commands require root privileges or show limited output for regular users. Use `sudo`.
 
@@ -464,15 +464,15 @@ udevadm info -a -n /dev/device
 
 ## Related topics
 
-- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/) — system boot process
-- 101.3 Change runlevels / boot targets — runlevels
-- 102.1 Design hard disk layout — disk partitioning
+- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/): system boot process
+- 101.3 Change runlevels / boot targets: runlevels
+- 102.1 Design hard disk layout: disk partitioning
 
 ---
 
 ## Exercises
 
-### Exercise 1 — SATA disk boot order
+### Exercise 1: SATA disk boot order
 
 A system stops booting after a second SATA disk is added. All components are working. What is the likely cause?
 
@@ -487,7 +487,7 @@ Fix: enter BIOS/UEFI and restore the correct disk to the top of the boot order.
 
 ---
 
-### Exercise 2 — Inspecting a video card with lspci
+### Exercise 2: Inspecting a video card with lspci
 
 You need to check the specs of a discrete video card connected to the PCI bus without opening the case. Which command do you use?
 
@@ -512,7 +512,7 @@ The `Subsystem` line in the output shows exactly what is printed on the box.
 
 ---
 
-### Exercise 3 — Kernel module for a RAID controller
+### Exercise 3: Kernel module for a RAID controller
 
 The `lspci` output contains this line:
 
@@ -535,7 +535,7 @@ The `-s` flag targets the specific device address; `-k` shows `Kernel driver in 
 
 ---
 
-### Exercise 4 — Module unload failure
+### Exercise 4: Module unload failure
 
 An administrator tries to unload the `bluetooth` module with `modprobe -r bluetooth` and gets:
 
@@ -556,20 +556,20 @@ Check who holds the module via `lsmod | grep bluetooth` and look at the `Used by
 
 ---
 
-### Exercise 5 — Headless boot on legacy BIOS
+### Exercise 5: Headless boot on legacy BIOS
 
 On older servers with a legacy BIOS, the system refuses to boot if no keyboard is connected. How do you fix this?
 
 <details>
 <summary>Answer</summary>
 
-In the BIOS settings, find the option that controls behaviour when a keyboard is absent — usually called `Halt on` or `Boot with keyboard errors`. Set it to `All, But Keyboard` (or equivalent) to ignore the missing keyboard and continue booting. Standard setting for headless servers.
+In the BIOS settings, find the option that controls behaviour when a keyboard is absent: usually called `Halt on` or `Boot with keyboard errors`. Set it to `All, But Keyboard` (or equivalent) to ignore the missing keyboard and continue booting. Standard setting for headless servers.
 
 </details>
 
 ---
 
-### Exercise 6 — No lspci on ARM
+### Exercise 6: No lspci on ARM
 
 On single-board computers like the Raspberry Pi (ARM), the `lspci` command is not present. Why?
 
@@ -582,7 +582,7 @@ Because ARM boards have no PCI/PCIe bus. `lspci` queries specifically the PCI bu
 
 ---
 
-### Exercise 7 — USB drive on a Linux router
+### Exercise 7: USB drive on a Linux router
 
 An external USB hard drive is connected to a Linux-based router. There are no other block devices. What will it be called in `/dev/`?
 
@@ -599,7 +599,7 @@ Since kernel 2.4, USB drives are represented as SCSI devices and receive the `sd
 
 ---
 
-### Exercise 8 — Checking for the Meltdown vulnerability
+### Exercise 8: Checking for the Meltdown vulnerability
 
 How do you check whether the current system is affected by Meltdown?
 

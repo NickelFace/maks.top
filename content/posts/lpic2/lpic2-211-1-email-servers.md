@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-211-1-email-servers/"
 page_lang: "en"
 ---
 
-> **Exam topic 211.1** — Using E-mail Servers (weight: 4). Covers Postfix configuration, mail queues, aliases, virtual domains, TLS, and Sendmail/Exim awareness.
+> **Exam topic 211.1**: Using E-mail Servers (weight: 4). Covers Postfix configuration, mail queues, aliases, virtual domains, TLS, and Sendmail/Exim awareness.
 
 ---
 
@@ -17,9 +17,9 @@ page_lang: "en"
 SMTP is described in RFC 5321. Commands are four characters; server responses start with a three-digit code.
 
 **Response codes:**
-- `2xx` — success
-- `4xx` — temporary error (retry possible)
-- `5xx` — permanent error (message rejected)
+- `2xx`: success
+- `4xx`: temporary error (retry possible)
+- `5xx`: permanent error (message rejected)
 
 Common codes: `220` = server ready, `250` = command OK, `550` = recipient not found.
 
@@ -49,7 +49,7 @@ disable_vrfy_command = yes
 
 ## MTA Architecture
 
-**MTA (Mail Transfer Agent)** — receives and delivers mail.
+**MTA (Mail Transfer Agent)**: receives and delivers mail.
 
 | Component | Role |
 |---|---|
@@ -113,7 +113,7 @@ Sample config: `/usr/share/postfix/main.cf.dist` (Debian)
 
 ---
 
-## main.cf — Key Parameters
+## main.cf: Key Parameters
 
 ```ini
 myhostname = mail.example.com           # server hostname
@@ -145,7 +145,7 @@ recipient_canonical_maps = hash:/etc/postfix/recipient_canonical  # rewrite reci
 
 ---
 
-## master.cf — Process Management
+## master.cf: Process Management
 
 Each line describes one service. Line continuation uses indentation (whitespace at the start of the next line).
 
@@ -160,13 +160,13 @@ cleanup   unix  n       -       -       -       0       cleanup
 qmgr      unix  n       -       n       300     1       qmgr
 ```
 
-> **Exam fact:** Lines in master.cf continue via indentation (space/tab at start of next line) — NOT with a backslash.
+> **Exam fact:** Lines in master.cf continue via indentation (space/tab at start of next line), NOT with a backslash.
 
 > `chroot` field: default is `n` in Postfix >= 3.0, `y` in Postfix < 3.0.
 
 ---
 
-## Aliases — /etc/aliases
+## Aliases: /etc/aliases
 
 Redirects mail from one address to another:
 
@@ -251,11 +251,11 @@ relayhost = mail.example.com  # route outgoing through ISP relay
 |---|---|
 | `none` | Don't announce STARTTLS |
 | `may` | TLS available but not required (recommended per RFC 2487) |
-| `encrypt` | TLS required — may block all incoming mail if remote doesn't support it |
+| `encrypt` | TLS required: may block all incoming mail if remote doesn't support it |
 | `dane` | Use TLSA DNS records (DANE) |
 
 ```bash
-# Generate self-signed certificate (no key passphrase — Postfix requirement)
+# Generate self-signed certificate (no key passphrase - Postfix requirement)
 openssl req -nodes -x509 -newkey rsa:2048 \
   -keyout postfixkey.pem -out postfixcert.pem -days 356
 ```
@@ -288,7 +288,7 @@ Postfix includes sendmail-compatible commands:
 
 | Command | Purpose | Native Postfix |
 |---|---|---|
-| `sendmail` | Send mail / accept from stdin | — |
+| `sendmail` | Send mail / accept from stdin | n/a |
 | `mailq` | Show message queue | `postqueue -p` |
 | `newaliases` | Rebuild aliases database | `postalias /etc/aliases` |
 | `sendmail -bp` | Show queue | `mailq` |
@@ -415,7 +415,7 @@ postsuper -d ALL            # delete all queued messages
 | After changing `/etc/aliases` | Run `newaliases` |
 | `relay_domains` vs `relayhost` | relay_domains = incoming relay; relayhost = outgoing relay |
 | `sender_canonical_maps` | Rewrites sender only, not recipient |
-| master.cf line continuation | Indentation (space/tab) — NOT backslash |
+| master.cf line continuation | Indentation (space/tab): NOT backslash |
 | TLS key passphrase | Postfix requires no passphrase on the private key |
 | `smtpd_tls_` vs `smtp_tls_` | smtpd = incoming server; smtp = outgoing client |
 | Sendmail `OK` vs `RELAY` | `OK` ≠ relay; `RELAY` = relay + OK |

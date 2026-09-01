@@ -10,12 +10,12 @@ date: 2026-04-22
 Cisco IOS cheat sheet for <strong>ISP connectivity</strong>: dual-ISP failover without BGP (IP SLA + tracking), dynamic NAT switching, multihomed BGP with two CE routers, PPPoE client, and <strong>Policy-Based Routing (PBR)</strong>.
 </div>
 
-## IP SLA — Availability Monitoring
+## IP SLA: Availability Monitoring
 
 Used to detect ISP link failure and trigger route switching.
 
 <div class="ref-panel">
-<div class="ref-panel-head">IP SLA — Method 1 (modern IOS)</div>
+<div class="ref-panel-head">IP SLA: Method 1 (modern IOS)</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -34,7 +34,7 @@ Used to detect ISP link failure and trigger route switching.
 </div>
 
 <div class="ref-panel">
-<div class="ref-panel-head">IP SLA — Method 2 (legacy IOS)</div>
+<div class="ref-panel-head">IP SLA: Method 2 (legacy IOS)</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -67,7 +67,7 @@ Used to detect ISP link failure and trigger route switching.
 <tr><td class="mono">route-map ISP1 permit 10</td><td class="desc">Match traffic exiting via ISP1 interface</td></tr>
 <tr><td class="mono">match interface e0/1</td><td class="desc">ISP1 outbound interface</td></tr>
 <tr><td class="mono">ip nat pool ovrld 217.145.14.4 217.145.14.4 netmask 255.255.255.0</td><td class="desc">ISP1 public IP pool</td></tr>
-<tr><td class="mono">ip nat inside source route-map ISP1 pool ovrld overload</td><td class="desc">NAT with route-map — translates to ISP1 IP when ISP1 is active</td></tr>
+<tr><td class="mono">ip nat inside source route-map ISP1 pool ovrld overload</td><td class="desc">NAT with route-map: translates to ISP1 IP when ISP1 is active</td></tr>
 </tbody>
 </table>
 </div>
@@ -92,7 +92,7 @@ Used to detect ISP link failure and trigger route switching.
 
 ---
 
-## BGP Multihomed — Dual CE Routers
+## BGP Multihomed: Dual CE Routers
 
 When both CE routers advertise the same PI prefix to two ISPs, return traffic may arrive via the wrong CE (breaking NAT). Solution: the standby CE conditionally suppresses its advertisement when the primary ISP is reachable.
 
@@ -121,7 +121,7 @@ When both CE routers advertise the same PI prefix to two ISPs, return traffic ma
 ## PPPoE Client Configuration
 
 <div class="ref-panel">
-<div class="ref-panel-head">Step 1 — Create Dialer Interface</div>
+<div class="ref-panel-head">Step 1: Create Dialer Interface</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -141,7 +141,7 @@ When both CE routers advertise the same PI prefix to two ISPs, return traffic ma
 </div>
 
 <div class="ref-panel">
-<div class="ref-panel-head">Step 2 — Bind Physical Interface to Dialer Pool</div>
+<div class="ref-panel-head">Step 2: Bind Physical Interface to Dialer Pool</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -154,7 +154,7 @@ When both CE routers advertise the same PI prefix to two ISPs, return traffic ma
 </div>
 
 <div class="ref-panel">
-<div class="ref-panel-head">Step 3 — Default Route and NAT</div>
+<div class="ref-panel-head">Step 3: Default Route and NAT</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -171,7 +171,7 @@ When both CE routers advertise the same PI prefix to two ISPs, return traffic ma
 
 ## Policy-Based Routing (PBR)
 
-Route traffic based on source IP, destination, or protocol — overriding the normal routing table.
+Route traffic based on source IP, destination, or protocol: overriding the normal routing table.
 
 <div class="ref-panel">
 <div class="ref-panel-head">PBR Configuration</div>

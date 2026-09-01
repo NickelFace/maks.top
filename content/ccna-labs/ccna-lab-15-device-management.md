@@ -72,4 +72,4 @@ SW1(config)#boot system flash:c2960-lanbasek9-mz.150-2.SE4.bin
 ```
 
 > **⚠️ Note:**
-> During Password Recovery, do NOT run `write erase`! Use `copy start run` to restore the configuration — otherwise the config will be deleted.
+> During Password Recovery, do NOT run `write erase`! Use `copy start run` to restore the configuration; otherwise the config will be deleted.

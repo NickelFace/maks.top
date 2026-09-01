@@ -344,9 +344,9 @@ cpio -idv < backup.cpio
 ```
 
 `cpio` modes:
-- `-o` (out) — create archive
-- `-i` (in) — extract
-- `-p` (pass-through) — copy without creating an archive
+- `-o` (out): create archive
+- `-i` (in): extract
+- `-p` (pass-through): copy without creating an archive
 
 ---
 
@@ -444,19 +444,19 @@ cp -r src/ dst/                          # recursive copy
 cp -a src/ dst/                          # archive mode (preserves everything)
 cp -i *.txt /backup/                     # copy with prompt
 
-# find — most common patterns
+# find - most common patterns
 find /home -name "*.txt" -type f
 find /var -size +50M -mtime -7
 find / -perm -4000 -type f               # find SUID files
 find . -name "*.tmp" -delete
 find . -name "*.sh" -exec chmod +x {} \;
 
-# tar — remember order: operation, then modifiers, then -f
+# tar - remember order: operation, then modifiers, then -f
 tar -czf backup.tar.gz /home/user/
 tar -xzf backup.tar.gz -C /restore/
 tar -tf archive.tar
 
-# dd — disk copying
+# dd - disk copying
 dd if=/dev/sda of=disk.img bs=4M status=progress
 
 # gzip/bzip2
@@ -483,9 +483,9 @@ tar -czf backup.tar.gz dir/  # most often used through tar
 **View archive contents without extracting:** `tar -tf arch.tar`.
 
 **Difference between mtime, atime, ctime:**
-- `mtime` — time of last file content modification.
-- `atime` — time of last file access.
-- `ctime` — time of last metadata change (permissions, owner).
+- `mtime`: time of last file content modification.
+- `atime`: time of last file access.
+- `ctime`: time of last metadata change (permissions, owner).
 
 **What `touch` does to an existing file:** updates its timestamps to the current time.
 
@@ -533,7 +533,7 @@ Because of the `-h` flag. Without it sizes would be in bytes.
 
 <details><summary>Answer</summary>
 
-Only filenames would be shown — no permissions, owner, size, or date.
+Only filenames would be shown, no permissions, owner, size, or date.
 
 </details>
 
@@ -591,7 +591,7 @@ The asterisk `*`:
 rm *
 ```
 
-`*` matches any number of any characters, including empty — it captures all files.
+`*` matches any number of any characters, including empty; it captures all files.
 
 </details>
 
@@ -710,7 +710,7 @@ mkdir animal
 mv dog cat -t animal/
 ```
 
-`-t` specifies the target directory explicitly — convenient when moving multiple files. `mv dog cat animal/` also works.
+`-t` specifies the target directory explicitly, convenient when moving multiple files. `mv dog cat animal/` also works.
 
 </details>
 

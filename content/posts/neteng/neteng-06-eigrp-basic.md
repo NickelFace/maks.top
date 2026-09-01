@@ -19,15 +19,15 @@ lang_pair: "/posts/neteng/ru/neteng-06-eigrp-basic/"
 
 | Device | Interface    | IP Address  | Subnet Mask     | Default Gateway |
 | ------ | ------------ | ----------- | --------------- | --------------- |
-| R1     | G0/0         | 192.168.1.1 | 255.255.255.0   | —               |
-|        | S0/0/0 (DCE) | 10.1.1.1    | 255.255.255.252 | —               |
-|        | S0/0/1       | 10.3.3.1    | 255.255.255.252 | —               |
-| R2     | G0/0         | 192.168.2.1 | 255.255.255.0   | —               |
-|        | S0/0/0       | 10.1.1.2    | 255.255.255.252 | —               |
-|        | S0/0/1 (DCE) | 10.2.2.2    | 255.255.255.252 | —               |
-| R3     | G0/0         | 192.168.3.1 | 255.255.255.0   | —               |
-|        | S0/0/0 (DCE) | 10.3.3.2    | 255.255.255.252 | —               |
-|        | S0/0/1       | 10.2.2.1    | 255.255.255.252 | —               |
+| R1     | G0/0         | 192.168.1.1 | 255.255.255.0   | n/a               |
+|        | S0/0/0 (DCE) | 10.1.1.1    | 255.255.255.252 | n/a               |
+|        | S0/0/1       | 10.3.3.1    | 255.255.255.252 | n/a               |
+| R2     | G0/0         | 192.168.2.1 | 255.255.255.0   | n/a               |
+|        | S0/0/0       | 10.1.1.2    | 255.255.255.252 | n/a               |
+|        | S0/0/1 (DCE) | 10.2.2.2    | 255.255.255.252 | n/a               |
+| R3     | G0/0         | 192.168.3.1 | 255.255.255.0   | n/a               |
+|        | S0/0/0 (DCE) | 10.3.3.2    | 255.255.255.252 | n/a               |
+|        | S0/0/1       | 10.2.2.1    | 255.255.255.252 | n/a               |
 | PC-A   | NIC          | 192.168.1.3 | 255.255.255.0   | 192.168.1.1     |
 | PC-B   | NIC          | 192.168.2.3 | 255.255.255.0   | 192.168.2.1     |
 | PC-C   | NIC          | 192.168.3.3 | 255.255.255.0   | 192.168.3.1     |
@@ -41,7 +41,7 @@ lang_pair: "/posts/neteng/ru/neteng-06-eigrp-basic/"
 
 ---
 
-### Part 1 — Basic device setup
+### Part 1: Basic device setup
 
 <details>
 <summary>R1</summary>
@@ -136,7 +136,7 @@ copy running-config startup-config
 
 ---
 
-### Part 2 — Configure EIGRP routing
+### Part 2: Configure EIGRP routing
 
 Enable EIGRP AS 10 and advertise directly connected networks on each router:
 
@@ -184,12 +184,12 @@ Wildcard masks are recommended because IOS requires them for non-classful subnet
 
 ---
 
-### Part 3 — Verify EIGRP routing
+### Part 3: Verify EIGRP routing
 
 **Neighbor table:**
 
 <details>
-<summary>R1 — show ip eigrp neighbors</summary>
+<summary>R1: show ip eigrp neighbors</summary>
 <pre><code>
 enable
 configure terminal
@@ -204,7 +204,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip eigrp neighbors</summary>
+<summary>R2: show ip eigrp neighbors</summary>
 <pre><code>
 enable
 configure terminal
@@ -219,7 +219,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip eigrp neighbors</summary>
+<summary>R3: show ip eigrp neighbors</summary>
 <pre><code>
 enable
 configure terminal
@@ -237,7 +237,7 @@ copy running-config startup-config
 **Routing table:**
 
 <details>
-<summary>R1 — show ip route eigrp</summary>
+<summary>R1: show ip route eigrp</summary>
 <pre><code>
 enable
 configure terminal
@@ -258,7 +258,7 @@ R1 has two equal-cost paths to 10.2.2.0/30 because both Serial0/0 and Serial1/0 
 **Topology table:**
 
 <details>
-<summary>R1 — show ip eigrp topology</summary>
+<summary>R1: show ip eigrp topology</summary>
 <pre><code>
 R1#show ip eigrp topology
 IP-EIGRP Topology Table for AS 10/ID(192.168.1.1)
@@ -284,12 +284,12 @@ P 192.168.3.0/24, 1 successors, FD is 20514560
 </code></pre>
 </details>
 
-No feasible successors exist because a feasible successor requires a loop-free backup path where AD < FD of the current successor — no such path exists in this symmetric triangle topology.
+No feasible successors exist because a feasible successor requires a loop-free backup path where AD < FD of the current successor, no such path exists in this symmetric triangle topology.
 
 **Protocol parameters:**
 
 <details>
-<summary>R1 — show ip protocols</summary>
+<summary>R1: show ip protocols</summary>
 <pre><code>
 R1#show ip protocols
 
@@ -323,12 +323,12 @@ AS number: **10** | Advertised networks: 10.1.1.0/30, 10.3.3.0/30, 192.168.1.0 |
 
 ---
 
-### Part 4 — Bandwidth and passive interfaces
+### Part 4: Bandwidth and passive interfaces
 
 Default serial bandwidth is **128 Kbps**. The R1–R3 link is slower than R1–R2 and R2–R3, so set bandwidth accordingly to influence EIGRP metric:
 
 <details>
-<summary>R1 — show interface Serial0/0 (before)</summary>
+<summary>R1: show interface Serial0/0 (before)</summary>
 <pre><code>
 R1#show interface serial 0/0
 Serial0/0 is up, line protocol is up (connected)
@@ -340,7 +340,7 @@ Serial0/0 is up, line protocol is up (connected)
 </code></pre>
 </details>
 
-Set bandwidth on all routers — R1–R2 links: 2000 Kbps, R1–R3 link: 64 Kbps:
+Set bandwidth on all routers. R1–R2 links: 2000 Kbps, R1–R3 link: 64 Kbps:
 
 <details>
 <summary>R1</summary>
@@ -382,10 +382,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-After changing bandwidth on R1, the routing table changes — the slow 64 Kbps link to R3 is no longer a preferred path, and 10.2.2.0/30 now has a single route via R2:
+After changing bandwidth on R1, the routing table changes: the slow 64 Kbps link to R3 is no longer a preferred path, and 10.2.2.0/30 now has a single route via R2:
 
 <details>
-<summary>R1 — show ip route after bandwidth change</summary>
+<summary>R1: show ip route after bandwidth change</summary>
 <pre><code>
 R1#show ip route
      10.0.0.0/8 is variably subnetted, 4 subnets, 2 masks
@@ -400,7 +400,7 @@ D    192.168.3.0/24 [90/21026560] via 10.1.1.2, 00:00:28, Serial0/0
 </details>
 
 <details>
-<summary>R1 — show interface Serial0/0 (after bandwidth 2000)</summary>
+<summary>R1: show interface Serial0/0 (after bandwidth 2000)</summary>
 <pre><code>
 R1#show interfaces serial 0/0
 Serial0/0 is up, line protocol is up (connected)
@@ -411,17 +411,17 @@ Serial0/0 is up, line protocol is up (connected)
 </code></pre>
 </details>
 
-Configure GigabitEthernet2/0 as passive on all routers — LAN interfaces don't need to send EIGRP hello packets, but the connected network is still advertised:
+Configure GigabitEthernet2/0 as passive on all routers; LAN interfaces don't need to send EIGRP hello packets, but the connected network is still advertised:
 
 ```
 router eigrp 10
  passive-interface GigabitEthernet2/0
 ```
 
-Verify with `show ip protocols` — the passive interface appears in the output:
+Verify with `show ip protocols`. The passive interface appears in the output:
 
 <details>
-<summary>R1 — show ip protocols (with passive interface)</summary>
+<summary>R1: show ip protocols (with passive interface)</summary>
 <pre><code>
 R1#show ip protocols
 

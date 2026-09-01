@@ -28,7 +28,7 @@ my_param: "value"        # custom → .Params.my_param
 | `title` | string | `.Title` | Page title. Used in `<title>`, h1, breadcrumb, cards |
 | `date` | date | `.Date` | Publication date. Format: `2026-04-11`. Affects sorting |
 | `description` | string | `.Description` | Meta description. Used in `<meta description>` and card previews |
-| `draft` | bool | `.Draft` | `true` — page not published with `hugo` (only with `hugo -D`) |
+| `draft` | bool | `.Draft` | `true`: page not published with `hugo` (only with `hugo -D`) |
 | `tags` | []string | `.Params.tags` | Tags. Create pages at `/tags/{tag-name}/` |
 | `categories` | []string | `.Params.categories` | Categories. Create pages at `/categories/{name}/` |
 | `weight` | int | `.Weight` | Manual sort order (lower = higher) |
@@ -83,12 +83,12 @@ These are custom fields, read via `.Params.*` in `certs/single.html`.
 | `description` | string | **yes** | Subtitle in hero block |
 | `post_prefix` | string | **yes** | Prefix for matching posts by slug (e.g. `"lpic2"`) |
 | `post_category` | string | **yes** | Hugo category used in course posts (e.g. `"LPIC-2"`). Used by `certs-widget.html` to count articles |
-| `expected_articles` | int | no | Planned total article count — enables auto-calculated progress % in the widget |
+| `expected_articles` | int | no | Planned total article count: enables auto-calculated progress % in the widget |
 | `progress_pct` | int | no | Manual fallback % when `expected_articles` is not set (e.g. early-stage courses with no articles yet) |
-| `credly_badge_id` | string | no | Credly badge ID — marks the cert as **passed** (overrides progress logic) |
-| `cert_url` | string | no | Alternative to `credly_badge_id` — any URL marks cert as passed |
+| `credly_badge_id` | string | no | Credly badge ID: marks the cert as **passed** (overrides progress logic) |
+| `cert_url` | string | no | Alternative to `credly_badge_id`: any URL marks cert as passed |
 | `cert_labs_done` | int | no | Number of completed labs, shown in the certs index `Articles` column |
-| `exams` | []Exam | no | List of exams with topics. Without it — "coming soon" page |
+| `exams` | []Exam | no | List of exams with topics. Without it: "coming soon" page |
 
 ### `exams` structure
 
@@ -128,11 +128,11 @@ All EN pages with a RU counterpart use these fields. Applies to posts, KB, docs,
 
 | Field | Type | Page | Description |
 |---|---|---|---|
-| `page_lang` | string | EN + RU | `"en"` or `"ru"` — identifies the page language |
+| `page_lang` | string | EN + RU | `"en"` or `"ru"`: identifies the page language |
 | `lang_pair` | string | EN + RU | URL of the paired page in the other language |
-| `pagefind_ignore` | bool | **RU only** | `true` — excludes the page from Pagefind search index |
-| `build.list` | string | **RU only** | `never` — hides the page from section listings |
-| `build.render` | string | **RU only** | `always` — ensures Hugo renders the page even when unlisted |
+| `pagefind_ignore` | bool | **RU only** | `true`: excludes the page from Pagefind search index |
+| `build.list` | string | **RU only** | `never`: hides the page from section listings |
+| `build.render` | string | **RU only** | `always`: ensures Hugo renders the page even when unlisted |
 
 ### EN page example
 ```yaml
@@ -165,11 +165,11 @@ build:
 | `icon` | string | no | Emoji icon shown in the card |
 | `group` | string | **yes** | KB section group. One of: `"Linux Core"`, `"Networking"`, `"Cloud & DevOps"`, `"Security"`, `"Cases"` |
 | `tags` | []string | recommended | Tag filtering |
-| `date` | date | **yes** | Must be a past date — Hugo skips future/today dates |
+| `date` | date | **yes** | Must be a past date: Hugo skips future/today dates |
 
 ### Subsection `_index.md` (`content/kb/{name}/_index.md`)
 
-Same fields as flat pages. Child articles do **not** need `group:` — only `_index.md` carries it.
+Same fields as flat pages. Child articles do **not** need `group:`, only `_index.md` carries it.
 
 ---
 
@@ -211,7 +211,7 @@ build:
 
 | Field | Notes |
 |---|---|
-| `code_toggle` | `true` — enables JS-collapsible `<details>` blocks for long CLI output |
+| `code_toggle` | `true`: enables JS-collapsible `<details>` blocks for long CLI output |
 | `categories` | Must match `post_category` in the cert frontmatter for article counting |
 
 ---
@@ -245,7 +245,7 @@ build:
 ---
 ```
 
-The `content/posts/ccna/_index.md` has `build: {render: never, list: never}` — the section itself does not render.
+The `content/posts/ccna/_index.md` has `build: {render: never, list: never}`; the section itself does not render.
 
 ---
 
@@ -281,13 +281,13 @@ build:
 | Field | Default | Notes |
 |---|---|---|
 | `tool` | `"Packet Tracer"` | Software used, shown in the `/ccna-labs/` grid |
-| `duration` | `"—"` | Estimated time, shown in the grid |
+| `duration` | `"n/a"` | Estimated time, shown in the grid |
 
 ---
 
 ## Fields for the About page (`content/about.md`)
 
-`about.md` uses no custom frontmatter fields — profile data (name, links) comes from `hugo.toml [params]`.
+`about.md` uses no custom frontmatter fields, profile data (name, links) comes from `hugo.toml [params]`.
 
 ```yaml
 ---

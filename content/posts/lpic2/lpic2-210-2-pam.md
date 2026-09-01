@@ -8,13 +8,13 @@ lang_pair: "/posts/lpic2/ru/lpic2-210-2-pam/"
 page_lang: "en"
 ---
 
-> **Exam topic 210.2** — PAM Authentication (weight: 3). Covers PAM module types, control flags, key PAM modules, `/etc/shadow` format, nsswitch.conf, and SSSD integration.
+> **Exam topic 210.2**: PAM Authentication (weight: 3). Covers PAM module types, control flags, key PAM modules, `/etc/shadow` format, nsswitch.conf, and SSSD integration.
 
 ---
 
 ## What Is PAM
 
-**PAM (Pluggable Authentication Modules)** is a set of libraries and APIs that gives applications a unified interface for authentication. Programs like `login` and `su` call the PAM API, and PAM handles where to verify the password — `/etc/shadow`, LDAP, or elsewhere.
+**PAM (Pluggable Authentication Modules)** is a set of libraries and APIs that gives applications a unified interface for authentication. Programs like `login` and `su` call the PAM API, and PAM handles where to verify the password: `/etc/shadow`, LDAP, or elsewhere.
 
 ```
 App1  ─┐
@@ -51,9 +51,9 @@ The control flag determines what to do on module success or failure:
 | `optional` | Ignored if other modules exist | Ignored if other modules exist |
 
 > **Key exam distinction:**
-> - `requisite` — instant failure, processing stops immediately
-> - `required` — records failure but continues all modules
-> - `sufficient` — instant success on pass
+> - `requisite`: instant failure, processing stops immediately
+> - `required`: records failure but continues all modules
+> - `sufficient`: instant success on pass
 
 ---
 
@@ -129,7 +129,7 @@ The `session` type logs username and session type to syslog at start and end.
 Authentication via NIS (Network Information Service). NIS is considered legacy and transmits data in plaintext. Modern replacement: LDAP/SSSD.
 
 ```bash
-# /etc/pam.d/login — NIS as primary, pam_unix as fallback
+# /etc/pam.d/login - NIS as primary, pam_unix as fallback
 auth    sufficient pam_nis.so item=user sense=allow map=users.byname value=compsci
 auth    required   pam_unix.so try_first_pass
 
@@ -152,7 +152,7 @@ account sufficient pam_ldap.so
 account required   pam_unix.so
 ```
 
-> `pam_ldap.so` is simpler but doesn't cache data — if the server is unavailable, login fails. SSSD via `pam_sss.so` caches credentials and works offline.
+> `pam_ldap.so` is simpler but doesn't cache data; if the server is unavailable, login fails. SSSD via `pam_sss.so` caches credentials and works offline.
 
 ---
 
@@ -201,10 +201,10 @@ john        hard   cpu     300
 Limit types: `soft` (user can raise up to hard), `hard` (only root can change).
 
 Common `item` values:
-- `nofile` — open file count
-- `nproc` — process count
-- `cpu` — CPU time in minutes
-- `maxlogins` — maximum concurrent sessions
+- `nofile`: open file count
+- `nproc`: process count
+- `cpu`: CPU time in minutes
+- `maxlogins`: maximum concurrent sessions
 
 ---
 
@@ -220,7 +220,7 @@ auth required pam_listfile.so \
 | Parameter | Description |
 |---|---|
 | `item` | What to check: `user`, `tty`, `rhost`, `ruser`, `group`, `shell` |
-| `sense` | `allow` — allow only those in list; `deny` — deny those in list |
+| `sense` | `allow`: allow only those in list; `deny`, deny those in list |
 | `file` | Path to the list file |
 | `onerr` | What to do on file read error: `succeed` or `fail` |
 
@@ -228,13 +228,13 @@ auth required pam_listfile.so \
 
 ## /etc/passwd and /etc/shadow
 
-`/etc/passwd` — public account information:
+`/etc/passwd`. Public account information:
 ```
 username:x:UID:GID:GECOS:home_dir:shell
 ```
 The `x` field means the password is stored in `/etc/shadow`.
 
-`/etc/shadow` — protected file with password hashes (root-only):
+`/etc/shadow`. Protected file with password hashes (root-only):
 ```
 username:$6$salt$hash:lastchg:min:max:warn:inactive:expire:
 ```

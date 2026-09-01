@@ -8,11 +8,11 @@ lang_pair: "/posts/lpic2/ru/lpic2-203-3-filesystem-options/"
 page_lang: "en"
 ---
 
-> **Exam topic 203.3** — Creating and Configuring Filesystem Options. Covers AutoFS, ISO9660 and its extensions, UDF, ISO image creation with mkisofs/cdrecord, and encrypted filesystems (dm-crypt, LUKS, eCryptfs).
+> **Exam topic 203.3**: Creating and Configuring Filesystem Options. Covers AutoFS, ISO9660 and its extensions, UDF, ISO image creation with mkisofs/cdrecord, and encrypted filesystems (dm-crypt, LUKS, eCryptfs).
 
 ---
 
-## AutoFS — Automatic Mounting
+## AutoFS: Automatic Mounting
 
 AutoFS mounts and unmounts filesystems on demand, without administrator intervention. When a user accesses a directory, the `automount` daemon mounts the required device. When the device is idle for a configured period, AutoFS unmounts it automatically.
 
@@ -39,7 +39,7 @@ The main AutoFS configuration file, `/etc/auto.master`, is called the **master m
 |---|---|
 | Mount point | Directory where pseudo-directories will appear |
 | Map file | Path to a subordinate file describing devices |
-| Options | e.g. `--timeout=N` — idle seconds before unmounting |
+| Options | e.g. `--timeout=N`: idle seconds before unmounting |
 
 > **Warning:** AutoFS will not reload or restart if the mount point is busy. Check for active processes in the directory before running `reload`.
 
@@ -58,7 +58,7 @@ cdrom    -ro,fstype=iso9660  :/dev/cdrom
 ```
 
 ```
-# /etc/auto.home — NFS example
+# /etc/auto.home - NFS example
 *   -fstype=nfs4,rw   server.example.com:/home/&
 ```
 
@@ -149,14 +149,14 @@ Full setup sequence:
 systemctl enable mnt.automount
 systemctl start mnt.automount
 
-# 2. Check status — unit will be "active (waiting)"
+# 2. Check status - unit will be "active (waiting)"
 systemctl status mnt.automount
 
 # 3. After start, mount shows the point as autofs but the disk is not yet mounted
 #    systemd-1 on /mnt type autofs (rw,relatime,...)
 mount | grep mnt
 
-# 4. Access the directory — this triggers the mount
+# 4. Access the directory - this triggers the mount
 ls /mnt
 
 # 5. Now lsblk and mount show the real disk on /mnt
@@ -215,7 +215,7 @@ Tools from the `udftools` package:
 
 ---
 
-## mkisofs — Creating ISO Images
+## mkisofs: Creating ISO Images
 
 `mkisofs` creates ISO images from directories. On newer distributions it is replaced by `genisoimage`, but the syntax is compatible.
 
@@ -306,7 +306,7 @@ With separate CD-ROM and CD-writer drives:
 cdrecord -v dev=0,6,0 speed=2 -isosize /dev/scd0
 ```
 
-With only one drive — read to file first, then write:
+With only one drive. Read to file first, then write:
 
 ```bash
 # Read CD contents into a file
@@ -328,7 +328,7 @@ Linux supports several symmetric encryption algorithms:
 |---|---|
 | AES (Rijndael) | NIST standard; 128-bit block; 128/192/256-bit key. Intel hardware acceleration via AES-NI since 2010. |
 | Twofish | AES candidate; 128-bit block, key up to 256 bits. Lost to Rijndael on performance. |
-| DES | Obsolete standard; 56-bit key. Considered insecure — brute-forced quickly. |
+| DES | Obsolete standard; 56-bit key. Considered insecure: brute-forced quickly. |
 
 > **Important:** Check AES-NI support in the CPU: `grep aes /proc/cpuinfo`. Check kernel support: `sort -u /proc/crypto | grep module`. Load the driver: `modprobe aesni-intel`.
 
@@ -346,7 +346,7 @@ The **Device Mapper** is a general Linux kernel mechanism for mapping one block 
 
 ## dm-crypt
 
-dm-crypt encrypts an entire block device. It stores no metadata — if the passphrase is lost, data cannot be recovered. After encryption the partition is indistinguishable from a disk of random data, providing plausible deniability.
+dm-crypt encrypts an entire block device. It stores no metadata; if the passphrase is lost, data cannot be recovered. After encryption the partition is indistinguishable from a disk of random data, providing plausible deniability.
 
 ```bash
 # Load required modules at startup
@@ -370,7 +370,7 @@ mkdir /crypt
 mount /crypt
 ```
 
-> **Warning:** dm-crypt is intended for experienced users. For everyone else, LUKS is recommended. Losing the passphrase means permanent data loss — there is no metadata to fall back on.
+> **Warning:** dm-crypt is intended for experienced users. For everyone else, LUKS is recommended. Losing the passphrase means permanent data loss; there is no metadata to fall back on.
 
 ---
 
@@ -520,13 +520,13 @@ cryptsetup luksDump /dev/sdb1
 
 **Q1.** An administrator wants to auto-mount the NFS directory `/export/data` from server `fileserver` at `/mnt/data` via AutoFS. Which file should be edited first?
 
-**Answer:** `/etc/auto.master` — add a line mapping the mount point to a map file. Then create the map file itself.
+**Answer:** `/etc/auto.master`; add a line mapping the mount point to a map file. Then create the map file itself.
 
 ---
 
 **Q2.** The file `/etc/auto.floppy` contains `floppy -user,fstype=auto :/dev/fd0`. What happens when a user runs `ls /var/autofs/floppy`?
 
-**Answer:** **Nothing** — the pseudo-directory `floppy` is not visible when listing the parent directory. The mount is triggered only on direct access: `ls /var/autofs/floppy/floppy`.
+**Answer:** **Nothing**; the pseudo-directory `floppy` is not visible when listing the parent directory. The mount is triggered only on direct access: `ls /var/autofs/floppy/floppy`.
 
 ---
 
@@ -544,7 +544,7 @@ cryptsetup luksDump /dev/sdb1
 
 **Q5.** An administrator created an ISO image and wants to verify its contents without burning it to disc. Which command does this?
 
-**Answer:** `mount -t iso9660 -o ro,loop=/dev/loop0 cd_image /cdrom` — mounts the ISO as a loop device for inspection.
+**Answer:** `mount -t iso9660 -o ro,loop=/dev/loop0 cd_image /cdrom`: mounts the ISO as a loop device for inspection.
 
 ---
 

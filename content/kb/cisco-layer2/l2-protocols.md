@@ -7,10 +7,10 @@ date: 2026-04-22
 ---
 
 <div class="intro-card">
-Cisco IOS WAN Layer 2 cheat sheet: <strong>PPP</strong> (Point-to-Point Protocol) with CHAP authentication, and <strong>Frame-Relay</strong> — multipoint and point-to-point sub-interface configurations.
+Cisco IOS WAN Layer 2 cheat sheet: <strong>PPP</strong> (Point-to-Point Protocol) with CHAP authentication, and <strong>Frame-Relay</strong>; multipoint and point-to-point sub-interface configurations.
 </div>
 
-## PPP — Point-to-Point Protocol
+## PPP: Point-to-Point Protocol
 
 <div class="ref-panel">
 <div class="ref-panel-head">PPP with CHAP Authentication</div>
@@ -28,11 +28,11 @@ Cisco IOS WAN Layer 2 cheat sheet: <strong>PPP</strong> (Point-to-Point Protocol
 </div>
 </div>
 
-> PPP is a point-to-point environment — no Layer 2 addresses (MAC) are used.
+> PPP is a point-to-point environment, no Layer 2 addresses (MAC) are used.
 
 ---
 
-## Frame-Relay — Basic Setup
+## Frame-Relay: Basic Setup
 
 <div class="ref-panel">
 <div class="ref-panel-head">Simple Frame-Relay Link</div>
@@ -51,9 +51,9 @@ Cisco IOS WAN Layer 2 cheat sheet: <strong>PPP</strong> (Point-to-Point Protocol
 
 ---
 
-## Frame-Relay — Multipoint Sub-Interface (Hub)
+## Frame-Relay: Multipoint Sub-Interface (Hub)
 
-Used when one physical interface connects to multiple remote sites. Inverse ARP is disabled — manual mapping required.
+Used when one physical interface connects to multiple remote sites. Inverse ARP is disabled, manual mapping required.
 
 <div class="ref-panel">
 <div class="ref-panel-head">Multipoint Frame-Relay (Hub Router)</div>
@@ -77,7 +77,7 @@ Used when one physical interface connects to multiple remote sites. Inverse ARP 
 
 ---
 
-## Frame-Relay — Point-to-Point Sub-Interfaces (Hub)
+## Frame-Relay: Point-to-Point Sub-Interfaces (Hub)
 
 Each spoke gets its own sub-interface. Cleaner, avoids split-horizon issues with routing protocols.
 

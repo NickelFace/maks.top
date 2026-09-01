@@ -8,11 +8,11 @@ lang_pair: "/posts/lpic2/ru/lpic2-212-4-security-tasks/"
 page_lang: "en"
 ---
 
-> **Exam topic 212.4** — Security tasks (weight: 3). Covers GPG key management, intrusion detection, OpenSSL certificates, and security auditing tools.
+> **Exam topic 212.4**: Security tasks (weight: 3). Covers GPG key management, intrusion detection, OpenSSL certificates, and security auditing tools.
 
 ---
 
-## GPG — GNU Privacy Guard
+## GPG: GNU Privacy Guard
 
 GPG implements the OpenPGP standard (RFC 4880). Used for encrypting files and email, signing data, and verifying integrity.
 
@@ -119,7 +119,7 @@ gpg --gen-revoke alice@example.com > revoke.asc
 gpg --import revoke.asc
 ```
 
-> **Exam fact:** Create a revocation certificate immediately after generating a key pair — if you lose access to the private key you cannot revoke it later.
+> **Exam fact:** Create a revocation certificate immediately after generating a key pair; if you lose access to the private key you cannot revoke it later.
 
 ### GPG Files
 
@@ -193,9 +193,9 @@ systemctl enable fail2ban
 ```
 
 Configuration:
-- `/etc/fail2ban/jail.conf` — default config (do NOT edit)
-- `/etc/fail2ban/jail.local` — local overrides (create this)
-- `/etc/fail2ban/jail.d/` — drop-in config files
+- `/etc/fail2ban/jail.conf`: default config (do NOT edit)
+- `/etc/fail2ban/jail.local`: local overrides (create this)
+- `/etc/fail2ban/jail.d/`: drop-in config files
 
 ```ini
 # /etc/fail2ban/jail.local
@@ -243,7 +243,7 @@ Blocked hosts are added to `/etc/hosts.deny` or an iptables rule.
 
 ## Security Auditing Tools
 
-### nmap — Network Scanner
+### nmap: Network Scanner
 
 ```bash
 # Basic scan (top 1000 ports)
@@ -295,7 +295,7 @@ netstat -tn
 ss -tn
 ```
 
-### lsof — List Open Files
+### lsof: List Open Files
 
 ```bash
 lsof                              # all open files
@@ -308,7 +308,7 @@ lsof /var/log/auth.log            # who has this file open
 lsof +D /tmp                      # all files under /tmp
 ```
 
-### fuser — Find Processes Using Files/Sockets
+### fuser: Find Processes Using Files/Sockets
 
 ```bash
 fuser /var/log/messages           # PID of processes using this file
@@ -334,7 +334,7 @@ arp -s 192.168.1.1 aa:bb:cc:dd:ee:ff   # add static ARP entry
 
 ## Password Security
 
-### /etc/shadow — Password Hashing
+### /etc/shadow: Password Hashing
 
 The shadow file stores hashed passwords in the format:
 
@@ -357,7 +357,7 @@ user:$id$salt$hash:lastchange:min:max:warn:inactive:expire:
 grep username /etc/shadow | cut -d'$' -f2
 ```
 
-### john — Password Cracker
+### john: Password Cracker
 
 John the Ripper tests password hashes against wordlists and brute force. Used for auditing password strength.
 
@@ -377,7 +377,7 @@ john --format=sha512crypt hashes.txt
 
 > **For LPIC-2:** Know that john tests password strength by cracking. It is a legitimate auditing tool.
 
-### chage — Password Aging
+### chage: Password Aging
 
 ```bash
 chage -l username              # list password aging info
@@ -458,7 +458,7 @@ gpg --gen-revoke user > revoke.asc     # create revocation cert
 |---|---|
 | `jail.conf` vs `jail.local` | Never edit `jail.conf`; create `jail.local` for overrides |
 | GPG revocation cert | Must be created right after key generation |
-| `$6$` in shadow | SHA-512 — current standard; `$1$` = MD5 (weak) |
+| `$6$` in shadow | SHA-512: current standard; `$1$` = MD5 (weak) |
 | lsof vs fuser | `lsof` shows files per process; `fuser` shows processes per file |
 | nmap `-sS` | Requires root (raw socket); `-sT` works as regular user |
 | SUID find | `-perm -4000` (note the `-` before 4000 = "at least these bits set") |

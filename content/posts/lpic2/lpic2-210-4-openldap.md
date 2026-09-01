@@ -8,13 +8,13 @@ lang_pair: "/posts/lpic2/ru/lpic2-210-4-openldap/"
 page_lang: "en"
 ---
 
-> **Exam topic 210.4** — Configuring an OpenLDAP Server (weight: 4). Covers installing and configuring the slapd daemon, managing the LDAP database, access control, TLS, and integrating Linux clients.
+> **Exam topic 210.4**: Configuring an OpenLDAP Server (weight: 4). Covers installing and configuring the slapd daemon, managing the LDAP database, access control, TLS, and integrating Linux clients.
 
 ---
 
 ## What Is OpenLDAP
 
-OpenLDAP is the most popular LDAP implementation in the Linux world. The main server process, **`slapd` (Standalone LDAP Daemon)**, listens on port **389** by default. Primary use case: centralized user authentication in a Linux network — the Linux equivalent of Microsoft Active Directory.
+OpenLDAP is the most popular LDAP implementation in the Linux world. The main server process, **`slapd` (Standalone LDAP Daemon)**, listens on port **389** by default. Primary use case: centralized user authentication in a Linux network, the Linux equivalent of Microsoft Active Directory.
 
 LDAP is optimized for **frequent reads and infrequent writes**.
 
@@ -35,11 +35,11 @@ dc=example,dc=com
 
 ### Object types:
 
-- **User accounts** — for authentication and Unix logins
-- **Organizational Units (ou)** — folders for grouping objects by department, country, type
-- **Groups** — for access rights assignment
-- **Computers** — asset inventory
-- **Contacts / Email directories** — address books
+- **User accounts**: for authentication and Unix logins
+- **Organizational Units (ou)**: folders for grouping objects by department, country, type
+- **Groups**: for access rights assignment
+- **Computers**: asset inventory
+- **Contacts / Email directories**: address books
 
 ### LDAP abbreviations:
 
@@ -94,7 +94,7 @@ ufw allow ldap
 uid=donpezet,ou=users,dc=lpiclab,dc=com
 ```
 
-**RDN (Relative Distinguished Name)** — the leftmost component of the DN, identifying an entry among siblings.
+**RDN (Relative Distinguished Name)**: the leftmost component of the DN, identifying an entry among siblings.
 
 If a name contains a comma, it must be escaped:
 ```
@@ -118,15 +118,15 @@ rootpw          {SHA}<password-hash>
 directory       /var/lib/ldap
 ```
 
-- `suffix` — LDAP tree root (usually the organization's domain name)
-- `rootdn` — account with full rights to the entire directory
-- `rootpw` — admin password (stored encrypted in modern versions)
+- `suffix`: LDAP tree root (usually the organization's domain name)
+- `rootdn`: account with full rights to the entire directory
+- `rootpw`: admin password (stored encrypted in modern versions)
 
 > `slapd.conf` is deprecated since OpenLDAP 2.3. Know both methods for the exam.
 
 ### Method 2: slapd-config (current)
 
-Since OpenLDAP 2.3, configuration is stored as LDIF files in `/etc/openldap/slapd.d/`. These files **must not be edited manually** — only via `ldapadd`, `ldapdelete`, `ldapmodify`. Key advantage: changes apply **without restarting slapd**.
+Since OpenLDAP 2.3, configuration is stored as LDIF files in `/etc/openldap/slapd.d/`. These files **must not be edited manually**: only via `ldapadd`, `ldapdelete`, `ldapmodify`. Key advantage: changes apply **without restarting slapd**.
 
 `slapd.d` directory structure:
 ```ascii
@@ -186,7 +186,7 @@ olcLogLevel: conns filter    # connections and filters only
 
 ## LDIF Format
 
-LDIF (LDAP Data Interchange Format) — text format for working with the directory. Records are separated by blank lines. Comment lines start with `#`.
+LDIF (LDAP Data Interchange Format), text format for working with the directory. Records are separated by blank lines. Comment lines start with `#`.
 
 ```ldif
 # Comment
@@ -196,7 +196,7 @@ objectClass: person
 sn: Doe
 ```
 
-> A trailing space at the end of a line is treated as part of the attribute value — imports fail with cryptic errors.
+> A trailing space at the end of a line is treated as part of the attribute value, imports fail with cryptic errors.
 
 ### changetype operations:
 
@@ -315,7 +315,7 @@ slappasswd
 
 By default, all clients can read the directory. The `olcRootDN` user always has full rights regardless of ACL settings.
 
-Access to attributes is controlled by `olcAccess`. Rules are evaluated in order — first match wins.
+Access to attributes is controlled by `olcAccess`. Rules are evaluated in order, first match wins.
 
 ```ldif
 # Protect passwords
@@ -331,9 +331,9 @@ olcAccess: to *
   by * none
 ```
 
-- `by self write` — user can change their own password
-- `by anonymous auth` — anonymous users can authenticate (hash comparison) but can't read the password
-- `by * none` — everyone else is denied
+- `by self write`: user can change their own password
+- `by anonymous auth`: anonymous users can authenticate (hash comparison) but can't read the password
+- `by * none`: everyone else is denied
 
 > ACL rules are read top-to-bottom. If no rule matches, access is denied by default.
 
@@ -343,11 +343,11 @@ olcAccess: to *
 
 A **schema** defines allowed `objectClass` values and attributes.
 
-- **Object ID** — numeric identifier, assigned once
-- **Attribute** — specific value attached to an object
-- **Object class** — template with a set of attributes
+- **Object ID**: numeric identifier, assigned once
+- **Attribute**: specific value attached to an object
+- **Object class**: template with a set of attributes
 
-The most popular schema: **`inetOrgPerson`** — implements "White Pages": names, addresses, email, phones.
+The most popular schema: **`inetOrgPerson`**, implements "White Pages": names, addresses, email, phones.
 
 Schema files: `/etc/openldap/schema/`
 - `core.ldif`, `cosine.ldif`, `inetorgperson.ldif`, `nis.ldif`
@@ -430,9 +430,9 @@ systemctl restart slapd
 
 A Linux client doesn't know about OpenLDAP by default. Two components are needed:
 
-**PAM** — `pam_ldap` module connects PAM to the LDAP server for login authentication.
+**PAM**: `pam_ldap` module connects PAM to the LDAP server for login authentication.
 
-**NSLCD** (Name Service LDAP Connection Daemon) — background process that performs name lookups via LDAP.
+**NSLCD** (Name Service LDAP Connection Daemon), background process that performs name lookups via LDAP.
 
 ### Install client packages:
 
@@ -506,7 +506,7 @@ ldapmodify -Y EXTERNAL -H ldapi:/// -f tls.ldif
 | slapd daemon | OpenLDAP server, port 389 |
 | slapd.conf | Legacy method, deprecated since 2.3 |
 | slapd-config | Current method, `/etc/slapd.d/`, LDIF-based |
-| slapd.d files | Cannot be edited manually — use ldapmodify |
+| slapd.d files | Cannot be edited manually: use ldapmodify |
 | slapadd vs ldapadd | `slapadd` = direct DB (server stopped); `ldapadd` = via protocol (server running) |
 | slappasswd | Generates `{SSHA}` hash for LDIF files |
 | slapcat | Exports DB to LDIF (backup) |

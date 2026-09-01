@@ -35,10 +35,10 @@ lang_pair: "/posts/ccna/ru/ccna-1-01-network-components/"
 
 | # | Layer | PDU | Devices | Protocol Examples |
 |:---:|---|---|---|---|
-| 7 | Application | Data | — | HTTP, HTTPS, FTP, DNS, DHCP, SMTP |
-| 6 | Presentation | Data | — | SSL/TLS, JPEG, ASCII |
-| 5 | Session | Data | — | NetBIOS, RPC, SQL |
-| 4 | Transport | Segment | — | TCP, UDP |
+| 7 | Application | Data | n/a | HTTP, HTTPS, FTP, DNS, DHCP, SMTP |
+| 6 | Presentation | Data | n/a | SSL/TLS, JPEG, ASCII |
+| 5 | Session | Data | n/a | NetBIOS, RPC, SQL |
+| 4 | Transport | Segment | n/a | TCP, UDP |
 | 3 | Network | Packet | Router, L3 Switch | IPv4, IPv6, ICMP, OSPF |
 | 2 | Data Link | Frame | Switch, Bridge | Ethernet, 802.11, PPP, ARP |
 | 1 | Physical | Bits | Hub, Repeater | Cables, signals |
@@ -125,8 +125,8 @@ Router# show running-config | exclude !
 | Resource | Description |
 |---|---|
 | [Cisco IOS CLI Reference](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/fundamentals/configuration/xe-16/fundamentals-xe-16-book.html) | Official Cisco IOS CLI documentation |
-| [Network Devices — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/network-devices) | Detailed breakdown of network devices: router, switch, hub, firewall |
-| [OSI Model — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/osi-model) | Layer-by-layer explanation of the OSI model |
-| [Jeremy's IT Lab — Network Devices (YouTube)](https://www.youtube.com/watch?v=H8W9oMZGWdA) | CCNA: network components and device roles — Free CCNA series |
-| [Cisco IOS CLI Modes — Cisco Learning Network](https://learningnetwork.cisco.com) | CLI modes: User EXEC, Privileged EXEC, Global Config |
-| [IDS vs IPS — Cisco](https://www.cisco.com/c/en/us/products/security/intrusion-prevention-system-ips/index.html) | Cisco explanation of the difference between IDS and IPS |
+| [Network Devices (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/network-devices) | Detailed breakdown of network devices: router, switch, hub, firewall |
+| [OSI Model (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/osi-model) | Layer-by-layer explanation of the OSI model |
+| [Jeremy's IT Lab: Network Devices (YouTube)](https://www.youtube.com/watch?v=H8W9oMZGWdA) | CCNA: network components and device roles, Free CCNA series |
+| [Cisco IOS CLI Modes (Cisco Learning Network)](https://learningnetwork.cisco.com) | CLI modes: User EXEC, Privileged EXEC, Global Config |
+| [IDS vs IPS (Cisco)](https://www.cisco.com/c/en/us/products/security/intrusion-prevention-system-ips/index.html) | Cisco explanation of the difference between IDS and IPS |

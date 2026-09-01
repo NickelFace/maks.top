@@ -17,11 +17,11 @@ Process and service management: monitoring (<strong>ps, top</strong>), signals (
 </div>
 
 **Planned:**
-- `ps aux / ps -ef` — process snapshot, filtering
-- `top / htop` — interactive monitoring, hotkeys
-- `kill / killall / pkill` — sending signals; SIGTERM vs SIGKILL
-- `nice / renice` — CPU priority (nice -20..19)
-- `systemctl` — start/stop/enable/status/mask, unit files
-- `journalctl` — filter by unit, time, priority
-- `cron / crontab` — syntax, special strings (@reboot, @daily)
-- `at / anacron` — one-time tasks
+- `ps aux / ps -ef`: process snapshot, filtering
+- `top / htop`: interactive monitoring, hotkeys
+- `kill / killall / pkill`: sending signals; SIGTERM vs SIGKILL
+- `nice / renice`: CPU priority (nice -20..19)
+- `systemctl`: start/stop/enable/status/mask, unit files
+- `journalctl`: filter by unit, time, priority
+- `cron / crontab`: syntax, special strings (@reboot, @daily)
+- `at / anacron`: one-time tasks

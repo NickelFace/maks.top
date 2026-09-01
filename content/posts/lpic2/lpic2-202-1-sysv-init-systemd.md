@@ -53,10 +53,10 @@ Format of each line:
 id:runlevels:action:process
 ```
 
-- `id` — unique identifier (1–4 characters). For `getty`, `id` must match the tty device suffix, otherwise login accounting breaks.
-- `runlevels` — levels without separators (e.g. `345` means levels 3, 4, and 5)
-- `action` — what to do with the process
-- `process` — command to run. If it starts with `+`, init skips utmp/wtmp accounting.
+- `id`: unique identifier (1–4 characters). For `getty`, `id` must match the tty device suffix, otherwise login accounting breaks.
+- `runlevels`: levels without separators (e.g. `345` means levels 3, 4, and 5)
+- `action`: what to do with the process
+- `process`: command to run. If it starts with `+`, init skips utmp/wtmp accounting.
 
 Example `/etc/inittab`:
 
@@ -131,8 +131,8 @@ S10sysklogd   S14ppp      S20makedev  S22ntpdate S99gdm
 
 Naming convention:
 
-- `S20nginx` — Start, priority 20 → calls `nginx start`
-- `K80nginx` — Kill (stop), priority 80 → calls `nginx stop`
+- `S20nginx`: Start, priority 20 → calls `nginx start`
+- `K80nginx`: Kill (stop), priority 80 → calls `nginx stop`
 
 Scripts execute in lexicographic order. A lower number runs earlier. Start and stop are symmetric: what starts first (S20) stops last (K80).
 
@@ -195,7 +195,7 @@ chkconfig --add food
 chkconfig --del food
 ```
 
-> **Tip:** `chkconfig` only manages symlinks — it does not start the service immediately. To start now, call `/etc/init.d/nginx start` separately.
+> **Tip:** `chkconfig` only manages symlinks; it does not start the service immediately. To start now, call `/etc/init.d/nginx start` separately.
 
 > **Important:** `chkconfig --del food` removes links from all `rcX.d/` directories but leaves `/etc/init.d/food` on disk.
 
@@ -353,7 +353,7 @@ systemctl edit nginx.service
 # 4. Edit the full unit via systemctl:
 systemctl edit --full nginx.service
 
-# After any changes — reload configs:
+# After any changes - reload configs:
 systemctl daemon-reload
 ```
 
@@ -470,7 +470,7 @@ systemctl daemon-reload
 
 > **Important:** `systemctl enable` adds the service to autostart at the next boot but does not start it now. To both enable and start: run both `systemctl enable` and `systemctl start`.
 
-> **Note:** `systemctl isolate rescue.target` switches silently without notifying logged-in users. `systemctl rescue` first sends a wall message to all users, then switches. `systemctl emergency` loads a minimal environment without network services — for cases where rescue mode is already broken.
+> **Note:** `systemctl isolate rescue.target` switches silently without notifying logged-in users. `systemctl rescue` first sends a wall message to all users, then switches. `systemctl emergency` loads a minimal environment without network services: for cases where rescue mode is already broken.
 
 > **Warning:** Difference between `mask` and `disable`: `disable` removes from autostart but the service can still be started manually. `mask` creates a symlink to `/dev/null` and completely blocks any start, including manual and via dependencies.
 
@@ -478,7 +478,7 @@ systemctl daemon-reload
 
 ## mkinitrd and mkinitramfs
 
-At boot, the kernel cannot access the root filesystem if it resides on LVM, RAID, or requires a special driver. The solution is an initial ramdisk (initrd) — a temporary filesystem in memory that the kernel mounts first, containing the required modules.
+At boot, the kernel cannot access the root filesystem if it resides on LVM, RAID, or requires a special driver. The solution is an initial ramdisk (initrd): a temporary filesystem in memory that the kernel mounts first, containing the required modules.
 
 ### mkinitrd (RPM-based distributions)
 

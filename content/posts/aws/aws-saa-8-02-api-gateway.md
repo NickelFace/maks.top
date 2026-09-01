@@ -11,7 +11,7 @@ lang_pair: "/posts/aws/ru/aws-saa-8-02-api-gateway/"
 
 ## API Types
 
-API Gateway supports three API types — choosing the right one matters for cost, features, and latency.
+API Gateway supports three API types, choosing the right one matters for cost, features, and latency.
 
 | Feature | REST API | HTTP API | WebSocket API |
 |---|---|---|---|
@@ -53,7 +53,7 @@ Client → API Gateway → VPC Link → NLB (REST API) → Private EC2 / ECS / R
 
 - REST API: integrates with **NLB** only
 - HTTP API: integrates with **ALB, NLB, or Cloud Map** (ECS service discovery)
-- Resources never need a public IP — traffic stays within AWS network
+- Resources never need a public IP: traffic stays within AWS network
 
 ---
 
@@ -87,7 +87,7 @@ TTL: 0–3600 seconds (default 300s)
 cache key: method + path + query strings + headers (configurable)
 ```
 
-- Cache is **per-stage** — one cache per stage, not per API or method
+- Cache is **per-stage**: one cache per stage, not per API or method
 - Per-method overrides: can enable/disable cache or change TTL per method within a stage
 - Flush: manual (`FLUSH_ALL`) or client sends `Cache-Control: max-age=0` (requires `InvalidateCache` permission)
 - Additional cost: charged hourly per GB provisioned
@@ -108,12 +108,12 @@ cache key: method + path + query strings + headers (configurable)
 ### Cognito User Pool Authorizer
 - API Gateway validates the JWT token from a Cognito User Pool directly
 - No custom code required; built-in
-- Only validates the token — authorization (what the user can do) is your responsibility
+- Only validates the token: authorization (what the user can do) is your responsibility
 
 ### IAM Authorization
 - Callers sign requests with AWS Signature V4
 - Use for internal service-to-service or AWS SDK callers
-- No user management — callers need an IAM identity
+- No user management: callers need an IAM identity
 
 | Authorizer | Best for |
 |---|---|
@@ -151,7 +151,7 @@ Cross-Origin Resource Sharing must be configured for browser clients:
 | Feature | Detail |
 |---|---|
 | Protocol | GraphQL (query, mutation, subscription) |
-| Real-time | WebSocket subscriptions — data pushed to clients on mutation |
+| Real-time | WebSocket subscriptions: data pushed to clients on mutation |
 | Data sources | DynamoDB, Lambda, HTTP, Relational DB (Aurora Serverless), OpenSearch |
 | Auth | API key, Cognito User Pools, OIDC, IAM, Lambda |
 | Caching | Server-side caching per resolver |
@@ -168,11 +168,11 @@ AppSync vs API Gateway:
 
 | Trap | Correct answer |
 |---|---|
-| HTTP API supports caching | False — only REST API has caching |
-| HTTP API supports usage plans | False — REST API only |
-| HTTP API is always better | False — REST API when you need caching/usage plans/transforms |
-| VPC Link for private resources | Correct — REST API uses NLB; HTTP API uses ALB/NLB/Cloud Map |
+| HTTP API supports caching | False: only REST API has caching |
+| HTTP API supports usage plans | False: REST API only |
+| HTTP API is always better | False: REST API when you need caching/usage plans/transforms |
+| VPC Link for private resources | Correct: REST API uses NLB; HTTP API uses ALB/NLB/Cloud Map |
 | API Gateway cache scope | Per-stage (not per API, not per method by default) |
-| Cognito authorizer validates permissions | False — validates token only; authorization is your logic |
-| WebSocket API for real-time push | Correct — bidirectional, server can push |
+| Cognito authorizer validates permissions | False: validates token only; authorization is your logic |
+| WebSocket API for real-time push | Correct: bidirectional, server can push |
 | AppSync use case | GraphQL API with real-time subscriptions and multiple data sources |

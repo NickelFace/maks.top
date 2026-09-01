@@ -16,7 +16,7 @@ The site has two independent search/filter mechanisms that coexist on the `/tags
 | **Tag filter** | `/tags/` | Client-side JS filter over a Hugo-generated array |
 | **Pagefind search** | `/posts/` and `/tags/` | Full-text search over a pre-built index |
 
-They don't interact — typing in the search box uses Pagefind, clicking a tag button uses the JS filter.
+They don't interact, typing in the search box uses Pagefind, clicking a tag button uses the JS filter.
 
 ---
 
@@ -39,12 +39,12 @@ The tag value is urlized: `"LPIC-2"` → `lpic-2`, `"Networking"` → `networkin
 
 ### Template: `taxonomy/tag.html`
 
-This single template renders **all** tag pages — both the tag index (`/tags/`) and individual tag pages.
+This single template renders **all** tag pages, both the tag index (`/tags/`) and individual tag pages.
 
 #### Tag buttons (rendered by Hugo at build time)
 
 ```html
-<!-- "All" button — data-tag="" means show everything -->
+<!-- "All" button - data-tag="" means show everything -->
 <button class="tag tag-lg tag-filter active" data-tag="">
   All <span class="count">{{ len .Site.RegularPages }}</span>
 </button>
@@ -57,7 +57,7 @@ This single template renders **all** tag pages — both the tag index (`/tags/`)
 {{ end }}
 ```
 
-`.Site.Taxonomies.tags.ByCount` — Hugo's built-in: returns all tags sorted by number of posts, descending.
+`.Site.Taxonomies.tags.ByCount`: Hugo's built-in: returns all tags sorted by number of posts, descending.
 
 #### `POSTS` array (embedded by Hugo at build time)
 
@@ -69,8 +69,8 @@ const POSTS = [
     url:       "https://maks.top/posts/lpic2-200-1.../",
     title:     "LPIC-2 200.1 Capacity Planning",
     date:      "2026-04-10",
-    tags:      ["linux", "lpic-2", "monitoring"],    // urlized — for filtering
-    tagLabels: ["Linux", "LPIC-2", "Monitoring"],    // original — for display
+    tags:      ["linux", "lpic-2", "monitoring"],    // urlized - for filtering
+    tagLabels: ["Linux", "LPIC-2", "Monitoring"],    // original - for display
     summary:   "CPU, memory, disk I/O monitoring..."
   },
   // ... all posts
@@ -78,10 +78,10 @@ const POSTS = [
 ```
 
 Two separate tag arrays per post:
-- `tags` — urlized values used for `===` comparison in the filter
-- `tagLabels` — original display values shown in the card
+- `tags`: urlized values used for `===` comparison in the filter
+- `tagLabels`: original display values shown in the card
 
-**Russian posts are excluded** — the template skips pages where `page_lang === "ru"`:
+**Russian posts are excluded**. The template skips pages where `page_lang === "ru"`:
 ```
 {{ range .Site.RegularPages }}{{ if ne .Params.page_lang "ru" }}
 ```
@@ -101,12 +101,12 @@ Then the template loads:
 <script src="/js/taxonomy.js"></script>
 ```
 
-`taxonomy.js` reads those two variables and handles all UI — tag grid, article grid, active pill, filter logic. See [JavaScript](/kb/docs/javascript/) for function details.
+`taxonomy.js` reads those two variables and handles all UI, tag grid, article grid, active pill, filter logic. See [JavaScript](/kb/docs/javascript/) for function details.
 
 **Filter flow:**
 1. Page loads → `renderArticles()` runs with `activeTag = currentTag` (pre-selects tag if arriving via `/tags/linux/`)
 2. User clicks a tag button → `activeTag` updated → `renderArticles()` rerenders `#tagArticles`
-3. No page reload — `POSTS` array is already in memory
+3. No page reload: `POSTS` array is already in memory
 
 Note: only the first 2 tags per post are shown in the card (`tagLabels.slice(0, 2)`).
 
@@ -121,7 +121,7 @@ Pagefind is a static search library that:
 2. Builds a binary search index into `public/pagefind/`
 3. Provides a JS API (`pagefind.js`) that queries the index client-side
 
-No server needed — the index is served as static files alongside the site.
+No server needed; the index is served as static files alongside the site.
 
 ### Build step
 
@@ -153,13 +153,13 @@ public/
 
 ### Lazy loading
 
-Pagefind is not loaded when the page opens — it loads on the first keypress:
+Pagefind is not loaded when the page opens; it loads on the first keypress:
 
 ```js
 let pf = null;
 
 async function loadPagefind() {
-  if (pf) return;   // already loaded — do nothing
+  if (pf) return;   // already loaded - do nothing
   try {
     pf = await import('/pagefind/pagefind.js');
     await pf.init();
@@ -176,7 +176,7 @@ searchInput.addEventListener('input', async function() {
 });
 ```
 
-This saves bandwidth — users who don't search don't download the index.
+This saves bandwidth; users who don't search don't download the index.
 
 ### Search flow
 
@@ -200,7 +200,7 @@ Render into #searchResults
   - item.excerpt      ← context snippet with match highlighted
 ```
 
-`.data()` is lazy — Pagefind doesn't fetch full result data until you call it. `slice(0, 8)` limits to 8 results before fetching, saving bandwidth.
+`.data()` is lazy; Pagefind doesn't fetch full result data until you call it. `slice(0, 8)` limits to 8 results before fetching, saving bandwidth.
 
 ### Result dropdown
 
@@ -213,7 +213,7 @@ searchResults.style.cssText = 'position:absolute;top:calc(100% + 8px);...';
 document.querySelector('.search-wrap').appendChild(searchResults);
 ```
 
-`.search-wrap` has `position: relative` — the dropdown positions itself relative to the input.
+`.search-wrap` has `position: relative`, the dropdown positions itself relative to the input.
 
 **Closing the dropdown:**
 ```js
@@ -237,7 +237,7 @@ The `baseof.html` template reads this and adds `data-pagefind-ignore="all"` to `
 <body{{ if .Params.pagefind_ignore }} data-pagefind-ignore="all"{{ end }}>
 ```
 
-**All RU shadow pages** (`page_lang: "ru"`) must have `pagefind_ignore: true` — without it they pollute the search index with duplicate Russian content. The `POSTS[]` array in `tag.html` already excludes RU pages via `{{ if ne .Params.page_lang "ru" }}`, but Pagefind indexing is a separate pipeline step that needs the frontmatter flag.
+**All RU shadow pages** (`page_lang: "ru"`) must have `pagefind_ignore: true`, without it they pollute the search index with duplicate Russian content. The `POSTS[]` array in `tag.html` already excludes RU pages via `{{ if ne .Params.page_lang "ru" }}`, but Pagefind indexing is a separate pipeline step that needs the frontmatter flag.
 
 ---
 

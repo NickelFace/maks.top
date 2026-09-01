@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-207-3-dns-server-security/"
 page_lang: "en"
 ---
 
-> **Exam topic 207.3** — Securing a DNS Server (weight: 2). Covers BIND security strategies, chroot jails, split DNS configuration, TSIG zone transfer authentication, DNSSEC record signing, and DANE certificate binding.
+> **Exam topic 207.3**: Securing a DNS Server (weight: 2). Covers BIND security strategies, chroot jails, split DNS configuration, TSIG zone transfer authentication, DNSSEC record signing, and DANE certificate binding.
 
 ---
 
@@ -41,7 +41,7 @@ acl "trusted" {
 };
 ```
 
-> ACL labels: update in one place — applies everywhere.
+> ACL labels: update in one place; applies everywhere.
 
 ### Restricting Queries (allow-query)
 
@@ -86,7 +86,7 @@ zone "example.org" IN {
     allow-transfer { my_slave_servers; };
 };
 
-// On slave — always deny further transfers
+// On slave - always deny further transfers
 zone "example.org" IN {
     type slave;
     allow-transfer { none; };
@@ -111,7 +111,7 @@ zone "example.com" IN {
 
 **Problem:** BIND may run as `root` by default. If compromised, the attacker gets full system access.
 
-**Why not `nobody`?** Many other services already run as `nobody` — undesirable interaction is possible.
+**Why not `nobody`?** Many other services already run as `nobody`; undesirable interaction is possible.
 
 **Solution:** create a dedicated `named` user.
 
@@ -210,7 +210,7 @@ start-stop-daemon ... --exec /usr/sbin/named -- -t /var/cache/bind
 # Red Hat
 daemon ... /sbin/named -t /var/cache/bind
 
-# Using the bind-chroot package (CentOS/RHEL — simpler):
+# Using the bind-chroot package (CentOS/RHEL - simpler):
 yum install bind-chroot
 /usr/libexec/setup-named-chroot.sh /var/named/chroot on
 systemctl stop named && systemctl disable named
@@ -222,7 +222,7 @@ systemctl start named-chroot && systemctl enable named-chroot
 
 ### Logging in chroot
 
-Standard syslog does not work — no access to `/dev/log`. Use a file:
+Standard syslog does not work. No access to `/dev/log`. Use a file:
 
 ```
 logging {
@@ -266,7 +266,7 @@ Internet ← [liongate 192.168.72.1] ← forwarders → [privdns 192.168.72.2]
 **`named.conf` on privdns (internal master):**
 
 ```
-// Internal root — for itself only
+// Internal root - for itself only
 zone "." IN {
     type master;
     file "/etc/bind/internal.root.zone";
@@ -274,7 +274,7 @@ zone "." IN {
     allow-query    { none; };
 };
 
-// Internal zone — only for liongate
+// Internal zone - only for liongate
 zone "exworks" IN {
     type master;
     file "/etc/bind/exworks.zone";
@@ -294,15 +294,15 @@ options {
 ```
 options {
     forwarders {
-        192.168.72.2;    // privdns — first (internal)
-        224.121.121.99;  // ISP DNS — for external
+        192.168.72.2;    // privdns - first (internal)
+        224.121.121.99;  // ISP DNS - for external
     };
 };
 ```
 
 ### Two Servers on the Same Host
 
-When no separate host is available — both servers on `liongate`:
+When no separate host is available, both servers on `liongate`:
 
 ```
 [liongate]
@@ -351,7 +351,7 @@ zone "exworks" IN {
 
 ---
 
-## TSIG — Transaction Signatures
+## TSIG: Transaction Signatures
 
 TSIG (Transaction SIGnatures) secures **the communication channel between servers** for zone transfers. Uses a shared secret + HMAC.
 
@@ -363,9 +363,9 @@ TSIG (Transaction SIGnatures) secures **the communication channel between server
 # On the master server:
 dnssec-keygen -a HMAC-SHA512 -b 512 -n HOST -r /dev/urandom mykey
 # Creates: Kmykey.+165+XXXXX.key  and  Kmykey.+165+XXXXX.private
-# For HMAC — both files contain the SAME key
+# For HMAC - both files contain the SAME key
 
-# Do not use HMAC-MD5 — deprecated!
+# Do not use HMAC-MD5 - deprecated!
 # Recommended: HMAC-SHA256 or HMAC-SHA512
 ```
 
@@ -431,11 +431,11 @@ server 10.0.1.1 {
 
 Then `include` in `named.conf` and `rndc reload`.
 
-> **Warning:** The key file must only be accessible to the named process. Do not type the key manually — copy it from the `.private` file!
+> **Warning:** The key file must only be accessible to the named process. Do not type the key manually, copy it from the `.private` file!
 
 ---
 
-## DNSSEC — DNS Security Extensions
+## DNSSEC: DNS Security Extensions
 
 DNSSEC protects against **DNS response spoofing** (cache poisoning) through digital signatures on records.
 
@@ -464,8 +464,8 @@ The public key of `example.com` is published on `.com` parent zone servers.
 | `DS` | Hash of DNSKEY in the parent zone |
 
 **NSEC vs NSEC3:**
-- `NSEC`: vulnerable to zone walking — reveals the next name
-- `NSEC3`: returns a **hash** of the next name — enumeration requires brute force
+- `NSEC`: vulnerable to zone walking, reveals the next name
+- `NSEC3`: returns a **hash** of the next name, enumeration requires brute force
 
 ### dnssec-keygen and dnssec-signzone
 
@@ -476,7 +476,7 @@ The public key of `example.com` is published on `.com` parent zone servers.
 | `-a` | Algorithm | `RSASHA256`, `RSASHA1`, `DSA`, `HMAC-MD5`, `HMAC-SHA512` |
 | `-b` | Key size | RSA: 512–4096; DSA: 512–1024 (×64); HMAC-MD5: 1–512 |
 | `-n` | Name type | `ZONE`, `HOST`, `ENTITY`, `USER`, `OTHER` |
-| `-f KSK` | Generate KSK | — |
+| `-f KSK` | Generate KSK | n/a |
 | `-r` | Randomness source | `/dev/urandom` (recommended) |
 
 ```bash
@@ -525,15 +525,15 @@ zone "example.com" {
 | `dnssec-settime` | Manage key timestamps |
 | `dnssec-revoke` | Revoke a key |
 
-> **Warning:** DNSSEC does **not** protect zone transfers and dynamic updates — use TSIG for those.
+> **Warning:** DNSSEC does **not** protect zone transfers and dynamic updates; use TSIG for those.
 
 ---
 
-## DANE — DNS-Based Authentication of Named Entities
+## DANE: DNS-Based Authentication of Named Entities
 
 **The CA problem:** browsers trust any of 1000+ certificate authorities. Compromise of one CA is catastrophic.
 
-**Example — DigiNotar (2011):** attackers generated fraudulent certificates for major sites. Browsers accepted them as valid. DigiNotar went bankrupt within weeks.
+**Example: DigiNotar (2011):** attackers generated fraudulent certificates for major sites. Browsers accepted them as valid. DigiNotar went bankrupt within weeks.
 
 **DANE** uses DNSSEC to bind TLS certificates to DNS names via **TLSA records**.
 
@@ -640,13 +640,13 @@ named -u named -g named -t /var/cache/bind
 **A:** Create `tsig.key` with the **same** secret, but `server` points to the **master**
 
 **Q:** How does TSIG differ from DNSSEC?  
-**A:** TSIG — point-to-point between servers (transfers, updates); DNSSEC — end-to-end to the client (response authenticity)
+**A:** TSIG; point-to-point between servers (transfers, updates); DNSSEC: end-to-end to the client (response authenticity)
 
 **Q:** Which Certificate Usage value in TLSA gives maximum DANE benefit?  
-**A:** `3` (DANE-EE) — no dependency on any CA
+**A:** `3` (DANE-EE), no dependency on any CA
 
 **Q:** Why does the slave need `allow-transfer { none; }`?  
-**A:** The slave should not redistribute data further — it only receives from master
+**A:** The slave should not redistribute data further; it only receives from master
 
 **Q:** What is NSEC3 and why is it needed?  
-**A:** NSEC3 returns a hash of the next name instead of the name itself — protects against zone walking (enumeration)
+**A:** NSEC3 returns a hash of the next name instead of the name itself, protects against zone walking (enumeration)

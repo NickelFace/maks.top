@@ -65,4 +65,4 @@ R1#show ip route eigrp
 ```
 
 > **💡 Tip:**
-> **RIP** — distance-vector, metric = hop count, slow convergence. **EIGRP** — Cisco enhanced distance-vector, fast convergence, composite metric. Administrative Distance: RIP=120, EIGRP internal=90.
+> **RIP**: distance-vector, metric = hop count, slow convergence. **EIGRP**, Cisco enhanced distance-vector, fast convergence, composite metric. Administrative Distance: RIP=120, EIGRP internal=90.

@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-102-1-hard-disk-layout/"
 page_lang: "en"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 101
+> **Exam weight: 2**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -25,7 +25,7 @@ A disk, or block storage device, must be partitioned before it can be used. A pa
 
 Each partition contains a filesystem. The filesystem defines how data is physically stored: directory structure, relationships between directories, and file locations.
 
-Partitions cannot span multiple disks. This limitation is removed by LVM, which allows combining partitions — including from different physical disks — into a single logical volume.
+Partitions cannot span multiple disks. This limitation is removed by LVM, which allows combining partitions: including from different physical disks, into a single logical volume.
 
 ---
 
@@ -33,7 +33,7 @@ Partitions cannot span multiple disks. This limitation is removed by LVM, which 
 
 Before a filesystem becomes accessible, it must be mounted. Mounting means binding a filesystem to a specific directory in the tree, called a mount point.
 
-The mount point must exist before mounting. If it already contains files, those files become inaccessible while the partition is mounted — the listing will show the contents of the partition, not the original directory files.
+The mount point must exist before mounting. If it already contains files, those files become inaccessible while the partition is mounted; the listing will show the contents of the partition, not the original directory files.
 
 A few notes on traditional mount points:
 
@@ -53,7 +53,7 @@ There are also performance arguments: keep the root filesystem on a fast SSD whi
 
 Contains the bootloader files, the Linux kernel and the initial RAM disk image. GRUB2 files are stored in `/boot/grub`.
 
-A separate `/boot` is not technically required — GRUB can mount the root filesystem and read files from there. But a dedicated partition guarantees the system can boot even if the root filesystem is damaged, and it allows using an encrypted or non-standard filesystem on root that the bootloader cannot handle.
+A separate `/boot` is not technically required; GRUB can mount the root filesystem and read files from there. But a dedicated partition guarantees the system can boot even if the root filesystem is damaged, and it allows using an encrypted or non-standard filesystem on root that the bootloader cannot handle.
 
 For historical reasons `/boot` is usually the first partition on the disk and must end before cylinder 1024. This limit is inherited from the IBM PC BIOS addressing scheme (CHS: 1024 cylinders, 256 heads, 63 sectors, totalling 528 MB). To ensure booting regardless of the addressing scheme used, the boot partition must fit entirely within the first 528 MB.
 
@@ -73,7 +73,7 @@ On Windows systems the ESP is usually the first partition on the disk, though it
 
 Most user home directories live in `/home`. User `john` gets `/home/john`. Exceptions: root lives in `/root`; some system services have directories elsewhere.
 
-The size of the `/home` partition depends on the number of users and the nature of their work — video editors need an order of magnitude more space than those who work with text and a browser.
+The size of the `/home` partition depends on the number of users and the nature of their work; video editors need an order of magnitude more space than those who work with text and a browser.
 
 Moving `/home` to a separate partition means a system reinstall will not touch user data.
 
@@ -114,9 +114,9 @@ Traditional partitioning requires deciding upfront how much space to allocate to
 
 ### Basic LVM concepts
 
-- **Physical Volume (PV)** — a block device on the system: a disk partition or RAID array. The building block of LVM.
-- **Volume Group (VG)** — a group of one or more PVs. Abstracts the physical devices and appears as a single logical device with the combined capacity of all PVs.
-- **Logical Volume (LV)** — a sub-volume inside a VG, analogous to a traditional partition but with a flexible, resizable size.
+- **Physical Volume (PV)**, a block device on the system: a disk partition or RAID array. The building block of LVM.
+- **Volume Group (VG)**: a group of one or more PVs. Abstracts the physical devices and appears as a single logical device with the combined capacity of all PVs.
+- **Logical Volume (LV)**: a sub-volume inside a VG, analogous to a traditional partition but with a flexible, resizable size.
 
 A Volume Group is divided into fixed-size blocks called extents. At the PV level they are called Physical Extents (PE); at the LV level, Logical Extents (LE). By default each LE maps to one PE.
 
@@ -243,7 +243,7 @@ At `/boot/efi`.
 <details>
 <summary>Answer</summary>
 
-In `/mnt`. This is a convention, not a hard rule — you can mount to any existing directory.
+In `/mnt`. This is a convention, not a hard rule; you can mount to any existing directory.
 
 </details>
 
@@ -299,10 +299,10 @@ Create a swap file. The file is prepared with `mkswap` and activated with `swapo
 
 ## Related topics
 
-- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/) — boot process, role of `/boot`
-- 102.2 Boot Manager — GRUB installation and configuration
-- 104.1 Create Partitions and Filesystems — fdisk, gdisk, parted
-- 104.3 Mount and Unmount Filesystems — mounting, `/etc/fstab`
+- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/): boot process, role of `/boot`
+- 102.2 Boot Manager: GRUB installation and configuration
+- 104.1 Create Partitions and Filesystems: fdisk, gdisk, parted
+- 104.3 Mount and Unmount Filesystems: mounting, `/etc/fstab`
 
 ---
 

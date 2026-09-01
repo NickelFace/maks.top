@@ -10,7 +10,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-06-ipv6/"
 
 ## Why IPv6
 
-- IPv4: ~4.3 billion addresses (2³²) — exhausted
+- IPv4: ~4.3 billion addresses (2³²), exhausted
 - IPv6: 340 undecillion addresses (2¹²⁸)
 - No need for NAT
 - Built-in security (IPsec)
@@ -26,7 +26,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-06-ipv6/"
 2001:0DB8:0000:0001:0000:0000:0000:0001
 ```
 
-Standard prefix length: **/64** (64 bits — network, 64 bits — interface ID)
+Standard prefix length: **/64** (64 bits, network, 64 bits, interface ID)
 
 ---
 
@@ -61,7 +61,7 @@ Standard prefix length: **/64** (64 bits — network, 64 bits — interface ID)
 | Loopback | ::1/128 | Loopback (analogous to 127.0.0.1) |
 | Unspecified | ::/128 | "Any" source (analogous to 0.0.0.0) |
 | Multicast | FF00::/8 | Group communication |
-| Anycast | — | One address, multiple interfaces; packet goes to the nearest |
+| Anycast | n/a | One address, multiple interfaces; packet goes to the nearest |
 
 ### Important Multicast Addresses
 
@@ -107,8 +107,8 @@ A8:BB:CC:FF:FE:DD:EE:FF
 
 ### DHCPv6
 
-- **Stateful DHCPv6** — server assigns address and parameters (analogous to DHCPv4)
-- **Stateless DHCPv6** — SLAAC provides the address; DHCPv6 provides only DNS and other options
+- **Stateful DHCPv6**: server assigns address and parameters (analogous to DHCPv4)
+- **Stateless DHCPv6**: SLAAC provides the address; DHCPv6 provides only DNS and other options
 
 ---
 
@@ -150,9 +150,9 @@ Router# traceroute ipv6 2001:DB8::1
 
 | Resource | Description |
 |---|---|
-| [RFC 4291 — IPv6 Addressing Architecture](https://www.rfc-editor.org/rfc/rfc4291) | Specification of IPv6 address types: unicast, multicast, anycast |
-| [RFC 4861 — NDP (Neighbor Discovery Protocol)](https://www.rfc-editor.org/rfc/rfc4861) | Neighbor Discovery Protocol, IPv6 replacement for ARP |
-| [IPv6 Address Types — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/ipv6-address-types) | Global unicast, link-local, loopback, multicast, anycast |
-| [EUI-64 — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/eui-64-explained) | How EUI-64 generates an Interface ID from a MAC address |
-| [Jeremy's IT Lab — IPv6 Addressing (YouTube)](https://www.youtube.com/watch?v=mJPO9W0tq_Q) | IPv6 address types, EUI-64, NDP from the Free CCNA series |
-| [IPv6 Transition Mechanisms — Cisco](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/configuration/xe-3s/ipv6-xe-3s-book/ip6-tunnel.html) | Dual-stack, tunneling (6to4, ISATAP), NAT64 |
+| [RFC 4291: IPv6 Addressing Architecture](https://www.rfc-editor.org/rfc/rfc4291) | Specification of IPv6 address types: unicast, multicast, anycast |
+| [RFC 4861: NDP (Neighbor Discovery Protocol)](https://www.rfc-editor.org/rfc/rfc4861) | Neighbor Discovery Protocol, IPv6 replacement for ARP |
+| [IPv6 Address Types (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/ipv6-address-types) | Global unicast, link-local, loopback, multicast, anycast |
+| [EUI-64 (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/eui-64-explained) | How EUI-64 generates an Interface ID from a MAC address |
+| [Jeremy's IT Lab: IPv6 Addressing (YouTube)](https://www.youtube.com/watch?v=mJPO9W0tq_Q) | IPv6 address types, EUI-64, NDP from the Free CCNA series |
+| [IPv6 Transition Mechanisms (Cisco)](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6/configuration/xe-3s/ipv6-xe-3s-book/ip6-tunnel.html) | Dual-stack, tunneling (6to4, ISATAP), NAT64 |

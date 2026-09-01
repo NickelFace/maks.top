@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-110-2-host-security/"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 102
+> **Exam weight: 3**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -36,7 +36,7 @@ username:x:UID:GID:GECOS:home_directory:shell
 | Field | Description |
 |---|---|
 | `username` | Login name |
-| `x` | Password placeholder — actual hash is in `/etc/shadow` |
+| `x` | Password placeholder: actual hash is in `/etc/shadow` |
 | `UID` | User ID number |
 | `GID` | Primary group ID |
 | `GECOS` | Full name / comment field |
@@ -81,7 +81,7 @@ usermod -s /sbin/nologin emma
 
 On older and resource-constrained systems, a *superdaemon* listens on multiple ports and starts the appropriate service on demand, keeping services inactive until needed.
 
-### /etc/xinetd.conf — main configuration
+### /etc/xinetd.conf: main configuration
 
 ```
 defaults
@@ -94,7 +94,7 @@ includedir /etc/xinetd.d
 
 The only meaningful directive is `includedir`, which points to per-service configuration files.
 
-### /etc/xinetd.d/ — per-service files
+### /etc/xinetd.d/: per-service files
 
 Each file controls one service. Example `/etc/xinetd.d/ssh`:
 
@@ -192,8 +192,8 @@ If `libwrap.so` appears, the daemon supports TCP wrappers.
 ### /etc/hosts.allow and /etc/hosts.deny
 
 Processing order:
-1. `/etc/hosts.allow` is checked first — if a matching `ALLOW` rule exists, access is granted.
-2. `/etc/hosts.deny` is checked next — if a matching `DENY` rule exists, access is denied.
+1. `/etc/hosts.allow` is checked first: if a matching `ALLOW` rule exists, access is granted.
+2. `/etc/hosts.deny` is checked next: if a matching `DENY` rule exists, access is denied.
 3. If no match in either file, access is granted (default allow).
 
 Format: `DAEMON: CLIENT_LIST`
@@ -216,7 +216,7 @@ Common client patterns:
 | `192.168.1.` | IP prefix (subnet) |
 | `KNOWN` | Hosts with resolvable hostnames |
 
-Changes take effect immediately — no service restart needed.
+Changes take effect immediately, no service restart needed.
 
 ---
 
@@ -288,7 +288,7 @@ TCP wrappers:
 
 ## Exercises
 
-### Exercise 1 — Shadow Password Inspection
+### Exercise 1: Shadow Password Inspection
 
 Check whether shadow passwords are configured on your system, and attempt to view `/etc/shadow` as a non-root user.
 
@@ -306,7 +306,7 @@ grep root /etc/shadow      # will fail with permission denied for non-root
 
 ---
 
-### Exercise 2 — Disable a Service Permanently
+### Exercise 2: Disable a Service Permanently
 
 Disable the `cups` printing service permanently on a systemd system and verify port 631 is no longer listening.
 
@@ -324,7 +324,7 @@ ss -l | grep ":ipp"
 
 ---
 
-### Exercise 3 — xinetd Configuration
+### Exercise 3: xinetd Configuration
 
 Write an xinetd configuration file that allows `xinetd` to manage the `daytime` service (re-enable the legacy service for testing).
 
@@ -359,7 +359,7 @@ nc localhost daytime
 
 ---
 
-### Exercise 4 — TCP Wrappers
+### Exercise 4: TCP Wrappers
 
 Configure TCP wrappers so that `sshd` only accepts connections from the local network.
 
@@ -384,7 +384,7 @@ No restart required. Verify with `ldd /usr/sbin/sshd | grep libwrap` first to co
 
 ---
 
-### Exercise 5 — /etc/nologin
+### Exercise 5: /etc/nologin
 
 Prevent all non-root users from logging in while you perform maintenance.
 

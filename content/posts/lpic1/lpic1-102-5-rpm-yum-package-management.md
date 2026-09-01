@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-102-5-rpm-yum-package-management/"
 page_lang: "en"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 101
+> **Exam weight: 3**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -104,7 +104,7 @@ rpm -q --scripts bash
 # Package changelog
 rpm -q --changelog bash | head -20
 
-# Query an .rpm file (not installed) — add -p
+# Query an .rpm file (not installed) - add -p
 rpm -qip package.rpm    # package file info
 rpm -qlp package.rpm    # list files in package
 rpm -qRp package.rpm    # package dependencies
@@ -271,13 +271,13 @@ gpgkey=http://repo.example.com/RPM-GPG-KEY-myrepo
 
 Repository fields:
 
-- `[section]` — unique repository identifier
-- `name` — human-readable name
-- `baseurl` — repository address (http, ftp, file://)
-- `mirrorlist` — alternative to baseurl, a link to a list of mirrors
-- `enabled` — 1 enabled, 0 disabled
-- `gpgcheck` — 1 verify GPG signature, 0 skip
-- `gpgkey` — path or URL to the GPG key
+- `[section]`: unique repository identifier
+- `name`: human-readable name
+- `baseurl`: repository address (http, ftp, file://)
+- `mirrorlist`: alternative to baseurl, a link to a list of mirrors
+- `enabled`: 1 enabled, 0 disabled
+- `gpgcheck`: 1 verify GPG signature, 0 skip
+- `gpgkey`: path or URL to the GPG key
 
 ```bash
 # Add a repository via yum-config-manager
@@ -332,7 +332,7 @@ dnf config-manager --set-enabled REPO_ID
 dnf config-manager --set-disabled REPO_ID
 ```
 
-DNF repositories use the same `.repo` files in `/etc/yum.repos.d/` — the format is identical to YUM. DNF fixes several YUM issues: better dependency resolution, modular package support, more accurate upgrade logic. Built-in help: `dnf help install`.
+DNF repositories use the same `.repo` files in `/etc/yum.repos.d/`; the format is identical to YUM. DNF fixes several YUM issues: better dependency resolution, modular package support, more accurate upgrade logic. Built-in help: `dnf help install`.
 
 ---
 
@@ -500,7 +500,7 @@ The `-h` flag enables progress display as `#` characters. `-v` can be added for 
 rpm -qf /etc/redhat-release
 ```
 
-The `-qf` flag stands for "query file" — it queries which package a file belongs to.
+The `-qf` flag stands for "query file"; it queries which package a file belongs to.
 
 </details>
 
@@ -588,7 +588,7 @@ dnf list --installed
 dnf config-manager --add_repo https://www.example.url/home:reponame.repo
 ```
 
-Note the underscore in `--add_repo` — not a hyphen. Added repositories are enabled by default.
+Note the underscore in `--add_repo`, not a hyphen. Added repositories are enabled by default.
 
 </details>
 
@@ -626,8 +626,8 @@ yum whatprovides /bin/wget
 
 ## Related topics
 
-- [102.4 Use Debian Package Management](/posts/lpic1-102-4-debian-package-management/) — dpkg and apt
-- 103.1 Work on the Command Line — shell basics
+- [102.4 Use Debian Package Management](/posts/lpic1-102-4-debian-package-management/): dpkg and apt
+- 103.1 Work on the Command Line: shell basics
 
 ---
 

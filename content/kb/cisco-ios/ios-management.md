@@ -24,7 +24,7 @@ Cisco IOS management tasks: <strong>IOS firmware upgrade</strong>, <strong>passw
 <tr><td class="mono">delete c2801-ipbasek9-mz.124-24.T.bin</td><td class="desc">3. Delete old IOS if flash is full</td></tr>
 <tr><td class="mono">copy ftp://user:pass@172.10.1.2/new.bin flash:new.bin</td><td class="desc">4. Download new IOS from FTP</td></tr>
 <tr><td class="mono">copy tftp: flash:</td><td class="desc">Or download via TFTP (interactive)</td></tr>
-<tr><td class="mono">verify /md5 flash:new.bin</td><td class="desc">5. Verify MD5 hash — compare with Cisco download page</td></tr>
+<tr><td class="mono">verify /md5 flash:new.bin</td><td class="desc">5. Verify MD5 hash: compare with Cisco download page</td></tr>
 <tr><td class="mono">boot system flash:new.bin</td><td class="desc">6. Tell the router which image to boot</td></tr>
 <tr><td class="mono">reload</td><td class="desc">7. Reboot and verify</td></tr>
 </tbody>
@@ -34,9 +34,9 @@ Cisco IOS management tasks: <strong>IOS firmware upgrade</strong>, <strong>passw
 
 ---
 
-## Password Recovery — Router
+## Password Recovery: Router
 
-All steps require **console access** only — SSH/Telnet cannot be used.
+All steps require **console access** only; SSH/Telnet cannot be used.
 
 <div class="ref-panel">
 <div class="ref-panel-head">Router Password Recovery Procedure</div>
@@ -45,7 +45,7 @@ All steps require **console access** only — SSH/Telnet cannot be used.
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">Ctrl+Break (Pause)</td><td class="desc">1. Interrupt boot sequence to enter ROMMON</td></tr>
-<tr><td class="mono">rommon> confreg 0x2142</td><td class="desc">2. Change config register — boot without loading startup-config</td></tr>
+<tr><td class="mono">rommon> confreg 0x2142</td><td class="desc">2. Change config register: boot without loading startup-config</td></tr>
 <tr><td class="mono">rommon> boot</td><td class="desc">2. Reboot into IOS with empty config (no password prompt)</td></tr>
 <tr><td class="mono">Router# copy startup-config running-config</td><td class="desc">3. Load old config into running-config (startup-config preserved)</td></tr>
 <tr><td class="mono">Router(config)# enable secret NEW_PASSWORD</td><td class="desc">4. Set new enable password</td></tr>
@@ -57,7 +57,7 @@ All steps require **console access** only — SSH/Telnet cannot be used.
 </div>
 </div>
 
-> **After recovery:** all interfaces will be `administratively down` — bring them up manually with `no shutdown`.
+> **After recovery:** all interfaces will be `administratively down`, bring them up manually with `no shutdown`.
 
 > If `no service password-recovery` is set, ROMMON protection is enabled. The only option then is a **factory reset** (wipes startup-config).
 
@@ -72,7 +72,7 @@ All steps require **console access** only — SSH/Telnet cannot be used.
 
 ---
 
-## Password Recovery — Cisco Catalyst Switch
+## Password Recovery: Cisco Catalyst Switch
 
 <div class="ref-panel">
 <div class="ref-panel-head">Catalyst Switch Password Recovery</div>
@@ -97,12 +97,12 @@ All steps require **console access** only — SSH/Telnet cannot be used.
 
 ---
 
-## ROMMON Recovery — Restore IOS via TFTP
+## ROMMON Recovery: Restore IOS via TFTP
 
-Used when flash is corrupted or IOS image is missing. **TFTP only — FTP is not supported in ROMMON.**
+Used when flash is corrupted or IOS image is missing. **TFTP only; FTP is not supported in ROMMON.**
 
 <div class="ref-panel">
-<div class="ref-panel-head">ROMMON TFTP Recovery — Router / Switch</div>
+<div class="ref-panel-head">ROMMON TFTP Recovery: Router / Switch</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -121,7 +121,7 @@ Used when flash is corrupted or IOS image is missing. **TFTP only — FTP is not
 </div>
 
 <div class="ref-panel">
-<div class="ref-panel-head">ROMMON TFTP Recovery — Cisco ASA</div>
+<div class="ref-panel-head">ROMMON TFTP Recovery: Cisco ASA</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -177,8 +177,8 @@ The 16-bit config register controls boot behavior. View with `show version` (las
 <tbody>
 <tr><td class="mono">0x2100</td><td class="desc">Boot into ROMMON (manual recovery mode)</td></tr>
 <tr><td class="mono">0x2101</td><td class="desc">Boot first image found in flash</td></tr>
-<tr><td class="mono">0x2102</td><td class="desc">Normal boot — follow boot system commands in startup-config (default)</td></tr>
-<tr><td class="mono">0x2142</td><td class="desc">Ignore startup-config on boot — used for password recovery</td></tr>
+<tr><td class="mono">0x2102</td><td class="desc">Normal boot: follow boot system commands in startup-config (default)</td></tr>
+<tr><td class="mono">0x2142</td><td class="desc">Ignore startup-config on boot: used for password recovery</td></tr>
 </tbody>
 </table>
 </div>
@@ -211,7 +211,7 @@ Format: `platform-featureset-format.version.bin`
 <thead><tr><th>Field</th><th>Example</th><th>Meaning</th></tr></thead>
 <tbody>
 <tr><td class="mono">Platform</td><td class="desc">c2800nm</td><td class="desc">Hardware platform (c2800 series, NM slot)</td></tr>
-<tr><td class="mono">Feature set</td><td class="desc">advipservicesk9</td><td class="desc">Feature set — IP Services + crypto (k9)</td></tr>
+<tr><td class="mono">Feature set</td><td class="desc">advipservicesk9</td><td class="desc">Feature set: IP Services + crypto (k9)</td></tr>
 <tr><td class="mono">Format</td><td class="desc">mz</td><td class="desc">m = runs from RAM; z = compressed (zipped)</td></tr>
 <tr><td class="mono">Version</td><td class="desc">124-25.bin</td><td class="desc">IOS 12.4(25)</td></tr>
 </tbody>

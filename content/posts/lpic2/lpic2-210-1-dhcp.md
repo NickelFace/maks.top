@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-210-1-dhcp/"
 page_lang: "en"
 ---
 
-> **Exam topic 210.1** — DHCP Configuration (weight: 2). Covers ISC DHCPd server setup, `dhcpd.conf` structure, lease management, BOOTP support, relay agents, and IPv6 with radvd.
+> **Exam topic 210.1**: DHCP Configuration (weight: 2). Covers ISC DHCPd server setup, `dhcpd.conf` structure, lease management, BOOTP support, relay agents, and IPv6 with radvd.
 
 ---
 
@@ -19,7 +19,7 @@ page_lang: "en"
 - Server listens on **UDP 67**; responds on **UDP 68**
 - `-p` flag changes the listening port; response port is always one higher
 
-For IPv6, there is DHCPv6, but **NDP (Neighbour Discovery Protocol)** is better suited for this — it's handled by the `radvd` daemon.
+For IPv6, there is DHCPv6, but **NDP (Neighbour Discovery Protocol)** is better suited for this; it's handled by the `radvd` daemon.
 
 ---
 
@@ -52,11 +52,11 @@ yum install dhcp
 Configuration file: `/etc/dhcp/dhcpd.conf`
 
 Structure elements:
-- **Global parameters** — defaults for all clients
-- `shared-network` — multiple subnets on one physical interface
-- `subnet` — defines a network segment
-- `group` — groups hosts with shared settings
-- `host` — settings for a specific client
+- **Global parameters**: defaults for all clients
+- `shared-network`: multiple subnets on one physical interface
+- `subnet`: defines a network segment
+- `group`: groups hosts with shared settings
+- `host`: settings for a specific client
 
 > Parameter priority: global → subnet → group → host (more specific overrides broader).
 
@@ -65,11 +65,11 @@ Structure elements:
 ## Global Parameters
 
 ```bash
-# Parameters with "option" keyword — sent to clients
+# Parameters with "option" keyword - sent to clients
 option domain-name-servers 10.0.0.10 10.0.0.11;
 option domain-name "example.com";
 
-# Parameters without "option" — control server behavior
+# Parameters without "option" - control server behavior
 default-lease-time 600;       # default lease time (seconds)
 max-lease-time 7200;          # maximum lease time
 ```
@@ -120,7 +120,7 @@ shared-network OFFICE {
 
 ## Static Hosts
 
-For servers and printers that need a permanent IP — bind a specific IP to a MAC address via the `host` block:
+For servers and printers that need a permanent IP, bind a specific IP to a MAC address via the `host` block:
 
 ```bash
 host webserver {
@@ -132,9 +132,9 @@ host webserver {
 
 > `hardware ethernet` and `fixed-address` are the two required fields for a static host.
 
-The host name in `host webserver {}` is just a unique internal identifier — it's not sent to the client.
+The host name in `host webserver {}` is just a unique internal identifier; it's not sent to the client.
 
-`fixed-address` can be outside the `range` — this is normal.
+`fixed-address` can be outside the `range`; this is normal.
 
 ---
 
@@ -225,7 +225,7 @@ dhcrelay 21.31.0.1
 dhcrelay -i eth1 21.31.0.1
 ```
 
-> `dhcrelay` correctly passes the client's MAC in the `chaddr` field — so static host identification by `hardware ethernet` still works through a relay.
+> `dhcrelay` correctly passes the client's MAC in the `chaddr` field, so static host identification by `hardware ethernet` still works through a relay.
 
 > Most modern routers have built-in DHCP relay (`ip helper-address` in Cisco). `dhcrelay` is only needed if the router doesn't support this.
 
@@ -239,7 +239,7 @@ dhcrelay -i eth1 21.31.0.1
 cat /var/lib/dhcp/dhcpd.leases
 ```
 
-Stores all active leases: IP, MAC, start/end time. If empty — the config probably has no `range`, only static hosts.
+Stores all active leases: IP, MAC, start/end time. If empty; the config probably has no `range`, only static hosts.
 
 On the client, the issued address is stored in `dhclient.leases`.
 
@@ -366,8 +366,8 @@ next-server 10.0.0.5;                # TFTP server
 |---|---|
 | `hardware ethernet` | Two words, no hyphen |
 | Leases file location | `/var/lib/dhcp/dhcpd.leases`, not `/etc/dhcp/` |
-| `dhcrelay` vs `dhcpd` | Different binaries — relay runs separately |
-| radvd | Works with prefixes, not addresses — has no pool |
+| `dhcrelay` vs `dhcpd` | Different binaries: relay runs separately |
+| radvd | Works with prefixes, not addresses: has no pool |
 | `allow booting` | Enables `filename`/`next-server` delivery |
 | `allow bootp` | Enables accepting BOOTP requests |
 | If leases file missing | `touch /var/lib/dhcp/dhcpd.leases` |

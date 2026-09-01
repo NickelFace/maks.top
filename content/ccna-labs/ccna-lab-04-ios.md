@@ -10,7 +10,7 @@ lang_pair: "/ccna-labs/ru/ccna-lab-04-ios/"
 
 ## Overview
 
-Guided walkthrough — step-by-step introduction to the Cisco IOS CLI. One router. No prior knowledge required.
+Guided walkthrough, step-by-step introduction to the Cisco IOS CLI. One router. No prior knowledge required.
 
 ## Topology
 
@@ -50,7 +50,7 @@ Guided walkthrough — step-by-step introduction to the Cisco IOS CLI. One route
 19. Filters: `sh run | begin hostname`, `sh run | include interface`, `sh run | exclude interface`
 20. Save the config: `R1#copy run start`
 21. Back up to flash: `copy run flash:` (name: config-backup)
-22. Try a TFTP backup (will time out — that is expected)
+22. Try a TFTP backup (will time out, that is expected)
 23. Reload and confirm the config was saved
 
 ## Key Commands

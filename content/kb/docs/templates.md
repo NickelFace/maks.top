@@ -12,18 +12,18 @@ tags: ["docs"]
 Hugo uses the Go template language. All templates live in `themes/maks/layouts/`.
 
 **Key concepts:**
-- `{{ .Field }}` — output a field value
-- `{{ range .Items }}...{{ end }}` — loop over a collection
-- `{{ if .Condition }}...{{ end }}` — conditional block
-- `{{ partial "name.html" . }}` — include a partial, passing current context
-- `{{ block "name" . }}...{{ end }}` — define a named block (in baseof)
-- `{{ define "name" }}...{{ end }}` — override a block (in child templates)
-- `{{ "path" | relURL }}` — convert path to relative URL
-- `{{ .Value | funcName }}` — pipe: pass value into a function
+- `{{ .Field }}`: output a field value
+- `{{ range .Items }}...{{ end }}`: loop over a collection
+- `{{ if .Condition }}...{{ end }}`: conditional block
+- `{{ partial "name.html" . }}`: include a partial, passing current context
+- `{{ block "name" . }}...{{ end }}`, define a named block (in baseof)
+- `{{ define "name" }}...{{ end }}`: override a block (in child templates)
+- `{{ "path" | relURL }}`: convert path to relative URL
+- `{{ .Value | funcName }}`, pipe: pass value into a function
 
 ---
 
-## baseof.html — master template
+## baseof.html: master template
 
 **Path:** `themes/maks/layouts/_default/baseof.html`  
 **Rendered for:** every page on the site (acts as a wrapper)
@@ -40,14 +40,14 @@ This is the foundation of the entire site. Every other template extends `baseof`
 
 ### What always renders (cannot be overridden)
 
-- **Desktop nav** `.desk-nav` — logo + links + lang-toggle + theme-toggle
-- **Mobile nav** `.mob-nav` — logo + burger
-- **Mobile drawer** `.mob-drawer` — slide-out menu
-- **Mobile bottom nav** `.mob-bottom-nav` — bottom bar with icons
-- **Footer** — logo + stack + location + year
-- **`<script>`** — inline: `toggleTheme()`, `setLang()`, `toggleMobMenu()`, `closeMobMenu()`, restore from localStorage
+- **Desktop nav** `.desk-nav`: logo + links + lang-toggle + theme-toggle
+- **Mobile nav** `.mob-nav`: logo + burger
+- **Mobile drawer** `.mob-drawer`: slide-out menu
+- **Mobile bottom nav** `.mob-bottom-nav`: bottom bar with icons
+- **Footer**: logo + stack + location + year
+- **`<script>`**, inline: `toggleTheme()`, `setLang()`, `toggleMobMenu()`, `closeMobMenu()`, restore from localStorage
 
-> **Note:** `site.js` is not loaded from baseof! Functions are inlined directly in baseof to guarantee execution order. `site.js` in `static/js/` is a legacy file — its functions are duplicated inline.
+> **Note:** `site.js` is not loaded from baseof! Functions are inlined directly in baseof to guarantee execution order. `site.js` in `static/js/` is a legacy file; its functions are duplicated inline.
 
 ### How theme switching works
 
@@ -59,7 +59,7 @@ CSS reads the attribute via `[data-theme="light"]` and switches variables. The v
 
 ---
 
-## index.html — home page
+## index.html: home page
 
 **Path:** `themes/maks/layouts/index.html`  
 **Rendered for:** `/`  
@@ -73,11 +73,11 @@ CSS reads the attribute via `[data-theme="light"]` and switches variables. The v
 | `.panel .recent-posts` | Last 5 posts | `{{ range first 5 .Site.RegularPages }}` |
 | `.panel .kb-section` | KB quick links | Hardcoded links |
 | `.panel .certs-section` | Cert widget | `{{ partial "certs-widget.html" . }}` |
-| `.cert-grid` | cert cards | `{{ partial "certs-widget.html" . }}` — counts computed dynamically |
+| `.cert-grid` | cert cards | `{{ partial "certs-widget.html" . }}`: counts computed dynamically |
 
 ---
 
-## _default/single.html — article page
+## _default/single.html: article page
 
 **Path:** `themes/maks/layouts/_default/single.html`  
 **Rendered for:** any `single` page without a specific template  
@@ -101,7 +101,7 @@ CSS reads the attribute via `[data-theme="light"]` and switches variables. The v
   .toc-aside           ← empty div, populated by JS
 ```
 
-### `head` block — JSON-LD structured data
+### `head` block: JSON-LD structured data
 
 Injects `<script type="application/ld+json">` with Schema.org `Article` for all EN pages (`page_lang: "en"`). Fields: headline, description, url, datePublished, dateModified, author, publisher.
 
@@ -111,7 +111,7 @@ Loads `static/js/article.js` (reading bar, ToC, copy buttons, lightbox). If `cod
 
 ---
 
-## _default/list.html — page listing
+## _default/list.html: page listing
 
 **Path:** `themes/maks/layouts/_default/list.html`  
 **Rendered for:** any section without a specific template (`/kb/docs/`, `/certs/` if no own template)  
@@ -130,7 +130,7 @@ Loads `static/js/article.js` (reading bar, ToC, copy buttons, lightbox). If `cod
 
 ---
 
-## posts/list.html — blog listing
+## posts/list.html: blog listing
 
 **Path:** `themes/maks/layouts/posts/list.html`  
 **Rendered for:** `/posts/`  
@@ -147,7 +147,7 @@ Loads `static/js/article.js` (reading bar, ToC, copy buttons, lightbox). If `cod
 
 ---
 
-## posts/linux-namespaces.html — interactive page
+## posts/linux-namespaces.html: interactive page
 
 **Path:** `themes/maks/layouts/posts/linux-namespaces.html`  
 **Rendered for:** `/posts/linux-namespaces/`  
@@ -174,11 +174,11 @@ Renders a profile card `.about-strip` with data from `hugo.toml [params]`:
 | GitHub / LinkedIn / Telegram links | `.Site.Params.github` / `.Site.Params.linkedin` / `.Site.Params.telegram` |
 | `.prose` | `.Content` (body of `about.md`) |
 
-Then inserts `{{ partial "certs-widget.html" . }}` — the same cards as on the home page.
+Then inserts `{{ partial "certs-widget.html" . }}`, the same cards as on the home page.
 
 ---
 
-## certs/single.html — cert overview page
+## certs/single.html: cert overview page
 
 **Path:** `themes/maks/layouts/certs/single.html`  
 **Rendered for:** `/certs/lpic-2/`, `/certs/lpic-1/`, etc.  
@@ -200,11 +200,11 @@ Then inserts `{{ partial "certs-widget.html" . }}` — the same cards as on the 
 
 ---
 
-## kb/section.html — KB index and sub-sections
+## kb/section.html: KB index and sub-sections
 
 **Path:** `themes/maks/layouts/kb/section.html`  
 **Rendered for:** `/kb/` (root index) and `/kb/{sub-section}/` (sub-section landing pages)  
-**Note:** `kb/single.html` and `kb/list.html` were deleted — KB articles fall through to `_default/single.html`.
+**Note:** `kb/single.html` and `kb/list.html` were deleted, KB articles fall through to `_default/single.html`.
 
 Uses `{{ if .Sections }}` to branch between two layouts:
 
@@ -233,7 +233,7 @@ Uses `{{ if .Sections }}` to branch between two layouts:
 
 ---
 
-## taxonomy/tag.html — tags page
+## taxonomy/tag.html: tags page
 
 **Path:** `themes/maks/layouts/taxonomy/tag.html`  
 **Rendered for:** `/tags/`
@@ -258,7 +258,7 @@ Accepts a context with `.Paginator`. Always shows first/last page, `cur-1`, `cur
 
 ---
 
-## 404.html — not found page
+## 404.html: not found page
 
 **Path:** `themes/maks/layouts/404.html`
 
@@ -268,7 +268,7 @@ Two-column layout:
 
 `window.location.pathname` is injected into the traceroute output via JS. The search input redirects to `/posts/?q=<term>` on submit. Pressing `/` focuses the search input.
 
-CSS classes: `.e404-page`, `.e404-left`, `.e404-right`, `.e404-terminal`, `.e404-search` — all in `global.css`.
+CSS classes: `.e404-page`, `.e404-left`, `.e404-right`, `.e404-terminal`, `.e404-search`, all in `global.css`.
 
 ---
 
@@ -293,9 +293,9 @@ command
 | Parameter | Type | Default | Description |
 |---|---|---|---|
 | `lang` | string | `"bash"` | Language shown in block header |
-| `label` | string | — | Additional label (small text) |
+| `label` | string | n/a | Additional label (small text) |
 
-Renders `.code-block` with a copy button. `.Inner` — body between tags, passed through `htmlEscape`.
+Renders `.code-block` with a copy button. `.Inner`, body between tags, passed through `htmlEscape`.
 
 ### `topology`
 
@@ -352,7 +352,7 @@ Styles are in `topology.css`. Loaded on `posts`, `kb`, and `ccna-labs` single pa
 | `host` | no | Value on the host side (visual block) |
 | `ns_view` | no | Value inside the namespace (visual block) |
 
-`.Inner` — arbitrary markdown inside the tags (e.g. code block).
+`.Inner`: arbitrary markdown inside the tags (e.g. code block).
 
 ---
 

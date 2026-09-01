@@ -34,7 +34,7 @@ page_lang: "en"
 
 ---
 
-### Part 1 — Basic switch setup
+### Part 1: Basic switch setup
 
 <details>
 <summary>S1</summary>
@@ -159,7 +159,7 @@ copy running-config startup-config
 
 ---
 
-### Part 2 — PAgP EtherChannel (S1–S3)
+### Part 2: PAgP EtherChannel (S1–S3)
 
 PAgP (Port Aggregation Protocol) is a Cisco proprietary protocol. Modes: `desirable` (active negotiation) and `auto` (passive). At least one side must be `desirable`.
 
@@ -238,9 +238,9 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-**Flag meanings:** `SU` — channel is a Layer2 trunk and in use. `P` — port is bundled in the port-channel.
+**Flag meanings:** `SU`; channel is a Layer2 trunk and in use. `P`; port is bundled in the port-channel.
 
-Verify STP — S3's root port should now be Port-channel1:
+Verify STP. S3's root port should now be Port-channel1:
 
 ```
 show spanning-tree
@@ -274,7 +274,7 @@ copy running-config startup-config
 
 ---
 
-### Part 3 — LACP EtherChannel (S1–S2 and S2–S3)
+### Part 3: LACP EtherChannel (S1–S2 and S2–S3)
 
 LACP (Link Aggregation Control Protocol) is an open standard (IEEE 802.3ad). Modes: `active` (sends LACP frames) and `passive` (responds only). At least one side must be `active`.
 
@@ -409,7 +409,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Verify connectivity — ping between PCs in VLAN 10:
+Verify connectivity. Ping between PCs in VLAN 10:
 
 ```
 PC-A> ping 192.168.10.2

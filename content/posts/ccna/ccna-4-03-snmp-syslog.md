@@ -12,14 +12,14 @@ lang_pair: "/posts/ccna/ru/ccna-4-03-snmp-syslog/"
 
 ### How It Works
 
-**SNMP (Simple Network Management Protocol)** — protocol for monitoring and managing network devices.
+**SNMP (Simple Network Management Protocol)**: protocol for monitoring and managing network devices.
 
 | Component | Description |
 |---|---|
 | SNMP Manager (NMS) | Network management station (Cisco Prime, SolarWinds) |
 | SNMP Agent | Software on the device (router, switch) |
-| MIB | Management Information Base — object database |
-| OID | Object Identifier — unique object identifier in MIB |
+| MIB | Management Information Base: object database |
+| OID | Object Identifier: unique object identifier in MIB |
 
 ### SNMP Versions
 
@@ -29,7 +29,7 @@ lang_pair: "/posts/ccna/ru/ccna-4-03-snmp-syslog/"
 | SNMPv2c | No | Community string (plaintext) | No |
 | SNMPv3 | Yes | Users + MD5/SHA | AES/DES |
 
-> **📌 Important:** For production — use **SNMPv3** with authentication and encryption only. SNMPv1/v2c send community strings in plaintext.
+> **📌 Important:** For production; use **SNMPv3** with authentication and encryption only. SNMPv1/v2c send community strings in plaintext.
 
 ### SNMP Operations
 
@@ -93,7 +93,7 @@ Router# show snmp host                    # trap receiver addresses
 
 ### How It Works
 
-**Syslog** — standard for sending system messages to a log server. UDP port 514 (default), TCP 6514 (secure).
+**Syslog**: standard for sending system messages to a log server. UDP port 514 (default), TCP 6514 (secure).
 
 ### Syslog Severity Levels
 
@@ -128,7 +128,7 @@ Router# show snmp host                    # trap receiver addresses
 ### Syslog Configuration
 
 ```bash
-# Logging to console (default — all levels)
+# Logging to console (default - all levels)
 Router(config)# logging console debugging                  # levels 0-7 to console
 Router(config)# no logging console                        # disable
 
@@ -163,9 +163,9 @@ Router# show logging | include OSPF       # filter by keyword
 
 | Resource | Description |
 |---|---|
-| [RFC 3411 — SNMPv3 Framework](https://www.rfc-editor.org/rfc/rfc3411) | SNMP v3 architecture: USM, View-based Access Control |
-| [RFC 5424 — Syslog Protocol](https://www.rfc-editor.org/rfc/rfc5424) | Syslog standard: message formats, severity levels 0–7 |
-| [SNMP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/snmp-simple-network-management-protocol) | SNMP v1/v2c/v3: OID, MIB, trap, community strings |
-| [Syslog — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/syslog) | Syslog severity levels, logging configuration on Cisco IOS |
-| [Jeremy's IT Lab — SNMP (YouTube)](https://www.youtube.com/watch?v=vDkBAdDFiYI) | SNMP v1/v2c/v3, MIB, OID, trap from the Free CCNA series |
+| [RFC 3411: SNMPv3 Framework](https://www.rfc-editor.org/rfc/rfc3411) | SNMP v3 architecture: USM, View-based Access Control |
+| [RFC 5424: Syslog Protocol](https://www.rfc-editor.org/rfc/rfc5424) | Syslog standard: message formats, severity levels 0–7 |
+| [SNMP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/snmp-simple-network-management-protocol) | SNMP v1/v2c/v3: OID, MIB, trap, community strings |
+| [Syslog (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/syslog) | Syslog severity levels, logging configuration on Cisco IOS |
+| [Jeremy's IT Lab: SNMP (YouTube)](https://www.youtube.com/watch?v=vDkBAdDFiYI) | SNMP v1/v2c/v3, MIB, OID, trap from the Free CCNA series |
 | [Cisco SNMP Configuration Guide](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/xe-16/snmp-xe-16-book/nm-snmp-cfg-snmp-support.html) | Official Cisco documentation for SNMP configuration |

@@ -31,7 +31,7 @@ Listed from lowest cost / highest RPO+RTO to highest cost / lowest RPO+RTO:
 - Periodic snapshots / backups shipped to S3 or another region.
 - On disaster: spin up new environment, restore from backup.
 - **RPO**: hours. **RTO**: hours.
-- **Cost**: lowest — pay only for storage of backups.
+- **Cost**: lowest, pay only for storage of backups.
 
 ### 2. Pilot Light
 
@@ -52,7 +52,7 @@ Listed from lowest cost / highest RPO+RTO to highest cost / lowest RPO+RTO:
 - Traffic is load-balanced across regions (Route 53 / Global Accelerator).
 - On disaster: remove failed region from routing; remaining region(s) absorb full load.
 - **RPO**: near zero. **RTO**: near zero.
-- **Cost**: highest — full infrastructure in every region.
+- **Cost**: highest, full infrastructure in every region.
 
 ### DR comparison table
 
@@ -96,7 +96,7 @@ Replaces the older CloudEndure Disaster Recovery.
 
 ---
 
-## Snow Family — Offline Data Transfer
+## Snow Family: Offline Data Transfer
 
 Use Snow when: data > 10 TB, bandwidth is limited/expensive, air-gapped environments.
 
@@ -119,7 +119,7 @@ Use Snow when: data > 10 TB, bandwidth is limited/expensive, air-gapped environm
 
 ---
 
-## AWS DataSync — Online Data Transfer
+## AWS DataSync: Online Data Transfer
 
 Online agent-based data transfer service.
 
@@ -133,7 +133,7 @@ Online agent-based data transfer service.
 | **Bandwidth throttling** | Configure max bandwidth to avoid saturating the link |
 | **Data integrity** | Checksums verified end-to-end |
 
-> **📌 Tip:** DataSync is NOT a migration tool for running applications — it transfers file data. For migrating live databases → DMS.
+> **📌 Tip:** DataSync is NOT a migration tool for running applications; it transfers file data. For migrating live databases → DMS.
 
 ---
 
@@ -150,11 +150,11 @@ Hybrid storage service connecting on-premises applications to AWS storage.
 | **Volume Gateway (Stored)** | iSCSI | EBS snapshots | Full data on-prem; async backup to S3 |
 | **Tape Gateway** | VTL (iSCSI) | S3 + Glacier | Replace physical tape library; virtual tapes |
 
-> **📌 Tip:** Storage Gateway extends on-premises storage to AWS — applications keep using familiar protocols (NFS/SMB/iSCSI). They don't need to know data is in S3/Glacier.
+> **📌 Tip:** Storage Gateway extends on-premises storage to AWS; applications keep using familiar protocols (NFS/SMB/iSCSI). They don't need to know data is in S3/Glacier.
 
 ---
 
-## DMS — Database Migration Service
+## DMS: Database Migration Service
 
 DMS migrates databases to AWS with minimal downtime.
 
@@ -163,7 +163,7 @@ DMS migrates databases to AWS with minimal downtime.
 | Type | Example | SCT needed? |
 |---|---|---|
 | **Homogeneous** | MySQL → RDS MySQL, Oracle → Oracle | No |
-| **Heterogeneous** | Oracle → Aurora PostgreSQL, SQL Server → MySQL | Yes — use **Schema Conversion Tool (SCT)** first |
+| **Heterogeneous** | Oracle → Aurora PostgreSQL, SQL Server → MySQL | Yes: use **Schema Conversion Tool (SCT)** first |
 
 ### DMS features
 
@@ -192,7 +192,7 @@ Lift-and-shift migration for servers (not databases).
 
 | Strategy | Description | Example |
 |---|---|---|
-| **Retire** | Decommission — no longer needed | Legacy app no one uses |
+| **Retire** | Decommission: no longer needed | Legacy app no one uses |
 | **Retain** | Keep on-premises for now | Compliance requirements |
 | **Relocate** | Move to AWS without changes (container-level) | Migrate VMware to VMware Cloud on AWS |
 | **Rehost** | Lift-and-shift to EC2 | Move VMs to EC2 using MGN |
@@ -208,11 +208,11 @@ Lift-and-shift migration for servers (not databases).
 
 | Trap | Correct answer |
 |---|---|
-| "Snowball for online data transfer" | **False** — Snowball is offline; use **DataSync** for online |
-| "DMS for heterogeneous migration without SCT" | **False** — heterogeneous requires **Schema Conversion Tool** first |
-| "Warm standby = zero RTO" | **False** — warm standby still needs a scale-up step; **active/active = zero RTO** |
-| "Multi-site active/active is cheapest DR" | **False** — it's the most expensive; cheapest is backup & restore |
-| "DRS replaces DMS for database migration" | **False** — DRS is server-level (block) replication for DR; DMS is for database migration |
-| "Storage Gateway replaces on-prem storage entirely" | **False** — it **extends** it; on-prem apps still use local protocols (NFS/SMB) |
-| "AWS Backup Vault Lock can be deleted by admin" | **False** — Vault Lock WORM prevents deletion even by privileged users |
-| "DataSync for migrating live application databases" | **False** — DataSync moves file data; use **DMS** for databases |
+| "Snowball for online data transfer" | **False**: Snowball is offline; use **DataSync** for online |
+| "DMS for heterogeneous migration without SCT" | **False**: heterogeneous requires **Schema Conversion Tool** first |
+| "Warm standby = zero RTO" | **False**: warm standby still needs a scale-up step; **active/active = zero RTO** |
+| "Multi-site active/active is cheapest DR" | **False**: it's the most expensive; cheapest is backup & restore |
+| "DRS replaces DMS for database migration" | **False**: DRS is server-level (block) replication for DR; DMS is for database migration |
+| "Storage Gateway replaces on-prem storage entirely" | **False**: it **extends** it; on-prem apps still use local protocols (NFS/SMB) |
+| "AWS Backup Vault Lock can be deleted by admin" | **False**: Vault Lock WORM prevents deletion even by privileged users |
+| "DataSync for migrating live application databases" | **False**: DataSync moves file data; use **DMS** for databases |

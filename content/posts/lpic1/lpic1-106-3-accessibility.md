@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-106-3-accessibility/"
 ---
 
-> **Exam weight: 1** — LPIC-1 v5, Exam 102
+> **Exam weight: 1**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -23,7 +23,7 @@ Key terms: High Contrast/Large Print Desktop Themes, Screen Reader, Braille Disp
 
 ## Accessibility Settings
 
-The Linux desktop provides settings and tools to adapt the user interface for people with disabilities. The standard interface devices — screen, keyboard, and mouse/touchpad — can each be reconfigured to overcome visual impairments or reduced mobility.
+The Linux desktop provides settings and tools to adapt the user interface for people with disabilities. The standard interface devices, screen, keyboard, and mouse/touchpad; can each be reconfigured to overcome visual impairments or reduced mobility.
 
 Accessibility settings are found in the system configuration panel:
 
@@ -33,7 +33,7 @@ Accessibility settings are found in the system configuration panel:
 | KDE | **System Settings → Personalization → Accessibility** |
 | Xfce | **Accessibility** (reduced feature set compared to GNOME/KDE) |
 
-GNOME can be configured to permanently show the **Universal Access** menu in the top-right corner of the screen for quick switching. The **visual bell** feature (called *visual bell* in KDE) replaces sound alerts with a visual cue — useful for users with hearing impairments.
+GNOME can be configured to permanently show the **Universal Access** menu in the top-right corner of the screen for quick switching. The **visual bell** feature (called *visual bell* in KDE) replaces sound alerts with a visual cue, useful for users with hearing impairments.
 
 ---
 
@@ -41,10 +41,10 @@ GNOME can be configured to permanently show the **Universal Access** menu in the
 
 ### Sticky Keys
 
-Allows typing keyboard shortcuts one key at a time. When enabled, combinations like `Ctrl+C` do not need to be held simultaneously — press `Ctrl`, release it, then press `C`.
+Allows typing keyboard shortcuts one key at a time. When enabled, combinations like `Ctrl+C` do not need to be held simultaneously: press `Ctrl`, release it, then press `C`.
 
 - GNOME: **Typing Assist** section of Universal Access.
-- KDE: **Modifier Keys** tab of Accessibility. KDE also offers **Locking Keys** — `Alt`, `Ctrl`, `Shift` stay "down" if pressed twice (like Caps Lock).
+- KDE: **Modifier Keys** tab of Accessibility. KDE also offers **Locking Keys**, `Alt`, `Ctrl`, `Shift` stay "down" if pressed twice (like Caps Lock).
 
 ### Bounce Keys
 
@@ -72,8 +72,8 @@ Sticky keys, Bounce keys, Slow keys, and Mouse Keys are accessibility features p
 ### Mouse Keys
 
 Allows controlling the mouse pointer with the **numerical keypad**:
-- `2` — move down, `4` — move left, `7` — move northwest, etc.
-- `5` — left mouse click (default).
+- `2`: move down, `4`, move left, `7`, move northwest, etc.
+- `5`: left mouse click (default).
 
 - GNOME: a single switch in Universal Access.
 - KDE: **System Settings → Mouse → Keyboard Navigation**; speed and acceleration can be customized.
@@ -82,7 +82,7 @@ Allows controlling the mouse pointer with the **numerical keypad**:
 
 When physical keyboard usage is impossible or uncomfortable, an on-screen keyboard can be used:
 
-- GNOME: **Screen Keyboard** switch in Universal Access — appears whenever the cursor is in a text field.
+- GNOME: **Screen Keyboard** switch in Universal Access, appears whenever the cursor is in a text field.
 - KDE and others: the **onboard** package provides a simple on-screen keyboard for any desktop environment.
 
 ### Mouse Click Assist
@@ -90,8 +90,8 @@ When physical keyboard usage is impossible or uncomfortable, an on-screen keyboa
 If clicking or dragging causes pain or is impractical:
 
 - GNOME **Click Assist**:
-  - *Simulate a right mouse click* — hold left button to generate a right-click.
-  - *Simulate clicking by hovering* — click triggered when mouse stays still.
+  - *Simulate a right mouse click*: hold left button to generate a right-click.
+  - *Simulate clicking by hovering*: click triggered when mouse stays still.
 - KDE: **KMouseTool** application provides the same features.
 
 ---
@@ -114,7 +114,7 @@ Allows choosing a bigger mouse cursor to make it easier to locate on the screen.
 
 For users who need to zoom in on parts of the screen:
 
-- GNOME: **Zoom** in Universal Access — configurable magnification ratio, magnifier position, and color adjustments.
+- GNOME: **Zoom** in Universal Access, configurable magnification ratio, magnifier position, and color adjustments.
 - KDE: **KMagnifier** application (available via the application launcher).
 - Xfce: zooms in and out by rotating the mouse scroll wheel while `Alt` is held.
 
@@ -122,7 +122,7 @@ For users who need to zoom in on parts of the screen:
 
 For users who cannot use the graphical interface visually, a **screen reader** generates a synthesized voice to report screen events and read the text under the mouse cursor.
 
-The most popular screen reader for Linux is **Orca**, usually installed by default. Orca also works with **refreshable braille displays** — special devices that display braille characters by raising small pins felt with the fingertips.
+The most popular screen reader for Linux is **Orca**, usually installed by default. Orca also works with **refreshable braille displays**: special devices that display braille characters by raising small pins felt with the fingertips.
 
 ---
 
@@ -150,9 +150,9 @@ Visual accessibility:
   High Contrast    sharper colors for windows and buttons
   Large Text       enlarged font size
   Cursor Size      bigger mouse cursor
-  Zoom (GNOME)     screen magnifier — configurable ratio, position, colors
+  Zoom (GNOME)     screen magnifier - configurable ratio, position, colors
   KMagnifier       KDE screen magnifier application
-  Orca             screen reader — synthesized voice + refreshable braille display support
+  Orca             screen reader - synthesized voice + refreshable braille display support
 
 Accessibility settings location:
   GNOME    Universal Access
@@ -170,7 +170,7 @@ Accessibility settings location:
 4. What is the keyboard gesture to enable Sticky Keys? → Press `Shift` **five consecutive times**.
 5. What is the keyboard gesture to enable Slow Keys? → Hold `Shift` for **eight seconds**.
 6. What command-line tool modifies AccessX settings? → `xkbset`
-7. What extension of the X Window System provides Sticky, Bounce, Slow, and Mouse Keys? → **AccessX** (within XKB — X Keyboard Extension)
+7. What extension of the X Window System provides Sticky, Bounce, Slow, and Mouse Keys? → **AccessX** (within XKB, X Keyboard Extension)
 8. How does Mouse Keys work? → The numerical keypad controls the mouse pointer; `5` = left click by default.
 9. What package provides an on-screen keyboard for any desktop environment? → **onboard**
 10. In GNOME, where are accessibility settings found? → **Universal Access**
@@ -187,20 +187,20 @@ Accessibility settings location:
 
 ## Exercises
 
-### Exercise 1 — Sticky Keys for Alt+Tab
+### Exercise 1: Sticky Keys for Alt+Tab
 
 What accessibility feature could help a user to alternate between open windows using the keyboard, considering that the user is unable to press `Alt` and `Tab` at the same time?
 
 <details>
 <summary>Answer</summary>
 
-**Sticky Keys** — allows pressing keyboard shortcuts one key at a time. The user can press `Alt`, release it, then press `Tab` without holding both simultaneously.
+**Sticky Keys**: allows pressing keyboard shortcuts one key at a time. The user can press `Alt`, release it, then press `Tab` without holding both simultaneously.
 
 </details>
 
 ---
 
-### Exercise 2 — Bounce Keys and Hand Tremors
+### Exercise 2: Bounce Keys and Hand Tremors
 
 How could the Bounce Keys accessibility feature help users whose involuntary hand tremors disturb their typing?
 
@@ -213,7 +213,7 @@ Bounce Keys places a delay between accepted key presses. A new key press is acce
 
 ---
 
-### Exercise 3 — Activation Gesture for Sticky Keys
+### Exercise 3: Activation Gesture for Sticky Keys
 
 What is the most common Activation Gesture for the Sticky Keys accessibility feature?
 
@@ -226,30 +226,30 @@ Pressing the `Shift` key **five consecutive times** activates Sticky Keys (when 
 
 ---
 
-### Exercise 4 — KDE Mouse Click Assist
+### Exercise 4: KDE Mouse Click Assist
 
 In KDE, what application helps users with repetitive strain injuries by automatically clicking the mouse whenever the cursor pauses briefly?
 
 <details>
 <summary>Answer</summary>
 
-**KMouseTool** — it monitors the mouse cursor position and simulates a click when the cursor remains still for a set interval, reducing the need to physically click the mouse button.
+**KMouseTool** monitors the mouse cursor position and simulates a click when the cursor remains still for a set interval, reducing the need to physically click the mouse button.
 
 </details>
 
 ---
 
-### Exercise 5 — Visual Adjustments for Readability
+### Exercise 5: Visual Adjustments for Readability
 
 What appearance aspects of the graphical environment can be modified to make it easier for people to read text on the screen?
 
 <details>
 <summary>Answer</summary>
 
-- **High Contrast theme** — sharper color distinction between interface elements.
-- **Large Text** — enlarges the standard screen font size.
-- **Cursor Size** — bigger cursor is easier to locate.
-- **Screen Magnifier** (Zoom in GNOME, KMagnifier in KDE) — zooms into any part of the screen with configurable magnification ratio.
+- **High Contrast theme**: sharper color distinction between interface elements.
+- **Large Text**: enlarges the standard screen font size.
+- **Cursor Size**: bigger cursor is easier to locate.
+- **Screen Magnifier** (Zoom in GNOME, KMagnifier in KDE), zooms into any part of the screen with configurable magnification ratio.
 
 </details>
 

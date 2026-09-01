@@ -16,7 +16,7 @@ The router:
 3. Searches the routing table for the most specific (longest prefix match) route
 4. Forwards the packet to the next hop or out the exit interface
 
-> **📌 Important:** **Longest Prefix Match** — the route with the longest prefix (smallest network) is selected. /28 is preferred over /24, which is preferred over /0.
+> **📌 Important:** **Longest Prefix Match**, the route with the longest prefix (smallest network) is selected. /28 is preferred over /24, which is preferred over /0.
 
 ---
 
@@ -52,7 +52,7 @@ Route entry format:
 
 ## Administrative Distance (AD)
 
-AD — preference of a routing information source. **Lower = better.**
+AD: preference of a routing information source. **Lower = better.**
 
 | Route Source | AD |
 |---|:---:|
@@ -68,7 +68,7 @@ AD — preference of a routing information source. **Lower = better.**
 | BGP (internal/iBGP) | 200 |
 | Floating static (non-standard) | > 1 |
 
-> **💡 Tip:** If the same network is learned from both OSPF and RIP — the OSPF route wins (AD=110 < 120). For a backup static route, use `ip route ... 200` (floating static).
+> **💡 Tip:** If the same network is learned from both OSPF and RIP, the OSPF route wins (AD=110 < 120). For a backup static route, use `ip route ... 200` (floating static).
 
 ---
 
@@ -87,10 +87,10 @@ AD — preference of a routing information source. **Lower = better.**
 
 Route selection process:
 
-1. **Longest Prefix Match** — most specific route
+1. **Longest Prefix Match**: most specific route
 2. Equal prefix length → **lowest AD**
 3. Equal AD → **lowest metric**
-4. Equal metric → **load balancing** (ECMP — Equal-Cost Multi-Path)
+4. Equal metric → **load balancing** (ECMP: Equal-Cost Multi-Path)
 
 ### Selection Example
 
@@ -98,9 +98,9 @@ Route selection process:
 Destination: 10.1.1.5
 
 Routes:
-  O  10.0.0.0/8 [110/2]    — prefix /8
-  S  10.1.0.0/16 [1/0]     — prefix /16
-  O  10.1.1.0/24 [110/4]   — prefix /24  ← SELECTED (longest match)
+  O  10.0.0.0/8 [110/2]    - prefix /8
+  S  10.1.0.0/16 [1/0]     - prefix /16
+  O  10.1.1.0/24 [110/4]   - prefix /24  ← SELECTED (longest match)
 ```
 
 ---
@@ -138,9 +138,9 @@ Router# traceroute 10.1.1.1
 
 | Resource | Description |
 |---|---|
-| [IP Routing — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/ip-routing-explained) | How IP routing works: table, longest prefix match, AD |
-| [Administrative Distance — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/administrative-distance) | AD for different protocols: static, OSPF, EIGRP, RIP |
-| [CEF — Cisco Express Forwarding](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipswitch_cef/configuration/xe-16/isw-cef-xe-16-book/isw-cef-overview.html) | Official documentation on Cisco Express Forwarding |
-| [Jeremy's IT Lab — Routing Fundamentals (YouTube)](https://www.youtube.com/watch?v=rSqQk33FSVA) | Routing table, longest match, AD from the Free CCNA series |
-| [show ip route — Cisco IOS Command](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16/iri-xe-16-book/iri-ip-route-tab.html) | Official reference for the show ip route command |
-| [Longest Prefix Match — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/longest-prefix-match) | Selecting the most specific route |
+| [IP Routing (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/ip-routing-explained) | How IP routing works: table, longest prefix match, AD |
+| [Administrative Distance (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/administrative-distance) | AD for different protocols: static, OSPF, EIGRP, RIP |
+| [CEF: Cisco Express Forwarding](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipswitch_cef/configuration/xe-16/isw-cef-xe-16-book/isw-cef-overview.html) | Official documentation on Cisco Express Forwarding |
+| [Jeremy's IT Lab: Routing Fundamentals (YouTube)](https://www.youtube.com/watch?v=rSqQk33FSVA) | Routing table, longest match, AD from the Free CCNA series |
+| [show ip route: Cisco IOS Command](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16/iri-xe-16-book/iri-ip-route-tab.html) | Official reference for the show ip route command |
+| [Longest Prefix Match (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/longest-prefix-match) | Selecting the most specific route |

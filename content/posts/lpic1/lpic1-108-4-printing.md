@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-108-4-printing/"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 102
+> **Exam weight: 2**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -23,7 +23,7 @@ Key files and commands: CUPS configuration files, `/etc/cups/`, `/var/log/cups/`
 
 ---
 
-## CUPS — Common Unix Printing System
+## CUPS: Common Unix Printing System
 
 CUPS (Common Unix Printing System) is the standard printing system on modern Linux. The daemon is `cupsd`.
 
@@ -56,7 +56,7 @@ CUPS provides a web interface at `http://localhost:631` for managing printers an
 
 ---
 
-## lpadmin — Configure Printers
+## lpadmin: Configure Printers
 
 `lpadmin` adds, modifies, and removes printers.
 
@@ -78,7 +78,7 @@ lpadmin -p myprinter -L "Office 3B" -v socket://192.168.1.100:9100 -m drv:///sam
 lpadmin -x myprinter
 ```
 
-### lpoptions — Default Printer
+### lpoptions: Default Printer
 
 ```bash
 lpoptions -d PRINTERNAME    # set system default printer
@@ -86,7 +86,7 @@ lpoptions -d PRINTERNAME    # set system default printer
 
 ---
 
-## lpr — Print Files (BSD Interface)
+## lpr: Print Files (BSD Interface)
 
 `lpr` submits files to a print queue.
 
@@ -110,7 +110,7 @@ lpr -P laserjet file.pdf
 
 ---
 
-## lp — Print Files (System V Interface)
+## lp: Print Files (System V Interface)
 
 `lp` is the System V alternative to `lpr`.
 
@@ -127,7 +127,7 @@ lp -d laserjet -n 2 file.pdf
 
 ---
 
-## lpstat — Show Printer Status
+## lpstat: Show Printer Status
 
 ```bash
 lpstat -p           # list printers and their status
@@ -142,7 +142,7 @@ lpstat -t           # show all status information
 
 ## Managing Print Jobs
 
-### lpq — Show Queue
+### lpq: Show Queue
 
 ```bash
 lpq             # queue for default printer
@@ -150,21 +150,21 @@ lpq -a          # queues for all printers
 lpq -P laserjet # queue for specific printer
 ```
 
-### lprm — Remove Jobs
+### lprm: Remove Jobs
 
 ```bash
 lprm 42         # remove job 42
 lprm -          # remove all jobs for current user
 ```
 
-### cancel — Cancel Jobs (System V)
+### cancel: Cancel Jobs (System V)
 
 ```bash
 cancel 42              # cancel job 42
 cancel laserjet-42     # cancel using printer-jobid format
 ```
 
-### lpmove — Move Jobs
+### lpmove: Move Jobs
 
 ```bash
 lpmove laserjet-42 colorjet    # move job 42 from laserjet to colorjet
@@ -278,7 +278,7 @@ cupsenable NAME         resume processing queue
 
 ## Exercises
 
-### Exercise 1 — Add a Printer
+### Exercise 1: Add a Printer
 
 Add a printer named `hplaser` located in "Server Room" with device URI `socket://10.0.0.5:9100`.
 
@@ -295,7 +295,7 @@ A PPD model (`-m`) would also be needed in practice to select the correct driver
 
 ---
 
-### Exercise 2 — Print with Options
+### Exercise 2: Print with Options
 
 Print page range 2–4 of `report.pdf` in landscape to the `office` printer.
 
@@ -310,7 +310,7 @@ lpr -P office -o page-ranges=2-4 -o landscape report.pdf
 
 ---
 
-### Exercise 3 — Queue Management
+### Exercise 3: Queue Management
 
 Take the printer `laserjet` fully offline: stop accepting new jobs and stop processing existing ones.
 
@@ -326,7 +326,7 @@ cupsdisable laserjet
 
 ---
 
-### Exercise 4 — Move a Job
+### Exercise 4: Move a Job
 
 Job 7 is stuck on printer `oldjet`. Move it to `newjet`.
 
@@ -341,7 +341,7 @@ lpmove oldjet-7 newjet
 
 ---
 
-### Exercise 5 — Check and Clear Queue
+### Exercise 5: Check and Clear Queue
 
 Show the queue for the default printer, then remove all your own pending jobs.
 

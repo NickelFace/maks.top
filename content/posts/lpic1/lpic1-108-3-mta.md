@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-108-3-mta/"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 102
+> **Exam weight: 3**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -105,7 +105,7 @@ sendmail -q        # force retry of all queued messages
 
 ---
 
-## /etc/aliases — System-Wide Aliases
+## /etc/aliases: System-Wide Aliases
 
 `/etc/aliases` defines email aliases for the system. It maps alias names to one or more destinations:
 
@@ -141,7 +141,7 @@ The compiled database is stored as `/etc/aliases.db`.
 
 ---
 
-## ~/.forward — Per-User Forwarding
+## ~/.forward: Per-User Forwarding
 
 Each user can create a `~/.forward` file to redirect their mail without requiring root access or a `newaliases` rebuild.
 
@@ -158,7 +158,7 @@ user@otherdomain.com
 
 Rules for `~/.forward`:
 
-- No `newaliases` needed — the MTA reads it directly.
+- No `newaliases` needed: the MTA reads it directly.
 - The file must be owned by the user and not writable by others (group and world write bits must be clear).
 - The `\username` syntax with backslash delivers a copy locally, preventing forwarding loops.
 
@@ -227,7 +227,7 @@ Mail queue:
 
 ## Exercises
 
-### Exercise 1 — System Alias
+### Exercise 1: System Alias
 
 Add an alias so that mail sent to `webmaster` is delivered to both `alice` and `bob@remote.example.com`. What command rebuilds the database?
 
@@ -250,7 +250,7 @@ newaliases
 
 ---
 
-### Exercise 2 — File Delivery Alias
+### Exercise 2: File Delivery Alias
 
 Create an alias `bugs` that appends incoming messages to `/var/log/bugs.txt`.
 
@@ -269,7 +269,7 @@ Run `newaliases` after editing.
 
 ---
 
-### Exercise 3 — Per-User Forward
+### Exercise 3: Per-User Forward
 
 User `carol` wants all her incoming mail forwarded to `carol@gmail.com` while also keeping a local copy. Write the contents of her `~/.forward`.
 
@@ -286,7 +286,7 @@ The `\carol` part delivers locally; `carol@gmail.com` forwards externally. The b
 
 ---
 
-### Exercise 4 — Reading the Queue
+### Exercise 4: Reading the Queue
 
 How do you list all messages currently waiting in the mail queue?
 
@@ -307,7 +307,7 @@ sendmail -bp
 
 ---
 
-### Exercise 5 — Sending from Command Line
+### Exercise 5: Sending from Command Line
 
 Send a test message to `root` with the body "Disk check passed" using `sendmail`.
 

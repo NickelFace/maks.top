@@ -15,7 +15,7 @@ lang_pair: "/posts/neteng/ru/neteng-11-bgp/"
 
 Goal: Configure BGP between autonomous systems and ensure connectivity between the Moscow and St. Petersburg offices.
 
-1. Configure eBGP between the Moscow office and two providers — Kitorn and Lamas
+1. Configure eBGP between the Moscow office and two providers, Kitorn and Lamas
 2. Configure eBGP between providers Kitorn and Lamas
 3. Configure eBGP between Lamas and Triada
 4. Configure eBGP between the St. Petersburg office and provider Triada
@@ -24,14 +24,14 @@ Goal: Configure BGP between autonomous systems and ensure connectivity between t
 
 ![EVE Topology](/img/neteng/11/1.png)
 
-A link between R14 and R15 was added — to simplify connecting them in area 0 and to provide redundancy for internet-bound traffic.
+A link between R14 and R15 was added, to simplify connecting them in area 0 and to provide redundancy for internet-bound traffic.
 
 ---
 
-## eBGP — Moscow ↔ Kitorn and Lamas
+## eBGP: Moscow ↔ Kitorn and Lamas
 
 <details>
-<summary>R14 (AS 1001) — config</summary>
+<summary>R14 (AS 1001): config</summary>
 <pre><code>
 enable
 configure terminal
@@ -46,7 +46,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R14 — show bgp summary</summary>
+<summary>R14: show bgp summary</summary>
 <pre><code>
 BGP router identifier 14.14.14.14, local AS number 1001
 BGP table version is 84, main routing table version 84
@@ -58,7 +58,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R15 (AS 1001) — config</summary>
+<summary>R15 (AS 1001): config</summary>
 <pre><code>
 enable
 configure terminal
@@ -73,7 +73,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 — show bgp summary</summary>
+<summary>R15: show bgp summary</summary>
 <pre><code>
 BGP router identifier 15.15.15.15, local AS number 1001
 BGP table version is 50, main routing table version 50
@@ -85,7 +85,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R21 — Lamas (AS 301) — config</summary>
+<summary>R21: Lamas (AS 301), config</summary>
 <pre><code>
 enable
 configure terminal
@@ -104,7 +104,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R21 — show bgp summary</summary>
+<summary>R21: show bgp summary</summary>
 <pre><code>
 BGP router identifier 21.21.21.21, local AS number 301
 BGP table version is 30, main routing table version 30
@@ -117,7 +117,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R22 — Kitorn (AS 101) — config</summary>
+<summary>R22: Kitorn (AS 101), config</summary>
 <pre><code>
 enable
 configure terminal
@@ -135,7 +135,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R22 — show bgp summary</summary>
+<summary>R22: show bgp summary</summary>
 <pre><code>
 BGP router identifier 22.22.22.22, local AS number 101
 BGP table version is 41, main routing table version 41
@@ -149,10 +149,10 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 
 ---
 
-## eBGP — Kitorn/Lamas ↔ Triada
+## eBGP: Kitorn/Lamas ↔ Triada
 
 <details>
-<summary>R23 — Triada (AS 520) — config</summary>
+<summary>R23: Triada (AS 520), config</summary>
 <pre><code>
 enable
 configure terminal
@@ -172,7 +172,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R23 — show bgp summary</summary>
+<summary>R23: show bgp summary</summary>
 <pre><code>
 BGP router identifier 23.23.23.23, local AS number 520
 BGP table version is 32, main routing table version 32
@@ -186,7 +186,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R24 — Triada (AS 520) — config</summary>
+<summary>R24: Triada (AS 520), config</summary>
 <pre><code>
 enable
 configure terminal
@@ -208,7 +208,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R24 — show bgp summary</summary>
+<summary>R24: show bgp summary</summary>
 <pre><code>
 BGP router identifier 24.24.24.24, local AS number 520
 BGP table version is 22, main routing table version 22
@@ -224,10 +224,10 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 
 ---
 
-## eBGP — St. Petersburg ↔ Triada
+## eBGP: St. Petersburg ↔ Triada
 
 <details>
-<summary>R26 — Triada (AS 520) — config</summary>
+<summary>R26: Triada (AS 520), config</summary>
 <pre><code>
 enable
 configure terminal
@@ -249,7 +249,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R26 — show bgp summary</summary>
+<summary>R26: show bgp summary</summary>
 <pre><code>
 BGP router identifier 26.26.26.26, local AS number 520
 BGP table version is 16, main routing table version 16
@@ -263,7 +263,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R18 — St. Petersburg (AS 2042) — config</summary>
+<summary>R18: St. Petersburg (AS 2042), config</summary>
 <pre><code>
 enable
 configure terminal
@@ -278,7 +278,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — show bgp summary</summary>
+<summary>R18: show bgp summary</summary>
 <pre><code>
 BGP router identifier 18.18.18.18, local AS number 2042
 BGP table version is 1, main routing table version 1
@@ -291,7 +291,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 
 ---
 
-## Verify connectivity — Moscow ↔ St. Petersburg
+## Verify connectivity: Moscow ↔ St. Petersburg
 
 <details>
 <summary>R15 ping R18</summary>
@@ -490,7 +490,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R21 — Lamas (AS 301)</summary>
+<summary>R21: Lamas (AS 301)</summary>
 <pre><code>
 enable
 configure terminal
@@ -523,7 +523,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R22 — Kitorn (AS 101)</summary>
+<summary>R22: Kitorn (AS 101)</summary>
 <pre><code>
 enable
 configure terminal
@@ -555,7 +555,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R23 — Triada (AS 520)</summary>
+<summary>R23: Triada (AS 520)</summary>
 <pre><code>
 enable
 configure terminal
@@ -592,7 +592,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R24 — Triada (AS 520)</summary>
+<summary>R24: Triada (AS 520)</summary>
 <pre><code>
 enable
 configure terminal
@@ -635,7 +635,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R25 — Triada (AS 520)</summary>
+<summary>R25: Triada (AS 520)</summary>
 <pre><code>
 enable
 configure terminal
@@ -677,7 +677,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R26 — Triada (AS 520)</summary>
+<summary>R26: Triada (AS 520)</summary>
 <pre><code>
 enable
 configure terminal
@@ -720,7 +720,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — St. Petersburg (AS 2042)</summary>
+<summary>R18: St. Petersburg (AS 2042)</summary>
 <pre><code>
 enable
 configure terminal

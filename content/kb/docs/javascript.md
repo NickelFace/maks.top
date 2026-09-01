@@ -20,7 +20,7 @@ tags: ["docs"]
 
 ---
 
-## baseof.html — global functions
+## baseof.html: global functions
 
 ### `toggleTheme()`
 
@@ -49,7 +49,7 @@ function setLang(lang)
 
 **Called by:** `onclick` on `.lang-btn` buttons in desktop nav and mobile drawer.
 
-**What it does:** if the page is bilingual (has `<meta id="page-lang">`) and the selected language differs from the current one — redirects to the `data-lang-pair` URL. On non-bilingual pages does nothing.
+**What it does:** if the page is bilingual (has `<meta id="page-lang">`) and the selected language differs from the current one, redirects to the `data-lang-pair` URL. On non-bilingual pages does nothing.
 
 ---
 
@@ -62,9 +62,9 @@ function toggleMobMenu()
 **Called by:** `onclick` on `#burgerBtn`.
 
 **What it does:** toggles `.open` class on three elements simultaneously:
-- `#mobDrawer` — slides out the drawer
-- `#mobOverlay` — shows the backdrop
-- `#burgerBtn` — animates burger into an X
+- `#mobDrawer`: slides out the drawer
+- `#mobOverlay`: shows the backdrop
+- `#burgerBtn`: animates burger into an X
 
 ---
 
@@ -102,9 +102,9 @@ To reset to auto: `localStorage.removeItem('theme')` in browser console.
 
 ---
 
-## article.js — article page functions
+## article.js: article page functions
 
-**Path:** `static/js/article.js` — loaded on all single article pages via `_default/single.html` scripts block.
+**Path:** `static/js/article.js`, loaded on all single article pages via `_default/single.html` scripts block.
 
 ### Reading progress bar
 
@@ -112,7 +112,7 @@ Creates `<div id="readingBar">` fixed at top of viewport. Width updated on `scro
 
 ### ToC builder
 
-Finds all `h2`, `h3` inside `#articleBody`. Only activates if more than 2 headings exist. Inserts links into `#tocAside`, adds `.has-toc` to `.page` at width ≥ 860px. `IntersectionObserver` with `rootMargin: '-10% 0px -80% 0px'` highlights the active heading — considers a heading active when it's in the top 20% of viewport.
+Finds all `h2`, `h3` inside `#articleBody`. Only activates if more than 2 headings exist. Inserts links into `#tocAside`, adds `.has-toc` to `.page` at width ≥ 860px. `IntersectionObserver` with `rootMargin: '-10% 0px -80% 0px'` highlights the active heading, considers a heading active when it's in the top 20% of viewport.
 
 ### Copy buttons
 
@@ -128,17 +128,17 @@ Wraps `<img>` tags inside `.prose` with a click handler that opens the image ful
 
 ---
 
-## pagefind-search.js — Pagefind search UI
+## pagefind-search.js: Pagefind search UI
 
-**Path:** `static/js/pagefind-search.js` — loaded on `/posts/` and `/tags/`.
+**Path:** `static/js/pagefind-search.js`, loaded on `/posts/` and `/tags/`.
 
 Lazy-loads `/pagefind/pagefind.js` on first keypress. Renders results into `#searchResults` (CSS-positioned below `.search-wrap`). Closes on click outside `.search-wrap`.
 
 ---
 
-## taxonomy.js — tag filter logic
+## taxonomy.js: tag filter logic
 
-**Path:** `static/js/taxonomy.js` — loaded on `/tags/` after an inline `<script>` that defines `POSTS[]` and `currentTag`.
+**Path:** `static/js/taxonomy.js`, loaded on `/tags/` after an inline `<script>` that defines `POSTS[]` and `currentTag`.
 
 Reads `POSTS[]` (Hugo-generated, EN only) and `currentTag` (current tag slug from Hugo) from the page. Builds the tag grid, filters articles, manages the active pill UI.
 
@@ -152,7 +152,7 @@ const currentTag = "linux"; // or "" if on /tags/ root
 
 ---
 
-## Mermaid diagrams — lazy loading
+## Mermaid diagrams: lazy loading
 
 Mermaid diagrams are supported via a render hook at `themes/maks/layouts/_default/_markup/render-codeblock-mermaid.html`. It wraps ` ```mermaid ` blocks in `<pre class="mermaid">` and sets a `hasMermaid` page store flag.
 
@@ -167,11 +167,11 @@ In `_default/single.html` scripts block:
 {{ end }}
 ```
 
-Mermaid JS is loaded from CDN **only on pages that actually contain a mermaid block** — not globally.
+Mermaid JS is loaded from CDN **only on pages that actually contain a mermaid block**, not globally.
 
 ---
 
-## certs/single.html — accordion
+## certs/single.html: accordion
 
 ```js
 function toggleTopic(btn) {
@@ -189,18 +189,18 @@ function toggleTopic(btn) {
 
 ---
 
-## ns.js — Namespace Explorer
+## ns.js: Namespace Explorer
 
 **Path:** `static/js/ns.js`  
 **Loaded:** only on `/posts/linux-namespaces/` via `<script src="{{ "js/ns.js" | relURL }}">`
 
 Contains:
-- `nsData` — array of objects with data for all namespaces (name, flag, icon, color, summary, desc...)
-- `cheatData` — array of commands for the cheatsheet table
+- `nsData`: array of objects with data for all namespaces (name, flag, icon, color, summary, desc...)
+- `cheatData`: array of commands for the cheatsheet table
 - Render functions: `buildNsGrid()`, `buildNsMap()`, `buildCheatTable()`
-- `nsToggleCard(el)` — expands/collapses a namespace card
-- `IntersectionObserver` — progress bar (how many namespaces have been read)
-- `buildToc()` — builds the table of contents in aside
+- `nsToggleCard(el)`: expands/collapses a namespace card
+- `IntersectionObserver`: progress bar (how many namespaces have been read)
+- `buildToc()`: builds the table of contents in aside
 
 ---
 

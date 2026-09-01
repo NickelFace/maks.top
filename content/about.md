@@ -8,7 +8,7 @@ date: 2026-04-10
 ## This site
 
 <div class="intro-card">
-A personal knowledge base covering Linux, DevOps, networking, and cloud — articles,
+A personal knowledge base covering Linux, DevOps, networking, and cloud: articles,
 cert notes, command references, and lab write-ups. Built with Hugo, hosted on
 GitHub Pages, served through Cloudflare.
 </div>

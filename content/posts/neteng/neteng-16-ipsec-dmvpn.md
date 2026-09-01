@@ -24,12 +24,12 @@ Goal: Configure GRE over IPSec between the Moscow and St. Petersburg offices. Co
 
 ---
 
-## GRE over IPSec — Moscow ↔ St. Petersburg
+## GRE over IPSec: Moscow ↔ St. Petersburg
 
 IKEv1 pre-shared key, 3DES/MD5, transport mode (GRE handles encapsulation, IPSec adds encryption only). The `protect-gre` profile is attached directly to Tunnel0.
 
 <details>
-<summary>R15 — IPSec + GRE config</summary>
+<summary>R15: IPSec + GRE config</summary>
 <pre><code>
 enable
 configure terminal
@@ -62,7 +62,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — IPSec + GRE config</summary>
+<summary>R18: IPSec + GRE config</summary>
 <pre><code>
 enable
 configure terminal
@@ -95,7 +95,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — GRE + IPSec verification</summary>
+<summary>R18: GRE + IPSec verification</summary>
 <pre><code>
 R18#ping 10.0.0.1
 !!!!!  Success rate is 100 percent (5/5), round-trip min/avg/max = 6/6/6 ms
@@ -117,12 +117,12 @@ Peer: 200.20.20.15 port 500
 
 ---
 
-## DMVPN over IPSec — Moscow hub, Chokurdakh and Labytnangi spokes
+## DMVPN over IPSec: Moscow hub, Chokurdakh and Labytnangi spokes
 
 Same IKEv1 policy, but with a wildcard pre-shared key (`address 0.0.0.0`) since spoke IP addresses are dynamic. Transform mode is tunnel (not transport) for mGRE.
 
 <details>
-<summary>R14 — DMVPN hub + IPSec</summary>
+<summary>R14: DMVPN hub + IPSec</summary>
 <pre><code>
 enable
 configure terminal
@@ -160,7 +160,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R28 — DMVPN spoke (Chokurdakh) + IPSec</summary>
+<summary>R28: DMVPN spoke (Chokurdakh) + IPSec</summary>
 <pre><code>
 enable
 configure terminal
@@ -201,7 +201,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R27 — DMVPN spoke (Labytnangi) + IPSec</summary>
+<summary>R27: DMVPN spoke (Labytnangi) + IPSec</summary>
 <pre><code>
 enable
 configure terminal
@@ -242,7 +242,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R27 — DMVPN + IPSec verification</summary>
+<summary>R27: DMVPN + IPSec verification</summary>
 <pre><code>
 R27#show dmvpn
 Interface: Tunnel0, IPv4 NHRP Details
@@ -276,7 +276,7 @@ R27#ping 10.1.0.3
 ## Full router configs
 
 <details>
-<summary>R15 (AS 1001) — lab 16 changes</summary>
+<summary>R15 (AS 1001): lab 16 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -309,7 +309,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — St. Petersburg (AS 2042) — lab 16 changes</summary>
+<summary>R18: St. Petersburg (AS 2042), lab 16 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -342,7 +342,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R14 (AS 1001) — lab 16 changes</summary>
+<summary>R14 (AS 1001): lab 16 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -380,7 +380,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R28 — Chokurdakh — lab 16 changes</summary>
+<summary>R28: Chokurdakh, lab 16 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -421,7 +421,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R27 — Labytnangi — lab 16 changes</summary>
+<summary>R27: Labytnangi, lab 16 changes</summary>
 <pre><code>
 enable
 configure terminal

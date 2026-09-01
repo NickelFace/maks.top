@@ -49,7 +49,7 @@ Router(dhcp-config)# option 150 ip 192.168.1.50          # TFTP server for phone
 
 ### DHCP Relay Agent (Helper Address)
 
-When the DHCP server is in a different subnet — the router forwards DHCP broadcasts:
+When the DHCP server is in a different subnet, the router forwards DHCP broadcasts:
 
 ```bash
 Router(config)# interface gigabitethernet 0/0            # interface toward clients
@@ -84,12 +84,12 @@ Router# debug ip dhcp server events         # debug
 ### How NTP Works
 
 - NTP (Network Time Protocol) synchronizes time between devices
-- **Stratum** — accuracy level: Stratum 0 = atomic clocks, Stratum 1 = directly connected server, Stratum 2–15 = clients
+- **Stratum**, accuracy level: Stratum 0 = atomic clocks, Stratum 1 = directly connected server, Stratum 2–15 = clients
 - UDP port 123
 
 | Stratum | Description |
 |---|---|
-| 0 | Reference clocks (GPS, atomic) — not in network |
+| 0 | Reference clocks (GPS, atomic): not in network |
 | 1 | NTP server synchronized with Stratum 0 |
 | 2 | Client of Stratum 1 |
 | 3–15 | Sequential clients |
@@ -147,9 +147,9 @@ Key word: `synchronized` = normal; `unsynchronized` = problem.
 
 | Resource | Description |
 |---|---|
-| [RFC 5905 — NTPv4](https://www.rfc-editor.org/rfc/rfc5905) | Network Time Protocol Version 4: stratum specification, synchronization |
-| [RFC 2131 — DHCP](https://www.rfc-editor.org/rfc/rfc2131) | Dynamic Host Configuration Protocol: DORA process |
-| [NTP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/network-time-protocol) | NTP: stratum, master, client, NTP authentication |
-| [DHCP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/dhcp-explained) | DHCP: pool, lease, ip helper-address, relay agent |
-| [Jeremy's IT Lab — NTP (YouTube)](https://www.youtube.com/watch?v=cNRVYoZ6PPYQ) | NTP stratum, Cisco IOS NTP configuration from the Free CCNA series |
+| [RFC 5905: NTPv4](https://www.rfc-editor.org/rfc/rfc5905) | Network Time Protocol Version 4: stratum specification, synchronization |
+| [RFC 2131: DHCP](https://www.rfc-editor.org/rfc/rfc2131) | Dynamic Host Configuration Protocol: DORA process |
+| [NTP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/network-time-protocol) | NTP: stratum, master, client, NTP authentication |
+| [DHCP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/dhcp-explained) | DHCP: pool, lease, ip helper-address, relay agent |
+| [Jeremy's IT Lab: NTP (YouTube)](https://www.youtube.com/watch?v=cNRVYoZ6PPYQ) | NTP stratum, Cisco IOS NTP configuration from the Free CCNA series |
 | [Cisco DHCP Configuration Guide](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/xe-16/dhcp-xe-16-book/config-dhcp-server.html) | Official documentation for DHCP server, relay, pool |

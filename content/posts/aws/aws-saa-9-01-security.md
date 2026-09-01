@@ -9,7 +9,7 @@ page_lang: "en"
 lang_pair: "/posts/aws/ru/aws-saa-9-01-security/"
 ---
 
-## KMS — Key Management Service
+## KMS: Key Management Service
 
 KMS is the central encryption service in AWS. All other AWS services that offer "encryption at rest" delegate to KMS under the hood.
 
@@ -34,7 +34,7 @@ KMS is the central encryption service in AWS. All other AWS services that offer 
 
 - **AWS-managed keys**: rotated automatically every year, cannot disable.
 - **Customer-managed keys**: enable via console or `enable-key-rotation`. New backing key material generated; old material retained to decrypt data encrypted before rotation.
-- **Imported key material**: rotation NOT supported automatically — must rotate manually by re-importing and updating the key alias.
+- **Imported key material**: rotation NOT supported automatically, must rotate manually by re-importing and updating the key alias.
 
 ### Multi-region keys
 
@@ -80,7 +80,7 @@ Secrets Manager stores credentials, API keys, tokens with built-in **automatic r
 
 ---
 
-## ACM — Certificate Manager
+## ACM: Certificate Manager
 
 ACM provides **free TLS/SSL certificates** for use within AWS.
 
@@ -96,7 +96,7 @@ ACM provides **free TLS/SSL certificates** for use within AWS.
 
 ---
 
-## WAF — Web Application Firewall
+## WAF: Web Application Firewall
 
 WAF operates at Layer 7 and inspects HTTP/HTTPS requests.
 
@@ -114,7 +114,7 @@ WAF operates at Layer 7 and inspects HTTP/HTTPS requests.
 
 - ALB (regional)
 - API Gateway (regional)
-- CloudFront (global — deployed to edge locations)
+- CloudFront (global: deployed to edge locations)
 - AppSync
 - Cognito User Pools
 
@@ -126,16 +126,16 @@ WAF operates at Layer 7 and inspects HTTP/HTTPS requests.
 
 | Tier | Cost | Protection | Extras |
 |---|---|---|---|
-| **Standard** | Free (always on) | Layer 3/4 — SYN floods, UDP reflection, volumetric attacks | Automatic |
+| **Standard** | Free (always on) | Layer 3/4, SYN floods, UDP reflection, volumetric attacks | Automatic |
 | **Advanced** | $3,000/month + data transfer fees | Layer 3/4/7 (with WAF); protects EC2, ELB, CloudFront, Route 53, Global Accelerator | DDoS Response Team (DRT), attack forensics, **financial protection** (bill credits for scaling costs during DDoS) |
 
-> **📌 Tip:** The exam loves "financial protection against DDoS" — that is **Shield Advanced only**. Shield Standard protects against common attacks automatically, but no bill credits, no DRT.
+> **📌 Tip:** The exam loves "financial protection against DDoS"; that is **Shield Advanced only**. Shield Standard protects against common attacks automatically, but no bill credits, no DRT.
 
 ---
 
 ## GuardDuty
 
-GuardDuty is a **threat detection** service. It analyses log data — no agents required.
+GuardDuty is a **threat detection** service. It analyses log data, no agents required.
 
 ### Data sources
 
@@ -203,7 +203,7 @@ Security Hub **aggregates security findings** from multiple AWS services into a 
 
 ### Features
 
-- **Security standards**: CIS AWS Foundations Benchmark, PCI DSS, NIST 800-53 — automated compliance checks
+- **Security standards**: CIS AWS Foundations Benchmark, PCI DSS, NIST 800-53, automated compliance checks
 - **Findings**: normalized using ASFF (Amazon Security Finding Format)
 - **Aggregation**: multi-account, multi-region via delegated administrator
 - **Actions**: send findings to EventBridge for automated remediation
@@ -216,10 +216,10 @@ Security Hub **aggregates security findings** from multiple AWS services into a 
 |---|---|
 | "Financial protection against DDoS bill" | Shield **Advanced** (not Standard) |
 | "Global WAF + DDoS protection" | WAF attached to **CloudFront** |
-| "GuardDuty blocks malicious IPs" | False — GuardDuty only detects; use EventBridge + Lambda to block |
-| "Macie scans RDS / EBS" | False — Macie is **S3-only** |
+| "GuardDuty blocks malicious IPs" | False: GuardDuty only detects; use EventBridge + Lambda to block |
+| "Macie scans RDS / EBS" | False: Macie is **S3-only** |
 | "Free automatic credential rotation" | Secrets Manager is **not free** ($0.40/secret/month); Parameter Store has no rotation |
-| "Encrypt data > 4KB with KMS directly" | Not possible — use **envelope encryption** (`GenerateDataKey`) |
+| "Encrypt data > 4KB with KMS directly" | Not possible: use **envelope encryption** (`GenerateDataKey`) |
 | "ACM cert for CloudFront in any region" | Must be in **us-east-1** |
-| "Auto-rotate imported KMS key material" | Not supported — manual rotation only |
+| "Auto-rotate imported KMS key material" | Not supported: manual rotation only |
 | "Cross-account secret sharing" | Secrets Manager (resource policy); Parameter Store cannot do cross-account |

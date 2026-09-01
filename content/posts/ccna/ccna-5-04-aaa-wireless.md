@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-5-04-aaa-wireless/"
 ---
 
-## AAA — Concept
+## AAA: Concept
 
 **AAA** = Authentication + Authorization + Accounting
 
@@ -38,7 +38,7 @@ lang_pair: "/posts/ccna/ru/ccna-5-04-aaa-wireless/"
 | A/A/A separation | No (Authentication + Authorization combined) | Yes (separate) |
 | Use case | WLAN, VPN, 802.1X (network access) | Device management (device administration) |
 
-> **💡 Tip:** **RADIUS** — for authenticating users onto the network (Wi-Fi, VPN). **TACACS+** — for managing network devices (SSH, IOS privileges). This distinction is important for the exam!
+> **💡 Tip:** **RADIUS**, for authenticating users onto the network (Wi-Fi, VPN). **TACACS+**: for managing network devices (SSH, IOS privileges). This distinction is important for the exam!
 
 ---
 
@@ -93,14 +93,14 @@ Router(config)# aaa accounting commands 15 default start-stop group tacacs+
 
 ## 802.1X (Port-Based Access Control)
 
-**IEEE 802.1X** — a port-level authentication standard. Network access is denied until authentication succeeds.
+**IEEE 802.1X**: a port-level authentication standard. Network access is denied until authentication succeeds.
 
 ### 802.1X Components
 
 | Role | Description |
 |---|---|
 | Supplicant | Client device (PC, phone) |
-| Authenticator | Switch or AP — acts as intermediary |
+| Authenticator | Switch or AP: acts as intermediary |
 | Authentication Server | RADIUS server (Cisco ISE, FreeRADIUS) |
 
 ### Authentication Process
@@ -117,9 +117,9 @@ Client ──── Full Access ─────────► Switch (if Succes
 
 | Method | Description |
 |---|---|
-| EAP-TLS | Mutual certificates — maximum security |
-| PEAP | Protected EAP — server certificate only; client uses password |
-| EAP-FAST | Cisco — no certificates (PAC) |
+| EAP-TLS | Mutual certificates: maximum security |
+| PEAP | Protected EAP: server certificate only; client uses password |
+| EAP-FAST | Cisco: no certificates (PAC) |
 | EAP-TTLS | Similar to PEAP |
 
 ### Configuring 802.1X on a Switch
@@ -152,7 +152,7 @@ Switch# show dot1x interface fa0/1
 
 | Standard | Algorithm | Status |
 |---|---|---|
-| WEP | RC4 (40/104-bit) | Broken — do not use |
+| WEP | RC4 (40/104-bit) | Broken: do not use |
 | WPA | TKIP (RC4) | Deprecated |
 | WPA2 Personal | AES-CCMP + PSK | Recommended for home |
 | WPA2 Enterprise | AES-CCMP + 802.1X/EAP | Recommended for enterprise |
@@ -182,9 +182,9 @@ config wlan enable 1
 
 | Resource | Description |
 |---|---|
-| [RFC 2865 — RADIUS](https://www.rfc-editor.org/rfc/rfc2865) | Remote Authentication Dial In User Service — RADIUS standard |
-| [TACACS+ vs RADIUS — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/tacacs-and-radius) | TACACS+ vs RADIUS: encryption, ports, use cases |
-| [AAA — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/aaa-authentication-authorization-accounting) | Authentication, Authorization, Accounting on Cisco IOS |
-| [WPA3 — Wi-Fi Alliance](https://www.wi-fi.org/discover-wi-fi/security) | WPA3: SAE, Enhanced Open, 192-bit Enterprise Mode |
-| [Jeremy's IT Lab — AAA and RADIUS (YouTube)](https://www.youtube.com/watch?v=RLQbFYt58sY) | AAA, TACACS+, RADIUS from the Free CCNA series |
-| [Cisco ISE — Identity Services Engine](https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html) | Cisco ISE: 802.1X, RADIUS, access policies |
+| [RFC 2865: RADIUS](https://www.rfc-editor.org/rfc/rfc2865) | Remote Authentication Dial In User Service: RADIUS standard |
+| [TACACS+ vs RADIUS (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/tacacs-and-radius) | TACACS+ vs RADIUS: encryption, ports, use cases |
+| [AAA (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/aaa-authentication-authorization-accounting) | Authentication, Authorization, Accounting on Cisco IOS |
+| [WPA3: Wi-Fi Alliance](https://www.wi-fi.org/discover-wi-fi/security) | WPA3: SAE, Enhanced Open, 192-bit Enterprise Mode |
+| [Jeremy's IT Lab: AAA and RADIUS (YouTube)](https://www.youtube.com/watch?v=RLQbFYt58sY) | AAA, TACACS+, RADIUS from the Free CCNA series |
+| [Cisco ISE: Identity Services Engine](https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html) | Cisco ISE: 802.1X, RADIUS, access policies |

@@ -13,16 +13,16 @@ Linux filesystem comparison: <strong>ext4</strong> (universal default), <strong>
 ## ext4
 
 <div class="ref-panel">
-<div class="ref-panel-head">ext4 — Extended Filesystem 4</div>
+<div class="ref-panel-head">ext4: Extended Filesystem 4</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Property</th><th>Value</th></tr></thead>
 <tbody>
 <tr><td class="mono">Max file size</td><td class="desc">16 TB</td></tr>
 <tr><td class="mono">Max volume size</td><td class="desc">1 EB</td></tr>
-<tr><td class="mono">Journaling</td><td class="desc">Yes — data, ordered (default), writeback modes</td></tr>
-<tr><td class="mono">Snapshots</td><td class="desc">No — use LVM snapshots externally</td></tr>
-<tr><td class="mono">Online shrink</td><td class="desc">No — must unmount to shrink</td></tr>
+<tr><td class="mono">Journaling</td><td class="desc">Yes: data, ordered (default), writeback modes</td></tr>
+<tr><td class="mono">Snapshots</td><td class="desc">No: use LVM snapshots externally</td></tr>
+<tr><td class="mono">Online shrink</td><td class="desc">No: must unmount to shrink</td></tr>
 <tr><td class="mono">Online grow</td><td class="desc">Yes (resize2fs while mounted)</td></tr>
 <tr><td class="mono">Default on</td><td class="desc">Debian, Ubuntu, and most general-purpose distros</td></tr>
 <tr><td class="mono">Best for</td><td class="desc">General purpose, VMs, boot partitions, broad compatibility</td></tr>
@@ -66,10 +66,10 @@ Linux filesystem comparison: <strong>ext4</strong> (universal default), <strong>
 <tbody>
 <tr><td class="mono">Max file size</td><td class="desc">8 EB</td></tr>
 <tr><td class="mono">Max volume size</td><td class="desc">8 EB</td></tr>
-<tr><td class="mono">Journaling</td><td class="desc">Yes — metadata only by default (fast)</td></tr>
-<tr><td class="mono">Online shrink</td><td class="desc">No — cannot shrink XFS</td></tr>
+<tr><td class="mono">Journaling</td><td class="desc">Yes: metadata only by default (fast)</td></tr>
+<tr><td class="mono">Online shrink</td><td class="desc">No: cannot shrink XFS</td></tr>
 <tr><td class="mono">Online grow</td><td class="desc">Yes (xfs_growfs while mounted)</td></tr>
-<tr><td class="mono">Delayed allocation</td><td class="desc">Yes — batches writes for efficiency</td></tr>
+<tr><td class="mono">Delayed allocation</td><td class="desc">Yes: batches writes for efficiency</td></tr>
 <tr><td class="mono">Default on</td><td class="desc">RHEL, CentOS, AlmaLinux, Rocky Linux</td></tr>
 <tr><td class="mono">Best for</td><td class="desc">Large files, databases, high-throughput I/O, media storage</td></tr>
 </tbody>
@@ -104,17 +104,17 @@ Linux filesystem comparison: <strong>ext4</strong> (universal default), <strong>
 ## Btrfs
 
 <div class="ref-panel">
-<div class="ref-panel-head">Btrfs — B-tree Filesystem properties</div>
+<div class="ref-panel-head">Btrfs: B-tree Filesystem properties</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Property</th><th>Value</th></tr></thead>
 <tbody>
 <tr><td class="mono">Max file size</td><td class="desc">16 EB</td></tr>
 <tr><td class="mono">Max volume size</td><td class="desc">16 EB</td></tr>
-<tr><td class="mono">Snapshots</td><td class="desc">Yes — native, instant, space-efficient (Copy-on-Write)</td></tr>
+<tr><td class="mono">Snapshots</td><td class="desc">Yes: native, instant, space-efficient (Copy-on-Write)</td></tr>
 <tr><td class="mono">Built-in RAID</td><td class="desc">RAID 0, 1, 10, 5, 6 (RAID 5/6 still experimental)</td></tr>
-<tr><td class="mono">Compression</td><td class="desc">zlib, lzo, zstd — transparent, per-file or per-mount</td></tr>
-<tr><td class="mono">Checksums</td><td class="desc">CRC32C per block — detects silent data corruption</td></tr>
+<tr><td class="mono">Compression</td><td class="desc">zlib, lzo, zstd: transparent, per-file or per-mount</td></tr>
+<tr><td class="mono">Checksums</td><td class="desc">CRC32C per block: detects silent data corruption</td></tr>
 <tr><td class="mono">Online shrink</td><td class="desc">Yes</td></tr>
 <tr><td class="mono">Subvolumes</td><td class="desc">Independent filesystem trees within the same volume</td></tr>
 <tr><td class="mono">Default on</td><td class="desc">openSUSE, Fedora (since F33), SteamOS</td></tr>
@@ -163,10 +163,10 @@ Enable compression in fstab: `compress=zstd` or `compress=zstd:3` (level 1–22)
 <tbody>
 <tr><td class="mono">Snapshots</td><td class="desc">Instant, space-efficient, unlimited</td></tr>
 <tr><td class="mono">RAIDZ</td><td class="desc">RAIDZ1 (RAID 5 equiv), RAIDZ2 (RAID 6), RAIDZ3</td></tr>
-<tr><td class="mono">Compression</td><td class="desc">lz4 (default), gzip, zstd — per dataset</td></tr>
-<tr><td class="mono">Deduplication</td><td class="desc">Yes — RAM-intensive (DDT table)</td></tr>
-<tr><td class="mono">Checksums</td><td class="desc">End-to-end, SHA256/Blake3 — self-healing</td></tr>
-<tr><td class="mono">ARC cache</td><td class="desc">Adaptive Replacement Cache — in RAM</td></tr>
+<tr><td class="mono">Compression</td><td class="desc">lz4 (default), gzip, zstd: per dataset</td></tr>
+<tr><td class="mono">Deduplication</td><td class="desc">Yes: RAM-intensive (DDT table)</td></tr>
+<tr><td class="mono">Checksums</td><td class="desc">End-to-end, SHA256/Blake3: self-healing</td></tr>
+<tr><td class="mono">ARC cache</td><td class="desc">Adaptive Replacement Cache: in RAM</td></tr>
 <tr><td class="mono">Default on</td><td class="desc">FreeBSD, TrueNAS, Proxmox (optional)</td></tr>
 <tr><td class="mono">Best for</td><td class="desc">NAS, mission-critical data, storage servers</td></tr>
 <tr><td class="mono">RAM minimum</td><td class="desc">1 GB per 1 TB storage (ARC sizing rule of thumb)</td></tr>
@@ -186,7 +186,7 @@ Enable compression in fstab: `compress=zstd` or `compress=zstd:3` (level 1–22)
 <tr><td class="mono">zpool create mypool mirror /dev/sdb /dev/sdc</td><td class="desc">Mirror pool (RAID 1)</td></tr>
 <tr><td class="mono">zpool create mypool raidz /dev/sdb /dev/sdc /dev/sdd</td><td class="desc">RAIDZ1 pool (min 3 drives)</td></tr>
 <tr><td class="mono">zpool status</td><td class="desc">Pool health, degraded drives</td></tr>
-<tr><td class="mono">zpool status -v</td><td class="desc">Verbose — shows error counts</td></tr>
+<tr><td class="mono">zpool status -v</td><td class="desc">Verbose: shows error counts</td></tr>
 <tr><td class="mono">zpool list</td><td class="desc">Pool size and usage</td></tr>
 <tr><td class="mono">zpool scrub mypool</td><td class="desc">Verify all checksums (runs in background)</td></tr>
 <tr><td class="mono">zfs list</td><td class="desc">All datasets and their sizes</td></tr>

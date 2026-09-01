@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-109-4-dns/"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 102
+> **Exam weight: 2**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -29,9 +29,9 @@ Key files and commands: `/etc/hosts`, `/etc/resolv.conf`, `/etc/nsswitch.conf`, 
 When a program resolves a hostname, it calls the GNU C library (glibc), which reads `/etc/nsswitch.conf` to determine where and in what order to look up the name.
 
 DNS has three record classes:
-- **IN** — Internet (TCP/IP addresses; used in all standard lookups).
-- **CH** — ChaosNet (legacy; rarely encountered).
-- **HS** — Hesiod (used to store passwd/group data in DNS).
+- **IN**: Internet (TCP/IP addresses; used in all standard lookups).
+- **CH**: ChaosNet (legacy; rarely encountered).
+- **HS**: Hesiod (used to store passwd/group data in DNS).
 
 ---
 
@@ -81,7 +81,7 @@ nameserver fd00:ffff::2:53
 | `domain DOMAIN` | Local domain name (mutually exclusive with `search`) |
 | `options KEY:VALUE` | Resolver options, e.g., `options timeout:3` |
 
-`search` and `domain` are mutually exclusive — if both appear, the last one takes effect.
+`search` and `domain` are mutually exclusive; if both appear, the last one takes effect.
 
 ---
 
@@ -258,7 +258,7 @@ dig +noall +answer NAME      answer section only
 
 ## Exercises
 
-### Exercise 1 — nsswitch.conf Order
+### Exercise 1: nsswitch.conf Order
 
 Change the resolution order so that DNS is consulted before `/etc/hosts` for host lookups.
 
@@ -275,7 +275,7 @@ hosts:    dns files
 
 ---
 
-### Exercise 2 — resolv.conf Configuration
+### Exercise 2: resolv.conf Configuration
 
 Configure `/etc/resolv.conf` to use DNS servers `1.1.1.1` and `8.8.8.8`, with search domain `example.com`.
 
@@ -292,7 +292,7 @@ search example.com
 
 ---
 
-### Exercise 3 — getent vs dig
+### Exercise 3: getent vs dig
 
 Look up the address of `myserver.local` using the full NSS stack, then look it up using DNS only.
 
@@ -314,7 +314,7 @@ dig myserver.local
 
 ---
 
-### Exercise 4 — host Record Types
+### Exercise 4: host Record Types
 
 Use `host` to look up the NS records for `lpi.org`, then the SOA record.
 
@@ -330,7 +330,7 @@ host -t SOA lpi.org
 
 ---
 
-### Exercise 5 — dig Terse Output
+### Exercise 5: dig Terse Output
 
 Use `dig` to display only the IP address of `wikipedia.org`.
 

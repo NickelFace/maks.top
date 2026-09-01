@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-205-1-basic-networking-configuration/"
 page_lang: "en"
 ---
 
-> **Exam topic 205.1** — Basic Networking Configuration (weight: 3). Covers configuring wired and wireless network interfaces, routing tables, ARP, and the loopback interface.
+> **Exam topic 205.1**: Basic Networking Configuration (weight: 3). Covers configuring wired and wireless network interfaces, routing tables, ARP, and the loopback interface.
 
 ---
 
@@ -26,7 +26,7 @@ page_lang: "en"
 
 ---
 
-## ifconfig — Interface Configuration
+## ifconfig: Interface Configuration
 
 `ifconfig` configures an interface and makes it available to the kernel's network stack. It can assign an IP address, subnet mask, broadcast address, and activate or deactivate the interface.
 
@@ -66,7 +66,7 @@ eth0  Link encap:10Mps Ethernet  HWaddr 00:00:C0:90:B3:42
 
 ---
 
-## route — Routing Table
+## route: Routing Table
 
 `route` adds and removes routes in the kernel routing table.
 
@@ -117,7 +117,7 @@ Entry in `/etc/hosts`:
 127.0.0.1  localhost
 ```
 
-> **Important:** Loopback must be configured even when the machine is not connected to any network. Without it, RPC applications (NFS, NIS) will fail to start — they register with portmapper via the loopback address.
+> **Important:** Loopback must be configured even when the machine is not connected to any network. Without it, RPC applications (NFS, NIS) will fail to start; they register with portmapper via the loopback address.
 
 ---
 
@@ -137,7 +137,7 @@ route add default gw romeo
 
 ---
 
-## ip — Modern Replacement for ifconfig and route
+## ip: Modern Replacement for ifconfig and route
 
 `/sbin/ip` is the modern tool for managing addresses, routes, tunnels, and policy routing. Officially recommended over `ifconfig` and `route`, though both legacy tools still work.
 
@@ -186,7 +186,7 @@ ip route add default via 192.168.1.1
 
 ---
 
-## ARP — Address Resolution Protocol
+## ARP: Address Resolution Protocol
 
 In the OSI model, networking operates at two layers: Layer 2 (Ethernet, MAC addresses) and Layer 3 (IP addresses). To send an IP packet on a local network, the kernel needs the recipient's MAC address. That is ARP's purpose.
 
@@ -203,7 +203,7 @@ Address       HWtype  HWaddress           Flags Mask  Iface
 
 > **Note:** There is also RARP (Reverse ARP). ARP: know the IP, get the MAC. RARP: know the MAC, get the IP.
 
-> **Warning:** Manually adding entries to the ARP cache is rarely needed — it updates automatically. To delete a stale entry: `arp -d <ip>`.
+> **Warning:** Manually adding entries to the ARP cache is rarely needed; it updates automatically. To delete a stale entry: `arp -d <ip>`.
 
 ---
 
@@ -211,7 +211,7 @@ Address       HWtype  HWaddress           Flags Mask  Iface
 
 ### iw (modern, nl80211)
 
-`iw` works through the nl80211 standard (netlink). If `iw` does not see your device, the driver does not support nl80211 — use `iwconfig` instead.
+`iw` works through the nl80211 standard (netlink). If `iw` does not see your device, the driver does not support nl80211; use `iwconfig` instead.
 
 ```bash
 # Show wireless interfaces
@@ -261,7 +261,7 @@ iwconfig wlan0 mode Ad-Hoc
 iwconfig wlan0 mode Managed
 ```
 
-> **Note:** Mode values: `Ad-Hoc` — network without an access point; `Managed` — client with roaming; `Master` — access point mode; `Monitor` — passive monitoring without association.
+> **Note:** Mode values: `Ad-Hoc`, network without an access point; `Managed`, client with roaming; `Master`; access point mode; `Monitor`, passive monitoring without association.
 
 ### iwlist (scanning)
 
@@ -279,7 +279,7 @@ iwlist wlan0 keys
 
 ## Exam Cheat Sheet
 
-### Key Commands — old vs new
+### Key Commands: old vs new
 
 | Task | ifconfig/route (legacy) | ip (modern) |
 |---|---|---|
@@ -305,10 +305,10 @@ iwlist wlan0 keys
 
 ### Common Mistakes
 
-- Forgetting `netmask` in `ifconfig` — the mask will be inferred from the address class, likely wrong.
-- Configuring two default gateways — only one works; the second is ignored.
-- Using `iw` with a WEXT-driver card — switch to `iwconfig` if `iw` doesn't see the device.
-- Running `iwlist scan` as a regular user — root is required for scanning.
+- Forgetting `netmask` in `ifconfig`: the mask will be inferred from the address class, likely wrong.
+- Configuring two default gateways: only one works; the second is ignored.
+- Using `iw` with a WEXT-driver card: switch to `iwconfig` if `iw` doesn't see the device.
+- Running `iwlist scan` as a regular user, root is required for scanning.
 
 ---
 
@@ -328,7 +328,7 @@ iwlist wlan0 keys
 
 **Q3.** What is the difference between `iw` and `iwconfig`?
 
-**Answer:** `iw` uses the nl80211 (netlink) standard; `iwconfig` uses the legacy WEXT standard from the `wireless_tools` package. If the card driver does not support nl80211, `iw` will not see the device — use `iwconfig` instead.
+**Answer:** `iw` uses the nl80211 (netlink) standard; `iwconfig` uses the legacy WEXT standard from the `wireless_tools` package. If the card driver does not support nl80211, `iw` will not see the device; use `iwconfig` instead.
 
 ---
 
@@ -340,7 +340,7 @@ iwlist wlan0 keys
 
 **Q5.** What does the `default` route in the routing table mean?
 
-**Answer:** `default` is shorthand for `0.0.0.0` — it matches any destination when no more specific route exists. Only one default gateway can be active at a time.
+**Answer:** `default` is shorthand for `0.0.0.0`; it matches any destination when no more specific route exists. Only one default gateway can be active at a time.
 
 ---
 

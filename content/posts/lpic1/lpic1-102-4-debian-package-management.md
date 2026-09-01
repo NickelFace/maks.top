@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-102-4-debian-package-management/"
 page_lang: "en"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 101
+> **Exam weight: 3**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -25,7 +25,7 @@ Tools and files: `/etc/apt/sources.list`, `dpkg`, `dpkg-reconfigure`, `apt-get`,
 
 The `.deb` format emerged as the standard for distributing compiled software on Debian systems. The `dpkg` tool works with this format directly. It is used on Debian itself and all its derivatives, including Ubuntu.
 
-`dpkg` handles installation, configuration, maintenance and removal of packages. APT works on top of `dpkg`, adding dependency resolution and repository support — it does not replace `dpkg`.
+`dpkg` handles installation, configuration, maintenance and removal of packages. APT works on top of `dpkg`, adding dependency resolution and repository support; it does not replace `dpkg`.
 
 ### Installing and upgrading packages
 
@@ -37,7 +37,7 @@ Before installing, `dpkg` checks whether an older version is already present. If
 
 ### Dependencies in dpkg
 
-`dpkg` checks for dependencies when installing. If required packages are missing, installation fails with a list of unmet dependencies. `dpkg` cannot resolve dependencies on its own — the required `.deb` files must be found and installed manually.
+`dpkg` checks for dependencies when installing. If required packages are missing, installation fails with a list of unmet dependencies. `dpkg` cannot resolve dependencies on its own: the required `.deb` files must be found and installed manually.
 
 Example dependency error:
 
@@ -133,10 +133,10 @@ APT simplifies package installation, upgrade and removal by adding automatic dep
 
 Main APT utilities:
 
-- `apt-get` — install, upgrade and remove packages.
-- `apt-cache` — search and retrieve information from the package index.
-- `apt-file` — search for files inside packages.
-- `apt` — combines the most commonly used `apt-get` and `apt-cache` commands. For the exam you need to know `apt-get` and `apt-cache`, since `apt` may not be available on every system.
+- `apt-get`: install, upgrade and remove packages.
+- `apt-cache`: search and retrieve information from the package index.
+- `apt-file`: search for files inside packages.
+- `apt`: combines the most commonly used `apt-get` and `apt-cache` commands. For the exam you need to know `apt-get` and `apt-cache`, since `apt` may not be available on every system.
 
 APT requires a network connection to download packages and update indexes.
 
@@ -237,21 +237,21 @@ deb http://us.archive.ubuntu.com/ubuntu/ disco main restricted universe multiver
 Entry syntax: `archive_type URL distribution components`.
 
 **Archive type:**
-- `deb` — binary packages (ready to run).
-- `deb-src` — source packages.
+- `deb`: binary packages (ready to run).
+- `deb-src`: source packages.
 
 **Ubuntu components:**
-- `main` — officially supported open-source packages.
-- `restricted` — officially supported proprietary software (e.g. drivers).
-- `universe` — community-maintained packages.
-- `multiverse` — non-free or patent-encumbered software.
+- `main`: officially supported open-source packages.
+- `restricted`: officially supported proprietary software (e.g. drivers).
+- `universe`: community-maintained packages.
+- `multiverse`: non-free or patent-encumbered software.
 
 **Debian components:**
-- `main` — packages compliant with the DFSG, considered part of the distribution.
-- `contrib` — DFSG-compliant packages that depend on non-free components.
-- `non-free` — packages that do not comply with the DFSG.
-- `security` — security updates.
-- `backports` — newer versions of `main` packages for the stable release.
+- `main`: packages compliant with the DFSG, considered part of the distribution.
+- `contrib`: DFSG-compliant packages that depend on non-free components.
+- `non-free`: packages that do not comply with the DFSG.
+- `security`: security updates.
+- `backports`: newer versions of `main` packages for the stable release.
 
 Lines beginning with `#` are comments and are ignored. After adding a new entry run `apt-get update`.
 
@@ -500,8 +500,8 @@ This downloads fresh indexes from the repositories listed in `/etc/apt/sources.l
 
 ## Related topics
 
-- [102.3 Manage Shared Libraries](/posts/lpic1-102-3-shared-libraries/) — shared libraries that packages depend on
-- 102.5 Use RPM and YUM Package Management — equivalent package management on RPM-based systems
+- [102.3 Manage Shared Libraries](/posts/lpic1-102-3-shared-libraries/): shared libraries that packages depend on
+- 102.5 Use RPM and YUM Package Management, equivalent package management on RPM-based systems
 
 ---
 

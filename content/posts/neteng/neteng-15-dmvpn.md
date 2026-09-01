@@ -24,7 +24,7 @@ Goal: Configure GRE between the Moscow and St. Petersburg offices. Configure DMV
 
 ---
 
-## GRE — Moscow ↔ St. Petersburg
+## GRE: Moscow ↔ St. Petersburg
 
 A point-to-point GRE tunnel between R15 (Moscow) and R18 (St. Petersburg) uses the public Loopback addresses from each AS as tunnel endpoints.
 
@@ -46,12 +46,12 @@ interface Tunnel0
 
 ---
 
-## DMVPN — Moscow hub, Chokurdakh and Labytnangi spokes
+## DMVPN: Moscow hub, Chokurdakh and Labytnangi spokes
 
-R14 acts as the DMVPN hub. R28 (Chokurdakh) and R27 (Labytnangi) are spokes. Both spokes have no dedicated public address — they use the IP of their uplink interface toward Triada as the tunnel source, with `ip nhrp registration no-unique` to allow re-registration.
+R14 acts as the DMVPN hub. R28 (Chokurdakh) and R27 (Labytnangi) are spokes. Both spokes have no dedicated public address; they use the IP of their uplink interface toward Triada as the tunnel source, with `ip nhrp registration no-unique` to allow re-registration.
 
 <details>
-<summary>R14 — DMVPN hub</summary>
+<summary>R14: DMVPN hub</summary>
 <pre><code>
 enable
 configure terminal
@@ -73,7 +73,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R28 — DMVPN spoke (Chokurdakh)</summary>
+<summary>R28: DMVPN spoke (Chokurdakh)</summary>
 <pre><code>
 enable
 configure terminal
@@ -98,7 +98,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R27 — DMVPN spoke (Labytnangi)</summary>
+<summary>R27: DMVPN spoke (Labytnangi)</summary>
 <pre><code>
 enable
 configure terminal
@@ -127,7 +127,7 @@ copy running-config startup-config
 ## Verify IP connectivity
 
 <details>
-<summary>R14 — DMVPN ping + show dmvpn</summary>
+<summary>R14: DMVPN ping + show dmvpn</summary>
 <pre><code>
 R14#ping 10.1.0.1
 !!!!!  Success rate is 100 percent (5/5), round-trip min/avg/max = 4/4/5 ms
@@ -151,7 +151,7 @@ Type:Hub, NHRP Peers:3,
 </details>
 
 <details>
-<summary>R15 — GRE tunnel ping</summary>
+<summary>R15: GRE tunnel ping</summary>
 <pre><code>
 R15>ping 10.0.0.2
 !!!!!  Success rate is 100 percent (5/5), round-trip min/avg/max = 5/5/7 ms
@@ -166,7 +166,7 @@ R15>ping 10.0.0.1
 ## Full router configs
 
 <details>
-<summary>R15 (AS 1001) — lab 15 changes</summary>
+<summary>R15 (AS 1001): lab 15 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -180,7 +180,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — St. Petersburg (AS 2042) — lab 15 changes</summary>
+<summary>R18: St. Petersburg (AS 2042), lab 15 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -194,7 +194,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R14 (AS 1001) — lab 15 changes</summary>
+<summary>R14 (AS 1001): lab 15 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -216,7 +216,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R28 — Chokurdakh — lab 15 changes</summary>
+<summary>R28: Chokurdakh, lab 15 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -241,7 +241,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R27 — Labytnangi — lab 15 changes</summary>
+<summary>R27: Labytnangi, lab 15 changes</summary>
 <pre><code>
 enable
 configure terminal

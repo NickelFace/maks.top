@@ -10,7 +10,7 @@ lang_pair: "/ccna-labs/ru/ccna-lab-13-troubleshooting-methodology/"
 
 ## Overview
 
-Practice the fault-diagnosis methodology. DNS is not working — find and fix several simultaneous problems.
+Practice the fault-diagnosis methodology. DNS is not working, find and fix several simultaneous problems.
 
 ## Topology
 

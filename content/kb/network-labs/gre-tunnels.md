@@ -7,7 +7,7 @@ date: 2026-01-17
 ---
 
 <div class="intro-card">
-GRE Hub-and-Spoke: one MainOffice router terminates tunnels to all branches. Branches reach each other via hub. As branch count grows, hub load increases — the limitation that <strong>DMVPN</strong> solves.
+GRE Hub-and-Spoke: one MainOffice router terminates tunnels to all branches. Branches reach each other via hub. As branch count grows, hub load increases, the limitation that <strong>DMVPN</strong> solves.
 </div>
 
 ## Topology
@@ -168,4 +168,4 @@ wr
 
 ## Summary
 
-Branch-to-branch traffic routes through MainOffice. Doesn't fully solve scalability — hub load grows with each branch. Next step: **DMVPN**.
+Branch-to-branch traffic routes through MainOffice. Doesn't fully solve scalability, hub load grows with each branch. Next step: **DMVPN**.

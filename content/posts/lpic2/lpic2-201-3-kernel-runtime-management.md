@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-201-3-kernel-runtime-management/"
 page_lang: "en"
 ---
 
-> **Exam weight:** Topic 201.3 carries **4 points** — one of the highest-weighted topics on the LPIC-2 201 exam. Focus on module management commands, `sysctl`, `/proc/sys/`, and `udev`.
+> **Exam weight:** Topic 201.3 carries **4 points**, one of the highest-weighted topics on the LPIC-2 201 exam. Focus on module management commands, `sysctl`, `/proc/sys/`, and `udev`.
 
 ---
 
@@ -16,7 +16,7 @@ page_lang: "en"
 
 Kernel modules allow drivers to be loaded and unloaded at runtime without rebooting. Module files are stored in `/lib/modules/<kernel-version>/` with the `.ko` extension.
 
-### lsmod — list loaded modules
+### lsmod: list loaded modules
 
 `lsmod` displays all currently loaded modules. It reads directly from `/proc/modules`.
 
@@ -35,9 +35,9 @@ snd                    98304  3 snd_ens1371,snd_ac97_codec
 
 > **Important:** If the use count (Used by) is greater than zero, the module cannot be unloaded. First unload all modules that reference it.
 
-### insmod — load a module manually
+### insmod: load a module manually
 
-`insmod` loads a module from the full path to the `.ko` file. It does not resolve dependencies automatically — its main disadvantage compared to `modprobe`.
+`insmod` loads a module from the full path to the `.ko` file. It does not resolve dependencies automatically; its main disadvantage compared to `modprobe`.
 
 ```bash
 # Successful load
@@ -55,7 +55,7 @@ insmod snd-ens1371.ko
 | `-s` | Write result to syslog instead of the terminal |
 | `-v` | Verbose output |
 
-### rmmod — unload a module
+### rmmod: unload a module
 
 `rmmod` unloads a module from the running kernel. Root privileges are required, and the use count must be zero.
 
@@ -69,9 +69,9 @@ rmmod snd_ens1371
 rmmod snd_ac97_codec
 ```
 
-> **Tip:** `modprobe -r` is more convenient than `rmmod` — it automatically determines the correct unload order for dependencies.
+> **Tip:** `modprobe -r` is more convenient than `rmmod`; it automatically determines the correct unload order for dependencies.
 
-### modprobe — smart load and unload
+### modprobe: smart load and unload
 
 `modprobe` is the recommended tool for loading modules. Unlike `insmod`, it automatically loads all dependencies by reading `/lib/modules/<version>/modules.dep`. It accepts a module name without a path or extension.
 
@@ -99,12 +99,12 @@ modprobe -v btusb
 | `-a` | Load all listed modules |
 | `-c` | Show full configuration including defaults |
 | `-l` | List modules |
-| `-n` | Dry run — check without actually loading |
+| `-n` | Dry run: check without actually loading |
 | `-v` | Verbose output |
 | `-s` | Write errors to syslog |
 | `-f` | Force load, ignore version conflicts |
 
-### modinfo — module information
+### modinfo: module information
 
 `modinfo` displays detailed information about a module: description, author, version, parameters, and dependencies.
 
@@ -133,7 +133,7 @@ modinfo -n snd_ens1371
 | `-p` | Show accepted parameters |
 | `-V` | Show utility version |
 
-### depmod — recalculate dependencies
+### depmod: recalculate dependencies
 
 `depmod` scans all modules in `/lib/modules/<version>/` and rebuilds the `modules.dep` dependency file. Most distributions run `depmod -a` automatically at boot.
 
@@ -202,7 +202,7 @@ modprobe eth0
 # modprobe loads e1000
 ```
 
-> **Exam tip:** "How to configure loading a module under a name different from the file name" — answer: the `alias` directive in `/etc/modprobe.d/*.conf`.
+> **Exam tip:** "How to configure loading a module under a name different from the file name", answer: the `alias` directive in `/etc/modprobe.d/*.conf`.
 
 ### modules.dep
 
@@ -346,7 +346,7 @@ uname -a
 
 ### dmesg
 
-`dmesg` prints the kernel ring buffer — messages about boot, hardware detection, and errors.
+`dmesg` prints the kernel ring buffer, messages about boot, hardware detection, and errors.
 
 ```bash
 # Print the full buffer
@@ -528,7 +528,7 @@ udevadm info --query=all --name=/dev/sda
 
 ## Tracing Tools
 
-### strace — system call tracing
+### strace: system call tracing
 
 `strace` intercepts and records all system calls made by a process and the signals it receives. No source code or recompilation required. For each call it outputs the name, arguments, and return value to stderr.
 
@@ -561,7 +561,7 @@ exit_group(0)                           = ?
 
 > **Tip:** The `-p` flag is especially useful for debugging daemons: attach to a hung process live and see which system call it is stuck on.
 
-### ltrace — library call tracing
+### ltrace: library call tracing
 
 `ltrace` works like `strace` but intercepts dynamic library calls rather than kernel system calls. Also requires no source code.
 
@@ -585,7 +585,7 @@ exit(0)
 
 > **Note:** `strace` shows kernel calls (`open`, `read`, `write`); `ltrace` shows library calls (`malloc`, `setlocale`, `printf`). In real debugging, both are often run together.
 
-### strings — read strings in binaries
+### strings: read strings in binaries
 
 `strings` prints all printable strings of 4 or more characters from a file. Useful for inspecting binaries without source code: find config file names, environment variables, paths.
 
@@ -697,7 +697,7 @@ udevadm info --query=all --name=/dev/sda  # Device info
 
 - `insmod` needs the full `.ko` file path; `modprobe` works with just the module name
 - `rmmod` will not unload a module with a non-zero use count
-- Changes to `/proc/sys/` do not survive a reboot — use `/etc/sysctl.conf`
+- Changes to `/proc/sys/` do not survive a reboot, use `/etc/sysctl.conf`
 - User udev rules go in `/etc/udev/rules.d/`, not `/lib/udev/rules.d/`
 - `modprobe -c` shows configuration; `modprobe -r` removes a module
 - After manually installing a new module, always run `depmod -a`

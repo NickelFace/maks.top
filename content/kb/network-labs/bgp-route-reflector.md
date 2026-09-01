@@ -7,7 +7,7 @@ date: 2026-01-26
 ---
 
 <div class="intro-card">
-iBGP requires full-mesh between all peers — N×(N−1)/2 sessions. A <strong>Route Reflector</strong> (RR) breaks this requirement: clients only peer with the RR, which re-advertises routes to all other clients.
+iBGP requires full-mesh between all peers, N×(N−1)/2 sessions. A <strong>Route Reflector</strong> (RR) breaks this requirement: clients only peer with the RR, which re-advertises routes to all other clients.
 </div>
 
 ## Topology
@@ -18,7 +18,7 @@ R1 is the Route Reflector. R3 and R4 are RR clients.
 
 ## Configurations
 
-### R1 — Route Reflector
+### R1: Route Reflector
 
 ```
 interface Loopback0
@@ -49,7 +49,7 @@ router bgp 65000
  neighbor 4.4.4.4 route-reflector-client
 ```
 
-### R3 — RR client
+### R3: RR client
 
 ```
 interface Loopback0
@@ -77,7 +77,7 @@ router bgp 65000
  neighbor 1.1.1.1 update-source Loopback0
 ```
 
-### R4 — RR client
+### R4: RR client
 
 ```
 interface Loopback0

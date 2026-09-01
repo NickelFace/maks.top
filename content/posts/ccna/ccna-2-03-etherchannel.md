@@ -10,11 +10,11 @@ lang_pair: "/posts/ccna/ru/ccna-2-03-etherchannel/"
 
 ## What is EtherChannel
 
-**EtherChannel** (Port-Channel) — aggregates multiple physical switch ports into a single logical link. It provides:
+**EtherChannel** (Port-Channel). Aggregates multiple physical switch ports into a single logical link. It provides:
 
 - **Increased bandwidth** (2, 4 or 8 links)
 - **Fault tolerance** (traffic moves to remaining links if one fails)
-- **STP sees one port** — does not block parallel links
+- **STP sees one port**: does not block parallel links
 
 Supported: 2 to 8 physical interfaces per group.
 
@@ -26,7 +26,7 @@ Supported: 2 to 8 physical interfaces per group.
 |---|---|---|---|
 | LACP | IEEE 802.3ad | `active` / `passive` | Open standard; active initiates, passive waits |
 | PAgP | Cisco | `desirable` / `auto` | Cisco proprietary; desirable initiates, auto waits |
-| Static | — | `on` | No negotiation (both ends must be `on`) |
+| Static | n/a | `on` | No negotiation (both ends must be `on`) |
 
 ### Mode Compatibility
 
@@ -163,9 +163,9 @@ Switch# show pagp internal
 
 | Resource | Description |
 |---|---|
-| [IEEE 802.3ad — LACP Standard](https://standards.ieee.org/ieee/802.3ad/1042/) | Link Aggregation Control Protocol (LACP) standard |
-| [EtherChannel — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/etherchannel) | Full EtherChannel breakdown: LACP, PAgP, static mode |
-| [LACP vs PAgP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/lacp-and-pagp) | Protocol comparison: active/passive, desirable/auto modes |
-| [EtherChannel Load Balancing — Cisco](https://www.cisco.com/c/en/us/support/docs/lan-switching/etherchannel/12023-4.html) | EtherChannel load balancing algorithms |
-| [Jeremy's IT Lab — EtherChannel (YouTube)](https://www.youtube.com/watch?v=sMSKFPjSLZE) | EtherChannel: LACP, PAgP, configuration and verification |
-| [EtherChannel Configuration Guide — Cisco Catalyst](https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-3/configuration_guide/lyr2/b_173_lyr2_9300_cg/configuring_etherchannel.html) | Official Cisco EtherChannel configuration guide |
+| [IEEE 802.3ad: LACP Standard](https://standards.ieee.org/ieee/802.3ad/1042/) | Link Aggregation Control Protocol (LACP) standard |
+| [EtherChannel (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/etherchannel) | Full EtherChannel breakdown: LACP, PAgP, static mode |
+| [LACP vs PAgP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/lacp-and-pagp) | Protocol comparison: active/passive, desirable/auto modes |
+| [EtherChannel Load Balancing (Cisco)](https://www.cisco.com/c/en/us/support/docs/lan-switching/etherchannel/12023-4.html) | EtherChannel load balancing algorithms |
+| [Jeremy's IT Lab: EtherChannel (YouTube)](https://www.youtube.com/watch?v=sMSKFPjSLZE) | EtherChannel: LACP, PAgP, configuration and verification |
+| [EtherChannel Configuration Guide: Cisco Catalyst](https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-3/configuration_guide/lyr2/b_173_lyr2_9300_cg/configuring_etherchannel.html) | Official Cisco EtherChannel configuration guide |

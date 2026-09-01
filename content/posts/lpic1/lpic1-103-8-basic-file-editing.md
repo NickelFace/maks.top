@@ -125,11 +125,11 @@ After typing the pattern press `Enter` to start the search. `n` and `N` continue
 
 A number can be placed before most normal-mode commands. The command executes exactly that many times. Examples:
 
-- `3yy` — copy the current line and the next 2.
-- `2dd` — delete the current line and the next one.
-- `5j` — move 5 lines down.
-- `d5w` — delete the current word and the next 4.
-- `3<` — shift the selection 3 positions to the left.
+- `3yy`: copy the current line and the next 2.
+- `2dd`: delete the current line and the next one.
+- `5j`: move 5 lines down.
+- `d5w`: delete the current word and the next 4.
+- `3<`: shift the selection 3 positions to the left.
 
 The number is typed directly before the command, without a space.
 

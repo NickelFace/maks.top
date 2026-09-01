@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-204-2-storage-device-access/"
 page_lang: "en"
 ---
 
-> **Exam topic 204.2** — Adjusting Storage Device Access. Covers hdparm/sdparm, tune2fs, sysctl, SSD/NVMe, iSCSI configuration, storage identifiers (WWID, WWN, LUN, IQN), and SAN protocols.
+> **Exam topic 204.2**: Adjusting Storage Device Access. Covers hdparm/sdparm, tune2fs, sysctl, SSD/NVMe, iSCSI configuration, storage identifiers (WWID, WWN, LUN, IQN), and SAN protocols.
 
 ---
 
@@ -62,7 +62,7 @@ sudo hdparm -tT /dev/sde
 #  Timing buffered disk reads:  1024 MB in  2.69 seconds =  380.94 MB/sec
 ```
 
-> **Tip:** Run the test several times and average the results — a single measurement is not reliable.
+> **Tip:** Run the test several times and average the results; a single measurement is not reliable.
 
 ### Making settings persistent
 
@@ -76,7 +76,7 @@ sudo hdparm -tT /dev/sde
 
 ## sdparm
 
-`sdparm` interacts with SCSI devices through VPD (Vital Product Data) tables and mode pages. It is not "hdparm for SCSI" — it is a separate tool with a different approach.
+`sdparm` interacts with SCSI devices through VPD (Vital Product Data) tables and mode pages. It is not "hdparm for SCSI"; it is a separate tool with a different approach.
 
 `sdparm` can read serial numbers, part codes, and device descriptions. It can also control disk behavior: stop the spindle, change write-back caching parameters.
 
@@ -91,7 +91,7 @@ sudo hdparm -tT /dev/sde
 | `--page` | Show a specific VPD page |
 | `--vendor` | Show vendor information |
 
-> **Important for the exam:** Running `sdparm` without options shows all **common mode parameters**. The `--all` option shows ALL recognized fields — not the same thing.
+> **Important for the exam:** Running `sdparm` without options shows all **common mode parameters**. The `--all` option shows ALL recognized fields, not the same thing.
 
 ---
 
@@ -187,7 +187,7 @@ echo 32 > /proc/irq/13/smp_affinity
 echo 2 > /proc/irq/12/smp_affinity
 ```
 
-> **Tip:** Proper interrupt distribution across cores can noticeably speed up heavily loaded systems with network storage — CPU0 is no longer a bottleneck.
+> **Tip:** Proper interrupt distribution across cores can noticeably speed up heavily loaded systems with network storage; CPU0 is no longer a bottleneck.
 
 ---
 
@@ -248,7 +248,7 @@ iSCSI (Internet Small Computer System Interface) is a network implementation of 
 |---|---|
 | initiator | Client that imports storage |
 | target | Server that exports storage |
-| CDB | Command Descriptor Block — a SCSI command packet |
+| CDB | Command Descriptor Block: a SCSI command packet |
 
 ### Initiator (client) configuration
 
@@ -364,7 +364,7 @@ Basic workflow in `targetcli`:
 
 > **Tip:** targetcli saves configuration to `/etc/target/saveconfig.json` on exit. The last 10 config backups are stored in `/etc/target/backup/`.
 
-> **Warning:** Use only lowercase in backstore names — targetcli behaves unpredictably with uppercase.
+> **Warning:** Use only lowercase in backstore names, targetcli behaves unpredictably with uppercase.
 
 After setting up the target, connect from the initiator:
 
@@ -457,7 +457,7 @@ multipath -l
 
 #### Persistent alias in /etc/multipath.conf
 
-Assign a human-readable name via an alias. This works even with a single path — just add the WWID and alias:
+Assign a human-readable name via an alias. This works even with a single path, just add the WWID and alias:
 
 ```
 multipaths {
@@ -499,8 +499,8 @@ SAN (Storage Area Network) is a dedicated high-speed network for access to disk 
 | Protocol | Description |
 |---|---|
 | Fibre Channel (FC) | Requires special hardware; high speed |
-| FCoE | Fibre Channel over Ethernet — FC over standard Ethernet |
-| AoE | ATA over Ethernet — ATA commands directly over Ethernet |
+| FCoE | Fibre Channel over Ethernet: FC over standard Ethernet |
+| AoE | ATA over Ethernet: ATA commands directly over Ethernet |
 | iSCSI | SCSI over IP; works on ordinary infrastructure |
 
 > **Note:** AoE and FCoE work only on local networks because they do not support routing. iSCSI can work over WAN and the Internet.
@@ -583,7 +583,7 @@ fstrim /
 
 ### Common Exam Traps
 
-- `sdparm` without options shows **common mode parameters**. `--all` shows all fields — not the same.
+- `sdparm` without options shows **common mode parameters**. `--all` shows all fields, not the same.
 - `hdparm` changes are **temporary**. Without `/etc/udev/rules.d/50-hdparm.rules` they disappear on reboot.
 - iSCSI entries in `/etc/fstab` **must** have the `_netdev` option. Without it the system hangs at boot trying to mount the volume before the network is up.
 - WWID and WWN identify the disk; IQN identifies both the target server and the disk. Different exam answers.
@@ -595,7 +595,7 @@ fstrim /
 
 **Q1.** Which command shows the **disk** read speed (not cache) for `/dev/sdb`?
 
-**Answer:** `hdparm -t /dev/sdb` — lowercase `-t` tests buffered disk reads. Uppercase `-T` tests cache reads.
+**Answer:** `hdparm -t /dev/sdb`, lowercase `-t` tests buffered disk reads. Uppercase `-T` tests cache reads.
 
 ---
 
@@ -607,7 +607,7 @@ fstrim /
 
 **Q3.** Which file must be created to make `hdparm` settings persist across reboots?
 
-**Answer:** `/etc/udev/rules.d/50-hdparm.rules` — hdparm settings are applied at boot via udev rules.
+**Answer:** `/etc/udev/rules.d/50-hdparm.rules`; hdparm settings are applied at boot via udev rules.
 
 ---
 

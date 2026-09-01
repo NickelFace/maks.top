@@ -26,7 +26,7 @@ page_lang: "en"
 
 Diagnosis is the first step before any prediction. It builds on the tools covered in topic 200.1.
 
-### Key tool — sar
+### Key tool: sar
 
 `sar` (System Activity Reporter) is one of the most important tools because it **records measurements over long periods**, making accumulated data available for **trend analysis**.
 
@@ -49,8 +49,8 @@ sar -n DEV
 
 Data is collected by **`sadc`** (System Activity Data Collector) and stored in `/var/log/sa/` as `saDD` (DD = day of the month).
 
-- **`sa1`** — saves data to a binary file (run from `cron`)
-- **`sa2`** — creates a daily report from `sa1` data (run from `cron`)
+- **`sa1`**: saves data to a binary file (run from `cron`)
+- **`sa2`**: creates a daily report from `sa1` data (run from `cron`)
 
 ```bash
 # Enable sadc on Debian/Ubuntu
@@ -62,7 +62,7 @@ Data is collected by **`sadc`** (System Activity Data Collector) and stored in `
 
 ### Establishing a baseline
 
-Before diagnosing a problem, establish a **baseline** — the "normal" behaviour of the system when working correctly. If a resource reaches **100% utilisation**, the source of the problem is obvious, but pinpointing it may require additional analysis.
+Before diagnosing a problem, establish a **baseline**: the "normal" behaviour of the system when working correctly. If a resource reaches **100% utilisation**, the source of the problem is obvious, but pinpointing it may require additional analysis.
 
 Supporting diagnostic utilities:
 
@@ -105,8 +105,8 @@ netstat    # network connections and statistics
 
 Monitoring solutions fall into two roles:
 
-- **Collector** — collects and logs metrics
-- **Presentation** — builds graphs and dashboards
+- **Collector**: collects and logs metrics
+- **Presentation**: builds graphs and dashboards
 
 Many products combine both roles or are designed to work together.
 
@@ -122,10 +122,10 @@ Many products combine both roles or are designed to work together.
 Purpose:       Collect system metrics (CPU, memory, disk, network, etc.)
 Language:      C (portability, high performance)
 Config file:   /etc/collectd/collectd.conf  (or /etc/collectd.conf)
-Key feature:   Runs WITHOUT cron or scripting languages — suitable for embedded systems
+Key feature:   Runs WITHOUT cron or scripting languages - suitable for embedded systems
 ```
 
-> **Important:** collectd only collects data. **collectd does NOT display** the collected data — you need additional tools for visualisation (e.g. Cacti, Grafana, RRDTool).
+> **Important:** collectd only collects data. **collectd does NOT display** the collected data; you need additional tools for visualisation (e.g. Cacti, Grafana, RRDTool).
 
 ```bash
 # Install (Debian/Ubuntu)
@@ -139,7 +139,7 @@ systemctl start collectd
 systemctl status collectd
 ```
 
-#### collectd configuration — loading plugins
+#### collectd configuration: loading plugins
 
 ```apache
 # /etc/collectd/collectd.conf
@@ -226,7 +226,7 @@ object Service "http" {
 
 ### MRTG
 
-**MRTG** (Multi Router Traffic Grapher) — collects and visualises network traffic.
+**MRTG** (Multi Router Traffic Grapher), collects and visualises network traffic.
 
 ```
 Full name:     Multi Router Traffic Grapher
@@ -284,7 +284,7 @@ Compatibility: MRTG graphs, RRDTool
 
 By analysing accumulated monitoring data, you can **statistically forecast growth** in resource needs.
 
-> **Warning:** Forecasting is called **statistical** because real-world needs are influenced by external factors. For example, email reduced demand for fax machines and phone lines. Growth is not always linear — when infrastructure expands, different services grow at different rates.
+> **Warning:** Forecasting is called **statistical** because real-world needs are influenced by external factors. For example, email reduced demand for fax machines and phone lines. Growth is not always linear; when infrastructure expands, different services grow at different rates.
 
 ### Prediction algorithm
 
@@ -313,10 +313,10 @@ Example: disk is 70% full, growing at 5% per month
 
 **Key terms for the exam:**
 
-- **capacity break point** — the moment a resource can no longer handle the load
-- **growth rate** — the rate of increase in resource usage
-- **trend graph** — a graph for visualising the forecast
-- **baseline** — the "normal" behaviour reference line
+- **capacity break point**: the moment a resource can no longer handle the load
+- **growth rate**: the rate of increase in resource usage
+- **trend graph**: a graph for visualising the forecast
+- **baseline**: the "normal" behaviour reference line
 
 ---
 
@@ -336,7 +336,7 @@ Resource Exhaustion
             compromised through deliberate resource exhaustion
 ```
 
-> **Warning — real example: ARP flood on switches.** Some **network switches** transition to **"fail open"** mode when their ARP table overflows and start **forwarding all traffic to all ports** (flooding), effectively turning from a switch into a hub. This allows an attacker to intercept other users' traffic (passive sniffing).
+> **Warning: real example: ARP flood on switches.** Some **network switches** transition to **"fail open"** mode when their ARP table overflows and start **forwarding all traffic to all ports** (flooding), effectively turning from a switch into a hub. This allows an attacker to intercept other users' traffic (passive sniffing).
 
 ### Bottleneck
 
@@ -421,10 +421,10 @@ sar/sadc  → built into Linux, /var/log/sa/, historical data
 
 ### Common Exam Traps
 
-1. **collectd** — **collects** data only, no visualisation
-2. **Cacti** — **visualisation only** (frontend), does not collect data
-3. **MRTG** — specialises in **network traffic** (not system metrics)
-4. **Icinga2** — is a **fork of Nagios**, not a product built from scratch
+1. **collectd**: **collects** data only, no visualisation
+2. **Cacti**: **visualisation only** (frontend), does not collect data
+3. **MRTG**: specialises in **network traffic** (not system metrics)
+4. **Icinga2**: is a **fork of Nagios**, not a product built from scratch
 5. collectd config: the key directive is `LoadPlugin`, not `Plugin` or `Enable`
 6. `sar` data is stored in `/var/log/sa/`, not `/var/log/sysstat/`
 

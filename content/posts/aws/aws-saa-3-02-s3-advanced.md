@@ -43,7 +43,7 @@ Lifecycle rules automate transitions between storage classes and expiration of o
 - Non-current versions (when versioning is enabled)
 - Incomplete multipart uploads
 
-**Practical pattern — tiered archival:**
+**Practical pattern, tiered archival:**
 ```
 Day 0:   Upload → Standard
 Day 30:  Auto-transition → Standard-IA
@@ -66,7 +66,7 @@ Day 730: Expire (delete)
 | Latency | Higher (inter-region) | Lower |
 
 **Key behaviors:**
-- Only **new objects** are replicated after replication is configured — existing objects are **not replicated retroactively** (use S3 Batch Operations for that)
+- Only **new objects** are replicated after replication is configured, existing objects are **not replicated retroactively** (use S3 Batch Operations for that)
 - Delete markers are optionally replicated (not by default)
 - Deletion of a specific version is **not replicated** (prevents accidental cascading deletes)
 - Replication is **not transitive**: if A replicates to B and B replicates to C, A does not replicate to C
@@ -129,7 +129,7 @@ aws s3api complete-multipart-upload --bucket my-bucket --key large-file.zip \
 - Uses distinct endpoint: `<bucket>.s3-accelerate.amazonaws.com`
 - Costs extra per GB transferred
 
-> **📌 Tip:** Transfer Acceleration benefits **uploads** (PUT) — not necessarily downloads. The exam often tests this direction. Also, it's only useful for cross-region or long-distance uploads — local users get no benefit.
+> **📌 Tip:** Transfer Acceleration benefits **uploads** (PUT), not necessarily downloads. The exam often tests this direction. Also, it's only useful for cross-region or long-distance uploads: local users get no benefit.
 
 ### Byte-Range Fetches
 
@@ -156,16 +156,16 @@ S3 can trigger downstream processing when objects are created, deleted, or resto
 - Event replay, archiving
 - Cross-account delivery
 
-> **📌 Tip:** For complex routing or when you need more than one consumer of the same event — use EventBridge. For simple single-destination processing — native S3 events (Lambda/SQS/SNS) are fine and have lower latency.
+> **📌 Tip:** For complex routing or when you need more than one consumer of the same event; use EventBridge. For simple single-destination processing, native S3 events (Lambda/SQS/SNS) are fine and have lower latency.
 
 ---
 
 ## S3 Select & Glacier Select
 
-Query data inside objects using SQL-like expressions — without downloading the entire object.
+Query data inside objects using SQL-like expressions, without downloading the entire object.
 
 - Supports CSV, JSON, Parquet
-- Server-side filtering — only matching rows returned
+- Server-side filtering: only matching rows returned
 - Up to 400% faster and 80% cheaper than downloading + client-side filter
 - Glacier Select: same concept but for objects in Glacier Flexible Retrieval
 
@@ -181,7 +181,7 @@ Simplify access to shared S3 buckets in large organizations.
 
 - Each Access Point has its own **DNS hostname** and **access point policy**
 - Policies can be scoped to a specific VPC (VPC-only access point)
-- Simplifies bucket policy management — instead of one enormous bucket policy, each team/app has its own access point
+- Simplifies bucket policy management: instead of one enormous bucket policy, each team/app has its own access point
 
 ```
 Bucket Policy (baseline)
@@ -193,7 +193,7 @@ Bucket Policy (baseline)
 
 ## Object Lambda
 
-Transform S3 objects on-the-fly as they're retrieved — without storing modified copies.
+Transform S3 objects on-the-fly as they're retrieved, without storing modified copies.
 
 Use cases:
 - Redact PII from documents before returning to caller
@@ -207,18 +207,18 @@ Architecture: `Caller → S3 Object Lambda Access Point → Lambda function → 
 
 ## S3 Object Lock
 
-Prevent objects from being deleted or overwritten for a specified period (WORM — Write Once Read Many).
+Prevent objects from being deleted or overwritten for a specified period (WORM; Write Once Read Many).
 
 | Mode | Who Can Override | Use Case |
 |---|---|---|
 | **Governance** | Users with `s3:BypassGovernanceRetention` permission | Internal compliance with override escape hatch |
-| **Compliance** | **Nobody** — not even root | Regulatory requirements (SEC 17a-4, FINRA) |
+| **Compliance** | **Nobody**: not even root | Regulatory requirements (SEC 17a-4, FINRA) |
 
 **Retention Period:** Fixed duration. Objects cannot be deleted until it expires.
 
 **Legal Hold:** Independent of retention period. Toggle on/off at any time by users with `s3:PutObjectLegalHold`. Blocks deletion regardless of retention status.
 
-> **📌 Tip:** Compliance mode = nobody can delete, even root. Governance mode = privileged users can bypass. Legal Hold overrides both — it's an additional lock you can add/remove.
+> **📌 Tip:** Compliance mode = nobody can delete, even root. Governance mode = privileged users can bypass. Legal Hold overrides both; it's an additional lock you can add/remove.
 
 ---
 
@@ -231,7 +231,7 @@ Grant time-limited access to a private S3 object without making it public.
 aws s3 presign s3://my-bucket/private-file.pdf --expires-in 3600
 ```
 
-- URL carries the signer's credentials — access is validated against the creator's permissions at request time
+- URL carries the signer's credentials: access is validated against the creator's permissions at request time
 - Works for GET (download) and PUT (upload)
 - Expiration: up to 12 hours (console/CLI), up to 7 days (SDK with SigV4)
 
@@ -244,8 +244,8 @@ aws s3 presign s3://my-bucket/private-file.pdf --expires-in 3600
 | Trap | Correct Answer |
 |---|---|
 | Transfer Acceleration speeds up downloads | It helps **uploads** primarily; cross-region/long-distance use case |
-| Replication Time Control (RTC) is free | RTC **costs extra** — standard replication has no time SLA |
-| Replication is retroactive | **Not retroactive** — only new objects after config; use S3 Batch Ops for existing |
+| Replication Time Control (RTC) is free | RTC **costs extra**: standard replication has no time SLA |
+| Replication is retroactive | **Not retroactive**: only new objects after config; use S3 Batch Ops for existing |
 | Standard → Standard-IA anytime | **30-day minimum** must pass first |
-| Object Lock Compliance = admin can override | Nobody can override Compliance mode — not even root |
-| S3 Select downloads whole object | It filters server-side — only matching data returned |
+| Object Lock Compliance = admin can override | Nobody can override Compliance mode: not even root |
+| S3 Select downloads whole object | It filters server-side: only matching data returned |

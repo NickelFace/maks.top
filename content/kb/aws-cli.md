@@ -17,12 +17,12 @@ AWS CLI reference: commands for <strong>EC2, S3, IAM, VPC, ECS</strong>. Profile
 </div>
 
 **Planned:**
-- Configuration — `aws configure`, profiles, `--profile`, `--region`, `--output`
-- EC2 — describe-instances, start/stop/terminate, run-instances, key pairs, security groups
-- S3 — ls, cp, mv, rm, sync, presign, bucket policy
-- IAM — users, roles, policies, `aws sts get-caller-identity`
-- VPC — describe-vpcs, subnets, route tables, IGW, NAT
-- ECS — list services/tasks, exec into container
-- CloudWatch — describe-alarms, get-metric-data, logs tail
-- JMESPath — output filtering via `--query`
-- Pagination — `--max-items`, `--starting-token`
+- Configuration: `aws configure`, profiles, `--profile`, `--region`, `--output`
+- EC2: describe-instances, start/stop/terminate, run-instances, key pairs, security groups
+- S3: ls, cp, mv, rm, sync, presign, bucket policy
+- IAM: users, roles, policies, `aws sts get-caller-identity`
+- VPC: describe-vpcs, subnets, route tables, IGW, NAT
+- ECS: list services/tasks, exec into container
+- CloudWatch: describe-alarms, get-metric-data, logs tail
+- JMESPath: output filtering via `--query`
+- Pagination: `--max-items`, `--starting-token`

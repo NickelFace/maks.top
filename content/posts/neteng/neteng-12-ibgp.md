@@ -27,12 +27,12 @@ Goal: Configure iBGP in the Moscow office, configure iBGP in the Triada provider
 
 ---
 
-## iBGP — Moscow (R14 ↔ R15)
+## iBGP: Moscow (R14 ↔ R15)
 
 iBGP session uses Loopback0 addresses reachable via OSPF area 0. `next-hop-self` ensures the iBGP peer can reach external next-hops.
 
 <details>
-<summary>R14 — Loopback + OSPF + bgp summary</summary>
+<summary>R14: Loopback + OSPF + bgp summary</summary>
 <pre><code>
 enable
 configure terminal
@@ -55,7 +55,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 — Loopback + OSPF + bgp summary</summary>
+<summary>R15: Loopback + OSPF + bgp summary</summary>
 <pre><code>
 enable
 configure terminal
@@ -79,10 +79,10 @@ copy running-config startup-config
 
 ---
 
-## iBGP — Triada (R23, R24, R25, R26)
+## iBGP: Triada (R23, R24, R25, R26)
 
 <details>
-<summary>R23 — show ip bgp summary</summary>
+<summary>R23: show ip bgp summary</summary>
 <pre><code>
 R23>show ip bgp summary
 BGP router identifier 23.23.23.23, local AS number 520
@@ -97,7 +97,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R24 — show ip bgp summary</summary>
+<summary>R24: show ip bgp summary</summary>
 <pre><code>
 R24#show ip bgp summary
 BGP router identifier 24.24.24.24, local AS number 520
@@ -113,7 +113,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R25 — show ip bgp summary</summary>
+<summary>R25: show ip bgp summary</summary>
 <pre><code>
 R25#show ip bgp summary
 BGP router identifier 25.25.25.25, local AS number 520
@@ -127,7 +127,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R26 — show ip bgp summary</summary>
+<summary>R26: show ip bgp summary</summary>
 <pre><code>
 R26#show ip bgp summary
 BGP router identifier 26.26.26.26, local AS number 520
@@ -143,12 +143,12 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 
 ---
 
-## Moscow — Lamas as preferred provider
+## Moscow: Lamas as preferred provider
 
-R15 marks all updates from R21 (Lamas) with `local-preference 150` at ingress via route-map `LP`. This preference is then propagated to all iBGP peers — R14 sees LP=150 for Lamas-learned routes and prefers them over Kitorn paths. A filter-list restricts outbound announcements to only locally originated prefixes (`^$`).
+R15 marks all updates from R21 (Lamas) with `local-preference 150` at ingress via route-map `LP`. This preference is then propagated to all iBGP peers, R14 sees LP=150 for Lamas-learned routes and prefers them over Kitorn paths. A filter-list restricts outbound announcements to only locally originated prefixes (`^$`).
 
 <details>
-<summary>R15 — BGP config</summary>
+<summary>R15: BGP config</summary>
 <pre><code>
 enable
 configure terminal
@@ -174,7 +174,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R14 — BGP config</summary>
+<summary>R14: BGP config</summary>
 <pre><code>
 enable
 configure terminal
@@ -197,7 +197,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R14 — show ip bgp (Lamas preferred, LP=150)</summary>
+<summary>R14: show ip bgp (Lamas preferred, LP=150)</summary>
 <pre><code>
 R14#show ip bgp
      Network          Next Hop            Metric LocPrf Weight Path
@@ -234,7 +234,7 @@ R14#show ip bgp
 </details>
 
 <details>
-<summary>R14 — traceroute via Lamas</summary>
+<summary>R14: traceroute via Lamas</summary>
 <pre><code>
 R14#traceroute 77.77.77.10 source ethernet 0/2
   1 10.10.10.26 1 msec 0 msec 1 msec
@@ -256,16 +256,16 @@ R14#traceroute 115.115.115.115
 </code></pre>
 </details>
 
-> **Note:** Setting local-preference at R15 ingress (instead of outbound from R14 toward R15) is the scalable approach — R15 propagates LP=150 to all iBGP peers automatically. *(Thanks to Alexei for the consultation.)*
+> **Note:** Setting local-preference at R15 ingress (instead of outbound from R14 toward R15) is the scalable approach, R15 propagates LP=150 to all iBGP peers automatically. *(Thanks to Alexei for the consultation.)*
 
 ---
 
-## iBGP — St. Petersburg (AS 2042, no OSPF)
+## iBGP: St. Petersburg (AS 2042, no OSPF)
 
 EIGRP is used for loopback reachability within the office. iBGP sessions run between all four routers using loopback addresses.
 
 <details>
-<summary>R16 — config</summary>
+<summary>R16: config</summary>
 <pre><code>
 enable
 configure terminal
@@ -292,7 +292,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R16 — show ip bgp summary</summary>
+<summary>R16: show ip bgp summary</summary>
 <pre><code>
 BGP router identifier 1.1.2.16, local AS number 2042
 BGP table version is 1, main routing table version 1
@@ -305,7 +305,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R17 — config</summary>
+<summary>R17: config</summary>
 <pre><code>
 enable
 configure terminal
@@ -332,7 +332,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R17 — show ip bgp summary</summary>
+<summary>R17: show ip bgp summary</summary>
 <pre><code>
 BGP router identifier 1.1.2.17, local AS number 2042
 BGP table version is 1, main routing table version 1
@@ -345,7 +345,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R18 — config</summary>
+<summary>R18: config</summary>
 <pre><code>
 enable
 configure terminal
@@ -373,7 +373,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — show ip bgp summary</summary>
+<summary>R18: show ip bgp summary</summary>
 <pre><code>
 BGP router identifier 18.18.18.18, local AS number 2042
 BGP table version is 12, main routing table version 12
@@ -388,7 +388,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 <details>
-<summary>R32 — config</summary>
+<summary>R32: config</summary>
 <pre><code>
 enable
 configure terminal
@@ -412,7 +412,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R32 — show ip bgp summary</summary>
+<summary>R32: show ip bgp summary</summary>
 <pre><code>
 BGP router identifier 1.1.2.32, local AS number 2042
 BGP table version is 1, main routing table version 1
@@ -472,7 +472,7 @@ IP address plan: [Google Sheets](https://docs.google.com/spreadsheets/d/1KDH3y6Q
 > R21, R22, R23, R24, R25, R26 configs unchanged from lab 11.
 
 <details>
-<summary>R14 (AS 1001) — updated</summary>
+<summary>R14 (AS 1001): updated</summary>
 <pre><code>
 enable
 configure terminal
@@ -560,7 +560,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 (AS 1001) — updated</summary>
+<summary>R15 (AS 1001): updated</summary>
 <pre><code>
 enable
 configure terminal
@@ -658,7 +658,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R16 — St. Petersburg (AS 2042)</summary>
+<summary>R16: St. Petersburg (AS 2042)</summary>
 <pre><code>
 enable
 configure terminal
@@ -708,7 +708,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R17 — St. Petersburg (AS 2042)</summary>
+<summary>R17: St. Petersburg (AS 2042)</summary>
 <pre><code>
 enable
 configure terminal
@@ -751,7 +751,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — St. Petersburg (AS 2042) — updated</summary>
+<summary>R18: St. Petersburg (AS 2042), updated</summary>
 <pre><code>
 enable
 configure terminal
@@ -807,7 +807,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R32 — St. Petersburg (AS 2042)</summary>
+<summary>R32: St. Petersburg (AS 2042)</summary>
 <pre><code>
 enable
 configure terminal

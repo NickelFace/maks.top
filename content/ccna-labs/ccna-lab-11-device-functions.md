@@ -35,7 +35,7 @@ All routers are pre-configured on the **10.10.10.0/24** network.
 
 ### Switch MAC Address Table
 3. On SW1, view the MAC address table: `show mac address-table`
-4. Ping all routers from R1, then view the MAC address table again — it will be populated
+4. Ping all routers from R1, then view the MAC address table again, it will be populated
 5. On SW2, view the MAC address table: `show mac address-table`
 
 ### Routing Table
@@ -54,4 +54,4 @@ R1#show ip route
 ```
 
 > **💡 Tip:**
-> The MAC address table is empty on first inspection — generate traffic (ping) to populate it. The switch learns MAC addresses only when it receives a frame.
+> The MAC address table is empty on first inspection, generate traffic (ping) to populate it. The switch learns MAC addresses only when it receives a frame.

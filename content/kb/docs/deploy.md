@@ -22,7 +22,7 @@ git checkout hugo
 
 ### Environment variables
 
-`phone` and `email` params are not stored in `hugo.toml` — they're passed via environment variables to keep them out of git history.
+`phone` and `email` params are not stored in `hugo.toml`; they're passed via environment variables to keep them out of git history.
 
 Create `.env` in the repo root (it's gitignored):
 
@@ -42,14 +42,14 @@ On GitHub Actions, set these as repository secrets (**Settings → Secrets and v
 Three options depending on what you need:
 
 ```bash
-# Option 1 — full cycle (like CI): build + index + serve
+# Option 1 - full cycle (like CI): build + index + serve
 ./dev.sh
 # loads .env, then: hugo && npx pagefind --site public && hugo server --disableFastRender
 
-# Option 2 — fast iteration (no Pagefind, search won't work)
+# Option 2 - fast iteration (no Pagefind, search won't work)
 hugo server -D
 
-# Option 3 — different port if 1313 is busy
+# Option 3 - different port if 1313 is busy
 hugo server -D --port 1314
 ```
 
@@ -59,7 +59,7 @@ hugo server -D --port 1314
 
 ### Why run Pagefind locally?
 
-`hugo server` serves from memory — `public/` is not written to disk. But Pagefind needs the built HTML files. That's why `dev.sh` first runs `hugo` (writes to `public/`), indexes it with Pagefind, then starts the server with `--disableFastRender`.
+`hugo server` serves from memory; `public/` is not written to disk. But Pagefind needs the built HTML files. That's why `dev.sh` first runs `hugo` (writes to `public/`), indexes it with Pagefind, then starts the server with `--disableFastRender`.
 
 Without this step the search box on `/posts/` returns no results locally.
 
@@ -69,8 +69,8 @@ Browser cache often masks CSS changes during local development:
 
 ```bash
 # Always verify CSS changes in:
-# — Incognito window, or
-# — DevTools → Network tab → check "Disable cache" → reload
+# - Incognito window, or
+# - DevTools → Network tab → check "Disable cache" → reload
 ```
 
 ---
@@ -113,11 +113,11 @@ GitHub Actions (.github/workflows/deploy.yml)
 
 | Branch | Purpose |
 |---|---|
-| `hugo` | Working branch — all commits go here, CI runs from here |
+| `hugo` | Working branch: all commits go here, CI runs from here |
 | `main` | Unused / legacy |
 | `gh-pages` | Auto-created by GitHub Actions, do not touch |
 
-> **Never push directly to `gh-pages`** — it's overwritten on every deploy.
+> **Never push directly to `gh-pages`**: it's overwritten on every deploy.
 
 ### Why `submodules: recursive` is required
 
@@ -147,7 +147,7 @@ DNS records at Cloudflare:
 
 ## Known deployment pitfalls
 
-### `actions/configure-pages@v4` — do not use
+### `actions/configure-pages@v4`: do not use
 
 This action is commonly seen in Hugo deployment examples but **must not be used here**.
 
@@ -172,11 +172,11 @@ env:
   HUGO_VERSION: "0.147.1"
 ```
 
-To upgrade: change this value and push. Don't use `peaceiris/actions-hugo` — it was replaced to avoid the action dependency.
+To upgrade: change this value and push. Don't use `peaceiris/actions-hugo`; it was replaced to avoid the action dependency.
 
 ### `@view-transition` causes white-frame flash
 
-`@view-transition { navigation: auto; }` in `global.css` enables browser-level cross-fade between pages. The default fade animation shows a transparent/white frame during the transition — this bypasses the inline FOUC prevention script entirely.
+`@view-transition { navigation: auto; }` in `global.css` enables browser-level cross-fade between pages. The default fade animation shows a transparent/white frame during the transition; this bypasses the inline FOUC prevention script entirely.
 
 **Fix already applied:** the default animation is disabled:
 
@@ -215,7 +215,7 @@ git commit -m "chore: update theme submodule"
 
 ### `markup.goldmark.renderer.unsafe = false`
 
-Raw HTML and `<script>` tags in Markdown files are silently stripped unless `unsafe = true` is set in `hugo.toml`. This is already configured correctly, but if you ever reset the config — make sure it stays:
+Raw HTML and `<script>` tags in Markdown files are silently stripped unless `unsafe = true` is set in `hugo.toml`. This is already configured correctly, but if you ever reset the config; make sure it stays:
 
 ```toml
 [markup.goldmark.renderer]
@@ -229,18 +229,18 @@ Raw HTML and `<script>` tags in Markdown files are silently stripped unless `uns
 GitHub Actions logs are the primary source. Common failure points:
 
 ```bash
-# 1. Hugo build failed — check for template errors
+# 1. Hugo build failed - check for template errors
 #    Look for: "Error: ... template"
 
-# 2. Pagefind failed — check npm/node availability
+# 2. Pagefind failed - check npm/node availability
 #    Look for: "pagefind: command not found"
 
-# 3. Deploy failed — check Pages permissions
+# 3. Deploy failed - check Pages permissions
 #    Look for: "HttpError: Not Found" or permissions errors
 #    Fix: Settings → Pages → Source must be "GitHub Actions"
 ```
 
-The debug step in `deploy.yml` prints CSS link tags from `public/index.html` — useful for confirming that CSS paths are correct after a build:
+The debug step in `deploy.yml` prints CSS link tags from `public/index.html`, useful for confirming that CSS paths are correct after a build:
 
 ```yaml
 - name: Check generated HTML

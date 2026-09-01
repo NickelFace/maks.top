@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-108-2-logging/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -141,7 +141,7 @@ mail.info;mail.!debug    /var/log/mail.log
 *.info                   @192.168.1.1
 ```
 
-### logger — Send Log Messages Manually
+### logger: Send Log Messages Manually
 
 `logger` writes a message to syslog from the command line or a script:
 
@@ -196,7 +196,7 @@ Rotated log files are renamed: `logfile.1`, `logfile.2.gz`, etc.
 
 ## dmesg
 
-`dmesg` displays the kernel ring buffer — kernel messages from boot and hardware events:
+`dmesg` displays the kernel ring buffer, kernel messages from boot and hardware events:
 
 ```bash
 dmesg
@@ -214,7 +214,7 @@ The kernel ring buffer is limited in size; oldest messages are overwritten first
 
 Configuration: `/etc/systemd/journald.conf`
 
-### journalctl — Query the Journal
+### journalctl: Query the Journal
 
 | Option | Description |
 |---|---|
@@ -254,7 +254,7 @@ journalctl _BOOT_ID=XXXX
 journalctl _TRANSPORT=kernel
 ```
 
-### systemd-cat — Write to Journal
+### systemd-cat: Write to Journal
 
 `systemd-cat` sends output from a command or pipe to the journal:
 
@@ -431,7 +431,7 @@ Forward to syslog: ForwardToSyslog=yes in journald.conf
 
 ## Exercises
 
-### Exercise 1 — rsyslog Rule
+### Exercise 1: rsyslog Rule
 
 Write an rsyslog rule that sends all `mail` facility messages at `info` and above to `/var/log/mail.log`, and all `kern` facility messages to `/var/log/kern.log`.
 
@@ -447,7 +447,7 @@ kern.*        /var/log/kern.log
 
 ---
 
-### Exercise 2 — journalctl Filtering
+### Exercise 2: journalctl Filtering
 
 Show all journal entries from the current boot with priority `warning` or higher, in reverse order.
 
@@ -462,7 +462,7 @@ journalctl -b 0 -p warning -r
 
 ---
 
-### Exercise 3 — logrotate Configuration
+### Exercise 3: logrotate Configuration
 
 Write a logrotate stanza for `/var/log/myapp.log` that rotates weekly, keeps 8 old files, compresses them (with one delay), and signals the app after rotation.
 
@@ -487,7 +487,7 @@ Write a logrotate stanza for `/var/log/myapp.log` that rotates weekly, keeps 8 o
 
 ---
 
-### Exercise 4 — Recovering Journal from Rescue System
+### Exercise 4: Recovering Journal from Rescue System
 
 A system will not boot. You mount the broken system's root at `/mnt`. How do you read its journal?
 
@@ -508,7 +508,7 @@ journalctl -D /mnt/var/log/journal
 
 ---
 
-### Exercise 5 — Journal Disk Usage
+### Exercise 5: Journal Disk Usage
 
 How do you check how much disk space the journal is using, and then reduce it to no more than 200 MB?
 

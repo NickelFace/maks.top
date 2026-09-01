@@ -62,7 +62,7 @@ graph LR
     TPID --- PCP --- DEI --- VID
 ```
 
-**Native VLAN** — frames in this VLAN are sent over the trunk untagged.
+**Native VLAN**: frames in this VLAN are sent over the trunk untagged.
 
 ---
 
@@ -111,7 +111,7 @@ Switch(config-if)# switchport trunk allowed vlan add 40    # add VLAN
 Switch(config-if)# switchport trunk allowed vlan remove 40 # remove VLAN
 Switch(config-if)# switchport trunk allowed vlan all       # all VLANs
 
-# DTP (Dynamic Trunking Protocol) — auto-negotiation
+# DTP (Dynamic Trunking Protocol) - auto-negotiation
 Switch(config-if)# switchport mode dynamic desirable  # tries to become trunk
 Switch(config-if)# switchport mode dynamic auto       # becomes trunk if partner desires
 Switch(config-if)# switchport nonegotiate             # disable DTP (recommended!)
@@ -218,8 +218,8 @@ Switch# reload
 | Resource | Description |
 |---|---|
 | [IEEE 802.1Q Standard](https://standards.ieee.org/ieee/802.1Q/6844/) | Official VLAN trunking 802.1Q standard |
-| [VLANs — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/introduction-to-vlans) | Introduction to VLANs, access/trunk ports, native VLAN |
-| [Inter-VLAN Routing — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/inter-vlan-routing) | Router-on-a-stick, L3 switch: inter-VLAN routing |
-| [DTP and VTP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/vtp-vlan-trunking-protocol) | Dynamic Trunking Protocol and VLAN Trunking Protocol |
-| [Jeremy's IT Lab — VLANs and Trunk Ports (YouTube)](https://www.youtube.com/watch?v=2p8Zv5Md8Xo) | VLANs, 802.1Q, trunk, DTP from the Free CCNA series |
+| [VLANs (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/introduction-to-vlans) | Introduction to VLANs, access/trunk ports, native VLAN |
+| [Inter-VLAN Routing (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/inter-vlan-routing) | Router-on-a-stick, L3 switch: inter-VLAN routing |
+| [DTP and VTP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/vtp-vlan-trunking-protocol) | Dynamic Trunking Protocol and VLAN Trunking Protocol |
+| [Jeremy's IT Lab: VLANs and Trunk Ports (YouTube)](https://www.youtube.com/watch?v=2p8Zv5Md8Xo) | VLANs, 802.1Q, trunk, DTP from the Free CCNA series |
 | [Cisco VLAN Configuration Guide](https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-3/configuration_guide/vlan/b_173_vlan_9300_cg.html) | Official Cisco guide for VLAN configuration on Catalyst |

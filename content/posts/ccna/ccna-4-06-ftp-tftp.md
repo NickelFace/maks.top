@@ -13,9 +13,9 @@ lang_pair: "/posts/ccna/ru/ccna-4-06-ftp-tftp/"
 
 ---
 
-## TFTP — Trivial File Transfer Protocol
+## TFTP: Trivial File Transfer Protocol
 
-**TFTP** — a simplified file transfer protocol with no authentication.
+**TFTP**: a simplified file transfer protocol with no authentication.
 
 | Parameter | Value |
 |---|---|
@@ -49,15 +49,15 @@ dir flash:           ! List files
 
 ---
 
-## FTP — File Transfer Protocol
+## FTP: File Transfer Protocol
 
-**FTP** — a full-featured file transfer protocol with authentication.
+**FTP**: a full-featured file transfer protocol with authentication.
 
 | Parameter | Value |
 |---|---|
 | Transport | **TCP port 21** (control) + **TCP port 20** (data) |
 | Authentication | Username/password |
-| Directories | Yes — file system navigation |
+| Directories | Yes: file system navigation |
 | Modes | Active (server connects to client) / Passive (client connects to server) |
 | Security | No encryption (plaintext) |
 | Secure version | **FTPS** (FTP + TLS) or **SFTP** (FTP over SSH) |
@@ -84,14 +84,14 @@ copy running-config ftp:
 | Navigation | None | Yes |
 | Reliability | Low (UDP) | High (TCP) |
 | Security | None | None (plaintext) |
-| Secure alternative | — | FTPS, SFTP |
+| Secure alternative | n/a | FTPS, SFTP |
 | Usage on Cisco | IOS backup/restore | IOS backup/restore |
 
 ---
 
-## SCP — Recommended Alternative
+## SCP: Recommended Alternative
 
-**SCP** (Secure Copy Protocol) — encrypted copy over SSH. Recommended over TFTP/FTP.
+**SCP** (Secure Copy Protocol), encrypted copy over SSH. Recommended over TFTP/FTP.
 
 ```
 ! Copy running-config to SCP server:

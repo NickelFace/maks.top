@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-110-3-encryption/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -111,8 +111,8 @@ Server host keys are stored in `/etc/ssh/`:
 | `ssh_host_ecdsa_key.pub` | `0644` | ECDSA public key |
 | `ssh_host_ed25519_key` | `0600` | Ed25519 private key |
 | `ssh_host_ed25519_key.pub` | `0644` | Ed25519 public key |
-| `ssh_config` | — | Client configuration |
-| `sshd_config` | — | Server configuration |
+| `ssh_config` | n/a | Client configuration |
+| `sshd_config` | n/a | Server configuration |
 
 View a key fingerprint:
 
@@ -234,19 +234,19 @@ gpg --import carol.pub.key
 
 Use when a private key is compromised or no longer needed.
 
-Step 1 — Create a revocation certificate:
+Step 1. Create a revocation certificate:
 
 ```bash
 gpg --output revocation_file.asc --gen-revoke USER-ID
 ```
 
-Step 2 — Import it to apply the revocation:
+Step 2. Import it to apply the revocation:
 
 ```bash
 gpg --import revocation_file.asc
 ```
 
-Step 3 — Distribute the revoked key to correspondents (and key servers).
+Step 3: Distribute the revoked key to correspondents (and key servers).
 
 ---
 
@@ -398,7 +398,7 @@ GPG:
 
 ## Exercises
 
-### Exercise 1 — SSH Key Setup
+### Exercise 1: SSH Key Setup
 
 Generate an Ed25519 key pair and set up key-based login to a remote host.
 
@@ -415,7 +415,7 @@ ssh user@remote-host           # login should succeed without password
 
 ---
 
-### Exercise 2 — SSH Authentication Agent
+### Exercise 2: SSH Authentication Agent
 
 Set up the authentication agent so you only type the passphrase once per session.
 
@@ -433,7 +433,7 @@ ssh user@host2                 # no passphrase needed
 
 ---
 
-### Exercise 3 — Local Port Tunnel
+### Exercise 3: Local Port Tunnel
 
 Create a local tunnel that forwards local port 8080 to `www.gnu.org:80` through SSH server `gateway` (user `admin`). Run it in the background without opening a shell.
 
@@ -448,7 +448,7 @@ ssh -L 8080:www.gnu.org:80 -Nf admin@gateway
 
 ---
 
-### Exercise 4 — GPG Encrypt and Decrypt
+### Exercise 4: GPG Encrypt and Decrypt
 
 Encrypt the file `secret.txt` for recipient `alice` with ASCII armored output, then decrypt it.
 
@@ -464,7 +464,7 @@ gpg --output decrypted.txt --decrypt secret.txt.asc
 
 ---
 
-### Exercise 5 — GPG Key Revocation
+### Exercise 5: GPG Key Revocation
 
 Revoke your GPG key because your private key has been compromised.
 

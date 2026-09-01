@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-212-5-openvpn/"
 page_lang: "en"
 ---
 
-> **Exam topic 212.5** — OpenVPN (weight: 2). Covers OpenVPN tunnel configuration, PKI setup, server/client config files, and routing.
+> **Exam topic 212.5**: OpenVPN (weight: 2). Covers OpenVPN tunnel configuration, PKI setup, server/client config files, and routing.
 
 ---
 
@@ -54,7 +54,7 @@ OpenVPN TLS mode requires:
 2. Server certificate + key (`server.crt`, `server.key`)
 3. Client certificate + key (`client.crt`, `client.key`)
 4. Diffie-Hellman parameters (`dh.pem`)
-5. TLS authentication key (`ta.key`) — optional but recommended
+5. TLS authentication key (`ta.key`): optional but recommended
 
 ### Setup with Easy-RSA
 
@@ -118,7 +118,7 @@ dh   /etc/openvpn/dh.pem
 # VPN subnet
 server 10.8.0.0 255.255.255.0   # VPN subnet; server gets 10.8.0.1
 
-# TLS auth (optional but recommended — protects against DoS)
+# TLS auth (optional but recommended - protects against DoS)
 tls-auth /etc/openvpn/ta.key 0  # 0 = server
 
 # Routes pushed to clients
@@ -348,7 +348,7 @@ openvpn --genkey --secret ta.key        # TLS auth key
 |---|---|
 | `tun` vs `tap` | `tun` = Layer 3 routing (most common); `tap` = Layer 2 bridging |
 | `tls-auth` key direction | `0` on server; `1` on client |
-| `remote-cert-tls server` | Verify the peer is actually a server certificate — prevents MITM |
+| `remote-cert-tls server` | Verify the peer is actually a server certificate: prevents MITM |
 | Static key vs PKI | Static key = simple, no PFS; PKI/TLS = production use |
 | IP forwarding for routing | Must enable `net.ipv4.ip_forward` for VPN clients to reach the LAN |
 | CRL not updated | Revoke + gen-crl + copy to `/etc/openvpn/` + `crl-verify` in config |

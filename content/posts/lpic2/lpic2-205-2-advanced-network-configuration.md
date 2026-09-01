@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-205-2-advanced-network-configuration/"
 page_lang: "en"
 ---
 
-> **Exam topic 205.2** — Advanced Network Configuration (weight: 4). Covers configuring network devices for various authentication schemes including multihomed configurations, VPN connections, and troubleshooting network problems.
+> **Exam topic 205.2**: Advanced Network Configuration (weight: 4). Covers configuring network devices for various authentication schemes including multihomed configurations, VPN connections, and troubleshooting network problems.
 
 ---
 
@@ -18,7 +18,7 @@ VPN (Virtual Private Network) connects two or more remote networks through an en
 
 Classic use case: offices in Los Angeles and New York each have internet access. VPN connects them without leasing expensive dedicated lines from a telecom provider.
 
-> **Important:** For the exam — VPN encrypts traffic between two points over an untrusted network. Primary implementations: IPSEC and SSL/TLS.
+> **Important:** For the exam, VPN encrypts traffic between two points over an untrusted network. Primary implementations: IPSEC and SSL/TLS.
 
 ### VPN Types
 
@@ -38,22 +38,22 @@ IPSEC operates at Layer 3 (IP) and encrypts all packets including UDP. For IPv4 
 
 ### Three IPSEC Protocols
 
-**ESP (Encapsulating Security Payload)** — encrypts and authenticates data.
+**ESP (Encapsulating Security Payload)**: encrypts and authenticates data.
 
-**AH (Authentication Header)** — provides packet authentication without encryption.
+**AH (Authentication Header)**: provides packet authentication without encryption.
 
-**IKE (Internet Key Exchange)** — negotiates connection parameters and keys between nodes. Runs on port `500/udp`, implemented as a userspace daemon.
+**IKE (Internet Key Exchange)**: negotiates connection parameters and keys between nodes. Runs on port `500/udp`, implemented as a userspace daemon.
 
 > **Note:** The term "IPSEC" is sometimes used to refer only to AH and ESP, excluding IKE.
 
 ### Linux IPSEC Implementations
 
-**Openswan** (formerly FreeS/WAN) — supports kernels 2.0–2.6. Contains:
-- KLIPS — IPSEC packet processing at kernel level (up to kernel 2.5.47)
-- NETKEY — built-in IPSEC implementation in kernel 2.6
-- Pluto — IKE daemon, negotiates connections
+**Openswan** (formerly FreeS/WAN). Supports kernels 2.0–2.6. Contains:
+- KLIPS: IPSEC packet processing at kernel level (up to kernel 2.5.47)
+- NETKEY: built-in IPSEC implementation in kernel 2.6
+- Pluto: IKE daemon, negotiates connections
 
-**StrongSwan** — also derived from FreeS/WAN, supports kernel 3.x.
+**StrongSwan**: also derived from FreeS/WAN, supports kernel 3.x.
 
 ---
 
@@ -61,9 +61,9 @@ IPSEC operates at Layer 3 (IP) and encrypts all packets including UDP. For IPv4 
 
 The configuration file `/etc/ipsec.conf` consists of three parts:
 
-1. `config setup` — general startup parameters
-2. `conn %default` — default values for all connections
-3. `conn <name>` — a specific connection definition
+1. `config setup`: general startup parameters
+2. `conn %default`: default values for all connections
+3. `conn <name>`: a specific connection definition
 
 ### Example Configuration
 
@@ -118,9 +118,9 @@ conn head-branch
 ipsec rsasigkey --verbose 2048 > rsa.key
 ```
 
-The private key is stored in `/etc/ipsec.secrets` — this file must be accessible only by root.
+The private key is stored in `/etc/ipsec.secrets`; this file must be accessible only by root.
 
-> **Warning:** Common exam mistake — the private key file is `/etc/ipsec.secrets`. The public key goes into `ipsec.conf` as `leftrsasigkey` or `rightrsasigkey`.
+> **Warning:** Common exam mistake, the private key file is `/etc/ipsec.secrets`. The public key goes into `ipsec.conf` as `leftrsasigkey` or `rightrsasigkey`.
 
 ---
 
@@ -150,20 +150,20 @@ eth0  Link encap:Ethernet  HWaddr 00:10:60:58:05:36
 ```
 
 When diagnosing interface problems, check the flags in the third line:
-- `UP` — interface is active; if "down", bring it up with `ifconfig eth0 up`
-- `RUNNING` — driver is working correctly; if absent, the driver is not installed properly
+- `UP`: interface is active; if "down", bring it up with `ifconfig eth0 up`
+- `RUNNING`: driver is working correctly; if absent, the driver is not installed properly
 
 The second line shows IP (`inet addr`), mask (`Mask`), and broadcast. The two most common problems: wrong subnet mask (host cannot see part of its subnet) and wrong IP address.
 
-If a host has the wrong network portion of its IP, any `ping` will fail with "no answer" — other hosts don't know that address and send replies to the default gateway. If only the host portion is wrong, the problem may not show up on that host for a long time, but another host with the same address will be affected. IP address conflicts are detected with `arp` — it will show alternating MAC addresses for the same IP.
+If a host has the wrong network portion of its IP, any `ping` will fail with "no answer", other hosts don't know that address and send replies to the default gateway. If only the host portion is wrong, the problem may not show up on that host for a long time, but another host with the same address will be affected. IP address conflicts are detected with `arp`, it will show alternating MAC addresses for the same IP.
 
 ### Multihomed Host
 
 A host can be configured as multihomed in two ways:
 
-**Two interfaces on the same network** — used to improve performance or reliability (e.g., a server with two physical NICs on the same network). Both IP addresses belong to the same subnet.
+**Two interfaces on the same network**: used to improve performance or reliability (e.g., a server with two physical NICs on the same network). Both IP addresses belong to the same subnet.
 
-**Interfaces on different networks** — the host is connected to multiple networks with different network identifiers, such as a router or firewall.
+**Interfaces on different networks**: the host is connected to multiple networks with different network identifiers, such as a router or firewall.
 
 ### ip
 
@@ -217,7 +217,7 @@ Destination     Gateway         Genmask         Flags Metric Ref  Use Iface
 
 Columns: Destination, Gateway, Genmask, Flags (`U`=active, `G`=uses gateway, `H`=host), Metric, Iface. The default route is identified by Destination=`0.0.0.0` and flag `G`.
 
-> **Warning:** Two typical routing mistakes. First: no entry for the interface — when an interface is configured, the kernel should automatically add a route for its subnet. Second: no default route, or two default routes. Two default gateways may not cause problems for a long time because traffic "accidentally" goes through the correct one.
+> **Warning:** Two typical routing mistakes. First: no entry for the interface; when an interface is configured, the kernel should automatically add a route for its subnet. Second: no default route, or two default routes. Two default gateways may not cause problems for a long time because traffic "accidentally" goes through the correct one.
 
 ---
 
@@ -245,9 +245,9 @@ round-trip min/avg/max = 32.1/33.9/37.6 ms
 ```
 
 Three metrics to watch:
-- `icmp_seq` — packet arrival order; out-of-order packets signal link problems
-- `time=` — round-trip time in milliseconds
-- `packet loss` — percentage of lost packets
+- `icmp_seq`: packet arrival order; out-of-order packets signal link problems
+- `time=`: round-trip time in milliseconds
+- `packet loss`: percentage of lost packets
 
 On a LAN the round-trip should be near zero with no packet loss. If there are losses on a LAN, look for cable, hub, or switch problems. Moderate loss and high RTT on WAN is normal.
 
@@ -403,7 +403,7 @@ PORT     STATE SERVICE  VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-> **Important:** For the exam — `-sS` and `-sT` scan open TCP ports. `-sU` scans UDP. `-A` enables OS detection, service version detection, and scripts.
+> **Important:** For the exam, `-sS` and `-sT` scan open TCP ports. `-sU` scans UDP. `-A` enables OS detection, service version detection, and scripts.
 
 > **Note:** Some `nmap` options require root. If something doesn't work as a regular user, run with `sudo`.
 
@@ -430,7 +430,7 @@ nc -u 192.168.1.1 53
 
 > **Tip:** `nc` is used for transferring files between hosts when Samba, FTP, or SSH is unavailable. Server listens: `nc -l 8080 > file.tar.gz`, client sends: `nc server 8080 < file.tar.gz`.
 
-> **Important:** For the exam — `-z` scans ports without sending data. If `nmap` is unavailable, `nc -z host 1-1023` checks a port range.
+> **Important:** For the exam, `-z` scans ports without sending data. If `nmap` is unavailable, `nc -z host 1-1023` checks a port range.
 
 ---
 

@@ -9,7 +9,7 @@ tags: ["docs"]
 
 ## What is this project?
 
-`maks.top` — a static site built with Hugo using a custom theme `maks`. No third-party themes or frameworks — everything is written from scratch.
+`maks.top`: a static site built with Hugo using a custom theme `maks`. No third-party themes or frameworks; everything is written from scratch.
 
 ---
 
@@ -21,15 +21,15 @@ layouts/ (templates) ──┼──► Hugo build ──► public/ ──► G
 static/  (assets)    ──┘
 ```
 
-1. Hugo reads `hugo.toml` — site configuration
+1. Hugo reads `hugo.toml`: site configuration
 2. For each `.md` file in `content/`, it finds a matching template from `layouts/`
 3. The template inserts data from frontmatter + `.Content` (markdown body)
 4. Static files from `static/` and `themes/maks/static/` are copied as-is
-5. The result — a `public/` folder with clean HTML/CSS/JS
+5. The result: a `public/` folder with clean HTML/CSS/JS
 
 ---
 
-## Template lookup — priority order
+## Template lookup: priority order
 
 Hugo searches for a template in this order (first match wins):
 
@@ -70,7 +70,7 @@ maks.top/
 │   │   │   └── ru/
 │   │   ├── netarch/                 # Network Architect articles
 │   │   └── misc/                    # Miscellaneous (linux-namespaces, etc.)
-│   ├── ccna-labs/                   # /ccna-labs/ section — 24 lab solutions
+│   ├── ccna-labs/                   # /ccna-labs/ section - 24 lab solutions
 │   │   └── ru/                      # RU translations
 │   ├── certs/                       # /certs/ section
 │   │   ├── ccna.md                  # CCNA cert page (accordion + resource tiles)
@@ -182,7 +182,7 @@ GitHub Actions (.github/workflows/deploy.yml)
 
 ---
 
-## hugo.toml — key parameters
+## hugo.toml: key parameters
 
 ```toml
 baseURL = "https://maks.top/"   # Used for absolute links
@@ -223,7 +223,7 @@ paginate = 10                   # Posts per page in listings
 
 ## How Hugo passes data to templates
 
-Each template has access to `.` (dot) — the current page context:
+Each template has access to `.` (dot), the current page context:
 
 | Variable | Type | Description |
 |---|---|---|
@@ -247,7 +247,7 @@ Each template has access to `.` (dot) — the current page context:
 
 ## Related pages
 
-- [Templates](/kb/docs/templates/) — each layout file in detail
-- [CSS](/kb/docs/css/) — style architecture and class reference
-- [Frontmatter](/kb/docs/frontmatter/) — all fields by content type
-- [JavaScript](/kb/docs/javascript/) — functions and event listeners
+- [Templates](/kb/docs/templates/): each layout file in detail
+- [CSS](/kb/docs/css/): style architecture and class reference
+- [Frontmatter](/kb/docs/frontmatter/): all fields by content type
+- [JavaScript](/kb/docs/javascript/): functions and event listeners

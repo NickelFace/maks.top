@@ -10,7 +10,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-05a-subnetting/"
 
 ## Fast Algorithm (for the exam)
 
-### Step 1 — Identify Network Parameters
+### Step 1: Identify Network Parameters
 
 Given: `192.168.1.0/26`
 
@@ -21,7 +21,7 @@ Hosts: 2^(32-26) - 2 = 2^6 - 2 = 64 - 2 = 62
 Block size: 256 - 192 = 64
 ```
 
-### Step 2 — List Subnets (count blocks by step)
+### Step 2: List Subnets (count blocks by step)
 
 ```
 Network:      192.168.1.0    Broadcast: 192.168.1.63
@@ -53,7 +53,7 @@ Hosts:        .193 – .254
 
 ---
 
-## Practice Problems — Level 1 (Basic)
+## Practice Problems: Level 1 (Basic)
 
 ### Problem 1.1
 
@@ -167,7 +167,7 @@ In `192.168.5.0/28`, valid hosts are `.1–.14` (`.0` = network, `.15` = broadca
 
 ---
 
-## Practice Problems — Level 2 (Intermediate)
+## Practice Problems: Level 2 (Intermediate)
 
 ### Problem 2.1
 
@@ -234,7 +234,7 @@ Subnets: `10.1.50.0/26` (hosts .1–.62), `10.1.50.64/26` (hosts .65–.126), `1
 - Host A `.130` → subnet `10.1.50.128/26`
 - Host B `.190` → subnet `10.1.50.128/26`
 
-**.130 and .190 — same subnet `10.1.50.128/26` ✓**
+**.130 and .190, same subnet `10.1.50.128/26` ✓**
 
 Broadcast for this subnet: `10.1.50.191`
 
@@ -270,11 +270,11 @@ Subnet: `192.168.10.64/27`, hosts `.65–.94`, broadcast `.95`
 
 ---
 
-## VLSM — Problems
+## VLSM: Problems
 
 ### What is VLSM
 
-**VLSM** (Variable Length Subnet Masking) — different subnets use different masks. This avoids wasting address space.
+**VLSM** (Variable Length Subnet Masking), different subnets use different masks. This avoids wasting address space.
 
 **Rule**: always start with the **largest** subnet.
 
@@ -355,7 +355,7 @@ Remaining free: `10.0.3.80 – 10.0.3.255`
 
 ---
 
-## Wildcard Masks — Practice
+## Wildcard Masks: Practice
 
 **Wildcard** = inverse of a subnet mask. Used in ACL and OSPF.
 
@@ -399,7 +399,7 @@ access-list 10 permit 172.16.16.0 0.0.15.255
 
 **How many /Y subnets can be created from a /X network?**
 
-Formula: `2^(Y-X)` — number of subnets
+Formula: `2^(Y-X)`, number of subnets
 
 | Original | New | Subnets |
 |---|---|---|

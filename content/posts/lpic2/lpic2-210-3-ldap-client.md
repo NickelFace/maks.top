@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-210-3-ldap-client/"
 page_lang: "en"
 ---
 
-> **Exam topic 210.3** — LDAP Client Usage (weight: 2). Covers using LDAP command-line client tools, LDIF format, search filters, and understanding the LDAP directory tree structure.
+> **Exam topic 210.3**: LDAP Client Usage (weight: 2). Covers using LDAP command-line client tools, LDIF format, search filters, and understanding the LDAP directory tree structure.
 
 ---
 
@@ -43,7 +43,7 @@ DN attributes are read bottom-up (specific to general):
 | `c` | Country | `c=US` |
 | `sn` | Surname | `sn=Doe` |
 
-**RDN (Relative Distinguished Name)** — the leftmost component of the DN. It uniquely identifies an entry among siblings with the same parent.
+**RDN (Relative Distinguished Name)**: the leftmost component of the DN. It uniquely identifies an entry among siblings with the same parent.
 
 > **Exam question:** DN = full path to the entry. RDN = only the leftmost component of the DN.
 
@@ -53,7 +53,7 @@ Object class schemas are stored in `/etc/openldap/schema/`. Each `objectClass` d
 
 ## LDIF Format
 
-**LDIF (LDAP Data Interchange Format)** — text format for describing LDAP entries. Used for import/export.
+**LDIF (LDAP Data Interchange Format)**: text format for describing LDAP entries. Used for import/export.
 
 Entry structure:
 ```ldif
@@ -132,7 +132,7 @@ ldapsearch -x -H ldap://localhost \
   -W -b "dc=example,dc=com" \
   -L "(cn=John*)"
 
-# From exam documentation — all objects
+# From exam documentation - all objects
 ldapsearch -b 'dc=ispnet1,dc=net' '(objectclass=*)'
 
 # Search for specific attributes only

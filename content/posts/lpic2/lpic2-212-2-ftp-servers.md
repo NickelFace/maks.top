@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-212-2-ftp-servers/"
 page_lang: "en"
 ---
 
-> **Exam topic 212.2** — Managing FTP Servers (weight: 2). Covers vsftpd configuration, anonymous FTP, access control, TLS, and awareness of Pure-FTPd and ProFTPD.
+> **Exam topic 212.2**: Managing FTP Servers (weight: 2). Covers vsftpd configuration, anonymous FTP, access control, TLS, and awareness of Pure-FTPd and ProFTPD.
 
 ---
 
@@ -21,7 +21,7 @@ FTP uses two TCP connections:
 | Control | 21 | Commands and responses (entire session) |
 | Data | 20 (active) or ephemeral (passive) | Actual file transfer |
 
-FTP sends credentials in cleartext — never use plain FTP over untrusted networks. Use FTPS (FTP + TLS) or SFTP (SSH file transfer, unrelated to FTP).
+FTP sends credentials in cleartext; never use plain FTP over untrusted networks. Use FTPS (FTP + TLS) or SFTP (SSH file transfer, unrelated to FTP).
 
 ---
 
@@ -143,7 +143,7 @@ allow_writeable_chroot=YES     # override the security check (less safe)
 
 ### /etc/ftpusers
 
-Lists users who are **denied** FTP access. One username per line. Always exists — contains system accounts (root, daemon, bin, etc.) that should never log in via FTP.
+Lists users who are **denied** FTP access. One username per line. Always exists, contains system accounts (root, daemon, bin, etc.) that should never log in via FTP.
 
 ```
 root
@@ -151,7 +151,7 @@ daemon
 nobody
 ```
 
-> **Exam fact:** `/etc/ftpusers` is a **blacklist** — users listed here are DENIED access.
+> **Exam fact:** `/etc/ftpusers` is a **blacklist**, users listed here are DENIED access.
 
 ### /etc/vsftpd/user_list
 
@@ -170,7 +170,7 @@ Both files can coexist. `user_list` is checked first; if the user is denied ther
 
 ---
 
-## FTPS — FTP over TLS
+## FTPS: FTP over TLS
 
 Two FTPS modes:
 
@@ -308,8 +308,8 @@ ftp> ls
 | Pitfall | Rule |
 |---|---|
 | Active vs Passive | Active: server initiates data; Passive: client initiates data |
-| `/etc/ftpusers` | Always a blacklist — no parameter to change this |
-| `userlist_deny=NO` | user_list becomes a whitelist — everyone else is denied |
+| `/etc/ftpusers` | Always a blacklist: no parameter to change this |
+| `userlist_deny=NO` | user_list becomes a whitelist: everyone else is denied |
 | Anonymous root ownership | Must be owned by root, not ftp, or vsftpd refuses to start |
-| `chroot_local_user=YES` + writable home | vsftpd refuses login — fix with `allow_writeable_chroot=YES` or `chmod a-w` |
-| FTPS vs SFTP | FTPS = FTP + TLS; SFTP = SSH subsystem — completely different protocols |
+| `chroot_local_user=YES` + writable home | vsftpd refuses login: fix with `allow_writeable_chroot=YES` or `chmod a-w` |
+| FTPS vs SFTP | FTPS = FTP + TLS; SFTP = SSH subsystem: completely different protocols |

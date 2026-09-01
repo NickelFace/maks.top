@@ -51,11 +51,11 @@ lang_pair: "/posts/ccna/ru/ccna-3-03-ospf/"
 
 | Type | Description | DR/BDR | Hello/Dead |
 |---|---|:---:|---|
-| Broadcast | Ethernet — DR/BDR elected | Yes | 10/40 sec |
-| Point-to-Point | Serial, GRE, HDLC — no DR/BDR | No | 10/40 sec |
-| Non-Broadcast (NBMA) | Frame Relay — manual neighbors | Yes | 30/120 sec |
+| Broadcast | Ethernet: DR/BDR elected | Yes | 10/40 sec |
+| Point-to-Point | Serial, GRE, HDLC: no DR/BDR | No | 10/40 sec |
+| Non-Broadcast (NBMA) | Frame Relay: manual neighbors | Yes | 30/120 sec |
 | Point-to-Multipoint | One hub, many spokes | No | 30/120 sec |
-| Loopback | Always /32 in OSPF | No | — |
+| Loopback | Always /32 in OSPF | No | n/a |
 
 ---
 
@@ -116,7 +116,7 @@ Router(config-router)# router-id 1.1.1.1       # recommended to set explicitly
 Router(config-router)# network 192.168.1.0 0.0.0.255 area 0
 Router(config-router)# network 10.0.0.0 0.255.255.255 area 0
 
-# Passive interface (does not send Hello — for LAN/client interfaces)
+# Passive interface (does not send Hello - for LAN/client interfaces)
 Router(config-router)# passive-interface gigabitethernet 0/1
 Router(config-router)# passive-interface default      # all passive by default
 Router(config-router)# no passive-interface gi0/0     # activate specific interface
@@ -166,7 +166,7 @@ Router# show ip route ospf                  # OSPF routes only
 Router# show ip route                       # entire table (O = OSPF)
 
 # Database
-Router# show ip ospf database              # LSDB — all LSAs
+Router# show ip ospf database              # LSDB - all LSAs
 Router# show ip ospf database router       # Router LSA (Type 1)
 Router# show ip ospf database network      # Network LSA (Type 2)
 Router# show ip ospf database summary      # Summary LSA (Type 3)
@@ -191,9 +191,9 @@ Router# debug ip ospf events               # OSPF events
 
 | Resource | Description |
 |---|---|
-| [RFC 2328 — OSPFv2](https://www.rfc-editor.org/rfc/rfc2328) | Official OSPFv2 (IPv4) specification |
-| [OSPF — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ospf-neighbor-adjacency) | OSPF: adjacency process, DR/BDR election |
-| [OSPF Areas and LSA Types — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ospf-areas-explained) | OSPF areas, LSA types 1–7, backbone area 0 |
-| [OSPF Cost Calculation — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ospf-cost) | OSPF cost calculation: reference bandwidth, commands |
-| [Jeremy's IT Lab — OSPF (YouTube)](https://www.youtube.com/watch?v=kfvJ8QVJscc) | OSPF: neighbor states, DR/BDR, areas from the Free CCNA series |
+| [RFC 2328: OSPFv2](https://www.rfc-editor.org/rfc/rfc2328) | Official OSPFv2 (IPv4) specification |
+| [OSPF (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ospf-neighbor-adjacency) | OSPF: adjacency process, DR/BDR election |
+| [OSPF Areas and LSA Types (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ospf-areas-explained) | OSPF areas, LSA types 1–7, backbone area 0 |
+| [OSPF Cost Calculation (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ospf-cost) | OSPF cost calculation: reference bandwidth, commands |
+| [Jeremy's IT Lab: OSPF (YouTube)](https://www.youtube.com/watch?v=kfvJ8QVJscc) | OSPF: neighbor states, DR/BDR, areas from the Free CCNA series |
 | [Cisco OSPFv2 Configuration Guide](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/xe-16/iro-xe-16-book/iro-cfg.html) | Official Cisco OSPF configuration guide |

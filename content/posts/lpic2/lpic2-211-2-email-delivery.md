@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-211-2-email-delivery/"
 page_lang: "en"
 ---
 
-> **Exam topic 211.2** — Managing E-Mail Delivery (weight: 2). Covers mail filtering and sorting using procmail (awareness level) and Sieve (scripting level), plus mbox and maildir storage formats.
+> **Exam topic 211.2**: Managing E-Mail Delivery (weight: 2). Covers mail filtering and sorting using procmail (awareness level) and Sieve (scripting level), plus mbox and maildir storage formats.
 
 ---
 
@@ -24,7 +24,7 @@ Topic 211.2 covers filtering and sorting incoming mail on the MDA (Mail Delivery
 
 ### Connecting to an MTA
 
-Procmail is rarely run manually — the MTA passes incoming messages to it automatically.
+Procmail is rarely run manually, the MTA passes incoming messages to it automatically.
 
 For Sendmail, add to the m4 file:
 
@@ -60,9 +60,9 @@ Procmail reads both files sequentially:
 action
 ```
 
-Each condition starts with `*`. After conditions — one action line.
+Each condition starts with `*`. After conditions, one action line.
 
-If `:0:` (with a colon after zero) is used, procmail creates a default lock file. For mbox format, a lock file is always required. For maildir — not needed.
+If `:0:` (with a colon after zero) is used, procmail creates a default lock file. For mbox format, a lock file is always required. For maildir: not needed.
 
 ### Recipe Flags
 
@@ -80,7 +80,7 @@ If `:0:` (with a colon after zero) is used, procmail creates a default lock file
 | `W` | Wait for program to finish, check exit code, suppress errors |
 | `w` | Wait for program to finish, check exit code, show errors |
 | `i` | Ignore write errors |
-| `r` | Raw mode — do not add trailing blank line |
+| `r` | Raw mode: do not add trailing blank line |
 
 ### Special Conditions
 
@@ -195,9 +195,9 @@ plugin {
 
 Sieve divides all commands into three groups:
 
-1. **Action commands** — what to do with the message
-2. **Control commands** — execution flow control
-3. **Test commands** — conditions for `if`
+1. **Action commands**: what to do with the message
+2. **Control commands**: execution flow control
+3. **Test commands**: conditions for `if`
 
 ### Action Commands
 
@@ -209,7 +209,7 @@ Sieve divides all commands into three groups:
 | `discard` | Delete silently, no notification to sender |
 | `reject "reason"` | Reject and return message to sender (requires `require ["reject"]`) |
 
-> **Exam fact:** `reject` is an extension, not in the base standard — must be declared via `require`. `discard` is silent deletion; the sender receives no response.
+> **Exam fact:** `reject` is an extension, not in the base standard; must be declared via `require`. `discard` is silent deletion; the sender receives no response.
 
 ### Control Commands
 
@@ -230,8 +230,8 @@ Used inside `if`. Can be combined.
 | `envelope` | Check SMTP envelope parts (From, Rcpt) |
 | `exists` | Check header existence |
 | `size` | Evaluate message size |
-| `allof(...)` | Logical AND — all conditions must match |
-| `anyof(...)` | Logical OR — one match is enough |
+| `allof(...)` | Logical AND: all conditions must match |
+| `anyof(...)` | Logical OR: one match is enough |
 | `not` | Invert test result |
 | `true` | Always TRUE |
 | `false` | Always FALSE |
@@ -351,7 +351,7 @@ sudo apt install dovecot-sieve dovecot-managesieved dovecot-lmtpd
 | `dovecot-managesieved` | Sieve management daemon, listens on port 4190 |
 | `dovecot-lmtpd` | Local mail transport between Postfix and Sieve |
 
-**`/etc/dovecot/conf.d/10-master.conf`** — configure LMTP unix listener:
+**`/etc/dovecot/conf.d/10-master.conf`**. Configure LMTP unix listener:
 
 ```
 service lmtp {
@@ -363,7 +363,7 @@ service lmtp {
 }
 ```
 
-**`/etc/postfix/main.cf`** — route mailbox delivery through LMTP:
+**`/etc/postfix/main.cf`**. Route mailbox delivery through LMTP:
 
 ```ini
 mailbox_transport = lmtp:unix:private/dovecot-lmtp
@@ -372,7 +372,7 @@ smtp_utf8_enable = no
 
 `smtp_utf8_enable = no` disables UTF-8, which Sieve does not yet support.
 
-**`/etc/dovecot/conf.d/20-lmtp.conf`** — enable Sieve in LMTP:
+**`/etc/dovecot/conf.d/20-lmtp.conf`**. Enable Sieve in LMTP:
 
 ```
 protocol lmtp {
@@ -381,9 +381,9 @@ protocol lmtp {
 }
 ```
 
-`postmaster_address` — address for Sieve errors. Required field.
+`postmaster_address`: address for Sieve errors. Required field.
 
-**`/etc/dovecot/conf.d/90-sieve.conf`** — full path configuration:
+**`/etc/dovecot/conf.d/90-sieve.conf`**. Full path configuration:
 
 ```
 plugin {
@@ -472,7 +472,7 @@ directory_name
 directory_name/
 ```
 
-> **Exam fact:** Maildir is the recommended format. With mbox in procmail, a lock file is mandatory (`:0:`). With maildir, no lock is needed — use `:0` without the colon.
+> **Exam fact:** Maildir is the recommended format. With mbox in procmail, a lock file is mandatory (`:0:`). With maildir, no lock is needed; use `:0` without the colon.
 
 ---
 
@@ -514,6 +514,6 @@ if TEST {
 | Using `fileinto` without `require` | `require ["fileinto"]` must appear first |
 | Using `reject` without `require` | `require ["reject"]` must appear first |
 | `discard` vs `reject` | `discard` = silent delete; `reject` = sends notification |
-| `reject` is a base command | It is NOT — it's an extension requiring `require` |
+| `reject` is a base command | It is NOT: it's an extension requiring `require` |
 | mbox in procmail without lock | Always use `:0:` (with lock) for mbox |
-| `/etc/procmailrc` without `-m` flag | Recipes run as root — dangerous |
+| `/etc/procmailrc` without `-m` flag | Recipes run as root: dangerous |

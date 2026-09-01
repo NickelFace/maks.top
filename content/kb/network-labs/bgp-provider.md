@@ -16,7 +16,7 @@ Dual-uplink BGP with two providers (AS 65010, AS 65020). R3 and R5 are border ro
 
 ## Configurations
 
-### R6 — Internal OSPF router
+### R6: Internal OSPF router
 
 ```
 interface Ethernet0/0
@@ -33,7 +33,7 @@ router ospf 1
  network 192.168.0.0 0.0.255.255 area 0
 ```
 
-### R5 — Border router (uplink to AS 65020)
+### R5: Border router (uplink to AS 65020)
 
 ```
 interface Loopback0
@@ -86,7 +86,7 @@ route-map ournets permit 100
  match ip address prefix-list our-network
 ```
 
-### R3 — Border router (uplink to AS 65010)
+### R3: Border router (uplink to AS 65010)
 
 ```
 interface Loopback0
@@ -131,7 +131,7 @@ ip prefix-list 1 seq 10 permit 1.2.3.0/24
 access-list 1 permit 192.168.0.0 0.0.255.255
 ```
 
-### R2 — Provider AS 65020
+### R2: Provider AS 65020
 
 ```
 interface Loopback2
@@ -160,7 +160,7 @@ route-map SET-ASPATH permit 10
  set as-path prepend 65020 65020 65020 65020 65020 65020
 ```
 
-### R1 — Provider AS 65010
+### R1: Provider AS 65010
 
 ```
 interface Ethernet0/0
@@ -179,7 +179,7 @@ ip route 0.0.0.0 0.0.0.0 Null0
 ip route 1.2.3.0 255.255.255.0 Null0
 ```
 
-### R4 — Transit AS 65030
+### R4: Transit AS 65030
 
 ```
 interface Ethernet0/0

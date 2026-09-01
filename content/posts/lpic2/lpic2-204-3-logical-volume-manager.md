@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-204-3-logical-volume-manager/"
 page_lang: "en"
 ---
 
-> **Exam topic 204.3** — Logical Volume Manager. Covers the three-tier LVM architecture, physical/volume/logical volume commands, resizing, snapshots, Device Mapper, and lvm.conf configuration.
+> **Exam topic 204.3**: Logical Volume Manager. Covers the three-tier LVM architecture, physical/volume/logical volume commands, resizing, snapshots, Device Mapper, and lvm.conf configuration.
 
 ---
 
@@ -221,10 +221,10 @@ lvextend -l +100%FREE /dev/volume01/lvol0  # use all free space in the VG
 
 ### Extend the filesystem
 
-After `lvextend` the filesystem is still unaware of the new space — resize it separately.
+After `lvextend` the filesystem is still unaware of the new space, resize it separately.
 
 ```bash
-# XFS (extend only; shrink is not supported — filesystem must be mounted)
+# XFS (extend only; shrink is not supported - filesystem must be mounted)
 xfs_growfs /dev/volume01/lvol0
 # or by mount point:
 xfs_growfs /mnt
@@ -242,7 +242,7 @@ resize2fs /dev/volume01/lvol0
 Shrinking is more complex than extending: shrink the filesystem first, then the LV.
 
 ```bash
-# Only for ext2/ext3/ext4 — XFS cannot be shrunk!
+# Only for ext2/ext3/ext4 - XFS cannot be shrunk!
 
 # Step 1: unmount
 umount /dev/volume01/lvol0
@@ -298,7 +298,7 @@ umount /mnt/backup
 lvremove /dev/volume01/snapshot0
 ```
 
-> **Warning:** Delete snapshots immediately after use. On databases and write-intensive systems, an unclosed snapshot degrades performance — every write to the original LV requires an extra copy operation.
+> **Warning:** Delete snapshots immediately after use. On databases and write-intensive systems, an unclosed snapshot degrades performance: every write to the original LV requires an extra copy operation.
 
 > **Important:** If the snapshot fills up (CoW space is exhausted), it becomes **invalid**. Monitor fill levels with `lvs` or `lvdisplay`.
 
@@ -374,7 +374,7 @@ filter = [ "a|^/dev/hda8$|", "r/.*/" ]
 
 > **Warning:** Rule order matters. Putting `"r|.*|"` first will block all devices and LVM will find no PVs.
 
-> **Important:** `a` = accept, `r` = reject. The separator in the regex can be any character (`|`, `/`, `!`) — opening and closing must match.
+> **Important:** `a` = accept, `r` = reject. The separator in the regex can be any character (`|`, `/`, `!`): opening and closing must match.
 
 ### devices section: preferred_names
 
@@ -500,7 +500,7 @@ filter = [ "r|/dev/cdrom|" ]             # reject cdrom
 filter = [ "a|/dev/sda|", "r|.*|" ]     # only /dev/sda
 ```
 
-Rule order matters — first match wins.
+Rule order matters, first match wins.
 
 ### Common Exam Mistakes
 
@@ -524,7 +524,7 @@ Rule order matters — first match wins.
 
 **Q2.** An admin wants to add 10 GB to logical volume `/dev/vg0/data` with XFS mounted. What is the correct command sequence?
 
-**Answer:** `lvextend -L +10G /dev/vg0/data`, then `xfs_growfs /dev/vg0/data`. No unmount is needed — XFS extends online.
+**Answer:** `lvextend -L +10G /dev/vg0/data`, then `xfs_growfs /dev/vg0/data`. No unmount is needed: XFS extends online.
 
 ---
 
@@ -573,4 +573,4 @@ Rule order matters — first match wins.
 
 **Q8.** An admin ran `lvextend -L +1G /dev/vg0/data` but `df -h` still shows the old size. What is needed?
 
-**Answer:** Extend the filesystem. For XFS (mounted): `xfs_growfs /dev/vg0/data`. For ext4: `resize2fs /dev/vg0/data`. `lvextend` only extends the block device — the filesystem inside must be resized separately.
+**Answer:** Extend the filesystem. For XFS (mounted): `xfs_growfs /dev/vg0/data`. For ext4: `resize2fs /dev/vg0/data`. `lvextend` only extends the block device; the filesystem inside must be resized separately.

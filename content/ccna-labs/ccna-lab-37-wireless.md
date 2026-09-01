@@ -33,7 +33,7 @@ graph LR
 3. Familiarize yourself with the WLC interface
 
 ### Create a WLAN
-4. Monitor → Access Points — confirm the AP is registered
+4. Monitor → Access Points: confirm the AP is registered
 5. WLANs → Create New:
    - **Profile Name**: CCNA-WLAN
    - **SSID**: CCNA
@@ -46,8 +46,8 @@ graph LR
 8. Connect the Laptop to SSID "CCNA" with the password
 
 ### View Statistics
-9. Monitor → Clients — view connected clients
-10. Monitor → Statistics — traffic on the AP
+9. Monitor → Clients: view connected clients
+10. Monitor → Statistics: traffic on the AP
 
 ### VLAN for Wireless
 11. Create an additional WLC interface for a VLAN (Guest):
@@ -60,11 +60,11 @@ graph LR
 | Concept | Description |
 |---|---|
 | Lightweight AP | Managed by the WLC; configuration delivered via CAPWAP |
-| CAPWAP | UDP 5246 (control), 5247 (data) — tunnel between AP and WLC |
+| CAPWAP | UDP 5246 (control), 5247 (data): tunnel between AP and WLC |
 | WPA2-Personal | PSK (Pre-Shared Key) |
 | WPA2-Enterprise | 802.1X + RADIUS |
 | SSID | Wireless network name (visible to clients) |
 | BSSID | AP MAC address (unique per radio) |
 
 > **💡 Tip:**
-> Packet Tracer's WLC supports limited functionality. For full testing, use real hardware or GNS3 with WLC images. The CCNA exam requires knowledge of the WLC GUI — creating WLANs and configuring security.
+> Packet Tracer's WLC supports limited functionality. For full testing, use real hardware or GNS3 with WLC images. The CCNA exam requires knowledge of the WLC GUI: creating WLANs and configuring security.

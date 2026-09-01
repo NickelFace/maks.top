@@ -121,7 +121,7 @@ When `make oldconfig` runs, the old `.config` is copied to `.config.old` and a n
 
 > **Note:** `make xconfig`, `make gconfig`, and `make menuconfig` also automatically pick up an existing `.config` from `/usr/src/linux/`. New options receive default values.
 
-> **Exam tip:** A common exam question is the difference between `make config`, `make menuconfig`, and `make oldconfig`. Remember: `menuconfig` is an ncurses interface with navigation; `oldconfig` updates an existing config asking only about new options; `make config` is the most primitive — no going back.
+> **Exam tip:** A common exam question is the difference between `make config`, `make menuconfig`, and `make oldconfig`. Remember: `menuconfig` is an ncurses interface with navigation; `oldconfig` updates an existing config asking only about new options; `make config` is the most primitive, no going back.
 
 ---
 
@@ -264,7 +264,7 @@ Example line from `modules.dep`:
 
 ---
 
-## Initial RAM Disk — initrd and initramfs
+## Initial RAM Disk: initrd and initramfs
 
 At boot time, the kernel cannot access the disk if the disk driver is compiled as a module. This creates a chicken-and-egg problem: to load the module you need the disk, but to access the disk you need the module. The solution is the initial RAM disk (initrd).
 
@@ -281,7 +281,7 @@ zcat /boot/initrd-2.6.18-348.6.1.el5.img | file -
 
 ### Building initrd manually
 
-If `mkinitrd` is unavailable, build the image by hand using a block device — a RAM disk (`/dev/ram0`) or a loopback device:
+If `mkinitrd` is unavailable, build the image by hand using a block device: a RAM disk (`/dev/ram0`) or a loopback device:
 
 ```bash
 # 1. Create a filesystem on the RAM disk (300 blocks)
@@ -294,7 +294,7 @@ mount -t ext2 /dev/ram0 /mnt
 mkdir /mnt/dev
 mknod /mnt/dev/tty1 c 4 1
 
-# 4. Create /linuxrc — the kernel runs this first
+# 4. Create /linuxrc - the kernel runs this first
 #    For a test, a symlink to /bin/sh is enough
 ln -s /bin/sh /mnt/linuxrc
 
@@ -353,7 +353,7 @@ The `mkinitramfs` config file is at `/etc/initramfs-tools/initramfs.conf`.
 
 > **Note:** Kernel patching is no longer in the LPIC-2 exam objectives, but it is useful background for working with kernel sources.
 
-A patch file is the output of `diff -u old_file new_file`. It consists of change blocks called hunks. Each hunk contains context lines — unchanged lines surrounding the edit. The `patch` tool uses this context to locate the right place in the file. Lines to remove are marked `-`, lines to add are marked `+`. If the context in the file doesn't match the context in the patch, `patch` cannot apply that hunk and saves it to a `.rej` file.
+A patch file is the output of `diff -u old_file new_file`. It consists of change blocks called hunks. Each hunk contains context lines, unchanged lines surrounding the edit. The `patch` tool uses this context to locate the right place in the file. Lines to remove are marked `-`, lines to add are marked `+`. If the context in the file doesn't match the context in the patch, `patch` cannot apply that hunk and saves it to a `.rej` file.
 
 ```diff
 --- a/drivers/net/foo.c   2024-01-01
@@ -381,13 +381,13 @@ patch -p1 < patch-4.3.4
 find /usr/src/linux -name "*.rej"
 ```
 
-The `-p<n>` option controls how many leading path components to strip. `git diff` writes paths as `a/drivers/net/foo.c` — without stripping, `patch` looks for that literal path and fails. `-p1` strips the first component (`a/` or `b/`), leaving the real relative path:
+The `-p<n>` option controls how many leading path components to strip. `git diff` writes paths as `a/drivers/net/foo.c`, without stripping, `patch` looks for that literal path and fails. `-p1` strips the first component (`a/` or `b/`), leaving the real relative path:
 
 | Option | Path from patch | Result |
 |---|---|---|
-| `-p0` | `a/drivers/net/foo.c` | `a/drivers/net/foo.c` — unchanged |
-| `-p1` | `a/drivers/net/foo.c` | `drivers/net/foo.c` — `a/` stripped |
-| `-p2` | `a/drivers/net/foo.c` | `net/foo.c` — `a/drivers/` stripped |
+| `-p0` | `a/drivers/net/foo.c` | `a/drivers/net/foo.c`: unchanged |
+| `-p1` | `a/drivers/net/foo.c` | `drivers/net/foo.c`: `a/` stripped |
+| `-p2` | `a/drivers/net/foo.c` | `net/foo.c`: `a/drivers/` stripped |
 
 For kernel patches the standard is `-p1`.
 
@@ -456,13 +456,13 @@ Key `dkms.conf` directives:
 | `DEST_MODULE_LOCATION` | Yes* | Install path, always starts with `/kernel` |
 | `PACKAGE_NAME` | Yes | Package name |
 | `PACKAGE_VERSION` | Yes | Package version |
-| `AUTOINSTALL` | No | `yes` — install the module on every new kernel boot |
-| `REMAKE_INITRD` | No | `yes` — rebuild initrd after module install (default `no`) |
+| `AUTOINSTALL` | No | `yes`: install the module on every new kernel boot |
+| `REMAKE_INITRD` | No | `yes`: rebuild initrd after module install (default `no`) |
 | `MAKE` | No | Build command; if unset, DKMS uses the default `make` |
 
-\* `DEST_MODULE_LOCATION` is not required on Fedora Core 6+, RHEL 5+, SuSE Linux ES 10+, and Ubuntu — they use distribution directories.
+\* `DEST_MODULE_LOCATION` is not required on Fedora Core 6+, RHEL 5+, SuSE Linux ES 10+, and Ubuntu; they use distribution directories.
 
-> **Warning:** The `REMAKE_INITRD` directive reads only the first character of the value — all others are ignored. The first character is treated as "yes" only if it is `y` or `Y`. `yes` and `YES` behave identically; so do `no` and `nope`.
+> **Warning:** The `REMAKE_INITRD` directive reads only the first character of the value; all others are ignored. The first character is treated as "yes" only if it is `y` or `Y`. `yes` and `YES` behave identically; so do `no` and `nope`.
 
 ### Working with module archives
 
@@ -503,7 +503,7 @@ dracut /boot/initramfs-$(uname -r).img $(uname -r)
 dracut --force /boot/initramfs-$(uname -r).img $(uname -r)
 ```
 
-> **Note:** The LPIC-2 exam only requires knowing that dracut exists and what it does — automatic initramfs creation when needed. Deep configuration is not tested.
+> **Note:** The LPIC-2 exam only requires knowing that dracut exists and what it does, automatic initramfs creation when needed. Deep configuration is not tested.
 
 ---
 
@@ -512,15 +512,15 @@ dracut --force /boot/initramfs-$(uname -r).img $(uname -r)
 ### Key Paths
 
 ```
-/usr/src/linux/           — symbolic link to kernel sources
-/usr/src/linux/.config    — kernel configuration file
-/boot/vmlinuz-<ver>       — kernel image
-/boot/System.map-<ver>    — symbol table
-/boot/initrd-<ver>.img    — initial RAM disk
-/lib/modules/<ver>/       — kernel modules
-/lib/modules/<ver>/modules.dep  — dependency file
-/etc/dkms/framework.conf  — DKMS configuration
-/etc/initramfs-tools/initramfs.conf — mkinitramfs configuration
+/usr/src/linux/           - symbolic link to kernel sources
+/usr/src/linux/.config    - kernel configuration file
+/boot/vmlinuz-<ver>       - kernel image
+/boot/System.map-<ver>    - symbol table
+/boot/initrd-<ver>.img    - initial RAM disk
+/lib/modules/<ver>/       - kernel modules
+/lib/modules/<ver>/modules.dep  - dependency file
+/etc/dkms/framework.conf  - DKMS configuration
+/etc/initramfs-tools/initramfs.conf - mkinitramfs configuration
 ```
 
 ### Key Commands

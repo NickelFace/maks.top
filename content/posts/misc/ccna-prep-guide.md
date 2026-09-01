@@ -31,19 +31,19 @@ Official exam topics (PDF): [200-301-CCNA-v1.1.pdf](https://learningcontent.cisc
 
 ## Books
 
-### Official Cert Guide (Wendell Odom) — recommended
+### Official Cert Guide (Wendell Odom): recommended
 
 The de facto standard. Two volumes, covers all exam domains in depth.
 
-- **Volume 1** — Network Fundamentals, Network Access, IP Connectivity
-- **Volume 2** — IP Services, Security, Automation, full exam review
+- **Volume 1**: Network Fundamentals, Network Access, IP Connectivity
+- **Volume 2**: IP Services, Security, Automation, full exam review
 
-Latest edition: **v1.1 (2024)** — updated for the current exam version.
+Latest edition: **v1.1 (2024)**, updated for the current exam version.
 
-- [Cisco Press — Official Cert Guide Library (v1.1)](https://www.ciscopress.com/store/ccna-200-301-official-cert-guide-library-premium-edition-9780138221447)
+- [Cisco Press: Official Cert Guide Library (v1.1)](https://www.ciscopress.com/store/ccna-200-301-official-cert-guide-library-premium-edition-9780138221447)
 - [Amazon](https://www.amazon.com/CCNA-200-301-Official-Cert-Guide/dp/0135792738)
 
-> Each chapter ends with a review quiz. Use these consistently — do not skip.
+> Each chapter ends with a review quiz. Use these consistently; do not skip.
 
 ### 31 Days Before Your CCNA Exam
 
@@ -57,20 +57,20 @@ Community-assembled cheat sheet collection covering subnetting, protocol summari
 
 ## Video Courses
 
-### Jeremy's IT Lab (YouTube) — free, highly recommended
+### Jeremy's IT Lab (YouTube): free, highly recommended
 
 Full 200-301 coverage, clear explanations, free on YouTube. Mentioned by the community as the go-to resource.
 
 Search: **"Jeremy's IT Lab CCNA"** on YouTube.
 
-### CiscoStr (Danil) — Russian-language course
+### CiscoStr (Danil): Russian-language course
 
 Structured paid course by an experienced instructor. Free YouTube recordings available:
 
 - [YouTube playlist (2020 recording)](https://www.youtube.com/playlist?list=PLHpWwR6fSBN76MvCxsfJwOnsQIloB3-Mo)
 - [CiscoStr website](https://ciscostr.ru)
 
-### Cisco NetAcad — free self-paced
+### Cisco NetAcad: free self-paced
 
 Three official Cisco courses covering the full 200-301 syllabus:
 
@@ -84,13 +84,13 @@ Registration: [netacad.com](https://www.netacad.com) · Module exams at the end 
 
 Paid, professional-quality video course. Good for visual learners who prefer a structured paid option.
 
-### DarkMayCall — Russian "Cisco from scratch"
+### DarkMayCall: Russian "Cisco from scratch"
 
 Russian-language structured course, beginner-friendly.
 
 - [darkmaycal-it.ru/cisco](https://darkmaycal-it.ru/cisco/)
 
-### CiscoStr demo — free preview
+### CiscoStr demo: free preview
 
 Free demo modules from the CiscoStr course (no registration):
 
@@ -106,7 +106,7 @@ Russian Cisco community platform with courses and materials.
 
 ## Practice Labs
 
-### Cisco Packet Tracer — recommended for beginners
+### Cisco Packet Tracer: recommended for beginners
 
 Free simulator from Cisco. No hardware required. Download via:
 
@@ -116,12 +116,12 @@ Covers ~90% of what you need for the exam. The community recommends starting her
 
 > Packet Tracer labs (`.pka` files) from the course cover: static routing, VLANs, OSPF, IPv6, EtherChannel, wireless.
 
-### EVE-NG / GNS3 — advanced
+### EVE-NG / GNS3: advanced
 
 Full network emulators that run real Cisco IOS images.
 
-- [EVE-NG community edition](https://www.eve-ng.net) — free
-- [Cisco DevNet Sandboxes](https://developer.cisco.com/site/sandbox/) — free cloud labs, no local install required
+- [EVE-NG community edition](https://www.eve-ng.net): free
+- [Cisco DevNet Sandboxes](https://developer.cisco.com/site/sandbox/): free cloud labs, no local install required
 
 > **Community warning:** EVE-NG can behave unexpectedly. Beginners may confuse emulator bugs with configuration mistakes. Stick with Packet Tracer until you have a solid foundation.
 
@@ -131,19 +131,19 @@ Free cloud-hosted lab environments. Covers more than EVE-NG for certain scenario
 
 - [developer.cisco.com/site/sandbox/](https://developer.cisco.com/site/sandbox/)
 
-### Packet Tracer Network — lab collection
+### Packet Tracer Network: lab collection
 
 Ready-made `.pka` lab files grouped by topic (routing, switching, security, etc.).
 
 - [packettracernetwork.com/labs](https://www.packettracernetwork.com/labs/packettracerlabs.html)
 
-### GNS3 Vault — lab collection
+### GNS3 Vault: lab collection
 
 Free GNS3 labs covering CCNA and beyond.
 
 - [gns3vault.com/labs](https://gns3vault.com/labs)
 
-### Network Education — practice simulators (RU)
+### Network Education: practice simulators (RU)
 
 Russian platform with Cisco courses and interactive practice simulators.
 
@@ -196,7 +196,7 @@ Community forum for CCNA discussion, security topics and lab configurations.
 
 - [ccna7.com](https://www.ccna7.com/)
 
-### infocisco.ru — Russian chapter tests
+### infocisco.ru: Russian chapter tests
 
 Russian-language CCNA chapter practice tests (based on older NetAcad material, still useful for self-check).
 
@@ -225,7 +225,7 @@ Spaced repetition is effective for memorising commands, protocol timers, and por
 
 ### Pearson VUE
 
-CCNA is delivered through Pearson VUE — both in-person testing centres and online proctored.
+CCNA is delivered through Pearson VUE, both in-person testing centres and online proctored.
 
 - [home.pearsonvue.com/cisco.aspx](https://home.pearsonvue.com/cisco.aspx)
 
@@ -249,20 +249,20 @@ Bring **2 forms of ID** to the testing centre (required per Pearson VUE policy):
 Based on community experience:
 
 **Must know:**
-- **Binary and hex math** — subnetting by hand, IPv6 prefix calculations
-- **OSPF** — single-area and multi-area, neighbour states, LSA types
-- **BGP basics** — eBGP, iBGP neighbour relationships, attributes
-- **VLANs and trunking** — 802.1Q, DTP, VTP, inter-VLAN routing
-- **STP / RSTP** — port states, port roles, topology changes (STP is still in 200-301 despite rumours)
-- **ACLs** — standard, extended, named; wildcard masks
-- **NAT/PAT** — static, dynamic, overload
-- **Wireless** — 802.11 standards, WLC, lightweight APs
-- **Automation** — REST API, JSON, Python basics, DNA Center, SD-WAN/SD-Access overview
+- **Binary and hex math**: subnetting by hand, IPv6 prefix calculations
+- **OSPF**: single-area and multi-area, neighbour states, LSA types
+- **BGP basics**: eBGP, iBGP neighbour relationships, attributes
+- **VLANs and trunking**: 802.1Q, DTP, VTP, inter-VLAN routing
+- **STP / RSTP**: port states, port roles, topology changes (STP is still in 200-301 despite rumours)
+- **ACLs**: standard, extended, named; wildcard masks
+- **NAT/PAT**: static, dynamic, overload
+- **Wireless**: 802.11 standards, WLC, lightweight APs
+- **Automation**: REST API, JSON, Python basics, DNA Center, SD-WAN/SD-Access overview
 
 **Common pitfalls:**
-- The official course (NetAcad) does not cover 100% of exam questions — supplement with OCG
+- The official course (NetAcad) does not cover 100% of exam questions, supplement with OCG
 - EVE-NG glitches can mislead beginners; use Packet Tracer for initial labs
-- IPv6 gets a dedicated section — don't skip it
+- IPv6 gets a dedicated section: don't skip it
 
 ---
 

@@ -10,7 +10,7 @@ date: 2026-04-14
 Disk usage and open file tools: <strong>df</strong> (filesystem usage), <strong>du</strong> (directory sizes), <strong>lsof</strong> (open files, network connections, deleted-but-held files).
 </div>
 
-## df — filesystem usage
+## df: filesystem usage
 
 <div class="ref-panel">
 <div class="ref-panel-head">df commands</div>
@@ -33,7 +33,7 @@ Disk usage and open file tools: <strong>df</strong> (filesystem usage), <strong>
 
 A full disk (100% Use%) with many inodes but 0 inode usage left will also block writes. Check both: `df -h` and `df -i`.
 
-## du — directory sizes
+## du: directory sizes
 
 <div class="ref-panel">
 <div class="ref-panel-head">du commands</div>
@@ -57,7 +57,7 @@ A full disk (100% Use%) with many inodes but 0 inode usage left will also block 
 
 `-s` = summary (one line per argument) · `-h` = human-readable · `-a` = all files, not just directories · `--max-depth=N` limits recursion.
 
-## lsof — open files
+## lsof: open files
 
 <div class="ref-panel">
 <div class="ref-panel-head">Files & processes</div>
@@ -71,9 +71,9 @@ A full disk (100% Use%) with many inodes but 0 inode usage left will also block 
 <tr><td class="mono">lsof -c nginx</td><td class="desc">Files opened by processes named nginx</td></tr>
 <tr><td class="mono">lsof +D /var/www</td><td class="desc">All files open under a directory (recursive)</td></tr>
 <tr><td class="mono">lsof -d 4</td><td class="desc">Files with file descriptor 4</td></tr>
-<tr><td class="mono">lsof -t /var/log/auth.log</td><td class="desc">PIDs only — useful in kill scripts</td></tr>
-<tr><td class="mono">lsof -u alice -c vim</td><td class="desc">AND — alice AND vim</td></tr>
-<tr><td class="mono">lsof -u alice -c vim -a</td><td class="desc">AND explicit — alice AND vim (with -a)</td></tr>
+<tr><td class="mono">lsof -t /var/log/auth.log</td><td class="desc">PIDs only: useful in kill scripts</td></tr>
+<tr><td class="mono">lsof -u alice -c vim</td><td class="desc">AND: alice AND vim</td></tr>
+<tr><td class="mono">lsof -u alice -c vim -a</td><td class="desc">AND explicit: alice AND vim (with -a)</td></tr>
 </tbody>
 </table>
 </div>
@@ -104,7 +104,7 @@ A full disk (100% Use%) with many inodes but 0 inode usage left will also block 
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">lsof | grep deleted</td><td class="desc">Files deleted but still held open — disk space not freed until process closes them</td></tr>
+<tr><td class="mono">lsof | grep deleted</td><td class="desc">Files deleted but still held open: disk space not freed until process closes them</td></tr>
 <tr><td class="mono">lsof -p 1234 | grep REG</td><td class="desc">Regular files open by a process</td></tr>
 <tr><td class="mono">ls -la /proc/1234/fd/</td><td class="desc">All file descriptors of a process</td></tr>
 <tr><td class="mono">cp /proc/1234/fd/3 /tmp/recovered</td><td class="desc">Recover a deleted file via /proc fd link</td></tr>

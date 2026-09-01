@@ -42,7 +42,7 @@ TRM not supported on this platform
 ```
 
 
-BFD is also not supported in the images — the commands exist but the actual packets are not sent.
+BFD is also not supported in the images, the commands exist but the actual packets are not sent.
 
 **Configuration:**
 

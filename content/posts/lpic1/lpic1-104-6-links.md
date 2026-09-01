@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-104-6-links/"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 101
+> **Exam weight: 2**. LPIC-1 v5, Exam 101
 
 ## What You Need to Know
 
@@ -29,7 +29,7 @@ All kernel interaction with a file goes through its inode.
 
 ### Two Types of Links
 
-**Hard link:** an additional directory entry pointing to the same inode as the original name. Both names are fully equivalent — there is no way to tell which is the "original."
+**Hard link:** an additional directory entry pointing to the same inode as the original name. Both names are fully equivalent; there is no way to tell which is the "original."
 
 **Symbolic link (symlink/soft link):** a separate file with its own inode whose contents are a path string pointing to the target. When accessed, the kernel follows that path to the target.
 
@@ -57,12 +57,12 @@ ls -li
 # 3806696 -r--r--r-- 2 carol carol 111702 Jun 7 10:13 target.txt
 ```
 
-- First column — inode number. Same number = same data.
-- `2` after permissions — hard link count.
+- First column: inode number. Same number = same data.
+- `2` after permissions: hard link count.
 - Default count: 1 for regular files, 2 for directories.
 - Each new hard link increments the count by 1.
 
-Changes through any name are visible through all others — the data on disk is shared.
+Changes through any name are visible through all others, the data on disk is shared.
 
 ### Moving and Deleting
 
@@ -114,17 +114,17 @@ A symlink always shows `lrwxrwxrwx` in `ls -l`. **Real access is determined by t
 If the target path is relative, it is interpreted **relative to the symlink's location**. Moving the symlink to another directory will break it.
 
 ```bash
-# Created in ~/Documents/ — dangerous (relative)
+# Created in ~/Documents/ - dangerous (relative)
 ln -s original.txt softlink
 
-# After mv softlink ../ — broken!
+# After mv softlink ../ - broken!
 # Fix: always use an absolute path
 ln -s /home/carol/Documents/original.txt softlink
 ```
 
 ### Broken Links
 
-When the target is deleted, the symlink remains but points nowhere — a **broken (dangling) link**. If a file with the same name is later created at the same path, the symlink works again.
+When the target is deleted, the symlink remains but points nowhere: a **broken (dangling) link**. If a file with the same name is later created at the same path, the symlink works again.
 
 ### Deleting and Moving
 
@@ -137,7 +137,7 @@ Same as regular files: `rm link`, `mv link /new/path`.
 | Method | Inode | Disk space | Relation to original |
 |---|---|---|---|
 | `cp` | new | new | independent |
-| `ln` (hard) | shared with target | shared | full — same data |
+| `ln` (hard) | shared with target | shared | full: same data |
 | `ln -s` (symlink) | own, new | a few bytes (path string) | via path to target |
 
 ---
@@ -161,7 +161,7 @@ Same as regular files: `rm link`, `mv link /new/path`.
 
 - **Version switching:** `/usr/bin/python` → `python3.11`. Retarget the link to switch interpreters without editing scripts.
 - **nginx `sites-enabled`:** config files are symlinks to `sites-available/`.
-- **Incremental backups** (`rsync --link-dest`): unchanged files are hard links to the previous snapshot — space-efficient while each snapshot looks complete.
+- **Incremental backups** (`rsync --link-dest`): unchanged files are hard links to the previous snapshot, space-efficient while each snapshot looks complete.
 - **Convenience access:** symlink in `~` pointing to `/var/log/myapp/`.
 
 ---
@@ -213,7 +213,7 @@ mv link /new/path
 
 ## Exercises
 
-### Exercise 1 — Enable the sticky bit with chmod
+### Exercise 1: Enable the sticky bit with chmod
 
 Which symbolic-mode `chmod` option enables the sticky bit on a directory?
 
@@ -232,7 +232,7 @@ The sticky bit symbol is `t`. To enable it, use `+t`.
 
 ---
 
-### Exercise 2 — Create a symbolic link
+### Exercise 2: Create a symbolic link
 
 The file `document.txt` is in `/home/carol/Documents`. Create a symbolic link named `text.txt` in the current directory pointing to it.
 
@@ -249,7 +249,7 @@ The `-s` flag creates a symbolic link. Using the full path prevents the link fro
 
 ---
 
-### Exercise 3 — Hard link vs copy
+### Exercise 3: Hard link vs copy
 
 Explain the difference between a hard link to a file and a copy of that file.
 
@@ -264,7 +264,7 @@ A **copy** is a fully independent entity with its own inode and its own disk spa
 
 ---
 
-### Exercise 4 — Deleting the target of a symlink
+### Exercise 4: Deleting the target of a symlink
 
 Given:
 
@@ -287,7 +287,7 @@ The data itself survives on disk and is accessible via `recipes.txt` (a hard lin
 
 ---
 
-### Exercise 5 — Hard link to a flash drive
+### Exercise 5: Hard link to a flash drive
 
 A USB drive is mounted at `/media/youruser/FlashA`. You run:
 
@@ -300,9 +300,9 @@ What happens? Why?
 <details>
 <summary>Answer</summary>
 
-The command fails with `Invalid cross-device link`. Hard links cannot span different devices or filesystems — an inode is only meaningful within its own filesystem.
+The command fails with `Invalid cross-device link`. Hard links cannot span different devices or filesystems; an inode is only meaningful within its own filesystem.
 
-Fix — use a symlink:
+Fix. Use a symlink:
 
 ```bash
 ln -s /media/youruser/FlashA/esquema.pdf ~/schematics.pdf
@@ -312,7 +312,7 @@ ln -s /media/youruser/FlashA/esquema.pdf ~/schematics.pdf
 
 ---
 
-### Exercise 6 — Analysing ls output for link count
+### Exercise 6: Analysing ls output for link count
 
 ```
 -rw-rw-r-- 1 carol carol 2,8M jun 17 15:45 compressed.zip
@@ -328,7 +328,7 @@ How many links point to `document.txt`? Are they hard or symbolic? Which `ls` fl
 
 Link count is **4**. Starting count is 1 (the name itself), so **3 additional hard links** were created.
 
-They are **hard links** — symlinks do not increase the target's link count.
+They are **hard links**; symlinks do not increase the target's link count.
 
 Flag **`-i`**:
 
@@ -344,7 +344,7 @@ ls -lahi
 
 ---
 
-### Exercise 7 — Moving a relative symlink
+### Exercise 7: Moving a relative symlink
 
 Directory structure:
 
@@ -361,9 +361,9 @@ After `mv ~/Documents/somedir/partners.txt ~/Documents/`, what does `less ~/Docu
 <details>
 <summary>Answer</summary>
 
-The link works, but shows `~/Documents/clients.txt` — `John, Michael, Bob` — **not the intended file**.
+The link works, but shows `~/Documents/clients.txt`: `John, Michael, Bob`, **not the intended file**.
 
-`partners.txt` stores `clients.txt` as a **relative path**, resolved from its current location. After moving from `somedir/` to `Documents/`, the link looks for `clients.txt` next to itself — and finds `Documents/clients.txt` instead.
+`partners.txt` stores `clients.txt` as a **relative path**, resolved from its current location. After moving from `somedir/` to `Documents/`, the link looks for `clients.txt` next to itself, and finds `Documents/clients.txt` instead.
 
 Fix: always use an absolute path when creating symlinks:
 
@@ -375,7 +375,7 @@ ln -s /home/carol/Documents/somedir/clients.txt partners.txt
 
 ---
 
-### Exercise 8 — Symlink permissions
+### Exercise 8: Symlink permissions
 
 ```
 -rw-r--r-- 1 carol carol 19 Jun 24 11:12 clients.txt
@@ -387,7 +387,7 @@ What are the actual access permissions for `partners.txt`?
 <details>
 <summary>Answer</summary>
 
-`rw-r--r--` — the target's permissions (`clients.txt`).
+`rw-r--r--`: the target's permissions (`clients.txt`).
 
 A symlink always shows `lrwxrwxrwx` in `ls -l`, but those are its own metadata. Access through the link is governed by the **target's permissions**.
 

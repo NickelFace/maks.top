@@ -24,10 +24,10 @@ Every running program in Linux lives as a process. The kernel assigns each proce
 
 ### PID, PPID and Process States
 
-**PID** (Process ID) — process number, 1 to 32768 by default.  
-**PPID** (Parent Process ID) — PID of the parent process that spawned it.
+**PID** (Process ID), process number, 1 to 32768 by default.
+**PPID** (Parent Process ID), PID of the parent process that spawned it.
 
-The process with PID 1 is always `init` or `systemd` — the parent of everything.
+The process with PID 1 is always `init` or `systemd`, the parent of everything.
 
 Possible process states:
 
@@ -199,7 +199,7 @@ Closing a region does not close its window; the window keeps running.
 
 ### tmux
 
-tmux was released in 2007. It uses a client-server model. Structure: a session contains windows; windows are split into panes. Unlike screen regions, panes are full pseudo-terminals — closing a pane terminates its process.
+tmux was released in 2007. It uses a client-server model. Structure: a session contains windows; windows are split into panes. Unlike screen regions, panes are full pseudo-terminals, closing a pane terminates its process.
 
 Command prefix: `Ctrl+B`.
 
@@ -389,10 +389,10 @@ top -o %MEM    # sort by memory on startup
 
 Header lines in top:
 
-- `load average` — three numbers: load over 1, 5, and 15 minutes. On a single-core system, 1.0 means full load.
-- `Tasks` — total, running, sleeping, stopped, zombie.
-- `%Cpu(s)` — CPU time breakdown: us (user), sy (system), ni (nice), id (idle), wa (iowait), hi (hardware interrupts), si (software interrupts), st (stolen).
-- `MiB Mem` / `MiB Swap` — memory usage.
+- `load average`, three numbers: load over 1, 5, and 15 minutes. On a single-core system, 1.0 means full load.
+- `Tasks`: total, running, sleeping, stopped, zombie.
+- `%Cpu(s)`, CPU time breakdown: us (user), sy (system), ni (nice), id (idle), wa (iowait), hi (hardware interrupts), si (software interrupts), st (stolen).
+- `MiB Mem` / `MiB Swap`: memory usage.
 
 ### pgrep and pidof
 
@@ -587,7 +587,7 @@ SIGKILL (9) and SIGSTOP (19).
 
 ## Exercises
 
-### Guided Exercises — Lesson 1
+### Guided Exercises: Lesson 1
 
 #### Exercise 1. oneko and Job Control
 
@@ -779,11 +779,11 @@ ps --user www-data
 
 ---
 
-### Explorational Exercises — Lesson 1
+### Explorational Exercises: Lesson 1
 
 #### Exercise 7. SIGHUP and Apache
 
-SIGHUP is used to restart daemons: Apache rereads its config, closes old child processes, and spawns new ones — while the parent process itself stays alive.
+SIGHUP is used to restart daemons: Apache rereads its config, closes old child processes, and spawns new ones; while the parent process itself stays alive.
 
 **How do you start the web server?**
 
@@ -925,7 +925,7 @@ ps o user,comm
 
 ---
 
-### Guided Exercises — Lesson 2
+### Guided Exercises: Lesson 2
 
 #### Exercise 11. screen vs tmux: Feature Comparison
 
@@ -1105,7 +1105,7 @@ tmux kill-session -t ssh
 
 ---
 
-### Explorational Exercises — Lesson 2
+### Explorational Exercises: Lesson 2
 
 #### Exercise 14. Multiplexer Command Line
 

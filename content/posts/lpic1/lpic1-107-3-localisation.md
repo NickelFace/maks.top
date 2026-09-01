@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-107-3-localisation/"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 102
+> **Exam weight: 3**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -26,7 +26,7 @@ Key files and commands: `/etc/timezone`, `/etc/localtime`, `/usr/share/zoneinfo/
 Time zones are regions of Earth that share the same local time, defined as an offset from **UTC** (Coordinated Universal Time). The term GMT (Greenwich Mean Time) is used as a synonym for UTC in offset-based names.
 
 - `GMT-5` means the region is 5 hours behind UTC.
-- `GMT+3` means UTC time is 3 hours behind — the region is 3 hours ahead.
+- `GMT+3` means UTC time is 3 hours behind, the region is 3 hours ahead.
 
 Servers and cloud services commonly run with the hardware clock set to UTC, leaving time zone adjustments to individual users.
 
@@ -67,9 +67,9 @@ America/Sao_Paulo
 
 `/etc/localtime` points to `/usr/share/zoneinfo/America/Sao_Paulo`.
 
-### tzselect — Interactive Zone Finder
+### tzselect: Interactive Zone Finder
 
-`tzselect` guides you through continent, country, and region menus to identify the correct zone name. It does not change system settings — it outputs the TZ value for you to use:
+`tzselect` guides you through continent, country, and region menus to identify the correct zone name. It does not change system settings; it outputs the TZ value for you to use:
 
 ```bash
 $ tzselect
@@ -159,7 +159,7 @@ For shell scripts, set `LANG=C` to avoid locale-dependent behavior in sorting an
 | Unicode | Universal standard assigning a unique number to every character |
 | UTF-8 | Variable-width Unicode encoding; backward compatible with ASCII; default on modern Linux |
 
-### iconv — Encoding Conversion
+### iconv: Encoding Conversion
 
 `iconv` converts a file from one character encoding to another:
 
@@ -252,20 +252,20 @@ iconv:
 
 ## Exercises
 
-### Exercise 1 — Reading the Time Zone from date
+### Exercise 1: Reading the Time Zone from date
 
 The `date` command outputs: `Mon Oct 21 18:45:21 +05 2019`. What is the time zone in `Etc/` notation?
 
 <details>
 <summary>Answer</summary>
 
-`Etc/GMT+5` — the offset `+05` means the region is 5 hours ahead of UTC, which in `Etc/` notation is `Etc/GMT+5`.
+`Etc/GMT+5`: the offset `+05` means the region is 5 hours ahead of UTC, which in `Etc/` notation is `Etc/GMT+5`.
 
 </details>
 
 ---
 
-### Exercise 2 — Setting /etc/localtime
+### Exercise 2: Setting /etc/localtime
 
 To make `Europe/Brussels` the system default time zone, what should `/etc/localtime` point to?
 
@@ -278,7 +278,7 @@ To make `Europe/Brussels` the system default time zone, what should `/etc/localt
 
 ---
 
-### Exercise 3 — iconv Conversion
+### Exercise 3: iconv Conversion
 
 Convert the WINDOWS-1252 encoded file `old.txt` to UTF-8 and save it as `new.txt`.
 
@@ -293,7 +293,7 @@ iconv -f WINDOWS-1252 -t UTF-8 -o new.txt old.txt
 
 ---
 
-### Exercise 4 — Per-Session Time Zone
+### Exercise 4: Per-Session Time Zone
 
 Make `Pacific/Auckland` the default time zone for the current shell session only.
 
@@ -310,7 +310,7 @@ This sets the time zone only for the current session. To persist across sessions
 
 ---
 
-### Exercise 5 — Transliteration with iconv
+### Exercise 5: Transliteration with iconv
 
 Convert the UTF-8 file `readme.txt` to a plain ASCII file `ascii.txt`, keeping characters as readable as possible by transliterating non-ASCII characters.
 

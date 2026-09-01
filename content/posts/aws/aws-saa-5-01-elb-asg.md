@@ -22,7 +22,7 @@ ELB distributes incoming traffic across targets. ASG automatically adjusts the n
 | **ALB** (Application) | L7 | HTTP, HTTPS, gRPC | Path/host/header routing, WebSockets | EC2, Lambda, IP, containers |
 | **NLB** (Network) | L4 | TCP, UDP, TLS | Ultra-low latency, static IP per AZ | EC2, IP, ALB |
 | **GWLB** (Gateway) | L3/L4 | IP (all) | Transparent inline inspection | Virtual appliances (firewalls, IDS) |
-| **CLB** (Classic) | L4/L7 | TCP, HTTP, HTTPS | **Legacy** — avoid for new designs | EC2-Classic (deprecated) |
+| **CLB** (Classic) | L4/L7 | TCP, HTTP, HTTPS | **Legacy**: avoid for new designs | EC2-Classic (deprecated) |
 
 ### Quick Selection Guide
 
@@ -38,7 +38,7 @@ ELB distributes incoming traffic across targets. ASG automatically adjusts the n
 
 ---
 
-## ALB — Application Load Balancer
+## ALB: Application Load Balancer
 
 ### Listener Rules
 
@@ -82,12 +82,12 @@ Routes the same client to the same target using a cookie.
 
 ---
 
-## NLB — Network Load Balancer
+## NLB: Network Load Balancer
 
 ### Key Characteristics
 
-- Operates at L4 — no HTTP header awareness
-- **One static Elastic IP per AZ** — clients can whitelist specific IPs
+- Operates at L4: no HTTP header awareness
+- **One static Elastic IP per AZ**: clients can whitelist specific IPs
 - **Ultra-low latency** (~100μs vs ~400ms for ALB)
 - TLS termination supported (offload to NLB)
 - Can register **ALB as a target** (chain NLB → ALB)
@@ -101,7 +101,7 @@ Routes the same client to the same target using a cookie.
 | GWLB | **OFF** | Charged when enabled |
 | CLB | OFF | Free when enabled |
 
-> **📌 Tip:** ALB cross-zone is on by default and free. NLB/GWLB is off by default — enabling it costs extra per AZ data transfer. This difference is tested.
+> **📌 Tip:** ALB cross-zone is on by default and free. NLB/GWLB is off by default, enabling it costs extra per AZ data transfer. This difference is tested.
 
 ### Zonal DNS
 
@@ -109,7 +109,7 @@ NLB provides a zonal DNS name per AZ (`<az>.<name>.<region>.elb.amazonaws.com`) 
 
 ---
 
-## GWLB — Gateway Load Balancer
+## GWLB: Gateway Load Balancer
 
 Used to deploy, scale, and manage third-party virtual network appliances (firewalls, IDS/IPS, DLP, packet inspection).
 
@@ -123,10 +123,10 @@ Client → GWLB (entry point)
 ```
 
 - Uses **GENEVE** encapsulation protocol (not HTTP)
-- Traffic is transparent to source/destination — no re-IP needed
+- Traffic is transparent to source/destination: no re-IP needed
 - Target group: virtual appliances (EC2 instances)
 
-> **📌 Tip:** If the exam mentions "inline traffic inspection," "bump-in-the-wire," or "third-party firewall/IDS in AWS" — the answer is **GWLB**.
+> **📌 Tip:** If the exam mentions "inline traffic inspection," "bump-in-the-wire," or "third-party firewall/IDS in AWS", the answer is **GWLB**.
 
 ---
 
@@ -142,7 +142,7 @@ Maintains a desired number of EC2 instances, replacing unhealthy ones and scalin
 | Versioning | **Yes** (multiple versions) | No |
 | Multiple instance types | **Yes** (mixed instances) | No |
 | Spot + On-Demand mix | **Yes** | Limited |
-| Required for | Latest EC2 features | — |
+| Required for | Latest EC2 features | n/a |
 
 Always use **Launch Templates** for new ASGs.
 
@@ -207,8 +207,8 @@ Hook timeout: 1 hour default (max 48h). Complete with `complete-lifecycle-action
 
 Rolling update mechanism to replace ASG instances after changing launch template.
 
-- Set **minimum healthy percentage** (e.g., 90%) — ASG maintains this during refresh
-- Set **warm-up time** — time to wait before counting new instance as healthy
+- Set **minimum healthy percentage** (e.g., 90%): ASG maintains this during refresh
+- Set **warm-up time**: time to wait before counting new instance as healthy
 - Supports automatic rollback on health check failures
 
 ```bash
@@ -229,4 +229,4 @@ aws autoscaling start-instance-refresh \
 | GWLB for CDN/caching | GWLB is for **inline traffic inspection** (firewalls, IDS) |
 | Cross-zone is free on NLB | Cross-zone on NLB is **charged** when enabled |
 | ASG replaces on EC2 health check failure | Only if **ELB health check is enabled** will app-level failures trigger replacement |
-| Launch Configuration is current best practice | Use **Launch Templates** — LC is legacy |
+| Launch Configuration is current best practice | Use **Launch Templates**: LC is legacy |

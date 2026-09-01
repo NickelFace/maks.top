@@ -11,7 +11,7 @@ lang_pair: "/kb/ru/text-processing/"
 ---
 
 <div class="intro-card">
-Linux text processing tools: <strong>grep</strong> (search), <strong>awk</strong> (fields and programs), <strong>sed</strong> (stream editor), <strong>cut / sort / uniq / xargs</strong> — the building blocks of any pipe pipeline.
+Linux text processing tools: <strong>grep</strong> (search), <strong>awk</strong> (fields and programs), <strong>sed</strong> (stream editor), <strong>cut / sort / uniq / xargs</strong>, the building blocks of any pipe pipeline.
 </div>
 
 ## grep
@@ -125,7 +125,7 @@ Built-in awk variables: `NR` (line number) · `NF` (field count) · `FS` (input 
 ## cut, sort, uniq, xargs
 
 <div class="ref-panel">
-<div class="ref-panel-head">cut — field extraction</div>
+<div class="ref-panel-head">cut: field extraction</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -177,7 +177,7 @@ Built-in awk variables: `NR` (line number) · `NF` (field count) · `FS` (input 
 </div>
 
 <div class="ref-panel">
-<div class="ref-panel-head">xargs — argument passing</div>
+<div class="ref-panel-head">xargs: argument passing</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>

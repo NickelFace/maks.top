@@ -11,7 +11,7 @@ lang_pair: "/posts/aws/ru/aws-saa-6-01-rds-aurora/"
 
 ## RDS Engines Overview
 
-Amazon RDS is a **managed relational database** service — AWS handles patching, backups, and hardware. You still choose the engine and size.
+Amazon RDS is a **managed relational database** service, AWS handles patching, backups, and hardware. You still choose the engine and size.
 
 | Engine | Notes |
 |---|---|
@@ -33,10 +33,10 @@ Multi-AZ creates a **synchronous standby** replica in a different AZ. It is an H
 | Property | Value |
 |---|---|
 | Replication | Synchronous (zero data loss) |
-| Standby readable? | No — it only serves failover |
+| Standby readable? | No: it only serves failover |
 | Failover trigger | AZ outage, instance failure, manual reboot with failover |
 | Failover time | ~60–120 seconds |
-| Endpoint | DNS endpoint stays the same — apps reconnect automatically |
+| Endpoint | DNS endpoint stays the same: apps reconnect automatically |
 | Read scaling | Not supported via standby |
 
 > **📌 Tip:** Multi-AZ ≠ read scaling. To scale reads, use Read Replicas. The exam will try to trick you here.
@@ -45,18 +45,18 @@ Multi-AZ creates a **synchronous standby** replica in a different AZ. It is an H
 
 ## Read Replicas (Read Scaling)
 
-Read Replicas use **asynchronous replication** — slight lag is possible (eventual consistency for reads).
+Read Replicas use **asynchronous replication**; slight lag is possible (eventual consistency for reads).
 
 | Property | Value |
 |---|---|
 | Max replicas | 5 per source (15 for Aurora) |
 | Scope | Same region, cross-region, or cross-account |
-| Readable? | Yes — direct reads via replica endpoint |
+| Readable? | Yes: direct reads via replica endpoint |
 | Promote | Can be promoted to a standalone DB (breaks replication) |
 | Cross-region replica | Creates its own automated backups; extra cost |
-| Multi-AZ source | Can create Read Replicas from a Multi-AZ source — replication from standby (no impact on primary) |
+| Multi-AZ source | Can create Read Replicas from a Multi-AZ source: replication from standby (no impact on primary) |
 
-A **Read Replica can itself be Multi-AZ** — this is a common exam distractor.
+A **Read Replica can itself be Multi-AZ**; this is a common exam distractor.
 
 ---
 
@@ -70,7 +70,7 @@ RDS Proxy sits between your application and the database and maintains a **conne
 | Auth | IAM authentication + Secrets Manager (no hardcoded passwords) |
 | Connection pooling | Reduces DB overhead from burst connections |
 | Failover | Proxy reduces failover time by ~66% (keeps connections warm) |
-| Lambda use case | Lambda functions create many short-lived connections — Proxy prevents DB exhaustion |
+| Lambda use case | Lambda functions create many short-lived connections: Proxy prevents DB exhaustion |
 | VPC-only | RDS Proxy is never publicly accessible |
 
 > **📌 Tip:** Any exam scenario involving Lambda + RDS and connection overload → RDS Proxy is the answer.
@@ -87,7 +87,7 @@ RDS Proxy sits between your application and the database and maintains a **conne
 
 ### Manual Snapshots
 - Taken any time, retained **until you delete them**
-- Can be copied cross-region (useful for DR) — encrypted snapshots remain encrypted
+- Can be copied cross-region (useful for DR), encrypted snapshots remain encrypted
 - Restoring from snapshot creates a **new DB instance**
 
 > **📌 Tip:** Automated backups are deleted when you delete the DB (unless you choose to keep a final snapshot). Manual snapshots persist forever.
@@ -128,7 +128,7 @@ Unencrypted DB → cannot enable encryption in-place. Workaround: take snapshot 
 
 ## Aurora Architecture
 
-Aurora is AWS's re-engineered relational engine — MySQL and PostgreSQL compatible, but with a fundamentally different storage layer.
+Aurora is AWS's re-engineered relational engine, MySQL and PostgreSQL compatible, but with a fundamentally different storage layer.
 
 | Property | Aurora | Standard RDS |
 |---|---|---|
@@ -140,7 +140,7 @@ Aurora is AWS's re-engineered relational engine — MySQL and PostgreSQL compati
 | Read replicas | Up to 15 | Up to 5 |
 | Cost | ~20% more than RDS per unit | Baseline |
 
-> **📌 Tip:** Aurora storage is shared — all instances in the cluster read from the same volume. Adding a read replica does not copy data.
+> **📌 Tip:** Aurora storage is shared, all instances in the cluster read from the same volume. Adding a read replica does not copy data.
 
 ---
 
@@ -166,17 +166,17 @@ Aurora is AWS's re-engineered relational engine — MySQL and PostgreSQL compati
 
 ## Aurora Serverless v2
 
-- No fixed instance size — compute scales in **ACU (Aurora Capacity Units)** increments
+- No fixed instance size: compute scales in **ACU (Aurora Capacity Units)** increments
 - You set min and max ACUs (e.g., 0.5 – 128 ACU)
 - Scales **within seconds** (v1 scaled in minutes with a cold start)
-- Pay per ACU-second — cost-effective for unpredictable or spiky workloads
+- Pay per ACU-second: cost-effective for unpredictable or spiky workloads
 - Full Aurora feature set including Multi-AZ, Global, read replicas
 
 ---
 
 ## Aurora Multi-Master
 
-- Multiple writer instances — all can accept writes simultaneously
+- Multiple writer instances: all can accept writes simultaneously
 - Conflict resolution: first-write-wins
 - Rare on the exam; typically used for continuous write availability requirements
 
@@ -188,11 +188,11 @@ Aurora is AWS's re-engineered relational engine — MySQL and PostgreSQL compati
 
 | Trap | Correct answer |
 |---|---|
-| Multi-AZ for read scaling | Wrong — use Read Replicas |
-| Read Replica for HA failover | Wrong — use Multi-AZ |
+| Multi-AZ for read scaling | Wrong: use Read Replicas |
+| Read Replica for HA failover | Wrong: use Multi-AZ |
 | Lambda + RDS connection exhaustion | RDS Proxy |
-| Aurora storage per instance | Wrong — storage is a shared cluster volume |
+| Aurora storage per instance | Wrong: storage is a shared cluster volume |
 | Encrypt existing unencrypted RDS | Snapshot → copy with encryption → restore |
 | RPO < 1s cross-region | Aurora Global Database |
 | Minimum backup retention | 1 day (0 disables backups entirely) |
-| Read Replicas can be Multi-AZ | True — a replica can itself be Multi-AZ |
+| Read Replicas can be Multi-AZ | True: a replica can itself be Multi-AZ |

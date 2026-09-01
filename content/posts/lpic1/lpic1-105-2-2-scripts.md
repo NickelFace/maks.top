@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-105-2-2-scripts/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -26,14 +26,14 @@ Key files, terms, and utilities: `for`, `while`, `test`, `if`, `read`, `seq`, `e
 
 ## Shebang and Interpreter Selection
 
-The first line of a script begins with `#!` (shebang) followed by the absolute path to the interpreter. The kernel reads this line when executing the file and passes it to the named program. Without a shebang the script still runs, but through the current shell — which may not be the intended behavior.
+The first line of a script begins with `#!` (shebang) followed by the absolute path to the interpreter. The kernel reads this line when executing the file and passes it to the named program. Without a shebang the script still runs, but through the current shell; which may not be the intended behavior.
 
 Common options:
 
 ```bash
-#!/bin/bash       # Bash — the most common choice
+#!/bin/bash       # Bash - the most common choice
 #!/bin/sh         # POSIX-compatible shell (varies by distro)
-#!/usr/bin/env python3   # Python via env — more portable
+#!/usr/bin/env python3   # Python via env - more portable
 ```
 
 Bash scripts use the shell's built-in commands combined with Linux command-line utilities. Their full power comes from combining built-ins with external tools.
@@ -44,7 +44,7 @@ Bash scripts use the shell's built-in commands combined with Linux command-line 
 
 ### Variables
 
-Assignment — no spaces around the equals sign:
+Assignment. No spaces around the equals sign:
 
 ```bash
 NAME="Alice"
@@ -98,7 +98,7 @@ A script can return its own code with `exit N` (0–255).
 
 ### Two Forms of test
 
-The `test` builtin has two equivalent forms — as a command name or as square brackets where `test` is implied:
+The `test` builtin has two equivalent forms, as a command name or as square brackets where `test` is implied:
 
 ```bash
 $ test -d /etc
@@ -109,7 +109,7 @@ $ echo $?
 0
 ```
 
-Spaces inside `[ ]` are mandatory — after `[` and before `]`.
+Spaces inside `[ ]` are mandatory; after `[` and before `]`.
 
 ### File and Directory Tests
 
@@ -137,7 +137,7 @@ Assume the path is stored in `$VAR`:
 `-G "$VAR"`: owned by current user's effective group  
 `-N "$VAR"`: modified since last read
 
-Double quotes around the tested variable are not optional — an empty variable without quotes produces a syntax error because the required operand disappears.
+Double quotes around the tested variable are not optional, an empty variable without quotes produces a syntax error because the required operand disappears.
 
 ### Comparing Two Files
 
@@ -169,7 +169,7 @@ LANG=C
 `$NUM1 -eq $NUM2`: equal  
 `$NUM1 -ne $NUM2`: not equal
 
-Numeric tests work only with integers and only with these letter operators. Using `<` or `>` for numbers compares them as strings — and the `>` shell operator additionally redirects stdout: `test 1 > 2` creates a file named `2` and returns true.
+Numeric tests work only with integers and only with these letter operators. Using `<` or `>` for numbers compares them as strings, and the `>` shell operator additionally redirects stdout: `test 1 > 2` creates a file named `2` and returns true.
 
 ### Logical Modifiers
 
@@ -205,7 +205,7 @@ else
 fi
 ```
 
-The condition is any command — its exit code is tested. Closed with `fi` (if reversed).
+The condition is any command; its exit code is tested. Closed with `fi` (if reversed).
 
 ### case
 
@@ -245,7 +245,7 @@ shopt -s nocasematch    # enable
 shopt -u nocasematch    # disable
 ```
 
-Changes made inside a script do not affect the parent session — scripts run in a subshell.
+Changes made inside a script do not affect the parent session; scripts run in a subshell.
 
 ---
 
@@ -264,7 +264,7 @@ done
 
 `LIST` is a sequence of separated elements. The separator is defined by `IFS` (default: space, tab, newline).
 
-Example — check odd/even:
+Example. Check odd/even:
 
 ```bash
 #!/bin/bash
@@ -326,7 +326,7 @@ Family Album
 .vimrc
 ```
 
-The `mapfile` built-in reads the file and creates an array with one element per line — convenient when names can contain spaces.
+The `mapfile` built-in reads the file and creates an array with one element per line, convenient when names can contain spaces.
 
 ```bash
 #!/bin/bash
@@ -388,7 +388,7 @@ for i in $(seq 1 10); do echo "Step $i"; done
 
 ### exec
 
-Replaces the current shell process with the named command — no new process, no return:
+Replaces the current shell process with the named command, no new process, no return:
 
 ```bash
 exec /usr/bin/python3 myscript.py
@@ -568,7 +568,7 @@ shopt -u nocasematch    # disable
 12. How to ensure stable alphabetical ordering regardless of locale? → Set `LANG=C` before the comparison.
 13. What does `mapfile -t LIST < file` do? → Reads the file into array `LIST`, one line per element, trimming trailing newlines.
 14. Which `set` option exits the script on any error? → `-e`.
-15. Do `shopt` changes inside a script affect the parent shell? → No — the script runs in a subshell.
+15. Do `shopt` changes inside a script affect the parent shell? → No, the script runs in a subshell.
 16. What does `exec > /tmp/log.txt 2>&1` do in a script? → Redirects all subsequent stdout and stderr to the file without replacing the shell.
 17. How to send a one-line alert to root? → `echo "message" | mail -s "subject" root`.
 18. Why does the kernel ignore SUID on shell scripts? → Race condition risk during shebang interpretation.
@@ -577,7 +577,7 @@ shopt -u nocasematch    # disable
 
 ## Exercises
 
-### Exercise 1 — test for File Comparison
+### Exercise 1: test for File Comparison
 
 How do you use `test` to check whether the file in `$FROM` is newer than the file in `$TO`?
 
@@ -594,7 +594,7 @@ Returns exit code 0 if `$FROM` is newer. The `-nt` flag stands for "newer than".
 
 ---
 
-### Exercise 2 — Infinite while and Missing Increment
+### Exercise 2: Infinite while and Missing Increment
 
 This script should print numbers 0 through 9, but instead prints 0 forever. Fix it.
 
@@ -630,7 +630,7 @@ Alternative increment forms: `(( COUNTER++ ))` or `let COUNTER++`.
 
 ---
 
-### Exercise 3 — Different Sort Order on Two Machines
+### Exercise 3: Different Sort Order on Two Machines
 
 The same script sorts a list of usernames differently on two machines:
 
@@ -671,7 +671,7 @@ Machine 1 likely uses a UTF-8 locale (e.g., `en_US.UTF-8`) that interleaves uppe
 
 ---
 
-### Exercise 4 — Script Arguments into a Bash Array
+### Exercise 4: Script Arguments into a Bash Array
 
 How do you populate a Bash array with all the command-line arguments of a script?
 
@@ -688,13 +688,13 @@ Or equivalently:
 PARAMS=( $* )
 ```
 
-`"$@"` is preferred — it preserves each argument as a separate element even when arguments contain spaces. `$*` (unquoted) splits on `IFS` and can lose argument boundaries.
+`"$@"` is preferred; it preserves each argument as a separate element even when arguments contain spaces. `$*` (unquoted) splits on `IFS` and can lose argument boundaries.
 
 </details>
 
 ---
 
-### Exercise 5 — Why does `test 1 > 2` return true?
+### Exercise 5: Why does `test 1 > 2` return true?
 
 <details>
 <summary>Answer</summary>
@@ -710,7 +710,7 @@ For correct numeric comparison: `[ 1 -gt 2 ]`. For correct string comparison esc
 
 ---
 
-### Exercise 6 — Temporarily Change IFS to Newline
+### Exercise 6: Temporarily Change IFS to Newline
 
 How do you change the field separator to newline and restore it afterwards?
 
@@ -726,7 +726,7 @@ IFS=$'\n'
 IFS=$OLDIFS
 ```
 
-`$'\n'` is ANSI-C quoting in Bash — backslash sequences (`\n`, `\t`, etc.) are interpreted as the actual control characters. Without the `$`, the literal two-character string `\n` would be assigned.
+`$'\n'` is ANSI-C quoting in Bash, backslash sequences (`\n`, `\t`, etc.) are interpreted as the actual control characters. Without the `$`, the literal two-character string `\n` would be assigned.
 
 </details>
 

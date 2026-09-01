@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-104-2-filesystem-integrity/"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 101
+> **Exam weight: 2**. LPIC-1 v5, Exam 101
 
 ## What You Need to Know
 
@@ -22,7 +22,7 @@ Key utilities: `du`, `df`, `fsck`, `e2fsck`, `mke2fs`, `tune2fs`, `xfs_repair`, 
 
 ## Introduction
 
-Modern Linux filesystems are journaling: every operation is written to an internal journal before execution. If a kernel panic or power loss interrupts it, the journal allows recovery without filesystem corruption. Journaling has greatly reduced the need for manual checks — but they are still occasionally necessary.
+Modern Linux filesystems are journaling: every operation is written to an internal journal before execution. If a kernel panic or power loss interrupts it, the journal allows recovery without filesystem corruption. Journaling has greatly reduced the need for manual checks, but they are still occasionally necessary.
 
 ---
 
@@ -81,7 +81,7 @@ $ du -ah --exclude="*.bin"
 
 ## Free Space: df
 
-`df` reports at the filesystem level — lists all mounted filesystems with total size, used, available, usage percentage, and mount point.
+`df` reports at the filesystem level, lists all mounted filesystems with total size, used, available, usage percentage, and mount point.
 
 ### Basic Usage
 
@@ -99,21 +99,21 @@ udev       2.9G 0    2.9G  0%   /dev
 | `-h` | human-readable sizes |
 | `-i` | show inodes instead of blocks |
 | `-T` | add filesystem type column |
-| `-t TYPE` | filter — show only filesystems of this type |
-| `-x TYPE` | filter — exclude filesystems of this type |
+| `-t TYPE` | filter: show only filesystems of this type |
+| `-x TYPE` | filter: exclude filesystems of this type |
 | `--output=FIELDS` | specify columns and their order |
 
-**`-T` vs `-t` — important exam distinction:**
+**`-T` vs `-t`, important exam distinction:**
 
 - `-T` (uppercase) **adds** a Type column to output; all filesystems remain visible.
-- `-t TYPE` (lowercase) is a **filter** — only shows filesystems of the specified type.
+- `-t TYPE` (lowercase) is a **filter**: only shows filesystems of the specified type.
 
 ```bash
 df -ht ext4      # show only ext4
 df -hx tmpfs     # hide tmpfs
 ```
 
-**`--output`** — control columns and order:
+**`--output`**. Control columns and order:
 
 ```bash
 $ df -h --output=target,source,fstype,pcent
@@ -131,7 +131,7 @@ Inode fields: `itotal`, `iused`, `iavail`, `ipcent`.
 
 ### fsck
 
-`fsck` checks a filesystem for errors. **Never run on a mounted filesystem — data loss will result.**
+`fsck` checks a filesystem for errors. **Never run on a mounted filesystem; data loss will result.**
 
 ```bash
 fsck /dev/sdb1
@@ -147,7 +147,7 @@ fsck -t vfat /dev/sdc      # explicit type
 |---|---|
 | `-A` | check all filesystems in `/etc/fstab` |
 | `-C` | show progress bar (ext2/3/4 only) |
-| `-N` | dry run — show what would be done |
+| `-N` | dry run: show what would be done |
 | `-R` | with `-A`, skip the root filesystem |
 | `-V` | verbose output |
 
@@ -194,9 +194,9 @@ Output includes: label, UUID, block size, inode count, mount count, maximum moun
 
 **Error behaviour:**
 
-- `continue` — keep running normally (default)
-- `remount-ro` — remount read-only; stops writes, prevents further corruption
-- `panic` — trigger kernel panic
+- `continue`: keep running normally (default)
+- `remount-ro`: remount read-only; stops writes, prevents further corruption
+- `panic`: trigger kernel panic
 
 ### Converting ext2 to ext3
 
@@ -242,9 +242,9 @@ xfs_repair /dev/sdb1
 | `-l LOGDEV` | external log section device |
 | `-r RTDEV` | realtime section device |
 | `-m N` | limit memory use to N MB |
-| `-d` | dangerous mode — repair read-only mounted filesystem |
+| `-d` | dangerous mode: repair read-only mounted filesystem |
 | `-v` | verbose; repeat for more detail |
-| `-L` | zero out a corrupt log (last resort — may cause data loss) |
+| `-L` | zero out a corrupt log (last resort: may cause data loss) |
 
 `xfs_repair` cannot repair a filesystem with a dirty log without `-L`.
 
@@ -316,13 +316,13 @@ xfs_repair -l /dev/sdc1 -n /dev/sda1
 3. Which `tune2fs` option sets the check interval in days? → **`-i`**.
 4. Which `tune2fs` option sets the maximum mount count? → **`-c`** (lowercase).
 5. Difference between `-T` and `-t` in `df`? → `-T` adds a Type column; `-t TYPE` filters output to only that filesystem type.
-6. How to add a journal to ext2? → `tune2fs -j /dev/XXX` — converts to ext3.
+6. How to add a journal to ext2? → `tune2fs -j /dev/XXX`, converts to ext3.
 7. How to check XFS without making changes? → `xfs_repair -n /dev/XXX`.
 8. XFS equivalent of `fsck`? → **`xfs_repair`**.
 9. How to place an ext journal on a separate device? → `tune2fs -J device=/dev/XXX`.
 10. Which `du` option shows only files in the current directory (not subdirectories)? → **`-S`** (uppercase), often with `-d 0`.
 11. Default reserved space for root in new ext4? → **5%**.
-12. What does `xfs_repair -n` mean? → no modify — check only, no writes to disk.
+12. What does `xfs_repair -n` mean? → no modify, check only, no writes to disk.
 13. Difference between `-c` and `-C` in `tune2fs`? → `-c` sets the maximum mount count; `-C` sets the current counter value.
 14. What is `mount count` in `tune2fs -l`? → number of times the filesystem has been mounted; triggers `e2fsck` when it reaches maximum mount count.
 15. What does `-e remount-ro` do in `tune2fs`? → on filesystem error, remount read-only to stop further writes.
@@ -331,9 +331,9 @@ xfs_repair -l /dev/sdc1 -n /dev/sda1
 
 ## Exercises
 
-### Exercise 1 — Show only files in the current directory with du
+### Exercise 1: Show only files in the current directory with du
 
-Use `du` to check how much space files in the current directory take up — excluding subdirectories.
+Use `du` to check how much space files in the current directory take up, excluding subdirectories.
 
 <details>
 <summary>Answer</summary>
@@ -342,13 +342,13 @@ Use `du` to check how much space files in the current directory take up — excl
 du -Shd 0
 ```
 
-`-S` separates the current directory's accounting from its subdirectories. `-d 0` limits recursion depth to zero — no subdirectory lines in output. Without `-S`, the total would still include nested files, so both flags are needed together.
+`-S` separates the current directory's accounting from its subdirectories. `-d 0` limits recursion depth to zero, no subdirectory lines in output. Without `-S`, the total would still include nested files, so both flags are needed together.
 
 </details>
 
 ---
 
-### Exercise 2 — df filtered to ext4 with custom columns
+### Exercise 2: df filtered to ext4 with custom columns
 
 Display information for each ext4 filesystem. Columns in order: device, mount point, total inodes, available inodes, usage percentage.
 
@@ -359,13 +359,13 @@ Display information for each ext4 filesystem. Columns in order: device, mount po
 df -t ext4 --output=source,target,itotal,iavail,pcent
 ```
 
-`-t ext4` filters by type. `--output=...` sets the column list and order. `pcent` shows the percentage of **used** space — there is no separate "free percentage" field.
+`-t ext4` filters by type. `--output=...` sets the column list and order. `pcent` shows the percentage of **used** space; there is no separate "free percentage" field.
 
 </details>
 
 ---
 
-### Exercise 3 — e2fsck in non-interactive mode
+### Exercise 3: e2fsck in non-interactive mode
 
 Run `e2fsck` on `/dev/sdc1` non-interactively, automatically fixing most errors.
 
@@ -382,7 +382,7 @@ With `-p`, the tool fixes what it can without human input. If it encounters an e
 
 ---
 
-### Exercise 4 — Convert ext2 to ext3, reset mount counter, set label
+### Exercise 4: Convert ext2 to ext3, reset mount counter, set label
 
 `/dev/sdb1` is ext2. Convert to ext3, reset the mount counter, and change the label to `UserData`.
 
@@ -393,9 +393,9 @@ With `-p`, the tool fixes what it can without human input. If it encounters an e
 tune2fs -j -C 0 -L UserData /dev/sdb1
 ```
 
-- `-j` — add journal (ext2 → ext3 conversion)
-- `-C 0` (uppercase) — reset current mount count to 0
-- `-L UserData` — set label
+- `-j`: add journal (ext2 → ext3 conversion)
+- `-C 0` (uppercase): reset current mount count to 0
+- `-L UserData`: set label
 
 Case matters: `-c` (lowercase) sets the maximum mount count; `-C` (uppercase) sets the current counter value.
 
@@ -403,7 +403,7 @@ Case matters: `-c` (lowercase) sets the maximum mount count; `-C` (uppercase) se
 
 ---
 
-### Exercise 5 — Check XFS without making any changes
+### Exercise 5: Check XFS without making any changes
 
 Check an XFS filesystem for errors without performing any repair.
 
@@ -420,14 +420,14 @@ xfs_repair -n /dev/sdb1
 
 ---
 
-### Exercise 6 — Effect of tune2fs -c 9 when mount count is 8
+### Exercise 6: Effect of tune2fs -c 9 when mount count is 8
 
 An ext4 filesystem on `/dev/sda1` has `Mount count: 8` and `Maximum mount count: -1`. What happens on the next boot if you run `tune2fs -c 9 /dev/sda1`?
 
 <details>
 <summary>Answer</summary>
 
-The command sets the maximum mount count to 9. Since the current count is 8, on the next boot the count will reach 9 — equal to the maximum — and the system will automatically run a filesystem check.
+The command sets the maximum mount count to 9. Since the current count is 8, on the next boot the count will reach 9: equal to the maximum, and the system will automatically run a filesystem check.
 
 The original value of `-1` meant the mount-count check was disabled entirely.
 
@@ -435,7 +435,7 @@ The original value of `-1` meant the mount-count check was disabled entirely.
 
 ---
 
-### Exercise 7 — Calculate file size from du output
+### Exercise 7: Calculate file size from du output
 
 `du -h` output:
 
@@ -464,7 +464,7 @@ du -Sh
 
 ---
 
-### Exercise 8 — Effect of tune2fs -j -J device= -i 30d
+### Exercise 8: Effect of tune2fs -j -J device= -i 30d
 
 What happens to the ext2 filesystem on `/dev/sdb1` when you run:
 
@@ -477,15 +477,15 @@ tune2fs -j /dev/sdb1 -J device=/dev/sdc1 -i 30d
 
 A journal is added, converting `/dev/sdb1` to ext3. The journal is stored on the separate device `/dev/sdc1`. The filesystem will be automatically checked every 30 days.
 
-- `-j` — creates the journal, upgrades to ext3
-- `-J device=` — places the journal on a separate disk (performance and reliability)
-- `-i 30d` — sets a 30-day automatic check interval
+- `-j`: creates the journal, upgrades to ext3
+- `-J device=`: places the journal on a separate disk (performance and reliability)
+- `-i 30d`: sets a 30-day automatic check interval
 
 </details>
 
 ---
 
-### Exercise 9 — Check XFS with external log section
+### Exercise 9: Check XFS with external log section
 
 Check XFS `/dev/sda1` whose log section is on `/dev/sdc1`, without making any changes.
 
@@ -504,7 +504,7 @@ xfs_repair -l /dev/sdc1 -n /dev/sda1
 
 ---
 
-### Exercise 10 — Difference between -T and -t in df
+### Exercise 10: Difference between -T and -t in df
 
 What is the difference between the `-T` and `-t` options of `df`?
 
@@ -512,7 +512,7 @@ What is the difference between the `-T` and `-t` options of `df`?
 <summary>Answer</summary>
 
 - `-T` (uppercase) **adds** a filesystem type column to output. All filesystems remain in the output.
-- `-t TYPE` (lowercase) is a **filter** — only filesystems of the specified type are shown.
+- `-t TYPE` (lowercase) is a **filter**: only filesystems of the specified type are shown.
 
 The complementary flag `-x TYPE` excludes filesystems of the specified type.
 

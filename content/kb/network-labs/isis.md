@@ -18,7 +18,7 @@ Basic connectivity without traffic engineering. Three areas: 49.0001, 49.0002, 4
 
 ## Configurations
 
-### R1 — L1 only (area 49.0003)
+### R1: L1 only (area 49.0003)
 
 ```
 interface Ethernet0/0
@@ -36,7 +36,7 @@ router isis
  is-type level-1
 ```
 
-### R2 — L1/L2 boundary (area 49.0003)
+### R2: L1/L2 boundary (area 49.0003)
 
 ```
 interface Ethernet0/0
@@ -60,7 +60,7 @@ router isis
  net 49.0003.0000.0000.0002.00
 ```
 
-### R3 — L1 only (area 49.0003)
+### R3: L1 only (area 49.0003)
 
 ```
 interface Ethernet0/0
@@ -80,7 +80,7 @@ router isis
  is-type level-1
 ```
 
-### R4 — L1/L2 boundary (area 49.0003)
+### R4: L1/L2 boundary (area 49.0003)
 
 ```
 interface Ethernet0/0
@@ -104,7 +104,7 @@ router isis
  net 49.0003.0000.0000.0004.00
 ```
 
-### R5 — L2 only (area 49.0004)
+### R5: L2 only (area 49.0004)
 
 ```
 interface Ethernet0/0
@@ -117,7 +117,7 @@ router isis
  net 49.0004.0000.0000.0005.00
 ```
 
-### R6 — L1 only (area 49.0001)
+### R6: L1 only (area 49.0001)
 
 ```
 interface Ethernet0/0
@@ -131,7 +131,7 @@ router isis
  is-type level-1
 ```
 
-### R7 — L1/L2 boundary (area 49.0001)
+### R7: L1/L2 boundary (area 49.0001)
 
 ```
 interface Ethernet0/0
@@ -156,7 +156,7 @@ router isis
  net 49.0001.0000.0000.0007.00
 ```
 
-### R8 — L1/L2 boundary (area 49.0002)
+### R8: L1/L2 boundary (area 49.0002)
 
 ```
 interface Ethernet0/0
@@ -175,7 +175,7 @@ router isis
  net 49.0002.0000.0000.0008.00
 ```
 
-### R9 — L1 only (area 49.0002)
+### R9: L1 only (area 49.0002)
 
 ```
 interface Ethernet0/0

@@ -18,10 +18,10 @@ Finding and fixing connectivity issues in a multi-tier network. Several intentio
 2. Identify unreachable hosts
 3. Apply the Cisco methodology: Physical → Data Link → Network
 4. Use diagnostic tools:
-   - `show ip interface brief` — interface status
-   - `show ip route` — routing table
-   - `ping` / `traceroute` — connectivity verification
-   - `show cdp neighbors` — topology discovery
+   - `show ip interface brief`: interface status
+   - `show ip route`: routing table
+   - `ping` / `traceroute`: connectivity verification
+   - `show cdp neighbors`: topology discovery
 5. Fix the identified problems
 6. Verify full connectivity
 

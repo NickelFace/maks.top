@@ -18,8 +18,8 @@ An IPv4 address is a 32-bit number written as four decimal octets:
 ```
 
 The address is divided into two parts:
-- **Network portion (N)** — bits covered by ones in the mask
-- **Host portion (H)** — bits covered by zeros in the mask
+- **Network portion (N)**: bits covered by ones in the mask
+- **Host portion (H)**: bits covered by zeros in the mask
 
 In an address:
 - All H bits = 0 → **network address**
@@ -35,10 +35,10 @@ In an address:
 | A | 1–126 | /8 (255.0.0.0) | 126 | 16,777,214 |
 | B | 128–191 | /16 (255.255.0.0) | 16,384 | 65,534 |
 | C | 192–223 | /24 (255.255.255.0) | 2,097,152 | 254 |
-| D | 224–239 | — | Multicast | — |
-| E | 240–255 | — | Reserved | — |
+| D | 224–239 | n/a | Multicast | n/a |
+| E | 240–255 | n/a | Reserved | n/a |
 
-> **📌 Important:** 127.x.x.x — loopback; 0.0.0.0 and 255.x.x.x — cannot be assigned to hosts.
+> **📌 Important:** 127.x.x.x, loopback; 0.0.0.0 and 255.x.x.x; cannot be assigned to hosts.
 
 ---
 
@@ -87,7 +87,7 @@ Three ways to write the same mask:
 | /31 | 255.255.255.254 | 0* |
 | /32 | 255.255.255.255 | 1 (host) |
 
-> **💡 Tip:** /30 (2 hosts) — standard for WAN point-to-point links. /31 — per RFC 3021 for p2p without network and broadcast addresses. /32 — loopback or host route.
+> **💡 Tip:** /30 (2 hosts), standard for WAN point-to-point links. /31: per RFC 3021 for p2p without network and broadcast addresses. /32, loopback or host route.
 
 ---
 
@@ -106,11 +106,11 @@ Three ways to write the same mask:
 
 **Given:** address 192.168.100.70/26. Determine the network, broadcast, and host range.
 
-**Step 1** — Mask /26 = 255.255.255.192, block size = 256 − 192 = **64**
+**Step 1**: Mask /26 = 255.255.255.192, block size = 256 − 192 = **64**
 
-**Step 2** — Networks: .0, .64, .128, .192
+**Step 2**: Networks: .0, .64, .128, .192
 
-**Step 3** — 70 falls in subnet **.64** (64 ≤ 70 < 128)
+**Step 3**: 70 falls in subnet **.64** (64 ≤ 70 < 128)
 
 | Network address | 192.168.100.64 |
 |---|---|
@@ -121,7 +121,7 @@ Three ways to write the same mask:
 
 ---
 
-## VLSM — Variable Length Subnet Masking
+## VLSM: Variable Length Subnet Masking
 
 VLSM allows using different prefix lengths within a single address space.
 
@@ -166,9 +166,9 @@ Router# traceroute 10.0.0.1
 
 | Resource | Description |
 |---|---|
-| [RFC 1918 — Private Address Space](https://www.rfc-editor.org/rfc/rfc1918) | RFC standard for private IPv4 ranges: 10.x, 172.16-31.x, 192.168.x |
-| [Subnetting — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/subnetting-in-binary) | Complete subnetting course with examples |
-| [VLSM — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/variable-length-subnet-masking-vlsm) | Variable Length Subnet Masking: principles and practice |
-| [Jeremy's IT Lab — IPv4 Addressing (YouTube)](https://www.youtube.com/watch?v=i3WKlVdFhJc) | IPv4 addressing and subnetting from the Free CCNA series |
-| [Wildcard Masks — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/wildcard-mask) | Wildcard masks: difference from subnet mask, use in ACL and OSPF |
-| [Subnet Calculator — Cisco](https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html) | Cisco guide on IP subnetting with calculation examples |
+| [RFC 1918: Private Address Space](https://www.rfc-editor.org/rfc/rfc1918) | RFC standard for private IPv4 ranges: 10.x, 172.16-31.x, 192.168.x |
+| [Subnetting (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/subnetting-in-binary) | Complete subnetting course with examples |
+| [VLSM (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/variable-length-subnet-masking-vlsm) | Variable Length Subnet Masking: principles and practice |
+| [Jeremy's IT Lab: IPv4 Addressing (YouTube)](https://www.youtube.com/watch?v=i3WKlVdFhJc) | IPv4 addressing and subnetting from the Free CCNA series |
+| [Wildcard Masks (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/wildcard-mask) | Wildcard masks: difference from subnet mask, use in ACL and OSPF |
+| [Subnet Calculator (Cisco)](https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html) | Cisco guide on IP subnetting with calculation examples |

@@ -25,17 +25,17 @@ Cisco IOS cheat sheet for <strong>First Hop Redundancy Protocols</strong>: HSRP 
 
 ---
 
-## HSRP — Hot Standby Router Protocol
+## HSRP: Hot Standby Router Protocol
 
 <div class="ref-panel">
-<div class="ref-panel-head">HSRP — Router 1 (Active)</div>
+<div class="ref-panel-head">HSRP: Router 1 (Active)</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">int fa0/1</td><td class="desc">Interface facing the LAN</td></tr>
 <tr><td class="mono">ip address 192.168.1.2 255.255.255.0</td><td class="desc">Physical IP of this router</td></tr>
-<tr><td class="mono">standby 1 ip 192.168.1.1</td><td class="desc">Virtual IP (same on both routers) — default gateway for hosts</td></tr>
+<tr><td class="mono">standby 1 ip 192.168.1.1</td><td class="desc">Virtual IP (same on both routers): default gateway for hosts</td></tr>
 <tr><td class="mono">standby 1 priority 110</td><td class="desc">Set priority (default 100; higher = preferred active)</td></tr>
 <tr><td class="mono">standby 1 preempt</td><td class="desc">Take over active role when priority is higher</td></tr>
 <tr><td class="mono">standby 1 preempt delay minimum 300</td><td class="desc">Wait 300 s before preempting (let routing protocols converge)</td></tr>
@@ -47,7 +47,7 @@ Cisco IOS cheat sheet for <strong>First Hop Redundancy Protocols</strong>: HSRP 
 </div>
 
 <div class="ref-panel">
-<div class="ref-panel-head">HSRP — Router 2 (Standby) with Interface Tracking</div>
+<div class="ref-panel-head">HSRP: Router 2 (Standby) with Interface Tracking</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -65,7 +65,7 @@ Cisco IOS cheat sheet for <strong>First Hop Redundancy Protocols</strong>: HSRP 
 
 ---
 
-## VRRP — Virtual Router Redundancy Protocol
+## VRRP: Virtual Router Redundancy Protocol
 
 Same commands as HSRP but replace `standby` with `vrrp`. Preemption is **on by default** in VRRP.
 
@@ -85,7 +85,7 @@ Same commands as HSRP but replace `standby` with `vrrp`. Preemption is **on by d
 
 ---
 
-## GLBP — Gateway Load Balancing Protocol
+## GLBP: Gateway Load Balancing Protocol
 
 GLBP elects one **AVG** (Active Virtual Gateway) and multiple **AVF** (Active Virtual Forwarder). Each AVF serves a subset of hosts → actual load balancing.
 

@@ -9,9 +9,9 @@ page_lang: "en"
 lang_pair: "/posts/aws/ru/aws-saa-4-02-vpc-advanced/"
 ---
 
-## VPC Advanced — Connectivity
+## VPC Advanced: Connectivity
 
-This article covers how VPCs connect to each other and to on-premises networks — a major focus area of SAA-C03.
+This article covers how VPCs connect to each other and to on-premises networks, a major focus area of SAA-C03.
 
 ---
 
@@ -26,7 +26,7 @@ Access AWS services privately without traffic leaving the AWS network (no IGW, N
 | Supported services | **S3 and DynamoDB only** |
 | Cost | **Free** |
 | Implementation | Entry in **route table** |
-| Scope | Regional — no AZ preference |
+| Scope | Regional: no AZ preference |
 | DNS | No DNS change; route table directs traffic |
 
 ```
@@ -62,8 +62,8 @@ Connects two VPCs using private IP addresses (same or different region, same or 
 | Property | Value |
 |---|---|
 | Routing | Both VPCs must add routes to each other |
-| Overlapping CIDRs | **Not allowed** — peering fails if CIDRs overlap |
-| Transitivity | **NOT transitive** — A↔B, B↔C does not give A↔C |
+| Overlapping CIDRs | **Not allowed**: peering fails if CIDRs overlap |
+| Transitivity | **NOT transitive**: A↔B, B↔C does not give A↔C |
 | Cross-region | Supported |
 | Cross-account | Supported |
 | Bandwidth | No bandwidth limit; charged as inter-AZ or inter-region data transfer |
@@ -81,13 +81,13 @@ VPC-A ←→ VPC-B ←→ VPC-C
 
 ## Transit Gateway (TGW)
 
-Hub-and-spoke model — a regional router connecting VPCs, VPNs, and Direct Connect attachments.
+Hub-and-spoke model, a regional router connecting VPCs, VPNs, and Direct Connect attachments.
 
 | Feature | Detail |
 |---|---|
 | Attachments | VPC, Site-to-Site VPN, Direct Connect Gateway, TGW peering |
 | Routing | Each attachment associated with a **TGW route table** |
-| Transitivity | **Supports transitive routing** — key differentiator from VPC Peering |
+| Transitivity | **Supports transitive routing**: key differentiator from VPC Peering |
 | Cross-region | TGW peering across regions |
 | Multicast | Supported (unique among AWS networking services) |
 | Bandwidth | Up to 50 Gbps per attachment |
@@ -101,7 +101,7 @@ Prod-RT:      knows Prod-VPC, Corp-VPN only (isolated from Dev)
 Dev-RT:       knows Dev-VPC only
 ```
 
-This allows granular segmentation — dev VPCs don't see prod traffic.
+This allows granular segmentation; dev VPCs don't see prod traffic.
 
 > **📌 Tip:** TGW is the answer when the question involves connecting many VPCs, or when "transitive routing" is needed. VPC Peering for simple 2-VPC direct connection. TGW for hub-and-spoke at scale.
 
@@ -115,21 +115,21 @@ Encrypted IPSec tunnel between your on-premises network and AWS VPC.
 |---|---|
 | **Virtual Private Gateway (VGW)** | AWS-side VPN endpoint, attached to VPC |
 | **Customer Gateway (CGW)** | On-premises VPN device (physical or software) |
-| **VPN Connection** | Two IPSec tunnels (HA — both must be configured on CGW) |
+| **VPN Connection** | Two IPSec tunnels (HA: both must be configured on CGW) |
 
 **Routing options:**
 - **Static:** Manually define routes on both sides
-- **BGP (Dynamic):** Preferred — supports route propagation
+- **BGP (Dynamic):** Preferred: supports route propagation
 
 | Feature | Virtual Private Gateway | Transit Gateway |
 |---|---|---|
 | VPCs supported | One VPC per VGW | Many VPCs via TGW |
 | BGP | Supported | Supported |
-| ECMP | Not supported | **Supported** — aggregate bandwidth across tunnels |
+| ECMP | Not supported | **Supported**: aggregate bandwidth across tunnels |
 
 **VPN throughput:** each tunnel = up to 1.25 Gbps. With TGW + ECMP, aggregate multiple tunnels.
 
-> **📌 Tip:** VPN is quick to set up (minutes to hours), encrypted by default, but uses the public internet — latency and bandwidth vary. Direct Connect is dedicated but takes weeks to provision.
+> **📌 Tip:** VPN is quick to set up (minutes to hours), encrypted by default, but uses the public internet: latency and bandwidth vary. Direct Connect is dedicated but takes weeks to provision.
 
 ---
 
@@ -193,7 +193,7 @@ Consumer VPC ──Interface Endpoint (ENI)──→ NLB in Provider VPC
 **Use cases:**
 - Share a SaaS-style service across accounts/VPCs
 - AWS services that use Interface Endpoints (SQS, SNS, etc.) are powered by PrivateLink internally
-- Secure marketplace integrations — no peering, no route table changes
+- Secure marketplace integrations: no peering, no route table changes
 
 > **📌 Tip:** PrivateLink is the answer when you need to expose a service to many consumers without giving them access to the whole VPC. Peering grants full CIDR-level access; PrivateLink exposes only one service endpoint.
 
@@ -218,9 +218,9 @@ Consumer VPC ──Interface Endpoint (ENI)──→ NLB in Provider VPC
 
 | Trap | Correct Answer |
 |---|---|
-| VPC Peering is transitive | Peering is **NOT transitive** — need direct connection for each pair |
-| DX is encrypted | **DX is NOT encrypted** by default — add VPN or MACsec |
-| TGW does NOT support transitive routing | TGW **does** support transitive routing — main advantage over peering |
-| Gateway Endpoints cost money | **Free** — only Interface Endpoints cost money |
+| VPC Peering is transitive | Peering is **NOT transitive**: need direct connection for each pair |
+| DX is encrypted | **DX is NOT encrypted** by default: add VPN or MACsec |
+| TGW does NOT support transitive routing | TGW **does** support transitive routing: main advantage over peering |
+| Gateway Endpoints cost money | **Free**: only Interface Endpoints cost money |
 | VPN over DX vs VPN via internet | VPN over DX = private + encrypted; VPN via internet = encrypted but variable latency |
 | PrivateLink vs Peering | PrivateLink exposes one service; Peering exposes entire VPC CIDR |

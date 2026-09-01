@@ -15,7 +15,7 @@ lang_pair: "/posts/neteng/ru/neteng-09-ospf-filter/"
 
 Goal: Configure OSPF in the Moscow office, divide the network into areas, and configure inter-area filtering.
 
-1. R14–R15 are in area 0 — backbone
+1. R14–R15 are in area 0: backbone
 2. **R12–R13 are in area 10. They must also receive the default route**
 3. R19 is in area 101 and receives only the default route
 4. R20 is in area 102 and receives all routes except routes to area 101 networks
@@ -25,7 +25,7 @@ Goal: Configure OSPF in the Moscow office, divide the network into areas, and co
 
 ---
 
-## R14–R15 — area 0 (backbone)
+## R14–R15: area 0 (backbone)
 
 The topology crashed and EVE-NG froze, so reconfiguring everything from scratch.
 
@@ -122,7 +122,7 @@ copy running-config startup-config
 
 ---
 
-## R12–R13 — area 10 (default route required)
+## R12–R13: area 10 (default route required)
 
 <details>
 <summary>R12</summary>
@@ -190,10 +190,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Both routers receive a default route — confirmed in routing table:
+Both routers receive a default route, confirmed in routing table:
 
 <details>
-<summary>R12 — show ip route ospf</summary>
+<summary>R12: show ip route ospf</summary>
 <pre><code>
 R12#show ip route ospf
 Gateway of last resort is 10.10.10.17 to network 0.0.0.0
@@ -212,7 +212,7 @@ O IA     172.16.1.0/24 [110/30] via 10.10.10.17, 05:29:40, Ethernet0/2
 </details>
 
 <details>
-<summary>R13 — show ip route ospf</summary>
+<summary>R13: show ip route ospf</summary>
 <pre><code>
 R13#show ip route ospf
 Gateway of last resort is 10.10.10.21 to network 0.0.0.0
@@ -232,9 +232,9 @@ O IA     172.16.0.0/24 [110/30] via 10.10.10.21, 05:31:25, Ethernet0/3
 
 ---
 
-## R19 — area 101 (default route only)
+## R19: area 101 (default route only)
 
-Area 101 is configured as `stub no-summary` on R14, which suppresses all LSA type 3 advertisements — R19 receives only the default route injected by the ABR.
+Area 101 is configured as `stub no-summary` on R14, which suppresses all LSA type 3 advertisements: R19 receives only the default route injected by the ABR.
 
 <details>
 <summary>R19</summary>
@@ -259,7 +259,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R19 — show ip route ospf</summary>
+<summary>R19: show ip route ospf</summary>
 <pre><code>
 R19#show ip route ospf
 Gateway of last resort is 10.10.10.13 to network 0.0.0.0
@@ -270,7 +270,7 @@ O*IA  0.0.0.0/0 [110/11] via 10.10.10.13, 18:31:11, Ethernet0/0
 
 ---
 
-## R20 — area 102 (all routes except area 101)
+## R20: area 102 (all routes except area 101)
 
 R15 uses a prefix-list `PL1` with `distribute-list in` to block `10.10.10.12/30` (area 101) from being installed in its own routing table, and thus it is not redistributed further into area 102.
 
@@ -299,7 +299,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R20 — show ip route ospf</summary>
+<summary>R20: show ip route ospf</summary>
 <pre><code>
 R20#show ip route ospf
 Gateway of last resort is not set
@@ -315,7 +315,7 @@ O IA     172.16.1.0 [110/30] via 10.10.10.1, 00:31:46, Ethernet0/0
 </code></pre>
 </details>
 
-The 10.10.10.12/30 network (area 101) is absent from the table — objective achieved.
+The 10.10.10.12/30 network (area 101) is absent from the table, objective achieved.
 
 ---
 

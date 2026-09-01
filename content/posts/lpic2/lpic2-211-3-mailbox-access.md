@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-211-3-mailbox-access/"
 page_lang: "en"
 ---
 
-> **Exam topic 211.3** — Managing Mailbox Access (weight: 2). Covers configuring Dovecot IMAP/POP3, TLS setup, auth mechanisms, and Courier awareness.
+> **Exam topic 211.3**: Managing Mailbox Access (weight: 2). Covers configuring Dovecot IMAP/POP3, TLS setup, auth mechanisms, and Courier awareness.
 
 ---
 
@@ -22,7 +22,7 @@ page_lang: "en"
 | Data loss risk on client failure | Low (messages downloaded) | High (everything on server) |
 | Server disk usage | Low | Requires space for all messages from all users |
 
-Key difference: IMAP leaves the original on the server and downloads only a copy. POP3 takes the message from the server entirely — if a phone downloads mail via POP3, the computer won't see those messages.
+Key difference: IMAP leaves the original on the server and downloads only a copy. POP3 takes the message from the server entirely; if a phone downloads mail via POP3, the computer won't see those messages.
 
 ---
 
@@ -157,8 +157,8 @@ Example `/etc/pam.d/dovecot`:
 Auth mechanism is configured in `10-auth.conf` via `auth_mechanisms`.
 
 **Plaintext mechanisms** (safe only over SSL/TLS):
-- `PLAIN` — password sent in cleartext
-- `LOGIN` — similar to PLAIN, used by some clients
+- `PLAIN`: password sent in cleartext
+- `LOGIN`: similar to PLAIN, used by some clients
 
 **Non-plaintext (protected) mechanisms:**
 - `CRAM-MD5`, `DIGEST-MD5`, `SCRAM-SHA1`, `SCRAM-SHA-256`
@@ -181,7 +181,7 @@ By default, Dovecot forbids plaintext authentication without TLS. To allow it:
 disable_plaintext_auth = no
 ```
 
-> Allowing plaintext without TLS is insecure — passwords transmit in cleartext. This only makes sense if encryption is guaranteed at another layer.
+> Allowing plaintext without TLS is insecure, passwords transmit in cleartext. This only makes sense if encryption is guaranteed at another layer.
 
 ---
 
@@ -206,9 +206,9 @@ mail_location = mbox:~/mail:INBOX=/var/mail/%u
 > Maildir is preferred over mbox: no locking issues, resistant to corruption, works on network filesystems.
 
 maildir structure:
-- `new/` — new unread messages
-- `cur/` — read messages
-- `tmp/` — temporary files during delivery
+- `new/`: new unread messages
+- `cur/`: read messages
+- `tmp/`: temporary files during delivery
 
 ---
 
@@ -252,8 +252,8 @@ ssl_prefer_server_ciphers = yes
 ssl_dh_parameters_length = 2048
 ```
 
-`AES256+EECDH` — key exchange: Ephemeral Elliptic Curve Diffie-Hellman; encryption: AES-256.  
-`AES256+EDH` — same, but with RSA instead of elliptic curves.
+`AES256+EECDH`: key exchange: Ephemeral Elliptic Curve Diffie-Hellman; encryption: AES-256.
+`AES256+EDH`: same, but with RSA instead of elliptic curves.
 
 Alternative certificate generation via openssl:
 
@@ -298,7 +298,7 @@ service pop3-login {
 }
 ```
 
-`port = 0` disables the listener — the service will not accept connections on that port.
+`port = 0` disables the listener; the service will not accept connections on that port.
 
 ### Postfix Integration via UNIX Listener
 
@@ -459,7 +459,7 @@ Files from `conf.d/` are sorted by ASCII and read in that order. Files with smal
 
 | Pitfall | Rule |
 |---|---|
-| Non-plaintext mechanisms + PAM | Incompatible — PAM can only verify plaintext passwords |
+| Non-plaintext mechanisms + PAM | Incompatible: PAM can only verify plaintext passwords |
 | Non-plaintext mechanisms + MD5/DES hashes | Also incompatible |
 | `port = 0` | Disables the listener (does NOT set it to port 0) |
 | Key permissions | 0400 (root only); certificate 0440 (world readable) |

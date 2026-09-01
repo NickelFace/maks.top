@@ -9,7 +9,7 @@ page_lang: "en"
 lang_pair: "/posts/aws/ru/aws-saa-6-03-elasticache/"
 ---
 
-## Redis vs Memcached — Feature Comparison
+## Redis vs Memcached: Feature Comparison
 
 ElastiCache offers two engines. Knowing the difference is a guaranteed exam topic.
 
@@ -17,17 +17,17 @@ ElastiCache offers two engines. Knowing the difference is a guaranteed exam topi
 |---|---|---|
 | Data structures | Strings, Hash, List, Set, Sorted Set, Bitmap, HyperLogLog, Streams | String / simple key-value only |
 | Persistence | RDB snapshots + AOF (Append Only File) | None |
-| Replication | Yes — primary + read replicas | None |
+| Replication | Yes: primary + read replicas | None |
 | Multi-AZ + auto-failover | Yes | No |
 | Pub/Sub | Yes | No |
 | Lua scripting | Yes | No |
-| Cluster mode (sharding) | Yes — up to 500 nodes | Yes — horizontal sharding only |
-| RBAC / AUTH | Yes — Redis AUTH token, RBAC (6.x+) | SASL optional |
+| Cluster mode (sharding) | Yes: up to 500 nodes | Yes: horizontal sharding only |
+| RBAC / AUTH | Yes: Redis AUTH token, RBAC (6.x+) | SASL optional |
 | Backup/Restore | Yes | No |
 | Transactions | Yes (`MULTI/EXEC`) | No |
 | Geospatial commands | Yes | No |
 
-> **📌 Tip:** If the exam mentions any of: persistence, HA, replication, pub/sub, leaderboards, session store with HA — the answer is **Redis**. Memcached is only the answer when you need simple caching with multi-thread horizontal scaling and nothing else.
+> **📌 Tip:** If the exam mentions any of: persistence, HA, replication, pub/sub, leaderboards, session store with HA, the answer is **Redis**. Memcached is only the answer when you need simple caching with multi-thread horizontal scaling and nothing else.
 
 ---
 
@@ -41,23 +41,23 @@ ElastiCache offers two engines. Knowing the difference is a guaranteed exam topi
 ### Cluster Mode Enabled (Sharding)
 - Data partitioned across up to **500 shards**; each shard = 1 primary + up to 5 replicas
 - Supports up to **500 nodes total**
-- Write scaling — distribute writes across shards
+- Write scaling: distribute writes across shards
 - Cannot run all commands that require multiple keys across shards (use hash tags `{key}` to co-locate)
 
 ### Redis AUTH
 - Password/token required to connect (set at cluster creation)
 - In-transit encryption (TLS) required together with AUTH
-- RBAC (Role-Based Access Control) available in Redis 6.x — fine-grained per-user ACLs
+- RBAC (Role-Based Access Control) available in Redis 6.x, fine-grained per-user ACLs
 
 ---
 
 ## Memcached Architecture Details
 
 - Pure in-memory, no persistence
-- Multi-threaded architecture — better CPU utilization than Redis for simple caching
+- Multi-threaded architecture: better CPU utilization than Redis for simple caching
 - Horizontal scaling: add nodes to increase total cache capacity
-- No replication — losing a node loses cached data
-- No HA — when a node fails, cache misses spike until refilled
+- No replication: losing a node loses cached data
+- No HA: when a node fails, cache misses spike until refilled
 
 ---
 
@@ -110,7 +110,7 @@ ElastiCache offers two engines. Knowing the difference is a guaranteed exam topi
 | Rate limiting | Redis | INCR + TTL per key |
 | Sticky session replacement | Redis | Centralized session store |
 
-> **📌 Tip:** When an exam scenario says "users are being logged out when routed to different EC2 instances" (session affinity problem), the answer is ElastiCache for Redis as a centralized session store — not sticky sessions (which are a single-point-of-failure workaround).
+> **📌 Tip:** When an exam scenario says "users are being logged out when routed to different EC2 instances" (session affinity problem), the answer is ElastiCache for Redis as a centralized session store: not sticky sessions (which are a single-point-of-failure workaround).
 
 ---
 
@@ -132,7 +132,7 @@ ElastiCache offers two engines. Knowing the difference is a guaranteed exam topi
 |---|---|---|
 | Target database | Any (DB, app-level) | DynamoDB only |
 | Data access model | App-level caching (explicit cache calls) | Transparent DynamoDB API proxy |
-| Strongly consistent reads | Possible (by not caching them) | Not cached — pass through |
+| Strongly consistent reads | Possible (by not caching them) | Not cached: pass through |
 | Use case | Multi-source, custom caching, session store | Transparent DynamoDB read acceleration |
 
 ---
@@ -162,10 +162,10 @@ ElastiCache offers two engines. Knowing the difference is a guaranteed exam topi
 
 | Trap | Correct answer |
 |---|---|
-| Memcached for HA caching | Wrong — no replication; use Redis |
-| Memcached for session store with HA | Wrong — Redis; no data loss on failover |
-| ElastiCache instead of sticky sessions | Correct — centralized session store |
-| Redis cluster mode required for write scaling | True — sharding distributes writes |
+| Memcached for HA caching | Wrong: no replication; use Redis |
+| Memcached for session store with HA | Wrong: Redis; no data loss on failover |
+| ElastiCache instead of sticky sessions | Correct: centralized session store |
+| Redis cluster mode required for write scaling | True: sharding distributes writes |
 | DAX vs ElastiCache for DynamoDB | DAX is simpler; ElastiCache for custom logic |
 | API Gateway cache location | Per-stage; not global |
 | Redis persistence options | RDB (snapshot) + AOF (log); Memcached has none |

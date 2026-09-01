@@ -12,9 +12,9 @@ lang_pair: "/posts/ccna/ru/ccna-2-04-stp/"
 
 Without STP, redundant links between switches create **loops**:
 
-- **Broadcast storm** — broadcast frames copy endlessly
-- **MAC table instability** — one MAC appears on different ports
-- **Unicast duplication** — unicast frames are received multiple times
+- **Broadcast storm**: broadcast frames copy endlessly
+- **MAC table instability**: one MAC appears on different ports
+- **Unicast duplication**: unicast frames are received multiple times
 
 STP blocks redundant ports, leaving a single active path. When the primary path fails, it automatically activates the backup path.
 
@@ -25,10 +25,10 @@ STP blocks redundant ports, leaving a single active path. When the primary path 
 | Protocol | Standard | Convergence | Description |
 |---|---|---|---|
 | STP | IEEE 802.1D | 30–50 sec | Original; single instance for all VLANs |
-| PVST+ | Cisco | 30–50 sec | Per-VLAN STP — separate instance per VLAN |
+| PVST+ | Cisco | 30–50 sec | Per-VLAN STP: separate instance per VLAN |
 | RSTP | IEEE 802.1w | 1–2 sec | Rapid STP |
 | Rapid-PVST+ | Cisco | 1–2 sec | Per-VLAN RSTP **(recommended)** |
-| MSTP | IEEE 802.1s | 1–2 sec | Multiple STP — groups of VLANs mapped to instances |
+| MSTP | IEEE 802.1s | 1–2 sec | Multiple STP: groups of VLANs mapped to instances |
 
 ---
 
@@ -46,13 +46,13 @@ Priority = Base (multiple of 4096) + VLAN ID
 | Parameter | Default | Range |
 |---|---|---|
 | Priority | 32768 | 0–61440 (multiples of 4096) |
-| Bridge ID | 32768 + MAC | — |
+| Bridge ID | 32768 + MAC | n/a |
 
 > **💡 Tip:** To force a Root Bridge election: set a priority lower than 32768 (e.g. 24576 or use `spanning-tree vlan X root primary`).
 
 ### Step 2: Root Port (RP) Election
 
-On each **non-Root** switch — the port with the lowest path cost to the Root Bridge.
+On each **non-Root** switch, the port with the lowest path cost to the Root Bridge.
 
 | Speed | Cost (default) |
 |---|:---:|
@@ -65,7 +65,7 @@ If costs are equal: lower **Sender Bridge ID** → lower **Port ID**.
 
 ### Step 3: Designated Port (DP) Election
 
-On each segment — the port with the lowest path cost to the Root Bridge (typically all Root Bridge ports are Designated).
+On each segment, the port with the lowest path cost to the Root Bridge (typically all Root Bridge ports are Designated).
 
 ### Step 4: Non-Designated Port (NDP)
 
@@ -77,17 +77,17 @@ All remaining ports are blocked (Blocking state).
 
 | State | Forwarding | Learning MAC | Listening for BPDU | Time |
 |---|:---:|:---:|:---:|---|
-| Blocking | No | No | Yes | — |
+| Blocking | No | No | Yes | n/a |
 | Listening | No | No | Yes | 15 sec (Forward Delay) |
 | Learning | No | Yes | Yes | 15 sec (Forward Delay) |
-| Forwarding | Yes | Yes | Yes | — |
-| Disabled | No | No | No | — |
+| Forwarding | Yes | Yes | Yes | n/a |
+| Disabled | No | No | No | n/a |
 
 > **📌 Important:** Total STP 802.1D convergence time: up to **50 sec** (20 sec Max Age + 15 sec Listening + 15 sec Learning). RSTP reduces this to 1–2 sec.
 
 ---
 
-## RSTP — Rapid STP (802.1w)
+## RSTP: Rapid STP (802.1w)
 
 ### RSTP Port States
 
@@ -209,9 +209,9 @@ Switch# show spanning-tree interface gi0/1 detail
 
 | Resource | Description |
 |---|---|
-| [IEEE 802.1D — STP Standard](https://standards.ieee.org/ieee/802.1D/3399/) | Original Spanning Tree Protocol standard |
-| [IEEE 802.1w — RSTP Standard](https://standards.ieee.org/ieee/802.1w/2935/) | Rapid Spanning Tree Protocol: faster convergence |
-| [STP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/spanning-tree-protocol-stp) | Full STP breakdown: Root Bridge, port roles, states |
-| [RSTP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/rapid-spanning-tree-protocol-rstp) | RSTP: differences from STP, proposal/agreement, edge ports |
-| [Jeremy's IT Lab — Spanning Tree Protocol (YouTube)](https://www.youtube.com/watch?v=mLi-xDPGpHw) | STP, RSTP, PVST+, PortFast, BPDU Guard from the Free CCNA series |
-| [PortFast and BPDU Guard — Cisco](https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-3/configuration_guide/lyr2/b_173_lyr2_9300_cg/configuring_optional_spanning_tree_features.html) | Official Cisco documentation for PortFast, BPDU Guard, Root Guard |
+| [IEEE 802.1D: STP Standard](https://standards.ieee.org/ieee/802.1D/3399/) | Original Spanning Tree Protocol standard |
+| [IEEE 802.1w: RSTP Standard](https://standards.ieee.org/ieee/802.1w/2935/) | Rapid Spanning Tree Protocol: faster convergence |
+| [STP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/spanning-tree-protocol-stp) | Full STP breakdown: Root Bridge, port roles, states |
+| [RSTP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/rapid-spanning-tree-protocol-rstp) | RSTP: differences from STP, proposal/agreement, edge ports |
+| [Jeremy's IT Lab: Spanning Tree Protocol (YouTube)](https://www.youtube.com/watch?v=mLi-xDPGpHw) | STP, RSTP, PVST+, PortFast, BPDU Guard from the Free CCNA series |
+| [PortFast and BPDU Guard (Cisco)](https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-3/configuration_guide/lyr2/b_173_lyr2_9300_cg/configuring_optional_spanning_tree_features.html) | Official Cisco documentation for PortFast, BPDU Guard, Root Guard |

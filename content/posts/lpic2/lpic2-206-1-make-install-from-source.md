@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-206-1-make-install-from-source/"
 page_lang: "en"
 ---
 
-> **Exam topic 206.1** — Make and Install Programs from Source (weight: 2). Covers the full cycle of downloading, configuring, compiling, and installing a program from source code.
+> **Exam topic 206.1**: Make and Install Programs from Source (weight: 2). Covers the full cycle of downloading, configuring, compiling, and installing a program from source code.
 
 ---
 
@@ -40,7 +40,7 @@ By GNU standard, source code is stored in `/usr/src`. That is the conventional p
     curl-7.46.0.tar.gz <- original archive
 ```
 
-> **Important:** For the exam — `/usr/src` is the default source code storage location.
+> **Important:** For the exam; `/usr/src` is the default source code storage location.
 
 ---
 
@@ -184,7 +184,7 @@ make distclean # remove everything including Makefile (for full rebuild)
 | `distclean` | Remove everything generated, including Makefile |
 | `uninstall` | Remove the installed program (if implemented) |
 
-> **Tip:** `make install` requires root — binaries are placed in system directories.
+> **Tip:** `make install` requires root; binaries are placed in system directories.
 
 ---
 

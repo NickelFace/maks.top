@@ -23,7 +23,7 @@ Linux permission system: <strong>chmod</strong> (mode bits), <strong>chown</stro
 <tr><td class="mono">chmod 600 file</td><td class="desc">rw-------</td><td class="desc">Owner only (private key, secret file)</td></tr>
 <tr><td class="mono">chmod 700 dir</td><td class="desc">rwx------</td><td class="desc">Owner only (private directory)</td></tr>
 <tr><td class="mono">chmod 664 file</td><td class="desc">rw-rw-r--</td><td class="desc">Owner + group write, others read</td></tr>
-<tr><td class="mono">chmod 777 file</td><td class="desc">rwxrwxrwx</td><td class="desc">Everyone full — avoid unless intentional</td></tr>
+<tr><td class="mono">chmod 777 file</td><td class="desc">rwxrwxrwx</td><td class="desc">Everyone full: avoid unless intentional</td></tr>
 </tbody>
 </table>
 </div>
@@ -40,7 +40,7 @@ Linux permission system: <strong>chmod</strong> (mode bits), <strong>chown</stro
 <tr><td class="mono">chmod o= file</td><td class="desc">Remove all permissions for others (o)</td></tr>
 <tr><td class="mono">chmod a+r file</td><td class="desc">Add read for all (a = u+g+o)</td></tr>
 <tr><td class="mono">chmod ug+rw file</td><td class="desc">Owner and group read+write</td></tr>
-<tr><td class="mono">chmod -R 755 /var/www</td><td class="desc">Recursive — dangerous if mixed files/dirs</td></tr>
+<tr><td class="mono">chmod -R 755 /var/www</td><td class="desc">Recursive: dangerous if mixed files/dirs</td></tr>
 <tr><td class="mono">find /var/www -type f -exec chmod 644 {} +</td><td class="desc">Safer: set 644 on files only</td></tr>
 <tr><td class="mono">find /var/www -type d -exec chmod 755 {} +</td><td class="desc">Set 755 on directories only</td></tr>
 </tbody>
@@ -54,9 +54,9 @@ Linux permission system: <strong>chmod</strong> (mode bits), <strong>chown</stro
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Octal</th><th>Effect</th></tr></thead>
 <tbody>
-<tr><td class="mono">chmod u+s /usr/bin/ping</td><td class="desc">4755</td><td class="desc">SUID — runs as file owner (root for ping)</td></tr>
-<tr><td class="mono">chmod g+s /shared/dir</td><td class="desc">2755</td><td class="desc">SGID — new files in dir inherit the group</td></tr>
-<tr><td class="mono">chmod +t /tmp</td><td class="desc">1777</td><td class="desc">Sticky — only file owner can delete (shared dirs)</td></tr>
+<tr><td class="mono">chmod u+s /usr/bin/ping</td><td class="desc">4755</td><td class="desc">SUID: runs as file owner (root for ping)</td></tr>
+<tr><td class="mono">chmod g+s /shared/dir</td><td class="desc">2755</td><td class="desc">SGID: new files in dir inherit the group</td></tr>
+<tr><td class="mono">chmod +t /tmp</td><td class="desc">1777</td><td class="desc">Sticky: only file owner can delete (shared dirs)</td></tr>
 <tr><td class="mono">chmod 4755 file</td><td class="desc">4755</td><td class="desc">SUID + rwxr-xr-x in one octal</td></tr>
 </tbody>
 </table>
@@ -104,15 +104,15 @@ Linux permission system: <strong>chmod</strong> (mode bits), <strong>chown</stro
 ## umask
 
 <div class="ref-panel">
-<div class="ref-panel-head">umask — default permissions</div>
+<div class="ref-panel-head">umask: default permissions</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>umask</th><th>New files</th><th>New dirs</th><th>Use case</th></tr></thead>
 <tbody>
-<tr><td class="mono">022</td><td class="desc">644 (rw-r--r--)</td><td class="desc">755 (rwxr-xr-x)</td><td class="desc">Default — others can read</td></tr>
+<tr><td class="mono">022</td><td class="desc">644 (rw-r--r--)</td><td class="desc">755 (rwxr-xr-x)</td><td class="desc">Default: others can read</td></tr>
 <tr><td class="mono">027</td><td class="desc">640 (rw-r-----)</td><td class="desc">750 (rwxr-x---)</td><td class="desc">Group read, no others</td></tr>
-<tr><td class="mono">077</td><td class="desc">600 (rw-------)</td><td class="desc">700 (rwx------)</td><td class="desc">Private — owner only</td></tr>
-<tr><td class="mono">002</td><td class="desc">664 (rw-rw-r--)</td><td class="desc">775 (rwxrwxr-x)</td><td class="desc">Collaborative — group can write</td></tr>
+<tr><td class="mono">077</td><td class="desc">600 (rw-------)</td><td class="desc">700 (rwx------)</td><td class="desc">Private: owner only</td></tr>
+<tr><td class="mono">002</td><td class="desc">664 (rw-rw-r--)</td><td class="desc">775 (rwxrwxr-x)</td><td class="desc">Collaborative: group can write</td></tr>
 </tbody>
 </table>
 </div>
@@ -131,7 +131,7 @@ Set system-wide default in `/etc/login.defs` (LOGIN_UMASK) or `/etc/profile`.
 ## setfacl / getfacl
 
 <div class="ref-panel">
-<div class="ref-panel-head">ACL — extended permissions</div>
+<div class="ref-panel-head">ACL: extended permissions</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
@@ -145,7 +145,7 @@ Set system-wide default in `/etc/login.defs` (LOGIN_UMASK) or `/etc/profile`.
 <tr><td class="mono">setfacl -x u:alice file</td><td class="desc">Remove alice's ACL entry</td></tr>
 <tr><td class="mono">setfacl -b file</td><td class="desc">Remove all ACL entries (reset to standard)</td></tr>
 <tr><td class="mono">setfacl -R -m u:alice:rX dir</td><td class="desc">Recursive: read + conditional execute (X = dirs only)</td></tr>
-<tr><td class="mono">setfacl -d -m u:alice:rw dir</td><td class="desc">Default ACL — inherited by new files in dir</td></tr>
+<tr><td class="mono">setfacl -d -m u:alice:rw dir</td><td class="desc">Default ACL: inherited by new files in dir</td></tr>
 <tr><td class="mono">setfacl -d -m g:devs:rwx dir</td><td class="desc">Default ACL for group</td></tr>
 <tr><td class="mono">setfacl -k dir</td><td class="desc">Remove only default ACL</td></tr>
 <tr><td class="mono">getfacl dir1 | setfacl --set-file=- dir2</td><td class="desc">Copy ACL from one dir to another</td></tr>
@@ -174,6 +174,6 @@ Set system-wide default in `/etc/login.defs` (LOGIN_UMASK) or `/etc/profile`.
 </div>
 </div>
 
-A `+` at the end of `ls -l` output means ACL is present. The mask (`m`) limits the effective permissions of named users and groups — `getfacl` shows both the entry and `#effective:` if the mask reduces it.
+A `+` at the end of `ls -l` output means ACL is present. The mask (`m`) limits the effective permissions of named users and groups, `getfacl` shows both the entry and `#effective:` if the mask reduces it.
 
 Requirements: filesystem must be mounted with ACL support. On ext4 it's enabled by default. Check: `tune2fs -l /dev/sda1 | grep "Default mount"`.

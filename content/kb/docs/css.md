@@ -26,7 +26,7 @@ Styles are split into 11 files by **scope** (area of application):
 
 Loading in `baseof.html`:
 ```html
-<!-- Inlined via Hugo asset pipeline — single source of truth for FOUC colors -->
+<!-- Inlined via Hugo asset pipeline - single source of truth for FOUC colors -->
 {{ with resources.Get "css/critical.css" | minify }}<style>{{ .Content | safeCSS }}</style>{{ end }}
 
 <link rel="stylesheet" href="/styles/fonts.css">    <!-- always -->
@@ -39,11 +39,11 @@ Loading in `baseof.html`:
 {{ block "head" . }}{{ end }}  <!-- cert.css / ns.css added here -->
 ```
 
-> **Why `critical.css` is inlined:** Dark/light background colors must be applied before any external CSS loads to prevent a white flash on navigation. `critical.css` lives in `assets/` so Hugo can read and inline it at build time via `resources.Get`. **When changing theme colors, update `critical.css` AND `global.css` `:root` — they must stay in sync.**
+> **Why `critical.css` is inlined:** Dark/light background colors must be applied before any external CSS loads to prevent a white flash on navigation. `critical.css` lives in `assets/` so Hugo can read and inline it at build time via `resources.Get`. **When changing theme colors, update `critical.css` AND `global.css` `:root`; they must stay in sync.**
 
 ---
 
-## CSS variables — themes
+## CSS variables: themes
 
 Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
 
@@ -77,7 +77,7 @@ Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
 
 ---
 
-## global.css — class reference
+## global.css: class reference
 
 ### Reset and base styles
 
@@ -112,7 +112,7 @@ Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
 | `.panel-head` | Flex panel header: `.panel-title` + `.panel-more` |
 | `.sec-title` | H2 section heading (gradient) |
 
-### Articles (post-card — blog list)
+### Articles (post-card: blog list)
 
 | Class | Description |
 |---|---|
@@ -170,7 +170,7 @@ Defined in `prose.css`. Used in `_default/single.html` for all article pages.
 ### Sticky footer
 
 `body` uses `display: flex; flex-direction: column` + `min-height: 100vh`.  
-`footer` has `margin-top: auto` — always pushed to bottom of viewport on short pages.
+`footer` has `margin-top: auto`; always pushed to bottom of viewport on short pages.
 
 ### Pagination (dot-grid)
 
@@ -205,7 +205,7 @@ Used by the blog (`pagination.html` partial).
 
 ---
 
-## mobile.css — class reference
+## mobile.css: class reference
 
 | Class | Description |
 |---|---|
@@ -222,7 +222,7 @@ Used by the blog (`pagination.html` partial).
 
 ---
 
-## prose.css — article content + shared components
+## prose.css: article content + shared components
 
 Applied to `.prose` (article body) and available in any post, KB, or docs page.
 
@@ -289,7 +289,7 @@ Page guard: `html, body { overflow-x: clip; }` in `global.css`. `min-width: 0` s
 
 ---
 
-## cert.css — certification pages
+## cert.css: certification pages
 
 | Class | Description |
 |---|---|
@@ -317,7 +317,7 @@ Page guard: `html, body { overflow-x: clip; }` in `global.css`. `min-width: 0` s
 
 ---
 
-## ns.css — linux-namespaces page layout
+## ns.css: linux-namespaces page layout
 
 Loads only for `/posts/linux-namespaces/`. All shared components (NS cards, tabs, map buttons, ref-panel, stags) are in `prose.css`.
 

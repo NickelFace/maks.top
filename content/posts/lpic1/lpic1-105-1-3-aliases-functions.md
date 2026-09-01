@@ -8,9 +8,9 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-105-1-3-aliases-functions/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102 | Part 3 of 105.1
+> **Exam weight: 4**. LPIC-1 v5, Exam 102 | Part 3 of 105.1
 
-## Aliases — Advanced Usage
+## Aliases: Advanced Usage
 
 ### Quotes and Variables Inside an Alias
 
@@ -42,7 +42,7 @@ Hello tortoise!
 
 The type of quotes determines **when** a variable is expanded.
 
-**Single quotes** — defer expansion until the alias is invoked:
+**Single quotes**. Defer expansion until the alias is invoked:
 
 ```bash
 $ alias where?='echo $PWD'
@@ -53,7 +53,7 @@ $ where?
 /home/user2/Music          # expands to current directory each time
 ```
 
-**Double quotes** — expand the variable immediately when the alias is created, fixing the value:
+**Double quotes**. Expand the variable immediately when the alias is created, fixing the value:
 
 ```bash
 $ alias where?="echo $PWD"
@@ -90,7 +90,7 @@ git version 2.7.4
 
 ---
 
-## Bash Functions — Advanced Usage
+## Bash Functions: Advanced Usage
 
 ### Single-line Function Definition
 
@@ -189,9 +189,9 @@ For proper positional parameter handling, use **functions**, not aliases.
 
 ## Special Built-in Bash Variables
 
-These variables are read-only — you can read them but not assign to them directly.
+These variables are read-only; you can read them but not assign to them directly.
 
-### $? — Last Exit Code
+### $?: Last Exit Code
 
 Stores the exit code of the last command. `0` means success:
 
@@ -211,7 +211,7 @@ $ echo $?
 127
 ```
 
-### $$ — Shell PID
+### $$: Shell PID
 
 Current shell's process ID:
 
@@ -220,7 +220,7 @@ $ echo $$
 420
 ```
 
-### $! — Background Job PID
+### $!: Background Job PID
 
 PID of the last process started in the background with `&`:
 
@@ -233,7 +233,7 @@ $ echo $!
 
 ### Positional Parameters $0..$9
 
-`$0` — script or shell name. `$1`–`$9` — arguments passed to a function or script:
+`$0`. Script or shell name. `$1`–`$9`, arguments passed to a function or script:
 
 ```bash
 $ special_vars() {
@@ -326,7 +326,7 @@ emacs is a great text editor
 
 One function can call another. Example: add to `~/.bashrc` so that on login the user gets a greeting and a video folder check.
 
-`check_vids` — lists mkv files and warns the user:
+`check_vids`. Lists mkv files and warns the user:
 
 ```bash
 check_vids() {
@@ -344,7 +344,7 @@ Step by step:
 - `> /dev/null 2>&1` redirects both stdout and stderr to /dev/null (the bit-bucket).
 - `[ "$?" = "0" ]` checks whether the previous command succeeded.
 
-`editors` — greets the user and calls `check_vids`:
+`editors`. Greets the user and calls `check_vids`:
 
 ```bash
 editors() {
@@ -425,7 +425,7 @@ readonly -f            # list all read-only functions
 
 ## Exercises
 
-### Exercise 1 — Aliases vs functions capabilities
+### Exercise 1: Aliases vs functions capabilities
 
 Fill in Yes or No.
 
@@ -450,13 +450,13 @@ Fill in Yes or No.
 
 Escaping with `\` applies to aliases because they can shadow built-in commands at parse time. Functions don't have that name-collision issue.
 
-Positional parameters in aliases always append to the end of the expanded string — they don't substitute into `$1`, `$2`. Use functions when you need argument handling.
+Positional parameters in aliases always append to the end of the expanded string; they don't substitute into `$1`, `$2`. Use functions when you need argument handling.
 
 </details>
 
 ---
 
-### Exercise 2 — List all aliases
+### Exercise 2: List all aliases
 
 <details>
 <summary>Answer</summary>
@@ -469,7 +469,7 @@ alias
 
 ---
 
-### Exercise 3 — Alias logg for ogg files
+### Exercise 3: Alias logg for ogg files
 
 Create alias `logg` that lists all ogg files in `~/Music`, one per line.
 
@@ -486,7 +486,7 @@ The `-1` option (digit one) forces one filename per line. The glob `*ogg` matche
 
 ---
 
-### Exercise 4 — Call the alias
+### Exercise 4: Call the alias
 
 <details>
 <summary>Answer</summary>
@@ -499,7 +499,7 @@ logg
 
 ---
 
-### Exercise 5 — Extend logg to greet the user
+### Exercise 5: Extend logg to greet the user
 
 Modify `logg` to first print the current username and a colon, then the list.
 
@@ -516,7 +516,7 @@ The two commands are joined by a semicolon. Single quotes defer `$USER` expansio
 
 ---
 
-### Exercise 6 — Call the updated alias
+### Exercise 6: Call the updated alias
 
 <details>
 <summary>Answer</summary>
@@ -529,7 +529,7 @@ logg
 
 ---
 
-### Exercise 7 — Verify logg is in the alias list
+### Exercise 7: Verify logg is in the alias list
 
 <details>
 <summary>Answer</summary>
@@ -542,7 +542,7 @@ alias
 
 ---
 
-### Exercise 8 — Remove the alias
+### Exercise 8: Remove the alias
 
 <details>
 <summary>Answer</summary>
@@ -555,7 +555,7 @@ unalias logg
 
 ---
 
-### Exercise 9 — Match alias names to commands
+### Exercise 9: Match alias names to commands
 
 Write correct definitions for these aliases.
 
@@ -584,7 +584,7 @@ Single quotes are used so that `$USER`, `$BASH_VERSION`, and `$pc` are expanded 
 
 ---
 
-### Exercise 10 — Function my_fun in /etc/bash.bashrc
+### Exercise 10: Function my_fun in /etc/bash.bashrc
 
 As root, write function `my_fun` that greets the user and prints their `PATH`. It should run on every login.
 
@@ -619,7 +619,7 @@ The function call on the last line is required; without it the function is only 
 
 ---
 
-### Exercise 11 — Switch to user2 to test
+### Exercise 11: Switch to user2 to test
 
 <details>
 <summary>Answer</summary>
@@ -634,7 +634,7 @@ The dash starts a login shell that runs the full set of startup files.
 
 ---
 
-### Exercise 12 — Same function as a one-liner
+### Exercise 12: Same function as a one-liner
 
 <details>
 <summary>Answer</summary>
@@ -657,7 +657,7 @@ A semicolon is required after the last command, before the closing brace.
 
 ---
 
-### Exercise 13 — Call the function
+### Exercise 13: Call the function
 
 <details>
 <summary>Answer</summary>
@@ -670,7 +670,7 @@ my_fun
 
 ---
 
-### Exercise 14 — Remove the function
+### Exercise 14: Remove the function
 
 <details>
 <summary>Answer</summary>
@@ -685,7 +685,7 @@ The `-f` flag tells `unset` to remove a function. Without it, `unset` first trie
 
 ---
 
-### Exercise 15 — Predict the output of special_vars2
+### Exercise 15: Predict the output of special_vars2
 
 Function:
 
@@ -730,7 +730,7 @@ Seven arguments were passed: `crying cockles and mussels alive alive oh`. So `$#
 
 ---
 
-### Exercise 16 — Parameterized check_music function
+### Exercise 16: Parameterized check_music function
 
 Write `check_music`, a startup-script function based on `check_vids`. Make it accept positional parameters for: folder name, file extension, maximum count, file type label.
 
@@ -757,7 +757,7 @@ Parameter mapping: `$1=Music` (folder), `$2=ogg` (extension), `$3=7` (limit), `$
 
 ---
 
-### Exercise 17 — Read-only functions
+### Exercise 17: Read-only functions
 
 How do you make a function read-only? How do you list all read-only functions?
 
@@ -775,7 +775,7 @@ A read-only function cannot be redefined or removed with `unset -f`. To undo it 
 
 ---
 
-### Exercise 18 — fyi function with system summary
+### Exercise 18: fyi function with system summary
 
 Write a `fyi` function for a startup script that prints: username, home directory, hostname, OS type, PATH, mail directory, mail check interval, shell nesting level, and changes PS1 to `<user>@<host-date>`.
 

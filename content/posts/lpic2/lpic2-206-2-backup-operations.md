@@ -8,15 +8,15 @@ lang_pair: "/posts/lpic2/ru/lpic2-206-2-backup-operations/"
 page_lang: "en"
 ---
 
-> **Exam topic 206.2** — Backup Operations (weight: 3). Covers backup strategy, backup types, storage media selection, and the tools used to create, verify, and restore backups.
+> **Exam topic 206.2**: Backup Operations (weight: 3). Covers backup strategy, backup types, storage media selection, and the tools used to create, verify, and restore backups.
 
 ---
 
 ## Why Backups Matter
 
-RAID arrays and cloud storage protect against only one cause of data loss — hardware failure. Human error, software bugs, natural disasters, and deliberate data destruction all fall outside the protection RAID provides.
+RAID arrays and cloud storage protect against only one cause of data loss, hardware failure. Human error, software bugs, natural disasters, and deliberate data destruction all fall outside the protection RAID provides.
 
-The rule is simple: every server requires regular backups. The exception is cluster nodes that can simply be reinstalled from scratch on failure — it is the computation results that matter, not the nodes themselves.
+The rule is simple: every server requires regular backups. The exception is cluster nodes that can simply be reinstalled from scratch on failure; it is the computation results that matter, not the nodes themselves.
 
 ---
 
@@ -26,7 +26,7 @@ The rule is simple: every server requires regular backups. The exception is clus
 
 The correct answer always comes from a risk analysis, not from a habit of copying everything. Large data volumes increase backup and recovery time, so only back up what is genuinely needed to restore system operation.
 
-Obvious candidates: user files in `/home` and system configuration in `/etc`. Grey zones include `/var` (logs, spool, mail) — you decide what is important. When in doubt, back it up.
+Obvious candidates: user files in `/home` and system configuration in `/etc`. Grey zones include `/var` (logs, spool, mail); you decide what is important. When in doubt, back it up.
 
 ### How Often
 
@@ -44,9 +44,9 @@ Two mandatory steps in any strategy:
 
 ### Where to Store
 
-At minimum two sets of media. Keeping both in the same building is pointless — any disaster will destroy both system and backup simultaneously. Keep at least one set off-site. Encrypt sensitive data on external media. Store a copy of the backup plan alongside the backups.
+At minimum two sets of media. Keeping both in the same building is pointless; any disaster will destroy both system and backup simultaneously. Keep at least one set off-site. Encrypt sensitive data on external media. Store a copy of the backup plan alongside the backups.
 
-> **Warning:** Recovery time matters. In some environments recovery takes hours due to slow network connections. If the acceptable downtime is less than the recovery time, backups alone are not enough — consider clustered failover solutions.
+> **Warning:** Recovery time matters. In some environments recovery takes hours due to slow network connections. If the acceptable downtime is less than the recovery time, backups alone are not enough: consider clustered failover solutions.
 
 > **Important:** The goal of backup is to restore the system as quickly as necessary. Anything that does not help achieve this goal does not need to be backed up.
 
@@ -83,7 +83,7 @@ At minimum two sets of media. Keeping both in the same building is pointless —
 | Differential | Only changes since the last full backup | Simpler recovery than incremental | Grows over time |
 | Snapshot | Full backup + pointer table, then incremental | Saves space | More complex to implement |
 
-> **Important:** For the exam — Incremental copies changes since the last backup OF ANY TYPE. Differential copies changes since the last FULL backup only. This difference is frequently tested.
+> **Important:** For the exam, Incremental copies changes since the last backup OF ANY TYPE. Differential copies changes since the last FULL backup only. This difference is frequently tested.
 
 ---
 
@@ -91,7 +91,7 @@ At minimum two sets of media. Keeping both in the same building is pointless —
 
 ### Magnetic Tape
 
-Tape is widely used in enterprise environments because of cost — per gigabyte it is cheaper than any alternative. Data is stored passively without power, reducing failure risk during storage.
+Tape is widely used in enterprise environments because of cost, per gigabyte it is cheaper than any alternative. Data is stored passively without power, reducing failure risk during storage.
 
 Main downside: sequential access. To reach a specific file, the tape must rewind to the right position. With many small files the tape constantly stops, starts, and partially rewinds. Tape is ideal for long-term archiving and where recovery speed is not critical.
 
@@ -99,7 +99,7 @@ Main downside: sequential access. To reach a specific file, the tape must rewind
 
 A local disk is rarely used as the primary backup medium but is often used as a buffer between the backup system and a remote storage server. Advantage: fast recovery of recent files. Disadvantage: a constantly powered disk fails far more often than passive tape.
 
-Inexpensive portable USB drives solve this for small systems — easy to take off-site.
+Inexpensive portable USB drives solve this for small systems; easy to take off-site.
 
 ### Optical Media (CDR/DVD/BD)
 
@@ -225,7 +225,7 @@ dd if=/dev/sda | gzip > /backup/sda.img.gz                  # compressed image
 |---|---|
 | `if=` | Input file (file, partition, or disk) |
 | `of=` | Output file (file, partition, or disk) |
-| `bs=` | Block size — affects speed |
+| `bs=` | Block size: affects speed |
 | `count=` | Number of blocks to copy |
 
 > **Warning:** Never use `dd` on a mounted disk. Copying or restoring a mounted partition may corrupt data. Boot from a live CD or unmount the partition first.
@@ -253,9 +253,9 @@ find /sue -name "*.conf" | cpio -p /backup/configs/ # pass-through copy
 find /etc | cpio -ov > /backup/etc.cpio             # verbose pack
 ```
 
-> **Note:** `tar` has largely replaced `cpio` for general archive work. However `cpio` is still used in some system tools — Linux initramfs images are built with `cpio`.
+> **Note:** `tar` has largely replaced `cpio` for general archive work. However `cpio` is still used in some system tools, Linux initramfs images are built with `cpio`.
 
-### mt — Magnetic Tape Control
+### mt: Magnetic Tape Control
 
 Tape is a sequential-access device. To reach a specific archive you must pass through all preceding ones sequentially.
 
@@ -301,7 +301,7 @@ tar -xvf /dev/nst0           # read second backup
 
 ### Amanda
 
-AMANDA (Advanced Maryland Automatic Network Disk Archiver) allows setting up one master backup server that collects data from many hosts over the network onto tape drives, disks, or optical media. Amanda is built on standard utilities — `dump` and/or GNU `tar`. Free Community Edition for small teams; Enterprise Edition with Zmanda Management Console for larger environments.
+AMANDA (Advanced Maryland Automatic Network Disk Archiver) allows setting up one master backup server that collects data from many hosts over the network onto tape drives, disks, or optical media. Amanda is built on standard utilities: `dump` and/or GNU `tar`. Free Community Edition for small teams; Enterprise Edition with Zmanda Management Console for larger environments.
 
 ### Bacula
 
@@ -313,7 +313,7 @@ Bacula is a set of enterprise-grade open-source programs for managing backup, re
 
 Bareos is a fork of Bacula version 5.2, created because the Bacula team rejected community contributions. Functionally nearly identical to Bacula, but adds LTO hardware encryption, bandwidth limiting, and new console commands. Aims to lower the barrier for newcomers with ready-made packages for popular Linux distributions and Windows.
 
-> **Warning:** Bareos protects backup data according to user-defined retention policies. This can complicate tape reuse — in such situations the developers themselves recommend considering an alternative solution.
+> **Warning:** Bareos protects backup data according to user-defined retention policies. This can complicate tape reuse, in such situations the developers themselves recommend considering an alternative solution.
 
 ### BackupPC
 
@@ -328,7 +328,7 @@ High-performance enterprise-grade backup for Linux, Windows, and macOS. Oriented
 | Bareos | Bacula 5.2 fork | Web, GUI, CLI | LTO encryption, easier for newcomers |
 | BackupPC | rsync, tar | Web | PC/laptops, easy start |
 
-> **Important:** For the exam — know Amanda, Bacula, Bareos, BackupPC by name and purpose. Bareos is a fork of Bacula 5.2. Amanda uses dump and tar. BackupPC uses rsync and tar.
+> **Important:** For the exam, know Amanda, Bacula, Bareos, BackupPC by name and purpose. Bareos is a fork of Bacula 5.2. Amanda uses dump and tar. BackupPC uses rsync and tar.
 
 ---
 
@@ -428,10 +428,10 @@ mt -f /dev/nst0 status                                  # tape status
 
 ### Common Mistakes
 
-- Using `/dev/st0` instead of `/dev/nst0` when writing multiple archives — each new tar overwrites from the beginning of the tape.
-- Running `dd` on a mounted partition — leads to data corruption.
-- Using `rsync://host:/` instead of `user@host:/` — the former does not encrypt data.
-- Trying to verify a tarball with `tar -W` — the option does not work with compressed archives.
+- Using `/dev/st0` instead of `/dev/nst0` when writing multiple archives, each new tar overwrites from the beginning of the tape.
+- Running `dd` on a mounted partition: leads to data corruption.
+- Using `rsync://host:/` instead of `user@host:/`: the former does not encrypt data.
+- Trying to verify a tarball with `tar -W`, the option does not work with compressed archives.
 - Giving the snapshot file the `.snap` extension instead of `.snar`.
 
 ---

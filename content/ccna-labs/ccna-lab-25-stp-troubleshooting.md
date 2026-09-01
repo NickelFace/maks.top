@@ -26,7 +26,7 @@ SW1 (Priority 32768) ----SW2 (Priority 32768)
 2. Identify the Root Bridge (flag `This bridge is the root`)
 3. View ports and their roles (Root/Designated/Blocked)
 4. Determine whether the topology is optimal (Root Bridge should be closest to the servers)
-5. Change the Root Bridge — set SW1 as Primary Root:
+5. Change the Root Bridge: set SW1 as Primary Root:
    ```
    SW1(config)#spanning-tree vlan 1 priority 4096
    ```

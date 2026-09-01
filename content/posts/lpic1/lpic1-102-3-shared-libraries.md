@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-102-3-shared-libraries/"
 page_lang: "en"
 ---
 
-> **Exam weight: 1** — LPIC-1 v5, Exam 101
+> **Exam weight: 1**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -50,7 +50,7 @@ libname.so
 ```
 Example: `libz.so -> libz.so.1`
 
-This chain of symbolic links allows updating a library without rebuilding programs — it is enough to change what the soname points to.
+This chain of symbolic links allows updating a library without rebuilding programs; it is enough to change what the soname points to.
 
 ---
 
@@ -108,7 +108,7 @@ include /etc/ld.so.conf.d/*.conf
 
 Individual files for each library set live in `/etc/ld.so.conf.d/`. If you install a package with libraries in a non-standard directory, add the path there and run `ldconfig`.
 
-Example — adding a directory:
+Example. Adding a directory:
 ```bash
 echo "/usr/local/lib/myapp" | sudo tee /etc/ld.so.conf.d/myapp.conf
 sudo ldconfig
@@ -134,7 +134,7 @@ unset LD_LIBRARY_PATH
 
 To make the change permanent, add `export LD_LIBRARY_PATH=/usr/local/mylib` to a Bash initialisation file: `/etc/bash.bashrc` (all users) or `~/.bashrc` (current user).
 
-Using `LD_LIBRARY_PATH` permanently in production is not recommended — it is better to add the path to `/etc/ld.so.conf.d/` and update the cache. The variable is most useful for development and debugging.
+Using `LD_LIBRARY_PATH` permanently in production is not recommended; it is better to add the path to `/etc/ld.so.conf.d/` and update the cache. The variable is most useful for development and debugging.
 
 ---
 
@@ -159,7 +159,7 @@ If a library is not found, `ldd` shows `not found` next to its name:
 	libmissing.so.1 => not found
 ```
 
-Important: `ldd` actually executes the program in a special mode. Do not run `ldd` on binaries from untrusted sources — it is a security risk. For those cases use `objdump -p binary | grep NEEDED` or `readelf -d binary | grep NEEDED` instead.
+Important: `ldd` actually executes the program in a special mode. Do not run `ldd` on binaries from untrusted sources; it is a security risk. For those cases use `objdump -p binary | grep NEEDED` or `readelf -d binary | grep NEEDED` instead.
 
 `ldd` works on shared libraries themselves, not just executables:
 
@@ -248,7 +248,7 @@ Because ABI compatibility is guaranteed within one major version. A program link
 | `libsystemd.so.0` | libsystemd | so | 0 |
 | `ld-linux-x86-64.so.2` | ld-linux-x86-64 | so | 2 |
 
-Note `ld-linux-x86-64`: this is the dynamic linker itself, and its name does not start with `lib`. It follows the same naming convention but has a special role — it loads all other libraries.
+Note `ld-linux-x86-64`: this is the dynamic linker itself, and its name does not start with `lib`. It follows the same naming convention but has a special role; it loads all other libraries.
 
 Also worth remembering: `linux-vdso.so.1` is a virtual library (vDSO, virtual Dynamic Shared Object) that the kernel maps directly into every process's address space. There is no file on disk.
 
@@ -341,9 +341,9 @@ Output shows the libraries Bash depends on, such as `libtinfo`, `libdl`, `libc`.
 
 ## Related topics
 
-- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/) — system boot and the role of the dynamic linker
-- 102.4 Use Debian Package Management — installing packages, including libraries
-- 102.5 Use RPM and YUM Package Management — the same for RPM-based systems
+- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/): system boot and the role of the dynamic linker
+- 102.4 Use Debian Package Management: installing packages, including libraries
+- 102.5 Use RPM and YUM Package Management, the same for RPM-based systems
 
 ---
 

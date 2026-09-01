@@ -49,9 +49,9 @@ HSRP Group: 1
 ### Failover Test
 6. Shut down the interface on R1: `interface g0/0` → `shutdown`
 7. Verify that R2 became Active: `show standby brief`
-8. Ping the virtual IP from PC — should work through R2
+8. Ping the virtual IP from PC: should work through R2
 9. Bring R1 interface back up: `no shutdown`
-10. With preempt enabled — R1 becomes Active again
+10. With preempt enabled: R1 becomes Active again
 
 ### Interface Tracking
 11. Configure a track object:
@@ -74,4 +74,4 @@ R1#show standby brief
 ```
 
 > **💡 Tip:**
-> HSRP v1 virtual MAC address: **0000.0C07.ACxx** (xx = group in hex). The PC uses this MAC as its gateway. When the Active router changes, the MAC stays the same — the PC does not need to update its ARP cache.
+> HSRP v1 virtual MAC address: **0000.0C07.ACxx** (xx = group in hex). The PC uses this MAC as its gateway. When the Active router changes, the MAC stays the same; the PC does not need to update its ARP cache.

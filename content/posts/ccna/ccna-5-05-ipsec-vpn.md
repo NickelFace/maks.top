@@ -18,10 +18,10 @@ lang_pair: "/posts/ccna/ru/ccna-5-05-ipsec-vpn/"
 **VPN** (Virtual Private Network) creates an encrypted tunnel over a public network (the Internet), ensuring data confidentiality and integrity.
 
 **VPN goals:**
-- **Confidentiality** — data encryption
-- **Integrity** — protection against data modification in transit
-- **Authentication** — verifying the identity of participants
-- **Anti-replay** — protection against replay attacks
+- **Confidentiality**: data encryption
+- **Integrity**: protection against data modification in transit
+- **Authentication**: verifying the identity of participants
+- **Anti-replay**: protection against replay attacks
 
 ---
 
@@ -54,7 +54,7 @@ An individual user connects to the corporate network from anywhere.
 
 ---
 
-## IPsec — Protocol Stack
+## IPsec: Protocol Stack
 
 **IPsec** (IP Security) is a suite of protocols for securing IP traffic.
 
@@ -76,7 +76,7 @@ An individual user connects to the corporate network from anywhere.
 
 ---
 
-## IKE — Parameter Negotiation
+## IKE: Parameter Negotiation
 
 **IKE** (Internet Key Exchange) is a protocol for automatically negotiating IPsec parameters.
 
@@ -89,7 +89,7 @@ An individual user connects to the corporate network from anywhere.
 - Creates IPsec SA (Security Association) for data traffic
 - Negotiates: protocol (ESP/AH), encryption and authentication algorithms
 
-**IKEv2** — a more modern version, simpler and more efficient than IKEv1.
+**IKEv2**: a more modern version, simpler and more efficient than IKEv1.
 
 ---
 
@@ -102,7 +102,7 @@ An individual user connects to the corporate network from anywhere.
 | Authentication | Pre-Shared Key (PSK), RSA | PKI/certificates |
 | DH Group | 1, 2, 5, **14, 19, 20** | 14+ |
 
-> DES and MD5 are legacy algorithms — use only when backward compatibility is required.
+> DES and MD5 are legacy algorithms; use only when backward compatibility is required.
 
 ---
 
@@ -120,13 +120,13 @@ interface Tunnel0
 
 ---
 
-## SSL/TLS VPN — Cisco AnyConnect
+## SSL/TLS VPN: Cisco AnyConnect
 
-**SSL VPN** uses HTTPS (TCP 443). No IPsec client required — works through a browser or AnyConnect.
+**SSL VPN** uses HTTPS (TCP 443). No IPsec client required; works through a browser or AnyConnect.
 
 | Type | Description |
 |---|---|
-| **Clientless SSL VPN** | Browser-based, no client — limited access |
+| **Clientless SSL VPN** | Browser-based, no client: limited access |
 | **Full Tunnel (AnyConnect)** | Full network access, client installed on PC |
 
 ---
@@ -135,7 +135,7 @@ interface Tunnel0
 
 | Parameter | Site-to-Site | Remote Access |
 |---|---|---|
-| Participants | Two devices (routers) | Device — VPN server |
+| Participants | Two devices (routers) | Device: VPN server |
 | Tunnel | Permanent | On-demand |
 | Configuration | On routers/firewalls | VPN client on user device |
 | Protocol | IPsec (ESP, IKEv1/v2) | IPsec or SSL/TLS |

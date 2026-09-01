@@ -31,7 +31,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-02-topologies/"
 | Mesh | Each node connects to multiple others | High fault tolerance | Expensive |
 | Hybrid | Combination of topologies | Flexibility | Complexity |
 
-> **💡 Tip:** Modern enterprise networks are built on a **star** topology (physically) — all devices connect to access layer switches.
+> **💡 Tip:** Modern enterprise networks are built on a **star** topology (physically), all devices connect to access layer switches.
 
 ---
 
@@ -39,9 +39,9 @@ lang_pair: "/posts/ccna/ru/ccna-1-02-topologies/"
 
 A logical topology describes how data actually flows in a network, regardless of the physical wiring.
 
-- **Ethernet** — logical bus (CSMA/CD in older versions); now operates point-to-point through switches
-- **Wi-Fi (802.11)** — logical bus (CSMA/CA)
-- **Token Ring** — logical ring (obsolete)
+- **Ethernet**: logical bus (CSMA/CD in older versions); now operates point-to-point through switches
+- **Wi-Fi (802.11)**: logical bus (CSMA/CA)
+- **Token Ring**: logical ring (obsolete)
 
 ---
 
@@ -95,8 +95,8 @@ graph TD
 
 | Resource | Description |
 |---|---|
-| [Network Topologies — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/network-topologies) | Overview of physical and logical network topologies |
-| [Three-Tier Network Architecture — Cisco](https://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Campus/campover.html) | Cisco Campus Network Design: Access, Distribution, Core |
-| [Jeremy's IT Lab — Network Topology Architectures (YouTube)](https://www.youtube.com/watch?v=Wm2rOA2Vrv0) | Topologies and three-tier model lesson from the Free CCNA series |
-| [Collision vs Broadcast Domain — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/collision-broadcast-domain) | Difference between collision and broadcast domains |
-| [Spine-Leaf Architecture — Cisco](https://www.cisco.com/c/en/us/solutions/data-center-virtualization/what-is-a-spine-and-leaf-architecture.html) | Cisco explanation of Spine-Leaf topology for data centers |
+| [Network Topologies (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/network-topologies) | Overview of physical and logical network topologies |
+| [Three-Tier Network Architecture (Cisco)](https://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Campus/campover.html) | Cisco Campus Network Design: Access, Distribution, Core |
+| [Jeremy's IT Lab: Network Topology Architectures (YouTube)](https://www.youtube.com/watch?v=Wm2rOA2Vrv0) | Topologies and three-tier model lesson from the Free CCNA series |
+| [Collision vs Broadcast Domain (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/collision-broadcast-domain) | Difference between collision and broadcast domains |
+| [Spine-Leaf Architecture (Cisco)](https://www.cisco.com/c/en/us/solutions/data-center-virtualization/what-is-a-spine-and-leaf-architecture.html) | Cisco explanation of Spine-Leaf topology for data centers |

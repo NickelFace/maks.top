@@ -31,7 +31,7 @@ T instances earn **CPU credits** when idle and spend them during bursts.
 | `standard` | Cannot burst beyond earned credits |
 | `unlimited` | Can burst beyond credits; charged for surplus CPU |
 
-> **📌 Tip:** T instances with `unlimited` mode can incur unexpected charges during sustained high CPU. The exam may ask about cost surprises on T instances — unlimited mode is the culprit.
+> **📌 Tip:** T instances with `unlimited` mode can incur unexpected charges during sustained high CPU. The exam may ask about cost surprises on T instances; unlimited mode is the culprit.
 
 ---
 
@@ -47,7 +47,7 @@ Choosing the right purchasing option is one of the highest-yield topics on the S
 | **Savings Plans (Compute)** | $/hr commitment; 1 or 3 yr | Up to 66% | Flexible: any instance family, region, OS, tenancy |
 | **Savings Plans (EC2 Instance)** | $/hr commitment; specific family+region | Up to 72% | Less flexible; locked to family+region |
 | **Spot** | Bid on spare capacity | Up to 90% | Fault-tolerant, stateless, flexible workloads |
-| **Dedicated Host** | Per host; on-demand or reserved | — | BYOL per-socket/per-core; compliance |
+| **Dedicated Host** | Per host; on-demand or reserved | n/a | BYOL per-socket/per-core; compliance |
 | **Dedicated Instance** | Per instance | ~10% premium | Workload isolation; no hardware sharing |
 | **Capacity Reservation** | Pay OD rate; guaranteed capacity | 0% | Ensures capacity in a specific AZ |
 
@@ -76,7 +76,7 @@ aws ec2 request-spot-instances \
   --launch-specification file://spec.json
 ```
 
-> **📌 Tip:** Dedicated Host vs Dedicated Instance: **Dedicated Host** gives you visibility into physical sockets/cores — required for **BYOL (Bring Your Own License)** for Windows Server, SQL Server, Oracle. Dedicated Instance just guarantees no hardware sharing; you don't control placement.
+> **📌 Tip:** Dedicated Host vs Dedicated Instance: **Dedicated Host** gives you visibility into physical sockets/cores, required for **BYOL (Bring Your Own License)** for Windows Server, SQL Server, Oracle. Dedicated Instance just guarantees no hardware sharing; you don't control placement.
 
 ---
 
@@ -95,7 +95,7 @@ An AMI is a template containing the OS, application server, and applications for
 
 ### AMI scope and copying
 
-- AMIs are **region-specific** — to use in another region, you must **copy** them
+- AMIs are **region-specific**: to use in another region, you must **copy** them
 - Copying an encrypted AMI to another region: the copy is encrypted with the destination region's KMS key
 - AMIs can be shared with specific AWS accounts or made public
 
@@ -114,7 +114,7 @@ aws ec2 copy-image \
 - Snapshots are stored in S3 (managed by AWS; not directly accessible as S3 objects)
 - Encrypted instance → encrypted AMI; encrypted AMI → new instances inherit encryption
 
-> **📌 Tip:** AMIs are regional. If an exam question describes a DR scenario copying instances to another region — you must copy the AMI first, then launch from the copy. You cannot launch an AMI in a region it doesn't exist in.
+> **📌 Tip:** AMIs are regional. If an exam question describes a DR scenario copying instances to another region; you must copy the AMI first, then launch from the copy. You cannot launch an AMI in a region it doesn't exist in.
 
 ---
 
@@ -147,11 +147,11 @@ Provides instance information to code running on the instance.
 | **IMDSv2** | Requires session token (PUT first) | SSRF-safe; recommended |
 
 ```bash
-# IMDSv2 — step 1: get token
+# IMDSv2 - step 1: get token
 TOKEN=$(curl -sX PUT "http://169.254.169.254/latest/api/token" \
   -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 
-# IMDSv2 — step 2: use token
+# IMDSv2 - step 2: use token
 curl -sH "X-aws-ec2-metadata-token: $TOKEN" \
   http://169.254.169.254/latest/meta-data/instance-id
 
@@ -163,7 +163,7 @@ curl -sH "X-aws-ec2-metadata-token: $TOKEN" \
 # /latest/dynamic/instance-identity/document
 ```
 
-> **📌 Tip:** IMDSv2 is the exam-preferred answer for any question about securing IMDS. A common scenario: web application on EC2 is vulnerable to SSRF — attackers can steal IAM credentials via IMDSv1. Mitigation: enforce IMDSv2 (requires token header).
+> **📌 Tip:** IMDSv2 is the exam-preferred answer for any question about securing IMDS. A common scenario: web application on EC2 is vulnerable to SSRF; attackers can steal IAM credentials via IMDSv1. Mitigation: enforce IMDSv2 (requires token header).
 
 ---
 
@@ -184,7 +184,7 @@ aws ec2 create-placement-group \
   --strategy cluster
 ```
 
-> **📌 Tip:** Spread placement group → max 7 instances per AZ. This is a hard limit. If an exam scenario has 8+ instances that must all be on different hardware, Spread can't do it alone — consider multiple AZs.
+> **📌 Tip:** Spread placement group → max 7 instances per AZ. This is a hard limit. If an exam scenario has 8+ instances that must all be on different hardware, Spread can't do it alone: consider multiple AZs.
 
 ---
 
@@ -204,7 +204,7 @@ aws ec2 create-placement-group \
 - Not supported on bare metal instances
 - Maximum hibernate duration: 60 days
 
-> **📌 Tip:** Hibernate is often tested as "preserve application state across Stop/Start without re-initializing." Key requirement: **encrypted root EBS volume**. If the exam asks about in-memory data surviving a stop — hibernate is the answer.
+> **📌 Tip:** Hibernate is often tested as "preserve application state across Stop/Start without re-initializing." Key requirement: **encrypted root EBS volume**. If the exam asks about in-memory data surviving a stop; hibernate is the answer.
 
 ---
 
@@ -212,12 +212,12 @@ aws ec2 create-placement-group \
 
 | Trap | Correct understanding |
 |---|---|
-| "Spot instances are always available" | False — they can be interrupted with 2-min notice |
-| "Dedicated Instance = BYOL" | False — Dedicated HOST gives socket/core visibility needed for BYOL |
+| "Spot instances are always available" | False: they can be interrupted with 2-min notice |
+| "Dedicated Instance = BYOL" | False: Dedicated HOST gives socket/core visibility needed for BYOL |
 | "Reserved Instances lock you to one AZ" | Standard RI can be AZ-specific (capacity reserved) or regional (flexible) |
-| "AMIs are global" | False — AMIs are region-specific; must be copied to use elsewhere |
-| "User data runs on every boot" | False — by default runs once at first launch |
-| "IMDSv1 is fine" | False — IMDSv2 is the secure option; IMDSv1 is SSRF-vulnerable |
-| "Cluster placement group spans AZs" | False — cluster group is within ONE AZ only |
-| "Spread group allows any number" | False — max 7 instances per AZ |
-| "T instances never incur extra charges" | False — unlimited mode can charge for burst CPU |
+| "AMIs are global" | False: AMIs are region-specific; must be copied to use elsewhere |
+| "User data runs on every boot" | False: by default runs once at first launch |
+| "IMDSv1 is fine" | False: IMDSv2 is the secure option; IMDSv1 is SSRF-vulnerable |
+| "Cluster placement group spans AZs" | False: cluster group is within ONE AZ only |
+| "Spread group allows any number" | False: max 7 instances per AZ |
+| "T instances never incur extra charges" | False: unlimited mode can charge for burst CPU |

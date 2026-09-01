@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-103-2-text-filters/"
 page_lang: "en"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 101
+> **Exam weight: 2**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -20,7 +20,7 @@ Utilities covered: `bzcat`, `cat`, `cut`, `head`, `less`, `md5sum`, `nl`, `od`, 
 
 ## Text streams and filters
 
-In Linux almost everything is built around text. Config files, logs, command output, data tables, scripts — all text. Filters read text from standard input or a file, do something with it, and pass the result to standard output. That output can then be piped into the next filter with `|`.
+In Linux almost everything is built around text. Config files, logs, command output, data tables, scripts: all text. Filters read text from standard input or a file, do something with it, and pass the result to standard output. That output can then be piped into the next filter with `|`.
 
 A pipeline looks like this:
 
@@ -75,14 +75,14 @@ less +G file.txt             # open at the end of the file
 ```
 
 Navigation inside `less`:
-- `Space` / `f` — next page
-- `b` — previous page
-- `g` — beginning of file
-- `G` — end of file
-- `/pattern` — search forward
-- `?pattern` — search backward
-- `n` / `N` — next / previous search result
-- `q` — quit
+- `Space` / `f`: next page
+- `b`: previous page
+- `g`: beginning of file
+- `G`: end of file
+- `/pattern`: search forward
+- `?pattern`: search backward
+- `n` / `N`: next / previous search result
+- `q`: quit
 
 ### nl
 
@@ -109,7 +109,7 @@ od -t x1 file.txt            # hex byte by byte
 od -An -c file.txt           # no addresses, characters only
 ```
 
-Example: `echo "AB" | od -c` shows `A`, `B`, `\n` — you can see the newline character.
+Example: `echo "AB" | od -c` shows `A`, `B`, `\n`; you can see the newline character.
 
 ---
 
@@ -185,7 +185,7 @@ sort file.txt | uniq -u          # show only unique lines
 sort file.txt | uniq -i          # case-insensitive
 ```
 
-Example — count word frequency in a text:
+Example. Count word frequency in a text:
 
 ```bash
 tr ' ' '\n' < text.txt | sort | uniq -c | sort -rn | head
@@ -220,7 +220,7 @@ echo "Hello World" | tr '[:lower:]' '[:upper:]'   # to uppercase
 
 `sed` (stream editor) is a powerful stream editor. It applies commands to each line.
 
-Most common use — text substitution (`s` = substitute):
+Most common use. Text substitution (`s` = substitute):
 
 ```bash
 sed 's/old/new/' file.txt           # replace first occurrence per line
@@ -250,7 +250,7 @@ sed -n '/pattern/p' file.txt     # print lines matching pattern
 sed -n -e '1'p -e '10'p -e '$'p file.txt  # lines 1, 10 and last
 ```
 
-In `sed`, `$` denotes the last line of the file. The trick `sed -n '$='` prints the last line number — i.e. the total line count, as an alternative to `wc -l`.
+In `sed`, `$` denotes the last line of the file. The trick `sed -n '$='` prints the last line number; i.e. the total line count, as an alternative to `wc -l`.
 
 `sed` also accepts input via redirection:
 
@@ -290,7 +290,7 @@ wc -L file.txt                  # length of the longest line
 wc -l *.txt                     # for multiple files + total
 ```
 
-Classic example: `ls | wc -l` — count files in a directory.
+Classic example: `ls | wc -l`, count files in a directory.
 
 ---
 
@@ -315,7 +315,7 @@ bzcat file.bz2    # same as: bunzip2 -c file.bz2
 xzcat file.xz     # same as: xz -dc file.xz
 ```
 
-Note: `gzip file.txt` compresses the file to `file.txt.gz` and removes the original. That is why `zcat` is so convenient — no need to decompress, read, then recompress.
+Note: `gzip file.txt` compresses the file to `file.txt.gz` and removes the original. That is why `zcat` is so convenient; no need to decompress, read, then recompress.
 
 Combining with other filters:
 
@@ -437,7 +437,7 @@ Without `-c` it computes a hash. With `-c` it reads a file of previously saved c
 
 ### Guided Exercises
 
-**Exercise 1 — Counting processors**
+**Exercise 1: Counting processors**
 
 The file `/proc/cpuinfo` has a line like `processor : 0`, `processor : 1`, etc. for each processor.
 
@@ -483,7 +483,7 @@ Here `'$='` means: find the last line (`$`) and print its number (`=`). The resu
 
 ---
 
-**Exercise 2 — Exploring /etc/passwd**
+**Exercise 2: Exploring /etc/passwd**
 
 **2.1. Which users have access to the Bash shell?**
 
@@ -550,13 +550,13 @@ cut -d: -f4 /etc/passwd | sort -u | wc -l
 sed -n -e '1'p -e '10'p -e '$'p /etc/passwd
 ```
 
-The `-n` flag suppresses all output. Each `-e` block is a separate instruction: `1p` — first line, `10p` — tenth line, `'$'p` — last line (`$` in sed means end of file).
+The `-n` flag suppresses all output. Each `-e` block is a separate instruction: `1p`, first line, `10p`, tenth line, `'$'p`, last line (`$` in sed means end of file).
 
 </details>
 
 ---
 
-**Exercise 3 — The mypasswd file**
+**Exercise 3: The mypasswd file**
 
 Create a file `mypasswd` with the following content:
 
@@ -587,7 +587,7 @@ john:x:1006:1000:John Chapel,Sales,,,Main Office:/home/john:/bin/bash
 sed -n /:1000:[A-Z]/p mypasswd
 ```
 
-The naive `sed -n /1000/p mypasswd` also matches carol (whose UID is 1000). The regex `/:1000:[A-Z]/` requires an uppercase letter immediately after `1000:`, which marks the GECOS field (full name) — uniquely identifying the GID field.
+The naive `sed -n /1000/p mypasswd` also matches carol (whose UID is 1000). The regex `/:1000:[A-Z]/` requires an uppercase letter immediately after `1000:`, which marks the GECOS field (full name): uniquely identifying the GID field.
 
 </details>
 
@@ -620,7 +620,7 @@ John Chapel
 
 ### Explorational Exercises
 
-**Exercise 1 — Prize draw**
+**Exercise 1: Prize draw**
 
 Pick a random Main Office employee for a prize draw using `sed`, `cut` and `sort -R`.
 
@@ -632,17 +632,17 @@ sed -n /'Main Office'/p mypasswd | cut -d: -f5 | cut -d, -f1 | sort -R | head -1
 ```
 
 Breakdown:
-- `sed -n /'Main Office'/p mypasswd` — lines containing "Main Office"
-- `cut -d: -f5` — fifth field (full name + department)
-- `cut -d, -f1` — only the name before the first comma
-- `sort -R` — random shuffle (different order each run)
-- `head -1` — take only the first name
+- `sed -n /'Main Office'/p mypasswd`: lines containing "Main Office"
+- `cut -d: -f5`, fifth field (full name + department)
+- `cut -d, -f1`: only the name before the first comma
+- `sort -R`: random shuffle (different order each run)
+- `head -1`: take only the first name
 
 </details>
 
 ---
 
-**Exercise 2 — Count by department**
+**Exercise 2: Count by department**
 
 How many people work in Finance, Engineering and Sales?
 
@@ -666,7 +666,7 @@ Result:
 
 ---
 
-**Exercise 3 — Create a CSV file**
+**Exercise 3: Create a CSV file**
 
 Prepare `names.csv` for import into LibreOffice in the format:
 
@@ -706,7 +706,7 @@ sed -n /'Main Office'/p mypasswd | cut -d: -f5 | cut -d, -f1,2 | tr ' ' , > name
 
 ---
 
-**Exercise 4 — Integrity check with md5sum**
+**Exercise 4: Integrity check with md5sum**
 
 Verify that `names.csv` was not modified during transfer.
 
@@ -726,13 +726,13 @@ md5sum names.csv
 # f44a0d68cb480466099021bf6d6d2e65  names.csv
 ```
 
-It is best to send the file and its checksum over different channels. Linux distributions use the same principle: they publish `SHA256SUMS` or `MD5SUMS` files alongside ISO images. For real security use SHA-256 or SHA-512 — MD5 is cryptographically broken.
+It is best to send the file and its checksum over different channels. Linux distributions use the same principle: they publish `SHA256SUMS` or `MD5SUMS` files alongside ISO images. For real security use SHA-256 or SHA-512; MD5 is cryptographically broken.
 
 </details>
 
 ---
 
-**Exercise 5 — Split a book into parts**
+**Exercise 5: Split a book into parts**
 
 Split a text file into parts of 100 lines to read 100 lines per day.
 
@@ -750,8 +750,8 @@ split -l 100 -d 50461-0.txt melville
 ```
 
 Flags:
-- `-l 100` — 100 lines per file
-- `-d` — numeric suffixes instead of alphabetic (melville00, melville01...)
+- `-l 100`: 100 lines per file
+- `-d`: numeric suffixes instead of alphabetic (melville00, melville01...)
 
 Check the line count of a part:
 ```bash
@@ -762,7 +762,7 @@ nl melville00 | tail -1
 
 ---
 
-**Exercise 6 — ls -l, tr and cut**
+**Exercise 6: ls -l, tr and cut**
 
 Display file information from `/etc` in various ways, combining `ls -l`, `tr` and `cut`.
 
@@ -796,7 +796,7 @@ ls -l /etc | grep ^d | tr -s ' ' | cut -d" " -f9,3
 
 ---
 
-**Exercise 7 — Monitor a log and plug in a USB drive**
+**Exercise 7: Monitor a log and plug in a USB drive**
 
 Use `tail -f` to monitor `/var/log/syslog` while inserting a USB drive. Find the device model, manufacturer and storage capacity.
 
@@ -822,10 +822,10 @@ The `-i` flag makes `grep` case-insensitive. The `|` inside quotes acts as a log
 
 ## Related topics
 
-- [103.1 Work on the Command Line](/posts/lpic1-103-1-work-on-command-line/) — shell, I/O redirection and pipelines
-- 103.3 Perform Basic File Management — file management
-- 103.4 Use Streams, Pipes and Redirects — streams and redirections
-- 103.7 Search Text Files Using Regular Expressions — text editors (vi, nano)
+- [103.1 Work on the Command Line](/posts/lpic1-103-1-work-on-command-line/): shell, I/O redirection and pipelines
+- 103.3 Perform Basic File Management: file management
+- 103.4 Use Streams, Pipes and Redirects: streams and redirections
+- 103.7 Search Text Files Using Regular Expressions, text editors (vi, nano)
 
 ---
 

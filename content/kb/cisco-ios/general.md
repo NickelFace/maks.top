@@ -118,7 +118,7 @@ Essential Cisco IOS command reference: <strong>exec modes, interface config, sta
 <tr><td class="mono">terminal monitor</td><td class="desc">Send console messages (including debug) to SSH/Telnet session</td></tr>
 <tr><td class="mono">show control-plane host open-ports</td><td class="desc">Open TCP/UDP ports on the device</td></tr>
 <tr><td class="mono">show processes cpu</td><td class="desc">CPU utilization per process</td></tr>
-<tr><td class="mono">debug ip nat</td><td class="desc">Real-time NAT debug (may overload CPU — use carefully)</td></tr>
+<tr><td class="mono">debug ip nat</td><td class="desc">Real-time NAT debug (may overload CPU: use carefully)</td></tr>
 </tbody>
 </table>
 </div>
@@ -179,7 +179,7 @@ Essential Cisco IOS command reference: <strong>exec modes, interface config, sta
 </tbody>
 </table>
 
-> **Important:** if one side has speed fixed to anything other than Auto and duplex is set to Full — auto-negotiation is disabled. The other side will not negotiate and may default to Half, causing a duplex mismatch.
+> **Important:** if one side has speed fixed to anything other than Auto and duplex is set to Full, auto-negotiation is disabled. The other side will not negotiate and may default to Half, causing a duplex mismatch.
 </div>
 </div>
 

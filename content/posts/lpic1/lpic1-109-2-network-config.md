@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-109-2-network-config/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -38,11 +38,11 @@ Key files and commands: `/etc/hostname`, `/etc/hosts`, `/etc/nsswitch.conf`, `/e
 
 The kernel assigns names in order of priority:
 
-1. **BIOS onboard index** — `eno1`, `eno2`
-2. **PCI slot number** — `ens1`, `ens3`
-3. **Bus topology** (PCI bus/slot/function) — `enp2s0`
-4. **MAC address** — `enx001122334455`
-5. **Legacy** — `eth0`, `eth1` (fallback)
+1. **BIOS onboard index**: `eno1`, `eno2`
+2. **PCI slot number**: `ens1`, `ens3`
+3. **Bus topology** (PCI bus/slot/function): `enp2s0`
+4. **MAC address**: `enx001122334455`
+5. **Legacy**: `eth0`, `eth1` (fallback)
 
 ### Listing Interfaces
 
@@ -327,7 +327,7 @@ systemd-networkd .network file:
 
 ## Exercises
 
-### Exercise 1 — Static Interface Configuration
+### Exercise 1: Static Interface Configuration
 
 Write an `/etc/network/interfaces` stanza that configures `eth1` statically with IP `10.0.0.50/24`, gateway `10.0.0.1`, and DNS `10.0.0.53`.
 
@@ -347,7 +347,7 @@ iface eth1 inet static
 
 ---
 
-### Exercise 2 — Hostname Change
+### Exercise 2: Hostname Change
 
 Change the system's static hostname to `dbserver` using `hostnamectl`, then verify the change.
 
@@ -363,7 +363,7 @@ hostnamectl status
 
 ---
 
-### Exercise 3 — nmcli Static Connection
+### Exercise 3: nmcli Static Connection
 
 Use `nmcli` to create a static Ethernet connection named `corp` on `eth0` with IP `192.168.10.20/24`, gateway `192.168.10.1`, and DNS `192.168.10.5`.
 
@@ -383,7 +383,7 @@ nmcli connection up corp
 
 ---
 
-### Exercise 4 — systemd-networkd
+### Exercise 4: systemd-networkd
 
 Write a `systemd-networkd` configuration file that enables DHCP on interface `ens3`.
 
@@ -404,7 +404,7 @@ DHCP=yes
 
 ---
 
-### Exercise 5 — nsswitch.conf
+### Exercise 5: nsswitch.conf
 
 Modify the `hosts` line in `/etc/nsswitch.conf` so that `/etc/hosts` is checked first, and DNS is only consulted if the host is not found there.
 

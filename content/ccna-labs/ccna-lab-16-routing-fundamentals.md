@@ -32,7 +32,7 @@ R1 (F0/0: 10.10.10.1, F0/1: 10.10.20.1) ---- R2 (F0/0: 10.10.20.2, F0/1: 10.10.3
 4. Add a static route on R3 to 10.10.10.0/24: `ip route 10.10.10.0 255.255.255.0 10.10.30.1`
 5. Add routes on R2 (both directions)
 6. Verify the routing table (S = Static, C = Connected): `show ip route`
-7. Ping PC2 from PC1 — it should succeed
+7. Ping PC2 from PC1: it should succeed
 8. Add a default route on R1: `ip route 0.0.0.0 0.0.0.0 10.10.20.2`
 9. Verify Longest Prefix Match: the more specific route always wins
 
@@ -48,4 +48,4 @@ R1#ping 10.10.30.10 source 10.10.10.1
 ```
 
 > **💡 Tip:**
-> Routing table codes: **C** = Connected, **S** = Static, **S*** = default static route. Longest prefix match — the router always selects the most specific route.
+> Routing table codes: **C** = Connected, **S** = Static, **S*** = default static route. Longest prefix match, the router always selects the most specific route.

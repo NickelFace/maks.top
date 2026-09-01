@@ -20,7 +20,7 @@ Goal: Configure OSPF for IPv6, preserving the same logic (metrics, timers, filte
 
 ![OSPF](/img/neteng/09/1.png)
 
-Link-local addresses were missing from the previous lab — adding them now alongside OSPFv3 config.
+Link-local addresses were missing from the previous lab, adding them now alongside OSPFv3 config.
 
 ---
 
@@ -164,10 +164,10 @@ copy running-config startup-config
 
 ## Verification
 
-R19 (area 101 — stub no-summary) receives only the default route:
+R19 (area 101. Stub no-summary) receives only the default route:
 
 <details>
-<summary>R19 — show ipv6 route ospf</summary>
+<summary>R19: show ipv6 route ospf</summary>
 <pre><code>
 R19#sh ipv6 route ospf
 IPv6 Routing Table - default - 4 entries
@@ -183,10 +183,10 @@ OI  ::/0 [110/11]
 </code></pre>
 </details>
 
-R20 (area 102) receives all routes except the area 101 network **2002:ACAD:DB8:7::/64** — filtered by `PL6` on R15:
+R20 (area 102) receives all routes except the area 101 network **2002:ACAD:DB8:7::/64**, filtered by `PL6` on R15:
 
 <details>
-<summary>R20 — show ipv6 route ospf</summary>
+<summary>R20: show ipv6 route ospf</summary>
 <pre><code>
 R20#show ipv6 route ospf
 IPv6 Routing Table - default - 9 entries
@@ -212,10 +212,10 @@ OI  2002:ACAD:DB8:9::/64 [110/30]
 </code></pre>
 </details>
 
-Timers and metrics are identical to OSPFv2 — no changes needed:
+Timers and metrics are identical to OSPFv2, no changes needed:
 
 <details>
-<summary>R15 — show ipv6 ospf interface e0/0 vs show ip ospf interface e0/0</summary>
+<summary>R15: show ipv6 ospf interface e0/0 vs show ip ospf interface e0/0</summary>
 <pre><code>
 R15#show ipv6 ospf interface e0/0
 Ethernet0/0 is up, line protocol is up

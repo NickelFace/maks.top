@@ -42,7 +42,7 @@ Linux filesystem mounting: <strong>mount/umount</strong> commands, <strong>/etc/
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">mount -o loop image.iso /mnt/iso</td><td class="desc">Mount an ISO image as a filesystem</td></tr>
-<tr><td class="mono">mount --bind /src /dst</td><td class="desc">Bind mount — expose a directory at another path</td></tr>
+<tr><td class="mono">mount --bind /src /dst</td><td class="desc">Bind mount: expose a directory at another path</td></tr>
 <tr><td class="mono">mount --rbind /src /dst</td><td class="desc">Recursive bind (includes sub-mounts)</td></tr>
 <tr><td class="mono">mount --make-private /mnt</td><td class="desc">Prevent mount propagation (namespaces)</td></tr>
 <tr><td class="mono">mount -t tmpfs -o size=512m tmpfs /mnt/ram</td><td class="desc">In-memory tmpfs mount</td></tr>
@@ -79,11 +79,11 @@ Linux filesystem mounting: <strong>mount/umount</strong> commands, <strong>/etc/
 <table class="cheat-table">
 <thead><tr><th>Field</th><th>Example</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">device</td><td class="desc">UUID=abc-123 or /dev/sdb1</td><td class="desc">Source — UUID is preferred (stable across reboots)</td></tr>
+<tr><td class="mono">device</td><td class="desc">UUID=abc-123 or /dev/sdb1</td><td class="desc">Source: UUID is preferred (stable across reboots)</td></tr>
 <tr><td class="mono">mount point</td><td class="desc">/mnt/data</td><td class="desc">Target directory</td></tr>
 <tr><td class="mono">type</td><td class="desc">ext4 / xfs / btrfs / nfs / auto</td><td class="desc">Filesystem type</td></tr>
 <tr><td class="mono">options</td><td class="desc">defaults,noatime,nofail</td><td class="desc">Comma-separated mount options</td></tr>
-<tr><td class="mono">dump</td><td class="desc">0 or 1</td><td class="desc">Include in dump backup — almost always 0</td></tr>
+<tr><td class="mono">dump</td><td class="desc">0 or 1</td><td class="desc">Include in dump backup: almost always 0</td></tr>
 <tr><td class="mono">pass</td><td class="desc">0, 1, 2</td><td class="desc">fsck order: 0 = skip, 1 = root, 2 = all others</td></tr>
 </tbody>
 </table>
@@ -124,10 +124,10 @@ UUID=1234-abcd  /mnt/data  ext4  defaults,noatime,nofail  0  2
 # SSD with TRIM
 UUID=5678-efgh  /home      ext4  defaults,noatime,discard  0  2
 
-# XFS — growfs works while mounted
+# XFS - growfs works while mounted
 UUID=9abc-1234  /var/data  xfs   defaults,noatime          0  2
 
-# NFS share — wait for network, don't block boot
+# NFS share - wait for network, don't block boot
 10.0.0.1:/exports  /mnt/nfs  nfs  defaults,_netdev,nofail  0  0
 
 # tmpfs RAM disk

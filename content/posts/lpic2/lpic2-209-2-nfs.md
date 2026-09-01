@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-209-2-nfs/"
 page_lang: "en"
 ---
 
-> **Exam topic 209.2** — NFS Server Configuration (weight: 3). Covers NFSv3 setup, `/etc/exports` configuration, NFS utilities, client-side mounting, and access control. LPIC-2 focuses on **NFSv3**.
+> **Exam topic 209.2**: NFS Server Configuration (weight: 3). Covers NFSv3 setup, `/etc/exports` configuration, NFS utilities, client-side mounting, and access control. LPIC-2 focuses on **NFSv3**.
 
 ---
 
@@ -26,13 +26,13 @@ page_lang: "en"
 | NFSv3 | 1995 | UDP or TCP | 64-bit files, async write, weak cache consistency |
 | NFSv4 | 2000/2015 | TCP (primary) | Kerberos, single port 2049, built-in locking |
 
-NFSv3 uses **RPC (Remote Procedure Call)** for mounting, locking, and quotas — requiring multiple ports, which complicates firewall configuration.
+NFSv3 uses **RPC (Remote Procedure Call)** for mounting, locking, and quotas: requiring multiple ports, which complicates firewall configuration.
 
 ```bash
-# Disable NFSv4 on Red Hat — /etc/sysconfig/nfs
+# Disable NFSv4 on Red Hat - /etc/sysconfig/nfs
 RPCNFSDARGS='--no-nfs-version 4'
 
-# Debian — /etc/default/nfs-kernel-server
+# Debian - /etc/default/nfs-kernel-server
 # add --no-nfs-version 4 to RPCMOUNTDOPTS
 
 # Force NFSv3 on mount
@@ -63,7 +63,7 @@ systemctl start nfs rpcbind
 systemctl start nfs-kernel-server rpcbind
 ```
 
-> On kernel-space NFS systems, the server appears in the process list as `[nfsd]`. On older user-space NFS systems — as `rpc.nfsd`.
+> On kernel-space NFS systems, the server appears in the process list as `[nfsd]`. On older user-space NFS systems: as `rpc.nfsd`.
 
 ---
 
@@ -90,7 +90,7 @@ Additional `.exports` files can be placed in `/etc/exports.d/`.
 > **Critical syntax rule:** There must be NO space between the client name and the options parenthesis. A space turns the rest of the line into a separate rule applying to ALL hosts.
 >
 > Correct: `/share client(rw)`
-> Wrong: `/share client (rw)` — the `(rw)` will apply to ALL hosts!
+> Wrong: `/share client (rw)`; the `(rw)` will apply to ALL hosts!
 
 ### /etc/exports options:
 
@@ -108,7 +108,7 @@ Additional `.exports` files can be placed in `/etc/exports.d/`.
 | `anongid=N` | GID for anonymous group | 65534 |
 | `subtree_check` | Checks permissions in parent directories | no |
 | `no_subtree_check` | Disables subtree check. Improves reliability. | yes |
-| `fsid=N` | Filesystem ID. In NFSv4, `fsid=0` or `fsid=root` = pseudo-filesystem root. | — |
+| `fsid=N` | Filesystem ID. In NFSv4, `fsid=0` or `fsid=root` = pseudo-filesystem root. | n/a |
 
 ```bash
 # /etc/exports examples
@@ -150,9 +150,9 @@ exportfs -u 192.168.1.10:/srv/temp
 ```
 
 Export data is stored in:
-- `/var/lib/nfs/etab` — detailed list with default options
-- `/var/lib/nfs/xtab` — active exports
-- `/proc/fs/nfs/exports` — kernel export table
+- `/var/lib/nfs/etab`: detailed list with default options
+- `/var/lib/nfs/xtab`: active exports
+- `/proc/fs/nfs/exports`: kernel export table
 
 ### showmount
 
@@ -223,8 +223,8 @@ mount -t nfs -o vers=3 192.168.1.100:/srv/data /mnt/nfs_share
 | Option | Description |
 |---|---|
 | `ro` / `rw` | Read-only / read-write |
-| `hard` | On server unavailability — infinite retries (default) |
-| `soft` | On unavailability — return error after timeout |
+| `hard` | On server unavailability: infinite retries (default) |
+| `soft` | On unavailability: return error after timeout |
 | `intr` | Allow interrupting a hung mount (Ctrl+C) |
 | `nointr` | Disallow interruption |
 | `bg` | Retry mounting in background |
@@ -239,7 +239,7 @@ mount -t nfs -o vers=3 192.168.1.100:/srv/data /mnt/nfs_share
 | `noexec` | Prevent executing binaries |
 | `port=N` | Specify NFS server port |
 
-> Recommended combination: `hard,intr,bg` — mount doesn't hang permanently but keeps retrying.
+> Recommended combination: `hard,intr,bg`; mount doesn't hang permanently but keeps retrying.
 
 ### Checking mounted NFS resources:
 
@@ -253,7 +253,7 @@ showmount -a                  # clients with mount paths
 
 ## NFS Security
 
-NFSv3 uses two mechanisms: `/etc/exports` entries (who can mount what) and AUTH_SYS/AUTH_UNIX (client sends UID/GID — easy to spoof).
+NFSv3 uses two mechanisms: `/etc/exports` entries (who can mount what) and AUTH_SYS/AUTH_UNIX (client sends UID/GID, easy to spoof).
 
 ### Recommendations:
 
@@ -262,7 +262,7 @@ Use TCP instead of UDP:
 mount -o tcp server:/share /mnt
 ```
 
-Avoid wildcards in `/etc/exports` — specify individual IPs.
+Avoid wildcards in `/etc/exports`, specify individual IPs.
 
 Apply squashing for public exports:
 ```bash
@@ -295,12 +295,12 @@ daemon: client_list
 ```
 
 ```bash
-# /etc/hosts.deny — block everything
+# /etc/hosts.deny - block everything
 portmap: ALL
 mountd: ALL
 statd: ALL
 
-# /etc/hosts.allow — allow specific hosts
+# /etc/hosts.allow - allow specific hosts
 portmap: 192.168.1.10, 192.168.1.20
 mountd: 192.168.1.0/255.255.255.0
 statd: .example.com
@@ -315,13 +315,13 @@ portmap: .example.com
 portmap: @workstations
 ```
 
-> No restart needed after changing `hosts.allow` and `hosts.deny` — changes take effect immediately.
+> No restart needed after changing `hosts.allow` and `hosts.deny`; changes take effect immediately.
 
 > Strategy: deny all in `hosts.deny` (`portmap: ALL`), then allow specific hosts in `hosts.allow`.
 
 ---
 
-## NFSv4 — Brief Overview
+## NFSv4: Brief Overview
 
 The exam requires **awareness**, not deep knowledge.
 
@@ -330,7 +330,7 @@ Key differences from NFSv3:
 - TCP by default
 - Built-in file locking (NLM not needed)
 - Kerberos for authentication and encryption
-- Pseudo-filesystem — client sees exports as a single tree
+- Pseudo-filesystem: client sees exports as a single tree
 - `idmapd` for UID/GID mapping by name
 - portmapper (rpcbind) not required (but may be present for compatibility)
 
@@ -351,8 +351,8 @@ Key differences from NFSv3:
 | `/etc/exports` | NFS server export configuration |
 | `/etc/exports.d/*.exports` | Additional export files |
 | `/etc/fstab` | Permanent NFS mounts on client |
-| `/etc/hosts.allow` | TCP Wrappers — allowed hosts |
-| `/etc/hosts.deny` | TCP Wrappers — denied hosts |
+| `/etc/hosts.allow` | TCP Wrappers: allowed hosts |
+| `/etc/hosts.deny` | TCP Wrappers: denied hosts |
 | `/var/lib/nfs/etab` | Detailed export table with default options |
 | `/var/lib/nfs/xtab` | Active exports |
 | `/var/lib/nfs/rmtab` | Current clients and mounted paths |
@@ -377,10 +377,10 @@ cat /proc/mounts                               # check mounted filesystems
 
 | Pitfall | Rule |
 |---|---|
-| `root_squash` | Enabled by **default** — `no_root_squash` must be explicit |
-| `sync` | NOT default — must be specified for rw exports |
-| Space before `(` in /etc/exports | Critical error — opens access to ALL hosts |
-| `showmount -e` with NFSv4 | Doesn't work — use `exportfs -v` |
+| `root_squash` | Enabled by **default**: `no_root_squash` must be explicit |
+| `sync` | NOT default: must be specified for rw exports |
+| Space before `(` in /etc/exports | Critical error: opens access to ALL hosts |
+| `showmount -e` with NFSv4 | Doesn't work: use `exportfs -v` |
 | portmapper port | **111** |
 | nfsd port | **2049** |
 | TCP Wrappers | Apply to `rpcbind`, not directly to `rpc.nfsd` |

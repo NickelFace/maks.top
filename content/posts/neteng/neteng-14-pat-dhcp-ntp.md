@@ -15,13 +15,13 @@ lang_pair: "/posts/neteng/ru/neteng-14-pat-dhcp-ntp/"
 
 Goal: Configure DHCP in the Moscow office, configure time synchronization in the Moscow office, configure NAT in the Moscow, St. Petersburg, and Chokurdakh offices.
 
-1. Configure NAT(PAT) on R14 and R15 — translation must use the AS1001 address
-2. Configure NAT(PAT) on R18 — translation must use a pool of 5 addresses from AS2042
+1. Configure NAT(PAT) on R14 and R15: translation must use the AS1001 address
+2. Configure NAT(PAT) on R18: translation must use a pool of 5 addresses from AS2042
 3. Configure static NAT for R20
 4. Configure NAT so that R19 is reachable from any node for remote management
 5. Configure static NAT(PAT) for the Chokurdakh office
-6. Configure DHCP server in the Moscow office on R12 and R13 — VPC1 and VPC7 must receive network settings via DHCP
-7. Configure NTP server on R12 and R13 — all devices in the Moscow office must synchronize time with R12 and R13
+6. Configure DHCP server in the Moscow office on R12 and R13, VPC1 and VPC7 must receive network settings via DHCP
+7. Configure NTP server on R12 and R13, all devices in the Moscow office must synchronize time with R12 and R13
 8. All offices in the lab must have IP connectivity
 9. Document the plan and changes
 
@@ -29,12 +29,12 @@ Goal: Configure DHCP in the Moscow office, configure time synchronization in the
 
 ---
 
-## NAT(PAT) — Moscow R14 and R15
+## NAT(PAT): Moscow R14 and R15
 
 Translation uses the Loopback address from the AS1001 address space announced via BGP.
 
 <details>
-<summary>R14 — NAT config</summary>
+<summary>R14: NAT config</summary>
 <pre><code>
 enable
 configure terminal
@@ -63,7 +63,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 — NAT config</summary>
+<summary>R15: NAT config</summary>
 <pre><code>
 enable
 configure terminal
@@ -93,12 +93,12 @@ copy running-config startup-config
 
 ---
 
-## NAT(PAT) — St. Petersburg R18
+## NAT(PAT): St. Petersburg R18
 
 R18 has two uplinks to Triada (R24 via e0/2, R26 via e0/3). Traffic is split between the two provider subnets: first half NATed behind **77.77.77.8/30**, the other behind **77.77.77.12/30**.
 
 <details>
-<summary>R18 — NAT config</summary>
+<summary>R18: NAT config</summary>
 <pre><code>
 enable
 configure terminal
@@ -138,7 +138,7 @@ copy running-config startup-config
 R20's internal Loopback address (1.1.1.19 space) is statically mapped to a public address in the 200.20.20.0/22 range. The same statement is applied on both R14 and R15 for redundancy.
 
 <details>
-<summary>R14 — static NAT for R20</summary>
+<summary>R14: static NAT for R20</summary>
 <pre><code>
 enable
 configure terminal
@@ -155,7 +155,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 — static NAT for R20</summary>
+<summary>R15: static NAT for R20</summary>
 <pre><code>
 enable
 configure terminal
@@ -171,10 +171,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Traffic is preferred through R15 — achieved at IGP (OSPF) and EGP (BGP) level. If R15 goes down, traffic automatically fails over to R14.
+Traffic is preferred through R15, achieved at IGP (OSPF) and EGP (BGP) level. If R15 goes down, traffic automatically fails over to R14.
 
 <details>
-<summary>Traffic engineering — OSPF + BGP path selection</summary>
+<summary>Traffic engineering: OSPF + BGP path selection</summary>
 <pre><code>
 enable
 configure terminal
@@ -211,7 +211,7 @@ copy running-config startup-config
 Verified with traceroute from Labytnangi and St. Petersburg:
 
 <details>
-<summary>R27 / R32 — traceroute to 200.20.20.20</summary>
+<summary>R27 / R32: traceroute to 200.20.20.20</summary>
 <pre><code>
 R27>traceroute 200.20.20.20
   1 210.110.35.1 1 msec 0 msec 1 msec
@@ -234,12 +234,12 @@ R32>traceroute 200.20.20.20
 
 ---
 
-## NAT for R19 — remote management via SSH
+## NAT for R19: remote management via SSH
 
 Port-static NAT maps R19's SSH port (TCP/22) to a public address in AS1001. Configured on both R14 and R15.
 
 <details>
-<summary>R14 / R15 — static PAT for SSH</summary>
+<summary>R14 / R15: static PAT for SSH</summary>
 <pre><code>
 enable
 configure terminal
@@ -266,7 +266,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R19 — SSH server setup</summary>
+<summary>R19: SSH server setup</summary>
 <pre><code>
 enable
 configure terminal
@@ -295,12 +295,12 @@ copy running-config startup-config
 
 ---
 
-## Static NAT — Chokurdakh (R28)
+## Static NAT: Chokurdakh (R28)
 
-Chokurdakh needs at least a /29 prefix: –1 network, –1 loopback, –1 broadcast, –2 for static NAT entries = 5 addresses minimum.
+Chokurdakh needs at least a /29 prefix: -1 network, -1 loopback, -1 broadcast, -2 for static NAT entries = 5 addresses minimum.
 
 <details>
-<summary>R28 — NAT config</summary>
+<summary>R28: NAT config</summary>
 <pre><code>
 enable
 configure terminal
@@ -326,7 +326,7 @@ copy running-config startup-config
 The /29 prefix must be announced via BGP and adjacent routers need a static route pointing to R28.
 
 <details>
-<summary>R25 / R26 — BGP announcement + static route + verification</summary>
+<summary>R25 / R26: BGP announcement + static route + verification</summary>
 <pre><code>
 enable
 configure terminal
@@ -349,7 +349,7 @@ R25#ping 111.110.35.6
 
 ---
 
-## DHCP — Moscow (R12 and R13)
+## DHCP: Moscow (R12 and R13)
 
 R12 serves VPC1 (VLAN connected to R12), R13 serves VPC7.
 
@@ -385,12 +385,12 @@ DDORA IP 172.16.1.2/24 GW 172.16.1.1
 
 ---
 
-## NTP — Moscow office
+## NTP: Moscow office
 
 R12 and R13 act as NTP masters (stratum 5). They broadcast NTP on VLAN 33 and uplink interfaces. R14, R15, R19, R20 sync via unicast to Loopback addresses. Switches sync via broadcast on the management VLAN.
 
 <details>
-<summary>R13 — NTP server</summary>
+<summary>R13: NTP server</summary>
 <pre><code>
 enable
 configure terminal
@@ -417,7 +417,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R12 — NTP server</summary>
+<summary>R12: NTP server</summary>
 <pre><code>
 enable
 configure terminal
@@ -444,7 +444,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R14 — NTP client + show ntp associations</summary>
+<summary>R14: NTP client + show ntp associations</summary>
 <pre><code>
 enable
 configure terminal
@@ -469,7 +469,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 — NTP client + show ntp associations</summary>
+<summary>R15: NTP client + show ntp associations</summary>
 <pre><code>
 enable
 configure terminal
@@ -491,7 +491,7 @@ R15#show ntp associations
 </details>
 
 <details>
-<summary>R20 — NTP client + show ntp associations</summary>
+<summary>R20: NTP client + show ntp associations</summary>
 <pre><code>
 enable
 configure terminal
@@ -511,7 +511,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R19 — NTP client + show ntp associations</summary>
+<summary>R19: NTP client + show ntp associations</summary>
 <pre><code>
 enable
 configure terminal
@@ -530,10 +530,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Switches receive NTP via broadcast on VLAN 33 — no direct unicast config needed since R12/R13 are on the same broadcast domain via HSRP.
+Switches receive NTP via broadcast on VLAN 33, no direct unicast config needed since R12/R13 are on the same broadcast domain via HSRP.
 
 <details>
-<summary>SW2 / SW3 / SW4 / SW5 — NTP (SW4 example)</summary>
+<summary>SW2 / SW3 / SW4 / SW5: NTP (SW4 example)</summary>
 <pre><code>
 enable
 configure terminal
@@ -563,7 +563,7 @@ copy running-config startup-config
 ## Verify IP connectivity
 
 <details>
-<summary>R15 — ping all remote offices</summary>
+<summary>R15: ping all remote offices</summary>
 <pre><code>
 R15>ping 210.110.35.2
 !!!!!  Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/3 ms
@@ -589,7 +589,7 @@ R15>ping 77.77.77.14
 > R21, R22, R23, R24, R25, R26 configs unchanged from lab 13.
 
 <details>
-<summary>R14 (AS 1001) — lab 14 changes</summary>
+<summary>R14 (AS 1001): lab 14 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -635,7 +635,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 (AS 1001) — lab 14 changes</summary>
+<summary>R15 (AS 1001): lab 14 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -681,7 +681,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — St. Petersburg (AS 2042) — lab 14 changes</summary>
+<summary>R18: St. Petersburg (AS 2042), lab 14 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -715,7 +715,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R28 — Chokurdakh — lab 14 changes</summary>
+<summary>R28: Chokurdakh, lab 14 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -739,7 +739,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R12 — DHCP + NTP server</summary>
+<summary>R12: DHCP + NTP server</summary>
 <pre><code>
 enable
 configure terminal
@@ -774,7 +774,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R13 — DHCP + NTP server</summary>
+<summary>R13: DHCP + NTP server</summary>
 <pre><code>
 enable
 configure terminal
@@ -809,7 +809,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R19 — SSH + OSPF</summary>
+<summary>R19: SSH + OSPF</summary>
 <pre><code>
 enable
 configure terminal

@@ -41,7 +41,7 @@ PC2 (10.10.10.20) ----SW1
    R1(config)#access-list 110 deny icmp 10.10.10.20 0.0.0.0 10.10.20.10 0.0.0.0
    R1(config)#access-list 110 permit ip any any
    ```
-6. Apply on G0/0 (inbound) — close to the source:
+6. Apply on G0/0 (inbound): close to the source:
    ```
    R1(config-if)#ip access-group 110 in
    ```

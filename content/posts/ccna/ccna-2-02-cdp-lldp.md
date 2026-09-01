@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-2-02-cdp-lldp/"
 ---
 
-## CDP — Cisco Discovery Protocol
+## CDP: Cisco Discovery Protocol
 
 **CDP** is a Cisco proprietary Layer 2 protocol that allows neighboring Cisco devices to discover each other and exchange device information.
 
@@ -28,7 +28,7 @@ lang_pair: "/posts/ccna/ru/ccna-2-02-cdp-lldp/"
 
 ---
 
-## LLDP — Link Layer Discovery Protocol
+## LLDP: Link Layer Discovery Protocol
 
 **LLDP** (IEEE 802.1AB) is an open standard, analogous to CDP. Works between devices from different vendors.
 
@@ -113,8 +113,8 @@ Router# show lldp traffic                # statistics
 
 | Resource | Description |
 |---|---|
-| [CDP — Cisco Documentation](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/cdp/configuration/xe-16/cdp-xe-16-book/nm-cdp-discover.html) | Official Cisco Discovery Protocol documentation |
-| [IEEE 802.1AB — LLDP Standard](https://standards.ieee.org/ieee/802.1AB/6047/) | Link Layer Discovery Protocol standard |
-| [CDP vs LLDP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/cisco-discovery-protocol-cdp) | CDP and LLDP comparison, commands, output examples |
-| [Jeremy's IT Lab — CDP and LLDP (YouTube)](https://www.youtube.com/watch?v=8bQB2eBElzM) | CDP and LLDP from the Free CCNA series: configuration and verification |
-| [LLDP-MED — networklessons.com](https://networklessons.com/cisco/ccnp-route/lldp) | LLDP Media Endpoint Discovery, LLDP extensions |
+| [CDP (Cisco Documentation)](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/cdp/configuration/xe-16/cdp-xe-16-book/nm-cdp-discover.html) | Official Cisco Discovery Protocol documentation |
+| [IEEE 802.1AB: LLDP Standard](https://standards.ieee.org/ieee/802.1AB/6047/) | Link Layer Discovery Protocol standard |
+| [CDP vs LLDP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/cisco-discovery-protocol-cdp) | CDP and LLDP comparison, commands, output examples |
+| [Jeremy's IT Lab: CDP and LLDP (YouTube)](https://www.youtube.com/watch?v=8bQB2eBElzM) | CDP and LLDP from the Free CCNA series: configuration and verification |
+| [LLDP-MED (networklessons.com)](https://networklessons.com/cisco/ccnp-route/lldp) | LLDP Media Endpoint Discovery, LLDP extensions |

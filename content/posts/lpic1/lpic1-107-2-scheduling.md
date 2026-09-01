@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-107-2-scheduling/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -22,7 +22,7 @@ Key files and commands: `/etc/cron.d/`, `/etc/cron.{daily,hourly,monthly,weekly}
 
 ---
 
-## Cron — Recurring Jobs
+## Cron: Recurring Jobs
 
 The `cron` daemon wakes every minute and checks crontab files for jobs to run. User crontabs are stored in `/var/spool/cron/`.
 
@@ -41,16 +41,16 @@ min  hour  dom  month  dow  command
 | dom | 1-31 | Day of month |
 | month | 1-12 | Month |
 | dow | 0-7 | Day of week (0 and 7 both = Sunday) |
-| command | — | Shell command to run |
+| command | n/a | Shell command to run |
 
 ### Time Field Operators
 
 | Operator | Meaning | Example |
 |---|---|---|
-| `*` | Any value | `* * * * *` — every minute |
-| `,` | List | `1,15,30` — at minutes 1, 15, 30 |
-| `-` | Range | `1-5` — Monday through Friday |
-| `/` | Step | `*/20` — every 20 units |
+| `*` | Any value | `* * * * *`: every minute |
+| `,` | List | `1,15,30`: at minutes 1, 15, 30 |
+| `-` | Range | `1-5`: Monday through Friday |
+| `/` | Step | `*/20`: every 20 units |
 
 ### Crontab Examples
 
@@ -72,7 +72,7 @@ min  hour  dom  month  dow  command
 
 | Shortcut | Equivalent | Meaning |
 |---|---|---|
-| `@reboot` | — | Once at startup |
+| `@reboot` | n/a | Once at startup |
 | `@hourly` | `0 * * * *` | Every hour at :00 |
 | `@daily` / `@midnight` | `0 0 * * *` | Daily at midnight |
 | `@weekly` | `0 0 * * 0` | Weekly, Sunday midnight |
@@ -108,7 +108,7 @@ System crontabs have a **6th field** (username) before the command, since they r
 30 01 * * * root /root/barfoo.sh >>/root/output.log 2>>/root/error.log
 ```
 
-Drop-in directories for scripts (no crontab format needed — just executable scripts):
+Drop-in directories for scripts (no crontab format needed, just executable scripts):
 - `/etc/cron.hourly/`
 - `/etc/cron.daily/`
 - `/etc/cron.weekly/`
@@ -126,7 +126,7 @@ Both files contain one username per line.
 
 ---
 
-## systemd Timers — Cron Alternative
+## systemd Timers: Cron Alternative
 
 Systemd timers are unit files with the `.timer` suffix. Each timer activates a matching `.service` unit (same name, different suffix).
 
@@ -187,7 +187,7 @@ Timer logs go to the systemd journal; review with `journalctl`. Ordinary users n
 
 ---
 
-## at — One-Time Jobs
+## at: One-Time Jobs
 
 `at` schedules a command to run once at a specified future time. The `atd` daemon must be running.
 
@@ -213,7 +213,7 @@ job 12 at Sat Sep 14 09:15:00 2019
 
 ### Time Specifications for at
 
-- `HH:MM` — 24h or 12h with AM/PM; if time has passed, next day is assumed
+- `HH:MM`: 24h or 12h with AM/PM; if time has passed, next day is assumed
 - `midnight`, `noon`, `teatime` (4 PM)
 - `now +N minutes/hours/days/weeks`
 - `today`, `tomorrow`
@@ -236,7 +236,7 @@ Same logic as cron:
 - If only `/etc/at.deny` exists: listed users may not; empty file = all allowed.
 - If neither exists: access depends on the distribution.
 
-### systemd-run — Alternative to at
+### systemd-run: Alternative to at
 
 ```bash
 # Run date at a specific calendar time
@@ -280,7 +280,7 @@ systemd timer:
   systemctl enable/start NAME.timer
   systemctl list-timers [--all]
 
-at — one-time scheduling (requires atd):
+at - one-time scheduling (requires atd):
   at HH:MM / at now +N minutes / at midnight / at tomorrow
   atq                 list pending jobs
   atrm ID             delete job
@@ -306,7 +306,7 @@ systemd-run (alternative to at):
 5. Where are user crontabs stored? → `/var/spool/cron/`
 6. What does `crontab -e` do? → Opens the current user's crontab for editing in `$EDITOR`.
 7. What does the `MAILTO=""` variable in a crontab do? → Suppresses email output from cron jobs.
-8. What is `/etc/cron.allow`? → Whitelist — only listed non-root users may use `crontab`; takes precedence over `cron.deny`.
+8. What is `/etc/cron.allow`? → Whitelist: only listed non-root users may use `crontab`; takes precedence over `cron.deny`.
 9. What command runs a job once in 30 minutes? → `at now +30 minutes`
 10. What is `atq`? → Lists pending `at` jobs; as root, shows jobs for all users.
 11. What is `atrm`? → Deletes pending `at` jobs by job ID; `at -d` is an alias.
@@ -322,20 +322,20 @@ systemd-run (alternative to at):
 
 ## Exercises
 
-### Exercise 1 — Crontab Shortcuts
+### Exercise 1: Crontab Shortcuts
 
 What crontab time specification corresponds to `@weekly`?
 
 <details>
 <summary>Answer</summary>
 
-`0 0 * * 0` — run at midnight on Sunday (day of week 0).
+`0 0 * * 0`: run at midnight on Sunday (day of week 0).
 
 </details>
 
 ---
 
-### Exercise 2 — Reading Cron Expressions
+### Exercise 2: Reading Cron Expressions
 
 Explain what the following crontab entries do:
 
@@ -349,16 +349,16 @@ Explain what the following crontab entries do:
 <details>
 <summary>Answer</summary>
 
-- `30 13 * * 1-5` — at 13:30 (1:30 PM) every weekday (Mon-Fri)
-- `00 09-18 * * *` — at the top of every hour from 09:00 to 18:00, every day
-- `0,20,40 11 * * Sun` — every Sunday at 11:00, 11:20, and 11:40
-- `*/20 * * * *` — every 20 minutes
+- `30 13 * * 1-5`: at 13:30 (1:30 PM) every weekday (Mon-Fri)
+- `00 09-18 * * *`: at the top of every hour from 09:00 to 18:00, every day
+- `0,20,40 11 * * Sun`: every Sunday at 11:00, 11:20, and 11:40
+- `*/20 * * * *`: every 20 minutes
 
 </details>
 
 ---
 
-### Exercise 3 — Send Cron Output by Email
+### Exercise 3: Send Cron Output by Email
 
 How do you redirect all cron job output to user `emma` via email? And how do you prevent any mail from being sent?
 
@@ -376,7 +376,7 @@ MAILTO=""          # suppress all mail
 
 ---
 
-### Exercise 4 — One-Time at Job
+### Exercise 4: One-Time at Job
 
 Schedule a job to run `./backup.sh` at 10:30 AM on October 31st as an ordinary user.
 
@@ -393,7 +393,7 @@ at> Ctrl+D
 
 ---
 
-### Exercise 5 — OnCalendar Expressions
+### Exercise 5: OnCalendar Expressions
 
 Write an `OnCalendar` expression that runs a timer every 5 minutes.
 

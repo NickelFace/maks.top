@@ -80,7 +80,7 @@ lang_pair: "/posts/ccna/ru/ccna-5-01-security-concepts/"
 | Model | Description |
 |---|---|
 | Defense in Depth | Multiple layers of protection (perimeter, network, host, application) |
-| Zero Trust | "Never trust, always verify" — every request is authenticated |
+| Zero Trust | "Never trust, always verify": every request is authenticated |
 | DMZ | Demilitarized zone for public-facing servers |
 
 ### Network Security Components
@@ -91,7 +91,7 @@ lang_pair: "/posts/ccna/ru/ccna-5-01-security-concepts/"
 | IDS (Intrusion Detection System) | Detects attacks (passive) |
 | IPS (Intrusion Prevention System) | Detects and blocks attacks |
 | VPN | Encrypted tunnel over a public network |
-| NAC | Network Access Control — verifies host compliance |
+| NAC | Network Access Control: verifies host compliance |
 | SIEM | Security Information & Event Management |
 
 ### Password Policy
@@ -110,9 +110,9 @@ lang_pair: "/posts/ccna/ru/ccna-5-01-security-concepts/"
 
 | Resource | Description |
 |---|---|
-| [Cisco Security Concepts — Cisco Learning](https://learningnetwork.cisco.com/s/article/network-security-concepts) | Overview of network security concepts from Cisco |
-| [CIA Triad — NIST](https://csrc.nist.gov/glossary/term/cia_triad) | Confidentiality, Integrity, Availability — foundational security principles |
-| [Common Network Threats — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/network-security-threats) | Threats: DoS, DDoS, MITM, phishing, malware |
-| [Jeremy's IT Lab — Security Concepts (YouTube)](https://www.youtube.com/watch?v=4_-JN1hqCmw) | CIA triad, threats, and defenses from the Free CCNA series |
+| [Cisco Security Concepts: Cisco Learning](https://learningnetwork.cisco.com/s/article/network-security-concepts) | Overview of network security concepts from Cisco |
+| [CIA Triad: NIST](https://csrc.nist.gov/glossary/term/cia_triad) | Confidentiality, Integrity, Availability: foundational security principles |
+| [Common Network Threats (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/network-security-threats) | Threats: DoS, DDoS, MITM, phishing, malware |
+| [Jeremy's IT Lab: Security Concepts (YouTube)](https://www.youtube.com/watch?v=4_-JN1hqCmw) | CIA triad, threats, and defenses from the Free CCNA series |
 | [Cisco Cybersecurity Essentials](https://www.cisco.com/c/en/us/products/security/index.html) | Cisco security products and concepts |
-| [David Bombal — Network Security Basics (YouTube)](https://www.youtube.com/watch?v=E03gh1PVUGM) | Network security basics: attacks and countermeasures |
+| [David Bombal: Network Security Basics (YouTube)](https://www.youtube.com/watch?v=E03gh1PVUGM) | Network security basics: attacks and countermeasures |

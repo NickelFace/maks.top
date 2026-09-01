@@ -17,12 +17,12 @@ SSH reference: <strong>key management, ~/.ssh/config, tunnels (L/R/D), ProxyJump
 </div>
 
 **Planned:**
-- Keys — `ssh-keygen` (ed25519, rsa), `ssh-copy-id`, `authorized_keys`
-- ~/.ssh/config — Host, User, IdentityFile, Port, ProxyJump, LocalForward
-- Tunnels — `-L` (local), `-R` (remote), `-D` (dynamic/SOCKS5)
-- ProxyJump / ProxyCommand — hopping through a bastion host
-- Agent forwarding — `ssh-add`, `ssh-agent`, `ForwardAgent`
-- scp / sftp — file transfer
-- rsync — sync, `-avz --delete`, `--exclude`
-- sshd_config — secure configuration: PermitRootLogin, PubkeyAuthentication, AllowUsers
-- Multiplexing — ControlMaster, ControlPath, ControlPersist
+- Keys: `ssh-keygen` (ed25519, rsa), `ssh-copy-id`, `authorized_keys`
+- ~/.ssh/config: Host, User, IdentityFile, Port, ProxyJump, LocalForward
+- Tunnels: `-L` (local), `-R` (remote), `-D` (dynamic/SOCKS5)
+- ProxyJump / ProxyCommand: hopping through a bastion host
+- Agent forwarding: `ssh-add`, `ssh-agent`, `ForwardAgent`
+- scp / sftp: file transfer
+- rsync: sync, `-avz --delete`, `--exclude`
+- sshd_config, secure configuration: PermitRootLogin, PubkeyAuthentication, AllowUsers
+- Multiplexing: ControlMaster, ControlPath, ControlPersist

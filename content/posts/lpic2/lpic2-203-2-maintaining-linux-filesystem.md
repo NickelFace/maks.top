@@ -8,15 +8,15 @@ lang_pair: "/posts/lpic2/ru/lpic2-203-2-maintaining-linux-filesystem/"
 page_lang: "en"
 ---
 
-> **Exam topic 203.2** — Maintaining a Linux Filesystem. Covers ext2/3/4 tools, Btrfs subvolumes and snapshots, XFS utilities, ZFS awareness, and SMART disk monitoring.
+> **Exam topic 203.2**: Maintaining a Linux Filesystem. Covers ext2/3/4 tools, Btrfs subvolumes and snapshots, XFS utilities, ZFS awareness, and SMART disk monitoring.
 
 ---
 
-## fsck — Checking and Repairing Filesystems
+## fsck: Checking and Repairing Filesystems
 
-`fsck` is a front-end for all filesystem checkers. The real work is done by `fsck.fstype` — where `fstype` is `ext4`, `btrfs`, `xfs`, etc.
+`fsck` is a front-end for all filesystem checkers. The real work is done by `fsck.fstype`; where `fstype` is `ext4`, `btrfs`, `xfs`, etc.
 
-> **Warning — critical for the exam:** `fsck.xfs` and `fsck.btrfs` are **empty stubs**. They do nothing. For XFS use `xfs_repair`; for Btrfs use `btrfs check`.
+> **Warning: critical for the exam:** `fsck.xfs` and `fsck.btrfs` are **empty stubs**. They do nothing. For XFS use `xfs_repair`; for Btrfs use `btrfs check`.
 
 `fsck` runs automatically at startup if a filesystem is marked "not clean," the maximum mount count has been exceeded, or the check interval has elapsed.
 
@@ -33,7 +33,7 @@ page_lang: "en"
 
 Filesystems with `fs_passno` equal to `0` are not checked at all. Root `/` is checked first; others are checked in ascending `fs_passno` order. Filesystems with the same `fs_passno` value may be checked in parallel, but not if they share the same physical disk.
 
-### e2fsck — checker for ext filesystems
+### e2fsck: checker for ext filesystems
 
 `e2fsck` is the real checker for ext2/3/4; `fsck` simply calls it.
 
@@ -54,11 +54,11 @@ e2fsck -n /dev/sda1
 e2fsck -c /dev/sda1
 ```
 
-> **Note — lost+found:** When `fsck` finds files without directory entries (inode exists but no name in a directory), it places them in the `lost+found` directory of the affected filesystem. Check this directory periodically.
+> **Note: lost+found:** When `fsck` finds files without directory entries (inode exists but no name in a directory), it places them in the `lost+found` directory of the affected filesystem. Check this directory periodically.
 
 ---
 
-## mkfs — Creating Filesystems
+## mkfs: Creating Filesystems
 
 `mkfs` is a front-end analogous to `fsck`. The real work is done by `mkfs.fstype`.
 
@@ -83,7 +83,7 @@ mkfs.btrfs -m raid10 -d raid10 /dev/sdb /dev/sdc /dev/sdd /dev/sde
 
 ---
 
-## tune2fs — Tuning ext Filesystems
+## tune2fs: Tuning ext Filesystems
 
 `tune2fs` is a multi-purpose tool for fine-tuning ext2/3/4 filesystems. Most commonly used to manage check frequency and UUIDs.
 
@@ -103,7 +103,7 @@ tune2fs -i 30d /dev/sda1
 tune2fs -C 15 /dev/sda1
 ```
 
-> **Tip — staggering mount counters:** If you have 5 partitions and the system reboots once a month, assign different counter values to each partition. This prevents all of them from being checked simultaneously on the 20th reboot, reducing startup time.
+> **Tip: staggering mount counters:** If you have 5 partitions and the system reboots once a month, assign different counter values to each partition. This prevents all of them from being checked simultaneously on the 20th reboot, reducing startup time.
 
 ### Changing UUID and label
 
@@ -118,11 +118,11 @@ tune2fs /dev/sdc1 -U b77a195a-e5a8-4810-932e-5d9adb97adc6
 tune2fs -L "my_data" /dev/sda1
 ```
 
-> **Warning:** After changing a UUID, update `/etc/fstab` and `/boot/grub/grub.cfg` if the partition is bootable — otherwise the system will not boot.
+> **Warning:** After changing a UUID, update `/etc/fstab` and `/boot/grub/grub.cfg` if the partition is bootable, otherwise the system will not boot.
 
 ---
 
-## dumpe2fs — Superblock Information
+## dumpe2fs: Superblock Information
 
 `dumpe2fs` prints detailed information about ext2/3/4 filesystem parameters stored in the superblock.
 
@@ -138,7 +138,7 @@ Output includes: UUID, label, block size, inode count, time of last check, maxim
 
 ---
 
-## badblocks — Surface Scan
+## badblocks: Surface Scan
 
 `badblocks` locates damaged sectors and marks them so the filesystem no longer uses them for data storage.
 
@@ -160,7 +160,7 @@ badblocks -w /dev/sda1
 
 ---
 
-## debugfs — Surgery on ext Filesystems
+## debugfs: Surgery on ext Filesystems
 
 `debugfs` is an interactive tool for low-level operations on ext filesystems. It opens the filesystem read-only by default; write mode requires the `-w` flag.
 
@@ -193,13 +193,13 @@ dump <inode> /tmp/recovered_file   # extract a file from a damaged FS
 ?                   # list all available commands
 ```
 
-> **Tip — bad block workflow with debugfs:** Locate the bad block with `testb`. Get the inode with `icheck`, then the filename with `ncheck`. Best course: mark the block bad and restore the file from backup.
+> **Tip: bad block workflow with debugfs:** Locate the bad block with `testb`. Get the inode with `icheck`, then the filename with `ncheck`. Best course: mark the block bad and restore the file from backup.
 
 > **Warning:** Use `-w` only if you know exactly what you are doing. Incorrect metadata changes can render the filesystem unusable.
 
 ---
 
-## Btrfs — Subvolumes, Snapshots, and Conversion
+## Btrfs: Subvolumes, Snapshots, and Conversion
 
 Btrfs is a modern filesystem with Copy-on-Write (COW), built-in checksums, RAID, and snapshots.
 
@@ -231,7 +231,7 @@ btrfs subvolume snapshot -r /home/ /home-snap-ro
 btrfs subvolume delete /home-snap/
 ```
 
-> **Tip:** After deleting a snapshot, Btrfs cleans up the file tree in the background. You may see I/O activity on an apparently idle system — this is normal.
+> **Tip:** After deleting a snapshot, Btrfs cleans up the file tree in the background. You may see I/O activity on an apparently idle system, this is normal.
 
 ### Btrfs check and repair utilities
 
@@ -271,7 +271,7 @@ btrfs-convert -r /dev/sdb1
 
 ---
 
-## XFS — Utilities
+## XFS: Utilities
 
 XFS is a journaling filesystem used by default on RHEL/CentOS. It has its own set of utilities.
 
@@ -326,28 +326,28 @@ xfs_dump -l 1 -f /backup/sda1-inc.dump /dev/sda1
 
 ---
 
-## ZFS — Overview
+## ZFS: Overview
 
 ZFS was developed by Sun Microsystems and is now owned by Oracle. On Linux, native kernel support exists only on Ubuntu; other distributions use ZFS via FUSE in userspace.
 
-> **Note for LPIC-2:** Only a general understanding of ZFS is required. No deep command knowledge is tested — just concepts and pool architecture.
+> **Note for LPIC-2:** Only a general understanding of ZFS is required. No deep command knowledge is tested, just concepts and pool architecture.
 
 ### Key ZFS features
 
 - 128-bit addressing (virtually unlimited storage)
 - Copy-on-Write with transactional writes: the **ueberblock** is updated only when a full transaction succeeds
 - 128 previous ueberblock copies stored in a ring buffer
-- **Vdev labels** — disk labels in the pool, stored in 4 copies: 2 at the start and 2 at the end of each disk
+- **Vdev labels**, disk labels in the pool, stored in 4 copies: 2 at the start and 2 at the end of each disk
 - Built-in RAID-Z (RAID5 equivalent) and RAID-Z2 (RAID6 equivalent)
 - Snapshots and clones (instantaneous creation, consume no space until data changes)
 - Data compression and deduplication (configurable per filesystem)
 - Checksums for all data and metadata
-- Volume provisioning (zvols — block devices inside ZFS)
+- Volume provisioning (zvols: block devices inside ZFS)
 - Separate devices for cache (L2ARC) and journal (ZIL/SLOG)
 
 > **Why ZFS has no fsck:** ZFS operates transactionally. The ueberblock is updated only if everything was written successfully. The system stores 128 previous ueberblocks in a ring buffer. For integrity checking and repair use `zpool scrub`, which fixes errors on the fly if multiple disks are in the pool.
 
-### zpool — managing storage pools
+### zpool: managing storage pools
 
 A pool in ZFS is analogous to a logical volume manager. A pool can consist of one or more disks.
 
@@ -371,7 +371,7 @@ zpool scrub tank
 zpool history tank
 ```
 
-### zfs — managing filesystems inside a pool
+### zfs: managing filesystems inside a pool
 
 By default, creating a pool also creates one filesystem with the same name inside it.
 
@@ -405,11 +405,11 @@ ls /tank/documents/.zfs/snapshot/backup/
 
 ---
 
-## SMART — Disk Health Monitoring
+## SMART: Disk Health Monitoring
 
 SMART (Self-Monitoring, Analysis and Reporting Technology) is a self-diagnostics technology built into most modern HDDs and SSDs. Linux support comes from the `smartmontools` package.
 
-### smartctl — direct SMART interaction
+### smartctl: direct SMART interaction
 
 ```bash
 # Show device information
@@ -444,7 +444,7 @@ smartctl -P showall | less
 
 > **Warning:** SMART does not guarantee advance warning. A device can show PASSED right up until failure. Unusual attribute values (high `Reallocated_Sector_Ct`, non-zero `Current_Pending_Sector`) may indicate an impending failure even with a PASSED status.
 
-### smartd — monitoring daemon
+### smartd: monitoring daemon
 
 `smartd` runs as a system service and automatically enables SMART monitoring on all connected devices. By default it checks every **30 minutes**.
 
@@ -473,7 +473,7 @@ DEVICESCAN -s L/../../7/01
 /dev/sda -m admin@example.com -M exec /usr/bin/my_alert_script
 ```
 
-> **Note — DEVICESCAN:** Only the first uncommented line beginning with `DEVICESCAN` is applied. All subsequent `DEVICESCAN` lines are ignored.
+> **Note: DEVICESCAN:** Only the first uncommented line beginning with `DEVICESCAN` is applied. All subsequent `DEVICESCAN` lines are ignored.
 
 ---
 
@@ -519,9 +519,9 @@ smartctl -a /dev/sda             # full SMART info
 
 ### Common Exam Traps
 
-- `fsck.xfs` and `fsck.btrfs` are stubs — they do nothing. Use `xfs_repair` and `btrfs check`.
+- `fsck.xfs` and `fsck.btrfs` are stubs: they do nothing. Use `xfs_repair` and `btrfs check`.
 - `xfs_repair` and `e2fsck` must not be run on mounted partitions.
-- `tune2fs -c 0` disables mount-count-based checks — risky, errors can accumulate silently.
+- `tune2fs -c 0` disables mount-count-based checks: risky, errors can accumulate silently.
 - `btrfs-convert` stores the old ext filesystem as subvolume `ext2_subvol`. Delete it explicitly to free space.
 - `xfs_check` is missing from many modern distros; use `xfs_repair -n` instead.
 - `smartctl -H` gives only the overall verdict. Use `smartctl -a` for the full picture.
@@ -532,13 +532,13 @@ smartctl -a /dev/sda             # full SMART info
 
 **Q1.** You run `fsck.xfs /dev/sdb1`. What happens?
 
-**Answer:** **Nothing** — `fsck.xfs` is an empty stub. For real XFS repair, use `xfs_repair`.
+**Answer:** **Nothing**; `fsck.xfs` is an empty stub. For real XFS repair, use `xfs_repair`.
 
 ---
 
 **Q2.** How do you change the maximum mount count for ext4 partition `/dev/sda2` to 15?
 
-**Answer:** `tune2fs -c 15 /dev/sda2` — sets the maximum mount count before a forced check.
+**Answer:** `tune2fs -c 15 /dev/sda2`, sets the maximum mount count before a forced check.
 
 ---
 
@@ -550,25 +550,25 @@ smartctl -a /dev/sda             # full SMART info
 
 **Q4.** Which command shows the overall SMART health verdict (PASSED/FAILED) for `/dev/sda`?
 
-**Answer:** `smartctl -H /dev/sda` — outputs the overall self-assessment test result. `-a` gives the full picture; `-i` shows only device info; `-t` runs a test.
+**Answer:** `smartctl -H /dev/sda`, outputs the overall self-assessment test result. `-a` gives the full picture; `-i` shows only device info; `-t` runs a test.
 
 ---
 
 **Q5.** You converted an ext4 partition to Btrfs with `btrfs-convert`. What is the subvolume that holds the old ext4 image called?
 
-**Answer:** `ext2_subvol` — the default name used by `btrfs-convert`. The rollback (`btrfs-convert -r`) is only possible while this subvolume exists.
+**Answer:** `ext2_subvol`, the default name used by `btrfs-convert`. The rollback (`btrfs-convert -r`) is only possible while this subvolume exists.
 
 ---
 
 **Q6.** How do you run a dry-run check of an XFS filesystem on a system where `xfs_check` is not installed?
 
-**Answer:** `xfs_repair -n /dev/sda1` — performs the check without making any changes.
+**Answer:** `xfs_repair -n /dev/sda1`, performs the check without making any changes.
 
 ---
 
 **Q7.** Which `fs_passno` value in `/etc/fstab` causes `fsck -A` to skip that filesystem?
 
-**Answer:** **`0`** — the filesystem is not checked.
+**Answer:** **`0`**; the filesystem is not checked.
 
 ---
 

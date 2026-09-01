@@ -41,7 +41,7 @@ In this lab you are expected to independently:
 ## Configure routing policy for the Chokurdakh office networks
 
 <details>
-<summary>R28 — interface addresses</summary>
+<summary>R28: interface addresses</summary>
 <pre><code>
 R28#show ipv6 int brief
 Ethernet0/0            [up/up]
@@ -66,7 +66,7 @@ Ethernet0/2                172.16.40.1     YES manual up                    up
 
 ## Distribute traffic between the two provider uplinks in Chokurdakh
 
-ACL `ACL1` matches traffic from VPC30 (172.16.40.10) and the route-map steers it via R26 (e0/0). A static route to R25's loopback (215.215.215.215) is added to verify the alternate path — the provider side runs OSPF with no additional configuration required.
+ACL `ACL1` matches traffic from VPC30 (172.16.40.10) and the route-map steers it via R26 (e0/0). A static route to R25's loopback (215.215.215.215) is added to verify the alternate path; the provider side runs OSPF with no additional configuration required.
 
 <details>
 <summary>R28</summary>
@@ -153,7 +153,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R28 — show track / show route-map</summary>
+<summary>R28: show track / show route-map</summary>
 <pre><code>
 R28#show track 1
 Track 1

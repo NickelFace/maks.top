@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-102-6-linux-virtualization-guest/"
 page_lang: "en"
 ---
 
-> **Exam weight: 1** — LPIC-1 v5, Exam 101
+> **Exam weight: 1**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -35,11 +35,11 @@ A virtual machine can be moved from one hypervisor to another. This process is c
 
 ### Common hypervisors
 
-**Xen** — open-source Type-1 hypervisor. The computer boots directly into it.
+**Xen**: open-source Type-1 hypervisor. The computer boots directly into it.
 
-**KVM (Kernel Virtual Machine)** — a Linux kernel module. VMs are managed through the libvirt daemon and tools like `virsh`. It uses the QEMU project for device emulation. Configurations are stored as XML files in `/etc/libvirt/qemu/`.
+**KVM (Kernel Virtual Machine)**: a Linux kernel module. VMs are managed through the libvirt daemon and tools like `virsh`. It uses the QEMU project for device emulation. Configurations are stored as XML files in `/etc/libvirt/qemu/`.
 
-**VirtualBox** — popular desktop application by Oracle. Runs on Linux, macOS and Windows. Type-2 hypervisor.
+**VirtualBox**: popular desktop application by Oracle. Runs on Linux, macOS and Windows. Type-2 hypervisor.
 
 ---
 
@@ -76,9 +76,9 @@ The guest sees the full declared disk size, even though the host may have far le
 
 ### Disk image types
 
-**COW (Copy-on-Write)** — thin provisioning. The file is created with a defined upper limit and grows on disk as data is written. The `qcow2` format is the standard COW format for QEMU/KVM.
+**COW (Copy-on-Write)**: thin provisioning. The file is created with a defined upper limit and grows on disk as data is written. The `qcow2` format is the standard COW format for QEMU/KVM.
 
-**RAW** — the full disk size is allocated upfront. Writes are faster because the hypervisor does not need to track file expansion. Occupies more host space from the start.
+**RAW**: the full disk size is allocated upfront. Writes are faster because the hypervisor does not need to track file expansion. Occupies more host space from the start.
 
 ---
 
@@ -88,7 +88,7 @@ A template is a VM with a base system installation and pre-configured settings t
 
 ### D-Bus Machine ID
 
-Every Linux system receives a unique machine identifier at installation time — the D-Bus Machine ID. If a VM is cloned without changing this ID, two guests will share the same identifier, leading to unpredictable behaviour.
+Every Linux system receives a unique machine identifier at installation time, the D-Bus Machine ID. If a VM is cloned without changing this ID, two guests will share the same identifier, leading to unpredictable behaviour.
 
 ID file: `/var/lib/dbus/machine-id`, which is a symbolic link to `/etc/machine-id`.
 
@@ -122,11 +122,11 @@ IaaS (Infrastructure as a Service) is a model where a provider supplies infrastr
 
 ### IaaS elements
 
-**Computing Instances** — units of CPU resource consumption. The more instances you run and the longer they run, the higher the bill.
+**Computing Instances**: units of CPU resource consumption. The more instances you run and the longer they run, the higher the bill.
 
-**Block Storage** — external storage for VMs. Cost depends on volume and access speed: fast SSDs cost more, archive storage costs less.
+**Block Storage**: external storage for VMs. Cost depends on volume and access speed: fast SSDs cost more, archive storage costs less.
 
-**Networking** — configuring routing, subnets and firewalls through the provider's web interface. Many providers offer DNS, public IP addresses and hybrid VPN solutions for connecting corporate and cloud infrastructure.
+**Networking**: configuring routing, subnets and firewalls through the provider's web interface. Many providers offer DNS, public IP addresses and hybrid VPN solutions for connecting corporate and cloud infrastructure.
 
 ### Accessing cloud guests via SSH
 
@@ -140,7 +140,7 @@ ssh-keygen
 ssh-copy-id -i <public_key> user@cloud_server
 ```
 
-If only one public key is present in `~/.ssh/`, the `-i` flag can be omitted: `ssh-copy-id` will find the `.pub` file automatically. Key file permissions: private key — `0600`, public key — `0644`.
+If only one public key is present in `~/.ssh/`, the `-i` flag can be omitted: `ssh-copy-id` will find the `.pub` file automatically. Key file permissions: private key, `0600`, public key, `0644`.
 
 Some cloud providers automatically generate a key pair when creating a VM and provide the private key for download.
 
@@ -181,8 +181,8 @@ On Linux, containers rely on the kernel's `cgroups` (control groups) mechanism. 
 Examples of container technologies: Docker, Kubernetes, LXD/LXC, systemd-nspawn, OpenShift. Their implementation details are outside the scope of LPIC-1.
 
 Two kinds of containers are distinguished:
-- **Linux container** — isolates a system environment (LXC/LXD).
-- **Application container** — runs a single application (Docker, Podman).
+- **Linux container**: isolates a system environment (LXC/LXD).
+- **Application container**: runs a single application (Docker, Podman).
 
 ---
 
@@ -217,7 +217,7 @@ The D-Bus Machine ID and SSH host keys.
 Automatically configures the system on first boot using a YAML config.
 
 **How does a container differ from a VM?**
-A container does not emulate the entire computer — it uses the host kernel and consumes fewer resources.
+A container does not emulate the entire computer; it uses the host kernel and consumes fewer resources.
 
 **Which command shows whether two clones have the same D-Bus ID?**
 `dbus-uuidgen --get` (run on each machine and compare the output).
@@ -311,9 +311,9 @@ After installation, run `virt-manager` for a graphical interface. For command-li
 
 ## Related topics
 
-- [101.1 Determine and Configure Hardware Settings](/posts/lpic1-101-1-hardware-settings/) — BIOS/UEFI and enabling VT-x/AMD-V
-- [102.1 Design Hard Disk Layout](/posts/lpic1-102-1-hard-disk-layout/) — partition planning, including for VMs
-- [102.4 Use Debian Package Management](/posts/lpic1-102-4-debian-package-management/) — installing libvirt on Debian systems
+- [101.1 Determine and Configure Hardware Settings](/posts/lpic1-101-1-hardware-settings/): BIOS/UEFI and enabling VT-x/AMD-V
+- [102.1 Design Hard Disk Layout](/posts/lpic1-102-1-hard-disk-layout/): partition planning, including for VMs
+- [102.4 Use Debian Package Management](/posts/lpic1-102-4-debian-package-management/): installing libvirt on Debian systems
 
 ---
 

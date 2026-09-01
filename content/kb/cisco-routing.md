@@ -18,12 +18,12 @@ Cisco IOS cheat sheet: dynamic routing protocols <strong>OSPF, EIGRP, BGP</stron
 </div>
 
 **Planned:**
-- OSPF — `router ospf`, `network`, `area`, `passive-interface`, `show ip ospf neighbor`
-- OSPF filtering — distribute-list, prefix-list, route-map
-- EIGRP — `router eigrp`, `no auto-summary`, `show ip eigrp neighbors`
-- BGP — `router bgp`, `neighbor`, `network`, `show bgp summary`
-- BGP — attributes, filtering (prefix-list, route-map, as-path acl)
-- iBGP — route-reflector, full-mesh
+- OSPF: `router ospf`, `network`, `area`, `passive-interface`, `show ip ospf neighbor`
+- OSPF filtering: distribute-list, prefix-list, route-map
+- EIGRP: `router eigrp`, `no auto-summary`, `show ip eigrp neighbors`
+- BGP: `router bgp`, `neighbor`, `network`, `show bgp summary`
+- BGP: attributes, filtering (prefix-list, route-map, as-path acl)
+- iBGP: route-reflector, full-mesh
 - Route redistribution between protocols
 - Static routes, floating routes
-- PBR (Policy-Based Routing) — route-map + ip policy
+- PBR (Policy-Based Routing): route-map + ip policy

@@ -18,8 +18,8 @@ lang_pair: "/posts/aws/ru/aws-saa-8-01-messaging/"
 | Ordering | Best-effort (not guaranteed) | Strict FIFO (within message group) |
 | Delivery | At-least-once (duplicates possible) | Exactly-once processing |
 | Throughput | Unlimited | 300 TPS (3,000 with batching) |
-| Deduplication | No | Yes — 5-minute deduplication window |
-| Message groups | No | Yes — `MessageGroupId` for parallelism within FIFO |
+| Deduplication | No | Yes: 5-minute deduplication window |
+| Message groups | No | Yes: `MessageGroupId` for parallelism within FIFO |
 | Cost | Lower | Higher |
 
 ### Key SQS Properties
@@ -56,7 +56,7 @@ lang_pair: "/posts/aws/ru/aws-saa-8-01-messaging/"
 - HTTP/HTTPS, Email, Email-JSON, SQS, Lambda, Mobile Push (APNs, GCM/FCM, ADM), SMS
 
 ### SNS FIFO Topics
-- Strict ordering + deduplication — only works with **SQS FIFO subscriptions**
+- Strict ordering + deduplication: only works with **SQS FIFO subscriptions**
 - Lower throughput than standard SNS (same limits as SQS FIFO: 300 TPS / 3,000 with batching)
 
 ---
@@ -73,9 +73,9 @@ Publisher → SNS Topic
 ```
 
 Benefits:
-- **Decoupled** — publisher doesn't know about consumers
-- **Durable** — SQS buffers messages if consumers are slow
-- **Filterable** — each SQS subscription can have a filter policy
+- **Decoupled**: publisher doesn't know about consumers
+- **Durable**: SQS buffers messages if consumers are slow
+- **Filterable**: each SQS subscription can have a filter policy
 - S3 event notifications → SNS → multiple SQS queues is a classic exam scenario
 
 > **📌 Tip:** Fan-out = SNS → multiple SQS queues. Not SNS to Lambda directly (no buffering), not SQS alone (single consumer).
@@ -111,7 +111,7 @@ Benefits:
 |---|---|
 | Type | Fully managed, near-real-time delivery |
 | Latency | ~60s (minimum buffer time) |
-| Replay | No — fire and forget |
+| Replay | No: fire and forget |
 | Destinations | S3, Redshift (via S3), OpenSearch, HTTP endpoint, Splunk, Datadog |
 | Transform | Lambda function inline transformation |
 | Compression | GZIP, Snappy, ZIP for S3 output |
@@ -142,7 +142,7 @@ Benefits:
 | **Partner event sources** | Zendesk, Shopify, Datadog, PagerDuty, etc. |
 | **Cross-account** | Ingest events from other accounts via resource-based policy |
 
-EventBridge is the modern replacement for CloudWatch Events — same service, more features, new partner integrations.
+EventBridge is the modern replacement for CloudWatch Events, same service, more features, new partner integrations.
 
 ---
 
@@ -151,7 +151,7 @@ EventBridge is the modern replacement for CloudWatch Events — same service, mo
 - Managed **ActiveMQ** and **RabbitMQ** broker
 - For **migrating existing MQ workloads** to AWS without rewriting applications
 - Supports: AMQP, MQTT, STOMP, OpenWire, JMS (not native AWS APIs)
-- Not serverless — you provision a broker instance (single or active/standby HA pair)
+- Not serverless: you provision a broker instance (single or active/standby HA pair)
 - Use case: existing apps using ActiveMQ/RabbitMQ protocols; cannot change to SQS/SNS
 
 > **📌 Tip:** If the exam says "the company has an existing on-premises message broker using AMQP/JMS and wants to migrate to AWS" → Amazon MQ. If it's a new greenfield project → SQS or SNS.
@@ -180,8 +180,8 @@ EventBridge is the modern replacement for CloudWatch Events — same service, mo
 | Kinesis order guarantee | Only within a single shard |
 | SQS FIFO throughput limit | 300 TPS (3000 with batching) |
 | Fan-out pattern | SNS → multiple SQS queues |
-| Firehose for replay | Wrong — no replay; use Kinesis Data Streams |
-| Amazon MQ for new greenfield | Wrong — use SQS/SNS |
+| Firehose for replay | Wrong: no replay; use Kinesis Data Streams |
+| Amazon MQ for new greenfield | Wrong: use SQS/SNS |
 | EventBridge vs CloudWatch Events | Same service (EventBridge is the new name) |
 | SQS message max size | 256 KB (use Extended Client + S3 for larger) |
 | SNS FIFO works with | SQS FIFO subscriptions only |

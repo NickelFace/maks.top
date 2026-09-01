@@ -7,7 +7,7 @@ date: 2026-04-22
 ---
 
 <div class="intro-card">
-Cisco IOS cheat sheet for <strong>RIP v2</strong> — distance-vector routing protocol. Simple to configure but limited to 15 hops. Covers configuration, timers, passive interfaces, summarization, and redistribution.
+Cisco IOS cheat sheet for <strong>RIP v2</strong>, distance-vector routing protocol. Simple to configure but limited to 15 hops. Covers configuration, timers, passive interfaces, summarization, and redistribution.
 </div>
 
 ## Configuration

@@ -35,7 +35,7 @@ page_lang: "en"
 
 ---
 
-### Part 1 — Basic device setup
+### Part 1: Basic device setup
 
 1. Build the network according to the topology.
 
@@ -124,7 +124,7 @@ copy running-config startup-config
 
 ---
 
-### Part 2 — VTP configuration
+### Part 2: VTP configuration
 
 <details>
 <summary>S1 (client)</summary>
@@ -170,11 +170,11 @@ copy running-config startup-config
 
 ---
 
-### Part 3 — DTP and trunk ports
+### Part 3: DTP and trunk ports
 
-**Dynamic trunk: S1 — S2**
+**Dynamic trunk: S1, S2**
 
-Set S1's port toward S2 to `dynamic desirable`. S2 defaults to `dynamic auto` — the trunk forms automatically:
+Set S1's port toward S2 to `dynamic desirable`. S2 defaults to `dynamic auto`, the trunk forms automatically:
 
 <details>
 <summary>S1</summary>
@@ -189,7 +189,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-**Static trunks: S1 — S3 and S2 — S3**
+**Static trunks: S1, S3 and S2, S3**
 
 <details>
 <summary>S1</summary>
@@ -252,7 +252,7 @@ copy running-config startup-config
 
 ---
 
-### Part 4 — Create VLANs on the server
+### Part 4: Create VLANs on the server
 
 <details>
 <summary>S2</summary>
@@ -275,7 +275,7 @@ copy running-config startup-config
 Verify VLANs propagated to clients:
 
 <details>
-<summary>S1 — show vlan brief</summary>
+<summary>S1: show vlan brief</summary>
 <pre><code>
 enable
 configure terminal
@@ -291,7 +291,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>S3 — show vlan brief</summary>
+<summary>S3: show vlan brief</summary>
 <pre><code>
 enable
 configure terminal
@@ -309,7 +309,7 @@ copy running-config startup-config
 
 ---
 
-### Part 5 — Assign ports to VLANs
+### Part 5: Assign ports to VLANs
 
 Assign access ports and configure the Management SVI on all switches.
 
@@ -367,9 +367,9 @@ copy running-config startup-config
 
 ---
 
-### Part 6 — Connectivity check
+### Part 6: Connectivity check
 
-PC-A and PC-C are both in VLAN 10 — verify reachability:
+PC-A and PC-C are both in VLAN 10; verify reachability:
 
 <details>
 <summary>PC-A</summary>
@@ -407,9 +407,9 @@ Success rate is 80 percent (4/5), round-trip min/avg/max = 1/1/1 ms
 
 ---
 
-### Part 7 — Extended VLAN
+### Part 7: Extended VLAN
 
-Extended-range VLANs (1025–4096) cannot be managed via VTP — the switch must be in transparent mode first.
+Extended-range VLANs (1025–4096) cannot be managed via VTP; the switch must be in transparent mode first.
 
 Switch S1 to VTP transparent:
 

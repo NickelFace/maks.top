@@ -31,11 +31,11 @@ A Virtual Private Cloud (VPC) is a logically isolated network within AWS. Every 
 ### CIDR Planning
 
 AWS reserves 5 IPs in each subnet:
-- `.0` — Network address
-- `.1` — VPC router
-- `.2` — DNS server
-- `.3` — Reserved for future use
-- `.255` — Broadcast (not used, but reserved)
+- `.0`: Network address
+- `.1`: VPC router
+- `.2`: DNS server
+- `.3`: Reserved for future use
+- `.255`: Broadcast (not used, but reserved)
 
 For a `/24` subnet (256 addresses): **251 usable IPs**.
 
@@ -58,9 +58,9 @@ A subnet becomes public by **adding a route to an Internet Gateway** in its rout
 
 Every subnet is associated with exactly one route table. Route priority: **most specific route wins**.
 
-**Default (main) route table** — created automatically with the VPC; used by subnets not explicitly associated with another.
+**Default (main) route table**: created automatically with the VPC; used by subnets not explicitly associated with another.
 
-**Custom route tables** — create one per subnet type for fine-grained control.
+**Custom route tables**: create one per subnet type for fine-grained control.
 
 | Destination | Target | Meaning |
 |---|---|---|
@@ -80,7 +80,7 @@ Every subnet is associated with exactly one route table. Route priority: **most 
 | Use case | Public-facing resources | IPv6 private instances that need internet access |
 | Attached to | VPC | VPC |
 
-> **📌 Tip:** Egress-Only IGW is the IPv6 equivalent of a NAT Gateway — allows IPv6 instances in private subnets to initiate outbound connections without being reachable from the internet.
+> **📌 Tip:** Egress-Only IGW is the IPv6 equivalent of a NAT Gateway; allows IPv6 instances in private subnets to initiate outbound connections without being reachable from the internet.
 
 ---
 
@@ -113,11 +113,11 @@ One NAT Gateway per AZ for HA. If AZ-A NAT GW fails and you only have one, priva
 
 ## Security Groups
 
-Stateful, instance-level (ENI) firewall. **Allow rules only — no explicit deny**.
+Stateful, instance-level (ENI) firewall. **Allow rules only: no explicit deny**.
 
 | Property | Value |
 |---|---|
-| State | **Stateful** — return traffic automatically allowed |
+| State | **Stateful**: return traffic automatically allowed |
 | Rules | Allow only (inbound + outbound separately) |
 | Level | Instance (ENI) |
 | Default inbound | All traffic **denied** (unless rules added) |
@@ -148,7 +148,7 @@ Stateless, subnet-level firewall. Supports both **allow and deny** rules.
 
 | Property | Value |
 |---|---|
-| State | **Stateless** — return traffic needs explicit rule |
+| State | **Stateless**: return traffic needs explicit rule |
 | Rules | Allow AND Deny |
 | Level | Subnet |
 | Rule evaluation | **Lowest rule number first; stops at first match** |
@@ -162,7 +162,7 @@ Rule 200: Allow TCP 80  from 0.0.0.0/0
 Rule *:   Deny all                       ← evaluated last (catch-all)
 ```
 
-**Ephemeral ports** — NACLs must account for return traffic on ephemeral ports:
+**Ephemeral ports**. NACLs must account for return traffic on ephemeral ports:
 - Linux: `1024–65535`
 - Windows: `49152–65535`
 - AWS recommends: allow `1024–65535` outbound in NACLs for return traffic
@@ -175,7 +175,7 @@ Rule *:   Deny all                       ← evaluated last (catch-all)
 | Evaluation | All rules | In order, first match |
 | Default | Allow outbound | Allow all (default NACL) |
 
-> **📌 Tip:** The most common exam pattern: SGs are stateful (return traffic automatic). NACLs are stateless (you must explicitly allow return traffic including ephemeral ports). NACL rules evaluate in order — first match wins.
+> **📌 Tip:** The most common exam pattern: SGs are stateful (return traffic automatic). NACLs are stateless (you must explicitly allow return traffic including ephemeral ports). NACL rules evaluate in order, first match wins.
 
 ---
 
@@ -221,7 +221,7 @@ protocol packets bytes start end action log-status
 2 123456789012 eni-abc12345 10.0.0.5 10.0.1.6 443 52412 6 10 840 ... ACCEPT OK
 ```
 
-> **📌 Tip:** Flow Logs capture flow metadata, not packet contents. DNS queries to Route 53 Resolver are not captured in Flow Logs — use Route 53 Resolver query logs separately.
+> **📌 Tip:** Flow Logs capture flow metadata, not packet contents. DNS queries to Route 53 Resolver are not captured in Flow Logs; use Route 53 Resolver query logs separately.
 
 ---
 
@@ -229,9 +229,9 @@ protocol packets bytes start end action log-status
 
 | Trap | Correct Answer |
 |---|---|
-| SG is stateless | SG is **stateful** — return traffic auto-allowed |
+| SG is stateless | SG is **stateful**: return traffic auto-allowed |
 | NACL allows all by default | Only the **default NACL** allows all; custom NACLs deny all by default |
-| NACL rules evaluated randomly | Rules evaluated **in number order** — first match wins |
+| NACL rules evaluated randomly | Rules evaluated **in number order**: first match wins |
 | NAT Gateway in private subnet | NAT GW must be in a **public subnet** |
 | Single NAT GW covers all AZs | For HA you need **one NAT GW per AZ** |
 | Flow Logs capture DNS to resolver | Route 53 Resolver traffic is **NOT** captured in Flow Logs |

@@ -40,18 +40,18 @@ Direct Connect provides a **dedicated private network connection** between your 
 
 ---
 
-## Direct Connect — High Availability
+## Direct Connect: High Availability
 
 ### HA patterns (weakest → strongest)
 
 | Pattern | Resilience |
 |---|---|
-| Single DX connection | No redundancy — single point of failure |
+| Single DX connection | No redundancy: single point of failure |
 | Two DX connections to same DX location | Protects against connection failure, NOT location failure |
 | Two DX connections to **two different DX locations** | Recommended HA; survives location failure |
 | DX as primary + **Site-to-Site VPN as backup** | Cost-effective HA; VPN is backup path over public internet |
 
-> **📌 Tip:** Two connections to the same DX location is NOT true HA. The exam specifically tests this — you need **two different DX locations** for location-level redundancy.
+> **📌 Tip:** Two connections to the same DX location is NOT true HA. The exam specifically tests this; you need **two different DX locations** for location-level redundancy.
 
 ---
 
@@ -125,11 +125,11 @@ Transit Gateway is a **regional hub-and-spoke network transit hub** that connect
 - Default: all attachments in the same route table → full mesh.
 - Segmentation: put different VPCs in different route tables → enforce isolation.
 
-### TGW — key use cases
+### TGW: key use cases
 
 - **Centralized egress**: one NAT Gateway for all VPCs (attach all VPCs to TGW, default route → shared egress VPC with NAT GW).
 - **Centralized inspection**: all traffic through a firewall VPC (inspection VPC with Network Firewall or 3rd-party appliance).
-- **Multicast**: IP multicast across VPCs (unique to TGW — VPC peering doesn't support multicast).
+- **Multicast**: IP multicast across VPCs (unique to TGW, VPC peering doesn't support multicast).
 
 ---
 
@@ -160,11 +160,11 @@ Transit Gateway is a **regional hub-and-spoke network transit hub** that connect
 
 | Trap | Correct answer |
 |---|---|
-| "DX is encrypted" | **False** — DX is private but NOT encrypted; add VPN for encryption |
-| "Two DX connections to same location = HA" | **False** — need two **different DX locations** for location-level HA |
-| "DX Gateway routes traffic between VPCs" | **False** — DX Gateway is on-prem → VPC only; VPC-to-VPC requires TGW |
-| "VPN throughput is unlimited" | False — max **~1.25 Gbps per tunnel**; use ECMP + TGW for more |
-| "TGW allows transitive routing; VPC Peering does not" | **True** — classic exam distinction |
-| "Private VIF for access to S3 over DX" | **False** — need a **Public VIF** for S3/DynamoDB (they have public endpoints); Private VIF accesses VPC resources only |
-| "TGW is always cheaper than VPC Peering" | **False** — TGW has hourly charge; peering may be cheaper for 2–3 VPCs |
-| "Client VPN for site-to-site connectivity" | **False** — Client VPN is for individual users; use Site-to-Site VPN for network-to-network |
+| "DX is encrypted" | **False**: DX is private but NOT encrypted; add VPN for encryption |
+| "Two DX connections to same location = HA" | **False**: need two **different DX locations** for location-level HA |
+| "DX Gateway routes traffic between VPCs" | **False**: DX Gateway is on-prem → VPC only; VPC-to-VPC requires TGW |
+| "VPN throughput is unlimited" | False: max **~1.25 Gbps per tunnel**; use ECMP + TGW for more |
+| "TGW allows transitive routing; VPC Peering does not" | **True**: classic exam distinction |
+| "Private VIF for access to S3 over DX" | **False**: need a **Public VIF** for S3/DynamoDB (they have public endpoints); Private VIF accesses VPC resources only |
+| "TGW is always cheaper than VPC Peering" | **False**: TGW has hourly charge; peering may be cheaper for 2–3 VPCs |
+| "Client VPN for site-to-site connectivity" | **False**: Client VPN is for individual users; use Site-to-Site VPN for network-to-network |

@@ -19,24 +19,24 @@ lang_pair: "/posts/neteng/ru/neteng-06-eigrp-advanced/"
 
 | Device | Interface     | IP Address    | Subnet Mask     | Default Gateway |
 | ------ | ------------- | ------------- | --------------- | --------------- |
-| R1     | G0/0          | 192.168.1.1   | 255.255.255.0   | —               |
-|        | S0/0/0 (DCE)  | 192.168.12.1  | 255.255.255.252 | —               |
-|        | S0/0/1        | 192.168.13.1  | 255.255.255.252 | —               |
-|        | Lo1           | 192.168.11.1  | 255.255.255.252 | —               |
-|        | Lo5           | 192.168.11.5  | 255.255.255.252 | —               |
-|        | Lo9           | 192.168.11.9  | 255.255.255.252 | —               |
-|        | Lo13          | 192.168.11.13 | 255.255.255.252 | —               |
-| R2     | G0/0          | 192.168.2.1   | 255.255.255.0   | —               |
-|        | S0/0/0        | 192.168.12.2  | 255.255.255.252 | —               |
-|        | S0/0/1 (DCE)  | 192.168.23.1  | 255.255.255.252 | —               |
-|        | Lo1           | 192.168.22.1  | 255.255.255.252 | —               |
-| R3     | G0/0          | 192.168.3.1   | 255.255.255.0   | —               |
-|        | S0/0/0 (DCE)  | 192.168.13.2  | 255.255.255.252 | —               |
-|        | S0/0/1        | 192.168.23.2  | 255.255.255.252 | —               |
-|        | Lo1           | 192.168.33.1  | 255.255.255.252 | —               |
-|        | Lo5           | 192.168.33.5  | 255.255.255.252 | —               |
-|        | Lo9           | 192.168.33.9  | 255.255.255.252 | —               |
-|        | Lo13          | 192.168.33.13 | 255.255.255.252 | —               |
+| R1     | G0/0          | 192.168.1.1   | 255.255.255.0   | n/a               |
+|        | S0/0/0 (DCE)  | 192.168.12.1  | 255.255.255.252 | n/a               |
+|        | S0/0/1        | 192.168.13.1  | 255.255.255.252 | n/a               |
+|        | Lo1           | 192.168.11.1  | 255.255.255.252 | n/a               |
+|        | Lo5           | 192.168.11.5  | 255.255.255.252 | n/a               |
+|        | Lo9           | 192.168.11.9  | 255.255.255.252 | n/a               |
+|        | Lo13          | 192.168.11.13 | 255.255.255.252 | n/a               |
+| R2     | G0/0          | 192.168.2.1   | 255.255.255.0   | n/a               |
+|        | S0/0/0        | 192.168.12.2  | 255.255.255.252 | n/a               |
+|        | S0/0/1 (DCE)  | 192.168.23.1  | 255.255.255.252 | n/a               |
+|        | Lo1           | 192.168.22.1  | 255.255.255.252 | n/a               |
+| R3     | G0/0          | 192.168.3.1   | 255.255.255.0   | n/a               |
+|        | S0/0/0 (DCE)  | 192.168.13.2  | 255.255.255.252 | n/a               |
+|        | S0/0/1        | 192.168.23.2  | 255.255.255.252 | n/a               |
+|        | Lo1           | 192.168.33.1  | 255.255.255.252 | n/a               |
+|        | Lo5           | 192.168.33.5  | 255.255.255.252 | n/a               |
+|        | Lo9           | 192.168.33.9  | 255.255.255.252 | n/a               |
+|        | Lo13          | 192.168.33.13 | 255.255.255.252 | n/a               |
 | PC-A   | NIC           | 192.168.1.3   | 255.255.255.0   | 192.168.1.1     |
 | PC-B   | NIC           | 192.168.2.3   | 255.255.255.0   | 192.168.2.1     |
 | PC-C   | NIC           | 192.168.3.3   | 255.255.255.0   | 192.168.3.1     |
@@ -51,7 +51,7 @@ lang_pair: "/posts/neteng/ru/neteng-06-eigrp-advanced/"
 
 ---
 
-### Part 1 — Basic device setup
+### Part 1: Basic device setup
 
 Note: do **not** configure loopback interfaces yet.
 
@@ -148,12 +148,12 @@ copy running-config startup-config
 
 ---
 
-### Part 2 — Configure EIGRP and verify connectivity
+### Part 2: Configure EIGRP and verify connectivity
 
 Configure EIGRP AS 1, passive LAN interface, and set bandwidth on serial links. Note: `bandwidth` affects EIGRP metric calculation only, not actual link speed.
 
 <details>
-<summary>R1 — EIGRP AS 1, S0/0/0 = 1024 Kbps, S0/0/1 = 64 Kbps</summary>
+<summary>R1: EIGRP AS 1, S0/0/0 = 1024 Kbps, S0/0/1 = 64 Kbps</summary>
 <pre><code>
 enable
 configure terminal
@@ -171,7 +171,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — EIGRP AS 1, S0/0/0 = 1024 Kbps</summary>
+<summary>R2: EIGRP AS 1, S0/0/0 = 1024 Kbps</summary>
 <pre><code>
 enable
 configure terminal
@@ -187,7 +187,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — EIGRP AS 1, S0/0/0 = 64 Kbps</summary>
+<summary>R3: EIGRP AS 1, S0/0/0 = 64 Kbps</summary>
 <pre><code>
 enable
 configure terminal
@@ -203,7 +203,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Verify end-to-end connectivity — all PCs should ping each other:
+Verify end-to-end connectivity. All PCs should ping each other:
 
 <details>
 <summary>PC-A → PC-C ping</summary>
@@ -228,12 +228,12 @@ Approximate round trip times in milli-seconds:
 
 ---
 
-### Part 3 — Auto-summarization
+### Part 3: Auto-summarization
 
 Check auto-summary default state with `show ip protocols` on R1:
 
 <details>
-<summary>R1 — show ip protocols (auto-summary enabled)</summary>
+<summary>R1: show ip protocols (auto-summary enabled)</summary>
 <pre><code>
 R1#show ip protocols
 
@@ -270,7 +270,7 @@ Redistributing: eigrp 1
 Auto-summary is **enabled** by default. Now add loopback interfaces on R1 and advertise them:
 
 <details>
-<summary>R1 — loopback addresses and EIGRP network statements</summary>
+<summary>R1: loopback addresses and EIGRP network statements</summary>
 <pre><code>
 enable
 configure terminal
@@ -296,7 +296,7 @@ copy running-config startup-config
 With auto-summary active, R2 sees all four loopbacks summarized into a single classful /24:
 
 <details>
-<summary>R2 — show ip route eigrp (auto-summary active)</summary>
+<summary>R2: show ip route eigrp (auto-summary active)</summary>
 <pre><code>
 enable
 configure terminal
@@ -315,10 +315,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Disable auto-summary on R1 — the four /30 loopbacks now appear individually:
+Disable auto-summary on R1. The four /30 loopbacks now appear individually:
 
 <details>
-<summary>R1 — no auto-summary</summary>
+<summary>R1: no auto-summary</summary>
 <pre><code>
 enable
 configure terminal
@@ -329,7 +329,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip route eigrp (after no auto-summary on R1)</summary>
+<summary>R2: show ip route eigrp (after no auto-summary on R1)</summary>
 <pre><code>
 enable
 configure terminal
@@ -352,10 +352,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Repeat the same on R3 — add loopback interfaces, advertise them, disable auto-summary:
+Repeat the same on R3. Add loopback interfaces, advertise them, disable auto-summary:
 
 <details>
-<summary>R3 — loopbacks + EIGRP + no auto-summary</summary>
+<summary>R3: loopbacks + EIGRP + no auto-summary</summary>
 <pre><code>
 enable
 configure terminal
@@ -381,7 +381,7 @@ copy running-config startup-config
 
 ---
 
-### Part 4 — Redistribute a default static route
+### Part 4: Redistribute a default static route
 
 Configure a loopback on R2 simulating the internet uplink, create a default static route, and redistribute it into EIGRP:
 
@@ -398,7 +398,7 @@ router eigrp 1
 Verify that redistribution is active with `show ip protocols` on R2:
 
 <details>
-<summary>R2 — show ip protocols (redistributing static)</summary>
+<summary>R2: show ip protocols (redistributing static)</summary>
 <pre><code>
 R2#show ip protocols
 
@@ -426,10 +426,10 @@ Routing Protocol is "eigrp 1"
 </code></pre>
 </details>
 
-On R1 verify the redistributed default route — it appears as EIGRP external (EX) with AD = 170:
+On R1 verify the redistributed default route; it appears as EIGRP external (EX) with AD = 170:
 
 <details>
-<summary>R1 — show ip route eigrp (default route visible)</summary>
+<summary>R1: show ip route eigrp (default route visible)</summary>
 <pre><code>
 enable
 configure terminal
@@ -445,9 +445,9 @@ copy running-config startup-config
 
 ---
 
-### Part 5 — Fine-tune EIGRP
+### Part 5: Fine-tune EIGRP
 
-**Bandwidth percent** — limit EIGRP traffic to 75% of bandwidth on R1–R2 link, 40% on R1–R3:
+**Bandwidth percent**. Limit EIGRP traffic to 75% of bandwidth on R1–R2 link, 40% on R1–R3:
 
 ```
 R1(config)# interface Serial0/0
@@ -462,10 +462,10 @@ R3(config)# interface Serial0/0
 R3(config-if)# ip bandwidth-percent eigrp 1 40
 ```
 
-**Hello/hold timers** — check current defaults with `show ip eigrp interfaces detail`:
+**Hello/hold timers**. Check current defaults with `show ip eigrp interfaces detail`:
 
 <details>
-<summary>R2 — show ip eigrp interfaces detail</summary>
+<summary>R2: show ip eigrp interfaces detail</summary>
 <pre><code>
 R2# show ip eigrp interfaces detail
 EIGRP-IPv4 Interfaces for AS(1)

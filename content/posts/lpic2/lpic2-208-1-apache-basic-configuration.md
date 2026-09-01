@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-208-1-apache-basic-configuration/"
 page_lang: "en"
 ---
 
-> **Exam topic 208.1** — Basic Apache Configuration (weight: 4). Covers Apache httpd installation, configuration structure, modules, MPM, access control, virtual hosts, and basic performance tuning.
+> **Exam topic 208.1**: Basic Apache Configuration (weight: 4). Covers Apache httpd installation, configuration structure, modules, MPM, access control, virtual hosts, and basic performance tuning.
 
 ---
 
@@ -104,7 +104,7 @@ apxs -c -i -a mod_example.c
 
 ---
 
-## MPM — Multi-Processing Module
+## MPM: Multi-Processing Module
 
 Apache can use one of several MPM backends:
 
@@ -232,7 +232,7 @@ Allow from all
 Deny from 10.0.0.0/8
 ```
 
-`Satisfy Any` — access if EITHER authentication OR IP passes.
+`Satisfy Any`: access if EITHER authentication OR IP passes.
 
 ### Apache 2.4 syntax (current):
 
@@ -323,7 +323,7 @@ Per-directory overrides (no server restart needed):
 
 ## mod_perl
 
-Embeds a Perl interpreter inside Apache — scripts persist in memory between requests (fast).
+Embeds a Perl interpreter inside Apache, scripts persist in memory between requests (fast).
 
 ```apache
 LoadModule perl_module modules/mod_perl.so
@@ -401,7 +401,7 @@ Listen 80
 </VirtualHost>
 ```
 
-> **Note:** `NameVirtualHost` directive is **obsolete in Apache 2.4** — it is now the default behavior when using `*:80`.
+> **Note:** `NameVirtualHost` directive is **obsolete in Apache 2.4**; it is now the default behavior when using `*:80`.
 
 > **First VirtualHost** that matches the IP/port is the **default** if no `Host:` header matches.
 
@@ -465,8 +465,8 @@ Evolution of network/server graphing tools:
 
 | Tool | Description |
 |---|---|
-| **MRTG** | Multi Router Traffic Grapher — original SNMP-based grapher |
-| **RRDtool** | Round Robin Database — storage + graphing engine, successor |
+| **MRTG** | Multi Router Traffic Grapher: original SNMP-based grapher |
+| **RRDtool** | Round Robin Database: storage + graphing engine, successor |
 | **Cricket** | Configuration-driven monitoring system built on RRDtool |
 
 ### mod_status

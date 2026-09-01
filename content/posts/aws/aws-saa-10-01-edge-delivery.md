@@ -9,7 +9,7 @@ page_lang: "en"
 lang_pair: "/posts/aws/ru/aws-saa-10-01-edge-delivery/"
 ---
 
-## CloudFront — CDN Overview
+## CloudFront: CDN Overview
 
 CloudFront is AWS's global Content Delivery Network. It caches content at **edge locations** (400+) and **regional edge caches** to reduce latency and origin load.
 
@@ -47,7 +47,7 @@ CloudFront is AWS's global Content Delivery Network. It caches content at **edge
 By default CloudFront uses only the URL path. Extend the cache key with:
 - **Query strings** (forward all or specific)
 - **Headers** (e.g., `Accept-Language` for multi-language content)
-- **Cookies** (specific cookies only — forwarding all cookies disables caching)
+- **Cookies** (specific cookies only: forwarding all cookies disables caching)
 
 > **📌 Tip:** Forwarding all headers to origin = effectively disabling CloudFront caching. Only forward the headers your origin needs to vary the response.
 
@@ -59,9 +59,9 @@ By default CloudFront uses only the URL path. Extend the cache key with:
 
 - **Viewer protocol**: HTTP only, HTTPS only, or redirect HTTP → HTTPS
 - **Origin protocol**: HTTP or HTTPS (match origin's certificate)
-- **Custom TLS cert**: via ACM — must be in **us-east-1** for CloudFront
+- **Custom TLS cert**: via ACM, must be in **us-east-1** for CloudFront
 - **SNI** (Server Name Indication): default, free; one cert per distribution
-- **Dedicated IP**: $600/month per distribution — for legacy clients that don't support SNI
+- **Dedicated IP**: $600/month per distribution, for legacy clients that don't support SNI
 
 ### Geo-restriction
 
@@ -82,7 +82,7 @@ By default CloudFront uses only the URL path. Extend the cache key with:
 
 ---
 
-## OAC vs OAI — Restricting S3 Access
+## OAC vs OAI: Restricting S3 Access
 
 | | OAI (legacy) | OAC (current) |
 |---|---|---|
@@ -131,7 +131,7 @@ Global Accelerator uses the AWS global network backbone to route traffic to the 
 1. You get **2 static Anycast IP addresses** (unchanged, regardless of backend changes).
 2. Client connects to nearest AWS edge location via Anycast.
 3. Traffic travels over AWS backbone (not public internet) to the target region.
-4. Targets: ALB, NLB, EC2, Elastic IP — in one or multiple regions.
+4. Targets: ALB, NLB, EC2, Elastic IP, in one or multiple regions.
 
 ### Health checks and failover
 
@@ -147,7 +147,7 @@ Global Accelerator uses the AWS global network backbone to route traffic to the 
 | Dimension | CloudFront | Global Accelerator |
 |---|---|---|
 | **Protocol** | HTTP/HTTPS (Layer 7) | TCP, UDP (Layer 4) |
-| **Caching** | Yes — edge caches content | No caching |
+| **Caching** | Yes: edge caches content | No caching |
 | **Use case** | Web content, APIs, video streaming | Gaming, IoT, VoIP, non-HTTP, static IP requirement |
 | **IP addresses** | Dynamic (uses domain, not static IPs) | 2 static Anycast IPs |
 | **DDoS protection** | Shield Standard + WAF support | Shield Standard |
@@ -187,10 +187,10 @@ Flow: User → Edge Location → (cache miss) → Regional Edge Cache → (cache
 | Trap | Correct answer |
 |---|---|
 | "ACM cert for CloudFront in any region" | Must be in **us-east-1** |
-| "Global Accelerator for HTTP caching" | Global Accelerator does **not cache** — use CloudFront |
-| "CloudFront for static IP requirement" | CloudFront IPs are dynamic — use **Global Accelerator** for static IPs |
-| "Lambda@Edge for simple header adds" | Overkill — use **CloudFront Functions** (cheaper, faster, simpler) |
-| "CloudFront Functions can call external APIs" | **Cannot** — use Lambda@Edge for external calls |
-| "OAI for SSE-KMS encrypted S3" | OAI doesn't support SSE-KMS — use **OAC** |
+| "Global Accelerator for HTTP caching" | Global Accelerator does **not cache**: use CloudFront |
+| "CloudFront for static IP requirement" | CloudFront IPs are dynamic: use **Global Accelerator** for static IPs |
+| "Lambda@Edge for simple header adds" | Overkill: use **CloudFront Functions** (cheaper, faster, simpler) |
+| "CloudFront Functions can call external APIs" | **Cannot**: use Lambda@Edge for external calls |
+| "OAI for SSE-KMS encrypted S3" | OAI doesn't support SSE-KMS: use **OAC** |
 | "Signed URL for premium subscription (many files)" | Use **Signed Cookies** instead |
 | "S3 Transfer Acceleration for faster downloads" | Transfer Acceleration is upload-only; use **CloudFront** for downloads |

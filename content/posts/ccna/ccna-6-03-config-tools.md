@@ -13,9 +13,9 @@ lang_pair: "/posts/ccna/ru/ccna-6-03-config-tools/"
 | Manual management problem | Solution |
 |---|---|
 | Errors from manual input | Templates, declarative approach |
-| Inconsistent configurations | Idempotency — only differences are applied |
+| Inconsistent configurations | Idempotency: only differences are applied |
 | Slow deployments | Parallel application to hundreds of devices |
-| No change history | Git integration (IaC — Infrastructure as Code) |
+| No change history | Git integration (IaC: Infrastructure as Code) |
 
 ---
 
@@ -27,7 +27,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-03-config-tools/"
 |---|---|
 | Language | YAML (Playbooks) |
 | Agent | None (agentless) |
-| Transport | SSH or API (for network devices — NETCONF, HTTP) |
+| Transport | SSH or API (for network devices: NETCONF, HTTP) |
 | Developer | Red Hat |
 
 ### Ansible Components
@@ -129,10 +129,10 @@ class network_config {
 | Developer | Progress (formerly Chef Software) |
 
 **Components:**
-- **Chef Server** — stores configurations
-- **Chef Client** — agent on managed nodes
-- **Workstation** — where developers write recipes
-- **Cookbook** — collection of recipes for a single task
+- **Chef Server**: stores configurations
+- **Chef Client**: agent on managed nodes
+- **Workstation**: where developers write recipes
+- **Cookbook**: collection of recipes for a single task
 
 ---
 
@@ -153,7 +153,7 @@ class network_config {
 
 ## Terraform
 
-**Terraform** (HashiCorp) — Infrastructure as Code for cloud and on-premises resources.
+**Terraform** (HashiCorp), Infrastructure as Code for cloud and on-premises resources.
 
 | Characteristic | Description |
 |---|---|
@@ -181,7 +181,7 @@ resource "cisco-asa_access_rules" "example" {
 A built-in IOS tool for automating responses to events:
 
 ```bash
-# Example: when an interface goes down — send syslog + backup config
+# Example: when an interface goes down - send syslog + backup config
 Router(config)# event manager applet LINK_DOWN
 Router(config-applet)# event syslog pattern "Interface.*down"
 Router(config-applet)# action 1.0 syslog msg "Interface went down - alerting"
@@ -205,9 +205,9 @@ Router(tcl)# puts [exec "show version | include IOS"]
 
 | Resource | Description |
 |---|---|
-| [Ansible for Network Automation — Ansible Docs](https://docs.ansible.com/ansible/latest/network/index.html) | Official Ansible documentation for network automation |
-| [RFC 6241 — NETCONF](https://www.rfc-editor.org/rfc/rfc6241) | Network Configuration Protocol: operations, XML, capabilities |
-| [RESTCONF — RFC 8040](https://www.rfc-editor.org/rfc/rfc8040) | RESTCONF Protocol: HTTP interface for YANG models |
-| [Configuration Management Tools — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/configuration-management) | Ansible vs Puppet vs Chef: agent-based and agentless approaches |
-| [Jeremy's IT Lab — Configuration Management (YouTube)](https://www.youtube.com/watch?v=_k_v_-0TH_k) | Ansible, Puppet, Chef, Terraform, YANG from the Free CCNA series |
-| [Cisco DevNet — Network Automation](https://developer.cisco.com/network-automation/) | Cisco DevNet: NETCONF, RESTCONF, YANG, Ansible resources |
+| [Ansible for Network Automation: Ansible Docs](https://docs.ansible.com/ansible/latest/network/index.html) | Official Ansible documentation for network automation |
+| [RFC 6241: NETCONF](https://www.rfc-editor.org/rfc/rfc6241) | Network Configuration Protocol: operations, XML, capabilities |
+| [RESTCONF: RFC 8040](https://www.rfc-editor.org/rfc/rfc8040) | RESTCONF Protocol: HTTP interface for YANG models |
+| [Configuration Management Tools (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/configuration-management) | Ansible vs Puppet vs Chef: agent-based and agentless approaches |
+| [Jeremy's IT Lab: Configuration Management (YouTube)](https://www.youtube.com/watch?v=_k_v_-0TH_k) | Ansible, Puppet, Chef, Terraform, YANG from the Free CCNA series |
+| [Cisco DevNet: Network Automation](https://developer.cisco.com/network-automation/) | Cisco DevNet: NETCONF, RESTCONF, YANG, Ansible resources |

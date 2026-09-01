@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-204-1-configuring-raid/"
 page_lang: "en"
 ---
 
-> **Exam topic 204.1** — Configuring RAID. Covers RAID levels, software RAID with mdadm, /proc/mdstat, mdadm.conf, and complete deployment and disk replacement procedures.
+> **Exam topic 204.1**: Configuring RAID. Covers RAID levels, software RAID with mdadm, /proc/mdstat, mdadm.conf, and complete deployment and disk replacement procedures.
 
 ---
 
@@ -16,15 +16,15 @@ page_lang: "en"
 
 RAID stands for Redundant Array of Independent (or Inexpensive) Disks. Multiple physical disks are combined into a single logical block device. The OS sees it as one disk and interacts with it via standard interfaces.
 
-**Why use it?** First, speed — parallel reads and writes across multiple disks increase throughput. Second, reliability — some RAID levels survive a single disk failure without data loss. Third, capacity — several small disks combine into one large pool.
+**Why use it?** First, speed: parallel reads and writes across multiple disks increase throughput. Second, reliability, some RAID levels survive a single disk failure without data loss. Third, capacity, several small disks combine into one large pool.
 
 Key concepts:
 
-**Parity** — a mathematically computed check value stored alongside data. If a disk dies, the missing bits are reconstructed from the remaining data plus parity.
+**Parity**: a mathematically computed check value stored alongside data. If a disk dies, the missing bits are reconstructed from the remaining data plus parity.
 
-**Chunk** — the minimum piece of data written to one disk in the array. Typically 32K or 64K; configurable. `mdadm` defaults to 512 KiB.
+**Chunk**: the minimum piece of data written to one disk in the array. Typically 32K or 64K; configurable. `mdadm` defaults to 512 KiB.
 
-**I/O transaction** — one I/O operation. Depending on RAID level, one transaction to the array generates multiple transactions to member disks, affecting performance.
+**I/O transaction**: one I/O operation. Depending on RAID level, one transaction to the array generates multiple transactions to member disks, affecting performance.
 
 > **Important:** Software RAID in Linux is implemented through the `md` (Multiple Devices) driver. The primary management tool is `mdadm`. Array devices are named `/dev/md0`, `/dev/md1`, etc. and have **major number 9**.
 
@@ -32,7 +32,7 @@ Key concepts:
 
 ## RAID Levels
 
-### RAID 0 — Striping
+### RAID 0: Striping
 
 Data is split into chunks and written alternately to all disks. Disk A gets chunk 1, disk B gets chunk 2, disk A gets chunk 3, and so on.
 
@@ -49,13 +49,13 @@ Chunk 3        Chunk 4
 Chunk 5        Chunk 6
 ```
 
-### RAID 1 — Mirroring
+### RAID 1: Mirroring
 
 The same data is written simultaneously to all disks. Each disk contains a complete copy. Reads can parallelize across disks, giving high throughput for read-heavy workloads.
 
 **Pros:** Excellent fault tolerance; immediate access to data when a disk fails; simple recovery.
 
-**Cons:** High cost — for every working disk you need another for the mirror. Capacity = size of the smallest disk.
+**Cons:** High cost, for every working disk you need another for the mirror. Capacity = size of the smallest disk.
 
 Minimum disks: 2.
 
@@ -65,7 +65,7 @@ Parity is stored on a dedicated disk; data is distributed across the remaining d
 
 Capacity = (N-1) disks. Minimum disks: 3.
 
-### RAID 5 — Striping with Parity
+### RAID 5: Striping with Parity
 
 Data and parity are interleaved across all disks. Unlike RAID 3/4, parity in RAID 5 is distributed evenly, eliminating the write bottleneck.
 
@@ -88,7 +88,7 @@ Minimum disks: 3. Capacity = (N-1) disks.
 
 Disks are joined end-to-end: data fills the first disk, then overflows to the second. No striping, no redundancy. If one disk fails the entire array becomes unavailable. Disks can be different sizes (unlike striping, which requires roughly equal sizes).
 
-A single writing process works on only one disk at a time — no speed gain. However, multiple reading processes can access different disks in parallel if both are populated. Capacity = sum of all disks.
+A single writing process works on only one disk at a time, no speed gain. However, multiple reading processes can access different disks in parallel if both are populated. Capacity = sum of all disks.
 
 ---
 
@@ -96,7 +96,7 @@ A single writing process works on only one disk at a time — no speed gain. How
 
 **Hardware RAID** is managed by a dedicated controller. The OS sees only one block device per array and has no knowledge of the member disks. The controller may be a SCSI card, an external disk module, or an onboard chip. Detecting hardware RAID from inside Linux is non-trivial; it looks like a regular single SCSI disk, and diagnostics often require vendor software.
 
-**Software RAID** is implemented directly in the kernel via the `md` driver. No special hardware is required; it works with ordinary SATA and SCSI disks. On modern CPUs, software RAID performance is fully comparable to hardware. Devices are named `/dev/md0`, `/dev/md1`, etc. with **major number 9** — the easiest way to identify software RAID.
+**Software RAID** is implemented directly in the kernel via the `md` driver. No special hardware is required; it works with ordinary SATA and SCSI disks. On modern CPUs, software RAID performance is fully comparable to hardware. Devices are named `/dev/md0`, `/dev/md1`, etc. with **major number 9**: the easiest way to identify software RAID.
 
 > **Note:** `mdadm` is also used for block-device-level multipathing, not just RAID. However, multipathing across paths to the same physical drive only creates the illusion of redundancy and is suitable for testing only.
 
@@ -116,7 +116,7 @@ A single writing process works on only one disk at a time — no speed gain. How
 
 ## Full RAID Deployment Process
 
-### Step 1 — Partition preparation
+### Step 1: Partition preparation
 
 Before creating an array, partition the disks with `fdisk` or `parted`. Set partition type `fd` (Linux RAID autodetect) on each RAID partition; otherwise the array will not assemble automatically at boot.
 
@@ -125,17 +125,17 @@ lsblk
 fdisk -l /dev/sdb
 fdisk /dev/sdb
 # Inside fdisk:
-# n — new partition
-# t — change partition type
-# fd — Linux RAID autodetect
-# w — write and exit
+# n - new partition
+# t - change partition type
+# fd - Linux RAID autodetect
+# w - write and exit
 ```
 
 > **Warning:** For `fdisk` to write the updated partition table, all partitions on that physical disk must be unmounted. If the disk has both local and RAID partitions, changing the type requires downtime.
 
 > **Note:** All partitions in one array must be the same size. If disks are unequal, the `md` driver uses the smallest size and ignores the remainder.
 
-### Step 2 — Create the array with mdadm
+### Step 2: Create the array with mdadm
 
 The device `/dev/md0` is created automatically when `mdadm --create` runs. It can also be created manually with `mknod` as a block device with major number 9 (found in `/proc/devices`).
 
@@ -153,9 +153,9 @@ mdadm -C /dev/md0 -l 0 -n 2 --chunk=64 /dev/sdb1 /dev/sdc1
 mdadm -C /dev/md0 -l 5 -n 3 --spare-devices=1 /dev/sdb1 /dev/sdc1 /dev/sdd1 /dev/sde1
 ```
 
-> **Note — Superblock:** On creation, `mdadm` writes a superblock (default version 1.2) to each member disk. It stores array metadata: UUID, RAID level, disk count, state. If a superblock already exists, use `--assemble` not `--create`.
+> **Note: Superblock:** On creation, `mdadm` writes a superblock (default version 1.2) to each member disk. It stores array metadata: UUID, RAID level, disk count, state. If a superblock already exists, use `--assemble` not `--create`.
 
-### Step 3 — Check via /proc/mdstat
+### Step 3: Check via /proc/mdstat
 
 Immediately after creation, verify the state via `/proc/mdstat`. This is the fastest way to confirm all disks joined and the rebuild is progressing normally.
 
@@ -163,7 +163,7 @@ Immediately after creation, verify the state via `/proc/mdstat`. This is the fas
 cat /proc/mdstat
 ```
 
-### Step 4 — Format the array
+### Step 4: Format the array
 
 A created `md` array behaves like any ordinary block device.
 
@@ -172,7 +172,7 @@ mkfs.ext3 /dev/md0
 mkfs.ext4 /dev/md0
 ```
 
-### Step 5 — Save configuration and update /etc/fstab
+### Step 5: Save configuration and update /etc/fstab
 
 `mdadm.conf` is not created automatically. Generate it manually.
 
@@ -187,7 +187,7 @@ Then add an entry to `/etc/fstab`. If the member partitions were previously list
 /dev/md0   /mnt/raid   ext4   defaults   0   2
 ```
 
-### Step 6 — Mount
+### Step 6: Mount
 
 If the array was created without a reboot, mount it manually.
 
@@ -376,8 +376,8 @@ unused devices: <none>
 ```
 
 In the `[UU_...]` field:
-- `U` — disk is active (UP)
-- `_` — disk is unavailable (DOWN/FAILED)
+- `U`: disk is active (UP)
+- `_`: disk is unavailable (DOWN/FAILED)
 
 During rebuild a progress bar appears:
 
@@ -385,7 +385,7 @@ During rebuild a progress bar appears:
 [===>.................]  recovery = 18.5% finish=8.1min speed=75000K/sec
 ```
 
-> **Tip:** `watch cat /proc/mdstat` refreshes every 2 seconds — convenient for monitoring a rebuild.
+> **Tip:** `watch cat /proc/mdstat` refreshes every 2 seconds, convenient for monitoring a rebuild.
 
 ---
 
@@ -414,7 +414,7 @@ During rebuild a progress bar appears:
 ### Common Exam Traps
 
 - `--create` writes a new superblock. If a superblock already exists, use `--assemble`.
-- `mdadm.conf` is not updated automatically — regenerate it after any array change.
+- `mdadm.conf` is not updated automatically: regenerate it after any array change.
 - `/proc/mdstat` is a **state** file, not a **config** file. Often confused with `mdadm.conf`.
 - RAID 5 requires at least 3 disks; RAID 6 and RAID 10 require at least 4.
 - `[3/2] [UU_]` in `/proc/mdstat` = degraded array: 3 required, 2 active.
@@ -426,7 +426,7 @@ During rebuild a progress bar appears:
 
 **Q1.** What is the minimum number of disks for RAID 5 with one spare?
 
-**Answer:** **4** — RAID 5 requires at least 3 active disks plus 1 spare.
+**Answer:** **4**; RAID 5 requires at least 3 active disks plus 1 spare.
 
 ---
 
@@ -438,7 +438,7 @@ During rebuild a progress bar appears:
 
 **Q3.** Which command assembles a previously created RAID array after a reboot?
 
-**Answer:** `mdadm --assemble --scan` — assembles existing arrays using superblock data.
+**Answer:** `mdadm --assemble --scan`, assembles existing arrays using superblock data.
 
 ---
 
@@ -450,22 +450,22 @@ During rebuild a progress bar appears:
 
 **Q5.** Disk `/dev/sdc1` failed in array `/dev/md0` and has been marked as failed. What is the next command before physically replacing the disk?
 
-**Answer:** `mdadm --manage /dev/md0 --remove /dev/sdc1` — remove the failed disk from the array, then physically replace it and add the new one with `--add`.
+**Answer:** `mdadm --manage /dev/md0 --remove /dev/sdc1`; remove the failed disk from the array, then physically replace it and add the new one with `--add`.
 
 ---
 
 **Q6.** After adding a spare via `mdadm --manage`, will `mdadm.conf` be updated automatically?
 
-**Answer:** **No** — `mdadm` never updates `mdadm.conf` automatically. Regenerate it manually after any change.
+**Answer:** **No**, `mdadm` never updates `mdadm.conf` automatically. Regenerate it manually after any change.
 
 ---
 
 **Q7.** What partition type should be set on disks intended for software RAID?
 
-**Answer:** `0xFD` — Linux RAID autodetect (code `fd` in `fdisk`). This allows the kernel to detect and assemble arrays automatically at boot.
+**Answer:** `0xFD`, Linux RAID autodetect (code `fd` in `fdisk`). This allows the kernel to detect and assemble arrays automatically at boot.
 
 ---
 
 **Q8.** Which RAID level provides the best write performance with two disks but no fault tolerance?
 
-**Answer:** **RAID 0** (striping) — distributes data across all disks in parallel for maximum speed. Any disk failure destroys the entire array.
+**Answer:** **RAID 0** (striping), distributes data across all disks in parallel for maximum speed. Any disk failure destroys the entire array.

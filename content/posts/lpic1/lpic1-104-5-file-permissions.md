@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-104-5-file-permissions/"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 101
+> **Exam weight: 3**. LPIC-1 v5, Exam 101
 
 ## What You Need to Know
 
@@ -31,9 +31,9 @@ ls -l
 
 First character = file type. Next 9 = permissions (three groups of three). Then: hard link count, owner, group, size, date, name.
 
-- `ls -a` — show hidden files (starting with `.`)
-- `ls -ld DIR` — show directory attributes, not its contents
-- `ls -lh` — human-readable sizes
+- `ls -a`: show hidden files (starting with `.`)
+- `ls -ld DIR`: show directory attributes, not its contents
+- `ls -lh`: human-readable sizes
 
 ### File Types
 
@@ -74,7 +74,7 @@ Each group: `r` (read), `w` (write), `x` (execute). Dash `-` = absent.
 
 ### How the System Checks Permissions
 
-Exactly one set of permissions applies — checked in order:
+Exactly one set of permissions applies, checked in order:
 
 1. User is the owner → owner permissions apply.
 2. User is in the owning group → group permissions apply.
@@ -111,13 +111,13 @@ Each permission has a numeric value: `r=4`, `w=2`, `x=1`. Sum them per group:
 
 | Number | Permissions |
 |---|---|
-| 7 | rwx |
-| 6 | rw- |
-| 5 | r-x |
-| 4 | r-- |
-| 0 | --- |
+| 7 | `rwx` |
+| 6 | `rw-` |
+| 5 | `r-x` |
+| 4 | `r--` |
+| 0 | `---` |
 
-Three digits: owner — group — others:
+Three digits: owner. Group. Others:
 
 ```bash
 chmod 660 text.txt      # rw-rw----
@@ -133,12 +133,12 @@ Tip: an odd number means the file is definitely executable.
 chmod -R u+rwx Another_Directory/
 ```
 
-Without `-R`, only the directory itself is affected. With `-R` — the entire tree.
+Without `-R`, only the directory itself is affected. With `-R`: the entire tree.
 
 ### Symbolic vs Octal
 
-- **Octal** — when you need to set all permissions to a specific value at once.
-- **Symbolic** — when changing one permission without touching the rest.
+- **Octal**: when you need to set all permissions to a specific value at once.
+- **Symbolic**: when changing one permission without touching the rest.
 
 ---
 
@@ -198,10 +198,10 @@ To persist across sessions, add to `~/.bashrc` or `/etc/profile`.
 
 | umask | File | Directory |
 |---|---|---|
-| 022 | rw-r--r-- (644) | rwxr-xr-x (755) |
-| 027 | rw-r----- (640) | rwxr-x--- (750) |
-| 077 | rw------- (600) | rwx------ (700) |
-| 007 | rw-rw---- (660) | rwxrwx--- (770) |
+| 022 | `rw-r--r--` (644) | `rwxr-xr-x` (755) |
+| 027 | `rw-r-----` (640) | `rwxr-x---` (750) |
+| 077 | `rw-------` (600) | `rwx------` (700) |
+| 007 | `rw-rw----` (660) | `rwxrwx---` (770) |
 
 ---
 
@@ -211,14 +211,14 @@ To persist across sessions, add to `~/.bashrc` or `/etc/profile`.
 
 Octal value: **1** (4th digit). Symbol: `t` in place of `x` for others.
 
-On a directory: only the file's owner or the directory's owner can delete or rename files inside. Applied to directories only — has no effect on files.
+On a directory: only the file's owner or the directory's owner can delete or rename files inside. Applied to directories only; has no effect on files.
 
 ```bash
 chmod 1755 /tmp        # octal
 chmod o+t /tmp         # symbolic
 ```
 
-Classic example: `/tmp` — world-writable, but each user can only delete their own files.
+Classic example: `/tmp`, world-writable, but each user can only delete their own files.
 
 ### SGID
 
@@ -323,7 +323,7 @@ Uppercase is a diagnostic signal: the special bit is set but without `x` it is l
 
 ## Exercises
 
-### Exercise 1 — Show a directory's own permissions
+### Exercise 1: Show a directory's own permissions
 
 Create `emptydir` with `mkdir emptydir`. Show the permissions on the directory itself (not its contents).
 
@@ -340,7 +340,7 @@ Without `-d`, `ls` lists the directory's contents. The `-d` flag makes it show t
 
 ---
 
-### Exercise 2 — chmod in symbolic mode
+### Exercise 2: chmod in symbolic mode
 
 Create `emptyfile` with `touch emptyfile`. In a single `chmod` command using symbolic mode: add execute for the owner and remove write and execute from group and others.
 
@@ -351,13 +351,13 @@ Create `emptyfile` with `touch emptyfile`. In a single `chmod` command using sym
 chmod u+x,go-wx emptyfile
 ```
 
-`u+x` — add execute for owner. `go-wx` — remove write and execute from group and others. Multiple changes are comma-separated with no spaces.
+`u+x`: add execute for owner. `go-wx`; remove write and execute from group and others. Multiple changes are comma-separated with no spaces.
 
 </details>
 
 ---
 
-### Exercise 3 — Calculate permissions from umask
+### Exercise 3: Calculate permissions from umask
 
 What permissions will new files have if umask is `027`?
 
@@ -372,7 +372,7 @@ Calculation: `666 - 027 = 640`. Files never get `x` by default, so the `x` bits 
 
 ---
 
-### Exercise 4 — Parse permissions and remove SGID
+### Exercise 4: Parse permissions and remove SGID
 
 ```
 -rwxr-sr-x 1 carol root 33 Dec 11 10:36 test.sh
@@ -383,7 +383,7 @@ What are the owner's permissions? How do you remove the special permission with 
 <details>
 <summary>Answer</summary>
 
-Owner permissions — characters 2–4: `rwx`. Owner can read, write, and execute.
+Owner permissions, characters 2–4: `rwx`. Owner can read, write, and execute.
 
 Converting to octal: `rwx`=7, `r-x` for group (`s` is in the `x` position, so `x` is present)=5, `r-x`=5 → regular permissions are `755`.
 
@@ -397,7 +397,7 @@ chmod 0755 test.sh
 
 ---
 
-### Exercise 5 — Block device ownership
+### Exercise 5: Block device ownership
 
 ```
 $ ls -l /dev/sdb1
@@ -409,7 +409,7 @@ What type of file is this? Who can write to it?
 <details>
 <summary>Answer</summary>
 
-First character `b` — block device (typically a disk).
+First character `b`, block device (typically a disk).
 
 Write access: owner (`root`) and any member of the `disk` group. Others have no access.
 
@@ -417,7 +417,7 @@ Write access: owner (`root`) and any member of the `disk` group. Others have no 
 
 ---
 
-### Exercise 6 — Octal notation for four files
+### Exercise 6: Octal notation for four files
 
 Express permissions in four-digit octal notation:
 
@@ -442,16 +442,16 @@ drwxr-sr-x 2 carol users 4,0K Jan 18 17:26 Sample_Directory
 
 ---
 
-### Exercise 7 — chmod with one or two digits
+### Exercise 7: chmod with one or two digits
 
 After `chmod 000 emptyfile`, what happens with `chmod 4 emptyfile`? With `chmod 44 emptyfile`? What does this reveal about how `chmod` reads numeric values?
 
 <details>
 <summary>Answer</summary>
 
-After `chmod 4 emptyfile`: `-------r--` — **others** only changed.
+After `chmod 4 emptyfile`: `-------r--`, **others** only changed.
 
-After `chmod 44 emptyfile`: `----r--r--` — **group and others** changed.
+After `chmod 44 emptyfile`: `----r--r--`, **group and others** changed.
 
 `chmod` reads digits right to left:
 
@@ -466,7 +466,7 @@ After `chmod 44 emptyfile`: `----r--r--` — **group and others** changed.
 
 ---
 
-### Exercise 8 — /tmp sticky bit and file deletion
+### Exercise 8: /tmp sticky bit and file deletion
 
 ```
 drwxrwxrwt 19 root root 16K /tmp
@@ -485,7 +485,7 @@ A regular user can only delete their own files in `/tmp`.
 
 ---
 
-### Exercise 9 — SUID and uppercase S
+### Exercise 9: SUID and uppercase S
 
 `test.sh` has `-rwsr-xr-x` (SUID set). After running `chmod u-x test.sh`, `ls -l` shows `-rwSr-xr-x`. What happened? What does the uppercase `S` mean?
 
@@ -507,20 +507,20 @@ Uppercase is a diagnostic signal: the special bit is set, but without `x` it is 
 
 ---
 
-### Exercise 10 — Shared directory with SGID and sticky bit
+### Exercise 10: Shared directory with SGID and sticky bit
 
 Create a `Box` directory where all new files automatically belong to group `users`, and only the file's creator can delete it.
 
 <details>
 <summary>Answer</summary>
 
-Step 1 — create the directory:
+Step 1. Create the directory:
 
 ```bash
 mkdir Box
 ```
 
-Step 2 — assign group ownership and set SGID (new files inherit the parent's group):
+Step 2. Assign group ownership and set SGID (new files inherit the parent's group):
 
 ```bash
 chown :users Box/

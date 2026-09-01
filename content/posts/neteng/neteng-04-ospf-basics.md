@@ -19,15 +19,15 @@ page_lang: "en"
 
 | Device | Interface           | IP address   | Subnet Mask     | Gateway     |
 | ------ | ------------------- | ------------ | --------------- | ----------- |
-| R1     | GigabitEthernet7/0  | 192.168.1.1  | 255.255.255.0   | —           |
-|        | Serial8/0 (DCE)     | 192.168.12.1 | 255.255.255.252 | —           |
-|        | Serial9/0           | 192.168.13.1 | 255.255.255.252 | —           |
-| R2     | GigabitEthernet7/0  | 192.168.2.1  | 255.255.255.0   | —           |
-|        | Serial8/0           | 192.168.12.2 | 255.255.255.252 | —           |
-|        | Serial9/0 (DCE)     | 192.168.23.1 | 255.255.255.252 | —           |
-| R3     | GigabitEthernet7/0  | 192.168.3.1  | 255.255.255.0   | —           |
-|        | Serial8/0 (DCE)     | 192.168.13.2 | 255.255.255.252 | —           |
-|        | Serial9/0           | 192.168.23.2 | 255.255.255.252 | —           |
+| R1     | GigabitEthernet7/0  | 192.168.1.1  | 255.255.255.0   | n/a           |
+|        | Serial8/0 (DCE)     | 192.168.12.1 | 255.255.255.252 | n/a           |
+|        | Serial9/0           | 192.168.13.1 | 255.255.255.252 | n/a           |
+| R2     | GigabitEthernet7/0  | 192.168.2.1  | 255.255.255.0   | n/a           |
+|        | Serial8/0           | 192.168.12.2 | 255.255.255.252 | n/a           |
+|        | Serial9/0 (DCE)     | 192.168.23.1 | 255.255.255.252 | n/a           |
+| R3     | GigabitEthernet7/0  | 192.168.3.1  | 255.255.255.0   | n/a           |
+|        | Serial8/0 (DCE)     | 192.168.13.2 | 255.255.255.252 | n/a           |
+|        | Serial9/0           | 192.168.23.2 | 255.255.255.252 | n/a           |
 | PC-A   | NIC                 | 192.168.1.3  | 255.255.255.0   | 192.168.1.1 |
 | PC-B   | NIC                 | 192.168.2.3  | 255.255.255.0   | 192.168.2.1 |
 | PC-C   | NIC                 | 192.168.3.3  | 255.255.255.0   | 192.168.3.1 |
@@ -42,7 +42,7 @@ page_lang: "en"
 
 ---
 
-### Part 1 — Basic device setup
+### Part 1: Basic device setup
 
 <details>
 <summary>R1</summary>
@@ -161,7 +161,7 @@ ip 192.168.3.3 24 192.168.3.1
 
 ---
 
-### Part 2 — Configure and verify OSPF
+### Part 2: Configure and verify OSPF
 
 <details>
 <summary>R1</summary>
@@ -214,7 +214,7 @@ show ip ospf interface
 ```
 
 <details>
-<summary>R1 — show ip ospf neighbor</summary>
+<summary>R1: show ip ospf neighbor</summary>
 <pre><code>
 R1#show ip ospf neighbor
 
@@ -224,7 +224,7 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip ospf neighbor</summary>
+<summary>R2: show ip ospf neighbor</summary>
 <pre><code>
 R2#show ip ospf neighbor
 
@@ -234,7 +234,7 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip ospf neighbor</summary>
+<summary>R3: show ip ospf neighbor</summary>
 <pre><code>
 R3#show ip ospf neighbor
 
@@ -244,7 +244,7 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip route</summary>
+<summary>R1: show ip route</summary>
 <pre><code>
 R1#show ip route
 Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
@@ -270,7 +270,7 @@ O       192.168.23.0 [110/128] via 192.168.12.2, Serial8/0
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip protocols</summary>
+<summary>R1: show ip protocols</summary>
 <pre><code>
 R1#show ip protocols
 
@@ -293,7 +293,7 @@ Routing Protocol is "ospf 1"
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip ospf</summary>
+<summary>R1: show ip ospf</summary>
 <pre><code>
 R1#show ip ospf
  Routing Process "ospf 1" with ID 192.168.13.1
@@ -321,7 +321,7 @@ R1#show ip ospf
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip ospf interface</summary>
+<summary>R1: show ip ospf interface</summary>
 <pre><code>
 R1#show ip ospf interface
 
@@ -399,14 +399,14 @@ Ping statistics for 192.168.3.3:
 
 ---
 
-### Part 3 — Router IDs
+### Part 3: Router IDs
 
 OSPF Router ID selection order:
 1. Explicitly configured `router-id` command
 2. Highest loopback IP address
 3. Highest active physical interface IP
 
-**Step 1 — Loopback-based Router IDs**
+**Step 1: Loopback-based Router IDs**
 
 Configure Loopback0 on each router, then clear the OSPF process to apply:
 
@@ -451,7 +451,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R1 — show ip protocols (Router ID 1.1.1.1)</summary>
+<summary>R1: show ip protocols (Router ID 1.1.1.1)</summary>
 <pre><code>
 R1#show ip protocols
 
@@ -474,7 +474,7 @@ Routing Protocol is "ospf 1"
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip ospf neighbor</summary>
+<summary>R1: show ip ospf neighbor</summary>
 <pre><code>
 R1#show ip ospf neighbor
 
@@ -484,7 +484,7 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 </code></pre>
 </details>
 
-**Step 2 — Explicit Router IDs**
+**Step 2: Explicit Router IDs**
 
 The `router-id` command overrides the loopback selection:
 
@@ -529,7 +529,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R1 — show ip protocols (Router ID 11.11.11.11)</summary>
+<summary>R1: show ip protocols (Router ID 11.11.11.11)</summary>
 <pre><code>
 R1#show ip protocols
 
@@ -555,7 +555,7 @@ Routing Protocol is "ospf 1"
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip ospf neighbor</summary>
+<summary>R1: show ip ospf neighbor</summary>
 <pre><code>
 R1#show ip ospf neighbor
 
@@ -565,7 +565,7 @@ Neighbor ID     Pri   State           Dead Time   Address         Interface
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip ospf neighbor</summary>
+<summary>R3: show ip ospf neighbor</summary>
 <pre><code>
 enable
 configure terminal
@@ -580,14 +580,14 @@ copy running-config startup-config
 
 ---
 
-### Part 4 — Passive interfaces
+### Part 4: Passive interfaces
 
 A passive interface stops sending OSPF hello packets. Use it on LAN interfaces where no OSPF neighbors exist.
 
 Check current state before applying:
 
 <details>
-<summary>R1 — show ip ospf interface gi7/0 (before passive)</summary>
+<summary>R1: show ip ospf interface gi7/0 (before passive)</summary>
 <pre><code>
 R1#show ip ospf interface gigabitEthernet 7/0
 
@@ -619,7 +619,7 @@ R1(config-router)# no passive-interface Serial9/0
 ```
 
 <details>
-<summary>R1 — show ip ospf interface gi7/0 (after passive)</summary>
+<summary>R1: show ip ospf interface gi7/0 (after passive)</summary>
 <pre><code>
 enable
 configure terminal
@@ -642,7 +642,7 @@ copy running-config startup-config
 WAN neighbors remain up:
 
 <details>
-<summary>R1 — show ip ospf neighbor</summary>
+<summary>R1: show ip ospf neighbor</summary>
 <pre><code>
 enable
 configure terminal
@@ -659,7 +659,7 @@ copy running-config startup-config
 Verify routing tables after applying passive interfaces on all routers:
 
 <details>
-<summary>R2 — show ip route</summary>
+<summary>R2: show ip route</summary>
 <pre><code>
 enable
 configure terminal
@@ -691,7 +691,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip ospf interface S8/0 (passive)</summary>
+<summary>R2: show ip ospf interface S8/0 (passive)</summary>
 <pre><code>
 enable
 configure terminal
@@ -708,7 +708,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip route</summary>
+<summary>R3: show ip route</summary>
 <pre><code>
 enable
 configure terminal
@@ -732,14 +732,14 @@ copy running-config startup-config
 
 ---
 
-### Part 5 — OSPF metric (cost)
+### Part 5: OSPF metric (cost)
 
 OSPF cost = reference bandwidth / interface bandwidth. Default reference: 100 Mbps.
 
 Check baseline route costs:
 
 <details>
-<summary>R1 — show ip route ospf (baseline)</summary>
+<summary>R1: show ip route ospf (baseline)</summary>
 <pre><code>
 R1#do sh ip rout os
 O    192.168.2.0/24 [110/65] via 192.168.12.2, 00:17:18, Serial8/0
@@ -753,7 +753,7 @@ O       192.168.23.0 [110/128] via 192.168.12.2, Serial8/0
 Check serial interface bandwidth:
 
 <details>
-<summary>R1 — show interface s8/0</summary>
+<summary>R1: show interface s8/0</summary>
 <pre><code>
 R1#show interface s8/0
 Serial8/0 is up, line protocol is up (connected)
@@ -771,7 +771,7 @@ router ospf 1
 ```
 
 <details>
-<summary>R1 — show ip ospf interface gi7/0 (Cost: 100)</summary>
+<summary>R1, show ip ospf interface gi7/0 (Cost: 100)</summary>
 <pre><code>
 enable
 configure terminal
@@ -785,7 +785,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip route ospf (costs after ref-bw 10000)</summary>
+<summary>R1: show ip route ospf (costs after ref-bw 10000)</summary>
 <pre><code>
 R1#do sh ip rout os
 O    192.168.2.0/24 [110/6477] via 192.168.12.2, 00:02:35, Serial8/0
@@ -813,7 +813,7 @@ R1(config-if)# bandwidth 2500
 ```
 
 <details>
-<summary>R1 — show interface s8/0 (BW 2500)</summary>
+<summary>R1: show interface s8/0 (BW 2500)</summary>
 <pre><code>
 enable
 configure terminal
@@ -827,7 +827,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip route ospf (after bandwidth 2500)</summary>
+<summary>R1: show ip route ospf (after bandwidth 2500)</summary>
 <pre><code>
 enable
 configure terminal
@@ -853,7 +853,7 @@ R1(config-if)# ip ospf cost 1565
 ```
 
 <details>
-<summary>R1 — show ip route ospf (traffic shifts to Serial9/0)</summary>
+<summary>R1: show ip route ospf (traffic shifts to Serial9/0)</summary>
 <pre><code>
 enable
 configure terminal
@@ -874,7 +874,7 @@ R1(config-if)# no ip ospf cost
 ```
 
 <details>
-<summary>R1 — show ip route ospf (equal-cost restored)</summary>
+<summary>R1: show ip route ospf (equal-cost restored)</summary>
 <pre><code>
 R1#show ip route ospf
 O    192.168.2.0/24 [110/65] via 192.168.12.2, 00:17:18, Serial8/0

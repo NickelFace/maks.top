@@ -58,7 +58,7 @@ AWS Identity and Access Management (IAM) is a **global service** (not region-sco
 }
 ```
 
-> **📌 Tip:** Always use `"Version": "2012-10-17"` — it enables policy variables like `${aws:username}`. The older 2008 date is a common exam distractor.
+> **📌 Tip:** Always use `"Version": "2012-10-17"`; it enables policy variables like `${aws:username}`. The older 2008 date is a common exam distractor.
 
 ---
 
@@ -66,12 +66,12 @@ AWS Identity and Access Management (IAM) is a **global service** (not region-sco
 
 AWS evaluates policies in this order when a principal makes a request:
 
-1. **Explicit Deny** — any matching Deny in any policy → **DENY** (final, no override)
-2. **SCPs** (if Organizations) — if no Allow in SCP → DENY
-3. **Resource-based policy** — cross-account: must Allow in both identity AND resource policy
-4. **Identity-based policy** — if no Allow → DENY (implicit)
-5. **Permission boundary** — Allow in identity policy AND in boundary → ALLOW
-6. **Session policy** — must also Allow
+1. **Explicit Deny**: any matching Deny in any policy → **DENY** (final, no override)
+2. **SCPs** (if Organizations): if no Allow in SCP → DENY
+3. **Resource-based policy**, cross-account: must Allow in both identity AND resource policy
+4. **Identity-based policy**: if no Allow → DENY (implicit)
+5. **Permission boundary**: Allow in identity policy AND in boundary → ALLOW
+6. **Session policy**: must also Allow
 
 ```
 Default = DENY → check explicit DENY → check ALLOW → grant or deny
@@ -102,13 +102,13 @@ curl -sH "X-aws-ec2-metadata-token: $TOKEN" \
   http://169.254.169.254/latest/meta-data/iam/security-credentials/MyRole
 ```
 
-> **📌 Tip:** The exam often asks: "An EC2 app is failing to access S3 — what is the BEST practice fix?" Answer: attach an IAM role with the required policy, not create an IAM user and embed access keys.
+> **📌 Tip:** The exam often asks: "An EC2 app is failing to access S3; what is the BEST practice fix?" Answer: attach an IAM role with the required policy, not create an IAM user and embed access keys.
 
 ---
 
 ## Permission Boundaries
 
-A permission boundary defines the **maximum** permissions an identity-based policy can grant. It does **not** grant permissions by itself — it only restricts them.
+A permission boundary defines the **maximum** permissions an identity-based policy can grant. It does **not** grant permissions by itself; it only restricts them.
 
 ```
 Effective permissions = identity_policy ∩ permission_boundary
@@ -129,7 +129,7 @@ Effective permissions = identity_policy ∩ permission_boundary
 
 Attaching this as a boundary means the role can never exceed S3 + CloudWatch + Logs, even if the identity policy allows EC2 or IAM.
 
-> **📌 Tip:** Permission boundaries apply only to **IAM users and roles** — not to groups or resource-based policies. An SCP is the organizational equivalent.
+> **📌 Tip:** Permission boundaries apply only to **IAM users and roles**, not to groups or resource-based policies. An SCP is the organizational equivalent.
 
 ---
 
@@ -156,11 +156,11 @@ The standard pattern for granting access across AWS accounts:
 }
 ```
 
-**External ID** prevents the "confused deputy" problem — a third party can't trick your account into assuming a role on their behalf.
+**External ID** prevents the "confused deputy" problem; a third party can't trick your account into assuming a role on their behalf.
 
 ---
 
-## STS — Security Token Service
+## STS: Security Token Service
 
 STS issues **temporary security credentials** (Access Key ID + Secret Access Key + Session Token).
 
@@ -174,7 +174,7 @@ STS issues **temporary security credentials** (Access Key ID + Secret Access Key
 
 **Token lifetime:** configurable 15 min – 12 h (default 1 h for AssumeRole). Tokens cannot be revoked but expire automatically.
 
-> **📌 Tip:** `AssumeRoleWithWebIdentity` is used by **GitHub Actions OIDC** and **EKS service accounts (IRSA)**. The exam may present a scenario with containers needing AWS access — roles + OIDC is the answer, not access keys.
+> **📌 Tip:** `AssumeRoleWithWebIdentity` is used by **GitHub Actions OIDC** and **EKS service accounts (IRSA)**. The exam may present a scenario with containers needing AWS access, roles + OIDC is the answer, not access keys.
 
 ---
 
@@ -199,13 +199,13 @@ STS issues **temporary security credentials** (Access Key ID + Secret Access Key
 
 | Trap | Correct understanding |
 |---|---|
-| "Add an Allow to override a Deny" | Impossible — explicit Deny is always final |
-| "Root account can be restricted by SCPs" | False — root is always exempt from SCPs |
-| "IAM is regional" | False — IAM is global |
-| "Groups can be nested" | False — groups cannot contain other groups |
-| "Access keys on EC2 = best practice" | False — always use IAM roles via instance profiles |
-| "Permission boundary grants permissions" | False — it only limits; needs identity policy too |
-| "STS tokens are permanent" | False — they expire (15 min – 12 h) |
+| "Add an Allow to override a Deny" | Impossible: explicit Deny is always final |
+| "Root account can be restricted by SCPs" | False: root is always exempt from SCPs |
+| "IAM is regional" | False: IAM is global |
+| "Groups can be nested" | False: groups cannot contain other groups |
+| "Access keys on EC2 = best practice" | False: always use IAM roles via instance profiles |
+| "Permission boundary grants permissions" | False: it only limits; needs identity policy too |
+| "STS tokens are permanent" | False: they expire (15 min – 12 h) |
 | "Resource-based policy alone grants cross-account access" | Partially true for S3; for most services, identity policy also required |
 
 ---
@@ -222,4 +222,4 @@ Need AWS access for...
 └── Cross-account automation      → IAM Role in target account + AssumeRole
 ```
 
-> **📌 Tip:** When the exam says "least privilege" + "temporary credentials" + "no long-term keys" — the answer is always **IAM Role**. Remember: roles are for machines; users are for humans; groups are for organizing users.
+> **📌 Tip:** When the exam says "least privilege" + "temporary credentials" + "no long-term keys", the answer is always **IAM Role**. Remember: roles are for machines; users are for humans; groups are for organizing users.

@@ -24,8 +24,8 @@ Route 53 is AWS's highly available, scalable DNS service. It also supports domai
 | **CNAME** | Maps hostname → another hostname | `www.example.com → lb.example.com` |
 | **MX** | Mail server (with priority) | `example.com → 10 mail.example.com` |
 | **NS** | Name servers for a hosted zone | Delegated name servers |
-| **SOA** | Start of Authority — zone metadata | Auto-managed by Route 53 |
-| **TXT** | Arbitrary text — SPF, DKIM, domain verification | `"v=spf1 include:...` |
+| **SOA** | Start of Authority: zone metadata | Auto-managed by Route 53 |
+| **TXT** | Arbitrary text: SPF, DKIM, domain verification | `"v=spf1 include:...` |
 | **CAA** | Authorized certificate authorities for domain | `example.com 0 issue "letsencrypt.org"` |
 | **SRV** | Service location (port + host) | Used by SIP, XMPP, Minecraft |
 | **PTR** | Reverse DNS (IP → hostname) | Managed separately, used for email |
@@ -34,14 +34,14 @@ Route 53 is AWS's highly available, scalable DNS service. It also supports domai
 
 ## Alias vs CNAME
 
-Critical distinction — appears on almost every exam.
+Critical distinction; appears on almost every exam.
 
 | Feature | Alias Record | CNAME Record |
 |---|---|---|
-| Works at zone apex (root domain) | **Yes** — `example.com` | **No** — only subdomains |
+| Works at zone apex (root domain) | **Yes**: `example.com` | **No**: only subdomains |
 | Resolves to | AWS resource hostname | Any hostname |
-| Cost | **Free** — no query charges | Standard DNS query charge |
-| Visible to clients | **No** — transparent; client sees resolved IP | Yes — clients see the CNAME target |
+| Cost | **Free**: no query charges | Standard DNS query charge |
+| Visible to clients | **No**: transparent; client sees resolved IP | Yes: clients see the CNAME target |
 | Health check integration | Supported | Not directly |
 | TTL | Set by Route 53 (not user-configurable) | User-configurable |
 
@@ -80,7 +80,7 @@ api.example.com → server-B  Weight: 20  (20%)
 api.example.com → server-C  Weight: 10  (10%)
 ```
 
-Weight is relative — percentages are calculated proportionally.
+Weight is relative; percentages are calculated proportionally.
 
 ### Failover Routing
 
@@ -96,7 +96,7 @@ When the primary health check fails, Route 53 routes all traffic to the secondar
 | | Geolocation | Latency |
 |---|---|---|
 | Basis | User's **geographic location** (country/continent) | AWS-measured **network latency** |
-| Deterministic | Yes — user in Germany → EU | No — user in Germany may get us-east if latency is lower |
+| Deterministic | Yes: user in Germany → EU | No: user in Germany may get us-east if latency is lower |
 | Use case | Legal compliance, language, content restriction | Best user experience (speed) |
 | Default record | Needed for unmatched locations | N/A |
 
@@ -130,7 +130,7 @@ When the primary health check fails, Route 53 routes all traffic to the secondar
 
 ### Health Checks with Private Resources
 
-Route 53 health checkers are on the public internet — they **cannot** reach private VPC resources directly. Solution: create a CloudWatch metric + alarm monitoring the private resource, then use a **CloudWatch alarm health check** in Route 53.
+Route 53 health checkers are on the public internet; they **cannot** reach private VPC resources directly. Solution: create a CloudWatch metric + alarm monitoring the private resource, then use a **CloudWatch alarm health check** in Route 53.
 
 ---
 
@@ -187,10 +187,10 @@ Visual editor for creating complex routing configurations combining multiple pol
 
 | Trap | Correct Answer |
 |---|---|
-| CNAME on root domain | **Not allowed** — use Alias instead |
-| Alias record costs per query | **Alias is free** — only CNAMEs have per-query charges |
+| CNAME on root domain | **Not allowed**: use Alias instead |
+| Alias record costs per query | **Alias is free**: only CNAMEs have per-query charges |
 | Geolocation = Latency | Different: Geolocation is geography-based, Latency is network-measurement-based |
-| Multi-Value = Load Balancer | Multi-Value is NOT an ELB replacement — it's client-side random selection from up to 8 records |
+| Multi-Value = Load Balancer | Multi-Value is NOT an ELB replacement: it's client-side random selection from up to 8 records |
 | Failover doesn't need health check | **Failover requires health check** on the primary record |
 | Route 53 resolves private zone without VPC settings | Requires `enableDnsSupport = true` on the VPC |
-| Health checks reach private IPs | Route 53 checkers are public — use **CloudWatch alarm health check** for private resources |
+| Health checks reach private IPs | Route 53 checkers are public: use **CloudWatch alarm health check** for private resources |

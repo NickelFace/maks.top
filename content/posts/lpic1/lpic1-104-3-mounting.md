@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-104-3-mounting/"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 101
+> **Exam weight: 3**. LPIC-1 v5, Exam 101
 
 ## What You Need to Know
 
@@ -23,7 +23,7 @@ Key utilities: `/etc/fstab`, `/media/`, `mount`, `umount`, `blkid`, `lsblk`.
 
 ## What is Mounting
 
-A filesystem in Linux cannot be used directly. It must first be attached to a point in the directory tree — called a **mount point**. After mounting, the partition's contents are accessible through that directory.
+A filesystem in Linux cannot be used directly. It must first be attached to a point in the directory tree, called a **mount point**. After mounting, the partition's contents are accessible through that directory.
 
 Mounting can be done manually with `mount`, automatically via `/etc/fstab` at boot, or through systemd unit files.
 
@@ -37,9 +37,9 @@ Mounting can be done manually with `mount`, automatically via `/etc/fstab` at bo
 mount -t TYPE DEVICE MOUNTPOINT
 ```
 
-- `TYPE` — filesystem type (`ext4`, `btrfs`, `exfat`, `ntfs`, etc.)
-- `DEVICE` — partition with the filesystem, e.g. `/dev/sdb1`
-- `MOUNTPOINT` — directory to attach to; must already exist
+- `TYPE`: filesystem type (`ext4`, `btrfs`, `exfat`, `ntfs`, etc.)
+- `DEVICE`: partition with the filesystem, e.g. `/dev/sdb1`
+- `MOUNTPOINT`: directory to attach to; must already exist
 
 ```bash
 mount -t exfat /dev/sdb1 ~/flash/
@@ -73,7 +73,7 @@ Alternatives: `cat /proc/self/mounts`, `cat /proc/mounts`, `findmnt`.
 | `-a` | mount all filesystems in `/etc/fstab` |
 | `--bind` | make a directory's contents visible at another path |
 
-**Remounting** an already-mounted filesystem — no need to specify type:
+**Remounting** an already-mounted filesystem. No need to specify type:
 
 ```bash
 mount -o remount,ro /dev/sdb1
@@ -90,7 +90,7 @@ mount --bind /src /dst
 
 ## The umount Command
 
-Accepts either device name or mount point — both are equivalent:
+Accepts either device name or mount point; both are equivalent:
 
 ```bash
 umount /dev/sdb1
@@ -121,8 +121,8 @@ Close the program, then unmount.
 
 ## /mnt vs /media
 
-- **`/mnt`** — conventional for manual, temporary mounts.
-- **`/media`** — standard for removable media. Modern distributions auto-mount there: `/media/USER/LABEL`.
+- **`/mnt`**: conventional for manual, temporary mounts.
+- **`/media`**, standard for removable media. Modern distributions auto-mount there: `/media/USER/LABEL`.
 
 ---
 
@@ -172,7 +172,7 @@ Example:
 
 ## UUID and Labels
 
-Device names are unstable — `/dev/sdb1` may become `/dev/sdc1` after reconnection. UUIDs and labels don't change between reconnections.
+Device names are unstable; `/dev/sdb1` may become `/dev/sdc1` after reconnection. UUIDs and labels don't change between reconnections.
 
 ### lsblk -f
 
@@ -263,7 +263,7 @@ systemctl enable mnt-external.mount    # persist across reboots
 
 ### Automount Unit (.automount)
 
-Mounts on demand — when the mount point is first accessed:
+Mounts on demand. When the mount point is first accessed:
 
 ```ini
 [Unit]
@@ -346,7 +346,7 @@ systemctl enable mnt-external.mount
 
 ## Exercises
 
-### Exercise 1 — Mount ext4 read-only with options
+### Exercise 1: Mount ext4 read-only with options
 
 Mount ext4 on `/dev/sdc1` to `/mnt/external` read-only, with options `noatime` and `async`.
 
@@ -361,7 +361,7 @@ mount -t ext4 -o noatime,async,ro /dev/sdc1 /mnt/external
 
 ---
 
-### Exercise 2 — Find what is holding a busy filesystem
+### Exercise 2: Find what is holding a busy filesystem
 
 Unmounting `/dev/sdd2` returns `target is busy`. How do you find which files are open?
 
@@ -378,7 +378,7 @@ Output shows: process name, PID, user, and the open file. Close the program, the
 
 ---
 
-### Exercise 3 — noauto and mount -a
+### Exercise 3: noauto and mount -a
 
 `/etc/fstab` contains:
 
@@ -397,7 +397,7 @@ No. The `noauto` option tells `mount -a` to skip this entry. The filesystem must
 
 ---
 
-### Exercise 4 — Finding a filesystem's UUID
+### Exercise 4: Finding a filesystem's UUID
 
 How do you find the UUID of the filesystem on `/dev/sdb1`?
 
@@ -416,14 +416,14 @@ blkid /dev/sdb1
 
 ---
 
-### Exercise 5 — Remount as read-only
+### Exercise 5: Remount as read-only
 
 An exFAT filesystem is mounted at `/mnt/data`. How do you remount it read-only?
 
 <details>
 <summary>Answer</summary>
 
-When remounting, type and UUID are not needed — mount point alone is sufficient:
+When remounting, type and UUID are not needed, mount point alone is sufficient:
 
 ```bash
 mount -o remount,ro /mnt/data
@@ -433,7 +433,7 @@ mount -o remount,ro /mnt/data
 
 ---
 
-### Exercise 6 — List ext3 and ntfs mounts
+### Exercise 6: List ext3 and ntfs mounts
 
 How do you list all mounted filesystems of type ext3 and ntfs?
 
@@ -448,7 +448,7 @@ mount -t ext3,ntfs
 
 ---
 
-### Exercise 7 — nouser and regular user mounting
+### Exercise 7: nouser and regular user mounting
 
 `/etc/fstab` contains:
 
@@ -469,7 +469,7 @@ To allow regular users: use `user` (any user) or `group` (users in the device's 
 
 ---
 
-### Exercise 8 — Force-unmount an unreachable network filesystem
+### Exercise 8: Force-unmount an unreachable network filesystem
 
 A network filesystem at `/mnt/server` has become unreachable due to connection loss. How do you force-unmount it, or fall back to read-only if that fails?
 
@@ -486,7 +486,7 @@ umount -fr /mnt/server
 
 ---
 
-### Exercise 9 — fstab entry for btrfs Backup
+### Exercise 9: fstab entry for btrfs Backup
 
 Write an `/etc/fstab` line that mounts a btrfs volume with label `Backup` at `/mnt/backup` with default options but no binary execution.
 
@@ -497,7 +497,7 @@ Write an `/etc/fstab` line that mounts a btrfs volume with label `Backup` at `/m
 LABEL=Backup  /mnt/backup  btrfs  defaults,noexec  0  0
 ```
 
-`defaults` includes `exec`. Adding `noexec` overrides it — the last matching option wins.
+`defaults` includes `exec`. Adding `noexec` overrides it, the last matching option wins.
 
 DUMP and PASS are `0 0`: skip `dump` backup, skip fsck on boot.
 
@@ -505,7 +505,7 @@ DUMP and PASS are `0 0`: skip `dump` backup, skip fsck on boot.
 
 ---
 
-### Exercise 10 — fstab equivalent of a mount unit
+### Exercise 10: fstab equivalent of a mount unit
 
 Given this systemd mount unit:
 

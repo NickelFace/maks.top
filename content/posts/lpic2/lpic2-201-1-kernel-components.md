@@ -10,13 +10,13 @@ page_lang: "en"
 
 ## Linux Kernel Architecture
 
-The Linux kernel was originally built as a **monolithic kernel**. A monolithic kernel bundles drivers for all supported hardware into a single binary — even hardware not present on the system. As the supported hardware list grew, so did the kernel size, with most of the code never actually used. The solution was dynamically loadable drivers, known as **kernel modules**.
+The Linux kernel was originally built as a **monolithic kernel**. A monolithic kernel bundles drivers for all supported hardware into a single binary, even hardware not present on the system. As the supported hardware list grew, so did the kernel size, with most of the code never actually used. The solution was dynamically loadable drivers, known as **kernel modules**.
 
-Linux is not a **microkernel**. In a microkernel architecture, only the minimum possible code runs in privileged mode — that was never the design goal of Linux. The correct term is **hybrid kernel**: it can load and unload modules like a microkernel, but almost all code runs in supervisor mode, like a monolithic kernel.
+Linux is not a **microkernel**. In a microkernel architecture, only the minimum possible code runs in privileged mode; that was never the design goal of Linux. The correct term is **hybrid kernel**: it can load and unload modules like a microkernel, but almost all code runs in supervisor mode, like a monolithic kernel.
 
 A monolithic build (without module support) is still possible, but rare in practice: any driver update requires a full kernel recompile. The only upside is a smaller final image, since you compile only what you need and dependencies are immediately obvious.
 
-> **Exam tip:** You may be asked whether Linux is a microkernel. The answer is no — Linux is a hybrid kernel.
+> **Exam tip:** You may be asked whether Linux is a microkernel. The answer is no; Linux is a hybrid kernel.
 
 ---
 
@@ -29,7 +29,7 @@ The kernel is stored on disk in compressed form. There are two main formats:
 | `zImage` | 512 KB | Low memory only | gzip |
 | `bzImage` | Unlimited | Low and high memory | gzip |
 
-> **Warning:** A common exam trap — `bz` in `bzImage` stands for "big zImage", **not** bzip2. Both formats use **gzip** compression.
+> **Warning:** A common exam trap, `bz` in `bzImage` stands for "big zImage", **not** bzip2. Both formats use **gzip** compression.
 
 Other names you will encounter:
 
@@ -55,8 +55,8 @@ The Linux versioning scheme has changed several times over the years.
 
 Format: `major.minor.patchlevel`
 
-- **Even** minor (2.2, 2.4) — stable release.
-- **Odd** minor (2.1, 2.3, 2.5) — development branch for developers and experimenters.
+- **Even** minor (2.2, 2.4): stable release.
+- **Odd** minor (2.1, 2.3, 2.5): development branch for developers and experimenters.
 - Patch level increments for bug fixes.
 
 ### 2.6.x series (four numbers)
@@ -67,9 +67,9 @@ After 2.6.0 was released in 2004, the project switched to time-based releases. T
 
 In May 2011, Linus Torvalds announced kernel 3.0.0 to mark Linux's 20th anniversary. The format returned to three numbers: `A.B.C`, where:
 
-- `A` — kernel version
-- `B` — release number
-- `C` — patch
+- `A`: kernel version
+- `B`: release number
+- `C`: patch
 
 Test releases use the `-rc` suffix, e.g. `3.2-rc4` (fourth release candidate of the 3.2 branch). Stable example: `3.2.84`.
 
@@ -77,7 +77,7 @@ A fourth number `.z` in the `3.x.y.z` format was occasionally used for emergency
 
 ### 4.x and later
 
-The 4.x branch started in April 2015. The numbering scheme did not change: `4.x.y`, with `-rc` for test builds. The 4.x branch introduced **Live Patching** — applying kernel patches without a reboot by unloading and loading the relevant modules.
+The 4.x branch started in April 2015. The numbering scheme did not change: `4.x.y`, with `-rc` for test builds. The 4.x branch introduced **Live Patching**, applying kernel patches without a reboot by unloading and loading the relevant modules.
 
 > **Note:** On kernel.org, kernels fall into three categories: **mainline** (active development), **stable** (current stable), **longterm** (older maintained branches).
 
@@ -105,9 +105,9 @@ tar xvJf linux-4.10-rc3.tar.xz
 
 File naming format: `linux-A.B.C.tar.xz`, e.g. `linux-3.18.43.tar.xz`.
 
-After extraction, the source tree takes at least 1 GB of disk space — plan accordingly.
+After extraction, the source tree takes at least 1 GB of disk space: plan accordingly.
 
-> **Note:** XZ is used for **kernel sources** on kernel.org. The kernel images themselves (`zImage`, `bzImage`) are compressed with gzip — these are separate things.
+> **Note:** XZ is used for **kernel sources** on kernel.org. The kernel images themselves (`zImage`, `bzImage`) are compressed with gzip; these are separate things.
 
 ---
 

@@ -22,7 +22,7 @@ page_lang: "en"
 
 A regular expression (regex) describes a search pattern. Tools like `grep` and `sed` use it to find matches in text.
 
-The basic building block of a regex is called an **atom** — a single character that may or may not have a special meaning. Most ordinary characters keep their literal meaning, while a few reserved characters act as metacharacters.
+The basic building block of a regex is called an **atom**, a single character that may or may not have a special meaning. Most ordinary characters keep their literal meaning, while a few reserved characters act as metacharacters.
 
 A substring that matches an atom with a quantifier is called a **piece**. When a substring matches and a longer substring from the same starting position also matches, the longer one is used.
 
@@ -45,12 +45,12 @@ A dot means literally any character. To match an actual dot, escape it: `\.`.
 A character class is defined in square brackets and matches any one of the listed characters.
 
 ```
-[abc]      — a, b, or c
-[a-z]      — any lowercase letter
-[A-Z]      — any uppercase letter
-[0-9]      — any digit
-[a-zA-Z]   — any letter
-[^0-9]     — any character that is not a digit
+[abc]      - a, b, or c
+[a-z]      - any lowercase letter
+[A-Z]      - any uppercase letter
+[0-9]      - any digit
+[a-zA-Z]   - any letter
+[^0-9]     - any character that is not a digit
 ```
 
 POSIX classes work inside `[]` and are portable across locales. They cannot be used as a standalone atom outside brackets or as range boundaries.
@@ -90,7 +90,7 @@ In BRE the characters `+`, `?`, `{`, and `}` must be escaped with a backslash. I
 
 ### Anchors
 
-Anchors don't match a character — they fix a position in the line.
+Anchors don't match a character; they fix a position in the line.
 
 - `^` matches the start of a line: `^root` finds lines beginning with "root". Outside the start of an expression `^` is treated literally.
 - `$` matches the end of a line: `bash$` finds lines ending with "bash". In the middle of an expression `$` is treated literally.
@@ -217,7 +217,7 @@ The `s` command replaces text using a regex:
 s/regexp/replacement/flags
 ```
 
-The `/` delimiter can be replaced by any other character — useful when working with paths:
+The `/` delimiter can be replaced by any other character, useful when working with paths:
 
 ```bash
 sed 's/old/new/' file.txt             # replace the first occurrence per line
@@ -313,7 +313,7 @@ lastb -d -a --time-format notime | grep -v '[0-9]$' \
   | sed -e 's/.* \(.*\)$/\1/' | sort | uniq
 ```
 
-The regex `[0-9]$` in `grep -v` selects lines not ending with a digit — i.e. lines with a hostname instead of an IP. In `sed` the pattern `.* \(.*\)$` captures everything from the last space to the end of the line, and `\1` substitutes it back in place of the whole line.
+The regex `[0-9]$` in `grep -v` selects lines not ending with a digit; i.e. lines with a hostname instead of an IP. In `sed` the pattern `.* \(.*\)$` captures everything from the last space to the end of the line, and `\1` substitutes it back in place of the whole line.
 
 ---
 
@@ -565,7 +565,7 @@ find . -print0 | grep -z 'pattern'
 The line is printed unchanged. `sed` uses BRE by default, where `(` and `)` are literal characters, not group delimiters. The pattern `(.*)` doesn't match anything in the date string. Correct versions:
 
 ```bash
-# BRE — escaped parentheses
+# BRE - escaped parentheses
 uptime -s | sed -e 's/\(.*\) \(.*\)/\1/'
 
 # ERE via -r flag
@@ -606,7 +606,7 @@ grep -c 'failed' /var/log/auth.log
 find . -type f -regextype egrep -not -regex '.*\.[[:alnum:]]{1,}$'
 ```
 
-`-regextype egrep` enables ERE. The pattern `.*\.[[:alnum:]]{1,}$` describes a path ending with a dot and one or more alphanumeric characters — any extension. `-not` inverts the condition: files that don't match are printed, i.e. files without an extension.
+`-regextype egrep` enables ERE. The pattern `.*\.[[:alnum:]]{1,}$` describes a path ending with a dot and one or more alphanumeric characters: any extension. `-not` inverts the condition: files that don't match are printed, i.e. files without an extension.
 
 </details>
 

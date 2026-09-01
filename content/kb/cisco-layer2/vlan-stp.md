@@ -60,7 +60,7 @@ Cisco IOS Layer 2 cheat sheet: <strong>VLANs, VTP, SVI interfaces, Spanning Tree
 <tbody>
 <tr><td class="mono">vtp mode transparent</td><td class="desc">Disable VTP VLAN sync; store VLAN DB in config file</td></tr>
 <tr><td class="mono">vtp mode server</td><td class="desc">Full VTP server mode (can create/modify/delete VLANs)</td></tr>
-<tr><td class="mono">vtp mode client</td><td class="desc">Client mode — cannot modify VLANs from CLI</td></tr>
+<tr><td class="mono">vtp mode client</td><td class="desc">Client mode: cannot modify VLANs from CLI</td></tr>
 <tr><td class="mono">vtp mode off</td><td class="desc">VTP v3: completely disabled, does not forward announcements</td></tr>
 <tr><td class="mono">vtp version 2</td><td class="desc">Select VTP version</td></tr>
 <tr><td class="mono">vtp domain darkmaycal</td><td class="desc">Set VTP domain name</td></tr>
@@ -75,7 +75,7 @@ Cisco IOS Layer 2 cheat sheet: <strong>VLANs, VTP, SVI interfaces, Spanning Tree
 
 ---
 
-## SVI — Virtual Layer 3 Interfaces
+## SVI: Virtual Layer 3 Interfaces
 
 Configuration is done on the **switch**. Enables inter-VLAN routing on L3 switches.
 
@@ -96,7 +96,7 @@ Configuration is done on the **switch**. Enables inter-VLAN routing on L3 switch
 
 ---
 
-## STP / RSTP — Spanning Tree Protocol
+## STP / RSTP: Spanning Tree Protocol
 
 <div class="ref-panel">
 <div class="ref-panel-head">STP Configuration</div>
@@ -261,7 +261,7 @@ Configuration is done on the **switch**. Enables inter-VLAN routing on L3 switch
 <tr><td class="mono">1 Gbps</td><td class="desc">4</td><td class="desc">20 000</td></tr>
 <tr><td class="mono">2 Gbps</td><td class="desc">3</td><td class="desc">10 000</td></tr>
 <tr><td class="mono">10 Gbps</td><td class="desc">2</td><td class="desc">2 000</td></tr>
-<tr><td class="mono">100 Gbps</td><td class="desc">—</td><td class="desc">200</td></tr>
+<tr><td class="mono">100 Gbps</td><td class="desc">n/a</td><td class="desc">200</td></tr>
 </tbody>
 </table>
 </div>
@@ -285,7 +285,7 @@ Configuration is done on the **switch**. Enables inter-VLAN routing on L3 switch
 
 ---
 
-## DTP — Dynamic Trunking Protocol
+## DTP: Dynamic Trunking Protocol
 
 <div class="ref-panel">
 <div class="ref-panel-head">DTP Negotiation Matrix</div>
@@ -314,11 +314,11 @@ Configuration is done on the **switch**. Enables inter-VLAN routing on L3 switch
 <table class="cheat-table">
 <thead><tr><th>Protocol</th><th>Mode A \ Mode B</th><th>Active / Desirable</th><th>Passive / Auto</th><th>On</th></tr></thead>
 <tbody>
-<tr><td class="mono">LACP</td><td class="desc">Active</td><td class="desc">✓ Trunk formed</td><td class="desc">✓ Trunk formed</td><td class="desc">—</td></tr>
-<tr><td class="mono">LACP</td><td class="desc">Passive</td><td class="desc">✓ Trunk formed</td><td class="desc">✗ No trunk</td><td class="desc">—</td></tr>
-<tr><td class="mono">PAgP</td><td class="desc">Desirable</td><td class="desc">✓ Trunk formed</td><td class="desc">✓ Trunk formed</td><td class="desc">—</td></tr>
-<tr><td class="mono">PAgP</td><td class="desc">Auto</td><td class="desc">✓ Trunk formed</td><td class="desc">✗ No trunk</td><td class="desc">—</td></tr>
-<tr><td class="mono">Static</td><td class="desc">On</td><td class="desc">—</td><td class="desc">—</td><td class="desc">✓ Trunk formed</td></tr>
+<tr><td class="mono">LACP</td><td class="desc">Active</td><td class="desc">✓ Trunk formed</td><td class="desc">✓ Trunk formed</td><td class="desc">n/a</td></tr>
+<tr><td class="mono">LACP</td><td class="desc">Passive</td><td class="desc">✓ Trunk formed</td><td class="desc">✗ No trunk</td><td class="desc">n/a</td></tr>
+<tr><td class="mono">PAgP</td><td class="desc">Desirable</td><td class="desc">✓ Trunk formed</td><td class="desc">✓ Trunk formed</td><td class="desc">n/a</td></tr>
+<tr><td class="mono">PAgP</td><td class="desc">Auto</td><td class="desc">✓ Trunk formed</td><td class="desc">✗ No trunk</td><td class="desc">n/a</td></tr>
+<tr><td class="mono">Static</td><td class="desc">On</td><td class="desc">n/a</td><td class="desc">n/a</td><td class="desc">✓ Trunk formed</td></tr>
 </tbody>
 </table>
 </div>
@@ -348,7 +348,7 @@ Configuration is done on the **switch**. Enables inter-VLAN routing on L3 switch
 
 ## FlexLinks
 
-Simple active/standby failover — alternative to STP for access layer.
+Simple active/standby failover, alternative to STP for access layer.
 
 <div class="ref-panel">
 <div class="ref-panel-head">FlexLinks Configuration</div>

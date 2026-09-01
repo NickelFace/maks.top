@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-105-2-1-scripts/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -28,7 +28,7 @@ Key files, terms, and utilities: `for`, `while`, `test`, `if`, `read`, `seq`, `e
 
 ## Shebang and Interpreter Selection
 
-The first line of a script begins with `#!` (shebang) followed by the absolute path to the interpreter. The kernel reads this line when executing the file and passes it to the named program. Without a shebang the script still runs, but through the current shell — which may not be the intended behavior.
+The first line of a script begins with `#!` (shebang) followed by the absolute path to the interpreter. The kernel reads this line when executing the file and passes it to the named program. Without a shebang the script still runs, but through the current shell; which may not be the intended behavior.
 
 ```bash
 #!/bin/bash
@@ -41,7 +41,7 @@ Common options:
 - `#!/bin/bash`: Bash extensions, arrays, `[[ ]]`
 - `#!/usr/bin/env python3`: find the interpreter via `env` using `$PATH`
 
-There are two ways to run a script. By filename (`./script.sh`) — the kernel reads the shebang and starts the interpreter. By explicit interpreter call (`bash script.sh`) — the shebang is ignored and the named program runs.
+There are two ways to run a script. By filename (`./script.sh`), the kernel reads the shebang and starts the interpreter. By explicit interpreter call (`bash script.sh`); the shebang is ignored and the named program runs.
 
 ---
 
@@ -49,7 +49,7 @@ There are two ways to run a script. By filename (`./script.sh`) — the kernel r
 
 Lines inside a script that begin with `#` are comments and are ignored by the interpreter. Exception: the first shebang line `#!`. Empty lines are also skipped. Multiple commands can go on one line separated by semicolons, but in Bash a newline is equivalent to a semicolon, so each command on its own line is more readable.
 
-The `.sh` suffix has no special meaning to the interpreter — filenames are free-form. The extension is useful only for quickly identifying scripts when browsing directories.
+The `.sh` suffix has no special meaning to the interpreter; filenames are free-form. The extension is useful only for quickly identifying scripts when browsing directories.
 
 The `echo` command adds a newline at the end of its output by default. The `-n` option suppresses the trailing newline so the next output appears on the same line:
 
@@ -62,7 +62,7 @@ For other users to run the script, they need read permission. `chmod o+r script.
 
 When run normally, the script executes in a new child shell (subshell). This protects the current session: variables and directory changes made inside the script do not affect the parent shell. This behavior is desirable for most tasks.
 
-To execute a script's instructions directly in the current session — without a subshell — use:
+To execute a script's instructions directly in the current session, without a subshell; use:
 
 ```bash
 source script.sh
@@ -86,7 +86,7 @@ After a normal script run, the script's exit code is available in `$?`.
 
 ### Variables
 
-Assignment — no spaces around the equals sign; access via `$`:
+Assignment. No spaces around the equals sign; access via `$`:
 
 ```bash
 NAME="Maks"
@@ -156,7 +156,7 @@ echo ${#SIZES[0]}    # 7 (length of string "2097152")
 echo ${#SIZES[@]}    # 2 (total elements)
 ```
 
-An array is conveniently created from command output — each word separated by space, tab, or newline becomes an element:
+An array is conveniently created from command output, each word separated by space, tab, or newline becomes an element:
 
 ```bash
 FS=( $(cut -f 2 < /proc/filesystems) )
@@ -212,7 +212,7 @@ echo $(( 1024 ** 3 ))    # 1073741824
 SIZES=( $((1024**2)) $((1024**3)) )
 ```
 
-Command substitution can be combined with arithmetic — for example, get free RAM bytes from the second line of `/proc/meminfo`:
+Command substitution can be combined with arithmetic, for example, get free RAM bytes from the second line of `/proc/meminfo`:
 
 ```bash
 FREE=$(( 1000 * `sed -nre '2s/[^[:digit:]]//gp' < /proc/meminfo` ))
@@ -238,7 +238,7 @@ The `echo` command prints a string and adds a newline at the end. The `-n` optio
 echo -e "Name:\tMaks\nCity:\tSydney"
 ```
 
-When using `-e` always wrap the string in quotes — otherwise the shell may consume the backslashes before `echo` sees them.
+When using `-e` always wrap the string in quotes, otherwise the shell may consume the backslashes before `echo` sees them.
 
 ### printf
 
@@ -258,7 +258,7 @@ printf "OS:\t%s\nMemory:\t%d MB\n" "$OS" "$FREE_MB"
 
 Key differences between `printf` and `echo`:
 
-- No automatic trailing newline — `\n` in the template is required
+- No automatic trailing newline: `\n` in the template is required
 - Markers are replaced in order from the arguments
 - If there are more values than markers, the template repeats
 - The template can be saved in a variable to switch output formats
@@ -354,7 +354,7 @@ else
 fi
 ```
 
-The `if` condition is any command — its exit code is used, not its output. So `if grep -q root /etc/passwd; then ... fi` works correctly.
+The `if` condition is any command; its exit code is used, not its output. So `if grep -q root /etc/passwd; then ... fi` works correctly.
 
 ### case
 
@@ -421,7 +421,7 @@ while read LINE; do
 done < input.txt
 ```
 
-The `until` loop works as the mirror image — it repeats while the condition is false:
+The `until` loop works as the mirror image; it repeats while the condition is false:
 
 ```bash
 until ping -c1 -W1 host >/dev/null 2>&1; do
@@ -487,7 +487,7 @@ done
 
 ### exec
 
-`exec` has two modes. With an argument it replaces the current process with the named program — the script does not continue:
+`exec` has two modes. With an argument it replaces the current process with the named program; the script does not continue:
 
 ```bash
 exec ls /tmp
@@ -645,7 +645,7 @@ maks ALL=(root) NOPASSWD: /usr/local/sbin/backup.sh
 2. Practical difference between `#!/bin/sh` and `#!/bin/bash`? → `sh` is POSIX-only; `bash` adds arrays, `[[ ]]`, and `$(( ))`.
 3. How do you get the exit code of the last command? → `$?`.
 4. What does exit code 0 mean? → Success.
-5. Which command substitution form is preferred — backticks or `$()`? → `$()`: supports nesting, more readable.
+5. Which command substitution form is preferred, backticks or `$()`? → `$()`: supports nesting, more readable.
 6. Difference between `&&`, `||`, and `;`? → `&&` on success; `||` on failure; `;` always.
 7. How do you send mail to root if a command failed? → `cmd || echo "msg" | mail -s "subject" root`
 8. Which command reads a line from stdin into a variable? → `read`.
@@ -656,7 +656,7 @@ maks ALL=(root) NOPASSWD: /usr/local/sbin/backup.sh
 13. Difference between `bash script.sh`, `source script.sh`, and `. script.sh`? → `bash` runs in a subshell; `source`/`.` run in the current session.
 14. How do you make a script executable in octal notation? → `chmod 755 script.sh`.
 15. Where are personal, shared, and administrative scripts stored? → `~/bin`, `/usr/local/bin`, `/usr/local/sbin`.
-16. Does SUID work on shell scripts in modern Linux? → No — the kernel ignores it.
+16. Does SUID work on shell scripts in modern Linux? → No, the kernel ignores it.
 17. Which `test` operators check file existence, directory, and executability? → `-e`, `-d`, `-x`.
 18. Difference between `[ ]` and `[[ ]]` in Bash? → `[[ ]]` is a Bash extension: no quoting required, supports patterns and regex, allows `&&`/`||` inside.
 19. How do you loop over all files in a directory with `for`? → `for f in /dir/*; do ...; done`.
@@ -674,7 +674,7 @@ maks ALL=(root) NOPASSWD: /usr/local/sbin/backup.sh
 
 ## Exercises
 
-### Guided Exercise 1 — Reading a Password without Echo
+### Guided Exercise 1: Reading a Password without Echo
 
 The `-s` option of `read` is useful for password input: the typed text is not shown on screen. How do you store the user's input in the variable `PASSWORD`?
 
@@ -685,13 +685,13 @@ The `-s` option of `read` is useful for password input: the typed text is not sh
 read -s PASSWORD
 ```
 
-> `-s` is often combined with `-p` for a prompt and `-t` for a timeout. Full interactive form: `read -s -p "Password: " PASSWORD`. Add `echo` immediately after to print a newline — Enter with suppressed echo does not emit one.
+> `-s` is often combined with `-p` for a prompt and `-t` for a timeout. Full interactive form: `read -s -p "Password: " PASSWORD`. Add `echo` immediately after to print a newline, Enter with suppressed echo does not emit one.
 
 </details>
 
 ---
 
-### Guided Exercise 2 — Saving whoami Output to a Variable
+### Guided Exercise 2: Saving whoami Output to a Variable
 
 How do you save the output of `whoami` into the variable `WHO` inside a Bash script?
 
@@ -714,7 +714,7 @@ WHO=$(whoami)
 
 ---
 
-### Guided Exercise 3 — Conditional Execution with an Operator
+### Guided Exercise 3: Conditional Execution with an Operator
 
 Which Bash operator should appear between `apt-get dist-upgrade` and `systemctl reboot` if root wants to reboot only when the upgrade completes successfully?
 
@@ -733,7 +733,7 @@ apt-get dist-upgrade && systemctl reboot
 
 ---
 
-### Explorational Exercise 1 — Permission Denied When Running a Script
+### Explorational Exercise 1: Permission Denied When Running a Script
 
 When trying to run a freshly created Bash script the user gets:
 
@@ -748,13 +748,13 @@ The file was created by the same user. What is the likely cause?
 
 The file does not have the execute bit set.
 
-> Running via `./script.sh` requires read **and** execute permissions. A newly created file has no `x` bit by default. Fix with `chmod +x script.sh`. Alternative without the `x` bit: call the interpreter explicitly — `bash script.sh`. That requires only read permission because the file is read by the interpreter, not executed by the kernel.
+> Running via `./script.sh` requires read **and** execute permissions. A newly created file has no `x` bit by default. Fix with `chmod +x script.sh`. Alternative without the `x` bit: call the interpreter explicitly, `bash script.sh`. That requires only read permission because the file is read by the interpreter, not executed by the kernel.
 
 </details>
 
 ---
 
-### Explorational Exercise 2 — Identifying the Call Name via a Symbolic Link
+### Explorational Exercise 2: Identifying the Call Name via a Symbolic Link
 
 Let `do.sh` be an executable script and `undo.sh` a symbolic link to it. How can the script determine from within itself which name was used to call it?
 
@@ -772,13 +772,13 @@ case "$(basename "$0")" in
 esac
 ```
 
-> This technique (one script, multiple symbolic links) is widely used in Unix. Classic example: BusyBox — a single binary that behaves like `ls`, `cat`, `grep`, and dozens of other commands depending on `$0`. `basename` strips the path and leaves only the filename.
+> This technique (one script, multiple symbolic links) is widely used in Unix. Classic example: BusyBox, a single binary that behaves like `ls`, `cat`, `grep`, and dozens of other commands depending on `$0`. `basename` strips the path and leaves only the filename.
 
 </details>
 
 ---
 
-### Explorational Exercise 3 — Conditional Mail to Root on Non-Zero Exit Code
+### Explorational Exercise 3: Conditional Mail to Root on Non-Zero Exit Code
 
 On a system with a configured mail service the command
 
@@ -795,7 +795,7 @@ sends a notification to root. Write an `if` construct that executes this `mail` 
 if [ "$?" -ne 0 ]; then mail -s "Maintenance Error" root <<<"Scheduled task error"; fi
 ```
 
-> `[ "$?" -ne 0 ]` compares `$?` with zero. Quotes around `"$?"` guard against empty-value errors — though `$?` always holds a number. Alternative compact form via `||`: `previous_command || mail -s "Maintenance Error" root <<<"Scheduled task error"`. Drawback of `||`: it must be chained to the previous command on the same line.
+> `[ "$?" -ne 0 ]` compares `$?` with zero. Quotes around `"$?"` guard against empty-value errors; though `$?` always holds a number. Alternative compact form via `||`: `previous_command || mail -s "Maintenance Error" root <<<"Scheduled task error"`. Drawback of `||`: it must be chained to the previous command on the same line.
 
 </details>
 

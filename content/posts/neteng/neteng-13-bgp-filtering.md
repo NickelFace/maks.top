@@ -26,12 +26,12 @@ Goal: Configure BGP filtering for the Moscow and St. Petersburg offices.
 
 ---
 
-## Moscow — prevent transit traffic (AS-path)
+## Moscow: prevent transit traffic (AS-path)
 
 AS 1001 must not become a transit between Kitorn and Lamas. An AS-path access-list that permits only locally originated routes (`^$`) is applied outbound to both providers. A dedicated loopback interface announces the real Moscow aggregate to the internet.
 
 <details>
-<summary>R14 — BGP config</summary>
+<summary>R14: BGP config</summary>
 <pre><code>
 enable
 configure terminal
@@ -61,7 +61,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 — BGP config</summary>
+<summary>R15: BGP config</summary>
 <pre><code>
 enable
 configure terminal
@@ -88,10 +88,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Verification — AS 1001 appears only in the path of its own 200.20.20.0/22, no transit routes visible:
+Verification. AS 1001 appears only in the path of its own 200.20.20.0/22, no transit routes visible:
 
 <details>
-<summary>R22 — show ip bgp</summary>
+<summary>R22: show ip bgp</summary>
 <pre><code>
 R22#show ip bgp
 BGP table version is 47, local router ID is 110.110.110.1
@@ -121,7 +121,7 @@ BGP table version is 47, local router ID is 110.110.110.1
 </details>
 
 <details>
-<summary>R21 — show ip bgp</summary>
+<summary>R21: show ip bgp</summary>
 <pre><code>
 R21#show ip bgp
 BGP table version is 13, local router ID is 111.111.111.5
@@ -153,12 +153,12 @@ BGP table version is 13, local router ID is 111.111.111.5
 
 ---
 
-## St. Petersburg — prevent transit traffic (prefix-list)
+## St. Petersburg: prevent transit traffic (prefix-list)
 
 R18 uses BGP peer-session/peer-policy templates for the Triada sessions. A prefix-list `DEFAULT` permits only the 100.10.8.0/22 aggregate outbound; a filter-list additionally blocks any route with a non-empty AS-path.
 
 <details>
-<summary>R18 — BGP config</summary>
+<summary>R18: BGP config</summary>
 <pre><code>
 enable
 configure terminal
@@ -203,10 +203,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Triada receives only 100.10.8.0/22 from AS 2042 — no transit:
+Triada receives only 100.10.8.0/22 from AS 2042, no transit:
 
 <details>
-<summary>R24 — show ip bgp</summary>
+<summary>R24: show ip bgp</summary>
 <pre><code>
 R24#show ip bgp
 BGP table version is 19, local router ID is 24.24.24.24
@@ -232,7 +232,7 @@ BGP table version is 19, local router ID is 24.24.24.24
 </details>
 
 <details>
-<summary>R26 — show ip bgp</summary>
+<summary>R26: show ip bgp</summary>
 <pre><code>
 R26#show ip bgp
 BGP table version is 26, local router ID is 26.26.26.26
@@ -262,7 +262,7 @@ BGP table version is 26, local router ID is 26.26.26.26
 Prefix-list `ISP` on R22 permits only the default route and 100.10.8.0/22 outbound to AS 1001. `default-originate` generates the default even without 0.0.0.0/0 in R22's routing table.
 
 <details>
-<summary>R22 — BGP config</summary>
+<summary>R22: BGP config</summary>
 <pre><code>
 enable
 configure terminal
@@ -290,7 +290,7 @@ copy running-config startup-config
 R14 receives only the default route from Kitorn:
 
 <details>
-<summary>R14 — show ip bgp</summary>
+<summary>R14: show ip bgp</summary>
 <pre><code>
 R14#show ip bgp
 BGP table version is 25, local router ID is 14.14.14.14
@@ -315,10 +315,10 @@ BGP table version is 25, local router ID is 14.14.14.14
 
 ## Lamas → default route + St. Petersburg prefix to Moscow
 
-R21 uses the same `ISP` prefix-list approach — permits 0.0.0.0/0 and 100.10.8.0/22 outbound to AS 1001.
+R21 uses the same `ISP` prefix-list approach, permits 0.0.0.0/0 and 100.10.8.0/22 outbound to AS 1001.
 
 <details>
-<summary>R21 — BGP config</summary>
+<summary>R21: BGP config</summary>
 <pre><code>
 enable
 configure terminal
@@ -346,7 +346,7 @@ copy running-config startup-config
 R15 receives 100.10.8.0/22 from Lamas (LP=150 preferred); default comes from Kitorn via iBGP from R14:
 
 <details>
-<summary>R15 / R14 — show ip bgp</summary>
+<summary>R15 / R14: show ip bgp</summary>
 <pre><code>
 R15#show ip bgp
 BGP table version is 48, local router ID is 15.15.15.15
@@ -398,7 +398,7 @@ R14#ping 111.110.35.14 source e0/2
 ## Full router configs
 
 <details>
-<summary>R14 (AS 1001) — lab 13 changes</summary>
+<summary>R14 (AS 1001): lab 13 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -425,7 +425,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R15 (AS 1001) — lab 13 changes</summary>
+<summary>R15 (AS 1001): lab 13 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -454,7 +454,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R18 — St. Petersburg (AS 2042) — lab 13 changes</summary>
+<summary>R18: St. Petersburg (AS 2042), lab 13 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -500,7 +500,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R22 — Kitorn (AS 101) — lab 13 changes</summary>
+<summary>R22: Kitorn (AS 101), lab 13 changes</summary>
 <pre><code>
 enable
 configure terminal
@@ -526,7 +526,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>R21 — Lamas (AS 301) — lab 13 changes</summary>
+<summary>R21: Lamas (AS 301), lab 13 changes</summary>
 <pre><code>
 enable
 configure terminal

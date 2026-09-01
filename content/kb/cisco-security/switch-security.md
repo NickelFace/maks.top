@@ -183,7 +183,7 @@ Validates ARP packets against the DHCP Snooping binding table to prevent ARP spo
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">arp access-list ARP-EXCEPTIONS</td><td class="desc">Create ARP ACL</td></tr>
-<tr><td class="mono">permit ip host 192.168.1.1 mac host 00:E0:F7:EC:D0:10</td><td class="desc">Bind gateway IP to its real MAC — rejects ARP spoofing attempts</td></tr>
+<tr><td class="mono">permit ip host 192.168.1.1 mac host 00:E0:F7:EC:D0:10</td><td class="desc">Bind gateway IP to its real MAC: rejects ARP spoofing attempts</td></tr>
 <tr><td class="mono">ip arp inspection filter ARP-EXCEPTIONS vlan 1</td><td class="desc">Apply ARP ACL to VLAN</td></tr>
 <tr><td class="mono">show ip arp inspection</td><td class="desc">DAI status and counters</td></tr>
 <tr><td class="mono">show ip arp inspection interface</td><td class="desc">Which interfaces have DAI enabled</td></tr>
@@ -194,7 +194,7 @@ Validates ARP packets against the DHCP Snooping binding table to prevent ARP spo
 
 ---
 
-## PoE — Power over Ethernet
+## PoE: Power over Ethernet
 
 <div class="ref-panel">
 <div class="ref-panel-head">PoE IEEE Classes</div>
@@ -203,10 +203,10 @@ Validates ARP packets against the DHCP Snooping binding table to prevent ARP spo
 <thead><tr><th>Class</th><th>Max PSE output</th><th>Note</th></tr></thead>
 <tbody>
 <tr><td class="mono">Class 0</td><td class="desc">15.4 W</td><td class="desc">Default class (unclassified devices)</td></tr>
-<tr><td class="mono">Class 1</td><td class="desc">4 W</td><td class="desc">Optional — low-power devices</td></tr>
+<tr><td class="mono">Class 1</td><td class="desc">4 W</td><td class="desc">Optional: low-power devices</td></tr>
 <tr><td class="mono">Class 2</td><td class="desc">7 W</td><td class="desc">Optional</td></tr>
-<tr><td class="mono">Class 3</td><td class="desc">15.4 W</td><td class="desc">Optional — standard 802.3af devices</td></tr>
-<tr><td class="mono">Class 4</td><td class="desc">51 W</td><td class="desc">802.3at (PoE+) only — not available on 802.3af switches</td></tr>
+<tr><td class="mono">Class 3</td><td class="desc">15.4 W</td><td class="desc">Optional: standard 802.3af devices</td></tr>
+<tr><td class="mono">Class 4</td><td class="desc">51 W</td><td class="desc">802.3at (PoE+) only: not available on 802.3af switches</td></tr>
 </tbody>
 </table>
 </div>

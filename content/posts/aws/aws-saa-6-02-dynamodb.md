@@ -18,8 +18,8 @@ DynamoDB is a **fully managed, serverless, key-value and document NoSQL database
 | **Table** | Top-level container; no schema enforcement beyond the primary key |
 | **Item** | Single row; up to **400 KB** |
 | **Attribute** | Field within an item; can be any type (string, number, binary, list, map, set, boolean, null) |
-| **Simple PK** | Partition key only — must be unique across all items |
-| **Composite PK** | Partition key + sort key — combination must be unique; items with same PK grouped together |
+| **Simple PK** | Partition key only: must be unique across all items |
+| **Composite PK** | Partition key + sort key: combination must be unique; items with same PK grouped together |
 
 DynamoDB distributes data by hashing the partition key. Choosing a high-cardinality partition key is critical for even distribution and avoiding "hot partitions."
 
@@ -72,13 +72,13 @@ Items > 1 KB: round up to nearest 1 KB.
 
 ### Local Secondary Index (LSI)
 - Same **partition key** as the base table; different **sort key**
-- Must be created **at table creation** — cannot add later
+- Must be created **at table creation**: cannot add later
 - Up to 5 LSIs per table
 - Shares capacity with the base table
 - Supports strongly consistent reads (unlike GSI)
 
 ### Global Secondary Index (GSI)
-- **Any attributes** as partition key and sort key — completely independent of the base table PK
+- **Any attributes** as partition key and sort key, completely independent of the base table PK
 - Can be created or deleted **at any time**
 - Up to 20 GSIs per table (default limit, can increase)
 - Has its **own separate RCU/WCU capacity**
@@ -93,7 +93,7 @@ Items > 1 KB: round up to nearest 1 KB.
 | Consistent reads | Strongly + eventually | Eventually only |
 | Max per table | 5 | 20 |
 
-> **📌 Tip:** LSI must be created at table creation. GSI uses its own capacity — provision it separately or throttling occurs independently of the main table.
+> **📌 Tip:** LSI must be created at table creation. GSI uses its own capacity, provision it separately or throttling occurs independently of the main table.
 
 ---
 
@@ -123,22 +123,22 @@ DAX is a **fully managed, in-memory cache** built specifically for DynamoDB.
 |---|---|
 | Latency | Microsecond (vs single-digit ms for DynamoDB) |
 | Cache type | Write-through (writes go to both DAX and DynamoDB) |
-| Strongly consistent reads | Not cached — passes through to DynamoDB |
+| Strongly consistent reads | Not cached: passes through to DynamoDB |
 | Cluster | Multi-node; primary + read replicas |
-| API | Drop-in compatible — same DynamoDB API calls |
+| API | Drop-in compatible: same DynamoDB API calls |
 | Use case | Read-heavy workloads, repeated reads of same data |
 
 **DAX vs ElastiCache for DynamoDB:**
 - DAX: DynamoDB-specific, handles DynamoDB API, simpler setup
 - ElastiCache: generic; use when you need custom caching logic, query result caching, or non-DynamoDB sources
 
-> **📌 Tip:** DAX does NOT cache strongly consistent reads — those always go directly to DynamoDB. If the use case demands strong consistency, DAX provides no benefit.
+> **📌 Tip:** DAX does NOT cache strongly consistent reads; those always go directly to DynamoDB. If the use case demands strong consistency, DAX provides no benefit.
 
 ---
 
 ## Global Tables
 
-- **Multi-region, active-active** replication — all tables can accept writes
+- **Multi-region, active-active** replication: all tables can accept writes
 - Conflict resolution: **last-write-wins** (based on timestamp)
 - Sub-second replication latency
 - Requires DynamoDB Streams to be enabled
@@ -179,7 +179,7 @@ DAX is a **fully managed, in-memory cache** built specifically for DynamoDB.
 ### On-Demand Backup
 - Full table backup at a specific point in time
 - Retained until manually deleted; stored in DynamoDB (not S3 directly)
-- Restore creates a **new table** — cannot restore in-place
+- Restore creates a **new table**: cannot restore in-place
 
 ### Continuous Backup (PITR)
 - **Point-in-Time Recovery** up to **35 days** back
@@ -193,11 +193,11 @@ DAX is a **fully managed, in-memory cache** built specifically for DynamoDB.
 
 | Trap | Correct answer |
 |---|---|
-| LSI can be added after table creation | False — must be at creation |
-| GSI shares capacity with table | False — GSI has separate RCU/WCU |
-| DAX caches strongly consistent reads | False — passes through to DynamoDB |
-| On-Demand is always cheaper | False — 2× cost at high sustained traffic |
-| DynamoDB Streams retention > 24h | False — 24h max |
+| LSI can be added after table creation | False: must be at creation |
+| GSI shares capacity with table | False: GSI has separate RCU/WCU |
+| DAX caches strongly consistent reads | False: passes through to DynamoDB |
+| On-Demand is always cheaper | False: 2× cost at high sustained traffic |
+| DynamoDB Streams retention > 24h | False: 24h max |
 | Global Tables conflict resolution | Last-write-wins |
 | Transactions cost | 2× RCU/WCU |
 | Max item size | 400 KB |

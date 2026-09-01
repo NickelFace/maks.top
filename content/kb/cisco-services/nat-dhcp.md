@@ -10,7 +10,7 @@ date: 2026-04-22
 Cisco IOS cheat sheet for <strong>NAT</strong> (Network Address Translation) and <strong>DHCP</strong>. Covers static NAT, dynamic NAT, PAT (overload), NVI NAT, DHCP server setup, and DHCP relay.
 </div>
 
-## NAT — Network Address Translation
+## NAT: Network Address Translation
 
 ### Static NAT
 
@@ -37,7 +37,7 @@ One-to-one permanent mapping. Used to expose an internal server to the outside.
 
 ### Dynamic NAT
 
-Pool of public IPs — each private IP gets a different public IP from the pool.
+Pool of public IPs, each private IP gets a different public IP from the pool.
 
 <div class="ref-panel">
 <div class="ref-panel-head">Dynamic NAT</div>
@@ -53,7 +53,7 @@ Pool of public IPs — each private IP gets a different public IP from the pool.
 </div>
 </div>
 
-### PAT — Port Address Translation (NAT Overload)
+### PAT: Port Address Translation (NAT Overload)
 
 Many private IPs share one public IP, differentiated by port numbers. Most common in home/office routers.
 
@@ -77,26 +77,26 @@ Many private IPs share one public IP, differentiated by port numbers. Most commo
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">ip nat inside source list 7 interface e0/1 overload</td><td class="desc">Translate to the IP of the outbound interface — no hardcoded public IP needed</td></tr>
+<tr><td class="mono">ip nat inside source list 7 interface e0/1 overload</td><td class="desc">Translate to the IP of the outbound interface: no hardcoded public IP needed</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
-> Prefer the interface-based form — it follows the interface IP automatically if the ISP reassigns it.
+> Prefer the interface-based form; it follows the interface IP automatically if the ISP reassigns it.
 
 ### NVI NAT (NAT Virtual Interface)
 
-Alternative to inside/outside model — mark interfaces with `ip nat enable` on both sides.
+Alternative to inside/outside model, mark interfaces with `ip nat enable` on both sides.
 
 <div class="ref-panel">
-<div class="ref-panel-head">NVI NAT — PAT Example</div>
+<div class="ref-panel-head">NVI NAT: PAT Example</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">ip nat enable</td><td class="desc">Enable NAT on interface (both LAN and WAN side)</td></tr>
-<tr><td class="mono">ip nat source list 7 interface fa0/1 overload</td><td class="desc">Enable PAT — note: no `inside` keyword</td></tr>
+<tr><td class="mono">ip nat source list 7 interface fa0/1 overload</td><td class="desc">Enable PAT, note: no `inside` keyword</td></tr>
 </tbody>
 </table>
 </div>
@@ -181,7 +181,7 @@ Alternative to inside/outside model — mark interfaces with `ip nat enable` on 
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">ip helper-address 10.0.1.4</td><td class="desc">DHCP Relay Agent — forward requests to DHCP server at 10.0.1.4</td></tr>
+<tr><td class="mono">ip helper-address 10.0.1.4</td><td class="desc">DHCP Relay Agent: forward requests to DHCP server at 10.0.1.4</td></tr>
 <tr><td class="mono">ip dhcp ping packets 0</td><td class="desc">Disable ping check before assigning IP (0 = off)</td></tr>
 <tr><td class="mono">ip dhcp ping timeout 200</td><td class="desc">Timeout between ping attempts (ms)</td></tr>
 <tr><td class="mono">clear ip dhcp binding *</td><td class="desc">Clear all DHCP lease bindings</td></tr>

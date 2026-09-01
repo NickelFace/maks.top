@@ -61,7 +61,7 @@ arp -a                      ! ARP table
 netstat -rn                 ! Routing table
 ```
 
-**System Preferences → Network** — GUI for IP settings.
+**System Preferences → Network**: GUI for IP settings.
 
 ---
 
@@ -73,7 +73,7 @@ ip addr show eth0           ! eth0 only
 ip route show               ! Routing table (includes default gateway)
 ip neigh                    ! ARP table
 
-# Legacy commands (ifconfig, route — net-tools package):
+# Legacy commands (ifconfig, route - net-tools package):
 ifconfig
 ifconfig eth0
 route -n
@@ -89,7 +89,7 @@ traceroute 8.8.8.8          ! (or tracepath)
 
 # DHCP:
 dhclient eth0               ! Request IP from DHCP (Debian/Ubuntu)
-nmcli con show              ! NetworkManager — list connections
+nmcli con show              ! NetworkManager - list connections
 ```
 
 ---

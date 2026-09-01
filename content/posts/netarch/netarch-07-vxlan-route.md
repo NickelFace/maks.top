@@ -740,7 +740,7 @@ ip 192.168.68.219/24 192.168.69.253
 </code></pre>
 </details>
 
-VPC configuration between **NXOS5 — NXOS7**:
+VPC configuration between **NXOS5. NXOS7**:
 
 <details>
 <summary>NXOS5</summary>
@@ -1710,8 +1710,8 @@ VPCS> ping 192.168.69.219
 </details>
 Conclusion:
 
-- L2 connectivity configured between clients (VPC1 — VPC2; VPC3 — VPC14).
-- Inter-VNI routing configured (10068 — 10069 via VNI 9999).
+- L2 connectivity configured between clients (VPC1: VPC2; VPC3, VPC14).
+- Inter-VNI routing configured (10068: 10069 via VNI 9999).
 - VPC pair and MLAG via LACP configured.
 
 *Network Architect Course | Lab 07*

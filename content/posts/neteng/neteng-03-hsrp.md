@@ -19,13 +19,13 @@ page_lang: "en"
 
 | Device | Interface    | IP address      | Subnet Mask     | Gateway     |
 | ------ | ------------ | --------------- | --------------- | ----------- |
-| R1     | G0/1         | 192.168.1.1     | 255.255.255.0   | —           |
-|        | S0/0/0 (DCE) | 10.1.1.1        | 255.255.255.252 | —           |
-| R2     | S0/0/0       | 10.1.1.2        | 255.255.255.252 | —           |
-|        | S0/0/1 (DCE) | 10.2.2.2        | 255.255.255.252 | —           |
-|        | Lo1          | 209.165.200.225 | 255.255.255.224 | —           |
-| R3     | G0/1         | 192.168.1.3     | 255.255.255.0   | —           |
-|        | S0/0/1       | 10.2.2.1        | 255.255.255.252 | —           |
+| R1     | G0/1         | 192.168.1.1     | 255.255.255.0   | n/a           |
+|        | S0/0/0 (DCE) | 10.1.1.1        | 255.255.255.252 | n/a           |
+| R2     | S0/0/0       | 10.1.1.2        | 255.255.255.252 | n/a           |
+|        | S0/0/1 (DCE) | 10.2.2.2        | 255.255.255.252 | n/a           |
+|        | Lo1          | 209.165.200.225 | 255.255.255.224 | n/a           |
+| R3     | G0/1         | 192.168.1.3     | 255.255.255.0   | n/a           |
+|        | S0/0/1       | 10.2.2.1        | 255.255.255.252 | n/a           |
 | PC-A   | NIC          | 192.168.1.31    | 255.255.255.0   | 192.168.1.1 |
 | PC-C   | NIC          | 192.168.1.33    | 255.255.255.0   | 192.168.1.3 |
 
@@ -36,7 +36,7 @@ page_lang: "en"
 
 ---
 
-### Part 1 — Basic router setup
+### Part 1: Basic router setup
 
 <details>
 <summary>R1</summary>
@@ -210,7 +210,7 @@ PC-A> trace 209.165.200.225
 
 ---
 
-### Part 2 — HSRP configuration
+### Part 2: HSRP configuration
 
 HSRP provides a virtual IP address shared between R1 and R3. R1 becomes Active with priority 150; R3 becomes Standby.
 
@@ -275,7 +275,7 @@ show standby brief
 ```
 
 <details>
-<summary>R1 — Active</summary>
+<summary>R1: Active</summary>
 <pre><code>
 enable
 configure terminal
@@ -289,7 +289,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — Standby</summary>
+<summary>R3: Standby</summary>
 <pre><code>
 enable
 configure terminal
@@ -349,7 +349,7 @@ GigabitEthernet9/0 - Group 1 (version 2)
 </code></pre>
 </details>
 
-Test failover — ping `209.165.200.225` and disconnect R1's uplink. R3 takes over after hold time expires:
+Test failover. Ping `209.165.200.225` and disconnect R1's uplink. R3 takes over after hold time expires:
 
 <details>
 <summary>PC-A ping during failover</summary>
@@ -369,10 +369,10 @@ Ping statistics for 209.165.200.225:
 </code></pre>
 </details>
 
-After R1 disconnect — R3 becomes Active:
+After R1 disconnect. R3 becomes Active:
 
 <details>
-<summary>R3 — after R1 disconnect</summary>
+<summary>R3: after R1 disconnect</summary>
 <pre><code>
 enable
 configure terminal
@@ -412,7 +412,7 @@ Gig9/0      1    200 P Active  local           unknown         192.168.1.254
 After R1 reconnects, it remains Standby because R3's priority (200) is now higher:
 
 <details>
-<summary>R1 — after R3 priority raised</summary>
+<summary>R1: after R3 priority raised</summary>
 <pre><code>
 enable
 configure terminal

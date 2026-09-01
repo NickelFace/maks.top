@@ -37,11 +37,11 @@ Configure Port Security to protect against unauthorized devices. Violation modes
 9. Check the violation counter: `show port-security`
 
 ### Sticky MAC
-10. Enable Sticky MAC — automatically learns connected devices:
+10. Enable Sticky MAC: automatically learns connected devices:
     ```
     SW1(config-if)#switchport port-security mac-address sticky
     ```
-11. Connect a PC — the MAC is automatically added to the config
+11. Connect a PC: the MAC is automatically added to the config
 12. Verify: `show run` → the config will contain `mac-address sticky XXXX.XXXX.XXXX`
 
 ### Recovering from err-disable

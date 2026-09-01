@@ -10,9 +10,9 @@ lang_pair: "/posts/ccna/ru/ccna-6-05-ai-ml-networking/"
 
 ## What is AI and ML
 
-**Artificial Intelligence (AI)** — simulation of human intelligence by computers: learning, reasoning, decision-making, and self-correction.
+**Artificial Intelligence (AI)**: simulation of human intelligence by computers: learning, reasoning, decision-making, and self-correction.
 
-**Machine Learning (ML)** — a subset of AI where algorithms learn from data without being explicitly programmed. The system improves through pattern recognition.
+**Machine Learning (ML)**: a subset of AI where algorithms learn from data without being explicitly programmed. The system improves through pattern recognition.
 
 ```
 AI ⊃ Machine Learning ⊃ Deep Learning
@@ -75,7 +75,7 @@ The most common ML use case in networking. The system learns **baseline behavior
 
 ### Load Balancing
 
-Reinforcement learning automatically redistributes traffic across paths to optimize performance and avoid congestion — adapting in real time without manual intervention.
+Reinforcement learning automatically redistributes traffic across paths to optimize performance and avoid congestion, adapting in real time without manual intervention.
 
 ---
 
@@ -93,7 +93,7 @@ Reinforcement learning automatically redistributes traffic across paths to optim
 
 ## Cisco Catalyst Center AI Analytics
 
-Cisco Catalyst Center (formerly DNA Center) includes **AI Network Analytics** — a cloud-delivered ML engine.
+Cisco Catalyst Center (formerly DNA Center) includes **AI Network Analytics**, a cloud-delivered ML engine.
 
 | Feature | Description |
 |---|---|
@@ -117,7 +117,7 @@ graph LR
 
 ---
 
-## Neural Networks — Basics
+## Neural Networks: Basics
 
 A **neural network** is a model loosely inspired by the human brain:
 
@@ -128,7 +128,7 @@ A **neural network** is a model loosely inspired by the human brain:
 | Weight | Strength of connection between neurons |
 | Training | Adjusting weights to minimize prediction error |
 
-**Deep learning** uses networks with many hidden layers — effective for complex patterns like speech recognition or intrusion detection.
+**Deep learning** uses networks with many hidden layers, effective for complex patterns like speech recognition or intrusion detection.
 
 ---
 
@@ -141,7 +141,7 @@ A **neural network** is a model loosely inspired by the human brain:
 - Summarize log files and alerts
 - Cisco's AI Assistant in Catalyst Center uses LLM for natural language queries
 
-> **📌 Note:** The CCNA exam does not require deep knowledge of LLMs — know what they are and their high-level use cases in network management.
+> **📌 Note:** The CCNA exam does not require deep knowledge of LLMs, know what they are and their high-level use cases in network management.
 
 ---
 
@@ -151,8 +151,8 @@ A **neural network** is a model loosely inspired by the human brain:
 |---|---|
 | AI vs ML | AI is the broad field; ML is a subset that learns from data |
 | Supervised learning | Labeled data, classification/regression tasks |
-| Unsupervised learning | No labels, finds patterns — used for anomaly detection |
-| Anomaly detection | Learns baseline, flags deviations — key security use case |
+| Unsupervised learning | No labels, finds patterns: used for anomaly detection |
+| Anomaly detection | Learns baseline, flags deviations: key security use case |
 | Predictive analytics | Forecasts future states (bandwidth, failure) |
 | Generative AI | Creates new content; LLMs as example |
 | Catalyst Center AI | AI-driven assurance, baseline learning, issue correlation |
@@ -165,7 +165,7 @@ A **neural network** is a model loosely inspired by the human brain:
 
 | Resource | Description |
 |---|---|
-| [AI and ML — networklessons.com](https://networklessons.com/cisco/ccna-200-301/artificial-intelligence-ai-and-machine-learning-ml) | AI/ML for CCNA: types of learning, networking applications |
+| [AI and ML (networklessons.com)](https://networklessons.com/cisco/ccna-200-301/artificial-intelligence-ai-and-machine-learning-ml) | AI/ML for CCNA: types of learning, networking applications |
 | [Cisco AI Network Analytics](https://www.cisco.com/c/en/us/products/analytics/ai-network-analytics/index.html) | Cisco's AI-driven assurance platform: anomaly detection, predictions |
-| [Jeremy's IT Lab — AI and ML (YouTube)](https://www.youtube.com/results?search_query=jeremy+it+lab+ccna+AI+ML) | AI/ML from the Free CCNA series |
+| [Jeremy's IT Lab: AI and ML (YouTube)](https://www.youtube.com/results?search_query=jeremy+it+lab+ccna+AI+ML) | AI/ML from the Free CCNA series |
 | [Cisco Catalyst Center AI Assistant](https://blogs.cisco.com/networking/catalyst-center-ai-assistant) | Natural language queries and AI-driven insights in Catalyst Center |

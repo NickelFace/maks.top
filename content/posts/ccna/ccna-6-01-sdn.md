@@ -26,7 +26,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-01-sdn/"
 |---|---|---|
 | Data Plane | Forwarding plane | Packet forwarding (FIB/CAM/TCAM) |
 | Control Plane | Control plane | Route computation (OSPF, STP, ARP) |
-| Management Plane | Management plane | SSH, SNMP, NetConf — device configuration |
+| Management Plane | Management plane | SSH, SNMP, NetConf: device configuration |
 
 ### In SDN:
 - The **Control Plane** is moved to a **centralized controller**
@@ -92,10 +92,10 @@ graph LR
 ### SD-Access
 
 **SD-Access (Software-Defined Access)** is a Cisco solution for automating campus networks:
-- **Fabric** — overlay network on top of the physical infrastructure (VXLAN + LISP)
-- **Control Plane** — LISP for endpoint tracking
-- **Data Plane** — VXLAN for tunneling
-- **Policy Plane** — TrustSec/SGT for micro-segmentation
+- **Fabric**: overlay network on top of the physical infrastructure (VXLAN + LISP)
+- **Control Plane**: LISP for endpoint tracking
+- **Data Plane**: VXLAN for tunneling
+- **Policy Plane**: TrustSec/SGT for micro-segmentation
 
 ---
 
@@ -125,8 +125,8 @@ graph LR
 | Resource | Description |
 |---|---|
 | [Cisco Catalyst Center Documentation](https://developer.cisco.com/docs/dna-center/) | Official Catalyst Center documentation: API, Intent API |
-| [SDN Overview — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/software-defined-networking-sdn) | SDN: control/data plane separation, OpenFlow, controllers |
+| [SDN Overview (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/software-defined-networking-sdn) | SDN: control/data plane separation, OpenFlow, controllers |
 | [Cisco SD-Access](https://www.cisco.com/c/en/us/solutions/enterprise-networks/software-defined-access/index.html) | SD-Access: fabric, underlay/overlay, policy, segmentation |
-| [Jeremy's IT Lab — SDN and Automation (YouTube)](https://www.youtube.com/watch?v=UdmgpxTq6Yw) | SDN, Catalyst Center, management and automation from the Free CCNA series |
-| [Cisco DevNet — Catalyst Center Sandbox](https://developer.cisco.com/site/sandbox/) | Free lab environment for learning the Catalyst Center API |
-| [OpenFlow — Open Networking Foundation](https://opennetworking.org/sdn-definition/) | SDN definition and the OpenFlow protocol from ONF |
+| [Jeremy's IT Lab: SDN and Automation (YouTube)](https://www.youtube.com/watch?v=UdmgpxTq6Yw) | SDN, Catalyst Center, management and automation from the Free CCNA series |
+| [Cisco DevNet: Catalyst Center Sandbox](https://developer.cisco.com/site/sandbox/) | Free lab environment for learning the Catalyst Center API |
+| [OpenFlow: Open Networking Foundation](https://opennetworking.org/sdn-definition/) | SDN definition and the OpenFlow protocol from ONF |

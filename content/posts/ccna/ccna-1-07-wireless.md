@@ -41,7 +41,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-07-wireless/"
 ### 6 GHz (Wi-Fi 6E)
 
 - Available only with Wi-Fi 6E (802.11ax) devices
-- ~60 channels of 20 MHz width (US) — much more capacity
+- ~60 channels of 20 MHz width (US), much more capacity
 - No legacy devices → minimal interference
 - Shorter range than 5 GHz; best for high-density indoor environments
 
@@ -85,9 +85,9 @@ lang_pair: "/posts/ccna/ru/ccna-1-07-wireless/"
 
 ## Media Access Methods
 
-- **CSMA/CA** (Collision Avoidance) — listen before transmit + random backoff
-- **ACK** — each packet is acknowledged
-- **RTS/CTS** — Request to Send / Clear to Send to prevent the "hidden node" problem
+- **CSMA/CA** (Collision Avoidance): listen before transmit + random backoff
+- **ACK**: each packet is acknowledged
+- **RTS/CTS**: Request to Send / Clear to Send to prevent the "hidden node" problem
 
 > **📌 Important:** Wi-Fi uses **CSMA/CA** (Avoidance), not **CSMA/CD** (Detection) like wired Ethernet. In a wireless environment, a device cannot simultaneously transmit and listen for collisions.
 
@@ -97,7 +97,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-07-wireless/"
 
 | Standard | Encryption | Authentication | Status |
 |---|---|---|---|
-| WEP | RC4 (40-bit) | Open/PSK | Broken — do not use |
+| WEP | RC4 (40-bit) | Open/PSK | Broken: do not use |
 | WPA | TKIP (RC4) | PSK / 802.1X | Deprecated |
 | WPA2 | AES-CCMP | PSK / 802.1X (EAP) | Recommended |
 | WPA3 | AES-GCMP | SAE / 802.1X | Current standard |
@@ -117,9 +117,9 @@ lang_pair: "/posts/ccna/ru/ccna-1-07-wireless/"
 
 | Resource | Description |
 |---|---|
-| [IEEE 802.11 Standards — IEEE](https://standards.ieee.org/ieee/802.11/7028/) | Official 802.11a/b/g/n/ac/ax standards |
-| [Wireless Standards — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/wireless-lan-overview) | WLAN overview: standards, frequencies, channels, SSID |
-| [Wi-Fi 6 (802.11ax) — Cisco](https://www.cisco.com/c/en/us/solutions/enterprise-networks/802-11ax-solution/index.html) | Cisco on Wi-Fi 6: OFDMA, MU-MIMO, improvements over 802.11ac |
-| [Jeremy's IT Lab — Wireless Fundamentals (YouTube)](https://www.youtube.com/watch?v=bPfELUx1BoI) | Wireless fundamentals: standards, frequencies, BSS/ESS |
-| [Channel Planning 2.4 GHz vs 5 GHz — Cisco](https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/212016-Best-Practices-for-Wireless-Channel-Pl.html) | Best practices for 2.4/5 GHz channel planning |
-| [David Bombal — Wireless Networking (YouTube)](https://www.youtube.com/watch?v=pnBqmEFKUHk) | CCNA wireless: standards, SSID, security |
+| [IEEE 802.11 Standards (IEEE)](https://standards.ieee.org/ieee/802.11/7028/) | Official 802.11a/b/g/n/ac/ax standards |
+| [Wireless Standards (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/wireless-lan-overview) | WLAN overview: standards, frequencies, channels, SSID |
+| [Wi-Fi 6 (802.11ax) (Cisco)](https://www.cisco.com/c/en/us/solutions/enterprise-networks/802-11ax-solution/index.html) | Cisco on Wi-Fi 6: OFDMA, MU-MIMO, improvements over 802.11ac |
+| [Jeremy's IT Lab: Wireless Fundamentals (YouTube)](https://www.youtube.com/watch?v=bPfELUx1BoI) | Wireless fundamentals: standards, frequencies, BSS/ESS |
+| [Channel Planning 2.4 GHz vs 5 GHz (Cisco)](https://www.cisco.com/c/en/us/support/docs/wireless-mobility/wireless-lan-wlan/212016-Best-Practices-for-Wireless-Channel-Pl.html) | Best practices for 2.4/5 GHz channel planning |
+| [David Bombal: Wireless Networking (YouTube)](https://www.youtube.com/watch?v=pnBqmEFKUHk) | CCNA wireless: standards, SSID, security |

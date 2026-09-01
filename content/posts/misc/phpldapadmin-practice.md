@@ -7,7 +7,7 @@ lang_pair: "/posts/misc/ru/phpldapadmin-practice/"
 page_lang: "en"
 ---
 
-A practical guide to deploying phpLDAPadmin on Ubuntu 24.04 and managing OpenLDAP through a graphical interface. For command-line background, see [LPIC-2 210.4 — Configuring an OpenLDAP Server](/posts/lpic2-210-4-openldap/).
+A practical guide to deploying phpLDAPadmin on Ubuntu 24.04 and managing OpenLDAP through a graphical interface. For command-line background, see [LPIC-2 210.4 Configuring an OpenLDAP Server](/posts/lpic2-210-4-openldap/).
 
 ---
 
@@ -178,7 +178,7 @@ Then open in a browser: `http://<server-ip>/phpldapadmin`
 
 ### 404 Not Found
 
-Apache is running but does not know about phpLDAPadmin — the alias is not loaded.
+Apache is running but does not know about phpLDAPadmin; the alias is not loaded.
 
 ```bash
 ls /etc/apache2/conf-available/ | grep phpldapadmin
@@ -265,15 +265,15 @@ After login you see the left panel with the directory tree and the right panel w
 
 Expand `dc=lpiclab,dc=com` in the left panel. You will see three OUs: `ou=People`, `ou=Groups`, `ou=Services`. Clicking a user entry such as `uid=jsmith` shows all its attributes in the right panel.
 
-> **Tip:** phpLDAPadmin displays each entry's DN exactly as it is used in `ldapsearch`, `ldappasswd`, and `ldapdelete` commands — helpful for avoiding typos when writing DNs by hand.
+> **Tip:** phpLDAPadmin displays each entry's DN exactly as it is used in `ldapsearch`, `ldappasswd`, and `ldapdelete` commands: helpful for avoiding typos when writing DNs by hand.
 
 ### Creating an entry
 
 Select `ou=People` in the left panel and click **"Create a child entry"**. The interface offers object class templates:
 
-- `inetOrgPerson` — for regular users
-- `posixAccount` — for Linux users with UID/GID
-- `organizationalUnit` — for OUs
+- `inetOrgPerson`: for regular users
+- `posixAccount`: for Linux users with UID/GID
+- `organizationalUnit`: for OUs
 
 Fill in the form and click **"Create Object"**. phpLDAPadmin generates the LDIF and submits it to the server automatically.
 
@@ -287,7 +287,7 @@ Click an entry → **"Modify attribute"** → change the value → **"Save Chang
 
 ### Via phpLDAPadmin
 
-Click a user entry → find the `userPassword` attribute → click the lock icon or **"change password"**. Select **SSHA** as the algorithm — it is the recommended choice.
+Click a user entry → find the `userPassword` attribute → click the lock icon or **"change password"**. Select **SSHA** as the algorithm; it is the recommended choice.
 
 ### Via ldappasswd (as admin)
 

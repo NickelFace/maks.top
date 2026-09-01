@@ -29,8 +29,8 @@ Amazon ECS (Elastic Container Service) is AWS's native container orchestration p
 | `random` | Place tasks randomly |
 
 Placement constraints:
-- `distinctInstance` — each task on a different EC2 instance
-- `memberOf` — tasks placed on instances matching an expression (e.g., instance type)
+- `distinctInstance`: each task on a different EC2 instance
+- `memberOf`: tasks placed on instances matching an expression (e.g., instance type)
 
 ---
 
@@ -53,7 +53,7 @@ Placement constraints:
 
 ## ECS with ALB: Dynamic Port Mapping
 
-On the EC2 launch type, the container can be assigned a **random host port** — ALB target group discovers it dynamically:
+On the EC2 launch type, the container can be assigned a **random host port**: ALB target group discovers it dynamically:
 
 ```yaml
 # Task Definition port mapping (EC2 launch type)
@@ -61,7 +61,7 @@ containerPort: 8080
 hostPort: 0        # 0 = dynamic port; ALB discovers via ECS API
 ```
 
-This allows **multiple task copies on the same EC2 host** — useful for bin-packing. On Fargate, each task gets its own ENI, so port mapping is straightforward (containerPort = hostPort).
+This allows **multiple task copies on the same EC2 host**, useful for bin-packing. On Fargate, each task gets its own ENI, so port mapping is straightforward (containerPort = hostPort).
 
 ---
 
@@ -106,14 +106,14 @@ EC2 cluster capacity: use **EC2 Auto Scaling Group** (or **ECS Cluster Auto Scal
 
 ## EKS (Elastic Kubernetes Service)
 
-EKS is a **managed Kubernetes control plane** — AWS runs etcd and the API server; you run worker nodes.
+EKS is a **managed Kubernetes control plane**; AWS runs etcd and the API server; you run worker nodes.
 
 ### Node Group Types
 | Type | Description |
 |---|---|
 | **Managed Node Group** | AWS provisions/updates EC2 instances; uses Launch Templates; cordon/drain on update |
 | **Self-Managed Nodes** | You provision and join EC2 instances manually or via CloudFormation |
-| **Fargate Profiles** | Serverless pods — no node management; define namespace/label selectors |
+| **Fargate Profiles** | Serverless pods: no node management; define namespace/label selectors |
 
 ### EKS Anywhere
 - Run EKS **on-premises** using bare metal or VMware
@@ -163,10 +163,10 @@ EKS is a **managed Kubernetes control plane** — AWS runs etcd and the API serv
 
 | Trap | Correct answer |
 |---|---|
-| Fargate supports GPU | False — EC2 launch type required |
-| ECS task role = instance role | False — task role is per-task IAM; instance role is for EC2 host |
-| EKS managed node group OS control | Limited — AWS manages patching; use self-managed for full control |
-| ECR lifecycle policies delete images | Correct — use to control storage costs |
-| Dynamic port mapping on Fargate | Not needed — each Fargate task has its own ENI |
+| Fargate supports GPU | False: EC2 launch type required |
+| ECS task role = instance role | False: task role is per-task IAM; instance role is for EC2 host |
+| EKS managed node group OS control | Limited: AWS manages patching; use self-managed for full control |
+| ECR lifecycle policies delete images | Correct: use to control storage costs |
+| Dynamic port mapping on Fargate | Not needed: each Fargate task has its own ENI |
 | ECS Anywhere needs agents | SSM agent + ECS agent on each external instance |
 | Fargate pricing model | Per vCPU + memory per second (not per EC2 instance) |

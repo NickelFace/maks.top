@@ -8,17 +8,17 @@ lang_pair: "/posts/lpic2/ru/lpic2-209-1-samba/"
 page_lang: "en"
 ---
 
-> **Exam topic 209.1** — Samba Server Configuration (weight: 5). Covers configuring Samba as a standalone file/print server or AD member server, access control, user management, and mounting SMB shares.
+> **Exam topic 209.1**: Samba Server Configuration (weight: 5). Covers configuring Samba as a standalone file/print server or AD member server, access control, user management, and mounting SMB shares.
 
 ---
 
 ## What Is Samba
 
-Samba implements the **SMB (Server Message Block)** protocol — Microsoft's protocol for file and printer sharing. Installing Samba on Linux allows Windows systems (and any SMB-capable client) to access Linux resources. Shared resources are called **shares** or **services**.
+Samba implements the **SMB (Server Message Block)** protocol, Microsoft's protocol for file and printer sharing. Installing Samba on Linux allows Windows systems (and any SMB-capable client) to access Linux resources. Shared resources are called **shares** or **services**.
 
 Samba operates in two main modes:
-- **Standalone server** — independent, no domain
-- **Member server** — participant in a Windows Active Directory domain
+- **Standalone server**: independent, no domain
+- **Member server**: participant in a Windows Active Directory domain
 
 ---
 
@@ -95,9 +95,9 @@ systemctl status smbd
     map to guest = Bad User          # Never / Bad User / Bad Password
 ```
 
-> `workgroup` must contain a workgroup or Windows domain name — not a FQDN. Otherwise Windows systems won't find the server in Network Neighborhood.
+> `workgroup` must contain a workgroup or Windows domain name, not a FQDN. Otherwise Windows systems won't find the server in Network Neighborhood.
 
-> `%m` in log file path inserts the client's NetBIOS name — each client gets its own log file.
+> `%m` in log file path inserts the client's NetBIOS name, each client gets its own log file.
 
 ---
 
@@ -126,7 +126,7 @@ log file = /var/log/samba/log.%m
 path = /home/%S          # In [homes]: %S expands to username
 ```
 
-> In the `[homes]` section, `%S` expands to the requested service name — i.e., the username. So `path = /home/%S` gives each user their own directory.
+> In the `[homes]` section, `%S` expands to the requested service name; i.e., the username. So `path = /home/%S` gives each user their own directory.
 
 ---
 
@@ -151,7 +151,7 @@ path = /home/%S          # In [homes]: %S expands to username
     hosts deny = 192.168.2.99
 ```
 
-### [homes] section — home directories:
+### [homes] section: home directories:
 
 ```ini
 [homes]
@@ -284,8 +284,8 @@ smbmount //windows/winshare2 /opt/winshare2 \
 | `credentials=` | File with username and password |
 | `uid=` | UID for local file representation |
 | `gid=` | GID for local file representation |
-| `fmask=` | Permissions for files (not a mask — actual permissions) |
-| `dmask=` | Permissions for directories (not a mask — actual permissions) |
+| `fmask=` | Permissions for files (not a mask: actual permissions) |
+| `dmask=` | Permissions for directories (not a mask: actual permissions) |
 | `rw` / `ro` | Read-write or read-only |
 
 ---
@@ -306,18 +306,18 @@ root = administrator admin
 nobody = guest pcguest smbguest
 alice.jones = alice
 readonly = glen fred terry sarah
-lachlan = "Lachlan Smith"    # spaces in client name — use quotes
+lachlan = "Lachlan Smith"    # spaces in client name - use quotes
 users = @sales               # @group: all members of group sales
 admin = *                    # * wildcard: any unknown user
-!root = administrator        # ! — stop processing on match
+!root = administrator        # ! - stop processing on match
 ```
 
 Rules:
-- `@group` — matches any member of a UNIX group
-- `+group` — lookup via nsswitch
-- `&group` — NIS lookup only
-- `*` — wildcard, matches any unknown name
-- `!` at start of line — stop processing on match
+- `@group`: matches any member of a UNIX group
+- `+group`: lookup via nsswitch
+- `&group`: NIS lookup only
+- `*`: wildcard, matches any unknown name
+- `!` at start of line: stop processing on match
 
 > Put the `*` wildcard line at the **end** of the file. If there's no `!` before it, all names will match the wildcard and subsequent lines won't be processed.
 
@@ -337,7 +337,7 @@ service smb restart
 service nmb restart
 ```
 
-> There must be only **one** WINS server on the network. If `wins support = yes` is set, do NOT set `wins server` — this is a conflict.
+> There must be only **one** WINS server on the network. If `wins support = yes` is set, do NOT set `wins server`; this is a conflict.
 
 ---
 
@@ -461,13 +461,13 @@ wbinfo -g           # list domain groups
 
 | Pitfall | Rule |
 |---|---|
-| `wins support = yes` + `wins server = ...` | Conflict — use only one |
-| `workgroup` | Not FQDN — use `WORKGROUP` not `workgroup.local` |
+| `wins support = yes` + `wins server = ...` | Conflict: use only one |
+| `workgroup` | Not FQDN: use `WORKGROUP` not `workgroup.local` |
 | `realm` | Always uppercase: `EXAMPLE.COM` not `example.com` |
 | `writable = yes` | Same as `read only = no` |
 | `public = yes` | No password needed |
-| `invalid users` | Overrides `valid users` — denied even if in valid list |
-| `smbmount` | Deprecated — use `mount -t cifs` |
+| `invalid users` | Overrides `valid users`: denied even if in valid list |
+| `smbmount` | Deprecated: use `mount -t cifs` |
 | `fmask`/`dmask` | These are actual permissions, not masks (misleading names) |
 | `testparm` | Checks syntax only, not operational correctness |
 | `share-level security` | Removed in Samba 4 |
@@ -491,4 +491,4 @@ wbinfo -g           # list domain groups
 |---|---|
 | `tdbsam` | Standalone, up to ~250 users (recommended) |
 | `ldapsam` | Large environments |
-| `smbpasswd` | Legacy only — not recommended |
+| `smbpasswd` | Legacy only: not recommended |

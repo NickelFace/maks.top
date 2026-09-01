@@ -13,7 +13,7 @@ lang_pair: "/posts/ccna/ru/ccna-3-02-static-routing/"
 | Type | Description | Usage |
 |---|---|---|
 | Standard static | Specific destination network | Specific route |
-| Default static | 0.0.0.0/0 — any destination | Gateway of last resort |
+| Default static | 0.0.0.0/0, any destination | Gateway of last resort |
 | Summary static | Summarizes multiple networks | Reduces table size |
 | Floating static | Backup route with higher AD | Failover |
 
@@ -27,22 +27,22 @@ Router(config)# ip route [network] [mask] {next-hop | exit-interface} [AD] [perm
 
 ### Route Specification Options
 
-**1. Next-hop — recommended for Ethernet:**
+**1. Next-hop, recommended for Ethernet:**
 ```bash
 Router(config)# ip route 10.0.0.0 255.255.0.0 192.168.1.2
 ```
 
-**2. Exit-interface — for point-to-point (serial):**
+**2. Exit-interface; for point-to-point (serial):**
 ```bash
 Router(config)# ip route 10.0.0.0 255.255.0.0 serial 0/0/0
 ```
 
-**3. Fully specified (both) — recommended for Ethernet to avoid proxy ARP:**
+**3. Fully specified (both), recommended for Ethernet to avoid proxy ARP:**
 ```bash
 Router(config)# ip route 10.0.0.0 255.255.0.0 gigabitethernet 0/0 192.168.1.2
 ```
 
-> **📌 Important:** On Ethernet interfaces, using exit-interface alone without a next-hop is **not recommended** — it causes recursive lookup and proxy ARP. Use fully-specified or next-hop.
+> **📌 Important:** On Ethernet interfaces, using exit-interface alone without a next-hop is **not recommended**; it causes recursive lookup and proxy ARP. Use fully-specified or next-hop.
 
 ### The permanent keyword
 
@@ -66,13 +66,13 @@ Router# show ip route
 # Asterisk * = candidate for gateway of last resort
 ```
 
-> **💡 Tip:** The default route is used when no more specific match exists in the routing table. `S*` — default static route (candidate for gateway of last resort).
+> **💡 Tip:** The default route is used when no more specific match exists in the routing table. `S*`, default static route (candidate for gateway of last resort).
 
 ---
 
 ## Floating Static Routes (Backup Routes)
 
-A static route with a higher AD than the primary protocol — installed only when the primary route disappears.
+A static route with a higher AD than the primary protocol, installed only when the primary route disappears.
 
 ```bash
 # Primary route via OSPF (AD=110) takes preference
@@ -142,21 +142,21 @@ Router# debug ip routing                        # routing table changes
 ## Configuration Example
 
 ```
-Topology: R1 —— R2 —— R3
+Topology: R1 -- R2 -- R3
            gi0/0    gi0/0  gi0/1   gi0/1
      .1         .2  .1         .2   .1
 192.168.1.0/30    10.0.0.0/30    172.16.0.0/24
 ```
 
 ```bash
-# R1 — route to 172.16.0.0 via R2
+# R1 - route to 172.16.0.0 via R2
 R1(config)# ip route 172.16.0.0 255.255.0.0 192.168.1.2
 R1(config)# ip route 10.0.0.0 255.255.255.252 192.168.1.2  # transit R2-R3
 
-# R3 — route back via R2
+# R3 - route back via R2
 R3(config)# ip route 192.168.1.0 255.255.255.0 10.0.0.1
 
-# R2 — routes for both ends (or default)
+# R2 - routes for both ends (or default)
 R2(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2   # toward R3
 ```
 
@@ -166,9 +166,9 @@ R2(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2   # toward R3
 
 | Resource | Description |
 |---|---|
-| [Static Routing — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/static-routing) | Static routes: next-hop, exit interface, recursive lookup |
-| [Default Route — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/default-route) | Default route 0.0.0.0/0: configuration and usage |
-| [Floating Static Routes — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/floating-static-route) | Floating static routes as a backup path |
-| [IPv6 Static Routes — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ipv6-static-routes) | Static routes for IPv6 on Cisco IOS |
-| [Jeremy's IT Lab — Static Routing (YouTube)](https://www.youtube.com/watch?v=3qKNNJvXGek) | Static routing from the Free CCNA series |
+| [Static Routing (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/static-routing) | Static routes: next-hop, exit interface, recursive lookup |
+| [Default Route (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/default-route) | Default route 0.0.0.0/0: configuration and usage |
+| [Floating Static Routes (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/floating-static-route) | Floating static routes as a backup path |
+| [IPv6 Static Routes (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/ipv6-static-routes) | Static routes for IPv6 on Cisco IOS |
+| [Jeremy's IT Lab: Static Routing (YouTube)](https://www.youtube.com/watch?v=3qKNNJvXGek) | Static routing from the Free CCNA series |
 | [Cisco Static Route Configuration](https://www.cisco.com/c/en/us/support/docs/ip/ip-routing/116217-technote-ios-static-route.html) | Official Cisco documentation on static routes |

@@ -33,7 +33,7 @@ In modern networks, a single link carries **voice (VoIP)**, **video**, and **dat
 
 ---
 
-## Per-Hop Behavior (PHB) — QoS Model
+## Per-Hop Behavior (PHB): QoS Model
 
 QoS works on the **PHB** principle: each node (router/switch) processes a packet independently, based on its marking.
 
@@ -56,7 +56,7 @@ Identifying the traffic type to apply a policy.
 
 **Classification methods:**
 - **ACL** (IP addresses, ports)
-- **NBAR** (Network-Based Application Recognition — by application signature)
+- **NBAR** (Network-Based Application Recognition: by application signature)
 - **DSCP/CoS marking** (by existing mark)
 
 ```
@@ -71,9 +71,9 @@ class-map match-any VOICE
 
 Tags packets for processing on downstream devices.
 
-### L3 — IP Precedence and DSCP
+### L3: IP Precedence and DSCP
 
-**DSCP** (Differentiated Services Code Point) — 6 bits in the IP header (part of the ToS/DSCP field).
+**DSCP** (Differentiated Services Code Point), 6 bits in the IP header (part of the ToS/DSCP field).
 
 | Class | DSCP Name | Value | Usage |
 |---|---|---|---|
@@ -83,13 +83,13 @@ Tags packets for processing on downstream devices.
 | Assured Forwarding 3 | **AF31** | 26 | Critical data |
 | Class Selector 3 | CS3 | 24 | Signaling |
 
-**AF (Assured Forwarding):** AFxy — x = class (1–4), y = drop probability (1–3).
-- AF11, AF12, AF13 — class 1 (low/medium/high drop)
-- AF41, AF42, AF43 — class 4
+**AF (Assured Forwarding):** AFxy, x = class (1–4), y = drop probability (1–3).
+- AF11, AF12, AF13: class 1 (low/medium/high drop)
+- AF41, AF42, AF43: class 4
 
-### L2 — CoS (Class of Service)
+### L2: CoS (Class of Service)
 
-**CoS** — 3 bits in the 802.1Q tag (Ethernet with VLAN only). Values 0–7.
+**CoS**: 3 bits in the 802.1Q tag (Ethernet with VLAN only). Values 0–7.
 
 ```
 interface GigabitEthernet0/0
@@ -99,7 +99,7 @@ interface GigabitEthernet0/0
 
 **Trust boundary:**
 - Typically at the IP phone or access point
-- PCs are NOT trusted — they can forge DSCP
+- PCs are NOT trusted: they can forge DSCP
 
 ```
 ! Marking in policy-map:
@@ -129,7 +129,7 @@ policy-map MARK-VOICE
 - Guaranteed bandwidth per class
 
 ### LLQ (Low Latency Queuing) = CBWFQ + Priority Queue
-- **Priority queue (PQ)** for VoIP — serviced first
+- **Priority queue (PQ)** for VoIP: serviced first
 - Other classes handled by CBWFQ
 
 ```
@@ -171,9 +171,9 @@ policy-map SHAPE-OUTPUT
 
 ---
 
-## 5. Congestion Avoidance — WRED
+## 5. Congestion Avoidance: WRED
 
-**WRED** (Weighted Random Early Detection) — starts dropping packets **randomly** as queue fills, without waiting for 100% capacity. Higher DSCP → lower drop probability.
+**WRED** (Weighted Random Early Detection), starts dropping packets **randomly** as queue fills, without waiting for 100% capacity. Higher DSCP → lower drop probability.
 
 Goal: prevent **TCP global synchronization** (when all flows simultaneously reduce their rates).
 
@@ -202,5 +202,5 @@ show policy-map
 - DSCP EF = 46 = VoIP
 - LLQ = CBWFQ + Priority Queue for voice
 - Policing = drop, Shaping = buffer/delay
-- Trust boundary — where we start trusting DSCP/CoS
+- Trust boundary: where we start trusting DSCP/CoS
 - `service-policy input/output` applies the policy

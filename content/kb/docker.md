@@ -11,7 +11,7 @@ lang_pair: "/kb/ru/docker/"
 ---
 
 <div class="intro-card">
-Docker: <strong>container lifecycle</strong> — run, stop, remove. Key <code>docker run</code> flags, log inspection, monitoring, running commands inside containers.
+Docker: <strong>container lifecycle</strong>; run, stop, remove. Key <code>docker run</code> flags, log inspection, monitoring, running commands inside containers.
 </div>
 
 ## Container lifecycle
@@ -28,7 +28,7 @@ docker run ──► running ──► stopped ──► (removed)
 
 ---
 
-## docker run — start a container
+## docker run: start a container
 
 <div class="ref-panel">
 <div class="ref-panel-head">Key flags</div>
@@ -57,7 +57,7 @@ docker run ──► running ──► stopped ──► (removed)
 # nginx in background, port 8080 → 80
 docker run -d -p 8080:80 --name webserver nginx
 
-# alpine — run a command and remove the container
+# alpine - run a command and remove the container
 docker run --rm alpine echo "hello"
 
 # interactive shell inside ubuntu
@@ -66,7 +66,7 @@ docker run -it --rm ubuntu bash
 
 ---
 
-## docker ps — list containers
+## docker ps: list containers
 
 ```bash
 docker ps                              # running only
@@ -99,7 +99,7 @@ docker container prune          # remove all stopped containers
 
 ---
 
-## exec — run commands inside a container
+## exec: run commands inside a container
 
 ```bash
 docker exec -it webserver bash          # interactive shell

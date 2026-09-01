@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-108-1-time/"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 102
+> **Exam weight: 3**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -40,7 +40,7 @@ The hardware clock can store time as local time or UTC. Linux distributions defa
 
 ---
 
-## date — System Clock
+## date: System Clock
 
 `date` displays or sets the system clock.
 
@@ -76,7 +76,7 @@ $ date -s "2019-10-21 10:45:00"
 
 ---
 
-## hwclock — Hardware Clock
+## hwclock: Hardware Clock
 
 `hwclock` reads or sets the hardware (RTC) clock and can synchronize it with the system clock.
 
@@ -100,7 +100,7 @@ $ hwclock --set --date="2019-10-21 10:45:00"
 
 ---
 
-## timedatectl — systemd Time Management
+## timedatectl: systemd Time Management
 
 `timedatectl` is the systemd tool for viewing and configuring time, timezone, and NTP sync.
 
@@ -131,7 +131,7 @@ System clock synchronized: yes
 
 NTP (Network Time Protocol) synchronizes clocks across a network. Servers are organized into a hierarchy called **strata**:
 
-- **Stratum 0**: Reference clocks (atomic clocks, GPS receivers) — not on the network directly
+- **Stratum 0**: Reference clocks (atomic clocks, GPS receivers), not on the network directly
 - **Stratum 1**: Servers directly connected to stratum 0 sources
 - **Stratum 2**: Servers synchronized from stratum 1
 - Higher strata introduce more potential error
@@ -159,9 +159,9 @@ Configuration is in `/etc/systemd/timesyncd.conf`. Status is shown by `timedatec
 
 ---
 
-## ntpd — NTP Daemon
+## ntpd: NTP Daemon
 
-`ntpd` (from the ntp package) is the classic full NTP implementation — it can both synchronize from upstream servers and serve time to other hosts.
+`ntpd` (from the ntp package) is the classic full NTP implementation; it can both synchronize from upstream servers and serve time to other hosts.
 
 Configuration file: `/etc/ntp.conf`
 
@@ -176,7 +176,7 @@ driftfile /var/lib/ntp/ntp.drift
 
 The `iburst` option sends several packets at startup to synchronize quickly.
 
-### ntpq -p — Peer Status
+### ntpq -p: Peer Status
 
 `ntpq -p` shows the list of NTP peers and their status:
 
@@ -314,7 +314,7 @@ Config files:
 9. What is a stratum 1 NTP server? → A server directly connected to a stratum 0 reference clock (atomic clock, GPS).
 10. What does the `*` prefix mean in `ntpq -p` output? → That server is the currently selected synchronization source.
 11. What does the `reach` column in `ntpq -p` show? → An octal bitmask of the last 8 polling attempts; 377 means all 8 succeeded.
-12. What NTP option in `ntp.conf` speeds up initial synchronization? → `iburst` — sends a burst of packets at startup.
+12. What NTP option in `ntp.conf` speeds up initial synchronization? → `iburst`, sends a burst of packets at startup.
 13. What file stores ntpd's clock drift information? → `/var/lib/ntp/ntp.drift` (as specified by `driftfile` in `ntp.conf`).
 14. What is `chronyc tracking`? → Shows clock performance: current offset, drift, stratum, and reference source.
 15. What does `makestep 1.0 3` in `chrony.conf` do? → Allows a step correction if the offset exceeds 1 second, but only during the first 3 clock updates.
@@ -326,7 +326,7 @@ Config files:
 
 ## Exercises
 
-### Exercise 1 — Reading the Hardware Clock
+### Exercise 1: Reading the Hardware Clock
 
 What command reads the hardware clock and shows detailed output?
 
@@ -341,7 +341,7 @@ hwclock --verbose
 
 ---
 
-### Exercise 2 — Converting an Epoch
+### Exercise 2: Converting an Epoch
 
 The epoch value `1571661921` is shown in a log. How do you convert it to a readable date?
 
@@ -356,7 +356,7 @@ date --date=@1571661921
 
 ---
 
-### Exercise 3 — Disabling NTP Before Setting Time
+### Exercise 3: Disabling NTP Before Setting Time
 
 You want to set the system time manually to `2019-10-21 15:00:00`. What two commands do you run?
 
@@ -374,7 +374,7 @@ NTP must be disabled before setting the time manually with `timedatectl`.
 
 ---
 
-### Exercise 4 — Reading ntpq Output
+### Exercise 4: Reading ntpq Output
 
 In `ntpq -p` output, a server shows `reach` of `377`. What does that mean?
 
@@ -387,7 +387,7 @@ All 8 of the last polling attempts succeeded. `377` in octal equals `11111111` i
 
 ---
 
-### Exercise 5 — Force chrony Step
+### Exercise 5: Force chrony Step
 
 The system clock is significantly off and chrony is running. How do you force an immediate step correction?
 

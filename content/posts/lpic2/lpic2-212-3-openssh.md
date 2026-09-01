@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-212-3-openssh/"
 page_lang: "en"
 ---
 
-> **Exam topic 212.3** — Secure shell (OpenSSH) (weight: 4). Covers SSH client and server configuration, key management, port forwarding, and X11 forwarding.
+> **Exam topic 212.3**: Secure shell (OpenSSH) (weight: 4). Covers SSH client and server configuration, key management, port forwarding, and X11 forwarding.
 
 ---
 
@@ -16,8 +16,8 @@ page_lang: "en"
 
 | Binary | Role |
 |---|---|
-| `ssh` | Client — connect to remote hosts |
-| `sshd` | Server daemon — accepts incoming connections |
+| `ssh` | Client: connect to remote hosts |
+| `sshd` | Server daemon: accepts incoming connections |
 | `ssh-keygen` | Generate and manage key pairs |
 | `ssh-agent` | Authentication agent (caches private keys) |
 | `ssh-add` | Add keys to ssh-agent |
@@ -30,7 +30,7 @@ Default port: **22**
 
 ---
 
-## Server Configuration — sshd_config
+## Server Configuration: sshd_config
 
 Main server config: `/etc/ssh/sshd_config`
 
@@ -145,8 +145,8 @@ Enter passphrase (empty for no passphrase): ****
 ```
 
 Generated files:
-- `~/.ssh/id_ed25519` — private key (permissions must be 0600)
-- `~/.ssh/id_ed25519.pub` — public key
+- `~/.ssh/id_ed25519`: private key (permissions must be 0600)
+- `~/.ssh/id_ed25519.pub`: public key
 
 > **Key types:** RSA is the traditional choice. Ed25519 is modern, shorter, and faster. DSA is obsolete and disabled in OpenSSH 7.0+.
 
@@ -167,7 +167,7 @@ cat ~/.ssh/id_ed25519.pub | ssh user@server "mkdir -p ~/.ssh && cat >> ~/.ssh/au
 
 ### authorized_keys
 
-`~/.ssh/authorized_keys` — one public key per line. Permissions must be:
+`~/.ssh/authorized_keys`. One public key per line. Permissions must be:
 - `~/.ssh/` directory: **0700**
 - `~/.ssh/authorized_keys`: **0600**
 - owned by the user
@@ -180,17 +180,17 @@ command="backup.sh",no-port-forwarding,no-x11-forwarding ssh-ed25519 AAAAC3Nza..
 ```
 
 Key options (before the key type):
-- `command="cmd"` — force a specific command when this key is used
-- `no-port-forwarding` — disable port forwarding for this key
-- `no-x11-forwarding` — disable X11 forwarding
-- `no-agent-forwarding` — disable agent forwarding
-- `from="192.168.1.*"` — allow this key only from matching IPs
+- `command="cmd"`: force a specific command when this key is used
+- `no-port-forwarding`: disable port forwarding for this key
+- `no-x11-forwarding`: disable X11 forwarding
+- `no-agent-forwarding`: disable agent forwarding
+- `from="192.168.1.*"`: allow this key only from matching IPs
 
 ### known_hosts
 
 When connecting to a server for the first time, ssh saves its host key:
-- `~/.ssh/known_hosts` — per-user
-- `/etc/ssh/ssh_known_hosts` — system-wide
+- `~/.ssh/known_hosts`: per-user
+- `/etc/ssh/ssh_known_hosts`: system-wide
 
 ```bash
 ssh-keyscan -H hostname >> ~/.ssh/known_hosts    # pre-populate
@@ -211,7 +211,7 @@ ssh-add -d ~/.ssh/id_ed25519  # remove key
 ssh-add -D                  # remove all keys
 ```
 
-**Agent Forwarding** — passes the agent connection through SSH so you can use your local keys on intermediate servers:
+**Agent Forwarding**. Passes the agent connection through SSH so you can use your local keys on intermediate servers:
 
 ```bash
 ssh -A user@jumphost         # forward agent to jumphost
@@ -223,7 +223,7 @@ Host jumphost
     ForwardAgent yes
 ```
 
-> **Security warning:** Agent forwarding is convenient but risky — anyone with root on the intermediate server can use your keys while you're connected.
+> **Security warning:** Agent forwarding is convenient but risky, anyone with root on the intermediate server can use your keys while you're connected.
 
 ---
 
@@ -307,7 +307,7 @@ firefox &                # opens Firefox window on your local display
 
 ---
 
-## SCP — Secure Copy
+## SCP: Secure Copy
 
 ```bash
 # Copy local file to remote
@@ -331,7 +331,7 @@ scp -i ~/.ssh/mykey file.txt user@host:/path/
 
 ---
 
-## SFTP — SSH File Transfer Protocol
+## SFTP: SSH File Transfer Protocol
 
 SFTP is an SSH subsystem, not FTP over SSH. It provides a file transfer protocol that runs over SSH.
 
@@ -423,8 +423,8 @@ scp file.txt user@host:/path/      # secure copy
 | `authorized_keys` permissions | Must be 0600; `~/.ssh/` must be 0700 |
 | `-L` vs `-R` | `-L` = local port forwards to remote; `-R` = remote port forwards to local |
 | `-X` vs `-Y` | `-X` = untrusted (safer); `-Y` = trusted (apps may need this) |
-| SFTP vs FTP | SFTP is an SSH subsystem, not FTP over SSH — completely separate protocol |
+| SFTP vs FTP | SFTP is an SSH subsystem, not FTP over SSH: completely separate protocol |
 | `PermitRootLogin prohibit-password` | Root can log in with key but not password |
 | Reload vs restart | `reload` keeps connections alive; `restart` drops them |
 | Host key mismatch | Edit `~/.ssh/known_hosts` or run `ssh-keygen -R hostname` |
-| DSA keys | Disabled in OpenSSH 7.0+ — do not use |
+| DSA keys | Disabled in OpenSSH 7.0+: do not use |

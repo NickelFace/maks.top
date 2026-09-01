@@ -18,9 +18,9 @@ LVM (Logical Volume Manager): flexible disk management with <strong>Physical Vol
 <table class="cheat-table">
 <thead><tr><th>Layer</th><th>Command prefix</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">PV — Physical Volume</td><td class="desc">pv*</td><td class="desc">A disk or partition initialised for LVM. Building block.</td></tr>
-<tr><td class="mono">VG — Volume Group</td><td class="desc">vg*</td><td class="desc">Named pool aggregating one or more PVs. Total storage.</td></tr>
-<tr><td class="mono">LV — Logical Volume</td><td class="desc">lv*</td><td class="desc">Virtual partition carved from the VG. Formatted and mounted.</td></tr>
+<tr><td class="mono">PV: Physical Volume</td><td class="desc">pv*</td><td class="desc">A disk or partition initialised for LVM. Building block.</td></tr>
+<tr><td class="mono">VG: Volume Group</td><td class="desc">vg*</td><td class="desc">Named pool aggregating one or more PVs. Total storage.</td></tr>
+<tr><td class="mono">LV: Logical Volume</td><td class="desc">lv*</td><td class="desc">Virtual partition carved from the VG. Formatted and mounted.</td></tr>
 </tbody>
 </table>
 </div>
@@ -32,10 +32,10 @@ LVM (Logical Volume Manager): flexible disk management with <strong>Physical Vol
 <table class="cheat-table">
 <thead><tr><th>Term</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">PE — Physical Extent</td><td class="desc">Smallest allocatable unit on a PV (default 4 MB)</td></tr>
-<tr><td class="mono">LE — Logical Extent</td><td class="desc">Matching unit on an LV (maps to PEs)</td></tr>
+<tr><td class="mono">PE: Physical Extent</td><td class="desc">Smallest allocatable unit on a PV (default 4 MB)</td></tr>
+<tr><td class="mono">LE: Logical Extent</td><td class="desc">Matching unit on an LV (maps to PEs)</td></tr>
 <tr><td class="mono">Thin provisioning</td><td class="desc">Allocate LVs larger than physical space (over-commit)</td></tr>
-<tr><td class="mono">CoW snapshot</td><td class="desc">Point-in-time copy — only changed blocks are stored</td></tr>
+<tr><td class="mono">CoW snapshot</td><td class="desc">Point-in-time copy: only changed blocks are stored</td></tr>
 </tbody>
 </table>
 </div>
@@ -82,7 +82,7 @@ Typical fstab entry using device mapper path:
 <tr><td class="mono">vgdisplay data-vg</td><td class="desc">Detailed VG info (free space, PE count)</td></tr>
 <tr><td class="mono">lvs</td><td class="desc">One-line summary of all LVs</td></tr>
 <tr><td class="mono">lvdisplay /dev/data-vg/web-lv</td><td class="desc">Detailed LV info (size, path, type)</td></tr>
-<tr><td class="mono">lsblk</td><td class="desc">Block device tree — shows LVM hierarchy</td></tr>
+<tr><td class="mono">lsblk</td><td class="desc">Block device tree: shows LVM hierarchy</td></tr>
 <tr><td class="mono">dmsetup ls</td><td class="desc">Device mapper mappings (underlying LVM)</td></tr>
 </tbody>
 </table>
@@ -111,7 +111,7 @@ Typical fstab entry using device mapper path:
 </div>
 
 <div class="ref-panel">
-<div class="ref-panel-head">Shrink LV (ext4 only — XFS cannot shrink)</div>
+<div class="ref-panel-head">Shrink LV (ext4 only: XFS cannot shrink)</div>
 <div class="ref-panel-body">
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>

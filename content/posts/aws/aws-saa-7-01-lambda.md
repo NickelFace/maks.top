@@ -11,7 +11,7 @@ lang_pair: "/posts/aws/ru/aws-saa-7-01-lambda/"
 
 ## Execution Model
 
-AWS Lambda runs **stateless, event-driven functions** — you provide code, AWS manages servers, scaling, and runtime.
+AWS Lambda runs **stateless, event-driven functions**; you provide code, AWS manages servers, scaling, and runtime.
 
 | Property | Limit / Value |
 |---|---|
@@ -23,7 +23,7 @@ AWS Lambda runs **stateless, event-driven functions** — you provide code, AWS 
 | Concurrent executions | **1000 per region** (default; can request increase) |
 | Environment variables | Up to 4 KB total |
 
-Lambda scales horizontally — each request can trigger a new execution environment. There is no limit on the number of Lambda functions, only on concurrency.
+Lambda scales horizontally; each request can trigger a new execution environment. There is no limit on the number of Lambda functions, only on concurrency.
 
 ---
 
@@ -53,7 +53,7 @@ Lambda scales horizontally — each request can trigger a new execution environm
 - A ZIP archive with libraries, custom runtimes, or configuration
 - Up to **5 layers** per function
 - Shared across multiple functions; reduces deployment package size
-- Layer version is immutable — create a new version to update
+- Layer version is immutable: create a new version to update
 
 ### Container Images
 - Package function as a Docker image (ECR) up to **10 GB**
@@ -91,7 +91,7 @@ Both run at CloudFront edge locations to manipulate HTTP requests/responses.
 - When reserved concurrency = 0, the function is throttled completely (can use for emergency stop)
 
 ### Provisioned Concurrency
-- Pre-initializes execution environments — **eliminates cold starts**
+- Pre-initializes execution environments: **eliminates cold starts**
 - You pay for provisioned concurrency even when idle
 - Can use Application Auto Scaling to adjust provisioned concurrency based on schedule or utilization
 - Use for: latency-sensitive APIs, functions with slow initialization (JVM, .NET)
@@ -129,7 +129,7 @@ By default, Lambda runs outside your VPC and cannot access private resources.
 When Lambda is deployed into a VPC:
 - Lambda creates an **ENI (Elastic Network Interface)** per subnet/SG pair
 - Function can access RDS, ElastiCache, EC2, etc. in the VPC
-- **No internet access by default** — even though Lambda normally has it
+- **No internet access by default**: even though Lambda normally has it
 - For internet: add a **NAT Gateway** in a public subnet + route from Lambda's private subnet
 
 ```yaml
@@ -137,7 +137,7 @@ When Lambda is deployed into a VPC:
 Lambda (private subnet) → NAT Gateway (public subnet) → Internet Gateway → Internet
 ```
 
-> **📌 Tip:** Lambda in VPC needs a NAT Gateway for internet access. A public subnet alone does not give Lambda internet access — Lambda doesn't get a public IP even in a public subnet.
+> **📌 Tip:** Lambda in VPC needs a NAT Gateway for internet access. A public subnet alone does not give Lambda internet access; Lambda doesn't get a public IP even in a public subnet.
 
 For AWS service access from VPC Lambda:
 - Use **VPC Endpoints** (Interface or Gateway) to avoid NAT costs and keep traffic within AWS
@@ -155,13 +155,13 @@ Asynchronous invocations can route results to:
 | Lambda | ✓ | ✓ |
 | EventBridge | ✓ | ✓ |
 
-Destinations replace the older DLQ pattern for async invocations — they provide more context (full event + response payload) than a DLQ.
+Destinations replace the older DLQ pattern for async invocations; they provide more context (full event + response payload) than a DLQ.
 
 ---
 
 ## Lambda URLs
 
-- Built-in **HTTPS endpoint** for a Lambda function — no API Gateway required
+- Built-in **HTTPS endpoint** for a Lambda function, no API Gateway required
 - URL format: `https://<url-id>.lambda-url.<region>.on.aws`
 - Auth: `NONE` (public) or `AWS_IAM`
 - Supports CORS configuration
@@ -202,10 +202,10 @@ For secrets: integrate with **AWS Secrets Manager** or **SSM Parameter Store**:
 | Trap | Correct answer |
 |---|---|
 | Lambda max timeout | 15 minutes |
-| Lambda in VPC needs NAT for internet | True — no automatic internet from VPC |
-| Provisioned concurrency eliminates cold starts | True — but costs money even when idle |
+| Lambda in VPC needs NAT for internet | True: no automatic internet from VPC |
+| Provisioned concurrency eliminates cold starts | True: but costs money even when idle |
 | Reserved concurrency = 0 | Completely throttles the function |
-| Lambda@Edge for sub-ms logic | Wrong — use CloudFront Functions |
+| Lambda@Edge for sub-ms logic | Wrong: use CloudFront Functions |
 | Lambda container image max size | 10 GB |
 | Default concurrent execution limit | 1000 per region |
-| Lambda@Edge runs closer to user than Lambda | True — regional edge caches, not all PoPs |
+| Lambda@Edge runs closer to user than Lambda | True: regional edge caches, not all PoPs |

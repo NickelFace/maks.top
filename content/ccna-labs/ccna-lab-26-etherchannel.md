@@ -46,7 +46,7 @@ SW1 ----F0/1,F0/2,F0/3 (bundle) ---- SW2
    ```
 
 ### Static EtherChannel
-7. Use `on` mode — no negotiation protocol:
+7. Use `on` mode: no negotiation protocol:
    ```
    SW1(config-if-range)#channel-group 1 mode on
    ```

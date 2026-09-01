@@ -29,13 +29,13 @@ This post covers the device configurations. Topics like network security and des
 
 Private address ranges **172.16.0.0/16** and **10.0.0.0/8** were chosen to avoid subnet overlap when setting up remote access for employees in the future.
 
-The network follows Cisco's **Enterprise Campus Architecture** — a three-tier hierarchical model. The traffic split is approximately 80% internal and 20% external. Here's what each tier handles:
+The network follows Cisco's **Enterprise Campus Architecture**, a three-tier hierarchical model. The traffic split is approximately 80% internal and 20% external. Here's what each tier handles:
 
-**Access Layer** — each device handles no more than ~5% of total enterprise traffic on average.
+**Access Layer**: each device handles no more than ~5% of total enterprise traffic on average.
 
-**Distribution Layer** — each device handles no more than ~20% of total enterprise traffic on average.
+**Distribution Layer**: each device handles no more than ~20% of total enterprise traffic on average.
 
-**Core Layer** — each device handles no more than ~80% of total enterprise traffic on average (up to 100% is acceptable).
+**Core Layer**: each device handles no more than ~80% of total enterprise traffic on average (up to 100% is acceptable).
 
 Traffic is divided into 9 VLANs:
 
@@ -66,7 +66,7 @@ Everything below these devices is L2; everything above is L3.
 
 **HSRP** is used for first-hop redundancy at the L2/L3 boundary for the first two blocks. The first challenge was **STP (PVST)**, which builds a spanning tree per VLAN. The problem: STP blocks ports, causing traffic to route through access switches and breaking the hierarchical model.
 
-Block 1 (D-SW1 and D-SW2) has 3 traffic domains: VLAN 2, 3, 20 — so 3 STP trees must align with the hierarchy. Root Primary and Root Secondary must be set manually.
+Block 1 (D-SW1 and D-SW2) has 3 traffic domains: VLAN 2, 3, 20, so 3 STP trees must align with the hierarchy. Root Primary and Root Secondary must be set manually.
 
 ![](/img/neteng/17/DistributionBlock1.png)
 
@@ -77,7 +77,7 @@ Block 2 has 5 STP trees to configure.
 Example configuration using **D-SW1**:
 
 <details>
-<summary>D-SW1 — STP priorities + HSRP + Loopback</summary>
+<summary>D-SW1: STP priorities + HSRP + Loopback</summary>
 <pre><code>
 enable
 configure terminal
@@ -113,7 +113,7 @@ Same configuration applies to the other L3 Distribution switches.
 IP addresses were assigned on all Router and L3 Switch interfaces, and OSPF was configured for dynamic routing.
 
 <details>
-<summary>D-SW1 — OSPF config</summary>
+<summary>D-SW1: OSPF config</summary>
 <pre><code>
 enable
 configure terminal
@@ -153,7 +153,7 @@ Failover and convergence were tested at this stage.
 ### DHCP
 
 <details>
-<summary>DHCP server — excluded addresses + pools (all VLANs)</summary>
+<summary>DHCP server: excluded addresses + pools (all VLANs)</summary>
 <pre><code>
 enable
 configure terminal
@@ -209,7 +209,7 @@ copy running-config startup-config
 </details>
 
 <details>
-<summary>VPCS — DHCP lease verification</summary>
+<summary>VPCS: DHCP lease verification</summary>
 <pre><code>
 VPCS> ip dhcp
 DORA IP 172.16.2.2/24 GW 172.16.2.1
@@ -238,10 +238,10 @@ Some technologies had to be dropped due to firmware limitations.
 
 ### Port-security
 
-Port-security limits which MAC addresses can send frames through a port — primarily a defense against MAC flooding attacks. Sticky learning is not used here since each port is limited to 2 MAC addresses, making static mode sufficient.
+Port-security limits which MAC addresses can send frames through a port, primarily a defense against MAC flooding attacks. Sticky learning is not used here since each port is limited to 2 MAC addresses, making static mode sufficient.
 
 <details>
-<summary>AccSW1 — port-security on access ports</summary>
+<summary>AccSW1: port-security on access ports</summary>
 <pre><code>
 enable
 configure terminal
@@ -272,7 +272,7 @@ Protects against broadcast storms by rate-limiting traffic when it exceeds a thr
 Protects against DHCP-based attacks by distinguishing trusted (server-facing) and untrusted (client-facing) ports.
 
 <details>
-<summary>AccSW1 — DHCP Snooping</summary>
+<summary>AccSW1: DHCP Snooping</summary>
 <pre><code>
 enable
 configure terminal
@@ -297,22 +297,22 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-`no ip dhcp snooping information option` removes option 82 that snooping appends — without it, DHCP Discover frames are dropped at the Distribution layer.
+`no ip dhcp snooping information option` removes option 82 that snooping appends, without it, DHCP Discover frames are dropped at the Distribution layer.
 
 ### ~~IP Source Guard~~
 
-Filters IP traffic on L2 interfaces based on the DHCP snooping binding table — defends against IP spoofing.
+Filters IP traffic on L2 interfaces based on the DHCP snooping binding table, defends against IP spoofing.
 
 `AccSW1(config-if)# ip verify source port-security`
 
-Traffic stopped flowing after this command and troubleshooting was unsuccessful — skipped.
+Traffic stopped flowing after this command and troubleshooting was unsuccessful, skipped.
 
 ### Dynamic ARP Inspection
 
 Protects against ARP spoofing attacks.
 
 <details>
-<summary>AccSW1 — Dynamic ARP Inspection</summary>
+<summary>AccSW1: Dynamic ARP Inspection</summary>
 <pre><code>
 enable
 configure terminal
@@ -345,7 +345,7 @@ Internet access is provided through the 3rd Distribution block, which connects t
 ### PAT
 
 <details>
-<summary>E-R1 — PAT config</summary>
+<summary>E-R1: PAT config</summary>
 <pre><code>
 enable
 configure terminal
@@ -390,7 +390,7 @@ interface Ethernet1/3
 EtherChannel is configured on each distribution block.
 
 <details>
-<summary>D-SW4 — LACP EtherChannel config + verification</summary>
+<summary>D-SW4: LACP EtherChannel config + verification</summary>
 <pre><code>
 enable
 configure terminal

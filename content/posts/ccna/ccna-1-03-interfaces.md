@@ -30,7 +30,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-03-interfaces/"
 | Router (Ethernet) | Router (Ethernet) | Crossover |
 | PC (COM/USB) | Router/Switch Console | Rollover (console) |
 
-> **💡 Tip:** Modern switches support **Auto-MDIX** — they automatically detect the cable type. With Auto-MDIX enabled, cable type does not matter. Enable it with: `(config-if)# mdix auto`
+> **💡 Tip:** Modern switches support **Auto-MDIX**; they automatically detect the cable type. With Auto-MDIX enabled, cable type does not matter. Enable it with: `(config-if)# mdix auto`
 
 ### T568A and T568B Pin Assignments
 
@@ -119,10 +119,10 @@ Router# show controllers serial 0/0/0   # DCE/DTE for serial interfaces
 ```
 
 > **💡 Tip:** Interface status in `show ip interface brief`:
-> - `up/up` — operating normally
-> - `up/down` — physically connected, no protocol
-> - `down/down` — no physical signal
-> - `administratively down/down` — disabled with the `shutdown` command
+> - `up/up`: operating normally
+> - `up/down`: physically connected, no protocol
+> - `down/down`: no physical signal
+> - `administratively down/down`: disabled with the `shutdown` command
 
 ---
 
@@ -130,9 +130,9 @@ Router# show controllers serial 0/0/0   # DCE/DTE for serial interfaces
 
 | Resource | Description |
 |---|---|
-| [Ethernet Cables — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/ethernet-wiring) | Ethernet cable types: straight-through, crossover, rollover |
-| [TIA/EIA-568 Standard — Wikipedia](https://en.wikipedia.org/wiki/ANSI/TIA-568) | Structured cabling standard, cable categories |
-| [SFP vs SFP+ vs QSFP — Cisco](https://www.cisco.com/c/en/us/products/interfaces-modules/gigabit-interface-converter/index.html) | Cisco transceivers: GLC/SFP modules, types and speeds |
-| [Fiber Optic Cables — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/fiber-optic-cables) | Single-mode and multi-mode fiber, SC/LC connectors |
-| [Jeremy's IT Lab — Ethernet LAN Switching (YouTube)](https://www.youtube.com/watch?v=DtXfP-5N_4k) | Cisco physical interfaces, speeds, Auto-MDIX |
+| [Ethernet Cables (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/ethernet-wiring) | Ethernet cable types: straight-through, crossover, rollover |
+| [TIA/EIA-568 Standard (Wikipedia)](https://en.wikipedia.org/wiki/ANSI/TIA-568) | Structured cabling standard, cable categories |
+| [SFP vs SFP+ vs QSFP (Cisco)](https://www.cisco.com/c/en/us/products/interfaces-modules/gigabit-interface-converter/index.html) | Cisco transceivers: GLC/SFP modules, types and speeds |
+| [Fiber Optic Cables (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/fiber-optic-cables) | Single-mode and multi-mode fiber, SC/LC connectors |
+| [Jeremy's IT Lab: Ethernet LAN Switching (YouTube)](https://www.youtube.com/watch?v=DtXfP-5N_4k) | Cisco physical interfaces, speeds, Auto-MDIX |
 | [IEEE 802.3 Ethernet Standards](https://standards.ieee.org/ieee/802.3/7071/) | Official IEEE 802.3 Ethernet standards |

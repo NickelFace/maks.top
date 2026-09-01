@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-104-7-find-fhs/"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 101
+> **Exam weight: 2**. LPIC-1 v5, Exam 101
 
 ## What You Need to Know
 
@@ -20,7 +20,7 @@ Key utilities: `find`, `locate`, `updatedb`, `whereis`, `which`, `type`, `/etc/u
 
 ---
 
-## FHS — Filesystem Hierarchy Standard
+## FHS: Filesystem Hierarchy Standard
 
 FHS is a Linux Foundation initiative that defines a standard directory layout for Linux systems. Compliance is not mandatory, but nearly all distributions follow it.
 
@@ -30,7 +30,7 @@ Full specification: http://refspecs.linuxfoundation.org/fhs.shtml
 
 | Directory | Purpose |
 |---|---|
-| `/` | Root — top of the hierarchy |
+| `/` | Root: top of the hierarchy |
 | `/bin` | Essential binaries available to all users |
 | `/boot` | Boot files: kernel image, initrd, GRUB |
 | `/dev` | Device files (physical and virtual): `/dev/sda`, `/dev/null` |
@@ -77,7 +77,7 @@ find STARTING_PATH OPTIONS EXPRESSION
 find . -name '*.jpg'
 ```
 
-Always quote glob patterns in single quotes — otherwise the shell expands them before `find` sees them.
+Always quote glob patterns in single quotes; otherwise the shell expands them before `find` sees them.
 
 ### Search by Name
 
@@ -151,7 +151,7 @@ find . -name "*.bak" -delete
 
 ## locate and updatedb
 
-`locate` searches a pre-built database instead of scanning the filesystem — results are instant but may be stale.
+`locate` searches a pre-built database instead of scanning the filesystem; results are instant but may be stale.
 
 Database location: `/var/lib/mlocate.db`.
 
@@ -174,7 +174,7 @@ sudo updatedb
 | Option | Description |
 |---|---|
 | `-i` | case-insensitive |
-| `-A "p1" "p2"` | match ALL patterns (default: match any one — OR logic) |
+| `-A "p1" "p2"` | match ALL patterns (default: match any one, OR logic) |
 | `-c` | count matches instead of printing paths |
 | `-e` | verify each result actually exists on disk |
 | `-r` / `--regex` | use a regular expression |
@@ -205,7 +205,7 @@ which -a mkfs     # all matches in PATH
 
 ### type
 
-Shell built-in. Reports how the shell interprets a name — distinguishes aliases, functions, built-ins, and files.
+Shell built-in. Reports how the shell interprets a name, distinguishes aliases, functions, built-ins, and files.
 
 ```bash
 type locate        # locate is /usr/bin/locate
@@ -309,7 +309,7 @@ whereis -m COMMAND
 
 ## Exercises
 
-### Exercise 1 — Disposable temporary file
+### Exercise 1: Disposable temporary file
 
 A program needs a one-off temporary file that is not needed after the program exits. Which FHS directory is the right choice?
 
@@ -318,13 +318,13 @@ A program needs a one-off temporary file that is not needed after the program ex
 
 `/tmp`. Since the file's fate after program exit does not matter, `/tmp` is the correct choice.
 
-`/tmp` may be cleared at boot — harmless for a disposable file. For files that must survive reboots, use `/var/tmp`.
+`/tmp` may be cleared at boot, harmless for a disposable file. For files that must survive reboots, use `/var/tmp`.
 
 </details>
 
 ---
 
-### Exercise 2 — Temporary directory cleared at boot
+### Exercise 2: Temporary directory cleared at boot
 
 Which temporary directory must be cleared during system boot?
 
@@ -339,7 +339,7 @@ For `/tmp`, clearing at boot is only recommended, not required. For `/run`, it i
 
 ---
 
-### Exercise 3 — find with write access, time, and size filters
+### Exercise 3: find with write access, time, and size filters
 
 Find files in the current directory that are writable by the current user, modified in the last 10 days, and larger than 4 GiB.
 
@@ -356,7 +356,7 @@ find . -writable -mtime -10 -size +4G
 
 ---
 
-### Exercise 4 — locate with multiple patterns simultaneously
+### Exercise 4: locate with multiple patterns simultaneously
 
 Find via `locate` files whose name contains both the substring `report` and one of: `update`, `updated`, `updating`.
 
@@ -367,15 +367,15 @@ Find via `locate` files whose name contains both the substring `report` and one 
 locate -A "report" "updat"
 ```
 
-`-A` switches `locate` to AND logic — all patterns must match. The pattern `updat` covers all three endings: `update`, `updated`, `updating`.
+`-A` switches `locate` to AND logic; all patterns must match. The pattern `updat` covers all three endings: `update`, `updated`, `updating`.
 
-Without `-A`, `locate` with multiple patterns uses OR logic — files matching any one pattern are shown.
+Without `-A`, `locate` with multiple patterns uses OR logic: files matching any one pattern are shown.
 
 </details>
 
 ---
 
-### Exercise 5 — Find the manual page for ifconfig
+### Exercise 5: Find the manual page for ifconfig
 
 How do you find the path to the manual page for `ifconfig`?
 
@@ -392,7 +392,7 @@ whereis -m ifconfig
 
 ---
 
-### Exercise 6 — Exclude ntfs from updatedb indexing
+### Exercise 6: Exclude ntfs from updatedb indexing
 
 Which variable in `/etc/updatedb.conf` prevents `updatedb` from indexing `ntfs` filesystems?
 
@@ -409,14 +409,14 @@ PRUNEFS=ntfs
 
 ---
 
-### Exercise 7 — Where to mount an internal disk per FHS
+### Exercise 7: Where to mount an internal disk per FHS
 
 A system administrator wants to mount an internal disk (`/dev/sdc1`). Where should the mount point go according to FHS?
 
 <details>
 <summary>Answer</summary>
 
-**`/mnt`** — FHS recommends this directory for temporary manual mounts of internal filesystems.
+**`/mnt`**: FHS recommends this directory for temporary manual mounts of internal filesystems.
 
 `/media` is intended for removable media (USB drives, CD/DVD, memory cards).
 
@@ -424,7 +424,7 @@ A system administrator wants to mount an internal disk (`/dev/sdc1`). Where shou
 
 ---
 
-### Exercise 8 — locate showing only existing files
+### Exercise 8: locate showing only existing files
 
 The `mlocate` database is not updated instantly, so `locate` sometimes returns paths to already-deleted files. How do you make it show only files that actually exist on disk?
 
@@ -441,7 +441,7 @@ locate -e PATTERN
 
 ---
 
-### Exercise 9 — find with depth limit and filesystem boundary
+### Exercise 9: find with depth limit and filesystem boundary
 
 Find files in the current directory and subdirectories no more than two levels deep, whose name contains `Status` or `statute` (case-insensitive), without crossing into mounted filesystems.
 
@@ -458,7 +458,7 @@ Both `Status` and `statute` share the prefix `statu`, so `*statu*` with `-iname`
 
 ---
 
-### Exercise 10 — find with filesystem type, permissions, and change time
+### Exercise 10: find with filesystem type, permissions, and change time
 
 Find files under `/mnt` that: are on ext4 partitions, have at least group-execute permission, are readable by the current user, and had their metadata changed in the last 2 hours.
 
@@ -475,7 +475,7 @@ find /mnt -fstype ext4 -perm -410 -cmin -120
 
 ---
 
-### Exercise 11 — find empty files modified long ago at minimum depth
+### Exercise 11: find empty files modified long ago at minimum depth
 
 Find empty files modified more than 30 days ago, located at least two directory levels below the current directory.
 
@@ -494,7 +494,7 @@ Note: `-ctime` in `find` means inode change time (metadata), not creation time. 
 
 ---
 
-### Exercise 12 — find files accessible by a shared group
+### Exercise 12: find files accessible by a shared group
 
 Users `carol` and `john` both belong to group `mkt`. Find files in `john`'s home directory that `carol` can read via the shared group.
 
@@ -505,7 +505,7 @@ Users `carol` and `john` both belong to group `mkt`. Find files in `john`'s home
 find /home/john -perm -040
 ```
 
-For `carol` to read via group membership, the group-read bit must be set. Octal `040` = group-read. The `-` prefix means "at least these bits" — other permission bits can be anything.
+For `carol` to read via group membership, the group-read bit must be set. Octal `040` = group-read. The `-` prefix means "at least these bits": other permission bits can be anything.
 
 </details>
 

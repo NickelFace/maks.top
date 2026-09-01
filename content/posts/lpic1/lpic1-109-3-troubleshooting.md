@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-109-3-troubleshooting/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102
+> **Exam weight: 4**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -23,7 +23,7 @@ Key files and commands: `ip`, `ifconfig`, `route`, `ping`, `ping6`, `traceroute`
 
 ## Interface Configuration
 
-### ip — Modern Tool
+### ip: Modern Tool
 
 ```bash
 # Show all interfaces
@@ -39,7 +39,7 @@ ip link set eth0 up
 ip link set eth0 down
 ```
 
-### ifconfig — Legacy Tool
+### ifconfig: Legacy Tool
 
 ```bash
 ifconfig                              # show active interfaces
@@ -140,7 +140,7 @@ Unlike `traceroute`, `tracepath` reports the MTU at each hop and does not requir
 
 ---
 
-## nc — netcat
+## nc: netcat
 
 `nc` (netcat) creates arbitrary TCP or UDP connections for testing and data transfer.
 
@@ -175,7 +175,7 @@ HOST: learning.lpi.org
 
 Both commands show open network connections, routing tables, and interface statistics.
 
-### ss — Modern Tool
+### ss: Modern Tool
 
 ```bash
 ss -tulnp          # TCP and UDP listening, numeric, with process names
@@ -183,7 +183,7 @@ ss -a              # all sockets (listening and established)
 ss -ln | grep ":80"  # check if port 80 is in use
 ```
 
-### netstat — Legacy Tool
+### netstat: Legacy Tool
 
 ```bash
 netstat -tulnp     # TCP and UDP listening, numeric, with process names
@@ -267,7 +267,7 @@ ss -tulnp    netstat -tulnp
 
 ## Exercises
 
-### Exercise 1 — Add and Verify a Route
+### Exercise 1: Add and Verify a Route
 
 Add a static route to network `10.5.0.0/24` via gateway `192.168.1.254`, then verify it appears in the routing table.
 
@@ -283,7 +283,7 @@ ip route show
 
 ---
 
-### Exercise 2 — Test Reachability
+### Exercise 2: Test Reachability
 
 Send exactly 3 ICMP packets to `8.8.8.8` and then trace the path to it.
 
@@ -299,7 +299,7 @@ tracepath 8.8.8.8
 
 ---
 
-### Exercise 3 — Find Listening Services
+### Exercise 3: Find Listening Services
 
 Show all TCP and UDP sockets that are currently listening, including process names, using the modern tool.
 
@@ -314,7 +314,7 @@ ss -tulnp
 
 ---
 
-### Exercise 4 — Test a TCP Port
+### Exercise 4: Test a TCP Port
 
 Use `nc` to check whether port 22 is open on `192.168.1.50`, then connect to port 80 and manually send an HTTP request.
 
@@ -334,7 +334,7 @@ HOST: 192.168.1.50
 
 ---
 
-### Exercise 5 — Trace MTU Path
+### Exercise 5: Trace MTU Path
 
 Determine the maximum MTU along the path to `8.8.8.8` without requiring root.
 

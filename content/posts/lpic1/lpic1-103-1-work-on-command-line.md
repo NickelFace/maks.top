@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-103-1-work-on-command-line/"
 page_lang: "en"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 101
+> **Exam weight: 4**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -113,8 +113,8 @@ $ history 20
 ```
 
 Navigating history with keyboard shortcuts:
-- Up/Down arrow — cycle through history entries.
-- `Ctrl+R` — interactive reverse search through history.
+- Up/Down arrow: cycle through history entries.
+- `Ctrl+R`: interactive reverse search through history.
 
 ### The .bash_history file
 
@@ -140,7 +140,7 @@ $ tail -n 20 ~/.bash_history
 
 ### Viewing variables: env and set
 
-`env` prints environment variables. `PATH` is always among them — it is the list of directories the shell searches for executables:
+`env` prints environment variables. `PATH` is always among them; it is the list of directories the shell searches for executables:
 
 ```bash
 $ env
@@ -154,7 +154,7 @@ $ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
-`set` prints more — including local variables and shell functions. The difference:
+`set` prints more. Including local variables and shell functions. The difference:
 
 | Command | Shows |
 |---------|-------|
@@ -309,7 +309,7 @@ Commands are written to the file only when the session ends. During the session 
 
 ## Exercises
 
-### Lesson 1 — Guided Exercises
+### Lesson 1: Guided Exercises
 
 **1. Using the `man` system, find out how to make `apropos` print a brief usage message and exit.**
 
@@ -347,7 +347,7 @@ Scroll to the "Copyright" section. It states that the program uses the Free Soft
 
 ---
 
-### Lesson 1 — Explorational Exercises
+### Lesson 1: Explorational Exercises
 
 **1. Determine the hardware architecture and Linux kernel version in a human-readable format.**
 
@@ -414,7 +414,7 @@ $ lsblk -b
 
 ---
 
-### Lesson 2 — Guided Exercises
+### Lesson 2: Guided Exercises
 
 **1. Using `export`, add a new directory to PATH. The change should not persist after a reboot.**
 
@@ -479,7 +479,7 @@ $ exit
 
 ---
 
-### Lesson 2 — Explorational Exercises
+### Lesson 2: Explorational Exercises
 
 **1. Find the full list of special Bash characters.**
 
@@ -533,10 +533,10 @@ The choice depends on the task: if you need variables to expand inside a string,
 
 ## Related topics
 
-- [101.1 Determine and Configure Hardware Settings](/posts/lpic1-101-1-hardware-settings/) — hardware and devices
-- 103.2 Process Text Streams Using Filters — text stream processing
-- 103.3 Perform Basic File Management — file management
-- 105.1 Customise and Use the Shell Environment — shell environment customisation
+- [101.1 Determine and Configure Hardware Settings](/posts/lpic1-101-1-hardware-settings/): hardware and devices
+- 103.2 Process Text Streams Using Filters: text stream processing
+- 103.3 Perform Basic File Management: file management
+- 105.1 Customise and Use the Shell Environment, shell environment customisation
 
 ---
 

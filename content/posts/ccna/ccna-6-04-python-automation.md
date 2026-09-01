@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/ccna/ru/ccna-6-04-python-automation/"
 ---
 
-**Exam topic:** Domain 6 — Automation and Programmability
+**Exam topic:** Domain 6, Automation and Programmability
 **Odom:** Vol.2, Ch. 15
 
 ---
@@ -44,7 +44,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-04-python-automation/"
 # List of devices
 devices = ["192.168.1.1", "192.168.1.2", "192.168.1.3"]
 
-# Dictionary — device configuration
+# Dictionary - device configuration
 device = {
     "host": "192.168.1.1",
     "username": "admin",
@@ -52,7 +52,7 @@ device = {
     "device_type": "cisco_ios"
 }
 
-# List of dictionaries — multiple devices
+# List of dictionaries - multiple devices
 routers = [
     {"host": "10.0.0.1", "hostname": "R1"},
     {"host": "10.0.0.2", "hostname": "R2"},
@@ -68,7 +68,7 @@ for device_ip in devices:
 
 # Iterating over a dictionary
 for router in routers:
-    print(f"Device: {router['hostname']} — IP: {router['host']}")
+    print(f"Device: {router['hostname']} - IP: {router['host']}")
 ```
 
 ### Functions
@@ -82,7 +82,7 @@ def get_hostname(connection):
 
 ---
 
-## Paramiko — Manual SSH
+## Paramiko: Manual SSH
 
 **Paramiko** is a low-level SSH library. Requires manual session management.
 
@@ -113,11 +113,11 @@ print(output)
 ssh.close()
 ```
 
-> Paramiko requires `time.sleep()` to wait for output — inconvenient. Netmiko solves this problem.
+> Paramiko requires `time.sleep()` to wait for output, inconvenient. Netmiko solves this problem.
 
 ---
 
-## Netmiko — Simplified SSH
+## Netmiko: Simplified SSH
 
 **Netmiko** is a wrapper over paramiko with support for dozens of device types.
 
@@ -176,7 +176,7 @@ for device in devices:
     with ConnectHandler(**device) as conn:
         hostname = conn.send_command("show run | include hostname")
         version = conn.send_command("show version | include Version")
-        print(f"{device['host']}: {hostname.strip()} — {version.strip()}")
+        print(f"{device['host']}: {hostname.strip()} - {version.strip()}")
 ```
 
 ### Netmiko Device Types
@@ -193,9 +193,9 @@ for device in devices:
 
 ---
 
-## NAPALM — Multi-Vendor
+## NAPALM: Multi-Vendor
 
-**NAPALM** (Network Automation and Programmability Abstraction Layer with Multivendor support) — a unified API for different network OSes.
+**NAPALM** (Network Automation and Programmability Abstraction Layer with Multivendor support), a unified API for different network OSes.
 
 ```python
 from napalm import get_network_driver
@@ -264,7 +264,7 @@ devices_response = requests.get(
 
 devices = devices_response.json()["response"]
 for device in devices:
-    print(f"{device['hostname']} — {device['managementIpAddress']} — {device['type']}")
+    print(f"{device['hostname']} - {device['managementIpAddress']} - {device['type']}")
 ```
 
 ### JSON Structure
@@ -292,7 +292,7 @@ For the CCNA exam, Python and automation questions focus on:
 | Concept | What to know |
 |---|---|
 | Why Python | Automate repetitive tasks, scale operations |
-| Netmiko vs Paramiko | Netmiko — more convenient, purpose-built for networking |
+| Netmiko vs Paramiko | Netmiko: more convenient, purpose-built for networking |
 | NAPALM | Unified API for multiple vendors |
 | JSON | Data format used in REST APIs (Catalyst Center, RESTCONF) |
 | `requests` | Library for HTTP requests to REST APIs |
@@ -321,7 +321,7 @@ flowchart LR
 
 | Resource | Description |
 |---|---|
-| [Netmiko — GitHub](https://github.com/ktbyers/netmiko) | Kirk Byers: Netmiko documentation and examples |
-| [NAPALM — Read the Docs](https://napalm.readthedocs.io/) | NAPALM: supported drivers, methods, examples |
-| [Cisco DevNet — Network Automation](https://developer.cisco.com/network-automation/) | Cisco: Python, Ansible, YANG, RESTCONF examples |
-| [Jeremy's IT Lab — Python & Automation (YouTube)](https://www.youtube.com/watch?v=FdRaJxFcT_8) | Python for CCNA: netmiko, NAPALM, automation basics |
+| [Netmiko: GitHub](https://github.com/ktbyers/netmiko) | Kirk Byers: Netmiko documentation and examples |
+| [NAPALM: Read the Docs](https://napalm.readthedocs.io/) | NAPALM: supported drivers, methods, examples |
+| [Cisco DevNet: Network Automation](https://developer.cisco.com/network-automation/) | Cisco: Python, Ansible, YANG, RESTCONF examples |
+| [Jeremy's IT Lab: Python & Automation (YouTube)](https://www.youtube.com/watch?v=FdRaJxFcT_8) | Python for CCNA: netmiko, NAPALM, automation basics |

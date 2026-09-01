@@ -11,7 +11,7 @@ lang_pair: "/kb/ru/bash/"
 ---
 
 <div class="intro-card">
-Bash reference: <strong>parameter expansion</strong>, special variables, arrays, tests, loops, functions — everything needed for writing reliable shell scripts.
+Bash reference: <strong>parameter expansion</strong>, special variables, arrays, tests, loops, functions, everything needed for writing reliable shell scripts.
 </div>
 
 ## Variables & expansion

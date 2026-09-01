@@ -7,7 +7,7 @@ date: 2026-04-14
 ---
 
 <div class="intro-card">
-<strong>find</strong> — recursive filesystem search. Combines filters for name, type, size, time, permissions, and ownership, then runs actions with <strong>-exec</strong>.
+<strong>find</strong>, recursive filesystem search. Combines filters for name, type, size, time, permissions, and ownership, then runs actions with <strong>-exec</strong>.
 </div>
 
 ## Name & type
@@ -28,7 +28,7 @@ date: 2026-04-14
 <tr><td class="mono">find . -maxdepth 2 -name "*.sh"</td><td class="desc">Limit search depth to 2 levels</td></tr>
 <tr><td class="mono">find . -mindepth 2 -name "*.py"</td><td class="desc">Skip top level, search from depth 2</td></tr>
 <tr><td class="mono">find . -not -name "*.log"</td><td class="desc">Exclude a pattern</td></tr>
-<tr><td class="mono">find . \( -name "*.txt" -o -name "*.md" \)</td><td class="desc">OR — match either pattern</td></tr>
+<tr><td class="mono">find . \( -name "*.txt" -o -name "*.md" \)</td><td class="desc">OR: match either pattern</td></tr>
 <tr><td class="mono">find . -name "*.py" -not -path "*/venv/*"</td><td class="desc">Exclude a directory subtree</td></tr>
 </tbody>
 </table>
@@ -120,7 +120,7 @@ Time flags: `m` = modified · `a` = accessed · `c` = inode changed. `time` = da
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">find . -name "*.tmp" -exec rm {} \;</td><td class="desc">Delete each file (one process per file)</td></tr>
-<tr><td class="mono">find . -name "*.tmp" -exec rm {} +</td><td class="desc">Delete — batch all files into one rm call (faster)</td></tr>
+<tr><td class="mono">find . -name "*.tmp" -exec rm {} +</td><td class="desc">Delete: batch all files into one rm call (faster)</td></tr>
 <tr><td class="mono">find . -type f -exec chmod 644 {} +</td><td class="desc">Fix file permissions in bulk</td></tr>
 <tr><td class="mono">find . -type d -exec chmod 755 {} +</td><td class="desc">Fix directory permissions in bulk</td></tr>
 <tr><td class="mono">find . -name "*.sh" -exec chmod +x {} +</td><td class="desc">Make scripts executable</td></tr>
@@ -139,13 +139,13 @@ Time flags: `m` = modified · `a` = accessed · `c` = inode changed. `time` = da
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">find . -name "*.py" -print0 | xargs -0 grep "TODO"</td><td class="desc">Safe pipe — handles filenames with spaces/newlines</td></tr>
+<tr><td class="mono">find . -name "*.py" -print0 | xargs -0 grep "TODO"</td><td class="desc">Safe pipe: handles filenames with spaces/newlines</td></tr>
 <tr><td class="mono">find . -print0 | xargs -0 ls -la</td><td class="desc">List every found file with details</td></tr>
 <tr><td class="mono">find . -name "*.log" -print0 | xargs -0 -P4 gzip</td><td class="desc">Parallel compression (4 workers)</td></tr>
-<tr><td class="mono">find . -name "*.py" | xargs grep "import"</td><td class="desc">Plain pipe — breaks on spaces in filenames</td></tr>
+<tr><td class="mono">find . -name "*.py" | xargs grep "import"</td><td class="desc">Plain pipe: breaks on spaces in filenames</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
-`{}` is replaced by the filename. `\;` runs one process per file; `+` batches all files into one invocation (like xargs). `-print0` uses null byte as separator — immune to spaces and special characters.
+`{}` is replaced by the filename. `\;` runs one process per file; `+` batches all files into one invocation (like xargs). `-print0` uses null byte as separator, immune to spaces and special characters.

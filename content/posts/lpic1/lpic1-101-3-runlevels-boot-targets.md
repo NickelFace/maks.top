@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-101-3-runlevels-boot-targets/"
 page_lang: "en"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 101
+> **Exam weight: 3**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -55,7 +55,7 @@ The default runlevel is set like this:
 id:3:initdefault:
 ```
 
-Never set 0 or 6 as the default — the system will immediately halt or reboot after loading.
+Never set 0 or 6 as the default; the system will immediately halt or reboot after loading.
 
 Available action values:
 
@@ -164,7 +164,7 @@ Change it:
 systemctl set-default multi-user.target
 ```
 
-The default target is stored as a symlink at `/etc/systemd/system/default.target`. Never set `shutdown.target` as the default — it is the equivalent of runlevel 0. You can also set the target via a kernel parameter at boot:
+The default target is stored as a symlink at `/etc/systemd/system/default.target`. Never set `shutdown.target` as the default; it is the equivalent of runlevel 0. You can also set the target via a kernel parameter at boot:
 
 ```
 systemd.unit=multi-user.target
@@ -172,11 +172,11 @@ systemd.unit=multi-user.target
 
 ### systemd configuration files
 
-- `/lib/systemd/system/` — vendor unit files (primary location)
-- `/usr/lib/systemd/` — alternative location on some distributions
-- `/etc/systemd/` — user overrides
-- `/etc/systemd/logind.conf` — power event settings (suspend, hibernate, etc.)
-- `/etc/systemd/logind.conf.d/` — drop-in config files (alternative to a single logind.conf)
+- `/lib/systemd/system/`: vendor unit files (primary location)
+- `/usr/lib/systemd/`: alternative location on some distributions
+- `/etc/systemd/`: user overrides
+- `/etc/systemd/logind.conf`: power event settings (suspend, hibernate, etc.)
+- `/etc/systemd/logind.conf.d/`: drop-in config files (alternative to a single logind.conf)
 
 List units:
 
@@ -303,7 +303,7 @@ status tty6          # status
 ## Typical exam questions
 
 **Q: How do you reboot the system using `telinit`?**
-`telinit 6` — runlevel 6 means reboot.
+`telinit 6`: runlevel 6 means reboot.
 
 **Q: What happens to a service linked as `/etc/rc1.d/K90network` when entering runlevel 1?**
 The service is stopped. Names starting with K cause the script to be called with the `stop` argument.
@@ -330,14 +330,14 @@ A kernel parameter `1` or `S` is set in the bootloader configuration. Kernel par
 
 ## Related topics
 
-- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/) — bootloader, initramfs, dmesg
-- 101.1 Determine and Configure Hardware Settings — BIOS, hardware resources
+- [101.2 Boot the System](/posts/lpic1-101-2-boot-the-system/): bootloader, initramfs, dmesg
+- 101.1 Determine and Configure Hardware Settings: BIOS, hardware resources
 
 ---
 
 ## Exercises
 
-### Exercise 1 — Reboot with telinit
+### Exercise 1: Reboot with telinit
 
 How do you reboot the system using the `telinit` command?
 
@@ -354,7 +354,7 @@ Runlevel 6 means reboot.
 
 ---
 
-### Exercise 2 — K90network at runlevel 1
+### Exercise 2: K90network at runlevel 1
 
 What happens to the service behind `/etc/rc1.d/K90network` when the system enters runlevel 1?
 
@@ -369,7 +369,7 @@ The service is stopped. The filename starts with `K` (kill), so when runlevel 1 
 
 ---
 
-### Exercise 3 — Check sshd status
+### Exercise 3: Check sshd status
 
 How do you use `systemctl` to check whether `sshd.service` is running?
 
@@ -392,7 +392,7 @@ systemctl is-active sshd.service
 
 ---
 
-### Exercise 4 — Enable sshd at boot
+### Exercise 4: Enable sshd at boot
 
 What command enables `sshd.service` to start automatically on a systemd system?
 
@@ -409,7 +409,7 @@ Run as root. The command creates a symbolic link that systemd picks up during bo
 
 ---
 
-### Exercise 5 — Wrong runlevel despite inittab
+### Exercise 5: Wrong runlevel despite inittab
 
 A SysV system always boots into runlevel 1, even though `/etc/inittab` specifies runlevel 3. What is the most likely cause?
 
@@ -424,7 +424,7 @@ A kernel parameter `1` or `S` is set in the bootloader configuration. Kernel par
 
 ---
 
-### Exercise 6 — /sbin/init on systemd
+### Exercise 6: /sbin/init on systemd
 
 The file `/sbin/init` exists on systemd systems but is only a symbolic link. What does it point to?
 
@@ -439,7 +439,7 @@ The file `/sbin/init` exists on systemd systems but is only a symbolic link. Wha
 
 ---
 
-### Exercise 7 — Check the default target
+### Exercise 7: Check the default target
 
 How do you check the default boot target on a systemd system?
 
@@ -462,7 +462,7 @@ ls -l /etc/systemd/system/default.target
 
 ---
 
-### Exercise 8 — Cancel a scheduled shutdown
+### Exercise 8: Cancel a scheduled shutdown
 
 How do you cancel a reboot scheduled with the `shutdown` command?
 

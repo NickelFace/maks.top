@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-208-2-https-configuration/"
 page_lang: "en"
 ---
 
-> **Exam topic 208.2** — Apache HTTPS Configuration (weight: 3). Covers SSL/TLS setup with mod_ssl, certificate management, SNI, virtual hosting over HTTPS, and hardening against known attacks.
+> **Exam topic 208.2**: Apache HTTPS Configuration (weight: 3). Covers SSL/TLS setup with mod_ssl, certificate management, SNI, virtual hosting over HTTPS, and hardening against known attacks.
 
 ---
 
@@ -30,9 +30,9 @@ Client                              Server (Apache + mod_ssl)
 
 **Asymmetric cryptography (PKC):**
 
-- **Public key** — encrypts messages, distributed openly (in the certificate)
-- **Private key** — decrypts messages, **never leaves the server**
-- Certificate is signed by a CA (Certificate Authority) — browser trusts it
+- **Public key**: encrypts messages, distributed openly (in the certificate)
+- **Private key**: decrypts messages, **never leaves the server**
+- Certificate is signed by a CA (Certificate Authority), browser trusts it
 
 ---
 
@@ -123,7 +123,7 @@ openssl req -new -x509 -days 365 -nodes \
 | `-nodes` | No passphrase on key (for automatic startup) |
 | `-days 365` | Certificate validity period |
 
-> Self-signed certificates trigger browser warnings — the CA is unknown. Use only for testing or internal networks.
+> Self-signed certificates trigger browser warnings; the CA is unknown. Use only for testing or internal networks.
 
 ```bash
 # Inspect certificate
@@ -183,7 +183,7 @@ openssl s_client -connect example.com:443 -tls1_2
 ### SSLCACertificateFile vs SSLCACertificatePath:
 
 ```bash
-# Single file — concatenate all CAs
+# Single file - concatenate all CAs
 cat ca1.pem ca2.pem ca3.pem > /etc/ssl/certs/ca-bundle.pem
 ```
 
@@ -240,13 +240,13 @@ Client → TCP → SSL handshake → [certificate sent] → HTTP request → Apa
 | Virtual host type | SSL | Notes |
 |---|---|---|
 | **IP-based** | No problem | Unique IP per site |
-| **Name-based** | Problem | One IP — Apache doesn't know the hostname until after SSL handshake |
+| **Name-based** | Problem | One IP: Apache doesn't know the hostname until after SSL handshake |
 
 **Solution:** SNI
 
 ---
 
-## SNI — Server Name Indication
+## SNI: Server Name Indication
 
 **SNI** is a TLS extension where the browser includes the hostname in the **first SSL handshake message** (`client hello`), before the encrypted channel is established.
 
@@ -258,7 +258,7 @@ Client ---- client hello + server_name=example.com ----> Apache
            <--------- Sends correct certificate -----------+
 ```
 
-> **Limitation:** `server_name` must contain a hostname/domain — not an IP address.
+> **Limitation:** `server_name` must contain a hostname/domain, not an IP address.
 
 ### Browsers without SNI support:
 
@@ -292,7 +292,7 @@ Client ---- client hello + server_name=example.com ----> Apache
 ### Fallback for non-SNI clients (multidomain certificate):
 
 ```apache
-# Block without ServerName — catches all requests without SNI
+# Block without ServerName - catches all requests without SNI
 <VirtualHost *:443>
     SSLEngine on
     SSLCertificateFile    /etc/ssl/certs/multidomain.pem
@@ -333,7 +333,7 @@ Root CA           ← in browser trust store
             +-- Your certificate
 ```
 
-**Problem:** browser doesn't know the intermediate CA — chain error.
+**Problem:** browser doesn't know the intermediate CA, chain error.
 
 **Solution:**
 
@@ -343,7 +343,7 @@ cat your_cert.pem intermediate.pem > chain.pem
 ```
 
 ```apache
-# Modern way (Apache 2.4.8+) — everything in one file
+# Modern way (Apache 2.4.8+) - everything in one file
 SSLCertificateFile /etc/ssl/certs/chain.pem
 ```
 
@@ -423,7 +423,7 @@ ServerSignature Email   # show version + ServerAdmin email
 |---|---|
 | `on` (default) | TRACE allowed per RFC 2616 |
 | `off` | Server returns **405 Method Not Allowed** |
-| `extended` | TRACE with request body — debug only |
+| `extended` | TRACE with request body: debug only |
 
 ```apache
 TraceEnable off
@@ -436,10 +436,10 @@ TraceEnable off
 ## Include vs IncludeOptional
 
 ```apache
-# Required include — Apache won't start if no files match
+# Required include - Apache won't start if no files match
 Include /etc/apache2/conf-enabled/*.conf
 
-# Optional include — silently ignored if no files match
+# Optional include - silently ignored if no files match
 IncludeOptional /etc/apache2/sites-enabled/*.conf
 ```
 

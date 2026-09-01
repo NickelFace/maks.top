@@ -14,7 +14,7 @@ lang_pair: "/kb/ru/iptables-nftables/"
 Linux firewall reference: <strong>iptables</strong> (chains, tables, stateful filtering, NAT, logging, persistence) and <strong>nftables</strong> (modern syntax). Covers LPIC-2 topic 212.1.
 </div>
 
-## iptables — structure
+## iptables: structure
 
 <div class="ref-panel">
 <div class="ref-panel-head">Tables & chains</div>
@@ -22,7 +22,7 @@ Linux firewall reference: <strong>iptables</strong> (chains, tables, stateful fi
 <table class="cheat-table">
 <thead><tr><th>Table</th><th>Chains</th><th>Purpose</th></tr></thead>
 <tbody>
-<tr><td class="mono">filter</td><td class="desc">INPUT · OUTPUT · FORWARD</td><td class="desc">Default table — allow/drop/reject</td></tr>
+<tr><td class="mono">filter</td><td class="desc">INPUT · OUTPUT · FORWARD</td><td class="desc">Default table: allow/drop/reject</td></tr>
 <tr><td class="mono">nat</td><td class="desc">PREROUTING · OUTPUT · POSTROUTING</td><td class="desc">Address translation</td></tr>
 <tr><td class="mono">mangle</td><td class="desc">All five</td><td class="desc">Packet modification (TTL, TOS, marks)</td></tr>
 <tr><td class="mono">raw</td><td class="desc">PREROUTING · OUTPUT</td><td class="desc">Conntrack bypass</td></tr>
@@ -178,8 +178,8 @@ Linux firewall reference: <strong>iptables</strong> (chains, tables, stateful fi
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</td><td class="desc">MASQUERADE — dynamic source IP (DHCP, PPPoE)</td></tr>
-<tr><td class="mono">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j SNAT --to-source 203.0.113.10</td><td class="desc">SNAT — fixed source IP (faster than MASQUERADE)</td></tr>
+<tr><td class="mono">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</td><td class="desc">MASQUERADE: dynamic source IP (DHCP, PPPoE)</td></tr>
+<tr><td class="mono">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j SNAT --to-source 203.0.113.10</td><td class="desc">SNAT: fixed source IP (faster than MASQUERADE)</td></tr>
 <tr><td class="mono">echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward</td><td class="desc">Enable IP forwarding (required for NAT router)</td></tr>
 <tr><td class="mono">net.ipv4.ip_forward = 1</td><td class="desc">Persist in /etc/sysctl.conf, apply with sysctl -p</td></tr>
 </tbody>
@@ -211,7 +211,7 @@ Linux firewall reference: <strong>iptables</strong> (chains, tables, stateful fi
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">iptables -A INPUT -j LOG --log-prefix "[DROP] " --log-level 4</td><td class="desc">Log (does NOT stop processing — packet continues)</td></tr>
+<tr><td class="mono">iptables -A INPUT -j LOG --log-prefix "[DROP] " --log-level 4</td><td class="desc">Log (does NOT stop processing: packet continues)</td></tr>
 <tr><td class="mono">iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "[INPUT-DROP] "</td><td class="desc">Log with rate limit (last rule before default policy)</td></tr>
 <tr><td class="mono">journalctl -k | grep DROP</td><td class="desc">Read kernel log (iptables LOG target)</td></tr>
 </tbody>

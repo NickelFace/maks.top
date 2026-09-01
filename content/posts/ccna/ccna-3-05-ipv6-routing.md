@@ -73,11 +73,11 @@ traceroute ipv6 2001:DB8:2::1     ! IPv6 traceroute
 ```
 
 **Route codes:**
-- `S` — Static
-- `O` — OSPF
-- `L` — Local (interface address /128)
-- `C` — Connected
-- `ND` — Neighbor Discovery
+- `S`: Static
+- `O`: OSPF
+- `L`: Local (interface address /128)
+- `C`: Connected
+- `ND`: Neighbor Discovery
 
 ---
 
@@ -115,7 +115,7 @@ show ipv6 route ospf
 
 ---
 
-## NDP — IPv6 Replacement for ARP
+## NDP: IPv6 Replacement for ARP
 
 **Neighbor Discovery Protocol** performs ARP, router discovery and SLAAC functions:
 

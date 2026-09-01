@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-207-1-basic-dns-server-configuration/"
 page_lang: "en"
 ---
 
-> **Exam topic 207.1** — Basic DNS Server Configuration (weight: 3). Covers configuring BIND as a caching-only DNS server, `named.conf` structure, zone types, `rndc` management, and DNS diagnostic utilities.
+> **Exam topic 207.1**: Basic DNS Server Configuration (weight: 3). Covers configuring BIND as a caching-only DNS server, `named.conf` structure, zone types, `rndc` management, and DNS diagnostic utilities.
 
 ---
 
@@ -28,7 +28,7 @@ In the early days of the internet, all hostname-to-IP mappings were stored in a 
 |---|---|
 | **Zone** | Equivalent to a domain; the zone file contains hostnames and IPs |
 | **PTR record** | Required for reverse DNS (rDNS) |
-| **Authoritative server** | Manages zone configuration — the "zone master" |
+| **Authoritative server** | Manages zone configuration: the "zone master" |
 | **Recursive server** | Resolves names for zones it is not authoritative for |
 | **Resolver** | Library/software component that performs DNS queries on the client |
 | **FQDN** | Fully Qualified Domain Name |
@@ -84,7 +84,7 @@ keyword {
 
 > **Warning:** `;` is **not** a comment in `named.conf`. It is a comment in BIND **zone files**.
 
-### File structure (Ubuntu — everything via include):
+### File structure (Ubuntu: everything via include):
 
 ```
 include "/etc/bind/named.conf.options";
@@ -200,9 +200,9 @@ dig @ns.example.com version.bind chaos txt
 
 > **Warning:** Only **one** `logging` statement is allowed in `named.conf`.
 
-**Channel** — where to write logs  
-**Category** — type of messages  
-**Severity** — detail level: from `critical` (minimum) to `dynamic` (maximum)
+**Channel**: where to write logs
+**Category**: type of messages
+**Severity**: detail level: from `critical` (minimum) to `dynamic` (maximum)
 
 ```
 logging {
@@ -235,7 +235,7 @@ logging {
 | `general` | Everything else (catch-all) |
 | `default` | All messages without a category |
 
-> BIND 9 applies logging configuration **after** parsing the entire file (unlike BIND 8). The `logging` section is optional — sensible defaults exist.
+> BIND 9 applies logging configuration **after** parsing the entire file (unlike BIND 8). The `logging` section is optional, sensible defaults exist.
 
 ---
 
@@ -283,7 +283,7 @@ zone "example.com" {
 
 ### The `@` symbol in zone files:
 
-`@` means "current origin" — the zone name from `named.conf`:
+`@` means "current origin". The zone name from `named.conf`:
 
 ```
 zone "127.in-addr.arpa" {
@@ -330,7 +330,7 @@ controls {
 };
 ```
 
-> The secret is never transmitted over the network — both sides compute a **hash** and compare. `rndc.key` permissions: owner `root:bind`, mode `640`. To generate: `rndc-confgen`.
+> The secret is never transmitted over the network, both sides compute a **hash** and compare. `rndc.key` permissions: owner `root:bind`, mode `640`. To generate: `rndc-confgen`.
 
 ### rndc commands:
 
@@ -375,10 +375,10 @@ named-checkconf /etc/bind/named.conf             # non-standard location
 named-checkzone example.com /var/named/db.example.com  # check zone file
 ```
 
-- If no errors — returns **without output**
+- If no errors: returns **without output**
 - On error: `/etc/named.conf:56: unknown option 'nclude'`
 
-> **Warning:** Files included via `include` are **not checked automatically** — they must be passed explicitly as an argument.
+> **Warning:** Files included via `include` are **not checked automatically**; they must be passed explicitly as an argument.
 
 ---
 

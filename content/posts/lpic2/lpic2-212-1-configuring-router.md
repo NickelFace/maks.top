@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-212-1-configuring-router/"
 page_lang: "en"
 ---
 
-> **Exam topic 212.1** — Configuring a Router (weight: 3). Covers IP forwarding, NAT, iptables/nftables packet filtering and address translation.
+> **Exam topic 212.1**: Configuring a Router (weight: 3). Covers IP forwarding, NAT, iptables/nftables packet filtering and address translation.
 
 ---
 
@@ -179,7 +179,7 @@ iptables-restore < /etc/iptables/rules.v4
 
 ---
 
-## NAT — Network Address Translation
+## NAT: Network Address Translation
 
 ### MASQUERADE (dynamic SNAT)
 
@@ -240,7 +240,7 @@ iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 \
   -j DNAT --to-destination 192.168.1.100:80
 ```
 
-REDIRECT — redirect to a local port (transparent proxy):
+REDIRECT. Redirect to a local port (transparent proxy):
 
 ```bash
 iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3128
@@ -248,7 +248,7 @@ iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3128
 
 ---
 
-## IPv6 — ip6tables
+## IPv6: ip6tables
 
 ip6tables has the same syntax as iptables but works with IPv6. NAT for IPv6 is rarely used (addresses are globally routable), but filtering works identically:
 
@@ -321,7 +321,7 @@ table ip nat {
 
 ---
 
-## ip Command — Routing
+## ip Command: Routing
 
 ```bash
 # Show routing table
@@ -380,7 +380,7 @@ nft list ruleset
 |---|---|
 | MASQUERADE vs SNAT | MASQUERADE = dynamic IP; SNAT = static IP |
 | PREROUTING vs POSTROUTING | DNAT goes in PREROUTING; SNAT/MASQUERADE in POSTROUTING |
-| ip_forward | Must be 1 for routing/NAT to work — iptables rules alone are not enough |
-| `iptables -F` | Flushes rules but does NOT reset policies — a DROP policy remains |
+| ip_forward | Must be 1 for routing/NAT to work: iptables rules alone are not enough |
+| `iptables -F` | Flushes rules but does NOT reset policies: a DROP policy remains |
 | nftables `inet` | Handles both IPv4 and IPv6 in one table |
-| Port forwarding | DNAT rule alone is not enough — FORWARD chain must also ACCEPT |
+| Port forwarding | DNAT rule alone is not enough: FORWARD chain must also ACCEPT |

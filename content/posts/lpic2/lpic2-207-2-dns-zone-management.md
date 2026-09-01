@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-207-2-dns-zone-management/"
 page_lang: "en"
 ---
 
-> **Exam topic 207.2** — Creating and Maintaining DNS Zones (weight: 3). Covers zone file syntax, SOA records, resource record types, forward and reverse zones, master/slave configuration, zone delegation, and zone validation tools.
+> **Exam topic 207.2**: Creating and Maintaining DNS Zones (weight: 3). Covers zone file syntax, SOA records, resource record types, forward and reverse zones, master/slave configuration, zone delegation, and zone validation tools.
 
 ---
 
@@ -29,7 +29,7 @@ A zone defines a DNS server's area of responsibility. Each zone is declared with
 
 ## Standard Zones
 
-### db.local — localhost zone
+### db.local: localhost zone
 
 **Entry in `named.conf`:**
 
@@ -58,7 +58,7 @@ $TTL    604800
 > `@` = current origin = zone name from `named.conf` = `localhost`.  
 > `root.localhost.` = administrator email `root@localhost` (`.` replaces `@`).
 
-### db.127 — reverse zone 127.in-addr.arpa
+### db.127: reverse zone 127.in-addr.arpa
 
 **Entry in `named.conf`:**
 
@@ -86,7 +86,7 @@ $TTL    604800
 
 > **Key rule:** all hostnames **without a trailing dot** automatically get the current origin appended. `1.0.0` → `1.0.0.127.in-addr.arpa.` (corresponds to `127.0.0.1`). Regular IP addresses (`127.0.0.1`) do **not** get the origin appended.
 
-### db.root — root server hints
+### db.root: root server hints
 
 **Entry in `named.conf`:**
 
@@ -148,11 +148,11 @@ SOA is the **required first record** in every zone file:
 
 ```
 @  IN  SOA  master-ns.example.org.  admin.example.org. (
-    2024031501    ; Serial    — yyyymmddee
-         28800    ; Refresh   — how often slave checks master
-          3600    ; Retry     — pause on check failure
-        604800    ; Expiration — when slave stops serving the zone
-          3600 )  ; Negative Cache TTL — how long to remember NXDOMAIN
+    2024031501    ; Serial    - yyyymmddee
+         28800    ; Refresh   - how often slave checks master
+          3600    ; Retry     - pause on check failure
+        604800    ; Expiration - when slave stops serving the zone
+          3600 )  ; Negative Cache TTL - how long to remember NXDOMAIN
 ```
 
 **Five SOA numbers:**
@@ -173,7 +173,7 @@ SOA is the **required first record** in every zone file:
 2024031600  →  March 16 2024, 1st change
 ```
 
-> **Warning:** Serial **must** be incremented on every change — otherwise slaves will not learn about updates.
+> **Warning:** Serial **must** be incremented on every change; otherwise slaves will not learn about updates.
 
 ### Resource Record Types
 
@@ -292,13 +292,13 @@ lion   IN   AAAA   2001:db8::ff00:42:8329
 **Building the PTR for IPv6:**
 
 ```
-Step 1 — full form:
+Step 1 - full form:
   2001:0db8:0000:0000:0000:ff00:0042:8329
 
-Step 2 — each hex character separated by dots:
+Step 2 - each hex character separated by dots:
   2.0.0.1.0.d.b.8.0.0.0.0.0.0.0.0.0.0.0.0.f.f.0.0.0.0.4.2.8.3.2.9
 
-Step 3 — reverse + add ip6.arpa:
+Step 3 - reverse + add ip6.arpa:
   9.2.3.8.2.4.0.0.0.0.f.f.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa
 ```
 
@@ -327,7 +327,7 @@ zone "example.org" IN {
 };
 ```
 
-**How master finds slaves:** looks at the zone's **NS records**. Additional servers — via `also-notify`.
+**How master finds slaves:** looks at the zone's **NS records**. Additional servers, via `also-notify`.
 
 > Old BIND versions used `primary` instead of `master`.
 
@@ -341,7 +341,7 @@ zone "example.org" IN {
 };
 ```
 
-- Zone file is **created by the slave itself** — no need to create it manually
+- Zone file is **created by the slave itself**, no need to create it manually
 - Path without a directory → written to BIND's working directory (`/var/cache/bind` or `/var/named`)
 - BIND must have **write permissions**
 
@@ -393,7 +393,7 @@ sh   IN  CNAME  bash
 scripts  2d IN NS ctl.scripts.example.org.
          2d IN NS bash.scripts.example.org.
 
-; Glue records — REQUIRED to find the servers
+; Glue records - REQUIRED to find the servers
 ctl.scripts.example.org.   2d IN A 224.123.240.16
 bash.scripts.example.org.  2d IN A 224.123.240.18
 ```
@@ -413,7 +413,7 @@ named-checkzone example.org /etc/bind/exampleorg.zone
 
 named-checkzone 240.123.224.in-addr.arpa /etc/bind/exampleorg.rev
 
-# Trailing dot is optional — both are valid
+# Trailing dot is optional - both are valid
 named-checkzone example.org  /etc/bind/exampleorg.zone
 named-checkzone example.org. /etc/bind/exampleorg.zone
 ```
@@ -483,11 +483,11 @@ lion.example.org.    1D IN A    224.123.240.1     ← glue record
 
 > If SOA is returned instead of an A record → the domain exists but **the host was not found**.
 
-**Warning — missing trailing dot in PTR records:**
+**Warning: missing trailing dot in PTR records:**
 
 ```
 ; Wrong:
-4  IN  PTR  lion.example.org    ; origin gets appended — ERROR!
+4  IN  PTR  lion.example.org    ; origin gets appended - ERROR!
 
 ; Correct:
 4  IN  PTR  lion.example.org.   ; trailing dot required
@@ -507,7 +507,7 @@ host -t NS example.org              # NS records
 
 ### nslookup
 
-**Deprecated** — use `dig` and `host`. Still on the exam.
+**Deprecated**: use `dig` and `host`. Still on the exam.
 
 ```bash
 nslookup example.org
@@ -530,7 +530,7 @@ dnswalk zoneedit.com.
 # 0 failures, 15 warnings, 0 errors.
 ```
 
-> Use with caution — attempts zone transfer from all servers.
+> Use with caution, attempts zone transfer from all servers.
 
 ---
 
@@ -576,15 +576,15 @@ Type hint: ONLY for root zone "."
 CNAME forbidden: as target of MX/SOA, pointing to another CNAME
 ```
 
-### SOA — Five Numbers
+### SOA: Five Numbers
 
 ```
 @  IN  SOA  ns1.example.org.  admin.example.org. (
-    2024031501    ; 1. Serial    — increment on change (yyyymmddee)
-         86400    ; 2. Refresh   — slave checks master (rec: 24h)
-          3600    ; 3. Retry     — retry on failure (rec: 2h)
-        604800    ; 4. Expire    — slave stops serving zone (rec: 30d)
-          3600 )  ; 5. Neg.Cache — NXDOMAIN cache time (rec: 1h)
+    2024031501    ; 1. Serial    - increment on change (yyyymmddee)
+         86400    ; 2. Refresh   - slave checks master (rec: 24h)
+          3600    ; 3. Retry     - retry on failure (rec: 2h)
+        604800    ; 4. Expire    - slave stops serving zone (rec: 30d)
+          3600 )  ; 5. Neg.Cache - NXDOMAIN cache time (rec: 1h)
 ```
 
 ### Common Mistakes

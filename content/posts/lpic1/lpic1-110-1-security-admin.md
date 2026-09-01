@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-110-1-security-admin/"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 102
+> **Exam weight: 3**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -27,7 +27,7 @@ Key files and commands: `find`, `passwd`, `fuser`, `lsof`, `nmap`, `chage`, `net
 
 ## Special Permission Bits: SUID and SGID
 
-### SUID (Set User ID) — octal 4000
+### SUID (Set User ID): octal 4000
 
 When set on an executable, it runs with the owner's privileges rather than the caller's.
 
@@ -38,7 +38,7 @@ chmod 4755 /usr/bin/program    # octal
 
 Example: `/usr/bin/passwd` has SUID set so any user can change their own password.
 
-### SGID (Set Group ID) — octal 2000
+### SGID (Set Group ID): octal 2000
 
 On an executable: runs with the group's privileges.
 On a directory: new files inherit the directory's group.
@@ -79,7 +79,7 @@ passwd -d emma               # delete password (passwordless login)
 
 Status codes: `P` = password set, `L` = locked, `NP` = no password.
 
-### chage — change password aging
+### chage: change password aging
 
 ```bash
 chage -l emma                # list aging information
@@ -93,7 +93,7 @@ chage -E 2025-12-31 emma     # account expiry date (YYYY-MM-DD)
 chage -E -1 emma             # set expiry to never
 ```
 
-### usermod — lock/unlock
+### usermod: lock/unlock
 
 ```bash
 usermod -L emma              # lock (same effect as passwd -l)
@@ -104,7 +104,7 @@ usermod --inactive 30 emma   # long form of -f
 
 ---
 
-## su — Switch User
+## su: Switch User
 
 ```bash
 su emma                      # switch to emma, keep current environment
@@ -119,7 +119,7 @@ The `-` (or `-l` / `--login`) flag sources the target user's shell profile files
 
 ## Listing Open Files and Ports
 
-### lsof — list open files
+### lsof: list open files
 
 ```bash
 lsof -i                      # all internet connections
@@ -131,7 +131,7 @@ lsof -i @192.168.1.1         # connections to a specific IP
 lsof -i TCP                  # TCP connections only
 ```
 
-### fuser — identify processes using files/ports
+### fuser: identify processes using files/ports
 
 ```bash
 fuser -v /var/log/syslog     # verbose: which process uses this file
@@ -160,7 +160,7 @@ Without `-l`, `netstat` shows established connections only.
 
 ---
 
-## nmap — Network Mapper
+## nmap: Network Mapper
 
 ```bash
 nmap 192.168.1.1             # scan single host
@@ -180,7 +180,7 @@ nmap --exclude 192.168.1.5 192.168.1.0/24   # exclude a host
 
 ---
 
-## ulimit — Resource Limits
+## ulimit: Resource Limits
 
 `ulimit` is a bash built-in that sets per-process resource limits.
 
@@ -245,7 +245,7 @@ w                            # who is logged in and what they are doing
 
 ---
 
-## sudo — Privilege Escalation
+## sudo: Privilege Escalation
 
 ```bash
 sudo command                 # run command as root
@@ -258,7 +258,7 @@ Credential cache: by default, sudo remembers authentication for 15 minutes (`tim
 
 ### /etc/sudoers
 
-Always edit with `visudo` — it checks syntax before saving.
+Always edit with `visudo`; it checks syntax before saving.
 
 ```
 # Basic format:
@@ -379,7 +379,7 @@ sudo -u USER CMD   run as user
 
 ## Exercises
 
-### Exercise 1 — Find SUID/SGID Files
+### Exercise 1: Find SUID/SGID Files
 
 Find all files on the system with both SUID and SGID bits set.
 
@@ -396,7 +396,7 @@ The `-6000` means both bits must be set. Use `/6000` if you want files where eit
 
 ---
 
-### Exercise 2 — Password Aging
+### Exercise 2: Password Aging
 
 Set up the user `alice` so that her password expires in 60 days, she gets a 7-day warning, and her account is locked 14 days after expiry.
 
@@ -414,7 +414,7 @@ chage -l alice
 
 ---
 
-### Exercise 3 — Resource Limits
+### Exercise 3: Resource Limits
 
 Set a persistent hard limit of 50 processes for the user `bob`.
 
@@ -431,7 +431,7 @@ bob  hard  nproc  50
 
 ---
 
-### Exercise 4 — sudoers Configuration
+### Exercise 4: sudoers Configuration
 
 Allow the group `developers` to restart the `nginx` service without a password.
 
@@ -448,7 +448,7 @@ Edit `/etc/sudoers` with `visudo`:
 
 ---
 
-### Exercise 5 — Port Investigation
+### Exercise 5: Port Investigation
 
 Find which process is listening on TCP port 443, using two different tools.
 

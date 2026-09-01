@@ -26,9 +26,9 @@ A **hypervisor** is a software layer that allows multiple virtual machines (VMs)
 - Snapshots (backup without downtime)
 - Live VM migration between hosts (vMotion)
 
-### vSwitch — Virtual Switch
+### vSwitch: Virtual Switch
 
-Each hypervisor includes a **vSwitch** — a software switch that connects VMs to each other and to the physical network. Cisco Nexus 1000v is an example of an advanced vSwitch with VLAN, QoS and port security support.
+Each hypervisor includes a **vSwitch**, a software switch that connects VMs to each other and to the physical network. Cisco Nexus 1000v is an example of an advanced vSwitch with VLAN, QoS and port security support.
 
 ---
 
@@ -47,7 +47,7 @@ A **container** is a lightweight isolation method: applications share the host O
 
 ---
 
-## VRF — Virtual Routing and Forwarding
+## VRF: Virtual Routing and Forwarding
 
 **VRF** creates multiple independent routing tables on a single physical router. Each VRF is an isolated "virtual network."
 
@@ -78,4 +78,4 @@ show ip vrf
 show ip vrf interfaces
 ```
 
-> **VRF-Lite** — a simplified version without MPLS, used in enterprise networks for traffic isolation.
+> **VRF-Lite**: a simplified version without MPLS, used in enterprise networks for traffic isolation.

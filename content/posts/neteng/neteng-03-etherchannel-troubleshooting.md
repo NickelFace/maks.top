@@ -190,7 +190,7 @@ copy running-config startup-config
 
 ### Troubleshooting
 
-#### Step 1 — Check EtherChannel summary
+#### Step 1: Check EtherChannel summary
 
 ```
 show etherchannel summary
@@ -295,15 +295,15 @@ copy running-config startup-config
 
 Issues visible in S2 config:
 - Po1 allows only VLAN 1,99 (missing VLAN 10)
-- Fa0/1-2 use `mode desirable` (PAgP) but S1 uses LACP `active` — protocol mismatch
+- Fa0/1-2 use `mode desirable` (PAgP) but S1 uses LACP `active`, protocol mismatch
 - Fa0/3-4 are shutdown
 
-#### Step 2 — Check VLAN 10 access port
+#### Step 2: Check VLAN 10 access port
 
-Po2 on S1 is in `access` mode — verify with `show run interface`:
+Po2 on S1 is in `access` mode; verify with `show run interface`:
 
 <details>
-<summary>S1 — interface Ethernet1/2</summary>
+<summary>S1: interface Ethernet1/2</summary>
 <pre><code>
 enable
 configure terminal
@@ -322,7 +322,7 @@ S1(config)# interface Port-channel2
 S1(config-if)# switchport mode trunk
 ```
 
-#### Step 3 — Check allowed VLANs on Po1 (S1–S2)
+#### Step 3: Check allowed VLANs on Po1 (S1–S2)
 
 S2 allows only VLAN 1,99 on Po1, blocking VLAN 10. Fix:
 
@@ -331,9 +331,9 @@ S2(config)# int r fa0/1-2
 S2(config-if-range)# switchport trunk allowed vlan add 10
 ```
 
-#### Step 4 — Fix protocol mismatch on Po1
+#### Step 4: Fix protocol mismatch on Po1
 
-S1 uses LACP `active`, S2 uses PAgP `desirable` — protocols don't match. Fix S2 to LACP:
+S1 uses LACP `active`, S2 uses PAgP `desirable`; protocols don't match. Fix S2 to LACP:
 
 ```
 S2(config)# no int po1
@@ -347,7 +347,7 @@ S2(config-if)# switchport trunk allowed vlan 1,10,99
 S2(config-if)# switchport mode trunk
 ```
 
-#### Step 5 — Fix shutdown ports on S2
+#### Step 5: Fix shutdown ports on S2
 
 Fa0/3-4 on S2 are shutdown. Fix:
 
@@ -408,7 +408,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Connectivity check — ping Management VLAN from S3:
+Connectivity check. Ping Management VLAN from S3:
 
 <details>
 <summary>S3</summary>
@@ -432,7 +432,7 @@ Success rate is 60 percent (3/5), round-trip min/avg/max = 0/1/4 ms
 </code></pre>
 </details>
 
-Connectivity check — ping between PCs:
+Connectivity check. Ping between PCs:
 
 <details>
 <summary>PC-A</summary>

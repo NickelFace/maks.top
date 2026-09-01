@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-208-3-squid-proxy/"
 page_lang: "en"
 ---
 
-> **Exam topic 208.3** — Squid Caching Proxy (weight: 2). Covers Squid 3.x configuration, ACL definitions, access control, client authentication, and redirectors.
+> **Exam topic 208.3**: Squid Caching Proxy (weight: 2). Covers Squid 3.x configuration, ACL definitions, access control, client authentication, and redirectors.
 
 ---
 
@@ -19,7 +19,7 @@ A web cache (HTTP proxy) is an intermediary server between clients and web serve
 1. Client is configured to use the proxy (host + port)
 2. All browser requests go to the proxy, not directly to the server
 3. Proxy contacts the target server, saves the response in cache
-4. On repeated requests — serves content from cache (fast, no network load)
+4. On repeated requests: serves content from cache (fast, no network load)
 
 **Benefits:** reduced bandwidth usage · faster access · content filtering · load balancing
 
@@ -39,7 +39,7 @@ A transparent proxy intercepts traffic **without any client-side configuration**
 
 Main configuration file: **`squid.conf`** (~125 options, only ~8 required to run).
 
-> If a directive is absent from `squid.conf`, Squid uses the default value. Squid can technically start with an empty config — but all clients will be denied.
+> If a directive is absent from `squid.conf`, Squid uses the default value. Squid can technically start with an empty config, but all clients will be denied.
 
 ---
 
@@ -49,13 +49,13 @@ Main configuration file: **`squid.conf`** (~125 options, only ~8 required to run
 |---|---|---|
 | `http_port` | Port for incoming requests | **3128** (also 8080) |
 | `cache_dir` | Directory and parameters for disk cache | 100 MB, 16×256 subdirs |
-| `cache_mem` | RAM for "hot" objects | — |
+| `cache_mem` | RAM for "hot" objects | n/a |
 | `maximum_object_size` | Max size of cached object | **4 MB** |
 | `minimum_object_size` | Min size of cached object | **0 KB** (no limit) |
-| `cache_swap` | Max disk cache size | — |
-| `auth_param` | Authentication program settings | — |
-| `redirect_program` | External redirector program | — |
-| `redirect_children` | Number of redirector processes | — |
+| `cache_swap` | Max disk cache size | n/a |
+| `auth_param` | Authentication program settings | n/a |
+| `redirect_program` | External redirector program | n/a |
+| `redirect_children` | Number of redirector processes | n/a |
 
 ### cache_dir format:
 
@@ -67,7 +67,7 @@ cache_dir /usr/local/squid/cache/ 100 16 256
 #                                  └───────── cache size in MB
 ```
 
-> Squid creates many subdirectories with few files each — searching a directory with 1,000,000 entries is extremely slow. Subdirectory splitting speeds up disk access.
+> Squid creates many subdirectories with few files each, searching a directory with 1,000,000 entries is extremely slow. Subdirectory splitting speeds up disk access.
 
 ---
 
@@ -150,7 +150,7 @@ http_access deny socialmedia
 >
 > **Always explicitly end the list with `http_access deny all`!**
 
-> **Authentication trap:** A rule `http_access allow name` with a `proxy_auth` ACL **behaves like `deny !name`** — it denies unauthenticated users, but does NOT grant access to authenticated ones!
+> **Authentication trap:** A rule `http_access allow name` with a `proxy_auth` ACL **behaves like `deny !name`**; it denies unauthenticated users, but does NOT grant access to authenticated ones!
 >
 > To actually grant access to authenticated users, add an explicit allow:
 > ```squid
@@ -217,9 +217,9 @@ http_access allow all        # required! otherwise access will be denied
 
 ## Redirectors
 
-Squid can pass every URL through an **external redirector** — a program or script that reads a URL from `stdin` and returns a new URL (or an empty string if unchanged).
+Squid can pass every URL through an **external redirector**, a program or script that reads a URL from `stdin` and returns a new URL (or an empty string if unchanged).
 
-> A redirector is not a standard part of Squid — it's an external program. Examples are in the `contrib/` directory of the source code. A ready-made simple redirector is **squirm** (uses a regex library).
+> A redirector is not a standard part of Squid; it's an external program. Examples are in the `contrib/` directory of the source code. A ready-made simple redirector is **squirm** (uses a regex library).
 
 ```squid
 redirect_program /usr/bin/my_redirector
@@ -266,7 +266,7 @@ while (<>) {
 
 ## Memory Management
 
-Squid makes heavy use of RAM — reading from memory is much faster than reading from disk.
+Squid makes heavy use of RAM, reading from memory is much faster than reading from disk.
 
 ### Metadata (StoreEntry) per object:
 
@@ -358,5 +358,5 @@ http_access deny all
 | ACL type for user auth | `proxy_auth` |
 | Reload without restart | `squid -k reconfigure` |
 | Last rule implicit default | opposite direction added automatically |
-| `basic` auth security | Base64 = plaintext — lowest security |
+| `basic` auth security | Base64 = plaintext: lowest security |
 | `maximum_object_size 4096 KB` | objects > 4 MB not cached to disk |

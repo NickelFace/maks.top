@@ -12,7 +12,7 @@ lang_pair: "/posts/ccna/ru/ccna-6-02-rest-api/"
 
 **API (Application Programming Interface)** is an interface that allows programs to communicate with each other.
 
-**REST API** (RESTful API) is an HTTP-based architectural style for APIs — the standard for interacting with network controllers (Cisco Catalyst Center, APIC, IOS-XE).
+**REST API** (RESTful API) is an HTTP-based architectural style for APIs, the standard for interacting with network controllers (Cisco Catalyst Center, APIC, IOS-XE).
 
 ---
 
@@ -107,7 +107,7 @@ ospf_enabled: true
 
 ---
 
-## JSON — Syntax
+## JSON: Syntax
 
 | Data type | Example |
 |---|---|
@@ -183,7 +183,7 @@ curl -X GET \
   -u "admin:cisco123" \
   --insecure
 
-# PUT — change hostname
+# PUT - change hostname
 curl -X PUT \
   "https://192.168.1.1/restconf/data/Cisco-IOS-XE-native:native/hostname" \
   -H "Content-Type: application/yang-data+json" \
@@ -198,9 +198,9 @@ curl -X PUT \
 
 | Resource | Description |
 |---|---|
-| [REST API — Cisco DevNet Learning](https://developer.cisco.com/learning/tracks/netprog-eng/netprog-eng-rest-api/) | Official Cisco DevNet REST API course |
-| [HTTP Methods — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) | GET, POST, PUT, PATCH, DELETE: descriptions and usage |
-| [JSON — json.org](https://www.json.org/json-en.html) | Official JSON format standard |
-| [REST API — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/rest-api) | REST: principles, HTTP methods, CRUD, status codes |
-| [Jeremy's IT Lab — REST APIs (YouTube)](https://www.youtube.com/watch?v=G0RM7eS0vw8) | REST API, JSON, Postman from the Free CCNA series |
+| [REST API: Cisco DevNet Learning](https://developer.cisco.com/learning/tracks/netprog-eng/netprog-eng-rest-api/) | Official Cisco DevNet REST API course |
+| [HTTP Methods: MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) | GET, POST, PUT, PATCH, DELETE: descriptions and usage |
+| [JSON (json.org)](https://www.json.org/json-en.html) | Official JSON format standard |
+| [REST API (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/rest-api) | REST: principles, HTTP methods, CRUD, status codes |
+| [Jeremy's IT Lab: REST APIs (YouTube)](https://www.youtube.com/watch?v=G0RM7eS0vw8) | REST API, JSON, Postman from the Free CCNA series |
 | [Cisco Catalyst Center API Reference](https://developer.cisco.com/docs/dna-center/#!api-quick-start) | Intent API and REST endpoints reference for Catalyst Center |

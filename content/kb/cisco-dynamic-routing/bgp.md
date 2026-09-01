@@ -7,7 +7,7 @@ date: 2026-04-22
 ---
 
 <div class="intro-card">
-Cisco IOS cheat sheet for <strong>BGP</strong> (Border Gateway Protocol) — the inter-domain routing protocol of the Internet. Covers basic eBGP/iBGP setup, path attributes (local-preference, AS-path prepend, MED, weight), filtering, route-maps, peer groups, and multihomed ISP scenarios.
+Cisco IOS cheat sheet for <strong>BGP</strong> (Border Gateway Protocol), the inter-domain routing protocol of the Internet. Covers basic eBGP/iBGP setup, path attributes (local-preference, AS-path prepend, MED, weight), filtering, route-maps, peer groups, and multihomed ISP scenarios.
 </div>
 
 ## Basic Configuration
@@ -39,7 +39,7 @@ Cisco IOS cheat sheet for <strong>BGP</strong> (Border Gateway Protocol) — the
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">show ip bgp</td><td class="desc">BGP table — raw routes received via BGP</td></tr>
+<tr><td class="mono">show ip bgp</td><td class="desc">BGP table: raw routes received via BGP</td></tr>
 <tr><td class="mono">show ip route bgp</td><td class="desc">BGP routes installed in the routing table</td></tr>
 <tr><td class="mono">show ip bgp summary</td><td class="desc">BGP neighbor summary (state, prefixes)</td></tr>
 <tr><td class="mono">show ip bgp neighbor 10.0.1.1</td><td class="desc">Detailed info for a specific BGP neighbor</td></tr>
@@ -55,7 +55,7 @@ Cisco IOS cheat sheet for <strong>BGP</strong> (Border Gateway Protocol) — the
 
 ## Path Attributes and Traffic Engineering
 
-### Inbound Path Preference — Local Preference
+### Inbound Path Preference: Local Preference
 
 Higher local-preference = preferred path for **outbound** traffic.
 
@@ -73,7 +73,7 @@ Higher local-preference = preferred path for **outbound** traffic.
 </div>
 </div>
 
-### Return Traffic Path — AS-Path Prepend
+### Return Traffic Path: AS-Path Prepend
 
 Deliberately lengthen the AS-path to make a provider less preferred for **inbound** traffic.
 

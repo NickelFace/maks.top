@@ -45,14 +45,14 @@ All member accounts' costs roll up to the management account. Benefit: **volume 
 
 ## Service Control Policies (SCPs)
 
-SCPs are **organizational guardrails** — they limit what IAM policies in member accounts can allow. They do **not** grant permissions.
+SCPs are **organizational guardrails**; they limit what IAM policies in member accounts can allow. They do **not** grant permissions.
 
 ### How SCPs work
 
 - Applied at Root, OU, or Account level
 - **Inherited downward**: an SCP on an OU applies to all child OUs and accounts
 - Evaluated **before** identity-based policies
-- The **management account is ALWAYS exempt** from SCPs — they never apply to it
+- The **management account is ALWAYS exempt** from SCPs, they never apply to it
 
 ### SCP inheritance example
 
@@ -114,7 +114,7 @@ IAM Identity Center provides **centralized SSO** across all AWS accounts in an O
 
 ### Permission sets
 
-A permission set is **not** an IAM role — it becomes one when provisioned into an account. Identity Center creates roles like `AWSReservedSSO_<PermissionSetName>_<hash>`.
+A permission set is **not** an IAM role; it becomes one when provisioned into an account. Identity Center creates roles like `AWSReservedSSO_<PermissionSetName>_<hash>`.
 
 ```yaml
 # Example permission set (conceptual)
@@ -162,7 +162,7 @@ User → Corporate IdP → SAML assertion → AWS STS:AssumeRoleWithSAML → Tem
 Used for workloads that have an OIDC-compatible identity token (GitHub Actions, Kubernetes IRSA, mobile apps).
 
 ```bash
-# GitHub Actions — no static credentials needed
+# GitHub Actions - no static credentials needed
 - uses: aws-actions/configure-aws-credentials@v4
   with:
     role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsRole
@@ -208,7 +208,7 @@ User pools support federation with:
 
 ### Unauthenticated (guest) access
 
-Identity pools can issue AWS credentials to **unauthenticated** users — useful for anonymous read access to public S3 assets or DynamoDB tables.
+Identity pools can issue AWS credentials to **unauthenticated** users, useful for anonymous read access to public S3 assets or DynamoDB tables.
 
 > **📌 Tip:** Exam trap: **User Pools authenticate users** (no AWS credentials); **Identity Pools authorize AWS access** (provide credentials). If the question says "mobile app needs to access DynamoDB" → you need both, or just an Identity Pool if using an external IdP. If the question says "add social login to web app" → User Pool.
 
@@ -222,7 +222,7 @@ AWS RAM lets you **share resources across AWS accounts** (within or outside an O
 
 | Resource | Notes |
 |---|---|
-| VPC Subnets | Share a subnet across accounts in an Org — instances in different accounts share the same VPC |
+| VPC Subnets | Share a subnet across accounts in an Org: instances in different accounts share the same VPC |
 | Transit Gateway | Share a TGW attachment across accounts |
 | Route 53 Resolver rules | Centralize DNS resolution |
 | License Manager configurations | Centralize BYOL license tracking |
@@ -238,7 +238,7 @@ Account B: launches EC2 instances into Account A's subnets
 
 Benefits: no VPC peering required; security groups in Account B; centralized network management.
 
-> **📌 Tip:** RAM vs VPC Peering: RAM sharing subnets is preferred for Organization-wide workloads — simpler than peering every pair of VPCs. Exam questions about "multiple accounts, same VPC network, no peering overhead" → RAM subnet sharing.
+> **📌 Tip:** RAM vs VPC Peering: RAM sharing subnets is preferred for Organization-wide workloads, simpler than peering every pair of VPCs. Exam questions about "multiple accounts, same VPC network, no peering overhead" → RAM subnet sharing.
 
 ---
 
@@ -259,11 +259,11 @@ Benefits: no VPC peering required; security groups in Account B; centralized net
 
 | Trap | Correct understanding |
 |---|---|
-| "SCPs apply to management account" | False — management account is always exempt |
-| "SCPs grant permissions like IAM policies" | False — SCPs only restrict; IAM policy must also Allow |
-| "SCP on Root applies only to Root" | False — SCPs inherit down through all OUs and accounts |
-| "Identity Center replaces IAM" | False — it manages access to AWS accounts; IAM still controls within accounts |
-| "Cognito User Pool gives AWS credentials" | False — User Pools give JWT tokens; Identity Pools give STS credentials |
-| "RAM copies resources to each account" | False — resources are shared in place; billed to the owner |
-| "SAML federation needs IAM users" | False — federated users assume IAM roles; no IAM user required |
-| "SLRs are blocked by SCPs" | False — service-linked roles bypass SCPs |
+| "SCPs apply to management account" | False: management account is always exempt |
+| "SCPs grant permissions like IAM policies" | False: SCPs only restrict; IAM policy must also Allow |
+| "SCP on Root applies only to Root" | False: SCPs inherit down through all OUs and accounts |
+| "Identity Center replaces IAM" | False: it manages access to AWS accounts; IAM still controls within accounts |
+| "Cognito User Pool gives AWS credentials" | False: User Pools give JWT tokens; Identity Pools give STS credentials |
+| "RAM copies resources to each account" | False: resources are shared in place; billed to the owner |
+| "SAML federation needs IAM users" | False: federated users assume IAM roles; no IAM user required |
+| "SLRs are blocked by SCPs" | False: service-linked roles bypass SCPs |

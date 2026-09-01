@@ -7,14 +7,14 @@ date: 2026-04-22
 ---
 
 <div class="intro-card">
-Cisco IOS cheat sheet for <strong>OSPF</strong> (Open Shortest Path First) — link-state routing protocol. Covers base configuration, area types (stub, NSSA, totally stubby), route filtering, summarization, redistribution, and authentication.
+Cisco IOS cheat sheet for <strong>OSPF</strong> (Open Shortest Path First), link-state routing protocol. Covers base configuration, area types (stub, NSSA, totally stubby), route filtering, summarization, redistribution, and authentication.
 </div>
 
 ## How OSPF Neighbor Adjacency Works
 
 To have two routers discover each other and exchange routes:
-1. Advertise the networks **connecting** the two routers — this establishes **adjacency only**.
-2. Advertise the networks you want the neighbor to **know about** — only then will the neighbor see networks "behind" the first router.
+1. Advertise the networks **connecting** the two routers, this establishes **adjacency only**.
+2. Advertise the networks you want the neighbor to **know about**, only then will the neighbor see networks "behind" the first router.
 
 ## Basic Configuration
 
@@ -28,7 +28,7 @@ To have two routers discover each other and exchange routes:
 <tr><td class="mono">router-id 0.0.0.32</td><td class="desc">Manually set router ID</td></tr>
 <tr><td class="mono">network 192.168.0.0 0.0.255.255 area 0</td><td class="desc">Advertise network in area 0</td></tr>
 <tr><td class="mono">passive-interface fa0/0.2</td><td class="desc">Suppress hello packets on interface (toward end users)</td></tr>
-<tr><td class="mono">auto-cost reference-bandwidth 10000</td><td class="desc">Set reference bandwidth in Mbps — apply to ALL routers</td></tr>
+<tr><td class="mono">auto-cost reference-bandwidth 10000</td><td class="desc">Set reference bandwidth in Mbps: apply to ALL routers</td></tr>
 <tr><td class="mono">clear ip ospf 1 process</td><td class="desc">Reset OSPF routing information</td></tr>
 </tbody>
 </table>
@@ -63,7 +63,7 @@ To have two routers discover each other and exchange routes:
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">show ip ospf neighbor</td><td class="desc">Neighbor table with adjacency state</td></tr>
-<tr><td class="mono">show ip ospf database</td><td class="desc">LSDB — LSAs from neighbors</td></tr>
+<tr><td class="mono">show ip ospf database</td><td class="desc">LSDB: LSAs from neighbors</td></tr>
 <tr><td class="mono">show ip ospf database router 1.1.1.1</td><td class="desc">Detailed LSA content from router ID 1.1.1.1</td></tr>
 <tr><td class="mono">show ip ospf interface [brief]</td><td class="desc">OSPF-enabled interfaces and their cost</td></tr>
 <tr><td class="mono">show ip ospf route</td><td class="desc">Routes computed by OSPF (before RIB insertion)</td></tr>
@@ -79,11 +79,11 @@ To have two routers discover each other and exchange routes:
 
 ## Route Filtering
 
-### Method 1 — prefix-list + area filter-list (on ABR)
+### Method 1: prefix-list + area filter-list (on ABR)
 
 **Goal:** block networks `10.0.1.0`, `10.0.2.0`, `10.0.3.0` from being leaked from Area 0 into Area 1.
 
-The logic is reversed — permit only what you want; everything else is denied by default.
+The logic is reversed, permit only what you want; everything else is denied by default.
 
 <div class="ref-panel">
 <div class="ref-panel-head">Prefix-list Filter on ABR</div>
@@ -99,9 +99,9 @@ The logic is reversed — permit only what you want; everything else is denied b
 </div>
 </div>
 
-> **Note:** This filter does **not** block the default route `0.0.0.0` — it will still reach the neighbor router.
+> **Note:** This filter does **not** block the default route `0.0.0.0`; it will still reach the neighbor router.
 
-### Method 2 — distribute-list (on receiving router)
+### Method 2: distribute-list (on receiving router)
 
 **Goal:** allow a router to install only specific routes in its RIB.
 
@@ -113,7 +113,7 @@ The logic is reversed — permit only what you want; everything else is denied b
 <tbody>
 <tr><td class="mono">access-list 3 permit 172.10.0.0 0.0.255.255</td><td class="desc">Define permitted routes in ACL</td></tr>
 <tr><td class="mono">router ospf 1</td><td class="desc">Enter OSPF context</td></tr>
-<tr><td class="mono">distribute-list 3 in</td><td class="desc">Apply ACL — only listed routes are installed in RIB</td></tr>
+<tr><td class="mono">distribute-list 3 in</td><td class="desc">Apply ACL: only listed routes are installed in RIB</td></tr>
 </tbody>
 </table>
 </div>
@@ -121,7 +121,7 @@ The logic is reversed — permit only what you want; everything else is denied b
 
 > *The router filters what goes into the RIB, but the LSDB remains unchanged.*
 
-**Difference:** Method 1 — prevents a router from **advertising** routes. Method 2 — prevents a router from **accepting** routes into RIB.
+**Difference:** Method 1; prevents a router from **advertising** routes. Method 2; prevents a router from **accepting** routes into RIB.
 
 ### Filtering During Redistribution
 
@@ -191,7 +191,7 @@ ABR replaces Type-5 (external) LSAs with a default route for the stub area. All 
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">area 1 stub</td><td class="desc">Mark area 1 as stub — configure on ALL routers in the area</td></tr>
+<tr><td class="mono">area 1 stub</td><td class="desc">Mark area 1 as stub: configure on ALL routers in the area</td></tr>
 <tr><td class="mono">area 2 default-cost 50</td><td class="desc">Set cost of the default route injected by ABR for stub area</td></tr>
 </tbody>
 </table>
@@ -209,7 +209,7 @@ Replaces both Type-3 (inter-area summary) and Type-5 LSAs with a single default 
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
 <tr><td class="mono">area 2 stub</td><td class="desc">On internal area routers</td></tr>
-<tr><td class="mono">area 2 stub no-summary</td><td class="desc">On ABR — blocks Type-3 and Type-5 LSAs</td></tr>
+<tr><td class="mono">area 2 stub no-summary</td><td class="desc">On ABR: blocks Type-3 and Type-5 LSAs</td></tr>
 </tbody>
 </table>
 </div>
@@ -241,7 +241,7 @@ Workaround for having an ASBR inside a stub area. ASBR generates Type-7 LSA; ABR
 <table class="cheat-table">
 <thead><tr><th>Command</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td class="mono">neighbor 10.0.2.1</td><td class="desc">Manually define neighbor (NBMA / frame-relay — no broadcast)</td></tr>
+<tr><td class="mono">neighbor 10.0.2.1</td><td class="desc">Manually define neighbor (NBMA / frame-relay: no broadcast)</td></tr>
 <tr><td class="mono">ip ospf authentication message-digest</td><td class="desc">Enable MD5 authentication on interface</td></tr>
 <tr><td class="mono">ip ospf message-digest-key 1 md5 cisco</td><td class="desc">Set authentication key</td></tr>
 <tr><td class="mono">show ip ospf int e0/1</td><td class="desc">Verify authentication is enabled on the interface</td></tr>

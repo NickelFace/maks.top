@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-206-3-notify-users/"
 page_lang: "en"
 ---
 
-> **Exam topic 206.3** — Notifying Users on System-Related Issues (weight: 1). Covers static login messages, dynamic broadcast messages, and systemd service and target management.
+> **Exam topic 206.3**: Notifying Users on System-Related Issues (weight: 1). Covers static login messages, dynamic broadcast messages, and systemd service and target management.
 
 ---
 
@@ -151,7 +151,7 @@ shutdown --no-wall +5
 shutdown -c "Maintenance postponed to next week."
 ```
 
-> **Warning:** `shutdown -k` creates `/etc/nologin`, which temporarily blocks new user logins — even though the system is not actually shutting down. The file is removed when the dry-run period ends, but while it exists no new logins are possible.
+> **Warning:** `shutdown -k` creates `/etc/nologin`, which temporarily blocks new user logins: even though the system is not actually shutting down. The file is removed when the dry-run period ends, but while it exists no new logins are possible.
 
 > **Warning:** If you ran `shutdown --no-wall +5` and then cancel with `shutdown -c`, users will still receive the cancellation message. To suppress it too, use `shutdown -c --no-wall`.
 
@@ -169,7 +169,7 @@ shutdown -c "Maintenance postponed to next week."
 
 ---
 
-## systemctl — Managing System State
+## systemctl: Managing System State
 
 In systemd-based systems, `systemctl` replaces several legacy tools. It is the central tool for managing the systemd init system: services, system states (targets/runlevels), and unit configuration files.
 
@@ -325,7 +325,7 @@ Attempting to start a masked service gives:
 Failed to start nginx.service: Unit nginx.service is masked.
 ```
 
-> **Important:** `disable` removes autostart but manual `systemctl start` still works. `mask` blocks all startup — both manual and automatic — until `unmask` is run.
+> **Important:** `disable` removes autostart but manual `systemctl start` still works. `mask` blocks all startup, both manual and automatic; until `unmask` is run.
 
 **Editing unit files:**
 
@@ -350,7 +350,7 @@ sudo systemctl daemon-reload                      # reload configuration
 
 ### Managing Targets and Runlevels
 
-Targets are special unit files with a `.target` suffix that describe system states. Their purpose is to group other units. This is the analog of SysV runlevels, but more flexible — multiple targets can be active simultaneously.
+Targets are special unit files with a `.target` suffix that describe system states. Their purpose is to group other units. This is the analog of SysV runlevels, but more flexible; multiple targets can be active simultaneously.
 
 **Getting and setting the default target:**
 
@@ -492,7 +492,7 @@ A. `broadcast "message"`  B. `notify "message"`  C. `wall "message"`  D. `write 
 A. The system shuts down in 30 minutes and users receive a warning  
 B. Users receive a warning, the system does not shut down, but new logins are blocked for 30 minutes  
 C. Only root receives the warning; the system does not shut down  
-D. No effect — the `-k` flag is obsolete
+D. No effect; the `-k` flag is obsolete
 
 **Answer:** B. The `-k` flag is a dry-run: warnings are sent but the system does not shut down. However, `/etc/nologin` is created, temporarily blocking new logins until the dry-run ends.
 

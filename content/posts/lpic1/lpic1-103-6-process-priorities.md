@@ -20,7 +20,7 @@ page_lang: "en"
 
 Operating systems that run multiple processes simultaneously are called multitasking. True parallelism only exists with multiple CPU cores, but even single-processor systems simulate it by rapidly switching between tasks.
 
-At any given moment the CPU handles exactly one process. Most process operations — reading files, network access, screen output — are system calls: the process hands control to the kernel, and while the kernel handles the request the CPU can switch to another process.
+At any given moment the CPU handles exactly one process. Most process operations, reading files, network access, screen output; are system calls: the process hands control to the kernel, and while the kernel handles the request the CPU can switch to another process.
 
 The Linux scheduler divides processes into two classes:
 

@@ -12,7 +12,7 @@ lang_pair: "/posts/ccna/ru/ccna-3-04-fhrp/"
 
 End devices are configured with a single default gateway. If that gateway router fails, devices lose connectivity until manual intervention.
 
-**FHRP (First Hop Redundancy Protocol)** — a group of protocols that create a virtual gateway with high availability.
+**FHRP (First Hop Redundancy Protocol)**: a group of protocols that create a virtual gateway with high availability.
 
 ---
 
@@ -27,9 +27,9 @@ End devices are configured with a single default gateway. If that gateway router
 
 ---
 
-## HSRP — Details
+## HSRP: Details
 
-**HSRP (Hot Standby Router Protocol)** — virtual IP and MAC are shared between Active and Standby routers.
+**HSRP (Hot Standby Router Protocol)**: virtual IP and MAC are shared between Active and Standby routers.
 
 ### HSRP Roles
 
@@ -46,7 +46,7 @@ End devices are configured with a single default gateway. If that gateway router
 
 ### Preemption
 
-By default, if the Active router recovers after a failure, it does not reclaim the Active role. With `preempt` — it reclaims it when it has the highest priority.
+By default, if the Active router recovers after a failure, it does not reclaim the Active role. With `preempt`; it reclaims it when it has the highest priority.
 
 ### HSRP Versions
 
@@ -73,7 +73,7 @@ Initial → Learn → Listen → Speak → Standby → Active
 ## HSRP Configuration
 
 ```bash
-# Basic HSRP configuration (Active — higher priority)
+# Basic HSRP configuration (Active - higher priority)
 Router1(config)# interface gigabitethernet 0/0
 Router1(config-if)# ip address 192.168.1.2 255.255.255.0
 Router1(config-if)# standby version 2                    # recommended v2
@@ -83,7 +83,7 @@ Router1(config-if)# standby 1 preempt                    # reclaim role on recov
 Router1(config-if)# standby 1 authentication md5 key-string cisco123
 Router1(config-if)# standby 1 timers 1 3                 # hello=1, hold=3 sec
 
-# Standby router (lower priority — stays Standby)
+# Standby router (lower priority - stays Standby)
 Router2(config)# interface gigabitethernet 0/0
 Router2(config-if)# ip address 192.168.1.3 255.255.255.0
 Router2(config-if)# standby version 2
@@ -93,14 +93,14 @@ Router2(config-if)# standby 1 preempt
 
 # Interface Tracking
 Router1(config-if)# standby 1 track gigabitethernet 0/1 20
-# If gi0/1 goes down — priority decreases by 20 (110-20=90 < R2's 100 → R2 becomes Active)
+# If gi0/1 goes down - priority decreases by 20 (110-20=90 < R2's 100 → R2 becomes Active)
 ```
 
 ---
 
 ## VRRP
 
-**VRRP (Virtual Router Redundancy Protocol)** — IEEE standard, analogous to HSRP.
+**VRRP (Virtual Router Redundancy Protocol)**: IEEE standard, analogous to HSRP.
 
 | Parameter | HSRP | VRRP |
 |---|---|---|
@@ -123,7 +123,7 @@ Router# show vrrp brief
 
 ## GLBP
 
-**GLBP (Gateway Load Balancing Protocol)** — Cisco proprietary; supports load balancing.
+**GLBP (Gateway Load Balancing Protocol)**: Cisco proprietary; supports load balancing.
 
 | Role | Description |
 |---|---|
@@ -170,9 +170,9 @@ Router# show glbp brief
 
 | Resource | Description |
 |---|---|
-| [RFC 2281 — HSRP](https://www.rfc-editor.org/rfc/rfc2281) | Original Hot Standby Router Protocol specification |
-| [RFC 5798 — VRRP](https://www.rfc-editor.org/rfc/rfc5798) | Virtual Router Redundancy Protocol v3 (IPv4 and IPv6) |
-| [HSRP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/hsrp-hot-standby-routing-protocol) | HSRP: active/standby, virtual IP, preempt, versions |
-| [GLBP — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/glbp-gateway-load-balancing-protocol) | Gateway Load Balancing Protocol: load balancing across gateways |
-| [Jeremy's IT Lab — FHRP: HSRP, VRRP, GLBP (YouTube)](https://www.youtube.com/watch?v=JNT3kBOGC8s) | HSRP, VRRP, GLBP from the Free CCNA series |
+| [RFC 2281: HSRP](https://www.rfc-editor.org/rfc/rfc2281) | Original Hot Standby Router Protocol specification |
+| [RFC 5798: VRRP](https://www.rfc-editor.org/rfc/rfc5798) | Virtual Router Redundancy Protocol v3 (IPv4 and IPv6) |
+| [HSRP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/hsrp-hot-standby-routing-protocol) | HSRP: active/standby, virtual IP, preempt, versions |
+| [GLBP (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/glbp-gateway-load-balancing-protocol) | Gateway Load Balancing Protocol: load balancing across gateways |
+| [Jeremy's IT Lab: FHRP: HSRP, VRRP, GLBP (YouTube)](https://www.youtube.com/watch?v=JNT3kBOGC8s) | HSRP, VRRP, GLBP from the Free CCNA series |
 | [Cisco HSRP Configuration Guide](https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16/fhp-xe-16-book/fhp-hsrp-v1-v2.html) | Official Cisco documentation for HSRP v1 and v2 |

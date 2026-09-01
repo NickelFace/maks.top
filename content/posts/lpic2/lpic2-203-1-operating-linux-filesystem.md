@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-203-1-operating-linux-filesystem/"
 page_lang: "en"
 ---
 
-> **Exam topic 203.1** — Operating the Linux Filesystem. Covers the FHS hierarchy, creating and mounting filesystems, /etc/fstab configuration, UUID management, swap, and systemd mount units.
+> **Exam topic 203.1**: Operating the Linux Filesystem. Covers the FHS hierarchy, creating and mounting filesystems, /etc/fstab configuration, UUID management, swap, and systemd mount units.
 
 ---
 
@@ -18,7 +18,7 @@ Linux presents all filesystems as a single directory tree. The FHS (Filesystem H
 
 | Directory | Purpose |
 |---|---|
-| `/` | Root — should not contain extra files |
+| `/` | Root: should not contain extra files |
 | `/bin/` | Binaries needed at boot |
 | `/boot/` | Bootloader files and kernel images |
 | `/dev/` | Device files |
@@ -36,7 +36,7 @@ Linux presents all filesystems as a single directory tree. The FHS (Filesystem H
 | `/usr/` | Read-only data: user commands, C headers |
 | `/var/` | Variable data: logs, mail, print queues |
 
-> **Note:** If a mount point is not empty, the files in it do not disappear — they simply become invisible while the device is mounted. After `umount` they reappear.
+> **Note:** If a mount point is not empty, the files in it do not disappear, they simply become invisible while the device is mounted. After `umount` they reappear.
 
 ---
 
@@ -190,7 +190,7 @@ The file `/etc/fstab` (Filesystem Table) controls filesystem mounting at boot. O
 Example configuration:
 
 ```
-# /etc/fstab — sample real configuration
+# /etc/fstab - sample real configuration
 
 # Root partition by UUID
 UUID=652b786e-b87f-49d2-af23-8087ced0c828  /          ext4    errors=remount-ro,noatime  0  1
@@ -219,8 +219,8 @@ server:/export/share                       /mnt/nfs   nfs     defaults,_netdev  
 | 2. Mount point | Absolute path; `none` for swap |
 | 3. Filesystem type | `ext4`, `xfs`, `btrfs`, `swap`, `nfs`, `vfat` |
 | 4. Options | `defaults`, `ro`, `noauto`, `_netdev`, etc. comma-separated |
-| 5. Dump | `0` — skip dump backup, `1` — include in dump |
-| 6. fsck | `0` — skip, `1` — check first (root), `2` — check after root |
+| 5. Dump | `0`: skip dump backup, `1`, include in dump |
+| 6. fsck | `0`: skip, `1`, check first (root), `2`, check after root |
 
 > **Important:** AutoFS filesystems must **not** have entries in `/etc/fstab`. If you add one, AutoFS cannot manage the mount.
 
@@ -246,7 +246,7 @@ mount
 
 ## UUID and blkid
 
-UUID (Universal Unique Identifier) is a 128-bit number that uniquely identifies a filesystem. A UUID is assigned at format time by `mkfs` and does not change when a disk is moved between slots or machines — it only changes when the partition is reformatted.
+UUID (Universal Unique Identifier) is a 128-bit number that uniquely identifies a filesystem. A UUID is assigned at format time by `mkfs` and does not change when a disk is moved between slots or machines; it only changes when the partition is reformatted.
 
 Standard UUID format: 32 hex characters in groups `8-4-4-4-12`:
 
@@ -284,7 +284,7 @@ lsblk -f
 mount -U 652b786e-b87f-49d2-af23-8087ced0c828 /mnt/data
 ```
 
-> **Warning:** After reformatting a partition the UUID changes. If you use UUIDs in `/etc/fstab`, update the entry — otherwise the system will not boot.
+> **Warning:** After reformatting a partition the UUID changes. If you use UUIDs in `/etc/fstab`, update the entry, otherwise the system will not boot.
 
 ---
 
@@ -365,7 +365,7 @@ UUID=3297cded-69e9-4d35-b29f-c50cf263fb8b   none   swap   sw   0   0
 /swapfile   none   swap   sw   0   0
 ```
 
-> **Warning:** Do not run `swapoff` on the current swap until a new swap partition is ready — the system may hang due to insufficient virtual memory.
+> **Warning:** Do not run `swapoff` on the current swap until a new swap partition is ready; the system may hang due to insufficient virtual memory.
 
 > **Tip:** A dedicated swap partition is faster than a swap file: no fragmentation, and it can be placed at the start of the disk (the fastest region on an HDD). A swap file is easier to resize without repartitioning.
 
@@ -448,7 +448,7 @@ Linux caches write operations in memory (RAM buffers) to improve performance. Th
 sync
 ```
 
-`sync` is called automatically during system shutdown and reboot. Manual use is helpful before removing a USB drive when `umount` is not available for some reason. The command has no significant options — just run `sync` without arguments.
+`sync` is called automatically during system shutdown and reboot. Manual use is helpful before removing a USB drive when `umount` is not available for some reason. The command has no significant options; just run `sync` without arguments.
 
 > **Warning:** The `sync` option in `/etc/fstab` (fourth field) forces every write to go straight to disk without buffering. This degrades performance. Do not confuse it with the standalone `sync` command.
 
@@ -510,13 +510,13 @@ sync
 
 **Q1.** Which file contains the most up-to-date list of mounted filesystems?
 
-**Answer:** `/proc/mounts` — maintained directly by the kernel. `/etc/mtab` may not be updated when `mount -n` is used.
+**Answer:** `/proc/mounts`, maintained directly by the kernel. `/etc/mtab` may not be updated when `mount -n` is used.
 
 ---
 
 **Q2.** You need to temporarily mount a partition by UUID `abc123`. Which command is correct?
 
-**Answer:** `mount -U abc123 /mnt` — the `-U` flag specifies a UUID for temporary mounting.
+**Answer:** `mount -U abc123 /mnt`, the `-U` flag specifies a UUID for temporary mounting.
 
 ---
 
@@ -528,7 +528,7 @@ sync
 
 **Q4.** What should the unit file be named to mount the path `/home/user/data/`?
 
-**Answer:** `home-user-data.mount` — strip outer `/`, replace inner `/` with `-`, add `.mount`.
+**Answer:** `home-user-data.mount`, strip outer `/`, replace inner `/` with `-`, add `.mount`.
 
 ---
 
@@ -546,19 +546,19 @@ sync
 
 **Q7.** How do you check the status of all active swap spaces?
 
-**Answer:** `swapon -s` — shows name, type, size, usage, and priority of each swap space. `cat /proc/swaps` also works.
+**Answer:** `swapon -s`, shows name, type, size, usage, and priority of each swap space. `cat /proc/swaps` also works.
 
 ---
 
 **Q8.** What does an inode store?
 
-**Answer:** All file metadata — permissions, owner, size, timestamps, and pointers to data blocks — **except the filename**. The filename is stored in the directory entry along with the inode number.
+**Answer:** All file metadata, permissions, owner, size, timestamps, and pointers to data blocks: **except the filename**. The filename is stored in the directory entry along with the inode number.
 
 ---
 
 **Q9.** You need to update the UUID of `/dev/sda2` (ext4) without losing data. Which command does this?
 
-**Answer:** `tune2fs -U $(uuidgen) /dev/sda2` — changes the UUID without destroying data. Running `mkfs.ext4 -U new-uuid /dev/sda2` would reformat the disk and erase everything.
+**Answer:** `tune2fs -U $(uuidgen) /dev/sda2`, changes the UUID without destroying data. Running `mkfs.ext4 -U new-uuid /dev/sda2` would reformat the disk and erase everything.
 
 ---
 

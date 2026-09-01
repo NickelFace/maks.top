@@ -18,13 +18,13 @@ Git reference: everyday commands, <strong>rebase, stash, reset, cherry-pick</str
 </div>
 
 **Planned:**
-- Basics — add, commit, push, pull, fetch, status, log, diff
-- Branches — branch, checkout, switch, merge, rebase
-- Stash — push/pop/list/drop, stash with a message
-- Reset — soft/mixed/hard, reverting commits
-- Cherry-pick — porting commits, `-n` without committing
-- Remotes — add, remove, fetch, push --force-with-lease
-- Tags — creation, push, annotated vs lightweight
-- Bisect — finding the commit that introduced a bug
-- Reflog — recovering deleted commits
+- Basics: add, commit, push, pull, fetch, status, log, diff
+- Branches: branch, checkout, switch, merge, rebase
+- Stash: push/pop/list/drop, stash with a message
+- Reset: soft/mixed/hard, reverting commits
+- Cherry-pick: porting commits, `-n` without committing
+- Remotes: add, remove, fetch, push `--force-with-lease`
+- Tags: creation, push, annotated vs lightweight
+- Bisect: finding the commit that introduced a bug
+- Reflog: recovering deleted commits
 - Useful aliases and `git log --oneline --graph`

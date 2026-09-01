@@ -27,7 +27,7 @@ Lab objectives:
 
 A few introductory notes:
 
-Routes are distributed via route-map attached to peer templates — this approach makes policy changes easier. BGP sessions are established using physical interface addresses. Loopback and connected networks are advertised.
+Routes are distributed via route-map attached to peer templates; this approach makes policy changes easier. BGP sessions are established using physical interface addresses. Loopback and connected networks are advertised.
 
 NEXUS configuration:
 

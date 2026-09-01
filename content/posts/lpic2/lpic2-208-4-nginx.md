@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-208-4-nginx/"
 page_lang: "en"
 ---
 
-> **Exam topic 208.4** — Nginx as Web Server and Reverse Proxy (weight: 2). Covers installing and configuring Nginx as a reverse proxy and basic HTTP server.
+> **Exam topic 208.4**: Nginx as Web Server and Reverse Proxy (weight: 2). Covers installing and configuring Nginx as a reverse proxy and basic HTTP server.
 
 ---
 
@@ -24,7 +24,7 @@ page_lang: "en"
 
 **Key features:**
 
-- Does not use threads — works on an **event-driven (asynchronous) architecture**
+- Does not use threads: works on an **event-driven (asynchronous) architecture**
 - Small memory footprint
 - Predictable performance under high load
 - Suitable for both small and large environments
@@ -103,8 +103,8 @@ server {
 }
 ```
 
-> `location ~ /\.ht` — prevents serving `.htaccess` file contents.
-> `try_files` — tries to serve the requested file; if not found, passes the request to the proxy.
+> `location ~ /\.ht`: prevents serving `.htaccess` file contents.
+> `try_files`: tries to serve the requested file; if not found, passes the request to the proxy.
 
 ---
 
@@ -115,7 +115,7 @@ server {
     # Listen on all interfaces (or specific IP: listen x.x.x.x:80;)
     listen 80;
 
-    # Server name. Wildcard: *.example.com — subdomains only.
+    # Server name. Wildcard: *.example.com - subdomains only.
     # For domain + subdomains: example.com and *.example.com
     server_name example.com www.example.com;
 
@@ -145,7 +145,7 @@ php-fpm capabilities:
 - Workers with different `uid/gid/chroot/environment` and `php.ini`
 - Replacement for `safe_mode`
 
-Best practice — extract PHP config to a separate file and include it:
+Best practice. Extract PHP config to a separate file and include it:
 
 ```nginx
 # At the end of nginx.conf:
@@ -212,7 +212,7 @@ systemctl start nginx
 systemctl enable nginx
 ```
 
-> If **Apache** is already running on port 80 — stop it before starting Nginx, or configure both servers on **different ports**.
+> If **Apache** is already running on port 80, stop it before starting Nginx, or configure both servers on **different ports**.
 
 ---
 
@@ -243,7 +243,7 @@ systemctl enable nginx
 
 | Question | Answer |
 |---|---|
-| Nginx architecture | Event-driven, async — no threads |
+| Nginx architecture | Event-driven, async: no threads |
 | Config directory | `/etc/nginx/` |
 | Main config file | `/etc/nginx/nginx.conf` |
 | PHP integration method | FastCGI via `fastcgi_pass` |

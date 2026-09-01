@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-107-1-users/"
 ---
 
-> **Exam weight: 5** — LPIC-1 v5, Exam 102
+> **Exam weight: 5**. LPIC-1 v5, Exam 102
 
 ## What You Need to Know
 
@@ -105,7 +105,7 @@ Creates a new user account. Common options:
 | `-s shell` | Login shell |
 | `-u UID` | Specify UID |
 
-Example — create user `emma` with home directory and bash shell:
+Example. Create user `emma` with home directory and bash shell:
 
 ```bash
 useradd -m -s /bin/bash -c "Emma User" emma
@@ -144,7 +144,7 @@ userdel -r emma
 
 ---
 
-## Password and Aging — passwd and chage
+## Password and Aging: passwd and chage
 
 ### passwd
 
@@ -215,7 +215,7 @@ System-wide defaults for user/group creation:
 
 ---
 
-## Querying Accounts — getent
+## Querying Accounts: getent
 
 `getent` retrieves entries from Name Service Switch (NSS) databases, supporting both local files and network directories (LDAP, NIS):
 
@@ -278,14 +278,14 @@ Query NSS databases:
 
 1. What command creates user `frank` with a home directory and bash shell? → `useradd -m -s /bin/bash frank`
 2. What does `usermod -L username` do? → Locks the account by prepending `!` to the password hash in `/etc/shadow`.
-3. What is the equivalent of `passwd -l`? → `usermod -L` — both lock the account.
+3. What is the equivalent of `passwd -l`? → `usermod -L`, both lock the account.
 4. How do you append a user to secondary group `staff` without removing existing groups? → `usermod -aG staff username`
 5. What command changes the maximum password age to 90 days? → `chage -M 90 username` or `passwd -x 90 username`
 6. What file stores password hashes on Linux? → `/etc/shadow`
 7. What does a `!` prefix in the password field of `/etc/shadow` mean? → The account is locked.
 8. What is `/etc/skel`? → Directory whose contents are copied to a new user's home directory when it is created.
 9. What command removes user `emma` and her home directory? → `userdel -r emma`
-10. What does `getent passwd emma` do? → Queries the NSS passwd database for user emma — works with local files and network directories.
+10. What does `getent passwd emma` do? → Queries the NSS passwd database for user emma, works with local files and network directories.
 11. How many fields does `/etc/passwd` have? → **7**: username, password placeholder, UID, GID, GECOS, home, shell.
 12. How many fields does `/etc/shadow` have? → **9**: username, hash, last-change, min, max, warn, inactive, expire, reserved.
 13. What UID range is typically used for ordinary users? → **1000 and above** (system accounts are below 1000).
@@ -299,7 +299,7 @@ Query NSS databases:
 
 ## Exercises
 
-### Exercise 1 — Create a Developer Account
+### Exercise 1: Create a Developer Account
 
 Create user `dev1` with UID 2001, home directory `/home/dev1`, bash shell, and secondary group `developers`. What command achieves this?
 
@@ -316,7 +316,7 @@ This creates the user with the specified UID (`-u 2001`), creates a home directo
 
 ---
 
-### Exercise 2 — Lock and Unlock an Account
+### Exercise 2: Lock and Unlock an Account
 
 A user account must be temporarily disabled while an employee is on leave. What are two ways to lock it, and how do you unlock it?
 
@@ -324,8 +324,8 @@ A user account must be temporarily disabled while an employee is on leave. What 
 <summary>Answer</summary>
 
 **Lock:**
-- `usermod -L username` — prepends `!` to password hash
-- `passwd -l username` — same effect
+- `usermod -L username`: prepends `!` to password hash
+- `passwd -l username`: same effect
 
 **Unlock:**
 - `usermod -U username`
@@ -337,7 +337,7 @@ Both methods modify the password field in `/etc/shadow`.
 
 ---
 
-### Exercise 3 — Password Aging Policy
+### Exercise 3: Password Aging Policy
 
 Set a password policy for user `frank` where: maximum age is 60 days, minimum age is 2 days, warning 7 days before expiry, and inactivity lock after 14 days.
 
@@ -357,7 +357,7 @@ passwd -x 60 -n 2 -w 7 -i 14 frank
 
 ---
 
-### Exercise 4 — Reading /etc/shadow
+### Exercise 4: Reading /etc/shadow
 
 Given this shadow entry: `emma:$6$abc:19000:5:90:7:30:19365:`
 
@@ -382,7 +382,7 @@ Interpret each field.
 
 ---
 
-### Exercise 5 — Group Membership
+### Exercise 5: Group Membership
 
 User `kevin` needs to be added to the `sysadmin` group as a secondary group without losing existing group memberships. What command achieves this?
 
@@ -393,7 +393,7 @@ User `kevin` needs to be added to the `sysadmin` group as a secondary group with
 usermod -aG sysadmin kevin
 ```
 
-The `-a` flag is critical — without it, `-G` would replace all current secondary group memberships with only `sysadmin`.
+The `-a` flag is critical, without it, `-G` would replace all current secondary group memberships with only `sysadmin`.
 
 </details>
 

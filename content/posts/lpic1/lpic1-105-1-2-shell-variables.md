@@ -8,13 +8,13 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-105-1-2-shell-variables/"
 ---
 
-> **Exam weight: 4** — LPIC-1 v5, Exam 102 | Part 2 of 105.1
+> **Exam weight: 4**. LPIC-1 v5, Exam 102 | Part 2 of 105.1
 
-## Shell Types — Quick Reference
+## Shell Types: Quick Reference
 
 Bash reads different initialization files depending on two attributes: interactive vs non-interactive, and login vs non-login.
 
-Check interactivity via `$-` — if the output contains `i`, the shell is interactive:
+Check interactivity via `$-`. If the output contains `i`, the shell is interactive:
 
 ```bash
 $ echo $-
@@ -44,21 +44,21 @@ $ shopt login_shell  # on = login, off = non-login
 
 ### Global Files (All Users)
 
-`/etc/profile` — read by any login shell. Usually sources scripts from `/etc/profile.d/*.sh`.
+`/etc/profile`: read by any login shell. Usually sources scripts from `/etc/profile.d/*.sh`.
 
-`/etc/bash.bashrc` — Debian/Ubuntu. Read by interactive shells.
+`/etc/bash.bashrc`: Debian/Ubuntu. Read by interactive shells.
 
-`/etc/bashrc` — RHEL/CentOS equivalent of `/etc/bash.bashrc`.
+`/etc/bashrc`: RHEL/CentOS equivalent of `/etc/bash.bashrc`.
 
 ### User Files
 
-`~/.bash_profile` — personal login file, highest priority.
+`~/.bash_profile`: personal login file, highest priority.
 
-`~/.bash_login` — read only if `~/.bash_profile` is absent.
+`~/.bash_login`: read only if `~/.bash_profile` is absent.
 
-`~/.profile` — fallback, compatible with other POSIX shells. Read if neither of the above exists.
+`~/.profile`: fallback, compatible with other POSIX shells. Read if neither of the above exists.
 
-`~/.bashrc` — for interactive non-login shells. Often sourced from `~/.bash_profile`:
+`~/.bashrc`. For interactive non-login shells. Often sourced from `~/.bash_profile`:
 
 ```bash
 if [ -f ~/.bashrc ]; then
@@ -66,7 +66,7 @@ if [ -f ~/.bashrc ]; then
 fi
 ```
 
-`~/.bash_logout` — executed when a login shell exits.
+`~/.bash_logout`: executed when a login shell exits.
 
 ### Reading Order
 
@@ -86,7 +86,7 @@ source ~/.bashrc
 . ~/.bashrc          # equivalent
 ```
 
-Both execute the file's commands in the **current** shell. Running `bash file` spawns a child — variables set there disappear on exit.
+Both execute the file's commands in the **current** shell. Running `bash file` spawns a child, variables set there disappear on exit.
 
 To fully reload the current shell process: `exec bash` or `exec $SHELL`.
 
@@ -97,8 +97,8 @@ To fully reload the current shell process: `exec bash` or `exec $SHELL`.
 ### Assignment and Reference
 
 ```bash
-$ distro=zorinos     # assignment — no spaces around =
-$ echo $distro       # reference — dollar sign required
+$ distro=zorinos     # assignment - no spaces around =
+$ echo $distro       # reference - dollar sign required
 zorinos
 ```
 
@@ -114,7 +114,7 @@ $ distro= zorinos
 ### Variable Naming Rules
 
 - May contain letters (`a-z`, `A-Z`), digits (`0-9`), underscore (`_`)
-- Must start with a letter or underscore — **not** a digit
+- Must start with a letter or underscore, **not** a digit
 - No spaces in names (use `_` instead)
 
 ```bash
@@ -150,7 +150,7 @@ C:\path\to\dir\
 
 ### Quotes in Assignment Context
 
-Single quotes — literal, no substitution:
+Single quotes. Literal, no substitution:
 
 ```bash
 $ lizard=uromastyx
@@ -159,7 +159,7 @@ $ echo $animal
 My $lizard
 ```
 
-Double quotes — allow variable substitution:
+Double quotes. Allow variable substitution:
 
 ```bash
 $ animal="My $lizard"
@@ -183,7 +183,7 @@ $ echo "$lizard"        # spaces preserved
 
 By convention, local variable names are **lowercase**.
 
-### readonly — Immutable Variable
+### readonly: Immutable Variable
 
 ```bash
 $ readonly reptile=tortoise
@@ -210,7 +210,7 @@ $ readonly
 $ readonly -p
 ```
 
-### set — List All Variables
+### set: List All Variables
 
 `set` without arguments prints all shell variables and functions (including unexported ones). Pipe through `less` or `grep`:
 
@@ -232,7 +232,7 @@ $ echo $reptile
 $ exit
 ```
 
-### unset — Remove a Variable
+### unset: Remove a Variable
 
 ```bash
 $ unset reptile
@@ -262,7 +262,7 @@ $ echo $your_shell
 /bin/bash
 ```
 
-### export — Make a Variable Global
+### export: Make a Variable Global
 
 ```bash
 $ export reptile          # export existing local variable
@@ -277,7 +277,7 @@ $ echo $amphibian
 frog
 ```
 
-### export -n — Revoke Export
+### export -n: Revoke Export
 
 ```bash
 $ export -n reptile       # back to local
@@ -318,7 +318,7 @@ Distinction for the exam: `set` shows everything including local variables and f
 
 ## Running a Program in a Modified Environment
 
-### env -i — Empty Environment
+### env -i: Empty Environment
 
 Starts a program with almost no inherited variables:
 
@@ -332,7 +332,7 @@ Useful for testing that a script does not rely on accidental user variables.
 
 ### env VAR=value command
 
-Run one command with a temporarily changed variable — the shell's own environment is unchanged:
+Run one command with a temporarily changed variable, the shell's own environment is unchanged:
 
 ```bash
 $ env LANG=es_ES.UTF-8 date
@@ -358,14 +358,14 @@ caiman
 
 ### DISPLAY
 
-X server address — `[hostname]:display[:screen]`. Empty hostname means localhost:
+X server address. `[hostname]:display[:screen]`. Empty hostname means localhost:
 
 ```bash
 $ printenv DISPLAY
 :0
 ```
 
-`reptilium:0:2` — X server on host `reptilium`, display 0, screen 2.
+`reptilium:0:2`. X server on host `reptilium`, display 0, screen 2.
 
 ### History Variables
 
@@ -450,7 +450,7 @@ fi
 export PATH
 ```
 
-`id -u` returns the UID — 0 for root.
+`id -u` returns the UID, 0 for root.
 
 Add a directory:
 
@@ -461,13 +461,13 @@ $ PATH=$PATH:/new/dir     # last (searched last)
 
 ### Prompt Variables PS1–PS4
 
-`PS1` — primary prompt (`# ` for root, `$ ` for regular users).
+`PS1`: primary prompt (`# ` for root, `$ ` for regular users).
 
-`PS2` — continuation prompt for multi-line commands (default `> `).
+`PS2`: continuation prompt for multi-line commands (default `> `).
 
-`PS3` — prompt for `select` construct.
+`PS3`: prompt for `select` construct.
 
-`PS4` — debug tracing prefix for `set -x` (default `+ `).
+`PS4`: debug tracing prefix for `set -x` (default `+ `).
 
 ### SHELL and USER
 
@@ -534,7 +534,7 @@ $ ls -la /etc/skel
 .bash_logout  .bashrc  .profile
 ```
 
-Add a line to any file here — all **future** users get it automatically. Existing users are unaffected.
+Add a line to any file here, all **future** users get it automatically. Existing users are unaffected.
 
 Change the template path: edit `SKEL=` in `/etc/default/useradd`, or use `useradd -k /alternate/skel`.
 
@@ -596,7 +596,7 @@ useradd -m newuser    # home created from /etc/skel
 ## Exam Questions
 
 1. What is the difference between `~/.bash_profile` and `~/.bashrc`? → `bash_profile` is read once by a login shell at login. `bashrc` is read by every interactive non-login shell.
-2. Both `~/.bash_profile` and `~/.profile` exist — which is read? → `~/.bash_profile`; `~/.profile` is ignored.
+2. Both `~/.bash_profile` and `~/.profile` exist: which is read? → `~/.bash_profile`; `~/.profile` is ignored.
 3. Where does the system-wide `PATH` live? → `/etc/profile` (plus fragments in `/etc/profile.d/`).
 4. Difference between `source file` and `bash file`? → `source` executes in the current shell; `bash file` spawns a child shell and changes are lost on exit.
 5. Which command turns a local variable into a global one? → `export VAR`.
@@ -619,7 +619,7 @@ useradd -m newuser    # home created from /etc/skel
 
 ## Exercises
 
-### Exercise 1 — Shell type by launch method
+### Exercise 1: Shell type by launch method
 
 For each launch method, state whether the shell is a login shell and whether it is interactive.
 
@@ -650,7 +650,7 @@ SSH, local tty login, and `su -` create a login shell (explicit system entry). T
 
 ---
 
-### Exercise 2 — su and sudo for four shell types
+### Exercise 2: su and sudo for four shell types
 
 Write the command to switch to user `bob`'s shell for each of the four types.
 
@@ -677,7 +677,7 @@ The dash in `su -` or the `-i` flag in `sudo` marks a login shell. Without them 
 
 ---
 
-### Exercise 3 — Startup files for each shell type
+### Exercise 3: Startup files for each shell type
 
 Which initialization files does each shell type read? Assume the user has `~/.bash_profile`, `~/.bashrc`, and `~/.bash_logout`, and `~/.bash_profile` contains the standard block that sources `~/.bashrc`.
 
@@ -695,14 +695,14 @@ Which initialization files does each shell type read? Assume the user has `~/.ba
 |---|---|
 | Login + interactive | `/etc/profile`, `/etc/profile.d/*.sh`, `~/.bash_profile` (sources `~/.bashrc`); on exit: `~/.bash_logout` |
 | Non-login + interactive | `/etc/bash.bashrc` (Debian) or `/etc/bashrc` (RHEL), `~/.bashrc` |
-| Login + non-interactive | Rare (`bash --login script.sh`) — reads the same set as login + interactive |
+| Login + non-interactive | Rare (`bash --login script.sh`): reads the same set as login + interactive |
 | Non-login + non-interactive | Only the file pointed to by `BASH_ENV`, if set |
 
 </details>
 
 ---
 
-### Exercise 4 — Local or global variable?
+### Exercise 4: Local or global variable?
 
 For each command sequence, decide whether the result is a local or global variable.
 
@@ -731,7 +731,7 @@ Plain assignment creates a local variable. `export`, whether combined with assig
 
 ---
 
-### Exercise 5 — Decode variable values
+### Exercise 5: Decode variable values
 
 Explain what each output means.
 
@@ -746,21 +746,21 @@ Explain what each output means.
 <details>
 <summary>Answer</summary>
 
-`HISTCONTROL=ignoreboth` — commands starting with a space are not saved to history, and consecutive duplicate commands are not saved either.
+`HISTCONTROL=ignoreboth`: commands starting with a space are not saved to history, and consecutive duplicate commands are not saved either.
 
-`~ = /home/carol` — the tilde expands to `$HOME`, which is `/home/carol` for user `carol`.
+`~ = /home/carol`: the tilde expands to `$HOME`, which is `/home/carol` for user `carol`.
 
-`DISPLAY=reptilium:0:2` — the X server is running on host `reptilium`, display number 0, screen 2.
+`DISPLAY=reptilium:0:2`. The X server is running on host `reptilium`, display number 0, screen 2.
 
-`MAILCHECK=60` — Bash checks for new mail every 60 seconds.
+`MAILCHECK=60`: Bash checks for new mail every 60 seconds.
 
-`HISTFILE=/home/carol/.bash_history` — command history is saved to this file when the session ends.
+`HISTFILE=/home/carol/.bash_history`: command history is saved to this file when the session ends.
 
 </details>
 
 ---
 
-### Exercise 6 — Fix invalid assignments
+### Exercise 6: Fix invalid assignments
 
 Each assignment is broken. Write the correct command and the `echo` call to produce the expected output.
 
@@ -783,13 +783,13 @@ Each assignment is broken. Write the correct command and the `echo` call to prod
 | `lizard="/** chameleon **/"` | `echo "$lizard"` |
 | `win_path=C:\\path\\to\\dir\\` | `echo $win_path` |
 
-Line 1: no spaces around `=`. Line 2: spaces in names are forbidden — use underscore. Lines 3–4: special characters `|` and `*` must be quoted. Line 4: double quotes required in `echo` to preserve internal spaces. Line 5: each backslash must be escaped with another backslash.
+Line 1: no spaces around `=`. Line 2: spaces in names are forbidden; use underscore. Lines 3–4: special characters `|` and `*` must be quoted. Line 4: double quotes required in `echo` to preserve internal spaces. Line 5: each backslash must be escaped with another backslash.
 
 </details>
 
 ---
 
-### Exercise 7 — Name the command for each task
+### Exercise 7: Name the command for each task
 
 | Task | Command |
 |---|---|
@@ -818,7 +818,7 @@ Without the dollar sign `PATH` is just five characters. With `$` the shell expan
 
 ---
 
-### Exercise 8 — Local variable mammal
+### Exercise 8: Local variable mammal
 
 Create a local variable `mammal` with value `gnu`.
 
@@ -833,7 +833,7 @@ mammal=gnu
 
 ---
 
-### Exercise 9 — Variable substitution in a value
+### Exercise 9: Variable substitution in a value
 
 Using substitution, create a local variable `var_sub` so that `echo $var_sub` outputs `The value of mammal is gnu`.
 
@@ -850,7 +850,7 @@ Double quotes allow `$mammal` to be expanded. Single quotes would output `The va
 
 ---
 
-### Exercise 10 — Export mammal
+### Exercise 10: Export mammal
 
 Make `mammal` a global environment variable.
 
@@ -865,7 +865,7 @@ export mammal
 
 ---
 
-### Exercise 11 — Search with set and grep
+### Exercise 11: Search with set and grep
 
 Find `mammal` using `set` and `grep`.
 
@@ -880,7 +880,7 @@ set | grep mammal
 
 ---
 
-### Exercise 12 — Search with env and grep
+### Exercise 12: Search with env and grep
 
 Find `mammal` using `env` and `grep`.
 
@@ -897,7 +897,7 @@ After `export mammal`, the variable appears in both `set` and `env`. Before expo
 
 ---
 
-### Exercise 13 — BIRD with two commands
+### Exercise 13: BIRD with two commands
 
 Create an environment variable `BIRD` with value `penguin`. Use two commands.
 
@@ -914,7 +914,7 @@ The semicolon separates two commands on one line. They can also be written on se
 
 ---
 
-### Exercise 14 — NEW_BIRD with one command
+### Exercise 14: NEW_BIRD with one command
 
 Create an environment variable `NEW_BIRD` with value `yellow-eyed penguin`. Use one command.
 
@@ -931,7 +931,7 @@ Quotes are required because of the spaces in the value. Single quotes work equal
 
 ---
 
-### Exercise 15 — Create ~/bin
+### Exercise 15: Create ~/bin
 
 You are `user2`. Create a `bin` directory in your home directory.
 
@@ -948,7 +948,7 @@ Equivalents: `mkdir /home/user2/bin` or `mkdir $HOME/bin`.
 
 ---
 
-### Exercise 16 — Prepend ~/bin to PATH
+### Exercise 16: Prepend ~/bin to PATH
 
 Add `~/bin` to `PATH` so Bash searches it first.
 
@@ -967,7 +967,7 @@ The colon separates directories. Placing your directory before `$PATH` makes Bas
 
 ---
 
-### Exercise 17 — Persist PATH via ~/.profile
+### Exercise 17: Persist PATH via ~/.profile
 
 Write the `if` block to add `~/bin` to PATH persistently via `~/.profile`.
 
@@ -986,7 +986,7 @@ The `[ -d "$HOME/bin" ]` check confirms the directory exists before adding it. W
 
 ---
 
-### Exercise 18 — Hello world function and where to put it
+### Exercise 18: Hello world function and where to put it
 
 Write a `hello` function that prints `Hello, world!`. Show how to load it with `source`. In which file should it go so user2 has it in every X Window terminal? In which file so root has it in any interactive shell?
 
@@ -1015,7 +1015,7 @@ For root in any interactive shell: `/root/.bashrc`. If root also uses login shel
 
 ---
 
-### Exercise 19 — Is a simple echo script interactive?
+### Exercise 19: Is a simple echo script interactive?
 
 Script `simple.sh`:
 
@@ -1043,7 +1043,7 @@ echo "Hello, $name!"
 
 ---
 
-### Exercise 20 — Apply ~/.bashrc changes without restarting
+### Exercise 20: Apply ~/.bashrc changes without restarting
 
 You edited `~/.bashrc`. Apply the changes in the current shell without restarting it. Show two ways.
 
@@ -1058,7 +1058,7 @@ source ~/.bashrc
 . ~/.bashrc
 ```
 
-Both execute the file's commands in the current shell. Running `bash ~/.bashrc` would not work — variables would be set in a child shell and lost on exit.
+Both execute the file's commands in the current shell. Running `bash ~/.bashrc` would not work; variables would be set in a child shell and lost on exit.
 
 A third option for a full shell reload: `exec bash` or `exec $SHELL` replaces the current shell process with a new one, reading all startup files fresh.
 
@@ -1066,7 +1066,7 @@ A third option for a full shell reload: `exec bash` or `exec $SHELL` replaces th
 
 ---
 
-### Exercise 21 — Switching to tty when GUI freezes
+### Exercise 21: Switching to tty when GUI freezes
 
 The GUI is frozen. You press `Ctrl+Alt+F2` and log in on tty2. Which initialization files does Bash read?
 
@@ -1086,7 +1086,7 @@ On exit, `~/.bash_logout` is executed.
 
 ---
 
-### Exercise 22 — Automating ~/.bash_login via /etc/skel
+### Exercise 22: Automating ~/.bash_login via /etc/skel
 
 You want every new user to receive `~/.bash_login` with a custom set of commands. How do you automate this?
 
@@ -1103,13 +1103,13 @@ When a new user is created with `useradd -m newuser` or `adduser newuser`, the s
 
 Note on priority: `~/.bash_login` is used only if `~/.bash_profile` is absent. If `~/.bash_profile` exists, `~/.bash_login` is silently skipped.
 
-Existing users are not affected — copy the file manually for them.
+Existing users are not affected, copy the file manually for them.
 
 </details>
 
 ---
 
-### Exercise 23 — let and arithmetic
+### Exercise 23: let and arithmetic
 
 Create a local variable `my_val` with the value `10` as the result of `5 + 5`. Then create `your_val` with the value `5` as the result of dividing `my_val` by 2.
 
@@ -1127,7 +1127,7 @@ let "your_val = $my_val / 2"
 
 ---
 
-### Exercise 24 — Command substitution syntax
+### Exercise 24: Command substitution syntax
 
 Which is the correct modern equivalent of:
 
@@ -1152,7 +1152,7 @@ latest_music=$(ls -l1t ~/Music | head -n 6)
 
 Command substitution has two equivalent syntaxes: backticks `` `cmd` `` and `$(cmd)`. The modern style is `$(cmd)` because it is easier to nest.
 
-B produces a literal string. C is arithmetic substitution — it evaluates integers, not shell commands.
+B produces a literal string. C is arithmetic substitution; it evaluates integers, not shell commands.
 
 </details>
 

@@ -9,7 +9,7 @@ lang_pair: "/posts/ccna/ru/ccna-1-08-switching-concepts/"
 ---
 
 **Exam topic:** 1.13 Describe switching concepts
-**Odom:** Vol.1, Ch. 5 — Analyzing Ethernet LAN Switching
+**Odom:** Vol.1, Ch. 5: Analyzing Ethernet LAN Switching
 
 ## How an Ethernet Switch Works
 
@@ -41,7 +41,7 @@ show mac address-table count
 - Type (dynamic / static)
 - Port
 
-**Aging timer** — how long a dynamic entry is kept (default **300 sec = 5 minutes**):
+**Aging timer**. How long a dynamic entry is kept (default **300 sec = 5 minutes**):
 ```
 mac address-table aging-time 300
 ```
@@ -54,11 +54,11 @@ If no traffic from a given MAC arrives within the aging time, the entry is delet
 
 | Mode | Description | Latency | CRC Check |
 |---|---|---|---|
-| **Store-and-Forward** | Receives entire frame, checks CRC, then forwards | High | Yes — errored frames are dropped |
+| **Store-and-Forward** | Receives entire frame, checks CRC, then forwards | High | Yes: errored frames are dropped |
 | **Cut-through** | Forwards immediately after reading the destination address | Low | No |
 | **Fragment-free** | Waits for first 64 bytes (collision check), then forwards | Medium | Partial |
 
-> Cisco Catalyst uses **store-and-forward** by default. This is preferred — errored frames are not propagated.
+> Cisco Catalyst uses **store-and-forward** by default. This is preferred; errored frames are not propagated.
 
 ---
 
@@ -84,17 +84,17 @@ show interfaces GigabitEthernet0/1
 
 | Field | What it means |
 |---|---|
-| CRC | Corrupted frames — physical issue or duplex mismatch |
+| CRC | Corrupted frames: physical issue or duplex mismatch |
 | Input errors | Total of all incoming frame errors |
-| Runts | Frames < 64 bytes — sign of collisions |
+| Runts | Frames < 64 bytes: sign of collisions |
 | Giants | Frames > 1518 bytes |
-| Late collisions | Collisions after byte 64 — duplex mismatch |
+| Late collisions | Collisions after byte 64: duplex mismatch |
 
 ---
 
 ## Static and Dynamic MAC Entries
 
-**Static entry** — does not age out, cannot be overwritten:
+**Static entry**. Does not age out, cannot be overwritten:
 ```
 mac address-table static 0011.2233.4455 vlan 10 interface Gi0/1
 ```

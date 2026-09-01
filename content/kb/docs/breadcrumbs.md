@@ -41,7 +41,7 @@ The partial renders different segments depending on page type:
 |---|---|
 | `eq .Section "certs"` | `maks.top / certs / Page Title` |
 | `eq .Section "ccna-labs"` | `maks.top / CCNA / Labs / Page Title` (CCNA links to `/certs/ccna/`) |
-| `.IsSection` | `maks.top / section-name` (section index — current page as plain text) |
+| `.IsSection` | `maks.top / section-name` (section index: current page as plain text) |
 | KB sub-page (`Section=kb`, depth=2) | `maks.top / kb / Parent Section Title / Page Title` |
 | Post with cert section prefix (`neteng`, `lpic1`, etc.) | `maks.top / Cert Name / Page Title` (cert name links to cert page) |
 | Other regular pages | `maks.top / section / Page Title` |
@@ -89,7 +89,7 @@ The partial has a `$certMap` dict mapping sub-folder names to cert page URLs:
 }}
 ```
 
-Used for posts in `/posts/neteng/`, `/posts/lpic1/` etc. — their middle breadcrumb segment links to the corresponding cert page instead of the posts sub-folder.
+Used for posts in `/posts/neteng/`, `/posts/lpic1/` etc.; their middle breadcrumb segment links to the corresponding cert page instead of the posts sub-folder.
 
 ---
 

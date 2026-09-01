@@ -7,15 +7,15 @@ date: 2026-04-22
 ---
 
 <div class="intro-card">
-Cisco IOS cheat sheet for <strong>ACL</strong> (Access Control Lists) — standard, extended, named, VACL, and Port ACL. Used for traffic filtering, route filtering, NAT pool selection, and more.
+Cisco IOS cheat sheet for <strong>ACL</strong> (Access Control Lists), standard, extended, named, VACL, and Port ACL. Used for traffic filtering, route filtering, NAT pool selection, and more.
 </div>
 
 ## Key Placement Rules
 
 - **IN direction**: packet arrives on the interface from the directly connected device → ACL is checked immediately.
 - **OUT direction**: packet arrives on the router from another interface → ACL is checked before forwarding out.
-- **Standard ACL** — filter by source IP only; place **close to the destination**.
-- **Extended ACL** — filter by source, destination, protocol, port; place **close to the source**.
+- **Standard ACL**: filter by source IP only; place **close to the destination**.
+- **Extended ACL**: filter by source, destination, protocol, port; place **close to the source**.
 
 ---
 
@@ -99,9 +99,9 @@ ip access-group 101 in
 
 ---
 
-## VACL — VLAN Access Maps
+## VACL: VLAN Access Maps
 
-Applied directly to a VLAN — inspects traffic within the VLAN (no routing required).
+Applied directly to a VLAN, inspects traffic within the VLAN (no routing required).
 
 <div class="ref-panel">
 <div class="ref-panel-head">VACL Configuration</div>
@@ -125,7 +125,7 @@ Applied directly to a VLAN — inspects traffic within the VLAN (no routing requ
 
 ---
 
-## PACL — Port ACL
+## PACL: Port ACL
 
 Applied to switch ports for servers with static IPs (DHCP servers, default gateways).
 

@@ -10,7 +10,7 @@ lang_pair: "/ccna-labs/ru/ccna-lab-12-life-of-packet/"
 
 ## Overview
 
-Guided walkthrough — tracing a packet's path through the network. Exploring DNS client behavior and the ARP cache.
+Guided walkthrough, tracing a packet's path through the network. Exploring DNS client behavior and the ARP cache.
 
 ## Topology
 
@@ -24,7 +24,7 @@ PC1 ---- SW1 ---- R1 ---- R2 ---- SW2 ---- Server (DNS + HTTP)
 ### ARP Cache
 1. On PC1, view the ARP cache (empty initially)
 2. Ping the default gateway
-3. View the ARP cache again — an entry for the gateway will appear
+3. View the ARP cache again: an entry for the gateway will appear
 4. Ping the remote host (Server)
 5. Explain: PC1's ARP cache shows only the gateway, not the Server
 

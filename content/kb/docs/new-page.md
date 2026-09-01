@@ -19,14 +19,14 @@ tags: ["docs"]
 
 ---
 
-## Type 1 — Prose article
+## Type 1: Prose article
 
-The simplest case. No custom layout needed — Hugo picks `_default/single.html` automatically.
+The simplest case. No custom layout needed, Hugo picks `_default/single.html` automatically.
 
 ### Step 1: create the file
 
 ```bash
-# LPIC-2 article — follow the naming convention
+# LPIC-2 article - follow the naming convention
 content/posts/lpic2-205-4-my-topic.md
 
 # General article
@@ -76,7 +76,7 @@ sudo systemctl status nginx
 {{</* /code */>}}
 ```
 
-> **Note:** `{{</* code */>}}` adds a copy button. Plain ` ```bash ``` ` markdown also works — `single.html` wraps it in `.code-block` with a copy button automatically.
+> **Note:** `{{</* code */>}}` adds a copy button. Plain ` ```bash ``` ` markdown also works, `single.html` wraps it in `.code-block` with a copy button automatically.
 
 ### Step 4: verify locally
 
@@ -86,15 +86,15 @@ hugo server -D
 ```
 
 The page automatically gets:
-- TOC sidebar (desktop) built from `h2`/`h3` headings — requires more than 2 headings
+- TOC sidebar (desktop) built from `h2`/`h3` headings, requires more than 2 headings
 - Reading progress bar at the top
 - Copy buttons on all code blocks
 
-### That's it — no other files needed.
+### That's it: no other files needed.
 
 ---
 
-## Type 2 — Interactive page
+## Type 2: Interactive page
 
 Use when the page has JS-driven UI: expandable cards, filters, progress tracking, data rendered from a JS array. Example: `/posts/linux-namespaces/`.
 
@@ -104,7 +104,7 @@ Use when the page has JS-driven UI: expandable cards, filters, progress tracking
 content/posts/my-interactive-topic.md
 ```
 
-Frontmatter — add `layout` to point Hugo at a specific template:
+Frontmatter. Add `layout` to point Hugo at a specific template:
 
 ```yaml
 ---
@@ -175,7 +175,7 @@ Minimal structure:
 {{ define "scripts" }}
 <script src="{{ "js/ns.js" | relURL }}"></script>
 <script>
-  // Initialization goes here — AFTER the external <script src> above
+  // Initialization goes here - AFTER the external <script src> above
   const MY_DATA = [
     { name: "Item 1", color: "#00d4ff" },
   ];
@@ -200,7 +200,7 @@ Then load it in the layout's `{{ define "head" }}` block instead of or alongside
 
 Two approaches:
 
-**A) Inline in `{{ define "scripts" }}`** — for small datasets, no extra files:
+**A) Inline in `{{ define "scripts" }}`**. For small datasets, no extra files:
 
 ```html
 {{ define "scripts" }}
@@ -212,7 +212,7 @@ buildCards(DATA);
 {{ end }}
 ```
 
-**B) External JS file** — for larger scripts like `ns.js`:
+**B) External JS file**. For larger scripts like `ns.js`:
 
 ```bash
 # Create the file
@@ -223,7 +223,7 @@ themes/maks/static/js/my-topic.js
 {{ define "scripts" }}
 <script src="{{ "js/my-topic.js" | relURL }}"></script>
 <script>
-  // inline init only — references functions from my-topic.js
+  // inline init only - references functions from my-topic.js
   initMyTopic(DATA);
 </script>
 {{ end }}
@@ -231,9 +231,9 @@ themes/maks/static/js/my-topic.js
 
 ---
 
-## Type 3 — Certification page
+## Type 3: Certification page
 
-Cert pages use a dedicated template `certs/single.html` that auto-generates an accordion of exam topics with linked articles. No custom layout needed — just the content file with the right frontmatter.
+Cert pages use a dedicated template `certs/single.html` that auto-generates an accordion of exam topics with linked articles. No custom layout needed, just the content file with the right frontmatter.
 
 ### Step 1: create the file
 
@@ -297,11 +297,11 @@ Open `themes/maks/layouts/partials/certs-widget.html` and add a card to the grid
 </a>
 ```
 
-> The progress percentage is hardcoded — update it manually as you progress.
+> The progress percentage is hardcoded, update it manually as you progress.
 
 ---
 
-## Type 4 — Network Engineer / bilingual course post
+## Type 4: Network Engineer / bilingual course post
 
 For Network Engineer labs and similar course posts. Uses the standard `_default/single.html` but requires paired EN/RU files and specific content conventions.
 
@@ -350,11 +350,11 @@ build:
 ### Content conventions
 
 - Top heading is `##` (h2), never `#` (h1)
-- Long CLI outputs go in `<details>` blocks — never bare fenced code blocks:
+- Long CLI outputs go in `<details>` blocks, never bare fenced code blocks:
 
 ```html
 <details>
-<summary>RouterName — command description</summary>
+<summary>RouterName - command description</summary>
 <pre><code>
 ... output ...
 </code></pre>
@@ -427,9 +427,9 @@ build:
 ---
 ```
 
-The `setLang()` function in `baseof.html` reads `lang_pair` from `<meta id="page-lang">` and redirects when the user switches language. Without these fields the language buttons only toggle their visual state — no redirect happens.
+The `setLang()` function in `baseof.html` reads `lang_pair` from `<meta id="page-lang">` and redirects when the user switches language. Without these fields the language buttons only toggle their visual state, no redirect happens.
 
-> **Important:** always add `pagefind_ignore: true` and `build: {list: never, render: always}` to RU pages — without them the page appears in listings and the search index.
+> **Important:** always add `pagefind_ignore: true` and `build: {list: never, render: always}` to RU pages, without them the page appears in listings and the search index.
 
 ---
 
@@ -451,7 +451,7 @@ hugo server --disableFastRender
 
 # 5. Test on mobile viewport (DevTools → Toggle device toolbar)
 
-# 6. If you used a new layout — verify the layout file name
+# 6. If you used a new layout - verify the layout file name
 #    matches the `layout:` field in frontmatter exactly
 ```
 

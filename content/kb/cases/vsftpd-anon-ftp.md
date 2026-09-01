@@ -10,12 +10,12 @@ lang_pair: "/kb/cases/ru/vsftpd-anon-ftp/"
 ---
 
 <div class="intro-card">
-Quick case — spin up an anonymous <strong>vsftpd</strong> FTP server for local network file sharing. Any client connects without a password and can freely upload and download files.
+Quick case, spin up an anonymous <strong>vsftpd</strong> FTP server for local network file sharing. Any client connects without a password and can freely upload and download files.
 </div>
 
 ## Why vsftpd
 
-vsftpd (Very Secure FTP Daemon) is the standard FTP server in most Linux distributions. It's lightweight, stable, and well-documented. Despite the "Very Secure" name, it works great in anonymous mode — everything is locked down by default, and you explicitly enable what you need.
+vsftpd (Very Secure FTP Daemon) is the standard FTP server in most Linux distributions. It's lightweight, stable, and well-documented. Despite the "Very Secure" name, it works great in anonymous mode; everything is locked down by default, and you explicitly enable what you need.
 
 ## Installation
 
@@ -42,8 +42,8 @@ sudo chown ftp:ftp /var/ftp/pub
 sudo chmod 2777 /var/ftp/pub
 ```
 
-- `/var/ftp` — anonymous user root. vsftpd **requires** this directory to be non-writable, otherwise the server refuses to start with `refusing to run with writable root inside chroot()`. Hence `555` permissions owned by `root`.
-- `/var/ftp/pub` — working directory for uploads and downloads. The `setgid` bit (`2777`) ensures new files inherit the group ownership.
+- `/var/ftp`: anonymous user root. vsftpd **requires** this directory to be non-writable, otherwise the server refuses to start with `refusing to run with writable root inside chroot()`. Hence `555` permissions owned by `root`.
+- `/var/ftp/pub`: working directory for uploads and downloads. The `setgid` bit (`2777`) ensures new files inherit the group ownership.
 
 ## vsftpd Configuration
 
@@ -128,11 +128,11 @@ ftp> get document.pdf      # download a file
 
 **From a phone (Android / iOS):**
 
-Any FTP client works — CX File Explorer, Total Commander, Solid Explorer. Enter the server IP, port 21, connection type anonymous. Files will be in `/pub`.
+Any FTP client works, CX File Explorer, Total Commander, Solid Explorer. Enter the server IP, port 21, connection type anonymous. Files will be in `/pub`.
 
 **From a browser:**
 
-Open `ftp://192.168.50.187/pub/` — download only, browser upload is not supported.
+Open `ftp://192.168.50.187/pub/`, download only, browser upload is not supported.
 
 ## Common Issues
 
@@ -176,7 +176,7 @@ sudo apt install --reinstall vsftpd
 
 ## Alternative: Python One-liner
 
-If you only need to serve files for download — no installation required:
+If you only need to serve files for download, no installation required:
 
 ```bash
 python3 -m http.server 8080 -d /path/to/files

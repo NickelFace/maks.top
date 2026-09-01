@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic1/ru/lpic1-101-2-boot-the-system/"
 page_lang: "en"
 ---
 
-> **Exam weight: 3** — LPIC-1 v5, Exam 101
+> **Exam weight: 3**. LPIC-1 v5, Exam 101
 
 ## What you need to know
 
@@ -22,7 +22,7 @@ page_lang: "en"
 
 ## Boot sequence
 
-Linux boot passes through several distinct stages. Know their order — the exam frequently tests exactly this.
+Linux boot passes through several distinct stages. Know their order, the exam frequently tests exactly this.
 
 ```
 Power on
@@ -52,25 +52,25 @@ Runlevels / targets
 
 ### BIOS (Basic Input/Output System)
 
-BIOS is stored in a non-volatile chip on the motherboard and runs every time the machine powers on. It is firmware — physically separate from ordinary storage devices.
+BIOS is stored in a non-volatile chip on the motherboard and runs every time the machine powers on. It is firmware, physically separate from ordinary storage devices.
 
 Exact BIOS boot sequence:
 
 1. POST (Power-On Self Test) checks hardware immediately at power-on
 2. BIOS activates basic components: video output, keyboard, storage
-3. BIOS reads the **first 440 bytes** of the first storage device (per boot order settings) — that is the first-stage bootloader
+3. BIOS reads the **first 440 bytes** of the first storage device (per boot order settings), that is the first-stage bootloader
 4. The first-stage bootloader invokes the second stage, which shows a menu and loads the kernel
 
 About MBR: the first **512 bytes** of a disk using the DOS partition scheme are called the MBR (Master Boot Record). The MBR contains the first-stage bootloader (first 440 bytes) and the partition table. A corrupted MBR means the system will not boot.
 
-Exam note: BIOS **initiates** the boot process after power-on, and some boot parameters are configured through it. BIOS does **not** load from a hard disk — it is embedded in a chip on the motherboard.
+Exam note: BIOS **initiates** the boot process after power-on, and some boot parameters are configured through it. BIOS does **not** load from a hard disk; it is embedded in a chip on the motherboard.
 
 ### UEFI (Unified Extensible Firmware Interface)
 
 UEFI is also firmware, but works fundamentally differently. Key differences:
 
 - Can read partition tables and work with filesystems directly
-- **Does not use MBR** — reads settings from NVRAM on the motherboard
+- **Does not use MBR**: reads settings from NVRAM on the motherboard
 - NVRAM stores paths to EFI applications that run automatically or from a boot menu
 - Supports Secure Boot: only runs signed EFI applications authorised by the manufacturer
 
@@ -80,7 +80,7 @@ Exact UEFI boot sequence:
 
 1. POST checks hardware
 2. UEFI activates basic components: video output, keyboard, storage
-3. UEFI reads NVRAM and launches the specified EFI application from ESP — usually the bootloader
+3. UEFI reads NVRAM and launches the specified EFI application from ESP, usually the bootloader
 4. The bootloader loads the kernel and starts the operating system
 
 ESP is typically mounted at `/boot/efi`. It holds a `.efi` file such as `grubx64.efi`. The `/EFI` directory on ESP contains applications referenced by NVRAM entries.
@@ -98,10 +98,10 @@ If the menu doesn't appear automatically: on BIOS systems hold `Shift` during GR
 ### Key files
 
 ```
-/etc/default/grub            — user settings (edit here)
-/etc/grub.d/                 — scripts that generate grub.cfg
-/boot/grub/grub.cfg          — final config (do not edit directly)
-/boot/grub/i386-pc/          — GRUB modules for BIOS systems (e.g. lvm.mod)
+/etc/default/grub            - user settings (edit here)
+/etc/grub.d/                 - scripts that generate grub.cfg
+/boot/grub/grub.cfg          - final config (do not edit directly)
+/boot/grub/i386-pc/          - GRUB modules for BIOS systems (e.g. lvm.mod)
 ```
 
 `grub.cfg` must be regenerated every time `/etc/default/grub` is changed:
@@ -134,7 +134,7 @@ At the GRUB menu, press `e` to edit an entry. Find the line starting with `linux
 linux /boot/vmlinuz-5.15.0 root=/dev/sda1 ro quiet splash
 ```
 
-Press `Ctrl+X` or `F10` to boot with the modified parameters. Changes are **temporary** — they do not survive a reboot.
+Press `Ctrl+X` or `F10` to boot with the modified parameters. Changes are **temporary**; they do not survive a reboot.
 
 To make parameters permanent, add them to `/etc/default/grub` in the `GRUB_CMDLINE_LINUX` line, then regenerate the config with `grub-mkconfig`.
 
@@ -181,7 +181,7 @@ initramfs (initial RAM filesystem) is a temporary root filesystem in RAM. The ke
 Why it is needed: the real root partition may be on LVM, RAID, an encrypted device or the network. Mounting all of that requires drivers the kernel does not yet have. initramfs contains a minimal set of tools and modules that locate and mount the real root.
 
 Exam facts:
-- initramfs is a **compressed cpio archive** — it can be unpacked and inspected
+- initramfs is a **compressed cpio archive**: it can be unpacked and inspected
 - the kernel uses initramfs **temporarily**, then switches to the real root
 - after a successful boot, initramfs contents are available at `/run/initramfs/`
 - initramfs is **tied to a specific kernel version**
@@ -202,7 +202,7 @@ zcat /boot/initrd.img-$(uname -r) | cpio -idmv
 
 ## Init systems
 
-After the kernel finishes, it unpacks initramfs, mounts filesystems from `/etc/fstab`, then launches the first program — `init`. This `init` process (PID 1) starts all initialisation scripts and system daemons. Once init is running, initramfs is released from memory.
+After the kernel finishes, it unpacks initramfs, mounts filesystems from `/etc/fstab`, then launches the first program: `init`. This `init` process (PID 1) starts all initialisation scripts and system daemons. Once init is running, initramfs is released from memory.
 
 Init scripts run short tasks and exit. Daemons (services) run continuously. Any init system can at minimum start, stop and restart a service.
 
@@ -212,7 +212,7 @@ Historically Linux used three different init systems.
 
 ## SysVinit
 
-SysVinit comes from Unix System V and still appears on legacy systems — that is why the exam covers it.
+SysVinit comes from Unix System V and still appears on legacy systems; that is why the exam covers it.
 
 SysVinit manages daemons through the concept of **runlevels**, numbered 0–6, defined by the distribution. The only runlevels with a consistent meaning across all distributions are 0, 1 and 6.
 
@@ -233,10 +233,10 @@ First process: `/sbin/init` with PID 1.
 ### Init scripts
 
 ```
-/etc/inittab            — main config (defines default runlevel)
-/etc/rc.d/              — rc script directories (RHEL)
-/etc/init.d/            — service scripts
-/etc/rc0.d/ ... /etc/rc6.d/  — symlinks to scripts per runlevel
+/etc/inittab            - main config (defines default runlevel)
+/etc/rc.d/              - rc script directories (RHEL)
+/etc/init.d/            - service scripts
+/etc/rc0.d/ ... /etc/rc6.d/  - symlinks to scripts per runlevel
 ```
 
 Scripts in `/etc/rcN.d/` are named: `S20apache2` (S = Start, 20 = order) or `K80apache2` (K = Kill). The number sets start or stop order.
@@ -282,7 +282,7 @@ Targets in systemd replace SysVinit runlevels.
 | multi-user.target | 3 | Multi-user without GUI |
 | graphical.target | 5 | Multi-user with GUI |
 | reboot.target | 6 | Reboot |
-| emergency.target | — | Emergency shell |
+| emergency.target | n/a | Emergency shell |
 
 ### Key commands
 
@@ -311,11 +311,11 @@ systemctl list-dependencies multi-user.target
 ### Units
 
 systemd works with units of different types:
-- `.service` — services
-- `.target` — groups of services
-- `.mount` — mount points
-- `.socket` — sockets for socket activation
-- `.timer` — cron replacement
+- `.service`: services
+- `.target`: groups of services
+- `.mount`: mount points
+- `.socket`: sockets for socket activation
+- `.timer`: cron replacement
 
 System units: `/lib/systemd/system/`
 User-defined and overrides: `/etc/systemd/system/`
@@ -364,7 +364,7 @@ The buffer is cleared only by explicit `dmesg --clear` and at shutdown or reboot
 
 ### journalctl
 
-On systemd systems, `journalctl` shows initialisation messages. The systemd journal is not stored as plain text, so `journalctl` is required — `cat` won't work.
+On systemd systems, `journalctl` shows initialisation messages. The systemd journal is not stored as plain text, so `journalctl` is required; `cat` won't work.
 
 ```bash
 # Current boot (both are equivalent)
@@ -405,10 +405,10 @@ The `-b`, `--boot`, `-k` and `--dmesg` flags show boot messages. The `-D` and `-
 ### Files in /var/log/
 
 ```
-/var/log/boot.log      — boot messages
-/var/log/messages      — general system log (RHEL)
-/var/log/syslog        — general system log (Debian/Ubuntu)
-/var/log/dmesg         — dmesg output saved at boot
+/var/log/boot.log      - boot messages
+/var/log/messages      - general system log (RHEL)
+/var/log/syslog        - general system log (Debian/Ubuntu)
+/var/log/dmesg         - dmesg output saved at boot
 ```
 
 ---
@@ -434,7 +434,7 @@ The `-b`, `--boot`, `-k` and `--dmesg` flags show boot messages. The `-D` and `-
 ## Typical exam questions
 
 **Q: What is true about the BIOS boot sequence?**
-BIOS initiates the boot process after power-on, and some boot parameters are configured through it. BIOS does **not** load from a hard disk — it is embedded in a chip.
+BIOS initiates the boot process after power-on, and some boot parameters are configured through it. BIOS does **not** load from a hard disk; it is embedded in a chip.
 
 **Q: What is true about UEFI?**
 UEFI can read partition tables and work with certain filesystems. Configuration is stored in NVRAM, not on the `/boot` partition.
@@ -467,15 +467,15 @@ Linux kernel images and initial ramdisk (initramfs) images. systemd units are no
 
 ## Related topics
 
-- [101.1 Determine and Configure Hardware Settings](/posts/lpic1-101-1-hardware-settings/) — BIOS, UEFI, hardware resources
-- 101.3 Change Runlevels and Boot Targets — managing runlevels and targets
-- 102.6 Linux as a Virtualization Guest — booting in virtual machines
+- [101.1 Determine and Configure Hardware Settings](/posts/lpic1-101-1-hardware-settings/): BIOS, UEFI, hardware resources
+- 101.3 Change Runlevels and Boot Targets: managing runlevels and targets
+- 102.6 Linux as a Virtualization Guest: booting in virtual machines
 
 ---
 
 ## Exercises
 
-### Exercise 1 — Bootstrap location on a BIOS machine
+### Exercise 1: Bootstrap location on a BIOS machine
 
 On a machine with BIOS: where is the initial bootstrap binary located?
 
@@ -488,20 +488,20 @@ In the MBR of the first storage device, as configured in the BIOS boot order set
 
 ---
 
-### Exercise 2 — EFI application location
+### Exercise 2: EFI application location
 
 UEFI supports external programs called EFI applications. Where are these applications stored on the system?
 
 <details>
 <summary>Answer</summary>
 
-On the EFI System Partition (ESP), on any available block device with a compatible filesystem — typically FAT32.
+On the EFI System Partition (ESP), on any available block device with a compatible filesystem: typically FAT32.
 
 </details>
 
 ---
 
-### Exercise 3 — Passing the root parameter to the kernel
+### Exercise 3: Passing the root parameter to the kernel
 
 Bootloaders allow passing parameters to the kernel before it loads. A system fails to boot because the root filesystem location is incorrectly specified. How do you pass the correct root partition `/dev/sda3` to the kernel?
 
@@ -524,7 +524,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ---
 
-### Exercise 4 — Device not found at boot
+### Exercise 4: Device not found at boot
 
 The boot process ends with:
 
@@ -545,7 +545,7 @@ This most commonly happens when the initramfs is missing a module for the disk c
 
 ---
 
-### Exercise 5 — UEFI and MBR overwrite
+### Exercise 5: UEFI and MBR overwrite
 
 A bootloader shows a list of operating systems when multiple are installed. However, a new OS may overwrite the MBR, erasing the first-stage bootloader and making other OSes inaccessible. Why does this not happen on a UEFI machine?
 
@@ -560,7 +560,7 @@ Each OS places its `.efi` file in its own directory on ESP (e.g. `/EFI/ubuntu/` 
 
 ---
 
-### Exercise 6 — New kernel without initramfs
+### Exercise 6: New kernel without initramfs
 
 What are the typical consequences of installing a new kernel without a matching initramfs image?
 
@@ -575,7 +575,7 @@ This is especially relevant when the root is on LVM, RAID or an encrypted partit
 
 ---
 
-### Exercise 7 — Paginated dmesg output
+### Exercise 7: Paginated dmesg output
 
 The output of `dmesg` spans hundreds of lines and is often piped to a pager like `less`. Which `dmesg` flag paginates output automatically, without an explicit pipe?
 
@@ -598,7 +598,7 @@ The `-H` flag enables human-readable mode, which launches a built-in pager autom
 
 ---
 
-### Exercise 8 — Reading journals from another disk
+### Exercise 8: Reading journals from another disk
 
 A hard disk with a complete filesystem from a powered-off machine has been removed and connected to a working machine as a second disk, mounted at `/mnt/hd`. How do you use `journalctl` to read the journals from `/mnt/hd/var/log/journal/`?
 

@@ -8,7 +8,7 @@ lang_pair: "/posts/lpic2/ru/lpic2-205-3-troubleshooting-network/"
 page_lang: "en"
 ---
 
-> **Exam topic 205.3** — Troubleshooting Network Issues (weight: 4). Covers systematically diagnosing and resolving network problems, TCP Wrappers access control, interface/routing configuration, and key diagnostic tools.
+> **Exam topic 205.3**: Troubleshooting Network Issues (weight: 4). Covers systematically diagnosing and resolving network problems, TCP Wrappers access control, interface/routing configuration, and key diagnostic tools.
 
 ---
 
@@ -107,7 +107,7 @@ rpcbind: ALL
 
 Entry fields: `service: client_list`. The list may contain IP addresses, host names, subnets, and wildcards (`ALL`, `LOCAL`).
 
-> **Tip:** Best practice — write `ALL: ALL` in `hosts.deny` and list only allowed addresses in `hosts.allow`. No service restart is needed after changing these files; changes take effect immediately.
+> **Tip:** Best practice; write `ALL: ALL` in `hosts.deny` and list only allowed addresses in `hosts.allow`. No service restart is needed after changing these files; changes take effect immediately.
 
 ---
 
@@ -171,7 +171,7 @@ ip route del 192.168.10.0/24                      # delete a route
 ip route get 8.8.8.8                              # find route to a specific host
 ```
 
-> **Warning:** Two common routing mistakes. First: missing network entry for an interface — when an interface is configured, the kernel should automatically add a route for its subnet. Second: two default gateways. There should be exactly one. Having two may go unnoticed for a long time because traffic accidentally goes through the correct one.
+> **Warning:** Two common routing mistakes. First: missing network entry for an interface; when an interface is configured, the kernel should automatically add a route for its subnet. Second: two default gateways. There should be exactly one. Having two may go unnoticed for a long time because traffic accidentally goes through the correct one.
 
 ---
 
@@ -200,7 +200,7 @@ ss -t dst :80  # filter by destination port
 
 The difference between `ss` and `netstat`: `ss` reads data directly from kernel space and shows Recv-Q and Send-Q queues, which helps understand whether the application is keeping up with the data flow.
 
-> **Tip:** For the exam — `netstat -tulnp` and `ss -tlnp` both show listening TCP/UDP ports with process names. Know both.
+> **Tip:** For the exam, `netstat -tulnp` and `ss -tlnp` both show listening TCP/UDP ports with process names. Know both.
 
 ---
 
@@ -241,7 +241,7 @@ mtr --report 8.8.8.8     # text-mode report
 
 `mtr` combines `ping` and `traceroute`: continuously sends packets and shows loss and latency per hop in real time.
 
-> **Important:** For the exam — if the question asks about a tool that combines ping and traceroute, the answer is always `mtr`.
+> **Important:** For the exam; if the question asks about a tool that combines ping and traceroute, the answer is always `mtr`.
 
 ---
 
@@ -258,7 +258,7 @@ nameserver 192.168.1.1       # primary DNS
 nameserver 8.8.8.8           # secondary DNS
 ```
 
-> **Warning:** NetworkManager overwrites `resolv.conf`. If NetworkManager is active, do not edit `/etc/resolv.conf` directly — changes will disappear after reconnection. Use `nmcli` or files under `/etc/NetworkManager/`.
+> **Warning:** NetworkManager overwrites `resolv.conf`. If NetworkManager is active, do not edit `/etc/resolv.conf` directly; changes will disappear after reconnection. Use `nmcli` or files under `/etc/NetworkManager/`.
 
 ### /etc/hosts
 
@@ -295,7 +295,7 @@ dig -x 192.168.1.10
 
 `dig` is the "Swiss Army knife" of name resolution: it shows everything the DNS server returned. `host` is simpler and faster when you just need the IP.
 
-> **Important:** For the exam — `host` gives a brief `hostname has address X.X.X.X` output. `dig` gives a full DNS response with all sections. Both can resolve names and check records.
+> **Important:** For the exam; `host` gives a brief `hostname has address X.X.X.X` output. `dig` gives a full DNS response with all sections. Both can resolve names and check records.
 
 ### /etc/hostname and /etc/HOSTNAME
 
@@ -368,7 +368,7 @@ journalctl -k   # kernel messages only
 
 ## Incorrect System Initialization
 
-If a network interface did not come up at all, the cause may be a boot error — the kernel did not load the required NIC module or failed to initialize the interface.
+If a network interface did not come up at all, the cause may be a boot error: the kernel did not load the required NIC module or failed to initialize the interface.
 
 ```bash
 dmesg | grep -i eth
@@ -480,9 +480,9 @@ systemctl list-units --type=service | grep -i net
 **Q1.** An administrator ran `ping 8.8.8.8` and got no reply. This means 8.8.8.8 is unreachable.
 
 A. True  
-B. False — a firewall may block ICMP  
+B. False; a firewall may block ICMP
 C. True, but only for IPv4  
-D. False — use ping6 instead
+D. False; use ping6 instead
 
 **Answer:** B. A firewall on an intermediate node or on 8.8.8.8 itself may block ICMP echo-request/reply. No ping reply does not prove the host is unreachable.
 
@@ -523,9 +523,9 @@ D. The DNS server needs to be restarted
 
 **Q5.** `route -n` shows two routes with Destination `0.0.0.0`. What does this mean?
 
-A. Normal — one route for IPv4, another for IPv6  
-B. A problem — two default gateways can cause unpredictable routing  
-C. Normal — one primary, one backup  
+A. Normal, one route for IPv4, another for IPv6
+B. A problem, two default gateways can cause unpredictable routing
+C. Normal, one primary, one backup
 D. A syntax error in the route command
 
 **Answer:** B. There should be exactly one default gateway. Two default gateways create unpredictable behavior that may go unnoticed for a long time if traffic accidentally takes the correct path.

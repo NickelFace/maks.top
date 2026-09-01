@@ -12,6 +12,6 @@ layout: "linux-namespaces"
 ---
 
 <!--
-  The body intentionally has no h2/h3 — the article is built from JS-rendered
+  The body intentionally has no h2/h3; the article is built from JS-rendered
   cards in ns.js. The description is rendered as `.prose-lead` by the layout.
 -->

@@ -8,7 +8,7 @@ page_lang: "en"
 lang_pair: "/posts/lpic1/ru/lpic1-104-1-partitions-filesystems/"
 ---
 
-> **Exam weight: 2** — LPIC-1 v5, Exam 101
+> **Exam weight: 2**. LPIC-1 v5, Exam 101
 
 ## What You Need to Know
 
@@ -57,7 +57,7 @@ Each GPT disk gets a 128-bit GUID. GPT stores a backup header and partition tabl
 
 ---
 
-## fdisk — MBR Partition Editor
+## fdisk: MBR Partition Editor
 
 ```bash
 fdisk /dev/sda
@@ -105,7 +105,7 @@ Command `t` → partition number → hex code. Common codes:
 
 ---
 
-## gdisk — GPT Partition Editor
+## gdisk: GPT Partition Editor
 
 `gdisk` mirrors `fdisk` for GPT disks.
 
@@ -120,7 +120,7 @@ Command `p` shows the disk GUID and total free space in the header. Type codes a
 
 Command `s` renumbers partitions after a deletion. Recovery menu (`r`) provides tools to rebuild headers, convert MBR↔GPT.
 
-**GPT advantage:** a new partition can use any free space regardless of physical location — no contiguity requirement.
+**GPT advantage:** a new partition can use any free space regardless of physical location, no contiguity requirement.
 
 ---
 
@@ -146,7 +146,7 @@ Key options:
 | `-c -c` | thorough (slow) bad block check |
 | `-L LABEL` | volume label (≤16 chars) |
 | `-U ID` | UUID: literal, `clear`, `random`, or `time` |
-| `-n` | dry run — no writes |
+| `-n` | dry run: no writes |
 | `-d DIR` | pre-populate filesystem from directory |
 | `-F` | force creation |
 | `-q` | quiet |
@@ -225,7 +225,7 @@ mount -o compress /dev/sdb1 /mnt/disk
 
 Works with both MBR and GPT.
 
-**Warning: parted applies changes immediately — there is no `w` command.**
+**Warning: parted applies changes immediately; there is no `w` command.**
 
 ```bash
 parted /dev/sdb
@@ -249,7 +249,7 @@ parted /dev/sdb
 (parted) mkpart primary linux-swap 301m 800m
 ```
 
-`FSTYPE` is a hint only — parted does **not** create the filesystem. Always run `mkfs` afterward.
+`FSTYPE` is a hint only; parted does **not** create the filesystem. Always run `mkfs` afterward.
 
 ### Rescue
 
@@ -261,7 +261,7 @@ Scans the disk between START and END for filesystem signatures. Only finds parti
 
 ### Resizing
 
-**Shrink** (order matters — reversing it destroys data):
+**Shrink** (order matters. Reversing it destroys data):
 1. Shrink filesystem: `resize2fs /dev/sdb3 88m`
 2. Move partition end: `resizepart 3 300m`
 
@@ -279,7 +279,7 @@ Scans the disk between START and END for filesystem signatures. Only finds parti
 
 Change type in fdisk: `t` → `82`; in gdisk: `t` → `8200`; in parted: specify `linux-swap` as FSTYPE.
 
-Always run `mkswap` before `swapon` — without it you get `read swap header failed`.
+Always run `mkswap` before `swapon`, without it you get `read swap header failed`.
 
 ```bash
 mkswap /dev/sda2
@@ -342,8 +342,8 @@ Add to `/etc/fstab` to persist across reboots. Recommended permissions: `0600`, 
 14. Max file size on FAT32? → **4 GB**.
 15. Correct order to shrink an ext4 partition? → **`resize2fs` first, then `resizepart`**.
 16. What does `resize2fs -M` do? → Shrinks filesystem to minimum size for current data.
-17. Error `read swap header failed` — cause? → **`mkswap` was not run** before `swapon`.
-18. What does parted `rescue` find? → Partitions that **had a filesystem** — empty partitions are not found.
+17. Error `read swap header failed`: cause? → **`mkswap` was not run** before `swapon`.
+18. What does parted `rescue` find? → Partitions that **had a filesystem**, empty partitions are not found.
 19. Difference between Btrfs subvolume and a partition? → Subvolume shares free space with parent; partition reserves space upfront.
 20. How to find UUID and label of a filesystem? → **`lsblk -f`**.
 
@@ -351,7 +351,7 @@ Add to `/etc/fstab` to persist across reboots. Recommended permissions: `0600`, 
 
 ## Exercises
 
-### Exercise 1 — Partition table for a 3 TB disk
+### Exercise 1: Partition table for a 3 TB disk
 
 A 3 TB disk needs three 1 GB partitions. Which partition table type should you use, and why?
 
@@ -364,7 +364,7 @@ GPT. MBR is limited to 2 TB disks, so a 3 TB disk cannot be fully addressed by M
 
 ---
 
-### Exercise 2 — Free space in gdisk
+### Exercise 2: Free space in gdisk
 
 How do you see how much free space remains on a disk in gdisk?
 
@@ -381,7 +381,7 @@ Total free space is 1282071 sectors (626.0 MiB)
 
 ---
 
-### Exercise 3 — Create ext3 with bad block check, label, and random UUID
+### Exercise 3: Create ext3 with bad block check, label, and random UUID
 
 Create ext3 on `/dev/sdc1` with bad block check, label `MyDisk`, and a random UUID.
 
@@ -402,7 +402,7 @@ mke2fs -t ext3 -c -L MyDisk -U random /dev/sdc1
 
 ---
 
-### Exercise 4 — Create partition in parted
+### Exercise 4: Create partition in parted
 
 In parted, create a 300 MB ext4 partition starting at 500 MB.
 
@@ -413,13 +413,13 @@ In parted, create a 300 MB ext4 partition starting at 500 MB.
 (parted) mkpart primary ext4 500m 800m
 ```
 
-Remember: parted only sets a type flag — it does **not** create the filesystem. After exiting parted, run `mkfs.ext4 /dev/sdXN` separately.
+Remember: parted only sets a type flag; it does **not** create the filesystem. After exiting parted, run `mkfs.ext4 /dev/sdXN` separately.
 
 </details>
 
 ---
 
-### Exercise 5 — Btrfs RAID1 on two 20 GB partitions
+### Exercise 5: Btrfs RAID1 on two 20 GB partitions
 
 Two 20 GB partitions. Combine them into one Btrfs with mirroring. What is the usable size?
 
@@ -430,20 +430,20 @@ Two 20 GB partitions. Combine them into one Btrfs with mirroring. What is the us
 mkfs.btrfs -d raid1 -m raid1 /dev/sda1 /dev/sdb1
 ```
 
-Usable size: **20 GB** — one partition mirrors the other.
+Usable size: **20 GB**, one partition mirrors the other.
 
 </details>
 
 ---
 
-### Exercise 6 — 600 MB partition on a fragmented MBR disk
+### Exercise 6: 600 MB partition on a fragmented MBR disk
 
 An MBR disk (1.9 GB) has two existing partitions: `/dev/sdb1` (512 MB) and `/dev/sdb3` (512 MB), with free space in the gaps between them. Can you create a new 600 MB partition?
 
 <details>
 <summary>Answer</summary>
 
-No. Total free space is about 1 GB, but the largest *contiguous* free block is only 512 MB. A partition cannot span a gap — fdisk rejects it with `Value out of range`.
+No. Total free space is about 1 GB, but the largest *contiguous* free block is only 512 MB. A partition cannot span a gap: fdisk rejects it with `Value out of range`.
 
 Use `F` in fdisk to inspect the free space layout.
 
@@ -451,22 +451,22 @@ Use `F` in fdisk to inspect the free space layout.
 
 ---
 
-### Exercise 7 — Shrink partition to minimum size
+### Exercise 7: Shrink partition to minimum size
 
 The first partition on `/dev/sdc` is 1 GB with ext4, containing about 256 MB of files. Shrink it to the minimum needed size.
 
 <details>
 <summary>Answer</summary>
 
-Two-step operation — filesystem first, then partition boundary.
+Two-step operation, filesystem first, then partition boundary.
 
-Step 1 — shrink the filesystem to fit actual data:
+Step 1. Shrink the filesystem to fit actual data:
 
 ```bash
 resize2fs -M /dev/sdc1
 ```
 
-Step 2 — move the partition end in parted:
+Step 2. Move the partition end in parted:
 
 ```
 (parted) resizepart 1 241M
@@ -478,7 +478,7 @@ Order is critical: always shrink the filesystem before moving the partition boun
 
 ---
 
-### Exercise 8 — swapon fails with "read swap header failed"
+### Exercise 8: swapon fails with "read swap header failed"
 
 A partition was created with `mkpart primary linux-swap 0 1024M`, then `swapon /dev/sdb1` fails with `read swap header failed`. What is wrong and how do you fix it?
 
@@ -496,7 +496,7 @@ swapon /dev/sdb1
 
 ---
 
-### Exercise 9 — Recover accidentally deleted partition in parted
+### Exercise 9: Recover accidentally deleted partition in parted
 
 A disk had an EFI partition (250 MB), swap (4 GB), and a third partition (10 GB). The third was accidentally deleted. How do you recover it?
 
@@ -505,26 +505,26 @@ A disk had an EFI partition (250 MB), swap (4 GB), and a third partition (10 GB)
 
 Use `rescue` with estimated boundaries.
 
-Calculate: 250 MB (EFI) + 4×1024 MB (swap) = 4346 MB — start. End: 4346 + 10×1024 = 14 586 MB.
+Calculate: 250 MB (EFI) + 4×1024 MB (swap) = 4346 MB; start. End: 4346 + 10×1024 = 14 586 MB.
 
 ```
 (parted) rescue 4346m 14586m
 ```
 
-Give a small margin in both directions — disk geometry can shift boundaries slightly. `rescue` only finds partitions that had a filesystem.
+Give a small margin in both directions; disk geometry can shift boundaries slightly. `rescue` only finds partitions that had a filesystem.
 
 </details>
 
 ---
 
-### Exercise 10 — Activate /dev/sda3 as swap using fdisk
+### Exercise 10: Activate /dev/sda3 as swap using fdisk
 
 Turn an unused 4 GB partition `/dev/sda3` into active swap.
 
 <details>
 <summary>Answer</summary>
 
-Step 1 — change partition type to Linux Swap in fdisk:
+Step 1. Change partition type to Linux Swap in fdisk:
 
 ```
 Command (m for help): t
@@ -536,13 +536,13 @@ Changed type of partition 'Linux' to 'Linux swap / Solaris'.
 Command (m for help): w
 ```
 
-Step 2 — write the swap header:
+Step 2. Write the swap header:
 
 ```bash
 mkswap /dev/sda3
 ```
 
-Step 3 — activate swap:
+Step 3. Activate swap:
 
 ```bash
 swapon /dev/sda3

@@ -14,8 +14,8 @@ An ACL is a list of rules (permit/deny) for filtering traffic.
 
 **Processing rules:**
 1. Lines are checked **top to bottom**
-2. On the first match — the action is applied, remaining lines are not checked
-3. At the end of every ACL — **implicit `deny any`** (invisible)
+2. On the first match: the action is applied, remaining lines are not checked
+3. At the end of every ACL: **implicit `deny any`** (invisible)
 4. An empty ACL (only `deny any`) blocks everything
 
 > **⚠️ Note:** There is an implicit `deny any` at the end of every ACL! If no explicit `permit` is added, all traffic will be blocked. Always add `permit ip any any` at the end if remaining traffic should be allowed.
@@ -104,7 +104,7 @@ Router(config)# interface gigabitethernet 0/0
 Router(config-if)# ip access-group 100 in
 ```
 
-> **💡 Tip:** Place Extended ACLs **close to the source** — to filter as early as possible and reduce unnecessary traffic on the network.
+> **💡 Tip:** Place Extended ACLs **close to the source**, to filter as early as possible and reduce unnecessary traffic on the network.
 
 ---
 
@@ -167,7 +167,7 @@ Router(config-if)# ipv6 traffic-filter BLOCK_HTTP6 in
 Router# show ipv6 access-list
 ```
 
-> **💡 Tip:** IPv6 ACLs are always named (no numbered form). The implicit end is `deny ipv6 any any` — same behavior as IPv4.
+> **💡 Tip:** IPv6 ACLs are always named (no numbered form). The implicit end is `deny ipv6 any any`, same behavior as IPv4.
 
 ---
 
@@ -192,9 +192,9 @@ Router# clear ip access-list counters
 
 | Resource | Description |
 |---|---|
-| [ACL — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/access-control-list-acl) | Standard vs Extended ACL: syntax, wildcard masks, direction |
-| [Named ACL — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/named-access-list) | Named ACL: creation, editing, sequence numbers |
-| [ACL Troubleshooting — Cisco](https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html) | Cisco guide for ACL troubleshooting and creation |
-| [Extended ACL — networklessons.com](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/extended-access-list) | Extended ACL: filtering by IP, port, and protocol |
-| [Jeremy's IT Lab — Standard ACL (YouTube)](https://www.youtube.com/watch?v=gvJ10sBbmVA) | Standard ACLs from the Free CCNA series |
-| [Jeremy's IT Lab — Extended ACL (YouTube)](https://www.youtube.com/watch?v=UGCuetJ6Fdo) | Extended ACLs from the Free CCNA series |
+| [ACL (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/access-control-list-acl) | Standard vs Extended ACL: syntax, wildcard masks, direction |
+| [Named ACL (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd2-200-105/named-access-list) | Named ACL: creation, editing, sequence numbers |
+| [ACL Troubleshooting (Cisco)](https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html) | Cisco guide for ACL troubleshooting and creation |
+| [Extended ACL (networklessons.com)](https://networklessons.com/cisco/ccna-routing-switching-icnd1-100-105/extended-access-list) | Extended ACL: filtering by IP, port, and protocol |
+| [Jeremy's IT Lab: Standard ACL (YouTube)](https://www.youtube.com/watch?v=gvJ10sBbmVA) | Standard ACLs from the Free CCNA series |
+| [Jeremy's IT Lab: Extended ACL (YouTube)](https://www.youtube.com/watch?v=UGCuetJ6Fdo) | Extended ACLs from the Free CCNA series |

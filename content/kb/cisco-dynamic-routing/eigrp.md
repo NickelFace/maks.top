@@ -7,7 +7,7 @@ date: 2026-04-22
 ---
 
 <div class="intro-card">
-Cisco IOS cheat sheet for <strong>EIGRP</strong> (Enhanced Interior Gateway Routing Protocol) — Cisco-proprietary distance-vector/diffusing-update routing protocol. Covers basic setup, timers, key-chain authentication, load balancing, and diagnostics.
+Cisco IOS cheat sheet for <strong>EIGRP</strong> (Enhanced Interior Gateway Routing Protocol), Cisco-proprietary distance-vector/diffusing-update routing protocol. Covers basic setup, timers, key-chain authentication, load balancing, and diagnostics.
 </div>
 
 ## Basic Configuration
@@ -102,7 +102,7 @@ Cisco IOS cheat sheet for <strong>EIGRP</strong> (Enhanced Interior Gateway Rout
 <tr><td class="mono">key-string cisco</td><td class="desc">Set key 1 value</td></tr>
 <tr><td class="mono">accept-lifetime 18:00:00 may 21 2015 18:00:00 may 22 2015</td><td class="desc">Window during which this key is accepted from neighbors</td></tr>
 <tr><td class="mono">send-lifetime 18:00:00 may 21 2015 18:00:00 may 22 2015</td><td class="desc">Window during which this key is sent to neighbors</td></tr>
-<tr><td class="mono">key 2</td><td class="desc">Key 2 — automatically takes over after key 1 expires</td></tr>
+<tr><td class="mono">key 2</td><td class="desc">Key 2: automatically takes over after key 1 expires</td></tr>
 <tr><td class="mono">key-string cisco2</td><td class="desc">Set key 2 value</td></tr>
 </tbody>
 </table>

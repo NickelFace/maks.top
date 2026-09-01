@@ -9,9 +9,9 @@ page_lang: "en"
 lang_pair: "/posts/neteng/ru/neteng-07-ipv4-ipv6/"
 ---
 
-## IP Addressing — Diploma Project
+## IP Addressing: Diploma Project
 
-### IPv4 — Full Network
+### IPv4: Full Network
 
 ![IPv4 full topology](/img/neteng/07/1.png)
 
@@ -126,7 +126,7 @@ lang_pair: "/posts/neteng/ru/neteng-07-ipv4-ipv6/"
 | ---------- | ---------- | ---- | ---------- |
 | LAN4       | 10.10.50.0 | /24  | 1.1.4.0/24 |
 
-ISP internal addressing is not our concern — they provide internet access.
+ISP internal addressing is not our concern; they provide internet access.
 
 ---
 
@@ -182,8 +182,8 @@ Triada is the ISP for three of our sites, so the address pool is shared:
 |        | e0/2 | 2CAD:1995:B0DA:9::0 | SW29        |           |
 
 **Summary:**
-- `2002:ACAD:0DB8::/48` — allocated by Lamas
-- `2CAD:1995:B0DA::/48` — allocated by Triada
+- `2002:ACAD:0DB8::/48`: allocated by Lamas
+- `2CAD:1995:B0DA::/48`: allocated by Triada
 
 ### VLANs
 
@@ -208,11 +208,11 @@ Triada is the ISP for three of our sites, so the address pool is shared:
 | ------- | ---- | ---------- | ----------- | ------ |
 | R15     | e0/0 | fe80:1::15 | R13 (local) | MOSCOW |
 |         | e0/1 | fe80:2::15 | R12 (local) |        |
-|         | e0/2 | —          | R21 (Lamas) |        |
+|         | e0/2 | n/a          | R21 (Lamas) |        |
 |         | e0/3 | fe80:3::15 | R20 (local) |        |
 | R14     | e0/0 | fe80:4::14 | R12 (local) |        |
 |         | e0/1 | fe80:5::14 | R13 (local) |        |
-|         | e0/2 | —          | R22 (Kitorn)|        |
+|         | e0/2 | n/a          | R22 (Kitorn)|        |
 |         | e0/3 | fe80:6::14 | R19 (local) |        |
 | R13     | e0/0 | fe80:8::13 | in SW5      |        |
 |         | e0/2 | fe80:1::13 | R15 (local) |        |
@@ -227,8 +227,8 @@ Triada is the ISP for three of our sites, so the address pool is shared:
 | ------- | ---- | ----------- | ----------- | -------------- |
 | R18     | e0/0 | fe80:12::18 | R16 (local) | St. Petersburg |
 |         | e0/1 | fe80:11::18 | R17 (local) |                |
-|         | e0/2 | —           | R24 (Triada)|                |
-|         | e0/3 | —           | R26 (Triada)|                |
+|         | e0/2 | n/a           | R24 (Triada)|                |
+|         | e0/3 | n/a           | R26 (Triada)|                |
 | R17     | e0/1 | fe80:11::17 | R18 (local) |                |
 |         | e0/2 | fe80:13::17 | in SW9      |                |
 | R16     | e0/0 | fe80:15::16 | R32 (local) |                |
@@ -238,12 +238,12 @@ Triada is the ISP for three of our sites, so the address pool is shared:
 
 | Device | Port | IPv6 | Note        | Region     |
 | ------ | ---- | ---- | ----------- | ---------- |
-| R27    | e0/0 | —    | R25 (Triada)| Labytnangi |
+| R27    | e0/0 | n/a    | R25 (Triada)| Labytnangi |
 
 | Device | Port | IPv6        | Note        | Region    |
 | ------ | ---- | ----------- | ----------- | --------- |
-| R28    | e0/0 | —           | R26 (Triada)| Chukordah |
-|        | e0/1 | —           | R25 (Triada)|           |
+| R28    | e0/0 | n/a           | R26 (Triada)| Chukordah |
+|        | e0/1 | n/a           | R25 (Triada)|           |
 |        | e0/2 | fe80:21::28 | SW29        |           |
 
 ---

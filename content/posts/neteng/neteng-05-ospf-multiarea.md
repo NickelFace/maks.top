@@ -46,7 +46,7 @@ page_lang: "en"
 
 ---
 
-### Part 1 — Basic device setup
+### Part 1: Basic device setup
 
 <details>
 <summary>R1</summary>
@@ -144,7 +144,7 @@ copy running-config startup-config
 Verify interface status:
 
 <details>
-<summary>R1 — show ip interface brief</summary>
+<summary>R1: show ip interface brief</summary>
 <pre><code>
 enable
 configure terminal
@@ -159,7 +159,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip interface brief</summary>
+<summary>R2: show ip interface brief</summary>
 <pre><code>
 enable
 configure terminal
@@ -173,7 +173,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip interface brief</summary>
+<summary>R3: show ip interface brief</summary>
 <pre><code>
 R3#show ip interface brief
 Interface    IP-Address       OK?  Method  Status    Protocol
@@ -185,7 +185,7 @@ Loopback5    192.168.5.1      YES  manual  up        up
 
 ---
 
-### Part 2 — OSPF multiarea configuration
+### Part 2: OSPF multiarea configuration
 
 Each loopback interface must be passive. MD5 authentication with key **Cisco123** on all serial interfaces.
 
@@ -252,7 +252,7 @@ show ip ospf interface
 ```
 
 <details>
-<summary>R1 — show ip ospf neighbor</summary>
+<summary>R1: show ip ospf neighbor</summary>
 <pre><code>
 enable
 configure terminal
@@ -265,7 +265,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip ospf neighbor</summary>
+<summary>R2: show ip ospf neighbor</summary>
 <pre><code>
 R2#show ip ospf neighbor
 
@@ -275,7 +275,7 @@ Neighbor ID  Pri  State     Dead Time  Address        Interface
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip ospf neighbor</summary>
+<summary>R3: show ip ospf neighbor</summary>
 <pre><code>
 R3#show ip ospf neighbor
 
@@ -284,7 +284,7 @@ Neighbor ID  Pri  State     Dead Time  Address        Interface
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip protocols</summary>
+<summary>R1: show ip protocols</summary>
 <pre><code>
 enable
 configure terminal
@@ -318,7 +318,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip protocols</summary>
+<summary>R2: show ip protocols</summary>
 <pre><code>
 enable
 configure terminal
@@ -350,7 +350,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip protocols</summary>
+<summary>R3: show ip protocols</summary>
 <pre><code>
 R3#show ip protocols
 
@@ -377,7 +377,7 @@ Routing Protocol is "ospf 1"
 </code></pre>
 </details>
 <details>
-<summary>R1 — show ip ospf interface</summary>
+<summary>R1: show ip ospf interface</summary>
 <pre><code>
 enable
 configure terminal
@@ -402,7 +402,7 @@ copy running-config startup-config
 Verify routing tables:
 
 <details>
-<summary>R1 — show ip route ospf</summary>
+<summary>R1: show ip route ospf</summary>
 <pre><code>
 enable
 configure terminal
@@ -420,7 +420,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip route ospf</summary>
+<summary>R2: show ip route ospf</summary>
 <pre><code>
 enable
 configure terminal
@@ -439,7 +439,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip route ospf</summary>
+<summary>R3: show ip route ospf</summary>
 <pre><code>
 R3#show ip route ospf
   192.168.1.0/32 is subnetted, 1 subnets
@@ -454,10 +454,10 @@ O*E2 0.0.0.0/0 [110/1] via 192.168.23.1, 00:48:37, Serial0/0
 </code></pre>
 </details>
 
-OSPF database — note loopbacks are advertised as /32 host routes:
+OSPF database. Note loopbacks are advertised as /32 host routes:
 
 <details>
-<summary>R1 — show ip ospf database</summary>
+<summary>R1: show ip ospf database</summary>
 <pre><code>
 enable
 configure terminal
@@ -498,7 +498,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip ospf database</summary>
+<summary>R2: show ip ospf database</summary>
 <pre><code>
 enable
 configure terminal
@@ -542,7 +542,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip ospf database</summary>
+<summary>R3: show ip ospf database</summary>
 <pre><code>
 R3#show ip ospf database
         OSPF Router with ID (3.3.3.3) (Process ID 1)
@@ -615,7 +615,7 @@ copy running-config startup-config
 Verify adjacency is restored after authentication:
 
 <details>
-<summary>R1 — show ip ospf neighbor</summary>
+<summary>R1: show ip ospf neighbor</summary>
 <pre><code>
 enable
 configure terminal
@@ -628,7 +628,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip ospf neighbor</summary>
+<summary>R2: show ip ospf neighbor</summary>
 <pre><code>
 R2#show ip ospf neighbor
 
@@ -638,7 +638,7 @@ Neighbor ID  Pri  State     Dead Time  Address        Interface
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip ospf neighbor</summary>
+<summary>R3: show ip ospf neighbor</summary>
 <pre><code>
 R3#show ip ospf neighbor
 
@@ -649,7 +649,7 @@ Neighbor ID  Pri  State     Dead Time  Address        Interface
 
 ---
 
-### Part 3 — Inter-area summarization
+### Part 3: Inter-area summarization
 
 Without summarization each loopback in Area 1 is advertised as a separate /32 host route. Add a summary on R1 (ABR for Area 1):
 
@@ -661,7 +661,7 @@ R1(config-router)# area 1 range 192.168.0.0 255.255.252.0
 R3 route table before and after the Area 1 summary:
 
 <details>
-<summary>R3 — before summarization</summary>
+<summary>R3: before summarization</summary>
 <pre><code>
 R3#show ip route ospf
   192.168.1.0/32 is subnetted, 1 subnets
@@ -676,7 +676,7 @@ O*E2 0.0.0.0/0 [110/1] via 192.168.23.1, 00:33:58, Serial0/0
 </code></pre>
 </details>
 <details>
-<summary>R3 — after area 1 range 192.168.0.0/22</summary>
+<summary>R3: after area 1 range 192.168.0.0/22</summary>
 <pre><code>
 R3#show ip route ospf
 O IA  192.168.0.0 [110/129] via 192.168.23.1, 00:00:00, Serial0/0
@@ -696,7 +696,7 @@ R2(config-router)# area 3 range 192.168.4.0 255.255.254.0
 ```
 
 <details>
-<summary>R1 — show ip route ospf (after area 3 range)</summary>
+<summary>R1: show ip route ospf (after area 3 range)</summary>
 <pre><code>
 enable
 configure terminal
@@ -712,7 +712,7 @@ copy running-config startup-config
 Final route tables after both summaries applied:
 
 <details>
-<summary>R1 — show ip route ospf</summary>
+<summary>R1: show ip route ospf</summary>
 <pre><code>
 R1#show ip route ospf
 O IA  192.168.4.0 [110/129] via 192.168.12.2, Serial0/0
@@ -721,7 +721,7 @@ O IA  192.168.23.0 [110/128] via 192.168.12.2, Serial0/0
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip route ospf</summary>
+<summary>R2: show ip route ospf</summary>
 <pre><code>
 R2#show ip route ospf
 O IA  192.168.0.0 [110/65] via 192.168.12.1, Serial0/0
@@ -731,7 +731,7 @@ O*E2 0.0.0.0/0 [110/1] via 192.168.12.1, Serial0/0
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip route ospf</summary>
+<summary>R3: show ip route ospf</summary>
 <pre><code>
 R3#show ip route ospf
 O IA  192.168.0.0 [110/129] via 192.168.23.1, Serial0/0
@@ -743,10 +743,10 @@ O*E2 0.0.0.0/0 [110/1] via 192.168.23.1, Serial0/0
 </code></pre>
 </details>
 
-OSPF database after summarization — individual /32 host routes replaced by summary entries:
+OSPF database after summarization. Individual /32 host routes replaced by summary entries:
 
 <details>
-<summary>R1 — show ip ospf database</summary>
+<summary>R1: show ip ospf database</summary>
 <pre><code>
 R1#show ip ospf database
         OSPF Router with ID (1.1.1.1) (Process ID 1)
@@ -780,7 +780,7 @@ Link ID  ADV Router  Age   Seq#        Checksum  Tag
 </code></pre>
 </details>
 <details>
-<summary>R2 — show ip ospf database</summary>
+<summary>R2: show ip ospf database</summary>
 <pre><code>
 R2#show ip ospf database
         OSPF Router with ID (2.2.2.2) (Process ID 1)
@@ -817,7 +817,7 @@ Link ID  ADV Router  Age   Seq#        Checksum  Tag
 </code></pre>
 </details>
 <details>
-<summary>R3 — show ip ospf database</summary>
+<summary>R3: show ip ospf database</summary>
 <pre><code>
 R3#show ip ospf database
         OSPF Router with ID (3.3.3.3) (Process ID 1)

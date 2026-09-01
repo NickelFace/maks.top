@@ -19,8 +19,8 @@ CloudWatch collects and tracks metrics from AWS services and custom sources.
 |---|---|
 | **Namespace** | Container for metrics (e.g., `AWS/EC2`, `AWS/RDS`). Custom metrics go in your own namespace. |
 | **Dimension** | Name/value pair that identifies a metric (e.g., `InstanceId=i-1234`). Up to 30 per metric. |
-| **Standard monitoring** | Default for most services — data points every **5 minutes** |
-| **Detailed monitoring** | Extra cost — data points every **1 minute** (enable per resource) |
+| **Standard monitoring** | Default for most services: data points every **5 minutes** |
+| **Detailed monitoring** | Extra cost: data points every **1 minute** (enable per resource) |
 | **High-resolution metrics** | Custom metrics at 1-second granularity via `--storage-resolution 1` |
 | **Retention** | `< 60s` resolution: 3 hours; `60s`: 15 days; `300s`: 63 days; `1 hour`: 15 months |
 
@@ -80,10 +80,10 @@ fields @timestamp, @message
 
 ### Alarm actions
 
-- **SNS notification** — email, HTTP endpoint, SQS, Lambda, etc.
-- **EC2 action** — stop, terminate, reboot, recover an instance
-- **Auto Scaling** — scale out or scale in a group
-- **Systems Manager OpsCenter** — create an OpsItem
+- **SNS notification**: email, HTTP endpoint, SQS, Lambda, etc.
+- **EC2 action**: stop, terminate, reboot, recover an instance
+- **Auto Scaling**: scale out or scale in a group
+- **Systems Manager OpsCenter**: create an OpsItem
 
 ### Composite alarms
 
@@ -116,9 +116,9 @@ EventBridge is the modern event bus for AWS.
 
 | Feature | Monitors |
 |---|---|
-| **Container Insights** | ECS, EKS, Kubernetes — CPU, memory, network, disk, pod/task level |
+| **Container Insights** | ECS, EKS, Kubernetes: CPU, memory, network, disk, pod/task level |
 | **Lambda Insights** | Cold starts, invocation duration, errors, memory usage |
-| **Application Insights** | .NET and SQL Server apps — anomaly detection, correlated findings |
+| **Application Insights** | .NET and SQL Server apps: anomaly detection, correlated findings |
 
 ---
 
@@ -136,8 +136,8 @@ CloudTrail records **every API call** made in your AWS account.
 
 ### Trail configuration
 
-- **Single-region trail** — logs events in one region only
-- **All-region trail** — recommended; logs all regions to a single S3 bucket
+- **Single-region trail**: logs events in one region only
+- **All-region trail**: recommended; logs all regions to a single S3 bucket
 - **Delivery**: S3 (always) + optionally CloudWatch Logs + SNS notification
 - **Log file integrity**: SHA-256 digest files; detects tampering
 
@@ -201,7 +201,7 @@ Trusted Advisor provides **best-practice recommendations** across five categorie
 | **7 core checks** (basic security + service limits) | Free (all plans) |
 | **All checks** + automated refresh + CloudWatch alarms for limits | **Business** or **Enterprise** support |
 
-> **📌 Tip:** Full Trusted Advisor access requires Business or Enterprise support — not Developer or free-tier.
+> **📌 Tip:** Full Trusted Advisor access requires Business or Enterprise support, not Developer or free-tier.
 
 ---
 
@@ -216,7 +216,7 @@ Personal Health integrates with EventBridge: trigger Lambda when a maintenance e
 
 ---
 
-## X-Ray — Distributed Tracing
+## X-Ray: Distributed Tracing
 
 X-Ray traces requests as they flow through distributed applications (microservices, Lambda, API Gateway, etc.).
 
@@ -247,11 +247,11 @@ X-Ray traces requests as they flow through distributed applications (microservic
 
 | Trap | Correct answer |
 |---|---|
-| "CloudTrail stores logs for 1 year by default" | False — Event History is **90 days**; create a trail for longer retention |
-| "AWS Config is free" | False — charged per config item + per rule evaluation |
-| "Config Rules can block non-compliant resource creation" | False — Config is **detective only**, not preventive |
-| "Trusted Advisor full checks on free tier" | False — requires **Business or Enterprise** support |
-| "RAM/disk metrics in CloudWatch by default on EC2" | False — need the **CloudWatch Agent** |
-| "X-Ray for API audit logging" | False — X-Ray is for **distributed tracing**; CloudTrail for API audit |
-| "CloudWatch Events vs EventBridge" | Same thing — EventBridge is the **new name** |
-| "Detailed monitoring is default" | False — default is **5-minute** standard monitoring |
+| "CloudTrail stores logs for 1 year by default" | False: Event History is **90 days**; create a trail for longer retention |
+| "AWS Config is free" | False: charged per config item + per rule evaluation |
+| "Config Rules can block non-compliant resource creation" | False: Config is **detective only**, not preventive |
+| "Trusted Advisor full checks on free tier" | False: requires **Business or Enterprise** support |
+| "RAM/disk metrics in CloudWatch by default on EC2" | False: need the **CloudWatch Agent** |
+| "X-Ray for API audit logging" | False: X-Ray is for **distributed tracing**; CloudTrail for API audit |
+| "CloudWatch Events vs EventBridge" | Same thing: EventBridge is the **new name** |
+| "Detailed monitoring is default" | False: default is **5-minute** standard monitoring |

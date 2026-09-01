@@ -32,7 +32,7 @@ page_lang: "en"
 
 ---
 
-### Part 1 — Basic device setup
+### Part 1: Basic device setup
 
 1. Build the topology according to the diagram.
 
@@ -118,7 +118,7 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-2. Verify connectivity — ping all switches from S1:
+2. Verify connectivity: ping all switches from S1:
 
 ```
 ping 192.168.1.1
@@ -143,7 +143,7 @@ Success rate is 80 percent (4/5)
 
 ---
 
-### Part 2 — Root bridge election
+### Part 2: Root bridge election
 
 First disable all ports, then bring up only Et0/0 and Et0/2 as trunks:
 
@@ -205,7 +205,7 @@ show spanning-tree
 The switch with the **lowest Bridge ID** (priority + MAC) becomes the Root bridge. With equal default priority (32768), the switch with the lowest MAC wins. Here S1 has the lowest MAC and is elected Root.
 
 <details>
-<summary>S1 — Root bridge</summary>
+<summary>S1: Root bridge</summary>
 <pre><code>
 S1#show spanning-tree
 VLAN0001
@@ -227,7 +227,7 @@ Et0/2               Desg FWD 100       128.3    Shr
 </code></pre>
 </details>
 <details>
-<summary>S2 — non-root, root port Et0/0</summary>
+<summary>S2: non-root, root port Et0/0</summary>
 <pre><code>
 S2#show spanning-tree
 VLAN0001
@@ -250,7 +250,7 @@ Et0/2               Desg FWD 100       128.3    Shr
 </code></pre>
 </details>
 <details>
-<summary>S3 — non-root, blocked port Et0/0</summary>
+<summary>S3: non-root, blocked port Et0/0</summary>
 <pre><code>
 S3#show spanning-tree
 VLAN0001
@@ -275,19 +275,19 @@ Et0/2               Root FWD 100       128.3    Shr
 
 **Port roles explained:**
 
-- **Root** — best path toward the Root bridge (one per non-root switch)
-- **Designated** — best port on a segment for forwarding toward the root (all Root bridge ports + one per segment)
-- **Alternate** — blocked to prevent loops
+- **Root**: best path toward the Root bridge (one per non-root switch)
+- **Designated**: best port on a segment for forwarding toward the root (all Root bridge ports + one per segment)
+- **Alternate**: blocked to prevent loops
 
-S3's Et0/0 (toward S2) is blocked because both S3 and S2 have equal cost to root (100), but S2 has a lower Bridge ID — so S2's Et0/2 wins the Designated role, and S3's Et0/0 is placed into Alternate (blocking).
+S3's Et0/0 (toward S2) is blocked because both S3 and S2 have equal cost to root (100), but S2 has a lower Bridge ID, so S2's Et0/2 wins the Designated role, and S3's Et0/0 is placed into Alternate (blocking).
 
 ---
 
-### Part 3 — Port selection based on cost
+### Part 3: Port selection based on cost
 
 Lower path cost to root wins. Default cost for 10 Mbps Ethernet is **100**.
 
-S3 currently has its Et0/0 (toward S2) blocked. Lower the cost on S3's root port (Et0/2) to **90** — this makes S3's path to root cheaper than S2's:
+S3 currently has its Et0/0 (toward S2) blocked. Lower the cost on S3's root port (Et0/2) to **90**; this makes S3's path to root cheaper than S2's:
 
 <details>
 <summary>S3</summary>
@@ -301,10 +301,10 @@ copy running-config startup-config
 </code></pre>
 </details>
 
-Now S3 can reach root via Et0/2 at cost **90**, while S2 reaches root at cost **100**. On the S2–S3 segment, S3 becomes the designated switch — S2's Et0/2 moves to Alternate (blocking).
+Now S3 can reach root via Et0/2 at cost **90**, while S2 reaches root at cost **100**. On the S2–S3 segment, S3 becomes the designated switch: S2's Et0/2 moves to Alternate (blocking).
 
 <details>
-<summary>S3 — after cost change</summary>
+<summary>S3: after cost change</summary>
 <pre><code>
 S3#show spanning-tree
 VLAN0001
@@ -338,7 +338,7 @@ copy running-config startup-config
 
 ---
 
-### Part 4 — Port selection based on port priority
+### Part 4: Port selection based on port priority
 
 Enable the redundant interfaces on all switches to bring up parallel links:
 
@@ -361,7 +361,7 @@ Now each pair of switches has two parallel links. STP must block one per segment
 Check the new STP state:
 
 <details>
-<summary>S1 — all ports Designated (Root bridge)</summary>
+<summary>S1: all ports Designated (Root bridge)</summary>
 <pre><code>
 S1#show spanning-tree
 VLAN0001
@@ -378,7 +378,7 @@ Et0/3               Desg FWD 100       128.4    Shr
 </code></pre>
 </details>
 <details>
-<summary>S2 — Et0/0 Root, Et0/1 Alternate</summary>
+<summary>S2: Et0/0 Root, Et0/1 Alternate</summary>
 <pre><code>
 S2#show spanning-tree
 ...
@@ -391,7 +391,7 @@ Et0/3               Desg FWD 100       128.4    Shr
 </code></pre>
 </details>
 <details>
-<summary>S3 — Et0/2 Root, all others Alternate</summary>
+<summary>S3: Et0/2 Root, all others Alternate</summary>
 <pre><code>
 S3#show spanning-tree
 ...
