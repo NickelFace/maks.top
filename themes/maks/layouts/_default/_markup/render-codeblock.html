@@ -32,13 +32,36 @@
 {{- $iosLangs := slice "ios" "cisco" "ios-config" -}}
 
 {{- /* An IOS prompt at the head of a line: R1#  SW1(config-if)#  R2(config)>
-       Anchored (?m)^ and requiring a non-space after the sigil, so prose that
-       merely mentions a prompt cannot trigger it. */ -}}
-{{- $sniff := "(?m)^[A-Za-z][\\w.-]*(\\([\\w-]+\\))?[#>]\\S" -}}
+       Anchored (?m)^ and requiring a non-space (after optional whitespace)
+       following the sigil, so prose that merely mentions a prompt cannot
+       trigger it. The optional \s* covers "R1(config)# command" as well as
+       the tighter "R1(config)#command" form. */ -}}
+{{- $sniff := "(?m)^[A-Za-z][\\w.-]*(\\([\\w-]+\\))?[#>]\\s*\\S" -}}
+
+{{- /* Once a space is allowed after the sigil, the same shape also matches
+       other bare CLI transcripts on the site that are not IOS: LPIC content
+       pastes ftp>/sftp>/gpg>/grub>/at> sessions, and the networking labs use
+       GNS3's PC>/PC-A>/VPCS> end-host stand-ins next to real router output.
+       A hostname with a (mode) group is unambiguously Cisco, so it always
+       counts; a bare hostname only counts if it is not one of these known
+       non-IOS prompts. One genuine match anywhere in the block is enough to
+       classify the whole thing as ios. */ -}}
+{{- $notIos := slice "ftp" "sftp" "gpg" "grub" "at" "vpcs" "pc" -}}
 
 {{- $declaredIos := in $iosLangs $lang -}}
 {{- $bare        := in $plain $lang -}}
-{{- $sniffedIos  := and $bare (gt (len (findRE $sniff .Inner 1)) 0) -}}
+{{- $sniffedIos  := false -}}
+{{- if $bare -}}
+  {{- range findRE $sniff .Inner -}}
+    {{- $host := "" -}}
+    {{- with $hm := findRE "^[A-Za-z][\\w.-]*" . 1 -}}{{- $host = lower (index $hm 0) -}}{{- end -}}
+    {{- $hasMode := strings.Contains . "(" -}}
+    {{- $denied  := or (in $notIos $host) (strings.HasPrefix $host "pc-") -}}
+    {{- if or $hasMode (not $denied) -}}
+      {{- $sniffedIos = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- $isIos       := or $declaredIos $sniffedIos -}}
 {{- $isShell     := in $shells $lang -}}
 {{- $isOutput    := and $bare (not $sniffedIos) -}}
@@ -66,7 +89,7 @@
     {{- $pm := findRE "^[A-Za-z][\\w.-]*(\\([\\w-]+\\))?[#>]" $esc 1 -}}
     {{- if $pm -}}
       {{- $p     := index $pm 0 -}}
-      {{- $rest  := strings.TrimPrefix $p $esc -}}
+      {{- $rest  := strings.TrimSpace (strings.TrimPrefix $p $esc) -}}
       {{- $sigil := substr $p -1 -}}
       {{- $head  := substr $p 0 (sub (len $p) 1) -}}
 
