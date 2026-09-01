@@ -1,7 +1,11 @@
 /* ─── DATA ──────────────────────────────────────────────── */
+/* Sprite marks replace the emoji. Symbols live in static/img/icons.svg. */
+const NS_ICON = id =>
+  `<svg class="ns-svg" aria-hidden="true"><use href="/img/icons.svg#${id}"></use></svg>`;
+
 const NS_DATA = [
   {
-    name:"UTS", flag:"CLONE_NEWUTS", icon:"🖥️", color:"var(--ns-uts)",
+    name:"UTS", flag:"CLONE_NEWUTS", icon:"ns-uts",
     summary:"Isolates hostname and NIS domain name",
     desc:"Each process or container gets its own <strong>hostname</strong> and <strong>NIS domainname</strong> without affecting the host system. Docker uses this so each container reports its own hostname rather than the host's.",
     tabs:[
@@ -27,7 +31,7 @@ lsns -t uts`
     ]
   },
   {
-    name:"PID", flag:"CLONE_NEWPID", icon:"⚙️", color:"var(--ns-pid)",
+    name:"PID", flag:"CLONE_NEWPID", icon:"ns-pid",
     summary:"Isolates the process ID number space",
     desc:"Processes are numbered <strong>independently starting from PID 1</strong>. The first process in the namespace becomes the <em>init</em> — if it exits, the kernel kills everything else in that namespace. From outside, processes remain visible with their real PIDs.",
     tabs:[
@@ -54,7 +58,7 @@ sudo nsenter --target $CPID --pid -- ps aux`
     ]
   },
   {
-    name:"Network", flag:"CLONE_NEWNET", icon:"🌐", color:"var(--ns-net)",
+    name:"Network", flag:"CLONE_NEWNET", icon:"ns-net",
     summary:"Full network stack isolation per namespace",
     desc:"Each net namespace gets its own <strong>network interfaces</strong>, routing tables, iptables/nftables rules, and sockets. Docker uses veth pairs to connect each container's isolated eth0 back to the host bridge.",
     tabs:[
@@ -84,7 +88,7 @@ sudo ip netns delete mynet`
     ]
   },
   {
-    name:"Mount", flag:"CLONE_NEWNS", icon:"📁", color:"var(--ns-mnt)",
+    name:"Mount", flag:"CLONE_NEWNS", icon:"ns-mnt",
     summary:"Isolates the filesystem mount table",
     desc:"The <strong>oldest namespace</strong> (Linux 2.4.19). A process can mount/unmount filesystems without affecting other processes. Docker mounts the container's rootfs via a new mount namespace, keeping the host filesystem untouched.",
     tabs:[
@@ -112,7 +116,7 @@ ls /   <span class="out"># → container rootfs</span>`
     ]
   },
   {
-    name:"IPC", flag:"CLONE_NEWIPC", icon:"📨", color:"var(--ns-ipc)",
+    name:"IPC", flag:"CLONE_NEWIPC", icon:"ns-ipc",
     summary:"Isolates SysV IPC and POSIX message queues",
     desc:"Isolates <strong>System V IPC objects</strong> (message queues, semaphores, shared memory segments) and POSIX message queues. Without IPC namespaces, processes in different containers could interact via shared memory keys.",
     tabs:[
@@ -134,7 +138,7 @@ ipcs -a`
     ]
   },
   {
-    name:"User", flag:"CLONE_NEWUSER", icon:"👤", color:"var(--ns-user)",
+    name:"User", flag:"CLONE_NEWUSER", icon:"ns-user",
     summary:"Maps UIDs/GIDs — unprivileged user can be root inside",
     desc:"The most powerful namespace. An <strong>unprivileged process</strong> can obtain UID 0 (root) inside the namespace while remaining a normal user outside. Rootless Docker/Podman is built entirely on this. No <code>sudo</code> required.",
     tabs:[
@@ -158,7 +162,7 @@ sysctl kernel.unprivileged_userns_clone
     ]
   },
   {
-    name:"Cgroup", flag:"CLONE_NEWCGROUP", icon:"📊", color:"var(--ns-cgroup)",
+    name:"Cgroup", flag:"CLONE_NEWCGROUP", icon:"ns-cgroup",
     summary:"Hides real cgroup path — process sees its own root",
     desc:"Added in <strong>Linux 4.6</strong>. Without it, a process inside a container could read its full cgroup path (<code>/docker/abc123/...</code>), revealing that it's containerised. With a cgroup namespace it only sees <code>/</code>.",
     tabs:[
@@ -180,7 +184,7 @@ readlink /proc/$$/ns/cgroup`
     ]
   },
   {
-    name:"Time", flag:"CLONE_NEWTIME", icon:"⏱️", color:"var(--ns-time)",
+    name:"Time", flag:"CLONE_NEWTIME", icon:"ns-time",
     summary:"Isolates CLOCK_MONOTONIC & CLOCK_BOOTTIME (Linux 5.6+)",
     desc:"The <strong>newest namespace</strong> (Linux 5.6, March 2020). Useful for container live migration between hosts — the monotonic clock doesn't reset during transfer. <code>CLOCK_REALTIME</code> cannot be virtualised.",
     tabs:[
@@ -280,9 +284,9 @@ function buildCard(ns, i) {
       </div>
     </div>`
   ).join('');
-  return `<div class="ns-card" id="nc${i}" style="--c:${ns.color};animation-delay:${i*.04}s" onclick="nsToggleCard(this)">
+  return `<div class="ns-card" id="nc${i}" style="animation-delay:${i*.04}s" onclick="nsToggleCard(this)">
     <div class="ns-header">
-      <div class="ns-icon">${ns.icon}</div>
+      <div class="ns-icon">${NS_ICON(ns.icon)}</div>
       <div class="ns-meta">
         <div class="ns-name">${ns.name} Namespace</div>
         <div class="ns-flag">${ns.flag}</div>
@@ -394,8 +398,8 @@ function nsInitTocHighlight() {
 function nsInit() {
   // NS Map
   document.getElementById('nsMap').innerHTML = NS_DATA.map((n, i) =>
-    `<button class="ns-map-btn" style="--c:${n.color}" id="mb${i}" onclick="nsJumpTo(${i})">
-      <div class="ns-map-icon">${n.icon}</div>
+    `<button class="ns-map-btn" id="mb${i}" onclick="nsJumpTo(${i})">
+      <div class="ns-map-icon">${NS_ICON(n.icon)}</div>
       <div class="ns-map-name">${n.name}</div>
       <div class="ns-map-flag">${n.flag.replace('CLONE_NEW','')}</div>
     </button>`
@@ -407,7 +411,7 @@ function nsInit() {
   // TOC
   document.getElementById('tocBody').innerHTML = NS_DATA.map((n, i) =>
     `<div class="toc-item" data-idx="${i}" onclick="nsJumpTo(${i})">
-      <div class="toc-dot" style="background:${n.color}"></div>
+      <div class="toc-dot"></div>
       ${n.name} Namespace
     </div>`
   ).join('');
