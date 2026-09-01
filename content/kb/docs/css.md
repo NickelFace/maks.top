@@ -17,12 +17,12 @@ Styles are split into 11 files by **scope** (area of application):
 | `global.css` | `themes/maks/static/styles/` | everywhere | Variables, nav, base components, dot-grid pagination |
 | `mobile.css` | `themes/maks/static/styles/` | everywhere | Mobile nav, breakpoints |
 | `fonts.css` | `themes/maks/static/styles/` | everywhere | `@font-face` for Inter (body), JetBrains Mono (code). Fraunces loaded via Google Fonts `<link>` in `baseof.html` |
-| `prose.css` | `themes/maks/static/styles/` | posts, about, kb, docs, ccna-labs singles | Article typography, NS cards/tabs/ref-panel, section divider, mobile overflow containment |
+| `prose.css` | `themes/maks/static/styles/` | posts, about, kb, ccna-labs singles | Article typography, NS cards/tabs/ref-panel, section divider, mobile overflow containment |
 | `home.css` | `themes/maks/static/styles/` | `/` only | Hero, recent posts, KB grid, cert-grid |
 | `cert.css` | `themes/maks/static/styles/` | `/certs/*` | Cert hero, resource tiles, accordion topics, certs index page |
-| `ns.css` | `themes/maks/static/styles/` | `/posts/linux-namespaces/` | Two-column page layout, TOC sidebar, progress, filter row |
+| `ns.css` | `themes/maks/static/styles/` | `/kb/linux-namespaces/` | Two-column page layout, TOC sidebar, reading progress, cheatsheet filter row |
 | `topology.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | `.topology` figure + SVG diagram styles |
-| `chroma.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Syntax highlighting (dark/light) |
+| `chroma.css` | `themes/maks/static/styles/` | posts, kb, ccna-labs singles | Syntax highlighting. Also **declares the `--code-*` token palette** that `prose.css` and `ns.css` read |
 
 Loading in `baseof.html`:
 ```html
@@ -31,10 +31,13 @@ Loading in `baseof.html`:
 
 <link rel="stylesheet" href="/styles/fonts.css">    <!-- always -->
 <link rel="stylesheet" href="/styles/global.css">   <!-- always -->
-<link rel="stylesheet" href="/styles/chroma.css">   <!-- always -->
-{{ if .IsHome }}<link href="/styles/home.css">{{ end }}
-{{ if or (eq .Type "posts") (eq .Type "about") (eq .Type "docs") (eq .Type "kb") }}
-  <link href="/styles/prose.css">{{ end }}
+{{ if or (eq .Type "posts") (eq .Type "kb") (and (eq .Type "ccna-labs") .IsPage) }}
+  <link rel="stylesheet" href="/styles/chroma.css">{{ end }}
+{{ if .IsHome }}<link rel="stylesheet" href="/styles/home.css">{{ end }}
+{{ if or (eq .Type "posts") (eq .Type "about") (eq .Type "kb") (and (eq .Type "ccna-labs") .IsPage) }}
+  <link rel="stylesheet" href="/styles/prose.css">{{ end }}
+{{ if or (eq .Type "posts") (eq .Type "kb") (and (eq .Type "ccna-labs") .IsPage) }}
+  <link rel="stylesheet" href="/styles/topology.css">{{ end }}
 <link rel="stylesheet" href="/styles/mobile.css">   <!-- always -->
 {{ block "head" . }}{{ end }}  <!-- cert.css / ns.css added here -->
 ```
@@ -45,35 +48,88 @@ Loading in `baseof.html`:
 
 ## CSS variables: themes
 
-Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
+The palette is **Slate** — a cold blue-grey base with a single blue accent. Dark is the
+default and is declared on `:root`; light overrides it on `[data-theme="light"]`. Both
+themes share the same hue family (accent hue 232), so the site does not change
+personality when the auto day/night switch flips.
 
-| Variable | Dark | Light | Purpose |
+| Variable | Dark (`:root`) | Light | Purpose |
 |---|---|---|---|
-| `--accent` | `oklch(0.78 0.14 70)` | `oklch(0.72 0.14 65)` | Primary accent (amber) |
-| `--accent2` | `oklch(0.70 0.09 155)` | `oklch(0.58 0.08 155)` | Secondary accent (moss green) |
-| `--accent3` | `oklch(0.65 0.13 35)` | `oklch(0.55 0.13 35)` | Tertiary accent (rust) |
+| `--accent` | `oklch(0.75 0.10 232)` | `oklch(0.51 0.12 232)` | Links, focus, progress, **in-progress** status |
+| `--accent2` | `oklch(0.74 0.09 168)` | `oklch(0.52 0.09 168)` | **passed** status only |
+| `--accent3` | `#838F9C` | `#616E78` | **planned** status — an alias of `--text3`, not a hue of its own |
 | `--warn` | `#f59e0b` | `#f59e0b` | Warning (amber) |
 | `--danger` | `#ef4444` | `#ef4444` | Danger / error (red) |
-| `--bg` | `#16140F` | `#F6F3EC` | Main background |
-| `--bg2` | `#1F1C16` | `#EFEBE0` | Cards, panels |
-| `--bg3` | `#2A2620` | `#E6E1D2` | Hover states |
-| `--border` | `#34302A` | `#D9D3C1` | Borders |
-| `--border2` | `#45403A` | `#C8C0A9` | Secondary borders |
-| `--text` | `#ECE7DA` | `#1B1A17` | Primary text |
-| `--text2` | `#B6B0A0` | `#4B4942` | Secondary text |
-| `--text3` | `#807A6B` | `#7A7567` | Muted text (date, meta) |
-| `--glow` | `oklch(0.78 0.14 70 / 0.16)` | `oklch(0.72 0.14 65 / 0.14)` | Hover highlight |
-| `--tag-bg` | `oklch(0.78 0.14 70 / 0.10)` | `oklch(0.72 0.14 65 / 0.10)` | Tag background |
-| `--shadow` | `0 1px 0 rgba(0,0,0,0.4), 0 16px 40px -20px rgba(0,0,0,0.5)` | `0 1px 0 rgba(27,26,23,0.04), 0 12px 32px -16px rgba(27,26,23,0.18)` | Box shadow |
-| `--nav-blur` | `rgba(22,20,15,0.90)` | `rgba(246,243,236,0.92)` | Nav backdrop blur color |
-| `--code-bg` | `#100E09` | `#EDE9DF` | Code block background |
+| `--bg` | `#0E1319` | `#F7F9FB` | Page background |
+| `--bg2` | `#141B23` | `#EFF3F7` | Surfaces, panels, nav blur base, writing band |
+| `--bg3` | `#1C242E` | `#E4EAF1` | Raised: inline code, hover rows |
+| `--border` | `#242D38` | `#D8E0E9` | Hairlines, grid gaps |
+| `--border2` | `#33404E` | `#BFCAD6` | Inputs, pill outlines |
+| `--text` | `#E6EBF1` | `#131A21` | Primary text |
+| `--text2` | `#A2AEBB` | `#48555F` | Body copy, leads |
+| `--text3` | `#838F9C` | `#616E78` | Meta, mono labels, card descriptions |
+| `--glow` | `oklch(0.75 0.10 232 / 0.14)` | `oklch(0.51 0.12 232 / 0.14)` | Focus ring, tag hover |
+| `--tag-bg` | `oklch(0.75 0.10 232 / 0.10)` | `oklch(0.51 0.12 232 / 0.10)` | Tag background |
+| `--shadow` | `0 1px 0 rgba(0,0,0,0.4), 0 16px 40px -20px rgba(0,0,0,0.5)` | `0 1px 0 rgba(19,26,33,0.04), 0 12px 32px -16px rgba(19,26,33,0.18)` | Box shadow |
+| `--nav-blur` | `rgba(14,19,25,0.90)` | `rgba(247,249,251,0.92)` | Nav backdrop blur color |
+| `--code-bg` | `#0A0E13` | `#E9EEF3` | Code block background |
+| `--grid-line` | `transparent` | `transparent` | Reserved |
 | `--radius` | `6px` | `6px` | Border-radius base |
 
+`--h1-hero`, `--h1-page` and `--h1-article` are also declared on `:root` and are not
+theme-dependent — see the type scale in [Templates](/kb/docs/templates/).
+
+> **Contrast is measured, not eyeballed.** `--text3` colours card descriptions at 12.5 px,
+> cert sub-lines and post dates, so it is body text and has to clear WCAG AA on all three
+> surfaces. Dark `#838F9C` measures 5.6 / 5.2 / 4.7:1 on `--bg` / `--bg2` / `--bg3`; light
+> `#616E78` measures 4.96 / 4.70. The light `--accent` sits at L 0.51 rather than the
+> dark theme's L 0.75 because `prose.css` renders inline `code` as accent-on-`--bg3`, which
+> is the binding case at 4.55:1. Do not "tidy" these values.
+
 **Per-component variables** (set via inline `style=""`):
-| Variable | Used by | Description |
+
+| Variable | Set by | Description |
 |---|---|---|
-| `--c` | NS cards, map buttons, tabs, filter buttons | Per-card accent color |
-| `--cert-color` | Cert hero, resource tiles | Per-cert accent color |
+| `--cert-color` | `certs/single.html`, `partials/certs-widget.html` | **Status** colour for one cert track, never a per-track brand hue. Resolves to `var(--accent2)` (passed), `var(--accent)` (in progress) or `var(--text3)` (planned) via the `$stateFor` dict |
+
+The old `--c` variable — a per-card hue on NS cards, map buttons, tabs and filter buttons —
+was removed along with the nine `--ns-*` namespace colours. Those components now colour by
+**state** off `--accent`; see [NS components](#shared-components) below.
+
+`cert_color` still exists in `content/certs/*.md` frontmatter but no template resolves it.
+
+---
+
+## Code token palette (`chroma.css`)
+
+Syntax highlighting is driven by one token table consumed by both themes, so there is no
+second `[data-theme]` block to keep in sync. `prose.css` and `ns.css` read the same
+variables instead of hard-coding hex values. Tuned for Bash, which is 3 400+ of the site's
+fenced blocks.
+
+| Variable | Dark | Light | Role | Contrast (dark) |
+|---|---|---|---|---|
+| `--code-fg` | `#D6DEE8` | `#1B2530` | Plain text, paths, flags | 19.0:1 |
+| `--code-cmd` | `#7FD1DE` | `#0B5D78` | Commands, builtins, functions | 11.0:1 |
+| `--code-str` | `#D5C08A` | `#8A5A00` | Strings, heredocs | 10.7:1 |
+| `--code-kw` | `#B49BE8` | `#7A3EA8` | Keywords, operators, pipes | 8.1:1 |
+| `--code-var` | `#9DC1F0` | `#1A4E9B` | `$VAR`, `${expansion}` | 10.3:1 |
+| `--code-num` | `#8FD6B4` | `#0F6B4F` | Numbers, added lines | 11.4:1 |
+| `--code-out` | `#94A3B4` | `#4A5764` | Program output, prompts | 7.4:1 |
+| `--code-cmt` | `#7E8C9E` | `#5A6672` | Comments — the contrast floor | 5.5:1 |
+| `--code-err` | `#F08C8C` | `#A32020` | Errors, removed lines | 9.5:1 |
+| `--code-gut` | `#4C596A` | `#97A3AE` | Line numbers (non-text) | — |
+| `--code-hl` | `#16202D` | — | Highlighted line background | — |
+
+Everything except strings is cool. Strings stay warm deliberately — one warm hue inside a
+code block is the cheapest way to break up a quoted argument, and it is the only place
+warmth survives in the Slate palette.
+
+> **Load-order caveat:** `--code-*` is declared in `chroma.css`, which loads only for
+> `posts`, `kb` and `ccna-labs` single pages. `prose.css` also loads on `about`, where
+> `chroma.css` does **not**. A code block on `/about/` would therefore resolve
+> `var(--code-fg)` to nothing and fall back to the inherited colour. There are no code
+> blocks there today; if one is ever added, move the `--code-*` block into `global.css`.
 
 ---
 
@@ -93,9 +149,9 @@ Variables are declared on `[data-theme="dark"]` and `[data-theme="light"]`:
 |---|---|
 | `.desk-nav` | Flex container: logo + links + right panel. Sticky, `z-index: 100` |
 | `.nav-logo` | Logo with gradient text |
-| `.nav-links a.active` | Active link: `color: var(--accent)` |
+| `.nav-links a.active` | Active link: `background: var(--text)`, `color: var(--bg)` (ink pill). `white-space: nowrap` keeps "Knowledge Base" on one line |
 | `.lang-btn` | EN/RU buttons |
-| `.theme-btn` | 🌙/☀️ theme toggle |
+| `.theme-btn` | 28 px round theme toggle. Holds an inline `<svg><use href="/img/icons.svg#power">` power glyph in `currentColor`, so it works unchanged on both themes. Dashed border when `[data-auto="true"]`, accent ring when active |
 
 ### Breadcrumbs
 
@@ -144,18 +200,37 @@ Defined in `prose.css`. Used in `_default/single.html` for all article pages.
 
 ### Knowledge Base cards
 
+Defined in a `{{ define "head" }}` style block inside `themes/maks/layouts/kb/section.html`,
+not in `global.css`. The grid is a hairline grid (`gap: 1px` over a `--border` background),
+not a set of floating cards.
+
 | Class | Description |
 |---|---|
-| `.kb-cards` | Grid: `auto-fill`, min 220px columns, gap 12px |
-| `.kb-card` | Card: `position: relative`, hover lifts 2px, border accent on hover |
-| `.kb-card-icon` | Emoji icon, `font-size: 20px` |
-| `.kb-card-title` | Card title: 13px, semi-bold |
-| `.kb-card-desc` | Description: 11.5px, `var(--text3)` |
-| `.kb-card-tags` | Flex-wrap row of small tags |
-| `.kb-card-meta` | Page count badge: `position: absolute`, bottom-right corner, pill style |
-| `.kb-card-section` | Section card variant: `border-color: var(--border2)`, `padding-bottom: 32px` |
-| `.kb-section-title` | Group heading above a `.kb-cards` grid |
-| `.kb-empty` | Empty state message |
+| `.kb-pg-header` / `.kb-pg-header-inner` | Page header band, `max-width: 1200px`, hairline bottom |
+| `.kb-pg-body` / `.kb-pg-body-inner` | Page body wrapper |
+| `.kb-group` | One domain group (e.g. "Linux Core") |
+| `.kb-group-hd` | Group header row: name + count, `border-bottom: 1px solid var(--text)` |
+| `.kb-group-name` | Fraunces 24px group heading |
+| `.kb-group-count` | JetBrains Mono 11px page count, `var(--text3)` |
+| `.kb-edit-grid` | 4-column hairline grid → 3 at ≤1024px, 2 at ≤640px, 1 at ≤400px |
+| `.kb-edit-card` | Cell: `background: var(--bg)`, hover → `var(--bg2)` |
+| `.kb-edit-mark` | Brand mark: `<svg><use href="/img/icons.svg#…">`, `height: 26px`, `var(--text3)` → `var(--accent)` on card hover. Driven by the `mark:` frontmatter field via `partials/kb-mark.html` |
+| `.kb-edit-letter` | Fallback when a page has no `mark:` — first title character in Fraunces 30px, `line-height: 0.86`, `height: 26px` so it optically matches the 26px marks and mixed rows stay level |
+| `.kb-edit-title` | 15px semi-bold title |
+| `.kb-edit-desc` | 12.5px description, `var(--text3)` |
+| `.kb-edit-tags` / `.kb-edit-tag` | Mono 10px tag row |
+| `.kb-edit-meta` | Mono 10px page count, `var(--accent)` |
+| `.kb-sub-header` / `.kb-sub-body` / `.kb-sub-h1` | Sub-section landing page wrappers |
+
+The home page has its own, separate KB block in `home.css`: `.home-kb-grid`,
+`.home-kb-col`, `.home-kb-col-hd`, `.home-kb-num`, `.home-kb-count`, `.home-kb-colname`,
+`.home-kb-list`, `.home-kb-more`.
+
+> Brand marks are Simple Icons (CC0); trademarks remain their owners'. The sprite lives at
+> `themes/maks/static/img/icons.svg` and is referenced externally (`/img/icons.svg#docker`)
+> so it is one cached request rather than ~20 KB inlined on every page. Pages with no mark
+> in the sprite — AWS CLI, SSH, Filesystem, Cheat Sheets, Processes, Network Labs,
+> IP Calculator — keep the Fraunces letter.
 
 ### 404 page
 
@@ -181,7 +256,8 @@ Used by the blog (`pagination.html` partial).
 | `.pg-dot-nav` | Flex container: Prev button + dot grid + Next button |
 | `.pg-dot-grid` | Flex-wrap row of page number links |
 | `.pg-dot` | Individual page link: small square tile |
-| `.pg-dot.cur` | Current page: `background: var(--accent)`, white text |
+| `.pg-dot.pg-active` | Current page: `background: var(--accent)`, `color: var(--bg)`. **Not** `#000` — that was written for the old amber accent and is unreadable on a mid-lightness blue |
+| `.pg-active` | Same treatment on the Prev/Next button variant |
 | `.pg-btn` | Prev / Next arrow button |
 | `.pg-btn.disabled` | Inactive arrow (first/last page) |
 
@@ -198,9 +274,9 @@ Used by the blog (`pagination.html` partial).
 | Class | Description |
 |---|---|
 | `.cert-grid` | 4-column grid |
-| `.cert-card` | Card with `--cert-color` custom variable |
+| `.cert-card` | Card carrying `--cert-color`, which holds the **status** colour |
 | `.cert-badge` | Emoji icon |
-| `.cert-name` | Name (`color: var(--cert-color)`) |
+| `.cert-name` | Name (`color: var(--cert-color, var(--accent))`) |
 | `.cert-sub` | Subtitle |
 
 ---
@@ -246,22 +322,23 @@ Applied to `.prose` (article body) and available in any post, KB, or docs page.
 | `.code-label` | Bar: language + copy button |
 | `.copy-btn` | "copy" → "ok!" (resets after 1.5s) |
 | `.ns-grid` | Card grid for NS cards |
-| `.ns-card` | Expandable card with `--c` color variable. Animated via `@keyframes fadeUp` |
-| `.ns-card.active` | Expanded: `border-color: var(--c)` |
+| `.ns-card` | Expandable card. Animated via `@keyframes fadeUp`. No per-card colour |
+| `.ns-card.active` | Expanded: `border-color: var(--accent)`; the icon and name go accent too |
 | `.ns-header` | Card header: icon + name + flag + toggle chevron |
+| `.ns-icon` | 38px tile holding a sprite mark: `var(--bg3)` + `var(--border)`, `var(--text3)` → `var(--text2)` on hover → `var(--accent)` when active |
 | `.ns-body` | Hidden body, shown when `.active` |
 | `.ns-map` | Namespace map widget |
-| `.ns-map-btn` | Map tile: flex-column, icon + name + flag. Hover uses `color-mix(--c)` |
+| `.ns-map-btn` | Map tile: flex-column, icon + name + flag. Hover → `--border2` / `--text2`; `.sel` → accent |
 | `.tabs` | Tab button row |
-| `.tab-btn` | Tab button. Active/hover uses `--c` |
+| `.tab-btn` | Tab button. Hover → `--border2` / `--text2`; `.active` → accent. Hover and active are deliberately **different** so hovering an inactive tab does not look selected |
 | `.tab-content.active` | Visible tab panel |
 | `.ref-panel` | Reference table wrapper |
 | `.ref-panel-head` | Uppercase panel heading |
 | `.ref-panel-body` | Scrollable table area |
 | `.cheat-table` | Data table inside `.ref-panel` |
 | `.cheat-table .mono` | `color: var(--accent)` |
-| `.stag` | Inline namespace type badge |
-| `.stag-uts/.stag-pid/.stag-net/…` | Per-type color variants |
+| `.stag` | Inline namespace type badge: one neutral mono uppercase pill on `var(--bg3)`. The category is spelled out in the tag, so it does not also need a hue |
+| `.stag-general` | The catch-all — transparent background at 75% opacity, one step back from the eight real namespace types |
 | `.back-link` | "← Back to posts" link at page bottom |
 
 ### Mobile overflow containment (≤ 640 px)
@@ -285,7 +362,7 @@ Page guard: `html, body { overflow-x: clip; }` in `global.css`. `min-width: 0` s
 | `.prose-page.has-toc` | `display: grid; grid-template-columns: 1fr 240px` |
 | `.toc-aside` | Right ToC column, sticky |
 | `.toc-item` | Link to a heading |
-| `.toc-item.cur` | Active heading: `color: var(--accent)` |
+| `.toc-item.hl` | Active heading: `color: var(--text2)`, `background: var(--bg3)`; its `.toc-dot` turns `var(--accent)` |
 
 ---
 
@@ -319,7 +396,13 @@ Page guard: `html, body { overflow-x: clip; }` in `global.css`. `min-width: 0` s
 
 ## ns.css: linux-namespaces page layout
 
-Loads only for `/posts/linux-namespaces/`. All shared components (NS cards, tabs, map buttons, ref-panel, stags) are in `prose.css`.
+Loads only for `/kb/linux-namespaces/`, via the `head` block in
+`themes/maks/layouts/kb/linux-namespaces.html`. All shared components (NS cards, tabs, map
+buttons, ref-panel, stags) are in `prose.css`.
+
+The page follows one rule: **colour marks state, the icon marks type.** One accent, and it
+only appears on the open card, the selected map button, the active tab, the active filter
+and the highlighted TOC dot. At rest everything is `--text2` / `--text3`.
 
 | Class | Description |
 |---|---|
@@ -328,13 +411,14 @@ Loads only for `/posts/linux-namespaces/`. All shared components (NS cards, tabs
 | `.ns-page-aside` | Right sidebar (sticky, hidden on mobile) |
 | `.toc-box` | Contents panel in sidebar |
 | `.toc-item` | Heading link in TOC |
-| `.toc-item.hl` | Active heading |
+| `.toc-item.hl` | Active heading; `.toc-dot` inside turns accent |
+| `.toc-dot` | Rail dot, `var(--border)` at rest |
 | `.progress-box` | Reading progress panel |
 | `.progress-fill` | Animated fill bar |
 | `.filter-row` | Filter buttons row for cheatsheet |
-| `.f-btn` | Filter button, uses `--c` |
-| `.f-btn.on` | Active filter |
-| `.ns-pre` | Code output area with custom syntax colors |
+| `.f-btn` | Filter button. Hover → `--border2` / `--text2` |
+| `.f-btn.on` | Active filter: accent |
+| `.ns-pre` | Hand-marked code block. `ns.css` no longer styles it — it inherits from `.code-block pre:not(.chroma)`; its `.cm` / `.out` spans use `--code-cmt` / `--code-out` |
 
 ---
 
