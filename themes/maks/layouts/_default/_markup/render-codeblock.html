@@ -1,40 +1,145 @@
 {{- /*
   Code block renderer.
 
-  Splits fenced blocks into two kinds, because a terminal session is two different
-  things wearing the same clothes:
+  Splits fenced blocks into kinds, because a terminal session, a router config
+  and a wall of program output are different things to read:
 
-    command — what you type.   Highlighted, dark well, command name in --code-cmd.
-    output  — what you get back. Not code, so not highlighted: flat surface, muted
-              --code-out text, so it reads as a quotation of the machine.
+    command — bash you type.      Chroma-highlighted, dark well, command lit.
+    ios     — Cisco IOS.          No Chroma lexer exists; tokenised below.
+    output  — what you get back.  Not code, so not highlighted: flat surface,
+                                  muted --code-out, reads as a quotation.
+    code    — everything else.    Chroma with the declared language.
 
-  A fence with no language is output, not "some language we should guess at".
-  Chroma's guesser used to label these blocks bash/gdscript/ru/en and colour them
-  from an unrelated grammar; hugo.toml now sets guessSyntax = false.
+  WHY ios IS DETECTED, NOT DECLARED
+  ~60 Cisco pages (content/kb/cisco-.../**, content/ccna-labs/**) open their fences
+  with no language at all, so every one of them landed in "output" and rendered
+  as a grey wall. Retagging them by hand is ~200 fences and would rot the next
+  time someone pastes a config. Instead: a bare fence containing at least one
+  IOS prompt line IS IOS. Everything else with a bare fence stays output — so
+  the ASCII topology diagrams sitting right next to those configs are left
+  alone, which is the case that makes sniffing safe here.
 
-  Chroma tags shell builtins (.nb) and keywords (.k) but never a bare command name,
-  so `systemctl status postgresql` came out entirely uncoloured. The replaceRE below
-  wraps the first bare word of each line in .cmd. It only fires when the word sits
-  flush against the start of the line span — an indented continuation or a line that
-  already opens with a token span (comment, keyword, builtin) is left alone — and it
-  requires a trailing space, tab, newline or tag so that FOO=bar is not mistaken for
-  a command.
+  Chroma tags shell builtins (.nb) and keywords (.k) but never a bare command
+  name, so 'systemctl status postgresql' came out entirely uncoloured. The
+  replaceRE below wraps the first bare word of each line in .cmd. It only fires
+  when the word sits flush against the start of the line span, and it requires a
+  trailing space, tab, newline or tag so that FOO=bar is not read as a command.
 */ -}}
-{{- $lang := lower (trim (.Type | default "") " ") -}}
-{{- $shells := slice "bash" "sh" "shell" "zsh" "console" "shell-session" -}}
-{{- $plain := slice "" "text" "txt" "output" "out" "plain" "ascii" -}}
-{{- $isShell := in $shells $lang -}}
-{{- $isOutput := in $plain $lang -}}
-{{- $kind := cond $isOutput "output" (cond $isShell "command" "code") -}}
-{{- $label := cond (eq $lang "") "output" $lang -}}
+
+{{- $lang     := lower (trim (.Type | default "") " ") -}}
+{{- $shells   := slice "bash" "sh" "shell" "zsh" "console" "shell-session" -}}
+{{- $plain    := slice "" "text" "txt" "output" "out" "plain" "ascii" -}}
+{{- $iosLangs := slice "ios" "cisco" "ios-config" -}}
+
+{{- /* An IOS prompt at the head of a line: R1#  SW1(config-if)#  R2(config)>
+       Anchored (?m)^ and requiring a non-space after the sigil, so prose that
+       merely mentions a prompt cannot trigger it. */ -}}
+{{- $sniff := "(?m)^[A-Za-z][\\w.-]*(\\([\\w-]+\\))?[#>]\\S" -}}
+
+{{- $declaredIos := in $iosLangs $lang -}}
+{{- $bare        := in $plain $lang -}}
+{{- $sniffedIos  := and $bare (gt (len (findRE $sniff .Inner 1)) 0) -}}
+{{- $isIos       := or $declaredIos $sniffedIos -}}
+{{- $isShell     := in $shells $lang -}}
+{{- $isOutput    := and $bare (not $sniffedIos) -}}
+
+{{- $kind := "code" -}}
+{{- if $isIos -}}{{- $kind = "ios" -}}
+{{- else if $isOutput -}}{{- $kind = "output" -}}
+{{- else if $isShell -}}{{- $kind = "command" -}}{{- end -}}
+
+{{- $label := $lang -}}
+{{- if $isIos -}}{{- $label = "cisco ios" -}}
+{{- else if eq $lang "" -}}{{- $label = "output" -}}{{- end -}}
+
 {{- $body := "" -}}
-{{- if $isOutput -}}
+
+{{- if $isIos -}}
+  {{- /* ═══ IOS TOKENISER — eight rules, in order ═══
+       Runs on plain text one line at a time and emits final markup, so no
+       regex ever sees the spans an earlier rule wrote (the failure mode of
+       chaining replaceRE over HTML). Colours: code.css / chroma.css. */ -}}
+  {{- $exec := slice "show" "debug" "undebug" "ping" "traceroute" "telnet" "ssh" "copy" "write" "reload" "dir" "more" "clear" "terminal" -}}
+  {{- $out := slice -}}
+  {{- range $line := split (trim .Inner "\n") "\n" -}}
+    {{- $esc := htmlEscape $line -}}
+    {{- $pm := findRE "^[A-Za-z][\\w.-]*(\\([\\w-]+\\))?[#>]" $esc 1 -}}
+    {{- if $pm -}}
+      {{- $p     := index $pm 0 -}}
+      {{- $rest  := strings.TrimPrefix $p $esc -}}
+      {{- $sigil := substr $p -1 -}}
+      {{- $head  := substr $p 0 (sub (len $p) 1) -}}
+
+      {{- /* rules 1+2: mode bold, hostname and sigil dimmed */ -}}
+      {{- $promptHtml := printf "<span class=\"i-host\">%s%s</span>" $head $sigil -}}
+      {{- with $mm := findRE "\\([\\w-]+\\)$" $head 1 -}}
+        {{- $mode := index $mm 0 -}}
+        {{- $promptHtml = printf "<span class=\"i-host\">%s</span><span class=\"i-mode\">%s</span><span class=\"i-host\">%s</span>" (strings.TrimSuffix $mode $head) $mode $sigil -}}
+      {{- end -}}
+
+      {{- /* rule 6: trailing ! comment, split off before anything else */ -}}
+      {{- $cmt := "" -}}
+      {{- with $cm := findRE "\\s+!.*$" $rest 1 -}}
+        {{- $c := index $cm 0 -}}
+        {{- $cmt = printf "<span class=\"i-cmt\">%s</span>" $c -}}
+        {{- $rest = strings.TrimSuffix $c $rest -}}
+      {{- end -}}
+
+      {{- /* rules 3,4,5,8 across the command body */ -}}
+      {{- $words  := split $rest " " -}}
+      {{- $isExec := in $exec (lower (index $words 0)) -}}
+      {{- $bodyHtml := "" -}}
+      {{- range $i, $w := $words -}}
+        {{- $cls := "i-arg" -}}
+        {{- if eq $w "" -}}
+          {{- $cls = "" -}}
+        {{- else if findRE "^\\d+(\\.\\d+)*$|^0x[0-9a-fA-F]+$|^[\\da-fA-F]{4}\\.[\\da-fA-F]{4}\\.[\\da-fA-F]{4}$|^[\\da-fA-F:]*::[\\da-fA-F:/]*$|^\\d+(\\.\\d+){3}/\\d+$" $w 1 -}}
+          {{- $cls = "i-num" -}}
+        {{- else if and (eq $i 0) (eq (lower $w) "no") -}}
+          {{- $cls = "i-no" -}}
+        {{- else if findRE "^[A-Z][A-Za-z-]*\\d[\\d/.:-]*$" $w 1 -}}
+          {{- $cls = "i-arg" -}}
+        {{- else if or (eq $i 0) (and (not $isExec) (not (findRE "\\d" $w 1))) -}}
+          {{- $cls = "i-verb" -}}
+        {{- end -}}
+        {{- $sp := cond (eq $i 0) "" " " -}}
+        {{- if eq $cls "" -}}
+          {{- $bodyHtml = printf "%s%s" $bodyHtml $sp -}}
+        {{- else -}}
+          {{- $bodyHtml = printf "%s%s<span class=\"%s\">%s</span>" $bodyHtml $sp $cls $w -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $out = $out | append (printf "%s%s%s" $promptHtml $bodyHtml $cmt) -}}
+
+    {{- else if findRE "^\\s*!" $esc 1 -}}
+      {{- /* rule 6, whole-line form: !  or  ! comment */ -}}
+      {{- $out = $out | append (printf "<span class=\"i-cmt\">%s</span>" $esc) -}}
+
+    {{- else if findRE "^%" $esc 1 -}}
+      {{- /* rules 7+8: % syslog notice (warn) vs % parser refusal (error) */ -}}
+      {{- $cls := "i-warn" -}}
+      {{- if findRE "^% (Invalid|Ambiguous|Incomplete|Unrecognized|Unknown|Bad)" $esc 1 -}}{{- $cls = "i-err" -}}{{- end -}}
+      {{- $out = $out | append (printf "<span class=\"%s\">%s</span>" $cls $esc) -}}
+
+    {{- else -}}
+      {{- /* show-command output and the caret line */ -}}
+      {{- $out = $out | append (printf "<span class=\"i-out\">%s</span>" $esc) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $body = printf "<pre class=\"ios-pre\"><code>%s</code></pre>" (delimit $out "\n") -}}
+
+{{- else if $isOutput -}}
   {{- $body = printf "<pre class=\"out-pre\"><code>%s</code></pre>" (htmlEscape .Inner) -}}
+
 {{- else -}}
   {{- $h := string (transform.Highlight .Inner $lang) -}}
   {{- if $isShell -}}
-    {{- $h = replaceRE `(<span class="cl">)([a-zA-Z_][\w.\-/]*)([ \t\n<])` `${1}<span class="cmd">${2}</span>${3}` $h -}}
+    {{- $h = replaceRE "(<span class=\"cl\">)([a-zA-Z_][\\w.\\-/]*)([ \\t\\n<])" "${1}<span class=\"cmd\">${2}</span>${3}" $h -}}
   {{- end -}}
   {{- $body = $h -}}
 {{- end -}}
-<div class="code-block" data-kind="{{ $kind }}"><div class="code-label"><span>{{ $label }}</span><button class="copy-btn" onclick="cpPre(this)">copy</button></div>{{ $body | safeHTML }}</div>
+
+{{- $copyFn  := cond $isIos "cpInput(this)" "cpPre(this)" -}}
+{{- $copyTxt := cond $isIos "copy config" "copy" -}}
+
+<div class="code-block" data-kind="{{ $kind }}"><div class="code-label"><span>{{ $label }}</span><button class="copy-btn"{{ if $isIos }} data-strip="ios"{{ end }} onclick="{{ $copyFn | safeJS }}">{{ $copyTxt }}</button></div>{{ $body | safeHTML }}</div>

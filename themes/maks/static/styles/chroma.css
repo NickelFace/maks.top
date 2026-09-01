@@ -1,51 +1,43 @@
 /* ═══════════════════════════════════════
    CHROMA — Slate Code
-   Adaptive syntax highlighting, tuned for Bash.
+   Adaptive syntax highlighting, tuned for Bash. Also the token source for
+   code.css (Cisco IOS, sessions, diffs) and for the .comment / .out spans
+   that prose.css and the namespace page hand-mark.
 
-   Dark  : cool base on var(--code-bg) #0A0E13
-   Light : cool base on var(--code-bg) #E9EEF3
+   ONE PALETTE, BOTH THEMES.
+   Code blocks stay on the dark well in the light theme too. That is a
+   deliberate consequence of the Recessed light background (option 6c): the
+   page recedes to #E8EDF3 and content rises to near-white above it, so a dark
+   code block reads as the deepest layer rather than as an inversion. It also
+   deletes a whole class of work — there is no second light syntax set to keep
+   in sync, and a screenshot of a code block is valid in both themes.
 
-   Every token colour below is measured against its own
-   background. Dark: 5.5:1 (comments, the floor) → 11.4:1.
-   Light: 5.2:1 → 14:1. Nothing here is decorative — if you
-   retune a hue, re-measure it.
+   Inline <code> inside a paragraph is the exception: it is type, not a block,
+   so it follows the page. That is --code-inline-bg, set per theme in
+   global.css.
+
+   Every colour below is measured against #0A0E13. Floor is the comment at
+   5.5:1; nothing else is under 7. If you retune a hue, re-measure it.
 ═══════════════════════════════════════ */
 
 :root {
-  /* Code token palette — also consumed by prose.css (.comment/.out)
-     and the hand-marked .ns-pre blocks on /kb/linux-namespaces/. */
   --code-fg:   #D6DEE8;  /* plain text, paths, flags        19.0:1 */
   --code-cmd:  #7FD1DE;  /* commands, builtins, functions   11.0:1 */
   --code-str:  #D5C08A;  /* strings, heredocs               10.7:1 */
   --code-kw:   #B49BE8;  /* keywords, operators, pipes       8.1:1 */
   --code-num:  #8FD6B4;  /* numbers, added lines            11.4:1 */
-  --code-var:  #9DC1F0;  /* $variables, ${expansions}       10.3:1 */
-  --code-cmt:  #7E8C9E;  /* # comments                       5.5:1 */
+  --code-var:  #9DC1F0;  /* $variables, ${expansions}     10.3:1 */
+  --code-cmt:  #7E8C9E;  /* # comments — the floor           5.5:1 */
   --code-out:  #94A3B4;  /* program output, prompts          7.4:1 */
   --code-err:  #F08C8C;  /* errors, removed lines            9.5:1 */
-  --code-gut:  #4C596A;  /* line numbers (non-text)               */
-  --code-hl:   #16202D;  /* highlighted line background           */
+  --code-gut:  #4C596A;  /* line numbers, dimmed hostnames         */
+  --code-hl:   #16202D;  /* highlighted line background            */
 }
 
-[data-theme="light"] {
-  --code-fg:   #1B2530;
-  --code-cmd:  #0B5D78;
-  --code-str:  #8A5A00;
-  --code-kw:   #7A3EA8;
-  --code-num:  #0F6B4F;
-  --code-var:  #1A4E9B;
-  --code-cmt:  #5A6672;
-  --code-out:  #4A5764;
-  --code-err:  #A32020;
-  --code-gut:  #97A3AE;
-  --code-hl:   #DCE6EF;
-}
-
-/* ── Structure helpers ── */
+/* ── Structure ── */
 .code-block .highlight { margin: 0; display: block; }
 .code-block .chroma    { border-radius: 0 0 6px 6px; }
 
-/* Fenced code blocks in prose (not wrapped by shortcode) */
 .prose .highlight {
   margin: 16px 0;
   border: 1px solid var(--border);
@@ -54,7 +46,6 @@
 }
 .prose .highlight .chroma { border-radius: 0; }
 
-/* ── Common pre/code ── */
 .chroma {
   display: block;
   overflow-x: auto;
@@ -67,11 +58,9 @@
 .chroma code { padding: 0; background: none; font-size: inherit; }
 
 /* ════════════════════════════════════
-   TOKENS — one table, both themes.
-   The values come from the custom
-   properties above, so there is no
-   second [data-theme] block to keep
-   in sync.
+   TOKENS — driven entirely from the
+   custom properties above, so there is
+   no [data-theme] duplicate to drift.
 ════════════════════════════════════ */
 .chroma          { color: var(--code-fg); background-color: var(--code-bg); }
 .chroma .err     { color: var(--code-err); }
@@ -84,52 +73,42 @@
 .chroma .line    { display: flex; }
 
 /* Keywords — if / then / for / do / function, and operators */
-.chroma .k,
-.chroma .kc,
-.chroma .kn,
-.chroma .kp,
-.chroma .kr,
-.chroma .o,
-.chroma .ow      { color: var(--code-kw) }
-.chroma .kd,
-.chroma .kt      { color: var(--code-kw); font-style: italic }
+.chroma .k, .chroma .kc, .chroma .kn, .chroma .kp,
+.chroma .kr, .chroma .o, .chroma .ow      { color: var(--code-kw) }
+.chroma .kd, .chroma .kt                  { color: var(--code-kw); font-style: italic }
 
-/* Names — the command itself, builtins, functions, attributes */
-.chroma .nb,
-.chroma .nf,
-.chroma .nc,
-.chroma .na,
-.chroma .nt,
-.chroma .no,
-.chroma .nd,
-.chroma .ne,
-.chroma .ni,
-.chroma .bp      { color: var(--code-cmd) }
-.chroma .nn      { color: var(--code-fg) }
-.chroma .nl      { color: var(--code-cmd); font-style: italic }
+/* Names — the command itself, builtins, functions, attributes.
+   .cmd is added by render-codeblock.html: Chroma never tags a bare command
+   name, so 'systemctl status sshd' came out entirely uncoloured. */
+.chroma .cmd,
+.chroma .nb, .chroma .nf, .chroma .nc, .chroma .na,
+.chroma .nt, .chroma .no, .chroma .nd, .chroma .ne,
+.chroma .ni, .chroma .bp                  { color: var(--code-cmd) }
+.chroma .nn                               { color: var(--code-fg) }
+.chroma .nl                               { color: var(--code-cmd); font-style: italic }
 
-/* Variables — $PID, ${VAR}, $$ */
-.chroma .nv,
-.chroma .vc,
-.chroma .vg,
-.chroma .vi      { color: var(--code-var) }
+/* Variables */
+.chroma .nv, .chroma .vc, .chroma .vg,
+.chroma .vi                               { color: var(--code-var) }
 
-/* Strings */
+/* Strings. Deliberately the one warm hue left in the palette: a warm token
+   inside a code block is the cheapest way to see where a quoted argument
+   starts and ends. */
 .chroma .s,  .chroma .sa, .chroma .sb, .chroma .sc,
 .chroma .dl, .chroma .sd, .chroma .s2, .chroma .sh,
-.chroma .sx, .chroma .s1                     { color: var(--code-str) }
+.chroma .sx, .chroma .s1                  { color: var(--code-str) }
 .chroma .se, .chroma .si, .chroma .sr,
-.chroma .ss                                  { color: var(--code-num) }
+.chroma .ss                               { color: var(--code-num) }
 
 /* Numbers */
 .chroma .m,  .chroma .mb, .chroma .mf, .chroma .mh,
-.chroma .mi, .chroma .il, .chroma .mo        { color: var(--code-num) }
+.chroma .mi, .chroma .il, .chroma .mo     { color: var(--code-num) }
 
-/* Comments — deliberately the quietest token that still clears AA */
+/* Comments — the quietest token that still clears AA */
 .chroma .c,  .chroma .ch, .chroma .cm,
-.chroma .c1                                  { color: var(--code-cmt); font-style: italic }
-.chroma .cs                                  { color: var(--code-cmt); font-weight: bold; font-style: italic }
-.chroma .cp, .chroma .cpf                    { color: var(--code-kw) }
+.chroma .c1                               { color: var(--code-cmt); font-style: italic }
+.chroma .cs                               { color: var(--code-cmt); font-weight: bold; font-style: italic }
+.chroma .cp, .chroma .cpf                 { color: var(--code-kw) }
 
 /* Generic — diffs, prompts, program output */
 .chroma .gd { color: var(--code-err) }
@@ -137,25 +116,10 @@
 .chroma .gr { color: var(--code-err) }
 .chroma .gh { color: var(--code-fg); font-weight: bold }
 .chroma .gi { color: var(--code-num) }
-.chroma .go { color: var(--code-out) }   /* was #44475a — invisible */
-.chroma .gp { color: var(--code-out) }   /* $ prompt */
+.chroma .go { color: var(--code-out) }   /* was #44475a — 1.6:1, invisible */
+.chroma .gp { color: var(--code-out) }   /* prompt */
 .chroma .gs { font-weight: bold }
 .chroma .gu { color: var(--code-cmt) }
 .chroma .gt { color: var(--code-err) }
 .chroma .gl { text-decoration: underline }
 .chroma .w  { color: var(--code-gut) }
-
-/* Light-only tightening: bold weight buys back the contrast that
-   the lighter background costs on the two busiest tokens. */
-[data-theme="light"] .chroma .k,
-[data-theme="light"] .chroma .kc,
-[data-theme="light"] .chroma .kn,
-[data-theme="light"] .chroma .kp,
-[data-theme="light"] .chroma .kr { font-weight: 600 }
-[data-theme="light"] .chroma .gd { background-color: #FBE9E9 }
-[data-theme="light"] .chroma .gi { background-color: #E4F4EC }
-
-/* Bare command names. Chroma tags builtins (.nb) and keywords (.k) but never the
-   command itself, so `systemctl status postgresql` came out flat. The codeblock
-   render hook wraps the leading word of each shell line in .cmd. */
-.chroma .cmd { color: var(--code-cmd); }

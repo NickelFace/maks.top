@@ -46,7 +46,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
 <link rel="stylesheet" href="{{ "styles/fonts.css" | relURL }}">
 <link rel="stylesheet" href="{{ "styles/global.css" | relURL }}">
-{{ if or (eq .Type "posts") (eq .Type "kb") (and (eq .Type "ccna-labs") .IsPage) }}<link rel="stylesheet" href="{{ "styles/chroma.css" | relURL }}">{{ end }}
+{{ if or (eq .Type "posts") (eq .Type "kb") (and (eq .Type "ccna-labs") .IsPage) }}<link rel="stylesheet" href="{{ "styles/chroma.css" | relURL }}">
+<link rel="stylesheet" href="{{ "styles/code.css" | relURL }}">{{ end }}
 {{ if .IsHome }}<link rel="stylesheet" href="{{ "styles/home.css" | relURL }}">{{ end }}
 {{ if or (eq .Type "posts") (eq .Type "about") (eq .Type "kb") (and (eq .Type "ccna-labs") .IsPage) }}<link rel="stylesheet" href="{{ "styles/prose.css" | relURL }}">{{ end }}
 {{ if or (eq .Type "posts") (eq .Type "kb") (and (eq .Type "ccna-labs") .IsPage) }}<link rel="stylesheet" href="{{ "styles/topology.css" | relURL }}">{{ end }}

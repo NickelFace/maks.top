@@ -1,0 +1,52 @@
+{{/*  A shell session: prompt, typed commands, program output.
+
+      {{< session host="maks@ubuntu" path="~/Projects/Claude/maks.top" >}}
+      $ systemctl status sshd
+      ● ssh.service - OpenBSD Secure Shell server
+           Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)
+      {{< /session >}}
+
+      Authoring convention: prefix the lines you TYPED with "$ " (or "# " for
+      root). Everything else is treated as output. That one marker is all the
+      block needs — the prompt, the command/output split and the copy filter
+      all derive from it, so pasting a real terminal scroll needs no editing
+      beyond adding the dollars.
+
+      host / path  render the full user@host:path prompt on every command line.
+                   Omit both for a bare "$".
+      ansi         set ansi="true" if the pasted text still contains real SGR
+                   escape codes; code-enhance.js converts them client-side.
+
+      Colour here is ANSI-faithful (see code.css): green user@host, blue path,
+      the same eight hues as the syntax tokens.
+*/}}
+{{- $host := .Get "host" -}}
+{{- $path := .Get "path" -}}
+{{- $out := slice -}}
+{{- range $line := split (trim .Inner "\n") "\n" -}}
+  {{- $esc := htmlEscape $line -}}
+  {{- if or (hasPrefix $esc "$ ") (hasPrefix $esc "# ") -}}
+    {{- $sig := substr $esc 0 1 -}}
+    {{- $cmd := substr $esc 2 -}}
+    {{- $prompt := printf "<span class=\"s-sig\">%s </span>" $sig -}}
+    {{- if $host -}}
+      {{- $prompt = printf "<span class=\"s-user\">%s</span><span class=\"s-sig\">:</span><span class=\"s-path\">%s</span><span class=\"s-sig\">%s </span>" $host ($path | default "~") $sig -}}
+    {{- end -}}
+    {{- $out = $out | append (printf "%s<span class=\"s-cmd\">%s</span>" $prompt $cmd) -}}
+  {{- else if eq (trim $esc " ") "" -}}
+    {{- $out = $out | append "" -}}
+  {{- else -}}
+    {{- $out = $out | append (printf "<span class=\"s-out\">%s</span>" $esc) -}}
+  {{- end -}}
+{{- end -}}
+<div class="code-block" data-kind="session">
+  <div class="code-label">
+    <span class="file-path">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M6.5 9.5l2.5 2.5-2.5 2.5M11.5 14.5h6"/></svg>
+      <b>{{ with $host }}{{ . }}{{ else }}session{{ end }}</b>
+    </span>
+    <span class="file-lang">session</span>
+    <button class="copy-btn" data-strip="session" onclick="cpInput(this)">copy input</button>
+  </div>
+  <pre class="session-pre"{{ if eq (.Get "ansi") "true" }} data-ansi="true"{{ end }}><code>{{ delimit $out "\n" | safeHTML }}</code></pre>
+</div>

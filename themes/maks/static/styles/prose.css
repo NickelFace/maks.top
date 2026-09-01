@@ -56,7 +56,7 @@
 .prose a:hover { border-bottom-color: var(--accent); }
 
 .prose code {
-  background: var(--bg3);
+  background: var(--code-inline-bg);
   border: 1px solid var(--border);
   border-radius: 3px;
   padding: 1px 5px;
@@ -127,11 +127,11 @@
    so it sits on a raised surface in muted --code-out with a rule down the left. The two
    must never look alike; telling them apart at a glance is the whole point. */
 .code-block[data-kind="output"] {
-  background: var(--bg2);
+  background: var(--code-bg);
   border-color: var(--border);
   border-left: 3px solid var(--border2);
 }
-.code-block[data-kind="output"] .code-label { background: var(--bg2); }
+.code-block[data-kind="output"] .code-label { background: var(--code-bg); }
 .code-block[data-kind="output"] .code-label span { opacity: .8; }
 .code-block[data-kind="output"] pre.out-pre {
   margin: 0; padding: 14px; overflow-x: auto;
