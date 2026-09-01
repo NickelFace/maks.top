@@ -1,0 +1,32 @@
+{{/*  A source file: path in the header, line numbers on, one line highlightable.
+
+      {{< file path="/etc/systemd/system/ssh.socket.d/override.conf" lang="ini" hl="4" >}}
+      [Socket]
+      ListenStream=
+      {{< /file >}}
+
+      path  required. The reason this block type exists — a config snippet with
+            no path is the thing the site used to ship.
+      lang  Chroma lexer name. Default: guessed from the path extension.
+      hl    comma-separated line numbers to highlight (Chroma hl_lines).
+*/}}
+{{- $path := .Get "path" -}}
+{{- $lang := .Get "lang" -}}
+{{- if not $lang -}}
+  {{- $ext := path.Ext $path -}}
+  {{- $map := dict ".conf" "ini" ".ini" "ini" ".yml" "yaml" ".yaml" "yaml" ".json" "json" ".sh" "bash" ".py" "python" ".go" "go" ".js" "javascript" ".css" "css" ".html" "html" ".toml" "toml" ".service" "ini" ".socket" "ini" -}}
+  {{- $lang = index $map $ext | default "text" -}}
+{{- end -}}
+{{- $opts := "lineNos=table,lineNumbersInTable=true,tabWidth=2" -}}
+{{- with .Get "hl" }}{{ $opts = printf "%s,hl_lines=%s" $opts . }}{{ end -}}
+<div class="code-block" data-kind="file">
+  <div class="code-label">
+    <span class="file-path">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8.5Z"/><path d="M13.5 3v5.5H19"/></svg>
+      <b>{{ $path }}</b>
+    </span>
+    <span class="file-lang">{{ $lang }}</span>
+    <button class="copy-btn" onclick="cpPre(this)">copy</button>
+  </div>
+  {{ highlight (trim .Inner "\n") $lang $opts }}
+</div>

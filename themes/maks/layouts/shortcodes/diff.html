@@ -1,0 +1,36 @@
+{{/*  A unified diff. Paste real diff output; nothing to hand-mark.
+
+      {{< diff file="sshd_config" >}}
+      @@ -12,7 +12,8 @@
+       Port 22
+      -PermitRootLogin yes
+      +PermitRootLogin no
+      {{< /diff >}}
+
+      Row tint + rail + the literal +/- is three signals, so the block still
+      reads for a red-green colourblind reader. See code.css.
+*/}}
+{{- $out := slice -}}
+{{- range $line := split (trim .Inner "\n") "\n" -}}
+  {{- $esc := htmlEscape $line -}}
+  {{- if hasPrefix $esc "@@" -}}
+    {{- $out = $out | append (printf "<span class=\"d-hunk\">%s</span>" $esc) -}}
+  {{- else if and (hasPrefix $esc "+") (not (hasPrefix $esc "+++")) -}}
+    {{- $out = $out | append (printf "<span class=\"d-add\">%s</span>" $esc) -}}
+  {{- else if and (hasPrefix $esc "-") (not (hasPrefix $esc "---")) -}}
+    {{- $out = $out | append (printf "<span class=\"d-del\">%s</span>" $esc) -}}
+  {{- else -}}
+    {{- $out = $out | append $esc -}}
+  {{- end -}}
+{{- end -}}
+<div class="code-block" data-kind="diff">
+  <div class="code-label">
+    <span class="file-path">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12"/><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="6" r="2.6"/><path d="M18 8.6v3.4a4 4 0 0 1-4 4H6"/></svg>
+      <b>{{ .Get "file" | default "diff" }}</b>
+    </span>
+    <span class="file-lang">diff</span>
+    <button class="copy-btn" onclick="cpPre(this)">copy</button>
+  </div>
+  <pre class="diff-pre"><code>{{ delimit $out "\n" | safeHTML }}</code></pre>
+</div>

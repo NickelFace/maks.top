@@ -1,0 +1,124 @@
+/* ═══════════════════════════════════════
+   CODE.CSS — block types beyond the plain fence.
+   Load AFTER chroma.css, which owns the --code-* tokens.
+
+     .ios-pre           Cisco IOS      (render-codeblock.html, data-kind=ios)
+     .session-pre       shell session  (shortcodes/session.html)
+     [data-kind=file]   source file with path header + line numbers
+     .diff-pre          unified diff   (shortcodes/diff.html)
+
+   One rule for all of them: COLOUR MARKS ROLE, never category. A token is
+   coloured for what it does in the line, not what topic it belongs to. Nine
+   per-topic hues is exactly what this redesign removed everywhere else.
+═══════════════════════════════════════ */
+
+.ios-pre,
+.session-pre,
+.diff-pre {
+  margin: 0;
+  padding: 14px 16px;
+  background: var(--code-bg);
+  color: var(--code-fg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.75;
+  overflow-x: auto;
+}
+.ios-pre code,
+.session-pre code,
+.diff-pre code { padding: 0; background: none; border: 0; font: inherit; color: inherit; }
+
+/* ═══ CISCO IOS ═══
+   The mode is the only bold thing in the block. Half of all IOS mistakes are a
+   correct command typed in the wrong mode, so a reader scanning a long paste
+   has to track config -> config-if -> config-router without reading a single
+   command. The hostname is dimmed for the same reason: twelve of thirteen
+   lines on a typical lab page start with "R1", so it should recede. That is
+   the inverse of how a real terminal shows it, on purpose. */
+.i-host { color: var(--code-gut); }
+.i-mode { color: var(--code-kw); font-weight: 700; }
+.i-verb { color: var(--code-kw); }
+.i-arg  { color: var(--code-cmd); }
+.i-num  { color: var(--code-num); }
+.i-cmt  { color: var(--code-cmt); font-style: italic; }
+.i-out  { color: var(--code-out); }
+.i-warn { color: var(--code-str); }
+.i-err  { color: var(--code-err); }
+
+/* 'no' is red — the one place on this site where red does not mean error, and
+   it earns the exception: 'shutdown' and 'no shutdown' differ by two
+   characters and are opposite in effect. */
+.i-no   { color: var(--code-err); font-weight: 600; }
+
+/* ═══ SHELL SESSION ═══
+   Real ANSI, mapped onto the eight Slate hues — the same eight as the syntax
+   tokens, so green is a number in code and 'active' in a terminal, and both
+   mean good. A page holding a code block and a session block then does not
+   read as two designs. */
+.a-b { font-weight: 700; }
+.a-d { opacity: .72; }
+.a-i { font-style: italic; }
+.a-u { text-decoration: underline; }
+
+.a-30, .a-90 { color: var(--code-gut); }
+.a-31, .a-91 { color: var(--code-err); }
+.a-32, .a-92 { color: var(--code-num); }
+.a-33, .a-93 { color: var(--code-str); }
+.a-34, .a-94 { color: var(--code-var); }
+.a-35, .a-95 { color: var(--code-kw); }
+.a-36, .a-96 { color: var(--code-cmd); }
+.a-37        { color: var(--code-fg); }
+.a-97        { color: #F0F4F8; }
+
+/* Prompt, when the shortcode is given host= and path=. Ubuntu's own bold
+   green / bold blue, repeated on every command: it tells the reader where they
+   are and, more usefully, which lines they typed and which the machine
+   answered — so the output needs no class of its own. */
+.s-user { color: var(--code-num); font-weight: 700; }
+.s-path { color: var(--code-var); font-weight: 700; }
+.s-sig  { color: var(--code-fg); }
+.s-cmd  { color: #F0F4F8; }
+.s-out  { color: var(--code-out); }
+
+/* ═══ FILE BLOCK ═══
+   The path is the most useful thing about a config snippet and it is what the
+   site currently omits, so it becomes the header and the language chip is
+   demoted to the right. Line numbers are on because a file block is something
+   you refer INTO; a session block never has them. */
+.code-block[data-kind="file"] .code-label { gap: 10px; }
+.file-path {
+  display: flex; align-items: center; gap: 7px; min-width: 0;
+  color: var(--text2); letter-spacing: 0; text-transform: none; font-size: 11px;
+}
+.file-path svg { width: 13px; height: 13px; color: var(--text3); flex-shrink: 0; }
+.file-path b { font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-lang { margin-left: auto; color: var(--text3); flex-shrink: 0; }
+.code-block[data-kind="file"] .chroma .lnt,
+.code-block[data-kind="file"] .chroma .ln  { color: var(--code-gut); }
+.code-block[data-kind="file"] .chroma .hl  { background: var(--code-hl); }
+
+/* ═══ DIFF ═══
+   Row tint + a 2px rail + the literal +/- : three signals, any one of which is
+   enough on its own. Colour alone fails for the commonest kind of colour
+   blindness, and a diff is exactly where that matters. Tints stay at 10% so
+   the text on top keeps its measured contrast. */
+.diff-pre .d-hunk { color: var(--code-cmt); }
+.diff-pre .d-add,
+.diff-pre .d-del { display: block; margin: 0 -16px; padding: 0 16px; }
+.diff-pre .d-add {
+  color: var(--code-num);
+  background: color-mix(in oklab, var(--code-num) 10%, transparent);
+  box-shadow: inset 2px 0 0 var(--code-num);
+}
+.diff-pre .d-del {
+  color: var(--code-err);
+  background: color-mix(in oklab, var(--code-err) 10%, transparent);
+  box-shadow: inset 2px 0 0 var(--code-err);
+}
+
+.copy-btn { white-space: nowrap; flex-shrink: 0; }
+
+@media (max-width: 480px) {
+  .ios-pre, .session-pre, .diff-pre { font-size: 11.5px; padding: 12px 14px; }
+  .file-path { font-size: 10px; }
+}
