@@ -1,7 +1,7 @@
 ---
 title: "Docker"
 description: "Контейнеры: запуск, управление, логи, очистка — docker run, ps, stop, rm, exec, inspect"
-icon: "🐳"
+icon: docker
 group: "Cloud & DevOps"
 tags: ["Docker", "Containers", "DevOps"]
 date: 2026-04-14

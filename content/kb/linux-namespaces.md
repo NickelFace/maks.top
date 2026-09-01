@@ -1,7 +1,7 @@
 ---
 title: "Linux Namespaces"
 description: "All 8 Linux namespace types explained with interactive examples and practical commands."
-icon: "🌐"
+icon: linux
 group: "Linux Core"
 tags: ["Linux", "Kernel", "Containers", "LPIC-2"]
 date: 2025-07-14

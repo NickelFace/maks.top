@@ -1,7 +1,7 @@
 ---
 title: "Bash & Scripting"
 description: "Variables, arrays, conditionals, loops, functions, parameter expansion"
-icon: "🐚"
+icon: bash
 group: "Linux Core"
 tags: ["Bash", "Shell", "Scripting", "Linux"]
 date: 2026-04-14

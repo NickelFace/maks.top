@@ -33,11 +33,20 @@
   transition:background 0.15s;
 }
 .kb-edit-card:hover { background:var(--bg2); }
+/* Fallback letter — sized so its optical height matches the 26px SVG marks */
 .kb-edit-letter {
-  font-family:'Fraunces',Georgia,serif; font-size:36px;
-  color:var(--accent); line-height:1; font-weight:300;
+  font-family:'Fraunces',Georgia,serif; font-size:30px;
+  color:var(--text3); line-height:0.86; height:26px; font-weight:300;
   letter-spacing:-0.04em; font-feature-settings:'opsz' 144;
+  transition: color .15s;
 }
+.kb-edit-card:hover .kb-edit-letter { color: var(--accent); }
+/* Brand mark — inherits colour, no fixed fills */
+.kb-edit-mark {
+  color: var(--text3);
+  transition: color .15s;
+}
+.kb-edit-card:hover .kb-edit-mark { color: var(--accent); }
 .kb-edit-title { font-size:15px; font-weight:600; margin-top:8px; color:var(--text); }
 .kb-edit-desc { font-size:12.5px; color:var(--text3); line-height:1.5; flex:1; }
 .kb-edit-tags { display:flex; gap:6px; margin-top:6px; }
@@ -76,6 +85,9 @@
 {{ end }}
 
 {{ define "main" }}
+{{/* Sprite symbol ids that live in /static/img/icons.svg — anything else in .Params.icon
+     (e.g. an emoji from legacy frontmatter) falls back to the Fraunces letter. */}}
+{{ $brandIcons := slice "docker" "git" "kubernetes" "nginx" "cisco" "linux" "bash" "wireshark" }}
 
   {{ if .Sections }}
 
@@ -118,14 +130,22 @@
         {{ $letter := substr .Title 0 1 | strings.ToUpper }}
         {{ if .IsSection }}
         <a href="{{ .RelPermalink }}" class="kb-edit-card">
+          {{ if in $brandIcons .Params.icon }}
+          <svg class="kb-edit-mark" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="{{ "/img/icons.svg" | relURL }}#{{ .Params.icon }}"></use></svg>
+          {{ else }}
           <div class="kb-edit-letter">{{ $letter }}</div>
+          {{ end }}
           <div class="kb-edit-title">{{ .Title }}</div>
           {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
           <div class="kb-edit-meta">{{ len .Pages }} pages →</div>
         </a>
         {{ else }}
         <a href="{{ .RelPermalink }}" class="kb-edit-card">
+          {{ if in $brandIcons .Params.icon }}
+          <svg class="kb-edit-mark" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="{{ "/img/icons.svg" | relURL }}#{{ .Params.icon }}"></use></svg>
+          {{ else }}
           <div class="kb-edit-letter">{{ $letter }}</div>
+          {{ end }}
           <div class="kb-edit-title">{{ .Title }}</div>
           {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
           {{ with .Params.tags }}
@@ -155,7 +175,11 @@
       {{ range $ungrouped }}
       {{ $letter := substr .Title 0 1 | strings.ToUpper }}
       <a href="{{ .Permalink }}" class="kb-edit-card">
+        {{ if in $brandIcons .Params.icon }}
+        <svg class="kb-edit-mark" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="{{ "/img/icons.svg" | relURL }}#{{ .Params.icon }}"></use></svg>
+        {{ else }}
         <div class="kb-edit-letter">{{ $letter }}</div>
+        {{ end }}
         <div class="kb-edit-title">{{ .Title }}</div>
         {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
       </a>
@@ -194,7 +218,11 @@
       {{ range .Pages.ByTitle }}
       {{ $letter := substr .Title 0 1 | strings.ToUpper }}
       <a href="{{ .RelPermalink }}" class="kb-edit-card">
+        {{ if in $brandIcons .Params.icon }}
+        <svg class="kb-edit-mark" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="{{ "/img/icons.svg" | relURL }}#{{ .Params.icon }}"></use></svg>
+        {{ else }}
         <div class="kb-edit-letter">{{ $letter }}</div>
+        {{ end }}
         <div class="kb-edit-title">{{ .Title }}</div>
         {{ with .Description }}<div class="kb-edit-desc">{{ . }}</div>{{ end }}
         {{ with .Params.tags }}

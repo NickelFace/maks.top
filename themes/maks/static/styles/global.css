@@ -206,26 +206,26 @@ nav.desk-nav {
   height: 28px;
   border-radius: 50%;
   border: 1px solid var(--border);
-  background: radial-gradient(circle at 35% 35%, var(--accent) 0 36%, transparent 37%), var(--bg2);
-  cursor: pointer;
-  font-size: 0;
-  line-height: 0;
+  background: var(--bg2);
+  color: var(--text3);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, opacity 0.2s;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
   flex-shrink: 0;
 }
 
-[data-theme="dark"] .theme-btn {
-  background: radial-gradient(circle at 68% 32%, var(--bg) 0 36%, transparent 37%),
-              radial-gradient(circle at 35% 35%, var(--accent) 0 55%, transparent 56%),
-              var(--bg2);
-}
-
-.theme-btn:hover { border-color: var(--accent); opacity: 0.85; }
+.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 .theme-btn[data-auto="true"] { border-style: dashed; }
+
+.theme-btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+}
 
 /* ═══════════════════════════════════════
    LAYOUT
@@ -783,7 +783,7 @@ button.tag {
 .pg-active {
   background: var(--accent);
   border-color: var(--accent);
-  color: #000;
+  color: var(--bg);
   font-weight: 600;
   cursor: default;
 }
@@ -832,7 +832,7 @@ button.tag {
 
 .pg-dot.pg-active {
   background: var(--accent);
-  color: #000;
+  color: var(--bg);
   font-weight: 700;
   border-color: var(--accent);
 }

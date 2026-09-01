@@ -72,7 +72,7 @@
       <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('en')" aria-pressed="{{ if ne .Params.page_lang "ru" }}true{{ else }}false{{ end }}">EN</button>
       <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick="setLang('ru')" aria-pressed="{{ if eq .Params.page_lang "ru" }}true{{ else }}false{{ end }}">RU</button>
     </div>
-    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme" aria-pressed="false">🌙</button>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><use href="{{ "/img/icons.svg#power" | relURL }}"></use></svg></button>
   </div>
 </nav>
 
@@ -84,7 +84,7 @@
       <button class="lang-btn{{ if ne .Params.page_lang "ru" }} active{{ end }}" onclick='setLang("en")' aria-pressed="{{ if ne .Params.page_lang "ru" }}true{{ else }}false{{ end }}">EN</button>
       <button class="lang-btn{{ if eq .Params.page_lang "ru" }} active{{ end }}" onclick='setLang("ru")' aria-pressed="{{ if eq .Params.page_lang "ru" }}true{{ else }}false{{ end }}">RU</button>
     </div>
-    <button class="theme-btn" onclick="toggleTheme()" id="themeBtnMob" aria-label="Toggle theme" aria-pressed="false">🌙</button>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtnMob" aria-label="Toggle theme" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><use href="{{ "/img/icons.svg#power" | relURL }}"></use></svg></button>
     <button class="burger" id="burgerBtn" onclick="toggleMobMenu()" aria-label="Menu" aria-expanded="false" aria-controls="mobDrawer">
       <span></span><span></span><span></span>
     </button>

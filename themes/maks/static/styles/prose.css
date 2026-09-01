@@ -52,7 +52,7 @@
 .prose ul, .prose ol { padding-left: 20px; margin-bottom: 16px; }
 .prose li { margin-bottom: 8px; }
 
-.prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0,212,255,0.3); }
+.prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); }
 .prose a:hover { border-bottom-color: var(--accent); }
 
 .prose code {
@@ -139,8 +139,8 @@ body.show-ru .ru-text { display: block; }
 .lang-toggle button.active { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .lang-toggle-label { font-size: 10px; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; }
 /* Bare pre fallback (non-Chroma) */
-.code-block pre:not(.chroma) { padding: 14px; font-size: 12px; line-height: 1.7; overflow-x: auto; color: #a5f3fc; margin: 0; font-family: 'JetBrains Mono', monospace; }
-[data-theme="light"] .code-block pre:not(.chroma) { color: #0369a1; }
+.code-block pre:not(.chroma) { padding: 14px; font-size: 12px; line-height: 1.7; overflow-x: auto; color: #8FD3F4; margin: 0; font-family: 'JetBrains Mono', monospace; }
+[data-theme="light"] .code-block pre:not(.chroma) { color: #0B5578; }
 
 /* Section divider */
 .sec {
@@ -399,7 +399,7 @@ details {
   margin: 16px 0;
 }
 details[open] {
-  border-color: rgba(0,212,255,.25);
+  border-color: color-mix(in oklab, var(--accent) 25%, transparent);
 }
 details summary {
   list-style: none;

@@ -1,7 +1,7 @@
 ---
 title: "Git"
 description: "commit, branch, rebase, stash, reset, cherry-pick — commands and patterns"
-icon: "🌿"
+icon: git
 group: "Cloud & DevOps"
 tags: ["Git", "DevOps", "VCS"]
 date: 2026-04-14

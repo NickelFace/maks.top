@@ -1,7 +1,7 @@
 ---
 title: "Bash & Scripting"
 description: "Переменные, массивы, условия, циклы, функции, parameter expansion"
-icon: "🐚"
+icon: bash
 group: "Linux Core"
 tags: ["Bash", "Shell", "Scripting", "Linux"]
 date: 2026-04-14

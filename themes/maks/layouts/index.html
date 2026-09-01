@@ -122,12 +122,13 @@
   </div>
   <div class="home-cert-grid">
 
-    {{- $l1Color   := $l1.Params.cert_color   | default "var(--accent)" -}}
-    {{- $neColor   := $ne.Params.cert_color   | default "var(--accent)" -}}
-    {{- $naColor   := $na.Params.cert_color   | default "var(--accent)" -}}
-    {{- $l2Color   := $l2.Params.cert_color   | default "var(--accent)" -}}
-    {{- $awsColor  := $aws.Params.cert_color  | default "var(--accent)" -}}
-    {{- $ccnaColor := $ccna.Params.cert_color | default "var(--accent)" -}}
+    {{- /* Cert colours are now status-driven, not per-track. Bars are empty for planned. */ -}}
+    {{- $l1Color   := $l1S.color   -}}
+    {{- $neColor   := $neS.color   -}}
+    {{- $naColor   := $naS.color   -}}
+    {{- $l2Color   := $l2S.color   -}}
+    {{- $awsColor  := $awsS.color  -}}
+    {{- $ccnaColor := $ccnaS.color -}}
 
     <a href="{{ "/certs/lpic-1/" | relURL }}" class="home-cert-card">
       <div class="home-cc-top">

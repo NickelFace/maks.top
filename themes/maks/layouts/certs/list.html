@@ -43,14 +43,23 @@
   {{ if eq $state "in progress"}}{{ $nInProg  = add $nInProg  1 }}{{ end }}
   {{ if eq $state "planned"    }}{{ $nPlanned = add $nPlanned 1 }}{{ end }}
   {{ $nArts = add $nArts $written }}
+  {{/* Status-driven colours — retired the per-track cert_color palette. */}}
+  {{ $stateColor := "var(--text3)" }}
+  {{ $pctColor   := "var(--text3)" }}
+  {{ if eq $state "passed" }}
+    {{ $stateColor = "var(--accent2)" }}{{ $pctColor = "var(--text)" }}
+  {{ else if eq $state "in progress" }}
+    {{ $stateColor = "var(--accent)"  }}{{ $pctColor = "var(--text)" }}
+  {{ end }}
   {{ $certData = $certData | append (dict
-      "page"     .
-      "written"  $written
-      "expected" $expected
-      "pct"      $pct
-      "state"    $state
-      "sub"      $sub
-      "color"    (.Params.cert_color | default "var(--accent)")
+      "page"       .
+      "written"    $written
+      "expected"   $expected
+      "pct"        $pct
+      "state"      $state
+      "sub"        $sub
+      "color"      $stateColor
+      "pctColor"   $pctColor
   ) }}
 {{ end }}
 
@@ -119,9 +128,11 @@
       </div>
 
       <div class="certs-idx-pct-wrap">
-        <div class="certs-idx-pct" style="color:{{ $c.color }}">{{ $c.pct }}<span style="font-size:16px;color:var(--text3)">%</span></div>
+        <div class="certs-idx-pct" style="color:{{ $c.pctColor | safeCSS }}">{{ $c.pct }}<span style="font-size:16px;color:var(--text3)">%</span></div>
         <div class="certs-idx-bar">
-          <div class="certs-idx-bar-fill" style="width:{{ $c.pct }}%;background:{{ $c.color }}"></div>
+          {{ if ne $c.state "planned" }}
+            <div class="certs-idx-bar-fill" style="width:{{ $c.pct }}%;background:{{ $c.color | safeCSS }}"></div>
+          {{ end }}
         </div>
       </div>
 

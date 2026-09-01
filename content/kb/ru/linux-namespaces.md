@@ -1,7 +1,7 @@
 ---
 title: "Linux Namespaces"
 description: "Все 8 типов пространств имён Linux с интерактивными примерами и практическими командами."
-icon: "🌐"
+icon: linux
 group: "Linux Core"
 tags: ["Linux", "Kernel", "Containers", "LPIC-2"]
 date: 2025-07-14
